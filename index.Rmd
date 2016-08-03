@@ -1,0 +1,13 @@
+---
+title: "Validate"
+---
+
+### Posts:
+
+- <a href="usingrmarkdown.html">Installing R Markdown and papaja on Ubuntu</a>
+
+### Upcoming:
+
+- Creating a Bayes factor
+- Coding a linear regression in R (by hand)
+- Assign stimuli to conditions in psychological experiments
