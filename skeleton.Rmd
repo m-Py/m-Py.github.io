@@ -1,0 +1,14 @@
+---
+title: "Title"
+date: Month 00, 20xx
+author: Martin Papenberg
+---
+
+Text
+
+&nbsp;
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
+
