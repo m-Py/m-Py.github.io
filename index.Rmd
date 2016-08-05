@@ -1,5 +1,6 @@
 ---
 title: "Validate"
+author: "Posts on R programming, statistics and psychology"
 ---
 
 ### Posts:
@@ -8,6 +9,7 @@ title: "Validate"
 
 ### Upcoming:
 
+- How to assign stimuli to conditions in psychological experiments
 - Creating a Bayes factor
-- Coding a linear regression in R (by hand)
-- Assign stimuli to conditions in psychological experiments
+- Coding a (non)-linear regression in R (by hand)
+

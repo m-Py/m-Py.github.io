@@ -20,11 +20,11 @@ href="https://rkward.kde.org/" target="_blank">rkward</a>).
 papaja (and R Markdown) make use of a bunch of open source software in order to
 convert a simple .Rmd file to pdf manuscripts. In RStudio, most of these dependencies
 do not need to be installed manually as they come with the installation package. This
-repository contains guidelines on how to use R Markdown and papaja on an Ubuntu system
-(14.04 +) without the requirement of an RStudio installation, which is somewhat less
-convenient (but maybe worthy). There is no warranty that it will work the same way on
-your system, it is just an explanation of how I did it. I wanted to share this
-because I found it somewhat tricky to make papaja run outside of RStudio.
+repository contains guidelines on how to install R Markdown and papaja on an Ubuntu
+system (14.04 +) without the requirement of an RStudio installation, which is
+somewhat less convenient (but maybe worthy). There is no warranty that it will work
+the same way on your system, it is just an explanation of how I did it. I wanted to
+share this because I found it somewhat tricky to make papaja run outside of RStudio.
 
 Note: To install the required dependencies for papaja, terminal commands are given
 that will install these dependencies. Commands starting with `$` must be typed in
@@ -41,7 +41,7 @@ $ sudo apt-get install texlive texlive-latex-extra texlive-bibtex-extra texlive-
 ### 2) Install some required GNU libraries
 
 If these libraries are not available on your system, install them. They are required
-to install the devtools package that we need to install papaja:
+to install the `devtools` package that we need to install papaja:
 
 ```
 $ sudo apt-get install libcurl4-openssl-dev
@@ -71,12 +71,12 @@ $ sudo apt-get install libssl-dev
   especially to convert to pdf
 - We need a recent version of pandoc which is not included in all available
   installation packages (e.g. standard Ubuntu repository)
-- If you are using a 64-Bit system, check this link and install the (and then skip to
-  **5) ImageMagick**)
+- If you are using a 64-Bit system, check this link and install the debian package
+  (and then skip to **5) ImageMagick**)
     + <a href="http://pandoc.org/installing.html#linux"
       target="_blank">http://pandoc.org/installing.html#linux</a>
-- If you are using a 32-Bit system, install Haskell platform, which includes an
-  installation tool that will install pandoc:
+- If you are using a 32-Bit system, installing pandoc is less convenient:
+    + install Haskell platform, which includes an installation tool that will install pandoc:
 
 ```
 $ sudo apt-get install haskell-platform
@@ -136,7 +136,7 @@ $ sudo apt-get install imagemagick imagemagick-doc
 
 ### 7) Further reading
 
-You can find more information on using rmarkdown here:
+These are some sources on writing in R Markdown and / or papaja that might be useful:
 
 - http://blog.efpsa.org/2015/06/09/how-not-to-worry-about-apa-style/
 - http://blog.rstudio.org/2014/06/18/r-markdown-v2/
@@ -147,3 +147,9 @@ You can find more information on using rmarkdown here:
 - https://github.com/rstudio/rmarkdown
 - http://yihui.name/en/2012/06/enjoyable-reproducible-research/
 - http://nicercode.github.io/guides/reports/
+
+&nbsp;
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
