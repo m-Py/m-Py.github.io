@@ -1,6 +1,6 @@
 ---
-title: "Rmd-Files"
-author: "Some texts on R Markdown"
+title: "Rmd-Files -- on R Markdown"
+author: "Martin Papenberg"
 ---
 
 Lately, I have been trying to create all of my documents (presentations, manuscripts,
@@ -11,7 +11,11 @@ limitations. In particular, R Markdown is relying on functionality of other soft
 Below are some texts on my journey with R Markdown and the difficulties that I dealt
 with. I do not claim to be an expert on R Markdown; I am simply writing about stuff
 that I found curious. Usually I found solutions by googling and trial and error --
-there is no garantee that presented solutions are optimal.
+there is no garantee that presented solutions are optimal. If you wish to learn about
+R Markdown in general, check out <a href="http://rmarkdown.rstudio.com/"
+target="_blank"> RStudio's rmarkdown documentation</a>. <a
+href="https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf"
+target="_blank">This cheat sheet</a> is also very useful.
 
 ### Posts:
 
