@@ -1,21 +1,20 @@
 ---
-title: "Positioning content at the top of a R Markdown beamer slide"
+title: "Positioning content at the top of a R Markdown Beamer slide"
 date: September 16, 2016
 author: Martin Papenberg
 ---
 
 If you are using R Markdown to create pdf presentations you are using the Latex
-document class Beamer. Unlike in -- for example -- LibreOffice, the content on your
-slides is not positioned at the top but in the center of the slide in Beamer by
-default.
+document class Beamer. Unlike in -- for example -- LibreOffice Impress, the content
+on your slides is not positioned at the top but in the center of the slide in Beamer
+by default.
 
 If you would like to change the default positioning to top alignment you can <a
-href="modifytemplate.html" target="_blank">modify the Beamer output template</a>. The first line in this template is something like this: 
+href="modifytemplate.html" target="_blank">modify the Beamer output template</a>. The
+first line in this template is something like this:
 
 ```
-
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(handout)$handout,$endif$$if(beamer)$ignorenonframetext,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
-
 ```
 
 To change default positioning to top, simply change this line to 
@@ -24,7 +23,7 @@ To change default positioning to top, simply change this line to
 \documentclass[t,$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(handout)$handout,$endif$$if(beamer)$ignorenonframetext,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
 ```
 
-The added t inside the [ ] brackets does the trick (see <a href="http://tex.stackexchange.com/questions/9889/positioning-content-at-the-top-of-a-beamer-slide-by-default" target="_blank">http://tex.stackexchange.com/questions/9889/positioning-content-at-the-top-of-a-beamer-slide-by-default</a>.
+The added t inside the [ ] brackets does the trick (see <a href="http://tex.stackexchange.com/questions/9889/positioning-content-at-the-top-of-a-beamer-slide-by-default" target="_blank">http://tex.stackexchange.com/questions/9889/positioning-content-at-the-top-of-a-beamer-slide-by-default</a>).
 
 
 &nbsp;

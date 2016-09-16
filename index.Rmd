@@ -15,18 +15,19 @@ there is no garantee that presented solutions are optimal.
 
 ### Posts:
 
-- <a href="positionbeamer.html">Positioning content at the top of a R Markdown beamer
+- <a href="positionbeamer.html">Positioning content at the top of a R Markdown Beamer
   slide</a>
 - <a href="modifytemplate.html">Modifying the default R Markdown template</a>
 - <a href="usingrmarkdown.html">Installing R Markdown and papaja on Ubuntu</a>
 
 ### Upcoming:
 
+- Use a theme to create R Markdown Beamer slides
+- Adding a short title for Beamer slides
 - Embedding pandoc commands in a R Markdown file
 - Suppress automatic numbering of figures
-- Adding a short title for beamer slides
-- Use {.allowframebreaks} to show the complete reference list in beamer slides
-- Add whitespace to a beamer slide
+- Use {.allowframebreaks} to show the complete reference list in Beamer slides
+- Add whitespace to a Beamer slide
 - Which editors support R Markdown syntax highlighting?
 - Detrimental whitespace in YAML headers
 - Tables in R Markdown pdf (formatting is difficult in markdown)
