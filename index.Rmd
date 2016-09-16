@@ -1,15 +1,33 @@
 ---
-title: "Validate"
-author: "Posts on R programming, statistics and psychology"
+title: "Rmd-Files"
+author: "Some texts on R Markdown"
 ---
+
+Lately, I have been trying to create all of my documents (presentations, manuscripts,
+examinations...) using R Markdown. While R Markdown is incredibly useful, it has its
+limitations. In particular, R Markdown is relying on functionality of other software
+(Latex, pandoc), which sometimes need to be addressed directly to achieve your goal.
+
+Below are some texts on my journey with R Markdown and the difficulties that I dealt
+with. I do not claim to be an expert on R Markdown; I am simply writing about stuff
+that I found curious. Usually I found solutions by googling and trial and error --
+there is no garantee that presented solutions are optimal.
 
 ### Posts:
 
+- <a href="positionbeamer.html">Positioning content at the top of a R Markdown beamer
+  slide</a>
+- <a href="modifytemplate.html">Modifying the default R Markdown template</a>
 - <a href="usingrmarkdown.html">Installing R Markdown and papaja on Ubuntu</a>
 
 ### Upcoming:
 
-- How to assign stimuli to conditions in psychological experiments
-- Creating a Bayes factor
-- Coding a (non)-linear regression in R (by hand)
+- Embedding pandoc commands in a R Markdown file
+- Suppress automatic numbering of figures
+- Adding a short title for beamer slides
+- Use {.allowframebreaks} to show the complete reference list in beamer slides
+- Add whitespace to a beamer slide
+- Which editors support R Markdown syntax highlighting?
+- Detrimental whitespace in YAML headers
+- Tables in R Markdown pdf (formatting is difficult in markdown)
 

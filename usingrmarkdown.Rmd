@@ -50,21 +50,21 @@ $ sudo apt-get install libgsl0-dev
 $ sudo apt-get install libssl-dev
 ```
 
-
 ### 3) Install the required R packages
 
 - Make sure you have a recent version of R
     + the version in the standard Ubuntu repository is too old, which will cause some
     package dependencies installations to fail
     + update R as described here: http://www.sysads.co.uk/2014/06/install-r-base-3-1-0-ubuntu-14-04/
-- Install the `devtools` package
+- Install the `devtools` package (`> install.packages("devtools")`)
 - Get the papaja package:
-    + some dependencies (including `rmarkdown`) are -- if not available --
-    automatically installed in the process
 
 ```
 > devtools::install_github("crsh/papaja")
 ```
+- some dependencies (including `rmarkdown`) are -- if not available -- automatically
+  installed in the process
+
 
 ### 4) Install pandoc
 - rmarkdown makes use of pandoc library to do its conversions between file formats,
@@ -122,13 +122,13 @@ $ sudo apt-get install imagemagick imagemagick-doc
 
 ### 6) Create a manuscript and enjoy
 
-- create an .Rmd file, which contains this text in the metadata section of your document
+- create an .Rmd file, which contains this text in the metadata section ('YAML
+  header') of your document
     + `output: papaja::apa6_pdf`
-- additionally call `papaja::apa_prepare_doc()` in an R chunk of the file
 - check the example article in the <a
   href="https://github.com/crsh/papaja/tree/master/example" target="_blank">papaja
   repository</a> to learn more
-- To convert your .Rmd file into an APA article, call:
+- To convert your .Rmd file into an APA article, simply call the render function:
 
 ```
 > rmarkdown::render("manuscript.Rmd")

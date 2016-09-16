@@ -1,6 +1,6 @@
 ---
 title: "Title"
-date: Month 00, 20xx
+date: September 16, 2016
 author: Martin Papenberg
 ---
 

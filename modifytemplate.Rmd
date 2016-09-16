@@ -1,0 +1,50 @@
+---
+title: "Modifying the default R Markdown template"
+date: September 16, 2016
+author: Martin Papenberg
+---
+
+Sometimes it is necessary to modify the default formatting of your R Markdown
+output. For example, you might want to <a href="positionbeamer.html"
+target="_blank">position content at the top of a beamer slide</a> by default. First of
+all then, you need the default template to modify it. Here is a list of the templates
+that R Markdown uses for its conversion: <a
+href="https://github.com/jgm/pandoc-templates" target="_blank">
+https://github.com/jgm/pandoc-templates</a>. Note that these are pandoc templates
+because pandoc effectively creates your output file.
+
+Save your ouput format's template into the folder in which your .Rmd file is located
+and add this to your YAML header (this is an example for pdf output):
+
+```
+--- 
+
+output: 
+  pdf_document:
+    template: default.latex
+	
+---
+```
+
+
+Note that whitespace matters in YAML headers: the indentation is necessary and
+implicates that 'template' is an extra argument to 'pdf_document'. This, for example,
+would cause the conversion to fail:
+
+
+```
+--- 
+
+output: 
+  pdf_document:
+  template: default.latex
+	
+---
+```
+
+&nbsp;
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
+
