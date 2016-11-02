@@ -19,6 +19,8 @@ target="_blank">This cheat sheet</a> is also very useful.
 
 ### Posts:
 
+- <a href="framebreaks.html">Use {.allowframebreaks} to show the complete
+  reference list in Beamer slides</a>
 - <a href="positionbeamer.html">Positioning content at the top of a R Markdown Beamer
   slide</a>
 - <a href="modifytemplate.html">Modifying the default R Markdown template</a>
@@ -30,7 +32,6 @@ target="_blank">This cheat sheet</a> is also very useful.
 - Adding a short title for Beamer slides
 - Embedding pandoc commands in a R Markdown file
 - Suppress automatic numbering of figures
-- Use {.allowframebreaks} to show the complete reference list in Beamer slides
 - Add whitespace to a Beamer slide
 - Which editors support R Markdown syntax highlighting?
 - Detrimental whitespace in YAML headers
