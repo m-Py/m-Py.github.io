@@ -5,7 +5,7 @@ library("BayesFactor")
 ## one draw in the simulation. `sample_sizes` is the »total sample
 ## size«, i.e. the sample size per group is `sample_sizes/2`
 estimate_expected_bf <- function(effect_size, sample_sizes,
-                                 n_bayes_factors, rscale=sqrt(2)/2) {
+                                 n_bayes_factors, rscale=sqrt(2)/2, ...) {
     ## store BFs for each repetition for one sample size:
     repetitions_bf <- vector(length=n_bayes_factors)
     ## store BFs by sample size:
@@ -15,7 +15,7 @@ estimate_expected_bf <- function(effect_size, sample_sizes,
         for (j in 1:n_bayes_factors) {
             group0 <- rnorm(sample_sizes[i]/2, 0, 1)
             group1 <- rnorm(sample_sizes[i]/2, effect_size, 1)
-            repetitions_bf[j] <- extractBF(ttestBF(group0, group1, rscale=rscale))$bf
+            repetitions_bf[j] <- extractBF(ttestBF(group0, group1, rscale=rscale, ...))$bf
         }
         ## store all bayes factors for sample size i
         samples_bf[[i]] <- log(repetitions_bf)

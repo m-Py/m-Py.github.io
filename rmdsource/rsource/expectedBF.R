@@ -57,3 +57,8 @@ BF08 <- estimate_expected_bf(0.8, samples, n_bayes_factors)
 
 quantiles_08 <- BF_quantiles(BF08, quantiles)
 plot_BF_quantiles(quantiles_08, thresholds)
+
+
+save_list <- list(BF0 = BF0, BF02 = BF02_def)
+
+save(save_list, file="BF.data")

@@ -1,0 +1,73 @@
+---
+title: "What Bayes factor should you expect?"
+date: December 18, 2017
+author: Martin Papenberg
+
+
+bibliography: "lit.bib"
+csl: "apa.csl"
+
+---
+
+The usage of Bayesian statistics, and in particular the usage of Bayes
+factors is on the rise in Psychology. Bayes factors allow to quantify
+the relative evidence that data provide for two different hypotheses and
+can therefore lend evidence to one hypothesis over another. In contrast,
+traditional significance testing relying on *p*-values can only be used
+to discard a null hypothesis, usually one assuming no effect of interest
+(e.g. two group means do not differ). For various reasons, null
+hypothesis significance testing has been criticizes for a long time.
+
+Bayes factors have been advocated in Psychology as an alternative to
+hypothesis tests relying on *p*-values. Bayes factors can be used to
+answer the question as to how much a specified alternative hypothesis
+describe the data better than the null hypothesis (however, it is not
+necessary that one of the competing hypotheses is a null
+hypothesis). When obtaining a Bayes factor of size X, you may say that
+your data favor the alternative hypothesis by a factor of X in
+comparison to the null hypothesis (you may not say that the alternative
+hypothesis is X times more likely than the null hypothesis). The general
+appraisal of Bayes factors seems to reach from "*they will save
+statistical inference in Psychology from evil p-values*" to "*it is next
+dangerous statistic that will be applied mindlessly and lead to bogus
+interpretations of data*". However one may think of Bayes factors, given
+their (as I assume) increasing occurrence in Psychological research, it
+is probably useful to know how they behave under different relevant
+settings.
+
+In this post I therefore describe what Bayes factors you might expect
+when varying the sample size and effect size. As is done often, I will
+stick to the example of the independent sample *t*-test that compares
+two means, and I will use the "default" Bayes factor proposed by
+@rouder2009, which is implemented in the R package BayesFactor
+[@R-BayesFactor]. This is also the model used in the statistics program
+JASP. Note that my evaluation of Bayes factors is limited to this
+specific model.
+
+## The default Bayes factor
+
+## The distribution of Bayes factors
+
+The following plot illustrates the distribution of the default Bayes
+factor when assuming an effect size of *d* = 0.2, which is a small
+effect. 
+
+
+```{r}
+
+sim_data <- get(load("./data/BF.data"))
+
+quantiles_02_def <- BF_quantiles(BF02_def, c(0.2, 0.5, 0.8))
+plot_BF_quantiles(quantiles_02_def, thresholds)
+
+```
+
+There are other treatments relevant to this question:
+
+Sequential Hypothesis Testing With Bayes Factors: Efficiently Testing
+Mean Differences (Schönbrodt, 2015) 
+
+Dance of the Bayes factors (Lakens, 2016)
+http://daniellakens.blogspot.de/2016/07/dance-of-bayes-factors.html
+
+# References

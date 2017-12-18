@@ -5,5 +5,5 @@ rmdFiles <- list.files(pattern=".Rmd")
 setwd("../")
 
 for (i in rmdFiles) {
-    rmarkdown::render(paste0("./rmdsource/", i), output_dir="../")
+    rmarkdown::render(paste0("./rmdsource/", i), output_dir="./")
 }
