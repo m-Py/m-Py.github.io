@@ -1,0 +1,22 @@
+---
+title: "blank"
+author: "by Martin Papenberg"
+---
+
+Here I share some thoughts and tips on things that interest me. It is
+usually about <a href="http://rmarkdown.rstudio.com/" target="_blank"> R
+Markdown </a>or other <a href="https://www.r-project.org/"
+target="_blank">R</a>-related stuff.
+
+### Posts:
+
+- <a href="setUpRMDemacs.html">Setting up emacs for R Markdown on
+  Ubuntu</a>
+- <a href="framebreaks.html">Use {.allowframebreaks} to show the
+  complete reference list in R Markdown Beamer slides</a>
+- <a href="positionbeamer.html">Positioning content at the top of a R
+  Markdown Beamer slide</a>
+- <a href="modifytemplate.html">Modifying the default R Markdown
+  template</a>
+- <a href="usingrmarkdown.html">Installing R Markdown and papaja on
+  Ubuntu</a>

@@ -42,4 +42,12 @@
 
 - tables using pander; using ---|||--- (cell width, table width)
 
+### Upcoming 
 
+- Change the default language in R Markdown output 
+- Adding a short title for Beamer slides
+- Embedding pandoc commands in a R Markdown file
+- Suppress automatic numbering of figures
+- Add whitespace to R Markdown pdf documents
+- Which editors support R Markdown syntax highlighting?
+- Detrimental whitespace in YAML headers

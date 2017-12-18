@@ -1,0 +1,220 @@
+---
+title: "Setting up emacs for R Markdown on Ubuntu"
+date: December 18, 2017
+author: Martin Papenberg
+
+---
+
+<a href="usingrmarkdown.html" target="_blank">Unless you are using
+RStudio</a>, you probably need to invest some time to set up your R
+Markdown writing environment. In this document, I explain how to use <a
+href="http://ess.r-project.org/" target="_blank">ESS</a>, <a
+href="https://jblevins.org/projects/markdown-mode/" target="_blank">
+markdown-mode</a> and <a href="https://github.com/vspinu/polymode"
+target="_blank">polymode</a> to write R Markdown documents with <a
+href="https://www.gnu.org/software/emacs/" target="_blank">emacs</a> on
+Ubuntu.
+
+### Installing emacs
+
+Just install emacs using official repository:
+
+```
+$ sudo apt-get install emacs
+```
+
+If you have not already used emacs, getting to know emacs in itself will
+be some kind of a challenge. I do not know what is the best introduction
+for beginners, but it is often advised to take the emacs tutorial, which
+is included in emacs itself. Just start the program - it is linked on
+the start screen. Generally, emacs is not considered to be
+beginner-friendly and getting accustomed to it will take some time.
+
+### Setting up ESS
+
+ESS is your R environment for emacs. "It is designed to support editing
+of scripts and interaction with various statistical analysis programs
+such as R" (<a href="http://ess.r-project.org/"
+target="_blank">http://ess.r-project.org/</a>). It can be installed
+through the standard package manager:
+
+```
+$ sudo apt-get install ess
+```
+
+### Setting up markdown-mode
+
+Just by installing emacs and ESS you are good to use R in emacs. ESS
+includes syntax highlighting for R and many useful keybindings
+(e.g. evaluation of commands, functions etc.) among other
+things. However, to write R Markdown documents in emacs you also need
+support for markdown syntax highlighting, which is not given in the
+blank installation of emacs. To get support for markdown syntax
+highlighting, you need to install <a
+href="https://jblevins.org/projects/markdown-mode/" target="_blank">
+markdown-mode</a>. There are several possibilities to do so. For me the
+following was the most simple:
+
+Download `markdown-mode` from the github page (to do it like this you
+need to install <a href="https://git-scm.com/" target="_blank">
+git</a>):
+
+```
+$ git clone https://github.com/jrblevin/markdown-mode
+```
+
+Add the path to the downloaded folder to your `.emacs` configuration
+file, which is in your home directory (if it is not there, create a file
+called `.emacs`; note that `.` files may be invisible in your file
+browser). This ensures that emacs can use markdown mode. Thus, add the
+following line to `.emacs`:
+
+```
+(add-to-list 'load-path "/path/to/markdown-mode/repository")
+```
+
+Additionally, the following lines need to be added to your `.emacs`
+configuration file to ensure that `markdown-mode` is loaded
+automatically in emacs.
+
+```
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+```
+
+### Setting up polymode
+
+Alas, when installing `markdown-mode` will not give you syntax
+highlighting for R code in your R Markdown document. To get both R and
+markdown syntax highlighting in one document you need the `polymode`
+emacs package to combine both. We will do the installation similar to
+`markdown-mode`:
+
+Download `markdown-mode` from the github page (to do it like this you
+need to install git):
+
+```
+$ git clone https://github.com/vspinu/polymode
+```
+
+Add the following lines to your `.emacs` file to ensure that `polymode`
+will be loaded:
+
+```
+(setq load-path
+      (append '("/path/to/polymode/repository/"  "/path/to/polymode/repository/modes")
+              load-path))
+
+(require 'poly-R)
+(require 'poly-markdown)
+
+(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
+```
+
+### Set up spell checking
+
+You probably want to use a spell checker in your R Markdown writing
+environment. Adding the following lines to your `.emacs` configuration
+file will activate spell checking in `markdown-mode` by default: 
+
+```
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'markdown-mode-hook 'flyspell-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+```
+
+To select a default language dictionary (e.g. American English), add
+this line:
+
+```
+(setq ispell-dictionary "american") 
+```
+
+It is possible to interactively change the dictionary used for the
+current document by using the command
+`M-x ispell-change-dictionary`. Press `return` and the type the required
+dictionary, e.g. `german` (see
+https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html)
+
+### Activate syntax highlighting for LaTex equations
+
+When doing scientific writing with R Markdown, it will probably be
+convenient to activate syntax highlighting for LaTex equations. The
+following line in your `.emacs` configuration file will do the trick: 
+
+```
+(setq markdown-enable-math t)
+```
+
+### Preventing line breaks in inline R
+
+When I write documents in text editors such as emacs, I like to keep the
+length of a single line short. That means, I usually write like this:
+
+```
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+mollit anim id est laborum."
+```
+
+In this case, each line that I see actually corresponds to a single line
+in the associated text file. Others however prefer to write like this:
+
+```
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+```
+
+Here, the text editor (or in this case: the web-browser) will produce
+"visual" line breaks, which means that your computer screen presents
+several lines to you, but the paragraph is actually written as a single
+line in the associated text file.
+
+What option you chose is a personal preference -- I prefer the
+former. In my experience the performance of text editors drops when I
+have very long lines of text, but this may only be in my imagination. To
+produce paragraphs consisting of lines of equal length, emacs offers the
+`M-q` command, that is, press `alt` and `q` simultaneously and your
+paragraph will automatically cut lines at a defined width (the default
+is 72 characters I think).
+
+The problem with this option is that when a line is split within an
+inline R command after `r`, the command will not be executed as expected
+when your R Markdown document is rendered. The reason for this is that
+`M-q` cuts all characters behind `r`, meaning there is no additional
+white space. The following command will not execute -- R Markdown seems
+to interpret this as `rmean(1:10)`:
+
+
+```
+`r
+mean(1:10)`
+```
+
+To counteract this unfortunate behavior, you can prevent line splitting
+within inline R commands by adding the following code to your `.emacs`
+file:
+
+```
+(defun odd-number-of-graves-this-paragraph-so-far ()
+  (oddp (how-many "`" (save-excursion (backward-paragraph) (point)) (point))))
+(add-to-list 'fill-nobreak-predicate 'odd-number-of-graves-this-paragraph-so-far)
+```
+
+### My .emacs file
+
+After setting up emacs as described here, I obtain this <a href=".emacs"
+target="_blank">`.emacs` </a>file. Feel free to use any of it if you
+like.
+
+&nbsp;
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
+
