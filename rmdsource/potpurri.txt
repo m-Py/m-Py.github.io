@@ -1,0 +1,6 @@
+
+They therefore lend evidence to one hypothesis over another, which is
+different from traditional significance testing relying on *p*-values;
+here, "too extreme" data are taken as a decision ground to discard a
+null hypothesis (the null hypothesis usually assumes there is no effect
+of interest, e.g. that two group means do not differ).

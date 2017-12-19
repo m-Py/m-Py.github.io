@@ -40,3 +40,4 @@ BF08 <- estimate_expected_bf(0.8, samples, n_bayes_factors)
 defBF <- list(BF0 = BF0, BF02 = BF02, BF05 = BF05, BF08 = BF08)
 
 save(defBF, file="../data/defBF.data")
+
