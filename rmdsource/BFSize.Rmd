@@ -11,55 +11,92 @@ csl: "apa.csl"
 
 The usage of Bayesian statistics, and in particular the usage of Bayes
 factors is on the rise in Psychology. Bayes factors allow to quantify
-the relative evidence that data provide for two different hypotheses and
-can therefore lend evidence to one hypothesis over another. In contrast,
-traditional significance testing relying on *p*-values can only be used
-to discard a null hypothesis, usually one assuming no effect of interest
-(e.g. two group means do not differ). For various reasons, null
-hypothesis significance testing has been criticizes for a long time.
+the relative evidence that data provide for two different
+hypotheses. They therefore lend evidence to one hypothesis over another,
+which is different from traditional significance testing relying on
+*p*-values; here, "too extreme" data are taken as a decision ground to
+discard a null hypothesis (the null hypothesis usually assumes there is
+no effect of interest, e.g. that two group means do not differ). 
 
 Bayes factors have been advocated in Psychology as an alternative to
-hypothesis tests relying on *p*-values. Bayes factors can be used to
-answer the question as to how much a specified alternative hypothesis
-describe the data better than the null hypothesis (however, it is not
-necessary that one of the competing hypotheses is a null
-hypothesis). When obtaining a Bayes factor of size X, you may say that
-your data favor the alternative hypothesis by a factor of X in
-comparison to the null hypothesis (you may not say that the alternative
-hypothesis is X times more likely than the null hypothesis). The general
-appraisal of Bayes factors seems to reach from "*they will save
-statistical inference in Psychology from evil p-values*" to "*it is next
-dangerous statistic that will be applied mindlessly and lead to bogus
-interpretations of data*". However one may think of Bayes factors, given
-their (as I assume) increasing occurrence in Psychological research, it
-is probably useful to know how they behave under different relevant
-settings.
+statistical hypothesis testing [@wagenmakers2017; xx]. In particular,
+several "default" Bayes factors have been proposed that compare an
+alternative hypothesis assuming an effect to a null hypothesis assuming
+no effect [e.g. ...]. Such Bayes factors answer the question as to how
+much a specified alternative hypothesis describe the data better than
+the null hypothesis. In general however, it is not necessary that one of
+the competing hypotheses is a null hypothesis. When obtaining a Bayes
+factor of size 5, they are 5 times more likely under the alternative
+hypothesis than under the null hypothesis; you may say that the data
+favor the alternative hypothesis by a factor of 5. You may not say that
+the alternative hypothesis is 5 times more likely than the null
+hypothesis. I will not give a detailed introduction to Bayes factors
+here, but there is a variety treatments you can consult if you are
+interested [e.g., ...]
 
-In this post I therefore describe what Bayes factors you might expect
-when varying the sample size and effect size. As is done often, I will
+The general appraisal of Bayes factors seems to reach from "*they will
+save statistical inference in Psychology from evil p-values*" to "*it is
+next dangerous statistic that will be applied mindlessly and lead to
+bogus interpretations of data*". However one may think of Bayes factors,
+it is probably useful to know how they behave under different settings
+-- given their increasing occurrence in Psychological research. In this
+post I therefore describe what Bayes factors you might expect when
+varying the sample size and the effect size. As is done often, I will
 stick to the example of the independent sample *t*-test that compares
 two means, and I will use the "default" Bayes factor proposed by
 @rouder2009, which is implemented in the R package BayesFactor
-[@R-BayesFactor]. This is also the model used in the statistics program
-JASP. Note that my evaluation of Bayes factors is limited to this
-specific model.
+[@R-BayesFactor]. This is also the Bayes factor used in the statistics
+program JASP when doing the Bayesian *t*-test. Note that my evaluation
+of Bayes factors is limited to this specific model.
 
 ## The default Bayes factor
 
 ## The distribution of Bayes factors
 
-The following plot illustrates the distribution of the default Bayes
-factor when assuming an effect size of *d* = 0.2, which is a small
-effect. 
+The following plot illustrates the distribution (what that means in the
+current case will be explained) of the default Bayes factor for sample
+sizes 50 - 1000 and effect sizes d = 0 (i.e. the null hypothesis is
+true), d = 0.2 (a small effect), d = 0.5 (a medium effect) and d = 0.8
+(a large effect). Null and small effect share the same scaling of the
+y-axis; medium and large effect also share the same scaling but it is
+different to the scaling of the y-axis of null and small effect. The
+data were generated in a simulation assuming normally distributed
+scores.
+
+So, how do I understand the plots?
 
 
-```{r}
+```{r,  message = FALSE, warning = FALSE, echo = FALSE, results="hide", fig.width = 8}
+# set knitr options
+knitr::opts_chunk$set(message=FALSE, echo=FALSE, warning=FALSE)
 
-sim_data <- get(load("./data/BF.data"))
+source("./rsource/functions.R")
 
-quantiles_02_def <- BF_quantiles(BF02_def, c(0.2, 0.5, 0.8))
-plot_BF_quantiles(quantiles_02_def, thresholds)
+get(load("./data/defBF.data")) # check out names(defBF)
 
+quants <- c(0.2, 0.5, 0.8)
+quantiles_02 <- BF_quantiles(defBF$BF02, quants)
+quantiles_0  <- BF_quantiles(defBF$BF0,  quants)
+
+## plot null effect and small effect d = 0.2
+par(mfrow=c(1,2))
+plot_BF_quantiles(quantiles_0, c(1/10, 1/3, 1, 3, 10),
+                  ylim=c(-3, 4), main="d = 0", axis="log")
+plot_BF_quantiles(quantiles_02, c(1/10, 1/3, 1, 3, 10),
+                  ylim=c(-3, 4), main="d = 0.2", axis="standard")
+```
+
+```{r,  message = FALSE, warning = FALSE, echo = FALSE, results="hide", fig.width = 8}
+
+quantiles_08 <- BF_quantiles(defBF$BF08, quants)
+quantiles_05 <- BF_quantiles(defBF$BF05, quants)
+
+## plot null effect and small effect d = 0.2
+par(mfrow=c(1,2))
+plot_BF_quantiles(quantiles_05, c(1/10, 1/3, 1, 3, 10),
+                  ylim=c(-3, 6), main="d = 0.5", axis="log")
+plot_BF_quantiles(quantiles_08, c(1/10, 1/3, 1, 3, 10),
+                  ylim=c(-3, 6), main="d = 0.8", axis="standard")
 ```
 
 There are other treatments relevant to this question:
