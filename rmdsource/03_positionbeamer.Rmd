@@ -4,14 +4,15 @@ date: September 16, 2016
 author: Martin Papenberg
 ---
 
-If you are using R Markdown to create pdf presentations you are using the Latex
-document class Beamer. Unlike in -- for example -- LibreOffice Impress, the content
-on your slides is not positioned at the top but in the center of the slide in Beamer
-by default.
+If you are using R Markdown to create pdf presentations you are using
+the Latex document class Beamer. Unlike in -- for example -- LibreOffice
+Impress, the content on your slides is not positioned at the top but in
+the center of the slide in Beamer by default.
 
-If you would like to change the default positioning to top alignment you can <a
-href="modifytemplate.html" target="_blank">modify the Beamer output template</a>. The
-first line in this template is something like this:
+If you would like to change the default positioning to top alignment you
+can <a href="02_modifytemplate.html" target="_blank">modify the Beamer
+output template</a>. The first line in this template is something like
+this:
 
 ```
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(handout)$handout,$endif$$if(beamer)$ignorenonframetext,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}

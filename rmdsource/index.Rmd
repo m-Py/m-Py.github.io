@@ -10,13 +10,13 @@ target="_blank">R</a>-related stuff.
 
 ### Posts:
 
-- <a href="setUpRMDemacs.html">Setting up emacs for R Markdown on
+- <a href="05_setUpRMDemacs.html">Setting up emacs for R Markdown on
   Ubuntu</a>
-- <a href="framebreaks.html">Use {.allowframebreaks} to show the
+- <a href="04_framebreaks.html">Use {.allowframebreaks} to show the
   complete reference list in R Markdown Beamer slides</a>
-- <a href="positionbeamer.html">Positioning content at the top of a R
+- <a href="03_positionbeamer.html">Positioning content at the top of a R
   Markdown Beamer slide</a>
-- <a href="modifytemplate.html">Modifying the default R Markdown
+- <a href="02_modifytemplate.html">Modifying the default R Markdown
   template</a>
-- <a href="usingrmarkdown.html">Installing R Markdown and papaja on
+- <a href="01_usingrmarkdown.html">Installing R Markdown and papaja on
   Ubuntu</a>

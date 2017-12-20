@@ -96,7 +96,7 @@ plot_BF_quantiles(quantiles_02, c(1/10, 1/3, 1, 3, 10),
 quantiles_08 <- BF_quantiles(defBF$BF08, quants)
 quantiles_05 <- BF_quantiles(defBF$BF05, quants)
 
-## plot null effect and small effect d = 0.2
+## plot medium effect (d = 0.5) and large effect (d = 0.8)
 par(mfrow=c(1,2))
 plot_BF_quantiles(quantiles_05, c(1/10, 1/3, 1, 3, 10),
                   ylim=c(-3, 6), main="d = 0.5 (medium effect)", axis="log")
