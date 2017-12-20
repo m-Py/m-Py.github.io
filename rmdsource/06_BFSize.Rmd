@@ -114,6 +114,12 @@ Mean Differences (Schönbrodt, 2015)
 Dance of the Bayes factors (Lakens, 2016)
 http://daniellakens.blogspot.de/2016/07/dance-of-bayes-factors.html
 
+&nbsp;
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
+
 # References
 
 [^1]: In general it is not necessary that one of the competing
@@ -124,3 +130,4 @@ times more likely than the null hypothesis.
 
 [^3]: This is also the Bayes factor used in the statistics program JASP
 when doing the Bayesian *t*-test.
+
