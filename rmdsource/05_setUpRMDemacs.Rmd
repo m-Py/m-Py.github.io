@@ -209,8 +209,9 @@ file:
 ### My .emacs file
 
 After setting up emacs as described here, I obtain this <a
-href="https://raw.githubusercontent.com/m-Py/m-Py.github.io/master/.emacs"
-target="_blank">`.emacs` </a>file. Feel free to use any of it if you like.
+href="https://raw.githubusercontent.com/m-Py/m-Py.github.io/master/rmdsource/.emacs"
+target="_blank">`.emacs` </a>file. Feel free to use any of it if you
+like.
 
 &nbsp;
 
