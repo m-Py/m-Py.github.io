@@ -92,11 +92,14 @@ markdown syntax highlighting in one document you need the `polymode`
 emacs package to combine both. We will do the installation similar to
 `markdown-mode`:
 
-Download `markdown-mode` from the github page (to do it like this you
-need to install git):
+Download `polymode`, `poly-R`, `poly-noweb`, and `poly-markdown` from
+Github:
 
 ```
 $ git clone https://github.com/vspinu/polymode
+$ git clone https://github.com/vspinu/poly-R
+$ git clone https://github.com/vspinu/poly-noweb
+$ git clone https://github.com/vspinu/poly-markdown
 ```
 
 Add the following lines to your `.emacs` file to ensure that `polymode`
@@ -104,13 +107,15 @@ will be loaded:
 
 ```
 (setq load-path
-      (append '("/path/to/polymode/repository/"  "/path/to/polymode/repository/modes")
+      (append '("/home/martin/git/polymode/"
+                "/home/martin/git/poly-markdown/"
+                "/home/martin/git/poly-R/"
+                "/home/martin/git/poly-noweb/")
               load-path))
-
+              
 (require 'poly-R)
+(require 'poly-noweb)
 (require 'poly-markdown)
-
-(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
 ```
 
 ### Set up spell checking
@@ -138,11 +143,18 @@ current document by using the command
 dictionary, e.g. `german` (see
 https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html)
 
+In this case, it may be necessary to install the required dictionary,
+for example like this:
+
+```
+$apt-get install aspell-de
+```
+
 ### Activate syntax highlighting for LaTex equations
 
 When doing scientific writing with R Markdown, it will probably be
 convenient to activate syntax highlighting for LaTex equations. The
-following line in your `.emacs` configuration file will do the trick: 
+following line in your `.emacs` configuration file will do the trick:
 
 ```
 (setq markdown-enable-math t)

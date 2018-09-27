@@ -13,13 +13,15 @@
 ;; add polymode
 
 (setq load-path
-      (append '("~/git/polymode/"  "~/git/polymode/modes")
+      (append '("/home/martin/git/polymode/"
+                "/home/martin/git/poly-markdown/"
+                "/home/martin/git/poly-R/"
+                "/home/martin/git/poly-noweb/")
               load-path))
               
 (require 'poly-R)
+(require 'poly-noweb)
 (require 'poly-markdown)
-
-(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
 
 ;; deactivate fill paragraph (M-q) for inline R (`r ... `). Adapted from
 ;; https://stackoverflow.com/questions/23755506/emacs-fill-mode-for-python-that-doesnt-break-quoted-strings-causing-errors

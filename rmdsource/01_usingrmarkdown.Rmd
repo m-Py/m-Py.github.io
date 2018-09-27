@@ -55,7 +55,7 @@ $ sudo apt-get install libssl-dev
 - Make sure you have a recent version of R
     + the version in the standard Ubuntu repository is too old, which will cause some
     package dependencies installations to fail
-    + update R as described here: http://www.sysads.co.uk/2014/06/install-r-base-3-1-0-ubuntu-14-04/
+    + update R as described here: https://cran.r-project.org/bin/linux/ubuntu/; also see http://sites.psu.edu/theubunturblog/installing-r-in-ubuntu/
 - Install the `devtools` package (`> install.packages("devtools")`)
 - Get the papaja package:
 

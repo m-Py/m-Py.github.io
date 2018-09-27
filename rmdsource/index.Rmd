@@ -3,7 +3,7 @@ title: "blank"
 author: "by Martin Papenberg"
 ---
 
-Here I share some thoughts and tips on things that interest me. It is
+Here I share some thoughts and write up things that interest me. It is
 usually about <a href="http://rmarkdown.rstudio.com/" target="_blank"> R
 Markdown </a>or other <a href="https://www.r-project.org/"
 target="_blank">R</a>-related stuff.
