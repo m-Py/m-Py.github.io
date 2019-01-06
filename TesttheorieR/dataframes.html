@@ -377,15 +377,16 @@ mdf[, <span class="kw">paste0</span>(<span class="st">&quot;Item&quot;</span>, <
 3     0     0
 4     1     0
 5     1     1</code></pre>
-<p> </p>
-
+<div class="block">
+<p>
+<strong>Merke</strong>: Mit dem <code>[·,·]</code> Zugriff wird zuerst – vor dem Komma – die Reihe und dann – nach dem Komma – die Spalte adressiert. Man kann die Auswahl nach numerischem Index, mit einem logischen Vektor, oder mit einem <code>character</code> Vektor durchführen.
+</p>
+</div>
 </div>
 <div id="weitere-zugriffsmoglichkeiten-auf-spalten" class="section level3">
 <h3><span class="header-section-number">3.2.3</span> Weitere Zugriffsmöglichkeiten auf Spalten</h3>
 <p>Dieser Abschnitt behandelt zwei weitere Varianten des Datenzugriffs auf <code>data.frames</code> mithilfe eckiger Klammern. Da wir diese Zugriffe danach erst einmal nicht weiter verwenden, kann dieser Abschnitt jedoch zunächst problemlos übersprungen werden. Datenzugriffe mit eckigen Klammern sind jedoch zentral für <code>R</code> als Programmiersprache, weswegen es sich lohnt diesen Abschnitt später zu konsultieren oder zum Nachschlagen zu nutzen.</p>
-<p> </p>
-<p></p>
-<p> </p>
+<p><strong>Der <code>[[·]]</code>-Zugriff</strong></p>
 <p>Äquivalent zum <code>$</code>-Zugriff funktioniert der folgende <code>[[·]]</code>-Zugriff auf eine einzelne Spalte:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf[[<span class="st">&quot;Item1&quot;</span>]] <span class="co"># dasselbe wie mdf$Item1</span></code></pre></div>
 <pre><code>[1] 1 0 0 1 1</code></pre>
@@ -397,10 +398,8 @@ mdf[[auswahl]]</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf[[<span class="kw">paste0</span>(<span class="st">&quot;Item&quot;</span>, <span class="dv">1</span>)]]</code></pre></div>
 <pre><code>[1] 1 0 0 1 1</code></pre>
 <p>Dieser Zugriff wird für uns noch einmal interessant werden, da wir so mithilfe von <em>Schleifen</em><a href="#fn32" class="footnoteRef" id="fnref32"><sup>32</sup></a> (in Kapitel 6) in <code>data.frames</code> nacheinander auf beliebig viele Spalten zugreifen können. Dabei wird es vor allem interessant sein, nacheinander auf die Antworten auf Testitems (Item <strong>1</strong>, Item <strong>2</strong>, …) zuzugreifen.</p>
-<p> </p>
-<p></p>
-<p> </p>
-<p>*Nicht** äquivalent zu den Zugriffen mit <code>$</code> und <code>[[·]]</code> ist folgender <code>[·]</code>-Zugriff:</p>
+<p><strong>Der <code>[·]</code>-Zugriff</strong></p>
+<p><strong>Nicht</strong> äquivalent zu den Zugriffen mit <code>$</code> und <code>[[·]]</code> ist folgender <code>[·]</code>-Zugriff:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf[<span class="st">&quot;Item1&quot;</span>]</code></pre></div>
 <pre><code>  Item1
 1     1
@@ -472,7 +471,12 @@ mdf[[auswahl]]</code></pre></div>
 <pre><code>  Item1 Augenfarbe
 1     1       blau
 3     0       blau</code></pre>
-<p>Hierbei habe ich mit dem dritten Argument <code>c('Item1', 'Augenfarbe')</code> eine Auswahl der Spalten durchgeführt. Dazu habe ich einen Vektor vom Typ <code>character</code> übergeben, der die auszulesenden Spalten mit Namen adressiert. Durch die Kombination der Auswahl von Zeilen und Spalten wird mir insgesamt ein <code>data.frame</code> ausgegeben, der nur die Spalten “Item1” und “Augenfarbe” enthält, und diese nur für Personen mit blauen Augen.<a href="#fn36" class="footnoteRef" id="fnref36"><sup>36</sup></a></p>
+<p>Hierbei habe ich mit dem dritten Argument <code>c('Item1', 'Augenfarbe')</code> eine Auswahl der Spalten durchgeführt. Dazu habe ich einen Vektor vom Typ <code>character</code> übergeben, der die auszulesenden Spalten mit Namen adressiert. Durch die Kombination der Auswahl von Zeilen und Spalten wird mir insgesamt ein <code>data.frame</code> ausgegeben, der nur die Spalten “Item1” und “Augenfarbe” enthält, und diese nur für Personen mit blauen Augen.</p>
+<div class="block">
+<p>
+<strong>Merke</strong>: Die Funktion <code>subset</code> gibt immer einen ganzen <code>data.frame</code> zurück – selbst dann, wenn ich nur eine einzige Spalte anfordere. Mit dem <code>$</code>-Operator könnte ich hingegen eine einzelne Spalte als Vektor auslesen.
+</p>
+</div>
 <p>Bei dieser Verwendung der Funktion <code>subset</code> fällt eine allgemeine Eigenschaft von Funktionen auf: <code>subset</code> erkennt anhand der Reihenfolge der Argumente, wie sie sich zu verhalten hat. Das erste Argument übergibt den <code>data.frame</code>, von dem wir Daten anfordern. Das zweite Argument wählt mit einem logischen Ausdruck <strong>Zeilen</strong> aus, das dritte Argument wählt durch einem <code>character</code>-Vektor <strong>Spalten</strong> aus. Was passiert, wenn wir diese Reihenfolge ändern?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(mdf, <span class="kw">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>),
        Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>)
@@ -497,7 +501,7 @@ boolesch sein</code></pre></div>
 <pre><code>  Item1 Augenfarbe
 1     1       blau
 3     0       blau</code></pre>
-<p>Hierbei benennen wir die Argumente, die wir nutzen, explizit. Wie wir es schon beim Argument <code>na.rm</code> der Funktion <code>mean</code> kennengelernt haben, können wir Argumente mit der Schreibweise “<code>Funktionsargument = Wert</code>” adressieren. “<code>Wert</code>” ist dabei immer ein <code>R</code>-Objekt, “<code>Funktionsargument</code>” der Name des Arguments. Im Fall von <code>subset</code> nehmen die drei Argumente folgende Objekte an:<a href="#fn37" class="footnoteRef" id="fnref37"><sup>37</sup></a></p>
+<p>Hierbei benennen wir die Argumente, die wir nutzen, explizit. Wie wir es schon beim Argument <code>na.rm</code> der Funktion <code>mean</code> kennengelernt haben, können wir Argumente mit der Schreibweise “<code>Funktionsargument = Wert</code>” adressieren. “<code>Wert</code>” ist dabei immer ein <code>R</code>-Objekt, “<code>Funktionsargument</code>” der Name des Arguments. Im Fall von <code>subset</code> nehmen die drei Argumente folgende Objekte an:<a href="#fn36" class="footnoteRef" id="fnref36"><sup>36</sup></a></p>
 <ol style="list-style-type: decimal">
 <li><code>x</code>: einen <code>data.frame</code></li>
 <li><code>subset</code>: einen logischer Vektor</li>
@@ -509,7 +513,7 @@ boolesch sein</code></pre></div>
 <pre><code>  Item1 Augenfarbe
 1     1       blau
 3     0       blau</code></pre>
-<p>In <code>R</code> kann man <strong>fast immer</strong><a href="#fn38" class="footnoteRef" id="fnref38"><sup>38</sup></a> Argumente per Position und per Name ansprechen. Oftmals wollen wir die Namen von Funktionen explizit verwenden, da viele Funktionen <em>optionale</em> Argumente haben – also solche, die wir nicht immer angeben müssen. Wir können ja beispielsweise das Argument <code>select</code> weglassen, wenn wir nach Zeilen, aber nicht nach Spalten selegieren wollen. Analog muss ich nicht das Argument <code>subset</code> angeben – in dem Fall werden alle Zeilen ausgegeben, aber nur eine Teilmenge der Spalten, wie in diesem Beispiel:</p>
+<p>In <code>R</code> kann man <strong>fast immer</strong><a href="#fn37" class="footnoteRef" id="fnref37"><sup>37</sup></a> Argumente per Position und per Name ansprechen. Oftmals wollen wir die Namen von Funktionen explizit verwenden, da viele Funktionen <em>optionale</em> Argumente haben – also solche, die wir nicht immer angeben müssen. Wir können ja beispielsweise das Argument <code>select</code> weglassen, wenn wir nach Zeilen, aber nicht nach Spalten selegieren wollen. Analog muss ich nicht das Argument <code>subset</code> angeben – in dem Fall werden alle Zeilen ausgegeben, aber nur eine Teilmenge der Spalten, wie in diesem Beispiel:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(mdf, <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;Testscore&quot;</span>, <span class="st">&quot;Geschlecht&quot;</span>))</code></pre></div>
 <pre><code>  Testscore Geschlecht
 1         2          w
@@ -518,10 +522,11 @@ boolesch sein</code></pre></div>
 4         1          w
 5         2          m</code></pre>
 <p>Mit diesem Aufruf werden mir alle 5 Fälle zurückgegeben, aber für diese nur der Testscore und das Geschlecht. Wie dieser Aufruf zeigt, kann ich Auswahl nach Position und Auswahl nach Namen mischen. Für das erste Argument – <code>mdf</code> – habe ich den Argumentnamen <code>x</code> nicht angegeben. Daher wurde das Argument anhand der Position identifiziert. Das hat funktioniert, da das erste Argument der <code>data.frame</code> ist, aus dem die Datenauswahl stattfindet. Für die Auswahl der Spalten habe ich jedoch den Argumentnamen angegeben. <strong>Das war auch nötig</strong>, da <code>subset</code> als zweites Argument sonst die Auswahl der Zeilen erwartet hätte.</p>
-<p> </p>
-
-<p> </p>
-<p> </p>
+<div class="block">
+<p>
+<strong>Merke</strong>: In <code>R</code> können Funktionsargumente per Position und per Namen identifiziert werden. Die Identifikation per Name schlägt dabei die Identifikation per Position.
+</p>
+</div>
 <p><strong>Ausnahmeregeln für die Funktion <code>subset</code></strong></p>
 <p>Inhalt folgt.</p>
 </div>
@@ -558,7 +563,7 @@ vec</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tapply</span>(mdf<span class="op">$</span>Alter, mdf<span class="op">$</span>Geschlecht, mean)</code></pre></div>
 <pre><code>   m    w 
 14.0 12.5 </code></pre>
-<p>Die Funktion <code>tapply</code> erhält als erstes Argument den Messwertvektor, für den Statistiken angefordert werden. Das zweite Argument ist die Gruppierungsvariable.<a href="#fn39" class="footnoteRef" id="fnref39"><sup>39</sup></a> Interessanterweise ist das dritte Argument eine Funktion, in diesem Fall die Funktion <code>mean</code>. So können wir die <em>mittlere</em> Punktzahl nach Geschlecht anfordern. Entsprechend könnten wir hier andere Funktionen übergeben, um etwa die Standardabweichung des Alters zu erfragen:</p>
+<p>Die Funktion <code>tapply</code> erhält als erstes Argument den Messwertvektor, für den Statistiken angefordert werden. Das zweite Argument ist die Gruppierungsvariable.<a href="#fn38" class="footnoteRef" id="fnref38"><sup>38</sup></a> Interessanterweise ist das dritte Argument eine Funktion, in diesem Fall die Funktion <code>mean</code>. So können wir die <em>mittlere</em> Punktzahl nach Geschlecht anfordern. Entsprechend könnten wir hier andere Funktionen übergeben, um etwa die Standardabweichung des Alters zu erfragen:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tapply</span>(mdf<span class="op">$</span>Alter, mdf<span class="op">$</span>Geschlecht, sd)</code></pre></div>
 <pre><code>        m         w 
 1.0000000 0.7071068 </code></pre>
@@ -567,7 +572,7 @@ vec</code></pre></div>
 <pre><code>  blau braun grau grün
 m   13    NA   14   15
 w   13    12   NA   NA</code></pre>
-<p>Mit nur fünf Datenpunkten macht diese Anfrage hier nur wenig Sinn, da jeder ausgegebene Mittelwert nur anhand eines einzelnen Wertes gebildet wurde,<a href="#fn40" class="footnoteRef" id="fnref40"><sup>40</sup></a> was die Idee des Mittelwerts eher ad absurdum führt. Manche Kombinationen von Geschlecht und Augenfarbe kommen in unseren Daten sogar gar nicht vor; in diesen Fällen wird <code>NA</code> ausgegeben. <code>tapply</code> zeigt ihre Stärke vor allem, wenn man viele – und nicht nur 5 – Datenpunkte hat. Das gilt gerade dann, wenn wir mehrere Gruppierungsvariablen angeben.</p>
+<p>Mit nur fünf Datenpunkten macht diese Anfrage hier nur wenig Sinn, da jeder ausgegebene Mittelwert nur anhand eines einzelnen Wertes gebildet wurde,<a href="#fn39" class="footnoteRef" id="fnref39"><sup>39</sup></a> was die Idee des Mittelwerts eher ad absurdum führt. Manche Kombinationen von Geschlecht und Augenfarbe kommen in unseren Daten sogar gar nicht vor; in diesen Fällen wird <code>NA</code> ausgegeben. <code>tapply</code> zeigt ihre Stärke vor allem, wenn man viele – und nicht nur 5 – Datenpunkte hat. Das gilt gerade dann, wenn wir mehrere Gruppierungsvariablen angeben.</p>
 </div>
 <div id="nrow-und-ncol" class="section level3">
 <h3><span class="header-section-number">3.3.2</span> <code>nrow</code> und <code>ncol</code></h3>
@@ -680,11 +685,10 @@ w   13    12   NA   NA</code></pre>
 <li id="fn33"><p>Der Abschnitt zur Funktion <code>subset</code> ist ein besonders wichtiger Abschnitt, da hier nicht nur die spezielle Funktionalität einer einzelnen Funktion erläutert wird, sondern auch an ihrem Beispiel allgemeine Eigenschaften von Funktionen in <code>R</code> dargestellt werden.<a href="dataframes.html#fnref33">↩</a></p></li>
 <li id="fn34"><p>Beachtet, dass durch diesen Aufruf die Tabelle <code>mdf</code> nicht verändert wird. Die Funktion gibt stattdessen eine neue Tabelle zurück, die nur die Fälle enthält, bei denen <code>Augenfarbe == &quot;blau&quot;</code> gilt. Wir müssten das Ergebnis der Funktion in einer Variablen speichern, wenn wir damit weiter arbeiten wollen (Erinnerung: <a href="vektoren.html#ausgabevsabspeichern">Kapitel 2</a>).<a href="dataframes.html#fnref34">↩</a></p></li>
 <li id="fn35"><p>Es macht an dieser Stelle Sinn, einen Moment inne zu halten und zu überlegen, warum es eigentlich außergewöhnlich ist, dass der Befehl <code>Augenfarbe == &quot;blau&quot;</code> innerhalb der Funktion <code>subset</code> funktioniert.<a href="dataframes.html#fnref35">↩</a></p></li>
-<li id="fn36"><p><strong>Merke</strong>: <code>subset</code> gibt immer einen <code>data.frame</code> zurück – selbst dann, wenn ich nur eine einzige Spalte anfordere. Mit dem <code>$</code>-Operator könnte ich hingegen eine einzelne Spalte als Vektor auslesen.<a href="dataframes.html#fnref36">↩</a></p></li>
-<li id="fn37"><p>Die Funktion <code>subset</code> lässt hier ein paar Ausnahmen zu, die weiter unten besprochen werden. Die erste Ausnahme kennen wir schon: Das Argument <code>subset</code> akzeptiert auch, wenn wir einen Ausdruck übergeben, der außerhalb der Funktion gar nicht als logischer Vektor erkannt würde.<a href="dataframes.html#fnref37">↩</a></p></li>
-<li id="fn38"><p>Eine Ausnahme bildet hier die Funktion <code>c</code>, bei der wir keine Funktionsnamen angeben. Hier gilt nämlich: wir können beliebig viele Vektoren als Argumente angeben und deswegen gibt es natürlich keinen separaten Namen für jedes mögliche Argument. Feste Namen gibt es aber normalerweise, wenn es eine feste Anzahl an möglichen Argumenten gibt – wie bei der Funktion <code>subset</code>.<a href="dataframes.html#fnref38">↩</a></p></li>
-<li id="fn39"><p>Beachtet, dass sowohl Messwerte als auch Gruppierungsvariable als <strong>Vektoren</strong> übergeben werden. Ich behandle die Funktion <code>tapply</code> jedoch im Kapitel zu <code>data.frames</code>, da es zumeist so sein wird, dass wir beide Vektoren aus <strong>einem</strong> <code>data.frame</code> mit der <code>$</code>-Notation auslesen werden.<a href="dataframes.html#fnref39">↩</a></p></li>
-<li id="fn40"><p>Wie viele Datenpunkte in die Berechnung jedes Mittelwerts eingehen, können wir in diesem Fall prüfen mit <code>table(mdf$Geschlecht, mdf$Augenfarbe)</code>.<a href="dataframes.html#fnref40">↩</a></p></li>
+<li id="fn36"><p>Die Funktion <code>subset</code> lässt hier ein paar Ausnahmen zu, die weiter unten besprochen werden. Die erste Ausnahme kennen wir schon: Das Argument <code>subset</code> akzeptiert auch, wenn wir einen Ausdruck übergeben, der außerhalb der Funktion gar nicht als logischer Vektor erkannt würde.<a href="dataframes.html#fnref36">↩</a></p></li>
+<li id="fn37"><p>Eine Ausnahme bildet hier die Funktion <code>c</code>, bei der wir keine Funktionsnamen angeben. Hier gilt nämlich: wir können beliebig viele Vektoren als Argumente angeben und deswegen gibt es natürlich keinen separaten Namen für jedes mögliche Argument. Feste Namen gibt es aber normalerweise, wenn es eine feste Anzahl an möglichen Argumenten gibt – wie bei der Funktion <code>subset</code>.<a href="dataframes.html#fnref37">↩</a></p></li>
+<li id="fn38"><p>Beachtet, dass sowohl Messwerte als auch Gruppierungsvariable als <strong>Vektoren</strong> übergeben werden. Ich behandle die Funktion <code>tapply</code> jedoch im Kapitel zu <code>data.frames</code>, da es zumeist so sein wird, dass wir beide Vektoren aus <strong>einem</strong> <code>data.frame</code> mit der <code>$</code>-Notation auslesen werden.<a href="dataframes.html#fnref38">↩</a></p></li>
+<li id="fn39"><p>Wie viele Datenpunkte in die Berechnung jedes Mittelwerts eingehen, können wir in diesem Fall prüfen mit <code>table(mdf$Geschlecht, mdf$Augenfarbe)</code>.<a href="dataframes.html#fnref39">↩</a></p></li>
 </ol>
 </div>
             </section>
