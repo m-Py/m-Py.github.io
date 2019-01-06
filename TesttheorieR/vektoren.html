@@ -85,6 +85,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -368,10 +369,11 @@ meinVektor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="
 meinVektor <span class="op">-</span><span class="st"> </span>xx</code></pre></div>
 <pre><code>[1] -4.2 -3.2  0.8  1.8  4.8</code></pre>
 <p>Variablen können an jeder Stelle verwendet werden, an der man Daten sonst “händisch” eingeben würde. Wir können jegliche Objekte – nicht nur Vektoren, sondern auch Datentabellen oder beliebig komplizierte Ergebnisse von Berechnungen – in Variablen speichern. Der Workflow in <code>R</code> ist so ausgelegt, dass Zwischenergebnisse weiterverwendet werden können. Hierbei unterscheidet es sich fundamental von SPSS, das einen Unterschied zwischen Daten und “Output” macht. In <code>R</code> kann das Ergebnis jeglicher Berechnung als Input einer anderen Berechnung dienen.</p>
-<p> </p>
-
-<p> </p>
-<p> </p>
+<div class="block">
+<p>
+<strong>Merke</strong>: In <code>R</code> kann (fast) alles in einer Variablen gespeichert und weiter verwendet werden.
+</p>
+</div>
 <p>Wir können auch mit “<code>=</code>” Daten zu Variablen zuweisen. Das funktioniert genauso wie “<code>&lt;-</code>”:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">foo =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>
 foo</code></pre></div>
@@ -605,7 +607,7 @@ zufallsdaten &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span c
 <pre><code>[1] 1000</code></pre>
 <p>Die Funktion <code>head</code> zeigt uns die ersten sechs Werte des Vektors an. <code>head</code> ist sehr praktisch, um sich schnell einen Blick über Daten zu verschaffen. Das machen wir hier auch, da wir nicht alle 1,000 Werte in die Konsole schreiben wollen:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(zufallsdaten)</code></pre></div>
-<pre><code>[1] -0.1538814  0.7348841 -0.1516168 -1.1939559  3.1274752 -1.0030440</code></pre>
+<pre><code>[1] -0.6494931 -1.5119641 -0.4969608 -0.3865598  2.4057916  1.1402806</code></pre>
 <p>Wir können die Daten mithilfe eines Histogramms betrachten, um uns davon zu überzeugen, dass sie tatsächlich normalverteilt sind – sich also der Großteil der Daten um die <code>0</code> tummelt und extreme Werte in beide Richtungen seltener werden (dieser Code muss nicht verstanden werden):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Male Histogram
 <span class="kw">hist</span>(zufallsdaten, <span class="dt">freq =</span> <span class="ot">FALSE</span>,
@@ -619,14 +621,14 @@ zufallsdaten &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span c
 
 ## Zeichne eine graue Linie beim x-Wert `1` ein:
 <span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;darkgrey&quot;</span>)</code></pre></div>
-<p><img src="01_Einstieg_files/figure-html/unnamed-chunk-51-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="01_Einstieg_files/figure-html/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Nach visueller Inspektion der Verteilung der Zufallszahlen können wir mit <code>sum</code> testen, wie viele der 1,000 Zufallsdaten größer als 1 sind:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(zufallsdaten <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</code></pre></div>
-<pre><code>[1] 147</code></pre>
+<pre><code>[1] 154</code></pre>
 <p>Zur Erinnerung: Der Befehl “<code>zufallsdaten &gt; 1</code>” ergibt einen Vektor aus <code>TRUE</code> und <code>FALSE</code> Werten, der genauso viele Elemente enthält wie der Vektor <code>zufallsdaten</code>; wann immer ein Eintrag in <code>zufallsdaten</code> größer ist als 1, erhalten wir <code>TRUE</code>, andernfalls <code>FALSE</code>. <code>sum</code> gibt die Zahl der <code>TRUE</code> Einträge aus. <strong>Das funktioniert, da <code>TRUE</code> und <code>FALSE</code> eine numerische Interpretation haben: <code>TRUE</code> wird als <code>1</code> interpretiert und <code>FALSE</code> als <code>0</code></strong>.<a href="#fn21" class="footnoteRef" id="fnref21"><sup>21</sup></a></p>
 <p>Analog können wir mit <code>mean</code> den relativen Anteil der Daten bestimmen, die größer als 1 sind:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(zufallsdaten <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</code></pre></div>
-<pre><code>[1] 0.147</code></pre>
+<pre><code>[1] 0.154</code></pre>
 <p>Der Erwartungswert, dass eine zufällige Zahl aus einer Standardnormalverteilung größer ist als <code>1</code> – also mehr als eine Standardabweichung vom Mittelwert entfernt liegt – liegt bei etwa 15.9%. Den exakten Erwartungswert könnte ich in <code>R</code> mit der Funktion <code>pnorm</code> herausfinden:<a href="#fn22" class="footnoteRef" id="fnref22"><sup>22</sup></a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="dv">1</span>)</code></pre></div>
 <pre><code>[1] 0.1586553</code></pre>
@@ -634,7 +636,7 @@ zufallsdaten &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## 100,000 Zufallsdaten sind für R kein Problem
 zufallsdaten &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100000</span>) <span class="co"># 100000</span>
 <span class="kw">mean</span>(zufallsdaten <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</code></pre></div>
-<pre><code>[1] 0.15931</code></pre>
+<pre><code>[1] 0.15953</code></pre>
 <p>Ihr könnt für das Gesetz der großen Zahlen selber ein Gefühl entwickeln, wenn ihr mehrfach <code>mean(rnorm(1000)&gt;1)</code> und <code>mean(rnorm(100000)&gt;1)</code> in die <code>R</code>-Konsole eingebt und beobachtet, welcher Wert häufiger näher an 0.159 liegt. Beachtet wie schnell <code>R</code> Operationen mit 100,000 Zahlen durchführen kann.</p>
 <div id="der-in-operator" class="section level3">
 <h3><span class="header-section-number">2.3.1</span> Der <code>%in%</code> Operator</h3>
@@ -696,8 +698,7 @@ auswahl</code></pre></div>
 ## etwa 2.5% der Daten sein)
 daten &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">300</span>)
 daten[daten <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>]</code></pre></div>
-<pre><code> [1] 2.481352 2.157728 2.335593 2.175585 2.390279 2.297804 2.274164
- [8] 2.731111 2.055884 2.244892 2.171255</code></pre>
+<pre><code>[1] 2.418230 2.354099 3.177765 2.023950 2.850154 2.466252 2.224873 2.240002</code></pre>
 <p>An dieser Stelle sollte man sich klar machen, warum <code>daten</code> sowohl vor als auch innerhalb der <code>[·]</code> Klammern vorkommt. Das ist prinzipiell dasselbe wie im Beispiel <code>meinVektor[auswahl]</code> oben, nur das ich dort den <code>TRUE/FALSE</code> Vektor, der die Daten ausgewählt hat, in einer Variablen – <code>auswahl</code> – zwischengespeichert habe.</p>
 </div>
 <div id="vektorAendern" class="section level3">
