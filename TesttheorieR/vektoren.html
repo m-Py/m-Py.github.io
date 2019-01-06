@@ -227,7 +227,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>3</code> ein Vektor</li>
 <li>das Ergebnis <code>4</code> ist auch ein Vektor</li>
 </ul>
-<p>Das Interessante an Vektoren ist, dass der ein-elementige Vektor nur ein Spezialfall ist. Im Normalfall können Vektoren mehrere Elemente enthalten; die “atomare” Einheit in <code>R</code> ist also nicht ein einzelnes Element, sondern gleich eine Aneinanderreihung beliebig vieler gleichartiger Elemente, etwa Zahlen.<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a> Statistische Berechnungen – wie die Berechnung eines Mittelwerts oder einer Standardabweichung – lassen sich direkt auf einer Menge an Daten durchführen, da diese in <strong>einem</strong> Vektor gespeichert sind. Diese “Vektorbasiertheit” ist vermutlich die größte Stärke von <code>R</code> für statistische Berechnungen.</p>
+<p>Das Interessante an Vektoren ist, dass der ein-elementige Vektor nur ein Spezialfall ist. Im Normalfall können Vektoren mehrere Elemente enthalten; die “atomare” Einheit in <code>R</code> ist also nicht ein einzelnes Element, sondern gleich eine Aneinanderreihung beliebig vieler gleichartiger Elemente, etwa Zahlen.<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a> Statistische Berechnungen – wie die Berechnung eines Mittelwerts oder einer Standardabweichung – lassen sich direkt auf einer Menge an Daten durchführen, da diese in <strong>einem</strong> Vektor gespeichert sind. Diese “Vektorbasiertheit” ist vermutlich die größte Stärke von <code>R</code> für statistische Berechnungen.</p>
 <p>Elemente zu Vektoren zusammenfügen (sprich: <strong>mehrere</strong> Vektoren zu <strong>einem</strong> Vektor zusammenfügen) funktioniert mit der <em>Funktion</em> <code>c</code> – die vermutlich basalste Funktion in <code>R</code>. Sie ist so simpel und grundlegend, dass man sie gegebenenfalls vergisst, wenn man sie braucht – versucht, sie zu erinnern!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Füge mehrere Zahlen zu einem Vektor zusammen:
 <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>) <span class="co"># Kommazahlen mit DezimalPUNKT schreiben</span></code></pre></div>
@@ -238,7 +238,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Folgendes geht auch, da <code>c</code> mehrere Vektoren zu <strong>einem einzelnen</strong> Vektor “verschmilzt”:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</code></pre></div>
 <pre><code>[1] 0.5 1.0 1.5 1.0 2.0 3.0</code></pre>
-<p>Auf mehrelementigen Vektoren kann man statistische Berechnungen durchführen, wie etwa die Bestimmung des arithmetischen Mittels, einer Standardabweichung, der Varianz, oder des Minimums oder Maximums:<a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a></p>
+<p>Auf mehrelementigen Vektoren kann man statistische Berechnungen durchführen, wie etwa die Bestimmung des arithmetischen Mittels, einer Standardabweichung, der Varianz, oder des Minimums oder Maximums:<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Berechne einen Mittelwert
 <span class="kw">mean</span>(<span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>))</code></pre></div>
 <pre><code>[1] 1</code></pre>
@@ -261,7 +261,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li>Funktionen haben einen Namen – etwa: <code>mean</code> oder <code>c</code></li>
 <li>Hinter dem Namen einer Funktion werden in Klammern ein oder mehrere <em>Argumente</em> übergeben, etwa: ein Vektor</li>
-<li>Wenn einer Funktion mehrere Argumente übergeben werden, werden diese mit Kommata separiert, etwa: <code>c(1, 2, 3)</code><a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a></li>
+<li>Wenn einer Funktion mehrere Argumente übergeben werden, werden diese mit Kommata separiert, etwa: <code>c(1, 2, 3)</code><a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a></li>
 <li>Funktionen führen eine Berechnung durch und geben uns das Ergebnis zurück</li>
 </ul>
 <p>Einfach gesagt nehmen also Funktionen Daten entgegen und geben wiederum Daten zurück. Der Großteil unserer Arbeit mit <code>R</code> ist die Anwendung von Funktionen. Es ist möglich Funktionsaufrufe zu verschachteln, wie dieses Beispiel zeigte:</p>
@@ -346,11 +346,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code> [1]  2  4  6  8 10 12 14 16 18 20</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
 <pre><code> [1]  1  3  5  7  9 11 13 15 17 19</code></pre>
-<p>Hierbei werden die Operationen <code>* 2</code> bzw. <code>-1</code> direkt auf alle Elemente der Vektoren <code>1:10</code> bzw. <code>1:10 * 2</code> angewendet; die Ausgabe ist demnach jeweils ein Vektor der Länge 10. Bei gleich langen Vektoren werden solche Operationen im Allgemeinen <strong>paarweise</strong><a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a> angewendet:</p>
+<p>Hierbei werden die Operationen <code>* 2</code> bzw. <code>-1</code> direkt auf alle Elemente der Vektoren <code>1:10</code> bzw. <code>1:10 * 2</code> angewendet; die Ausgabe ist demnach jeweils ein Vektor der Länge 10. Bei gleich langen Vektoren werden solche Operationen im Allgemeinen <strong>paarweise</strong><a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a> angewendet:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span><span class="op">:</span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span><span class="op">:</span><span class="dv">6</span> <span class="co"># entspricht c(2*4, 3*5, 4*6)</span></code></pre></div>
 <pre><code>[1]  8 15 24</code></pre>
 <p>Dieses Verhalten ist typisch für <code>R</code>: Viele Funktionen und Operationen in <code>R</code> arbeiten <strong>komponentenweise</strong>, wenn zwei Vektoren gleicher Länge übergeben werden. Das Element an Position 1 im einen Vektor wird dann mit dem Element an Position 1 im anderen Vektor gepaart, das Element an Position 2 im einen Vektor mit dem Element an Position 2 im anderen Vektor – und so weiter.</p>
-<p>Werden ein ein-elementiger Vektor und ein mehr-elementiger Vektor mit einer Berechnung (etwa einer Addition) verknüpft, wird normalerweise das einzelne Element mit allen Elementen des anderen Vektors “gepaart.”<a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a></p>
+<p>Werden ein ein-elementiger Vektor und ein mehr-elementiger Vektor mit einer Berechnung (etwa einer Addition) verknüpft, wird normalerweise das einzelne Element mit allen Elementen des anderen Vektors “gepaart.”<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a></p>
 <div id="variablen" class="section level2">
 <h2><span class="header-section-number">2.1</span> Variablen</h2>
 <p>Wir wollen unsere Daten nicht nur in der Konsole ausgeben lassen, sondern auch abspeichern und damit arbeiten. Ein essentieller Bestandteil einer jeden Programmiersprache ist es, Daten in Variablen abzuspeichern. Variablen sind Namen, mit deren Hilfe wir auf gespeicherte Daten zugreifen. Wenn wir Daten in einer Variablen abgespeichert haben, können wir unter dem Namen der Variablen immer wieder darauf zugreifen. In <code>R</code> funktioniert das mit der Zuweisung “<code>&lt;-</code>”:</p>
@@ -381,7 +381,7 @@ foo</code></pre></div>
 <p>In <code>R</code> hat sich aus historischen Gründen die Konvention durchgesetzt, <code>&lt;-</code> zu verwenden, die ich in diesem Skript auch befolgen werde. In vielen anderen Programmiersprachen werden mit <code>=</code> Variablen zugewiesen.</p>
 <div id="ausgabevsabspeichern" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Ausgabe versus Abspeichern</h3>
-<p>Wir haben bereits zwei verschiedene Möglichkeiten gesehen, Objekte<a href="#fn13" class="footnoteRef" id="fnref13"><sup>13</sup></a> in <code>R</code> zu verwenden:</p>
+<p>Wir haben bereits zwei verschiedene Möglichkeiten gesehen, Objekte<a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a> in <code>R</code> zu verwenden:</p>
 <ol style="list-style-type: decimal">
 <li>Wir geben Objekte in der Konsole aus.</li>
 <li>Wir speichern Objekte in einer Variable ab.</li>
@@ -443,7 +443,7 @@ mean_age &lt;-<span class="st"> </span><span class="kw">mean</span>(age)</code><
 <span class="kw">rm</span>(foo)
 foo
 Fehler<span class="op">:</span><span class="st"> </span>Objekt <span class="st">&#39;foo&#39;</span> nicht gefunden</code></pre></div>
-<p>Weiterhin ist es guter Stil <em>konsistent</em> in der Vergebung der Variablennamen zu sein. Variablennamen sollen einen semantischen Gehalt haben, das heißt sie machen eine Aussage darüber, welche Daten sie enthalten. Häufig ist diese Information nicht in einem Wort erklärbar. Um auszusagen, dass eine Variable “das mittlere Alter” enthält, müssen mindestens die Anteile “mittel” und “Alter” enthalten sein. Wie soll das verknüpft werden? Verschiedene Konventionen existieren; wichtig ist, dass ihr euch konsistent für eine Variante entscheidet.<a href="#fn14" class="footnoteRef" id="fnref14"><sup>14</sup></a></p>
+<p>Weiterhin ist es guter Stil <em>konsistent</em> in der Vergebung der Variablennamen zu sein. Variablennamen sollen einen semantischen Gehalt haben, das heißt sie machen eine Aussage darüber, welche Daten sie enthalten. Häufig ist diese Information nicht in einem Wort erklärbar. Um auszusagen, dass eine Variable “das mittlere Alter” enthält, müssen mindestens die Anteile “mittel” und “Alter” enthalten sein. Wie soll das verknüpft werden? Verschiedene Konventionen existieren; wichtig ist, dass ihr euch konsistent für eine Variante entscheidet.<a href="#fn13" class="footnoteRef" id="fnref13"><sup>13</sup></a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Mögliche Konventionen der Namensgebung von Variablen:
 mean_age &lt;-<span class="st"> </span><span class="kw">mean</span>(age)
 mean.age &lt;-<span class="st"> </span><span class="kw">mean</span>(age)
@@ -466,7 +466,7 @@ mein_text &lt;-<span class="st"> &#39;bla bla bla&#39;</span>
 
 ## zwei-elementiger Vektor vom Typ character:
 mein_text2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Cronbachs&quot;</span>, <span class="st">&quot;Alpha&quot;</span>)</code></pre></div>
-<p>Mit Texten können wir andere Operationen durchführen als mit Zahlen, etwa ergibt Folgendes eine Fehlermeldung<a href="#fn15" class="footnoteRef" id="fnref15"><sup>15</sup></a> und ergibt auch gar keinen Sinn, da man Text nicht mit einer Zahl multiplizieren kann:</p>
+<p>Mit Texten können wir andere Operationen durchführen als mit Zahlen, etwa ergibt Folgendes eine Fehlermeldung<a href="#fn14" class="footnoteRef" id="fnref14"><sup>14</sup></a> und ergibt auch gar keinen Sinn, da man Text nicht mit einer Zahl multiplizieren kann:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;bla&quot;</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span>
 Fehler <span class="cf">in</span> <span class="st">&quot;bla&quot;</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">:</span><span class="st"> </span>nicht<span class="op">-</span>numerisches Argument
 für binären Operator</code></pre></div>
@@ -482,7 +482,7 @@ für binären Operator</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="st">&quot;Extraversion&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</code></pre></div>
 <pre><code>[1] &quot;Extraversion1&quot; &quot;Extraversion2&quot; &quot;Extraversion3&quot; &quot;Extraversion4&quot;
 [5] &quot;Extraversion5&quot;</code></pre>
-<p>Mit der Funktion <code>mode</code> können wir überprüfen, welchen Datentyp ein Vektor hat, also ob er beispielsweise tatsächlich vom Typ <code>character</code> ist:<a href="#fn16" class="footnoteRef" id="fnref16"><sup>16</sup></a></p>
+<p>Mit der Funktion <code>mode</code> können wir überprüfen, welchen Datentyp ein Vektor hat, also ob er beispielsweise tatsächlich vom Typ <code>character</code> ist:<a href="#fn15" class="footnoteRef" id="fnref15"><sup>15</sup></a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mode</span>(items)</code></pre></div>
 <pre><code>[1] &quot;character&quot;</code></pre>
 <p>Wenn man mit der Funktion <code>paste0</code> mehrere ein-elementige Vektoren miteinander verknüpft, wird immer ein ein-elementiger Vektor vom Typ <code>character</code> ausgegeben:</p>
@@ -497,7 +497,7 @@ für binären Operator</code></pre></div>
 falsch &lt;-<span class="st"> </span><span class="ot">FALSE</span></code></pre></div>
 <p>Wir werden häufig vom Typ <code>logical</code> Gebrauch machen, wenn wir in Datentabellen Fälle auswählen (etwa alle weiblichen oder männlichen Teilnehmer in einer Umfrage).</p>
 <p> </p>
-<p>Mit logischen Werten kann man die logischen Operationen UND (in <code>R</code>: <code>&amp;</code> ), ODER (in <code>R</code>: <code>|</code> ) und NICHT (in <code>R</code>: <code>!</code> ) durchführen:<a href="#fn17" class="footnoteRef" id="fnref17"><sup>17</sup></a></p>
+<p>Mit logischen Werten kann man die logischen Operationen UND (in <code>R</code>: <code>&amp;</code> ), ODER (in <code>R</code>: <code>|</code> ) und NICHT (in <code>R</code>: <code>!</code> ) durchführen:<a href="#fn16" class="footnoteRef" id="fnref16"><sup>16</sup></a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Logisches UND
 <span class="ot">TRUE</span> <span class="op">&amp;</span><span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
 <pre><code>[1] TRUE</code></pre>
@@ -546,13 +546,13 @@ In <span class="kw">mean.default</span>(laune_faktor) <span class="op">:</span>
 </div>
 <div id="na" class="section level3">
 <h3><span class="header-section-number">2.2.4</span> <code>NA</code></h3>
-<p><code>R</code> hat einen eigenen Datentyp, um fehlende Werte zu kodieren: <code>NA</code>.<a href="#fn18" class="footnoteRef" id="fnref18"><sup>18</sup></a> Da wir mit echten Datensätzen arbeiten, die oftmals “messy” sind, d.h. nicht notwendigerweise vollständig, ist diese Eigenschaft sehr nützlich. Gerade bei der Arbeit mit Daten in der psychologischen Diagnostik ist dies wichtig: Menschen geben in Fragebögen eben nicht immer auf alle Fragen eine Antwort.</p>
+<p><code>R</code> hat einen eigenen Datentyp, um fehlende Werte zu kodieren: <code>NA</code>.<a href="#fn17" class="footnoteRef" id="fnref17"><sup>17</sup></a> Da wir mit echten Datensätzen arbeiten, die oftmals “messy” sind, d.h. nicht notwendigerweise vollständig, ist diese Eigenschaft sehr nützlich. Gerade bei der Arbeit mit Daten in der psychologischen Diagnostik ist dies wichtig: Menschen geben in Fragebögen eben nicht immer auf alle Fragen eine Antwort.</p>
 <p>Man kann selber Vektoren erstellen, die fehlende Werte enthalten:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">messy_data &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">3</span>, <span class="ot">NA</span>, <span class="dv">6</span>, <span class="ot">NA</span>, <span class="dv">5</span>)</code></pre></div>
 <p>Die Anwesenheit von fehlenden Werten hat Auswirkungen darauf, welche Berechnungen <code>R</code> mit dem Vektor anstellen kann. Etwa können wir nicht mehr ohne Weiteres einen Mittelwert berechnen:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(messy_data) <span class="co"># geht nicht wegen des fehlenden Werts</span></code></pre></div>
 <pre><code>[1] NA</code></pre>
-<p>Man muss <code>R</code> explizit mitteilen, dass man trotz des Auftretens fehlender Werte einen Mittelwert ausrechnen möchte. Dies funktioniert mit dem <em>optionalen Argument</em> <code>na.rm</code><a href="#fn19" class="footnoteRef" id="fnref19"><sup>19</sup></a> der Funktion <code>mean</code>, welches wir auf <code>TRUE</code> setzen können. Mit dem <em>Argument</em> <code>na.rm</code> (“NA remove”) teilt man <code>mean</code> mit, dass <code>NA</code> Werte bei der Berechnung des Mittelwerts nicht berücksichtigt werden sollen (andere Funktionen wie <code>sd</code> und <code>var</code> haben auch das Argument <code>na.rm</code>):</p>
+<p>Man muss <code>R</code> explizit mitteilen, dass man trotz des Auftretens fehlender Werte einen Mittelwert ausrechnen möchte. Dies funktioniert mit dem <em>optionalen Argument</em> <code>na.rm</code><a href="#fn18" class="footnoteRef" id="fnref18"><sup>18</sup></a> der Funktion <code>mean</code>, welches wir auf <code>TRUE</code> setzen können. Mit dem <em>Argument</em> <code>na.rm</code> (“NA remove”) teilt man <code>mean</code> mit, dass <code>NA</code> Werte bei der Berechnung des Mittelwerts nicht berücksichtigt werden sollen (andere Funktionen wie <code>sd</code> und <code>var</code> haben auch das Argument <code>na.rm</code>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(messy_data, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>[1] 4.142857</code></pre>
 <p>Hierbei nehmen wir zur Kenntnis, dass man Argumente von Funktionen benennen kann – was wir aber nicht immer machen. Dazu später mehr.</p>
@@ -581,7 +581,7 @@ daten <span class="op">&gt;</span><span class="st"> </span>vergleichswert</code>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">daten</code></pre></div>
 <pre><code>[1] 3</code></pre>
 <p>Dies ist ein Beispiel für einen Fehler (<em>Bug</em>), den man nicht anhand von einer Fehlermeldung bemerkt, da der Befehl <em>syntaktisch</em> korrekt ist. Es ist jedoch problematisch, dass ich an dieser Stelle meine Daten mit einem irrelevanten Wert überschrieben habe, und das bei einem späteren Zugriff darauf vermutlich nicht beachten werde.</p>
-<p>Welche logischen Vergleiche möglich sind, hängt vom Datentyp eines Vektors ab. Für Vektoren vom typ <code>character</code> etwa macht eine kleiner/größer Abfrage keinen Sinn, jedoch eine Abfrage auf Gleichheit:<a href="#fn20" class="footnoteRef" id="fnref20"><sup>20</sup></a></p>
+<p>Welche logischen Vergleiche möglich sind, hängt vom Datentyp eines Vektors ab. Für Vektoren vom typ <code>character</code> etwa macht eine kleiner/größer Abfrage keinen Sinn, jedoch eine Abfrage auf Gleichheit:<a href="#fn19" class="footnoteRef" id="fnref19"><sup>19</sup></a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">text1 &lt;-<span class="st"> &quot;Hallo Welt&quot;</span>
 
 text1 <span class="op">==</span><span class="st"> &quot;Hallo Welt&quot;</span></code></pre></div>
@@ -625,11 +625,11 @@ zufallsdaten &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span c
 <p>Nach visueller Inspektion der Verteilung der Zufallszahlen können wir mit <code>sum</code> testen, wie viele der 1,000 Zufallsdaten größer als 1 sind:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(zufallsdaten <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</code></pre></div>
 <pre><code>[1] 153</code></pre>
-<p>Zur Erinnerung: Der Befehl “<code>zufallsdaten &gt; 1</code>” ergibt einen Vektor aus <code>TRUE</code> und <code>FALSE</code> Werten, der genauso viele Elemente enthält wie der Vektor <code>zufallsdaten</code>; wann immer ein Eintrag in <code>zufallsdaten</code> größer ist als 1, erhalten wir <code>TRUE</code>, andernfalls <code>FALSE</code>. <code>sum</code> gibt die Zahl der <code>TRUE</code> Einträge aus. <strong>Das funktioniert, da <code>TRUE</code> und <code>FALSE</code> eine numerische Interpretation haben: <code>TRUE</code> wird als <code>1</code> interpretiert und <code>FALSE</code> als <code>0</code></strong>.<a href="#fn21" class="footnoteRef" id="fnref21"><sup>21</sup></a></p>
+<p>Zur Erinnerung: Der Befehl “<code>zufallsdaten &gt; 1</code>” ergibt einen Vektor aus <code>TRUE</code> und <code>FALSE</code> Werten, der genauso viele Elemente enthält wie der Vektor <code>zufallsdaten</code>; wann immer ein Eintrag in <code>zufallsdaten</code> größer ist als 1, erhalten wir <code>TRUE</code>, andernfalls <code>FALSE</code>. <code>sum</code> gibt die Zahl der <code>TRUE</code> Einträge aus. <strong>Das funktioniert, da <code>TRUE</code> und <code>FALSE</code> eine numerische Interpretation haben: <code>TRUE</code> wird als <code>1</code> interpretiert und <code>FALSE</code> als <code>0</code></strong>.<a href="#fn20" class="footnoteRef" id="fnref20"><sup>20</sup></a></p>
 <p>Analog können wir mit <code>mean</code> den relativen Anteil der Daten bestimmen, die größer als 1 sind:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(zufallsdaten <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</code></pre></div>
 <pre><code>[1] 0.153</code></pre>
-<p>Der Erwartungswert, dass eine zufällige Zahl aus einer Standardnormalverteilung größer ist als <code>1</code> – also mehr als eine Standardabweichung vom Mittelwert entfernt liegt – liegt bei etwa 15.9%. Den exakten Erwartungswert könnte ich in <code>R</code> mit der Funktion <code>pnorm</code> herausfinden:<a href="#fn22" class="footnoteRef" id="fnref22"><sup>22</sup></a></p>
+<p>Der Erwartungswert, dass eine zufällige Zahl aus einer Standardnormalverteilung größer ist als <code>1</code> – also mehr als eine Standardabweichung vom Mittelwert entfernt liegt – liegt bei etwa 15.9%. Den exakten Erwartungswert könnte ich in <code>R</code> mit der Funktion <code>pnorm</code> herausfinden:<a href="#fn21" class="footnoteRef" id="fnref21"><sup>21</sup></a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="dv">1</span>)</code></pre></div>
 <pre><code>[1] 0.1586553</code></pre>
 <p>Nach dem Gesetz der großen Zahlen liegt der folgende Wert wahrscheinlich näher an 15.9% als der Schätzer, der auf 1,000 Zufallszahlen basiert:</p>
@@ -655,7 +655,7 @@ zufallsdaten &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span c
 <p>Der Zugriff auf Daten ist ein wichtiger Abschnitt unserer Einleitung in die Grundlagen <code>R</code>s. In diesem Abschnitt lernen wir, wie wir Elemente aus einfachen Vektoren “herausgreifen” können.</p>
 <div id="veczugriff" class="section level3">
 <h3><span class="header-section-number">2.4.1</span> Der <code>[·]</code>-Zugriff</h3>
-<p>Daten können mit dem <code>[·]</code>-Zugriff<a href="#fn23" class="footnoteRef" id="fnref23"><sup>23</sup></a> <em>indexbasiert</em> aus Vektoren ausgewählt werden. Jedes Element im Vektor hat einen <em>Index</em>, der seiner Position im Vektor entspricht. Im folgenden Vektor etwa hat <code>2</code> den Index <code>1</code>, <code>4</code> den Index <code>2</code> und <code>1</code> den Index <code>3</code>:</p>
+<p>Daten können mit dem <code>[·]</code>-Zugriff<a href="#fn22" class="footnoteRef" id="fnref22"><sup>22</sup></a> <em>indexbasiert</em> aus Vektoren ausgewählt werden. Jedes Element im Vektor hat einen <em>Index</em>, der seiner Position im Vektor entspricht. Im folgenden Vektor etwa hat <code>2</code> den Index <code>1</code>, <code>4</code> den Index <code>2</code> und <code>1</code> den Index <code>3</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">daten &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">1</span>)</code></pre></div>
 <p>Ich kann mit dem <code>[·]</code>-Zugriff durch Angabe des Index auf einzelne Elemente im Vektor zugreifen:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">daten[<span class="dv">1</span>]</code></pre></div>
@@ -713,7 +713,7 @@ daten</code></pre></div>
 daten[<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)] &lt;-<span class="st"> </span><span class="dv">0</span>
 daten</code></pre></div>
 <pre><code>[1] 0 2 0 4 5</code></pre>
-<p>Das würde man so “händisch” nicht machen, aber es soll zum Verständnis dessen dienen, was im folgenden – anwendungsnäheren – Beispiel passiert. Angenommen, bei einer Dateneingabe wurden fehlende Werte in einem Fragebogen mit <code>-99</code> kodiert.<a href="#fn24" class="footnoteRef" id="fnref24"><sup>24</sup></a> Wir wollen <code>R</code> mitteilen, diesen Wert als fehlend zu interpretieren. Hier kommt uns wiederum eine logische Abfrage zugute:</p>
+<p>Das würde man so “händisch” nicht machen, aber es soll zum Verständnis dessen dienen, was im folgenden – anwendungsnäheren – Beispiel passiert. Angenommen, bei einer Dateneingabe wurden fehlende Werte in einem Fragebogen mit <code>-99</code> kodiert.<a href="#fn23" class="footnoteRef" id="fnref23"><sup>23</sup></a> Wir wollen <code>R</code> mitteilen, diesen Wert als fehlend zu interpretieren. Hier kommt uns wiederum eine logische Abfrage zugute:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">daten &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">-99</span>, <span class="dv">5</span>, <span class="dv">-99</span>, <span class="dv">2</span>, <span class="dv">-99</span>, <span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)
 daten</code></pre></div>
 <pre><code> [1]   1 -99   5 -99   2 -99   4   1   2   3</code></pre>
@@ -772,26 +772,26 @@ daten</code></pre></div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="8">
-<li id="fn8"><p>Interessanterweise gibt es sogar Vektoren der Länge 0 – also Vektoren, die gar kein Element beinhalten. Das soll uns aber erst einmal nicht beschäftigen.<a href="vektoren.html#fnref8">↩</a></p></li>
-<li id="fn9"><p><code>R</code> würde oft auch bei einelementigen Vektoren ein Ergebnis ausgeben, aber das ist zum Beispiel beim Mittelwert wenig sinnvoll.<a href="vektoren.html#fnref9">↩</a></p></li>
-<li id="fn10"><p>In den obigen Beispielen einfacher statistischer Berechnungen wird jeweils genau ein Argument übergeben, nämlich der Vektor, für den wir den Mittelwert, die Standardabweichung etc. berechnen wollten. Es ist auch möglich – und auch üblich –, dass Funktionen mehrere Argumente annehmen, die ihr Verhalten bestimmen. Die Funktion <code>plot</code> etwa verfügt über eine kaum überschaubare Menge an möglichen Argumenten, die verwendet werden können, um das Aussehen einer Abbildung zu spezifizieren.<a href="vektoren.html#fnref10">↩</a></p></li>
-<li id="fn11"><p>Ich werde dazu oft auch <em>komponentenweise</em> sagen.<a href="vektoren.html#fnref11">↩</a></p></li>
-<li id="fn12"><p>Wir werden nur diese Fälle betrachten: Entweder wird ein ein-elementiger Vektor mit einem längeren Vektor verknüpft oder zwei gleich lange Vektoren werden miteinander verknüpft. Es ist auch möglich, andere Kombinationen von Vektorlängen zu paaren, was wir jedoch erst einmal vernachlässigen (gebt bei Interesse einmal die Befehle <code>c(1,2) * 1:4</code> und <code>c(1,2) * 1:3</code> in die <code>R</code>-Konsole ein).<a href="vektoren.html#fnref12">↩</a></p></li>
-<li id="fn13"><p>Bis jetzt kennen wir nur das Vektor-Objekt. In <code>R</code> gibt es aber ganz verschiedene “Datencontainer”, die man allgemein als Objekte bezeichnet.<a href="vektoren.html#fnref13">↩</a></p></li>
-<li id="fn14"><p>Ich werde von dieser Regel in diesem Skript abweichen.<a href="vektoren.html#fnref14">↩</a></p></li>
-<li id="fn15"><p>Leider sind Fehlermeldungen in <code>R</code> oftmals sehr kryptisch und gerade für Anfänger schwer verständlich.<a href="vektoren.html#fnref15">↩</a></p></li>
-<li id="fn16"><p>Die Ausgabe des Vektors macht uns auch schon eindeutig klar, dass es sich hier um einen Vektor vom Typ <code>character</code> handelt; die ausgegeben Elemente erscheinen nämlich in Anführungszeichen (“item_1”, “item_2”, …)<a href="vektoren.html#fnref16">↩</a></p></li>
-<li id="fn17"><p><a href="https://de.wikipedia.org/wiki/Boolesche_Algebra#" class="uri">https://de.wikipedia.org/wiki/Boolesche_Algebra#</a> Zweielementige_boolesche_Algebra<a href="vektoren.html#fnref17">↩</a></p></li>
-<li id="fn18"><p>Eigentlich ist <code>NA</code> kein eigener Datentyp. In <code>R</code> hat jeder Vektor <strong>nur genau einen</strong> Datentyp. Es ist beispielsweise nicht möglich, dass in einem Vektor gleichzeitig Werte vom Typ <code>numeric</code>, <code>character</code> und <code>factor</code> vorkommen. <code>NA</code>-Werte können jedoch in Kombination mit jedem Datentyp vorkommen. Sie kodieren dann die Abwesenheit eines Datums; dieses Datum hätte – wenn es nicht fehlen würde – den Datentyp des Vektors.<a href="vektoren.html#fnref18">↩</a></p></li>
-<li id="fn19"><p>Ein Argument heißt optional, wenn wir dafür keinen Wert angeben müssen. Stattdessen hat es einen sogenannten Standardwert, der angenommen wird, wenn wir das Argument nicht selber angeben. Der Standardwert des Arguments <code>na.rm</code> in der Funktion <code>mean</code> ist <code>FALSE</code>.<a href="vektoren.html#fnref19">↩</a></p></li>
-<li id="fn20"><p>Für Vektoren vom Typ <code>factor</code> lässt sich auf dieselbe Art und Weise eine Abfrage auf Gleichheit umsetzen.<a href="vektoren.html#fnref20">↩</a></p></li>
-<li id="fn21"><p>Wenn logische Vektoren einer numerischen Berechnung übergeben werden, werden die <code>TRUE</code>/<code>FALSE</code> Elemente des Vektors automatisch in Zahlen, d.h. 1 und 0 umgewandelt. Deswegen funktioniert beispielsweise auch folgender Befehl:<br />
+<ol start="7">
+<li id="fn7"><p>Interessanterweise gibt es sogar Vektoren der Länge 0 – also Vektoren, die gar kein Element beinhalten. Das soll uns aber erst einmal nicht beschäftigen.<a href="vektoren.html#fnref7">↩</a></p></li>
+<li id="fn8"><p><code>R</code> würde oft auch bei einelementigen Vektoren ein Ergebnis ausgeben, aber das ist zum Beispiel beim Mittelwert wenig sinnvoll.<a href="vektoren.html#fnref8">↩</a></p></li>
+<li id="fn9"><p>In den obigen Beispielen einfacher statistischer Berechnungen wird jeweils genau ein Argument übergeben, nämlich der Vektor, für den wir den Mittelwert, die Standardabweichung etc. berechnen wollten. Es ist auch möglich – und auch üblich –, dass Funktionen mehrere Argumente annehmen, die ihr Verhalten bestimmen. Die Funktion <code>plot</code> etwa verfügt über eine kaum überschaubare Menge an möglichen Argumenten, die verwendet werden können, um das Aussehen einer Abbildung zu spezifizieren.<a href="vektoren.html#fnref9">↩</a></p></li>
+<li id="fn10"><p>Ich werde dazu oft auch <em>komponentenweise</em> sagen.<a href="vektoren.html#fnref10">↩</a></p></li>
+<li id="fn11"><p>Wir werden nur diese Fälle betrachten: Entweder wird ein ein-elementiger Vektor mit einem längeren Vektor verknüpft oder zwei gleich lange Vektoren werden miteinander verknüpft. Es ist auch möglich, andere Kombinationen von Vektorlängen zu paaren, was wir jedoch erst einmal vernachlässigen (gebt bei Interesse einmal die Befehle <code>c(1,2) * 1:4</code> und <code>c(1,2) * 1:3</code> in die <code>R</code>-Konsole ein).<a href="vektoren.html#fnref11">↩</a></p></li>
+<li id="fn12"><p>Bis jetzt kennen wir nur das Vektor-Objekt. In <code>R</code> gibt es aber ganz verschiedene “Datencontainer”, die man allgemein als Objekte bezeichnet.<a href="vektoren.html#fnref12">↩</a></p></li>
+<li id="fn13"><p>Ich werde von dieser Regel in diesem Skript abweichen.<a href="vektoren.html#fnref13">↩</a></p></li>
+<li id="fn14"><p>Leider sind Fehlermeldungen in <code>R</code> oftmals sehr kryptisch und gerade für Anfänger schwer verständlich.<a href="vektoren.html#fnref14">↩</a></p></li>
+<li id="fn15"><p>Die Ausgabe des Vektors macht uns auch schon eindeutig klar, dass es sich hier um einen Vektor vom Typ <code>character</code> handelt; die ausgegeben Elemente erscheinen nämlich in Anführungszeichen (“item_1”, “item_2”, …)<a href="vektoren.html#fnref15">↩</a></p></li>
+<li id="fn16"><p><a href="https://de.wikipedia.org/wiki/Boolesche_Algebra#" class="uri">https://de.wikipedia.org/wiki/Boolesche_Algebra#</a> Zweielementige_boolesche_Algebra<a href="vektoren.html#fnref16">↩</a></p></li>
+<li id="fn17"><p>Eigentlich ist <code>NA</code> kein eigener Datentyp. In <code>R</code> hat jeder Vektor <strong>nur genau einen</strong> Datentyp. Es ist beispielsweise nicht möglich, dass in einem Vektor gleichzeitig Werte vom Typ <code>numeric</code>, <code>character</code> und <code>factor</code> vorkommen. <code>NA</code>-Werte können jedoch in Kombination mit jedem Datentyp vorkommen. Sie kodieren dann die Abwesenheit eines Datums; dieses Datum hätte – wenn es nicht fehlen würde – den Datentyp des Vektors.<a href="vektoren.html#fnref17">↩</a></p></li>
+<li id="fn18"><p>Ein Argument heißt optional, wenn wir dafür keinen Wert angeben müssen. Stattdessen hat es einen sogenannten Standardwert, der angenommen wird, wenn wir das Argument nicht selber angeben. Der Standardwert des Arguments <code>na.rm</code> in der Funktion <code>mean</code> ist <code>FALSE</code>.<a href="vektoren.html#fnref18">↩</a></p></li>
+<li id="fn19"><p>Für Vektoren vom Typ <code>factor</code> lässt sich auf dieselbe Art und Weise eine Abfrage auf Gleichheit umsetzen.<a href="vektoren.html#fnref19">↩</a></p></li>
+<li id="fn20"><p>Wenn logische Vektoren einer numerischen Berechnung übergeben werden, werden die <code>TRUE</code>/<code>FALSE</code> Elemente des Vektors automatisch in Zahlen, d.h. 1 und 0 umgewandelt. Deswegen funktioniert beispielsweise auch folgender Befehl:<br />
 <code>TRUE * 2</code><br />
-<code>[1] 2</code><a href="vektoren.html#fnref21">↩</a></p></li>
-<li id="fn22"><p><code>pnorm</code> ist die kummulative Verteilungsfunktion der Normalverteilung. Sie sagt aus, wie viel % der Werte in einer Normalverteilung kleiner sind als der übergebene Wert. Um heraus zu finden, wie viele Werte <strong>größer</strong> als 1 sind, wird hier das Komplement, also <code>1 - pnorm(1)</code>, gebildet. (Das funktioniert, da die Gesamtdichte einer Wahrscheinlichkeitsverteilung immer 1 ist.)<a href="vektoren.html#fnref22">↩</a></p></li>
-<li id="fn23"><p>Ich nenne diese Operation <code>[·]</code>-Zugriff , da zur Datenauswahl aus Vektoren hinter den Vektor eckigen Klammern gestellt werden. Die Klammern enthalten eine Angabe darüber, welche Elemente ich aus dem Vektor auswählen will. Etwa wählt <code>c(4, 2, 6)[1]</code> das erste Element aus dem Vektor <code>c(4, 2, 6)</code> aus, also 4. Der Punkt ist bloß ein Platzhalter in der <code>[·]</code>-Notation.<a href="vektoren.html#fnref23">↩</a></p></li>
-<li id="fn24"><p>Das macht beispielsweise Sinn, damit bei der Eingabe explizit gemacht wird, dass der Wert fehlt. Andernfalls könnte das Datum bei der Eingabe auch vergessen worden sein.<a href="vektoren.html#fnref24">↩</a></p></li>
+<code>[1] 2</code><a href="vektoren.html#fnref20">↩</a></p></li>
+<li id="fn21"><p><code>pnorm</code> ist die kummulative Verteilungsfunktion der Normalverteilung. Sie sagt aus, wie viel % der Werte in einer Normalverteilung kleiner sind als der übergebene Wert. Um heraus zu finden, wie viele Werte <strong>größer</strong> als 1 sind, wird hier das Komplement, also <code>1 - pnorm(1)</code>, gebildet. (Das funktioniert, da die Gesamtdichte einer Wahrscheinlichkeitsverteilung immer 1 ist.)<a href="vektoren.html#fnref21">↩</a></p></li>
+<li id="fn22"><p>Ich nenne diese Operation <code>[·]</code>-Zugriff , da zur Datenauswahl aus Vektoren hinter den Vektor eckigen Klammern gestellt werden. Die Klammern enthalten eine Angabe darüber, welche Elemente ich aus dem Vektor auswählen will. Etwa wählt <code>c(4, 2, 6)[1]</code> das erste Element aus dem Vektor <code>c(4, 2, 6)</code> aus, also 4. Der Punkt ist bloß ein Platzhalter in der <code>[·]</code>-Notation.<a href="vektoren.html#fnref22">↩</a></p></li>
+<li id="fn23"><p>Das macht beispielsweise Sinn, damit bei der Eingabe explizit gemacht wird, dass der Wert fehlt. Andernfalls könnte das Datum bei der Eingabe auch vergessen worden sein.<a href="vektoren.html#fnref23">↩</a></p></li>
 </ol>
 </div>
             </section>
