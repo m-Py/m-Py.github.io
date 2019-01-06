@@ -248,11 +248,11 @@ mdf</code></pre></div>
 <p>Wir lernen in diesem Abschnitt die wichtigsten Möglichkeiten kennen, Daten aus Spalten und Zeilen von <code>data.frames</code> auszuwählen.</p>
 <div id="zugriff-auf-eine-einzelne-spalte-die--notation" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> Zugriff auf eine einzelne Spalte: die <code>$</code>-Notation</h3>
-<p>Der <code>$</code>-Zugriff ist für uns die grundlegendste Operation auf <code>data.frames</code>. Mit der <code>$</code>-Notation auf eine einzelne Spalte eines <code>data.frames</code> zugreifen und diese <strong>als Vektor</strong> auslesen:</p>
+<p>Der <code>$</code>-Zugriff ist für uns die grundlegendste Operation auf <code>data.frames</code>. Mit der <code>$</code>-Notation können wir auf eine einzelne Spalte eines <code>data.frames</code> zugreifen und diese <strong>als Vektor</strong> auslesen:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">punkte &lt;-<span class="st"> </span>mdf<span class="op">$</span>Item1
 punkte <span class="co"># `punkte` ist ein Vektor</span></code></pre></div>
 <pre><code>[1] 1 0 0 1 1</code></pre>
-<p>Ich kann den <code>$</code>-Zugriff nicht nur verwenden, um eine Spalte aus einem <code>data.frame</code> auszulesen, sondern kann damit auch neue Spalten zum <code>data.frame</code> hinzufügen, indem ich der neu zu erstellenden Spalte per “<code>&lt;-</code>” einen Vektor zuweise:</p>
+<p>Ich kann den <code>$</code>-Zugriff nicht nur verwenden, um eine Spalte aus einem <code>data.frame</code> auszulesen, sondern kann damit auch neue Spalten zum <code>data.frame</code> hinzufügen. Das geht, indem ich der neu zu erstellenden Spalte per “<code>&lt;-</code>” einen Vektor zuweise:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf<span class="op">$</span>Augenfarbe &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;blau&quot;</span>, <span class="st">&quot;grau&quot;</span>, <span class="st">&quot;blau&quot;</span>, <span class="st">&quot;braun&quot;</span>, <span class="st">&quot;grün&quot;)</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf</code></pre></div>
 <pre><code>  Nummer Item1 Item2 Alter Geschlecht Augenfarbe
@@ -308,7 +308,6 @@ m w
 <p>Dabei ist <em>Reihenvektor</em>/<em>Spaltenvektor</em> entweder ein (a) numerischer Vektor, der die Indexe der Reihen/Spalten enthält, die ausgewählt werden sollen, (b) ein logischer Vektor, der für jede Reihe/Spalte kodiert, ob diese in der Ausgabe enthalten sein soll (vgl. Kapitel <a href="vektoren.html#logischerZugriff">2</a>), oder (c) Vektor vom Typ <code>character</code>, der die Namen der Zeilen/Spalten enthält, die ausgegeben werden sollen.<a href="#fn31" class="footnoteRef" id="fnref31"><sup>31</sup></a></p>
 <p>Es ist möglich, dass in einem einzelnen <code>[·,·]</code>-Zugriff sowohl nach Spalten als auch Zeilen ausgewählt wird. Oftmals wird aber entweder der Spaltenvektor oder der Reihenvektor “leer” sein. Dann findet die Auswahl nur entweder nach Zeilen beziehungsweise Spalten statt, wie es auch in den obigen Beispielen der Fall war.</p>
 <p>Häufig werden wir zur Auswahl der gewünschten Spalten einen Vektor vom Typ <code>character</code> angeben – also die Spaltennamen. Zur Auswahl von Zeilen wird man häufig einen logischen Vektor verwenden, der die Eigenschaften der Fälle kodiert, die die auszuwählenden Fälle haben sollen. Aber: Alle Möglichkeiten sind denkbar, etwa auch, dass ein logischer Vektor zur Auswahl der Spalten verwendet wird oder wir die Nummern der Zeilen angeben, die ausgewählt werden sollen.</p>
-<p> </p>
 <p>Durch die UND bzw. ODER Operationen können wir auch komplexere Anforderungen an die Auswahl der Zeilen stellen:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf[mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span> <span class="op">|</span><span class="st"> </span>mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;grün&quot;, ]</span></code></pre></div>
 <pre><code>  Nummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
@@ -321,8 +320,7 @@ m w
 3      3     0     0    13          m       blau         0
 5      5     1     1    15          m       grün         2</code></pre>
 <p>Hier merken wir, dass die <code>[·,·]</code>-Notation recht schnell unübersichtlich wird, wenn man komplexere logische Anfragen stellt. Insbesondere führen wir hier häufig einen <code>$</code>-Zugriff auf <code>dfw</code> durch, um die kombinierte logische Bedingung anzugeben. Weiter unten lernen wir mit der Funktion <code>subset</code> eine Möglichkeit kennen, komplexere logische Anfragen an die Auswahl von Zeilen etwas prägnanter zu stellen.</p>
-<p> </p>
-<p>Zum Abschluss dieses Abschnitts gebe ich noch weitere Beispiele für die verschiedenen Auswahlmöglichkeiten per <code>[·,·]</code> an. Wir verwenden weiterhin die Tabelle <code>mdf</code>:</p>
+<p>Zum Abschluss dieses Abschnitts betrachten wir noch einige weitere Beispiele für die verschiedenen Auswahlmöglichkeiten per <code>[·,·]</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Wähle per Index die ersten drei Zeilen aus
 mdf[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, ]</code></pre></div>
 <pre><code>  Nummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
