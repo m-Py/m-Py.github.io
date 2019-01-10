@@ -1,0 +1,15 @@
+
+
+I just read the following statement on alpha error thresholds in a paper
+on multiple comparisons:
+
+"In other words, by setting [the alpha level] to 5%, researchers accept
+a 5% chance that they will falsely conclude there is an effect."
+
+This is not true. "Falsely conclude there is an effect" means that (1)
+we conclude there is an effect and (2) there is no effect. By laws of
+probability we have: p(conclude effect AND no effect) = p(conclude
+effect | no effect) * p(no effect), which is 5% multiplied by the base
+rate of null effects, which is not 1. This means that I erroneously
+conclude the presence of an effect less often than my nominal alpha
+level indicates.
