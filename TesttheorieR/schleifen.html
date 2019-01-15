@@ -221,7 +221,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="schleifen" class="section level1">
 <h1><span class="header-section-number">6</span> Schleifen</h1>
-<p>Ein Hinweis zu Beginn: Dieses Kapitel nutzt den <code>[[·]]</code>-Zugriff auf Spalten auf <code>data.frames</code>. Wer damit noch nicht vertraut ist, sollte sich vor dem Weiterlesen zunächst den <a href="dataframes.html#doppelteckig">kurzen Abschnitt zum <code>[[·]]</code>-Zugriff</a> in Kapitel 3 ansehen.</p>
+<p>Ein Hinweis zu Beginn: Dieses Kapitel nutzt den <code>[[·]]</code>-Zugriff auf Spalten in <code>data.frames</code>. Wer damit noch nicht vertraut ist, sollte sich vor dem Weiterlesen zunächst den <a href="dataframes.html#doppelteckig">kurzen Abschnitt zum <code>[[·]]</code>-Zugriff</a> in Kapitel 3 ansehen.</p>
 <p>Schleifen spielen in allen Programmiersprachen eine wichtige Rolle. Sie erlauben uns, eine Aufgabe mehrfach durchzuführen, ohne dass wir den Code für die Aufgabe mehrfach schreiben müssen. Beispielsweise müssen wir Umkodierungen von Items (vgl. <a href="psychometrie.html#umkodierung">Kapitel 4</a>) nicht für jedes einzelne Item neu eingeben – d.h. fehleranfällig copy-pasten –, sondern können sie mithilfe einer Schleife für alle Items auf einmal durchführen. Wie auch eigene Funktionen helfen uns Schleifen bei der Automatisierung unserer Arbeit. Sie helfen uns, <code>R</code> als Programmiersprache zu nutzen.</p>
 <p>Im Allgemeinen und in <code>R</code> im Speziellen gibt es mehrere schleifenartige Gebilde; in diesem Kapitel lernen wir die wichtige <code>for</code>-Schleife kennen.<a href="#fn74" class="footnoteRef" id="fnref74"><sup>74</sup></a> Das logische Prinzip einer <code>for</code>-Schleifen ist recht simpel: Sie führt einen Code-Block mehrfach durch. In der Regel wird in den verschiedenen Durchläufen der Schleife variiert, auf welche Daten – also etwa auf welche Items eines Tests – zugegriffen wird, damit nicht in jedem Durchgang einfach dasselbe passiert. Dies ist die Syntax einer <code>for</code>-Schleife:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (Schleifenvariable <span class="cf">in</span> vector) {
@@ -229,7 +229,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 }</code></pre></div>
 <p>Das sieht erst einmal etwas beunruhigend aus. Gehen wir die einzelnen Bestandteile der Schleife einmal durch; danach schauen wir uns eine <code>for</code>-Schleife in Aktion an.</p>
 <p>Den Anfang der Schleife definieren wir mit dem Schlagwort <code>for</code>. Die eigentliche Musik spielt in der darauf folgenden Klammer <code>(Schleifenvariable in vector)</code>. Dabei ist <code>vector</code> ein beliebiger <code>R</code>-Vektor. Von der Länge dieses Vektors hängt ab, wie oft der Code im Körper der Schleife – eingeschlossen in den geschwungenen Klammern <code>{·}</code> – ausgeführt wird. Wir könnten der <code>for</code>-Schleife beispielsweise einen der folgenden Vektoren übergeben:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">83</span>, <span class="dv">45</span>, <span class="dv">12</span>, <span class="op">-</span><span class="dv">99</span>) <span class="co"># Die Schleife würde 4x laufen</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">83</span>, <span class="dv">45</span>, <span class="dv">12</span>, <span class="dv">-99</span>) <span class="co"># Die Schleife würde 4x laufen</span>
 <span class="kw">c</span>(<span class="st">&quot;Cronbach&quot;</span>, <span class="st">&quot;Spearman&quot;</span>, <span class="st">&quot;Brown&quot;</span>)  <span class="co"># 3x</span>
 <span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="co"># 10x</span>
 <span class="kw">paste0</span>(<span class="st">&quot;item&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>) <span class="co"># 50x</span></code></pre></div>
@@ -363,14 +363,14 @@ indices &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">
     <span class="co"># 1. Summenwert unter Ausschluss eines Items</span>
     scores &lt;-<span class="st"> </span><span class="kw">rowSums</span>(items[, indices[<span class="op">-</span>i]])
     <span class="co"># 2. Korreliere damit den Item-Score</span>
-    part_whole &lt;-<span class="st"> </span><span class="kw">cor</span>(items[, i], scores)
+    part_whole &lt;-<span class="st"> </span><span class="kw">cor</span>(items[[i]], scores)
     <span class="co"># 3. Speichere Trennschärfe ab</span>
     discriminations[i] &lt;-<span class="st"> </span>part_whole
 }
 ## Voilá:
 <span class="kw">head</span>(discriminations)</code></pre></div>
 <pre><code>[1] 0.3558674 0.4201535 0.3321716 0.5012883 0.4414333 0.4790852</code></pre>
-<p>Hier wird die Index-Variable <code>i</code> gleich mehrfach verwendet: (a) zur Auswahl der Spalten, die den jeweiligen Testwert berechnen; (b) zur Auswahl der Spalte des Items, für das die Trennschärfe bestimmt wird; (c) zum Abspeichern der Trennschärfe im Vektor <code>discriminations</code>.</p>
+<p>Hier wird die Index-Variable <code>i</code> gleich mehrfach verwendet: (1) zur Auswahl der Spalten, die den jeweiligen Testwert berechnen; (2) zur Auswahl der Spalte des Items, für das die Trennschärfe bestimmt wird; (3) zum Abspeichern der Trennschärfe im Vektor <code>discriminations</code>.</p>
 </div>
 </div>
 <div id="abstraktion-trennscharfe-als-funktion" class="section level2">

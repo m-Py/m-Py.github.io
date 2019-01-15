@@ -421,7 +421,7 @@ mean of x mean of y
 <p>Erinnern wir uns an die Spearman-Brown-Funktion, die ich in Kapitel 4 definiert habe:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span>   spearman_brown &lt;-<span class="st"> </span><span class="cf">function</span>(reliability, factor) {
 <span class="dv">2</span>       numerator  &lt;-<span class="st"> </span>reliability <span class="op">*</span><span class="st"> </span>factor
-<span class="dv">3</span>       denominator &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(factor<span class="op">-</span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>reliability
+<span class="dv">3</span>       denominator &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(factor<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span>reliability
 <span class="dv">4</span>       corrected_reliability &lt;-<span class="st"> </span>numerator <span class="op">/</span><span class="st"> </span>denominator
 <span class="dv">5</span>       <span class="kw">return</span>(corrected_reliability)
 <span class="dv">6</span>   }</code></pre></div>

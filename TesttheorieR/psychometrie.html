@@ -543,7 +543,7 @@ cor_halfs</code></pre></div>
 
 spearman_brown &lt;-<span class="st"> </span><span class="cf">function</span>(reliability, factor) {
     numerator  &lt;-<span class="st"> </span>reliability <span class="op">*</span><span class="st"> </span>factor
-    denominator &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(factor<span class="op">-</span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>reliability
+    denominator &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(factor<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span>reliability
     corrected_reliability &lt;-<span class="st"> </span>numerator <span class="op">/</span><span class="st"> </span>denominator
     <span class="kw">return</span>(corrected_reliability)
 }
