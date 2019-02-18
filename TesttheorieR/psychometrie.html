@@ -6,8 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title></title>
-  <meta name="description" content="<div style="white-space: pre-line;">Testtheorie mit R</div>">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="description" content="Testtheorie mit R">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="" />
   <meta property="og:type" content="book" />
@@ -34,6 +34,7 @@
 <link rel="next" href="funktionen.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -122,7 +123,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.2.4" data-path="vektoren.html"><a href="vektoren.html#na"><i class="fa fa-check"></i><b>2.2.4</b> <code>NA</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="vektoren.html"><a href="vektoren.html#logischevergleiche"><i class="fa fa-check"></i><b>2.3</b> Logische Vergleiche</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.3.1</b> Der <code>%in%</code> Operator</a></li>
+<li class="chapter" data-level="2.3.1" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-uberprufe-das-gesetz-der-groen-zahlen"><i class="fa fa-check"></i><b>2.3.1</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
+<li class="chapter" data-level="2.3.2" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.3.2</b> Der <code>%in%</code> Operator</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.4</b> Zugriff auf Vektorelemente</a><ul>
 <li class="chapter" data-level="2.4.1" data-path="vektoren.html"><a href="vektoren.html#veczugriff"><i class="fa fa-check"></i><b>2.4.1</b> Der <code>[·]</code>-Zugriff</a></li>
@@ -135,7 +137,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3" data-path="dataframes.html"><a href="dataframes.html"><i class="fa fa-check"></i><b>3</b> <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.1" data-path="dataframes.html"><a href="dataframes.html#die-funktion-data.frame"><i class="fa fa-check"></i><b>3.1</b> Die Funktion <code>data.frame</code></a></li>
 <li class="chapter" data-level="3.2" data-path="dataframes.html"><a href="dataframes.html#zugriff-auf-eine-einzelne-spalte-die--notation"><i class="fa fa-check"></i><b>3.2</b> Zugriff auf eine einzelne Spalte: die <code>$</code>-Notation</a></li>
-<li class="chapter" data-level="3.3" data-path="dataframes.html"><a href="dataframes.html#zugriff-auf-spalten-und-zeilen-die--notation"><i class="fa fa-check"></i><b>3.3</b> Zugriff auf Spalten und Zeilen: die <code>[·,·]</code>-Notation</a></li>
+<li class="chapter" data-level="3.3" data-path="dataframes.html"><a href="dataframes.html#datenzugriffe"><i class="fa fa-check"></i><b>3.3</b> Zugriff auf Spalten und Zeilen: die <code>[·,·]</code>-Notation</a></li>
 <li class="chapter" data-level="3.4" data-path="dataframes.html"><a href="dataframes.html#subset"><i class="fa fa-check"></i><b>3.4</b> Die Funktion <code>subset</code></a><ul>
 <li class="chapter" data-level="3.4.1" data-path="dataframes.html"><a href="dataframes.html#zeileneinfach"><i class="fa fa-check"></i><b>3.4.1</b> Vereinfachte Zeilenauswahl</a></li>
 <li class="chapter" data-level="3.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>3.4.2</b> Funktionsargumente</a></li>
@@ -523,9 +525,7 @@ corrected_score &lt;-<span class="st"> </span><span class="kw">rowSums</span>(re
 <p>Cronbachs Alpha ist ein Schätzer für die Reliabilität eines Tests.<a href="#fn37" class="footnoteRef" id="fnref37"><sup>37</sup></a> Andere mögliche Schätzer sind die Retest-Reliabilität und die Split-Half-Reliabilität. Diese basieren auf der Berechnung einer Korrelation zwischen zwei Punktwerten. Für die Bestimmung der Retest-Reliabilität lassen wir Testteilnehmer zweimal denselben Test bearbeiten und korrelieren die Punktwerte, die sich zu den zwei Testzeitpunkten ergeben.</p>
 <p>Noch leichter ist die Bestimmung der Split-Half-Reliabilität, welche nicht das mehrmalige Bearbeiten desselben Tests erfordert. Dabei teilen wir die Items des Tests in zwei Gruppen ein und bilden Summenwerte für die beiden Testhälften, welche wir dann miteinander korrelieren. Wir müssen dabei berücksichtigen, dass wir nur die Hälfte des Tests zur Schätzung der Reliabilität verwenden. Dies kann mithilfe der <em>Spearman-Brown-Formel</em> korrigiert werden.</p>
 <p>Die Spearman-Brown-Formel schätzt die Reliabilität eines Tests für den hypothetischen Fall, dass man diesen um einen bestimmten Faktor verlängern würde (d.h. man würde die bestehenden Items replizieren). Man kann sie verwenden, um den Reliabilitätsschätzer einer Split-Half-Korrelation zu korrigieren, da in diesen nur die Hälfte der Items eingehen. Die Spearman-Brown Formel ist diese:</p>
-<p> </p>
 <p><span class="math display">\[r&#39; = \frac{r \, n}{1 + (n - 1) r}\]</span></p>
-<p> </p>
 <p>Hierbei ist <em>r’</em> die um die Testlänge korrigierte Reliabilität. <em>r</em> ist der derzeitige Reliabilitätsschätzer, also beispielsweise die Korrelation von zwei Testhälften. <em>n</em> ist der Faktor, um den der Test hypothetisch verlängert wird.</p>
 <p>Für die Schätzung der Split-Half-Reliabilität muss man einen Verlängerungsfaktor von 2 annehmen, da man die Reliabilität nur mit einem halbierten Test schätzt (im Vergleich dazu geht bei der Bestimmung der Retest-Reliabilität zweimal der gesamte Test in die Korrelation ein). Folgender Code berechnet eine Split-Half-Reliabilität:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Wähle (a) die ersten drei und (b) die letzten zwei Items aus:
@@ -590,9 +590,12 @@ split_half</code></pre></div>
 </ol>
 </blockquote>
 <p>Ob ein Kreuz bei (1), (2), (3) oder (4) gesetzt wird, ist für die Auswertung nicht von Belang. Relevant ist, ob die Frage richtig beantwortet wurde – wir benötigen also die folgende Umkodierung der Daten:</p>
-<blockquote>
-<p><code>1</code> <span class="math inline">\(\to\)</span> <code>0</code> <code>2</code> <span class="math inline">\(\to\)</span> <code>1</code> <code>3</code> <span class="math inline">\(\to\)</span> <code>0</code> <code>4</code> <span class="math inline">\(\to\)</span> <code>0</code></p>
-</blockquote>
+<ul>
+<li><code>1</code> <span class="math inline">\(\to\)</span> <code>0</code></li>
+<li><code>2</code> <span class="math inline">\(\to\)</span> <code>1</code></li>
+<li><code>3</code> <span class="math inline">\(\to\)</span> <code>0</code></li>
+<li><code>4</code> <span class="math inline">\(\to\)</span> <code>0</code></li>
+</ul>
 <p>In psychometrischem Jargon: Für diese Aufgabe ist der Wert <code>2</code> der <em>Schlüssel</em> (engl.: <em>key</em>). Ein Schlüssel kodiert den Eingabewert der richtigen Antwort.<a href="#fn38" class="footnoteRef" id="fnref38"><sup>38</sup></a> Wir lernen jetzt, wie wir solche Umkodierungen in <code>R</code> umsetzen. Die Stärke einer Programmiersprache wie <code>R</code>: Wenn wir einmal gelernt haben, wie wir für eine Item-Schlüssel-Kombination Daten als richtig und falsch umkodieren, können wir mit nur ein wenig mehr Aufwand diesen Prozess für beliebig viele Items wiederholen. Das <em>Narcissistic Personality Inventory</em> etwa hat 40 Items und wir haben keine Lust, 40 Mal eine Umkodierung “händisch” neu durchzuführen.</p>
 <p> </p>
 <p><strong>Die Funktion <code>ifelse</code></strong></p>
@@ -622,7 +625,7 @@ bundesland_score</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(bundesland_score)</code></pre></div>
 <pre><code>[1] 0.4285714</code></pre>
 <p>In diesem Fall hätten 43% der Testteilnehmer das Bundesland-Item korrekt beantwortet. Diese Information konnten wir aus den ursprünglichen Antwortkategorien 1, 2, 3 und 4 nicht herleiten.</p>
-<p><code>ifelse</code> ist eine sehr nützliche Funktion, mit der wir Antworten umkodieren können. Später lernen wir, wie wir mithilfe von <code>ifelse</code> ganze Tests und nicht nur einzelne Items bepunkten können. Bevor wir das jedoch effizient machen können, werden wir im nächsten Kapitel noch ein paar Grundlagen zur Programmierung mit <code>R</code> lernen.</p>
+<p>Die Funktion <code>ifelse</code> ist sehr nützlich, mit der wir Antworten umkodieren können. Später lernen wir, wie wir mithilfe von <code>ifelse</code> ganze Tests und nicht nur einzelne Items bepunkten können. Bevor wir das jedoch effizient machen können, werden wir im nächsten Kapitel noch ein paar Grundlagen zur Programmierung mit <code>R</code> lernen.</p>
 </div>
 <div id="invertierung-von-antworten" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> Invertierung von Antworten</h3>
@@ -634,9 +637,13 @@ bundesland_score</code></pre></div>
 </ol>
 </blockquote>
 <p>Beide Items werden auf einer Likertskala mit fünf Abstufungen gemessen, das heißt es werden Punktzahlen von 1 bis 5 vergeben. Das Problem ist, dass in Item 1 ein hoher Punktwert für wenig Extraversion steht, in Item 2 ein hoher Punktwert hingegen für eine hohe Ausprägung in Extraversion. Generell wollen wir einen <em>Summenwert</em> berechnen, also einen Wert, der die Extraversion eines jeden Testteilnehmers kodiert – und zwar über beide Items hinweg. Im vorliegenden Fall macht es aber keinen Sinn, die Punktzahlen beider Items zu addieren. Die höchste Ausprägung in Extraversion würde sich dann ergeben, wenn ein Item extravertiert beantwortet wird, aber das andere introvertiert. Damit die Punktzahlen in beiden Items “in dieselbe Richtung” zu verstehen sind, wollen wir die Antworten auf Item 1 <em>invertieren</em>, sodass auch hier eine hohe Punktzahl für eine hohe Merkmalsausprägung in Extraversion steht. Das heißt, wir wollen die folgende Abbildung durchführen:</p>
-<blockquote>
-<p><code>1</code> <span class="math inline">\(\to\)</span> <code>5</code> <code>2</code> <span class="math inline">\(\to\)</span> <code>4</code> <code>3</code> <span class="math inline">\(\to\)</span> <code>3</code> <code>4</code> <span class="math inline">\(\to\)</span> <code>2</code> <code>5</code> <span class="math inline">\(\to\)</span> <code>1</code></p>
-</blockquote>
+<ul>
+<li><code>1</code> <span class="math inline">\(\to\)</span> <code>5</code></li>
+<li><code>2</code> <span class="math inline">\(\to\)</span> <code>4</code></li>
+<li><code>3</code> <span class="math inline">\(\to\)</span> <code>3</code></li>
+<li><code>4</code> <span class="math inline">\(\to\)</span> <code>2</code></li>
+<li><code>5</code> <span class="math inline">\(\to\)</span> <code>1</code></li>
+</ul>
 <p>Wir könnten dies mit mehrfacher Anwendung von <code>ifelse</code> hinbekommen, was jedoch mühsam wäre. Es gibt eine mathematische Umformung, welche wir auch mit nur wenig Code umsetzen können:</p>
 <blockquote>
 <p>Invertierter Wert = Ursprungswert * (-1) + Höchster Skalenwert + 1</p>
@@ -727,8 +734,6 @@ npi &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="
 <p>Eine weitere nützliche Funktion zum Betrachten von <code>data.frames</code> ist die Funktion <code>summary</code>, die uns einen schnellen Überblick über die Werte in allen Spalten des <code>data.frames</code> bietet:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(npi)</code></pre></div>
 <p>Die Funktion <code>summary</code> ergibt für jede Spalte eine Tabelle. Wegen der Länge des Outputs von <code>summary(npi)</code> ist nicht der gesamte Output im Skript abgebildet.<a href="#fn41" class="footnoteRef" id="fnref41"><sup>41</sup></a> Für die Variable <code>score</code> erhalten wir folgende Informationen zum Narzissmus-Gesamtscore:</p>
-<p> </p>
-<p> </p>
 <table>
 <thead>
 <tr class="header">
@@ -757,9 +762,7 @@ npi &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="
 </tbody>
 </table>
 <p> </p>
-<p> </p>
 <p><strong>Identifikation von fehlenden Werten im NPI Datensatz</strong></p>
-<p> </p>
 <p>Das NPI besteht aus 40 Items. Aus dem <em>Codebuch</em> des NPI Datensatzes<a href="#fn42" class="footnoteRef" id="fnref42"><sup>42</sup></a> wissen wir, dass Antworten auf die NPI Items die Werte 1 und 2 annehmen können. Die Antwort auf jedes Item des NPI besteht aus einer “forced choice” zwischen zwei Aussagen; eine davon steht für Narzissmus. Item 1 besteht beispielsweise aus den folgenden beiden Aussagen:</p>
 <blockquote>
 <ol style="list-style-type: decimal">
@@ -919,6 +922,7 @@ npi<span class="op">$</span>Q40_score &lt;-<span class="st"> </span><span class=
 <li><p>Gegeben ist der Antwortvektor <code>c(1, 2, 2, 1, 4, 5, 2, 2, 2, 3)</code> und der Schlüssel <code>2</code>. Wie kann ich die Item-Schwierigkeit ohne Anwendung der Funktion <code>ifelse()</code> bestimmen? Was ist die Item-Schwierigkeit?</p></li>
 <li><p>Gegeben ist der Antwortvektor <code>c(2, 3, 2, 4, 5, 6, 2, 3)</code>, der die Antworten auf das Item eines Persönlichkeitsinventars enthält. Die Antworten wurden auf einer Likertskala gegeben, die zwischen 1 und 6 kodiert war. Da das Item negativ gepolt ist, müssen die Antworten vor der Analyse invertiert werden. Was ist der Mittelwert der umgepolten Antworten (d.h. die Item-Schwierigkeit)?</p></li>
 </ol>
+
 </div>
 </div>
 <div class="footnotes">
@@ -972,7 +976,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -982,6 +986,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -1000,7 +1008,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

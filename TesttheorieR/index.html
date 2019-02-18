@@ -6,8 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title></title>
-  <meta name="description" content="<div style="white-space: pre-line;">Testtheorie mit R</div>">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="description" content="Testtheorie mit R">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="" />
   <meta property="og:type" content="book" />
@@ -34,6 +34,7 @@
 <link rel="next" href="vektoren.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -122,7 +123,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.2.4" data-path="vektoren.html"><a href="vektoren.html#na"><i class="fa fa-check"></i><b>2.2.4</b> <code>NA</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="vektoren.html"><a href="vektoren.html#logischevergleiche"><i class="fa fa-check"></i><b>2.3</b> Logische Vergleiche</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.3.1</b> Der <code>%in%</code> Operator</a></li>
+<li class="chapter" data-level="2.3.1" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-uberprufe-das-gesetz-der-groen-zahlen"><i class="fa fa-check"></i><b>2.3.1</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
+<li class="chapter" data-level="2.3.2" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.3.2</b> Der <code>%in%</code> Operator</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.4</b> Zugriff auf Vektorelemente</a><ul>
 <li class="chapter" data-level="2.4.1" data-path="vektoren.html"><a href="vektoren.html#veczugriff"><i class="fa fa-check"></i><b>2.4.1</b> Der <code>[·]</code>-Zugriff</a></li>
@@ -135,7 +137,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3" data-path="dataframes.html"><a href="dataframes.html"><i class="fa fa-check"></i><b>3</b> <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.1" data-path="dataframes.html"><a href="dataframes.html#die-funktion-data.frame"><i class="fa fa-check"></i><b>3.1</b> Die Funktion <code>data.frame</code></a></li>
 <li class="chapter" data-level="3.2" data-path="dataframes.html"><a href="dataframes.html#zugriff-auf-eine-einzelne-spalte-die--notation"><i class="fa fa-check"></i><b>3.2</b> Zugriff auf eine einzelne Spalte: die <code>$</code>-Notation</a></li>
-<li class="chapter" data-level="3.3" data-path="dataframes.html"><a href="dataframes.html#zugriff-auf-spalten-und-zeilen-die--notation"><i class="fa fa-check"></i><b>3.3</b> Zugriff auf Spalten und Zeilen: die <code>[·,·]</code>-Notation</a></li>
+<li class="chapter" data-level="3.3" data-path="dataframes.html"><a href="dataframes.html#datenzugriffe"><i class="fa fa-check"></i><b>3.3</b> Zugriff auf Spalten und Zeilen: die <code>[·,·]</code>-Notation</a></li>
 <li class="chapter" data-level="3.4" data-path="dataframes.html"><a href="dataframes.html#subset"><i class="fa fa-check"></i><b>3.4</b> Die Funktion <code>subset</code></a><ul>
 <li class="chapter" data-level="3.4.1" data-path="dataframes.html"><a href="dataframes.html#zeileneinfach"><i class="fa fa-check"></i><b>3.4.1</b> Vereinfachte Zeilenauswahl</a></li>
 <li class="chapter" data-level="3.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>3.4.2</b> Funktionsargumente</a></li>
@@ -226,7 +228,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title"><div style="white-space: pre-line;">Testtheorie mit R</div></h1>
-<h4 class="author"><em><div style="white-space: pre-line;">Martin Papenberg</div></em></h4>
+<p class="author"><em><div style="white-space: pre-line;">Martin Papenberg</div></em></p>
 </div>
 <div id="einstieg" class="section level1">
 <h1><span class="header-section-number">1</span> Einstieg</h1>
@@ -244,7 +246,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="danksagung" class="section level3">
 <h3><span class="header-section-number">1.1.2</span> Danksagung</h3>
-<p>Ich danke Juliane Tkotz für ihre Beiträge und für ihr nützliches Feedback zum Skript. Hanna Siegers, Marlene Wettstein, Frank Calio und Ingo Weigel danke ich für ihre Fehlermeldungen.</p>
+<p>Ich danke Juliane Tkotz für ihre wertvollen Beiträge und ihr nützliches Feedback zum Skript. Hanna Siegers, Marlene Wettstein, Frank Calio und Ingo Weigel danke ich für Fehlermeldungen.</p>
 <p>Zur Erstellung des Skripts wurden <code>R</code> <span class="citation">(R Core Team 2018)</span> und die <code>R</code>-Pakete <em>bookdown</em> <span class="citation">(Xie 2016)</span>, <em>knitr</em> <span class="citation">(Xie 2015)</span>, <em>rmarkdown</em> <span class="citation">(Allaire et al. 2017)</span>, <em>tufte</em> <span class="citation">(Xie and Allaire 2016)</span> und <em>tint</em> <span class="citation">(Eddelbuettel 2018)</span> genutzt.</p>
 </div>
 </div>
@@ -297,6 +299,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="ausblick" class="section level2">
 <h2><span class="header-section-number">1.3</span> Ausblick</h2>
 <p>In den nächsten zwei Kapiteln beschäftigen wir uns zunächst damit, wie <code>R</code> Daten darstellt. Dabei betrachten wir zunächst die grundlegenste Datenstruktur, den Vektor (<a href="vektoren.html#vektoren">Kapitel 2</a>). Danach lernen wir <code>data.frames</code> kennen (<a href="dataframes.html#dataframes">Kapitel 3</a>), die in <code>R</code> Datentabellen darstellen, wie wir sie auch aus Excel oder SPSS kennen. In <a href="psychometrie.html#psychometrie">Kapitel 4</a> werden wir psychometrische Datenauswertungen durchführen und dabei das Wissen anwenden, das wir zuvor erworben haben. In den Kapiteln <a href="funktionen.html#funktionen">5</a> und <a href="schleifen.html#schleifen">6</a> lernen wir mit Funktionen und Schleifen wichtige Programmiersprachenelemente kennen und werden sehen, wie wir damit unsere Arbeit automatisieren können.</p>
+
 </div>
 </div>
 <div class="footnotes">
@@ -336,7 +339,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -346,6 +349,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -364,7 +371,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

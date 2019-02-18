@@ -6,8 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title></title>
-  <meta name="description" content="<div style="white-space: pre-line;">Testtheorie mit R</div>">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="description" content="Testtheorie mit R">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="" />
   <meta property="og:type" content="book" />
@@ -34,6 +34,7 @@
 <link rel="next" href="dataframes.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -122,7 +123,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.2.4" data-path="vektoren.html"><a href="vektoren.html#na"><i class="fa fa-check"></i><b>2.2.4</b> <code>NA</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="vektoren.html"><a href="vektoren.html#logischevergleiche"><i class="fa fa-check"></i><b>2.3</b> Logische Vergleiche</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.3.1</b> Der <code>%in%</code> Operator</a></li>
+<li class="chapter" data-level="2.3.1" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-uberprufe-das-gesetz-der-groen-zahlen"><i class="fa fa-check"></i><b>2.3.1</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
+<li class="chapter" data-level="2.3.2" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.3.2</b> Der <code>%in%</code> Operator</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.4</b> Zugriff auf Vektorelemente</a><ul>
 <li class="chapter" data-level="2.4.1" data-path="vektoren.html"><a href="vektoren.html#veczugriff"><i class="fa fa-check"></i><b>2.4.1</b> Der <code>[·]</code>-Zugriff</a></li>
@@ -135,7 +137,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3" data-path="dataframes.html"><a href="dataframes.html"><i class="fa fa-check"></i><b>3</b> <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.1" data-path="dataframes.html"><a href="dataframes.html#die-funktion-data.frame"><i class="fa fa-check"></i><b>3.1</b> Die Funktion <code>data.frame</code></a></li>
 <li class="chapter" data-level="3.2" data-path="dataframes.html"><a href="dataframes.html#zugriff-auf-eine-einzelne-spalte-die--notation"><i class="fa fa-check"></i><b>3.2</b> Zugriff auf eine einzelne Spalte: die <code>$</code>-Notation</a></li>
-<li class="chapter" data-level="3.3" data-path="dataframes.html"><a href="dataframes.html#zugriff-auf-spalten-und-zeilen-die--notation"><i class="fa fa-check"></i><b>3.3</b> Zugriff auf Spalten und Zeilen: die <code>[·,·]</code>-Notation</a></li>
+<li class="chapter" data-level="3.3" data-path="dataframes.html"><a href="dataframes.html#datenzugriffe"><i class="fa fa-check"></i><b>3.3</b> Zugriff auf Spalten und Zeilen: die <code>[·,·]</code>-Notation</a></li>
 <li class="chapter" data-level="3.4" data-path="dataframes.html"><a href="dataframes.html#subset"><i class="fa fa-check"></i><b>3.4</b> Die Funktion <code>subset</code></a><ul>
 <li class="chapter" data-level="3.4.1" data-path="dataframes.html"><a href="dataframes.html#zeileneinfach"><i class="fa fa-check"></i><b>3.4.1</b> Vereinfachte Zeilenauswahl</a></li>
 <li class="chapter" data-level="3.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>3.4.2</b> Funktionsargumente</a></li>
@@ -357,8 +359,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Werden ein ein-elementiger Vektor und ein mehr-elementiger Vektor mit einer Berechnung (etwa einer Addition) verknüpft, wird normalerweise das einzelne Element mit allen Elementen des anderen Vektors “gepaart.”<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a></p>
 <div id="variablen" class="section level2">
 <h2><span class="header-section-number">2.1</span> Variablen</h2>
-<p>Wir wollen unsere Daten nicht nur in der Konsole ausgeben lassen, sondern auch abspeichern und damit arbeiten. Ein essentieller Bestandteil einer jeden Programmiersprache ist es, Daten in Variablen abzuspeichern. Variablen sind Namen, mit deren Hilfe wir auf gespeicherte Daten zugreifen. Wenn wir Daten in einer Variablen abgespeichert haben, können wir unter dem Namen der Variablen immer wieder darauf zugreifen. In <code>R</code> funktioniert das mit der Zuweisung <code>&lt;-</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Speichere einen Vektor in einer Variablen:
+<p>Wir wollen unsere Daten nicht nur in der Konsole ausgeben lassen, sondern auch abspeichern und damit arbeiten. Ein essentieller Bestandteil einer jeden Programmiersprache ist es, Daten in Variablen abzuspeichern. Variablen sind Namen, mit deren Hilfe wir auf gespeicherte Daten zugreifen. Wenn wir Daten in einer Variablen abgespeichert haben, können wir unter dem Namen der Variablen immer wieder darauf zugreifen. In <code>R</code> funktioniert das mit der Zuweisung <code>&lt;-</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Speichert einen Vektor in einer Variablen:
 meinVektor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">10</span>)</code></pre></div>
 <p>Ich kann den Inhalt von Variablen in der <code>R</code>-Konsole ausgeben lassen, wenn ich den Namen der Variablen in die Konsole schreibe und <code>Enter</code> drücke:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">meinVektor</code></pre></div>
@@ -476,7 +478,7 @@ mein_text2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;bla&quot;</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span>
 Fehler <span class="cf">in</span> <span class="st">&quot;bla&quot;</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">:</span><span class="st"> </span>nicht<span class="op">-</span>numerisches Argument
 für binären Operator</code></pre></div>
-<p>In diesem Skript spielt Text keine allzu große Rolle. In erster Linie werden wir Vektoren vom Typ <code>character</code> für Datenzugriffe verwenden; im Speziellen werden wir Vektoren vom Typ <code>character</code> nutzen, um Spalten in Datentabelle zu adressieren (siehe <a href="#datenzugriffe">Kapitel 3</a>). Zu diesem Zweck werden wir die Funktion <code>paste0</code> nutzen, die <code>character</code>-Vektoren beliebiger Länge erstellt. So lassen sich beispielsweise bequem 10 durchnummerierte Itemnamen generieren, wodurch man gleich 10 Spalten aus einer Tabelle auswählen könnte:</p>
+<p>In diesem Skript spielt Text keine allzu große Rolle. In erster Linie werden wir Vektoren vom Typ <code>character</code> für Datenzugriffe verwenden; im Speziellen werden wir Vektoren vom Typ <code>character</code> nutzen, um Spalten in Datentabelle zu adressieren (siehe <a href="dataframes.html#datenzugriffe">Kapitel 3</a>). Zu diesem Zweck werden wir die Funktion <code>paste0</code> nutzen, die <code>character</code>-Vektoren beliebiger Länge erstellt. So lassen sich beispielsweise bequem 10 durchnummerierte Itemnamen generieren, wodurch man gleich 10 Spalten aus einer Tabelle auswählen könnte:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">items &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;item_&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
 <p>Hierbei wird der Text “item_” mit den Zahlen von 1 bis 10 gepaart. Das Ergebnis des Befehls ist ein 10-elementiger Vektor, was wir auch wie folgt überprüfen können:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(items)</code></pre></div>
@@ -600,7 +602,8 @@ score_test1 <span class="op">&gt;</span><span class="st"> </span>score_test2</co
 <pre><code>[1] FALSE FALSE  TRUE FALSE FALSE  TRUE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">score_test1 <span class="op">==</span><span class="st"> </span>score_test2</code></pre></div>
 <pre><code>[1] FALSE FALSE FALSE  TRUE FALSE FALSE</code></pre>
-<p><strong>Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</strong></p>
+<div id="anwendungsbeispiel-uberprufe-das-gesetz-der-groen-zahlen" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</h3>
 <p>Häufig verwendet man die Vergleichsoperatoren, um zu prüfen, wie viele Daten eine bestimmte Eigenschaft erfüllen. Dafür verknüpfen wir die Vergleichsoperatoren mit den Funktionen <code>sum</code> oder <code>mean</code>.</p>
 <p>Dafür bietet sich ein Beispiel aus der Statistik an: Wie viele von 1,000 Zufallsdaten aus einer Standardnormalverteilung sind größer als 1? <code>R</code> hat zahlreiche Funktionen, um Zufallszahlen aus verschiedenen Verteilungen zu generieren. Mit <code>rnorm</code> lassen sich Zufallszahlen generieren, die einer Normalverteilungen folgen; wenn man keine weiteren Argumente angibt, ist die Standardnormalverteilung gemeint, die einen Mittelwert von <code>0</code> und eine Standardabweichung von <code>1</code> hat:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Erstelle 1,000 Zufallsdaten:
@@ -641,8 +644,9 @@ zufallsdaten &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span c
 <span class="kw">mean</span>(zufallsdaten <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</code></pre></div>
 <pre><code>[1] 0.15838</code></pre>
 <p>Ihr könnt für das Gesetz der großen Zahlen selber ein Gefühl entwickeln, wenn ihr mehrfach <code>mean(rnorm(1000)&gt;1)</code> und <code>mean(rnorm(100000)&gt;1)</code> in die <code>R</code>-Konsole eingebt und beobachtet, welcher Wert häufiger näher an 0.159 liegt. Beachtet wie schnell <code>R</code> Operationen mit 100,000 Zahlen durchführen kann.</p>
+</div>
 <div id="der-in-operator" class="section level3">
-<h3><span class="header-section-number">2.3.1</span> Der <code>%in%</code> Operator</h3>
+<h3><span class="header-section-number">2.3.2</span> Der <code>%in%</code> Operator</h3>
 <p>Um zu testen, ob ein oder mehrere Elemente in einem Vektor enthalten sind, kann man den <code>%in%</code>-Operator verwenden. Der sieht zwar gewöhnungsbedürftig aus, ist aber einfach zu verwenden und hat auch eine einfache verbale Interpretation: Sind die Elemente aus Vektor A in Vektor B?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> <span class="op">%in%</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></code></pre></div>
 <pre><code>[1] TRUE</code></pre>
@@ -771,6 +775,7 @@ daten</code></pre></div>
 <li>Was sind die Ausgaben von <code>mode(2)</code> und <code>mode(mode(2))</code>. Warum?</li>
 <li>Was ist der Unterschied zwischen <code>sum(c(TRUE, FALSE, TRUE))</code> und <code>length(c(TRUE, FALSE, TRUE))</code>?</li>
 </ol>
+
 </div>
 </div>
 <div class="footnotes">
@@ -787,7 +792,7 @@ daten</code></pre></div>
 <li id="fn15"><p><a href="https://de.wikipedia.org/wiki/Boolesche_Algebra#" class="uri">https://de.wikipedia.org/wiki/Boolesche_Algebra#</a> Zweielementige_boolesche_Algebra<a href="vektoren.html#fnref15">↩</a></p></li>
 <li id="fn16"><p>Eigentlich ist <code>NA</code> kein eigener Datentyp. In <code>R</code> hat jeder Vektor <strong>nur genau einen</strong> Datentyp. Es ist beispielsweise nicht möglich, dass in einem Vektor gleichzeitig Werte vom Typ <code>numeric</code>, <code>character</code> und <code>factor</code> vorkommen. <code>NA</code>-Werte können jedoch in Kombination mit jedem Datentyp vorkommen. Sie kodieren dann die Abwesenheit eines Datums; dieses Datum hätte – wenn es nicht fehlen würde – den Datentyp des Vektors.<a href="vektoren.html#fnref16">↩</a></p></li>
 <li id="fn17"><p>Ein Argument heißt optional, wenn wir dafür keinen Wert angeben müssen. Stattdessen hat es einen sogenannten Standardwert, der angenommen wird, wenn wir das Argument nicht selber angeben. Der Standardwert des Arguments <code>na.rm</code> in der Funktion <code>mean</code> ist <code>FALSE</code>.<a href="vektoren.html#fnref17">↩</a></p></li>
-<li id="fn18"><p>Wenn logische Vektoren einer numerischen Berechnung übergeben werden, werden die <code>TRUE</code>/<code>FALSE</code> Elemente des Vektors automatisch in Zahlen, d.h. 1 und 0 umgewandelt. Deswegen funktioniert beispielsweise auch folgender Befehl: <code>TRUE * 2</code> <code>[1] 2</code><a href="vektoren.html#fnref18">↩</a></p></li>
+<li id="fn18"><p>Wenn logische Vektoren einer numerischen Berechnung übergeben werden, werden die <code>TRUE</code>/<code>FALSE</code> Elemente des Vektors automatisch in Zahlen, d.h. 1 und 0 umgewandelt. Deswegen funktioniert beispielsweise auch folgender Befehl: <code>TRUE + 1</code><a href="vektoren.html#fnref18">↩</a></p></li>
 <li id="fn19"><p><code>pnorm</code> ist die kummulative Verteilungsfunktion der Normalverteilung. Sie sagt aus, wie viel % der Werte in einer Normalverteilung kleiner sind als der übergebene Wert. Um heraus zu finden, wie viele Werte <strong>größer</strong> als 1 sind, wird hier das Komplement, also <code>1 - pnorm(1)</code>, gebildet. (Das funktioniert, da die Gesamtdichte einer Wahrscheinlichkeitsverteilung immer 1 ist.)<a href="vektoren.html#fnref19">↩</a></p></li>
 <li id="fn20"><p>Ich nenne diese Operation <code>[·]</code>-Zugriff , da zur Datenauswahl aus Vektoren hinter den Vektor eckigen Klammern gestellt werden. Die Klammern enthalten eine Angabe darüber, welche Elemente ich aus dem Vektor auswählen will. Etwa wählt <code>c(4, 2, 6)[1]</code> das erste Element aus dem Vektor <code>c(4, 2, 6)</code> aus, also 4. Der Punkt ist bloß ein Platzhalter in der <code>[·]</code>-Notation.<a href="vektoren.html#fnref20">↩</a></p></li>
 <li id="fn21"><p>Das macht beispielsweise Sinn, damit bei der Eingabe explizit gemacht wird, dass der Wert fehlt. Andernfalls könnte das Datum bei der Eingabe auch vergessen worden sein.<a href="vektoren.html#fnref21">↩</a></p></li>
@@ -819,7 +824,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -829,6 +834,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -847,7 +856,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
