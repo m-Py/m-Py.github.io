@@ -476,7 +476,7 @@ mein_text2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;bla&quot;</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span>
 Fehler <span class="cf">in</span> <span class="st">&quot;bla&quot;</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">:</span><span class="st"> </span>nicht<span class="op">-</span>numerisches Argument
 für binären Operator</code></pre></div>
-<p>In diesem Skript spielt Text keine allzu große Rolle. In erster Linie werden wir Vektoren vom Typ <code>character</code> für Datenzugriffe verwenden; im Speziellen werden wir Vektoren vom Typ <code>character</code> nutzen, um Spalten in Datentabelle zu adressieren (siehe Kapitel 3 und 4). Zu diesem Zweck werden wir die Funktion <code>paste0</code> nutzen, die <code>character</code>-Vektoren beliebiger Länge erstellt. So lassen sich beispielsweise bequem 10 durchnummerierte Itemnamen generieren, wodurch man gleich 10 Spalten aus einer Tabelle auswählen könnte:</p>
+<p>In diesem Skript spielt Text keine allzu große Rolle. In erster Linie werden wir Vektoren vom Typ <code>character</code> für Datenzugriffe verwenden; im Speziellen werden wir Vektoren vom Typ <code>character</code> nutzen, um Spalten in Datentabelle zu adressieren (siehe <a href="#datenzugriffe">Kapitel 3</a>). Zu diesem Zweck werden wir die Funktion <code>paste0</code> nutzen, die <code>character</code>-Vektoren beliebiger Länge erstellt. So lassen sich beispielsweise bequem 10 durchnummerierte Itemnamen generieren, wodurch man gleich 10 Spalten aus einer Tabelle auswählen könnte:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">items &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;item_&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
 <p>Hierbei wird der Text “item_” mit den Zahlen von 1 bis 10 gepaart. Das Ergebnis des Befehls ist ein 10-elementiger Vektor, was wir auch wie folgt überprüfen können:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(items)</code></pre></div>
@@ -484,7 +484,6 @@ für binären Operator</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">items</code></pre></div>
 <pre><code> [1] &quot;item_1&quot;  &quot;item_2&quot;  &quot;item_3&quot;  &quot;item_4&quot;  &quot;item_5&quot;  &quot;item_6&quot;  &quot;item_7&quot; 
  [8] &quot;item_8&quot;  &quot;item_9&quot;  &quot;item_10&quot;</code></pre>
-<p>Mehr über solche Zugriffe auf Datentabellen lernen wir in <a href="#datenzugriffe">Kapitel 3</a>.</p>
 <p>Wenn man mit der Funktion <code>paste0</code> mehrere ein-elementige Vektoren miteinander verknüpft, wird ein ein-elementiger Vektor vom Typ <code>character</code> ausgegeben:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="st">&quot;item&quot;</span>, <span class="st">&quot;_&quot;</span>, <span class="dv">1</span>) <span class="co"># paste0 nimmt beliebig viele Argumente an</span></code></pre></div>
 <pre><code>[1] &quot;item_1&quot;</code></pre>
