@@ -197,8 +197,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.3.1" data-path="schleifen.html"><a href="schleifen.html#adressierung-per-name"><i class="fa fa-check"></i><b>6.3.1</b> Adressierung per Name</a></li>
 <li class="chapter" data-level="6.3.2" data-path="schleifen.html"><a href="schleifen.html#vektorspeicherung-adressierung-per-index"><i class="fa fa-check"></i><b>6.3.2</b> Vektorspeicherung – Adressierung per Index</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="schleifen.html"><a href="schleifen.html#abstraktion-trennscharfe-als-funktion"><i class="fa fa-check"></i><b>6.4</b> Abstraktion – Trennschärfe als Funktion</a></li>
-<li class="chapter" data-level="6.5" data-path="schleifen.html"><a href="schleifen.html#for-loops-are-evil-oder-nicht"><i class="fa fa-check"></i><b>6.5</b> for-loops are evil – oder nicht?</a></li>
+<li class="chapter" data-level="6.4" data-path="schleifen.html"><a href="schleifen.html#for-loops-are-evil-oder-nicht"><i class="fa fa-check"></i><b>6.4</b> for-loops are evil – oder nicht?</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="simulationen.html"><a href="simulationen.html"><i class="fa fa-check"></i><b>7</b> Simulationen</a></li>
 <li class="chapter" data-level="8" data-path="anhang.html"><a href="anhang.html"><i class="fa fa-check"></i><b>8</b> Anhang</a><ul>
@@ -208,7 +207,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.2.2" data-path="anhang.html"><a href="anhang.html#mit-einem-sauberen-environment-starten"><i class="fa fa-check"></i><b>8.2.2</b> Mit einem sauberen Environment starten</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="referenzen.html"><a href="referenzen.html"><i class="fa fa-check"></i>Referenzen</a></li>
+<li class="chapter" data-level="9" data-path="referenzen.html"><a href="referenzen.html"><i class="fa fa-check"></i><b>9</b> Referenzen</a></li>
 </ul>
 
       </nav>
@@ -232,7 +231,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>In <code>R</code> speichern wir Datentabellen in <code>data.frames</code> ab. Ein <code>data.frame</code> ist, vereinfacht gesagt, eine Sammlung von Vektoren gleicher Länge. Jede Spalte – also jede Messvariable – ist ein Vektor. Mit dieser Datenstruktur werden wir uns im vorliegenden Kapitel auseinandersetzen.</p>
 <div id="die-funktion-data.frame" class="section level2">
 <h2><span class="header-section-number">3.1</span> Die Funktion <code>data.frame</code></h2>
-<p>Mit der Funktion <code>data.frame</code> können wir “händisch” einen <code>data.frame</code> erstellen. In der Praxis werden wir das eher selten machen und stattdessen Daten aus einer externen Datei einlesen.<a href="#fn22" class="footnoteRef" id="fnref22"><sup>22</sup></a> Die folgende unscheinbare Tabelle mit 5 Einträgen erstelle ich mit der Funktion <code>data.frame</code>; sie wird uns durch einen Großteil des Kapitels begleiten, um Grundlagen von <code>data.frame</code>-Operationen zu betrachten.</p>
+<p>Mit der Funktion <code>data.frame</code> können wir “händisch” einen <code>data.frame</code> erstellen. In der Praxis werden wir das eher selten machen und stattdessen Daten aus einer externen Datei einlesen.<a href="#fn17" class="footnoteRef" id="fnref17"><sup>17</sup></a> Die folgende unscheinbare Tabelle mit 5 Einträgen erstelle ich mit der Funktion <code>data.frame</code>; sie wird uns durch einen Großteil des Kapitels begleiten, um Grundlagen von <code>data.frame</code>-Operationen zu betrachten.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> mdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Nummer =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,
                    <span class="dt">Item1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>),
                    <span class="dt">Item2 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>),
@@ -271,7 +270,7 @@ mdf<span class="op">$</span>Augenfarbe &lt;-<span class="st"> </span><span class
 
 mdf<span class="op">$</span>Testscore</code></pre></div>
 <pre><code>[1] 2 1 0 1 2</code></pre>
-<p>In diesem Beispiel kommt die <code>$</code>-Notation recht häufig zum Einsatz, was etwas gewöhnungsbedürftig aussieht. Aber es ist wichtig darauf zu achten. Die Variablen,<a href="#fn23" class="footnoteRef" id="fnref23"><sup>23</sup></a> die wir verwenden, um den Testscore zu berechnen, “wohnen” in <code>mdf</code> und können nicht ohne Verweis darauf adressiert werden. Das hier geht schief:</p>
+<p>In diesem Beispiel kommt die <code>$</code>-Notation recht häufig zum Einsatz, was etwas gewöhnungsbedürftig aussieht. Aber es ist wichtig darauf zu achten. Die Variablen,<a href="#fn18" class="footnoteRef" id="fnref18"><sup>18</sup></a> die wir verwenden, um den Testscore zu berechnen, “wohnen” in <code>mdf</code> und können nicht ohne Verweis darauf adressiert werden. Das hier geht schief:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf<span class="op">$</span>Testscore &lt;-<span class="st"> </span>Item1 <span class="op">+</span><span class="st"> </span>Item2
 Fehler<span class="op">:</span><span class="st"> </span>Objekt <span class="st">&#39;Item1&#39;</span> nicht gefunden</code></pre></div>
 <p>Hier sucht <code>R</code> nach einer Variablen <code>Item1</code>, die aber nicht existiert; <code>Item1</code> ist nur eine Spalte von <code>mdf</code>. Noch schlimmer wäre es, wenn in meiner Arbeitsumgebung tatsächlich Variablen mit den Namen <code>Item1</code> und <code>Item2</code> existieren sollten. In dem Fall würden wir gegebenenfalls falsche Daten abspeichern und nicht einmal eine Fehlermeldung erhalten.</p>
@@ -295,7 +294,7 @@ m w
 <div id="datenzugriffe" class="section level2">
 <h2><span class="header-section-number">3.3</span> Zugriff auf Spalten und Zeilen: die <code>[·,·]</code>-Notation</h2>
 <p>Einzelne Spalten können wir mit dem <code>$</code>-Zugriff aus <code>data.frames</code> auslesen. Wir lernen nun den <code>[·,·]</code>-Zugriff kennen, mit dem wir nicht nur einzelne Spalten, sondern beliebige Spalten und Zeilen aus <code>data.frames</code> auslesen können. Wie wir sehen werden, ist der <code>[·,·]</code>-Zugriff dem <code>[·]</code>-Zugriff ähnlich, den wir zur Auswahl von Daten aus Vektoren kennengelernt haben.</p>
-<p>Der <code>[·,·]</code>-Zugriff erlaubt es uns, eine Teilmenge aller Fälle aus <code>mdf</code> auszuwählen, etwa nur die Personen mit blauen Augen, oder alle Personen, die den maximalen Testwert erreicht haben. Für solche Auswahlen hilft uns unser Wissen über <a href="vektoren.html#logischevergleiche">logische Vergleiche aus dem letzten Kapitel</a>. Betrachten wir zunächst ein Beispiel:<a href="#fn24" class="footnoteRef" id="fnref24"><sup>24</sup></a></p>
+<p>Der <code>[·,·]</code>-Zugriff erlaubt es uns, eine Teilmenge aller Fälle aus <code>mdf</code> auszuwählen, etwa nur die Personen mit blauen Augen, oder alle Personen, die den maximalen Testwert erreicht haben. Für solche Auswahlen hilft uns unser Wissen über <a href="vektoren.html#logischevergleiche">logische Vergleiche aus dem letzten Kapitel</a>. Betrachten wir zunächst ein Beispiel:<a href="#fn19" class="footnoteRef" id="fnref19"><sup>19</sup></a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf[mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>, ]</code></pre></div>
 <pre><code>  Nummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 1      1     1     1    13          w       blau         2
@@ -310,17 +309,16 @@ m w
 5      gruen    15</code></pre>
 <p>Die zwei Beispiele zeigen, dass das Komma in der <code>[·,·]</code>-Notation dafür entscheident ist, ob eine Auswahl nach Zeilen oder Spalten stattfindet. <strong>Vor dem Komma werden Zeilen adressiert, nach dem Komma Spalten.</strong> Es ist auch eine gleichzeitige Auswahl nach Zeilen <strong>und</strong> Spalten möglich. Allgemein ist die Syntax zum Ansprechen von <code>data.frames</code> mit dem <code>[·,·]</code>-Zugriff die folgende:</p>
 <pre><code>data.frame[Reihenvektor, Spaltenvektor]</code></pre>
-<p>Dabei ist <em>Reihenvektor</em>/<em>Spaltenvektor</em> entweder ein (a) numerischer Vektor, der die Indexe der Reihen/Spalten enthält, die ausgewählt werden sollen, (b) ein logischer Vektor, der für jede Reihe/Spalte kodiert, ob diese in der Ausgabe enthalten sein soll (vgl. Kapitel <a href="vektoren.html#logischerZugriff">2</a>), oder (c) Vektor vom Typ <code>character</code>, der die Namen der Zeilen/Spalten enthält, die ausgegeben werden sollen.<a href="#fn25" class="footnoteRef" id="fnref25"><sup>25</sup></a></p>
+<p>Dabei ist <em>Reihenvektor</em>/<em>Spaltenvektor</em> entweder ein (a) numerischer Vektor, der die Indexe der Reihen/Spalten enthält, die ausgewählt werden sollen, (b) ein logischer Vektor, der für jede Reihe/Spalte kodiert, ob diese in der Ausgabe enthalten sein soll (vgl. Kapitel <a href="vektoren.html#logischerZugriff">2</a>), oder (c) Vektor vom Typ <code>character</code>, der die Namen der Zeilen/Spalten enthält, die ausgegeben werden sollen.<a href="#fn20" class="footnoteRef" id="fnref20"><sup>20</sup></a></p>
 <p>Spalten werden am häufigsten per Namen – also durch Angabe eines einen Vektors vom Typ <code>character</code> – adressiert; Zeilen werden am häufigsten durch einen logischen Ausdruck – also durch Angabe eines einen Vektors vom Typ <code>logical</code> – adressiert (“Gib mir alle Fälle aus, die eine bestimmte Eigenschaft aufweisen.”). Durch die UND- bzw. ODER-Operationen können wir auch komplexere logische Bedingungen zur Auswahl von Fällen formulieren:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf[mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span> <span class="op">|</span><span class="st"> </span>mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;braun&quot;</span>, ]</code></pre></div>
 <pre><code>  Nummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 1      1     1     1    13          w       blau         2
 3      3     0     0    13          m       blau         0
 4      4     1     0    12          w      braun         1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf[mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span> <span class="op">|</span><span class="st"> </span>mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;braun&quot;</span> <span class="op">&amp;</span><span class="st"> </span>mdf<span class="op">$</span>Item1 <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf[(mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span> <span class="op">|</span><span class="st"> </span>mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;braun&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>mdf<span class="op">$</span>Item1 <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ]</code></pre></div>
 <pre><code>  Nummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 1      1     1     1    13          w       blau         2
-3      3     0     0    13          m       blau         0
 4      4     1     0    12          w      braun         1</code></pre>
 <p>Die <code>[·,·]</code>-Notation wird recht schnell unübersichtlich, wenn sie komplexere logische Anfragen enthält. Hier bewirken das Zusammenspiel aus den <code>$</code>-Zugriffen, den UND- und ODER-Operationen, sowie der Syntax der <code>[·,·]</code>-Notation, dass sich der Code etwas aufbauscht. Die Verknüpfung mehrerer ODER-Bedingungen lässt sich durch den <code>%in%</code>-Operator verkürzen:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf[mdf<span class="op">$</span>Augenfarbe <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;blau&quot;</span>, <span class="st">&quot;braun&quot;</span>), ]</code></pre></div>
@@ -379,7 +377,7 @@ mdf[, <span class="kw">paste0</span>(<span class="st">&quot;Item&quot;</span>, <
 5     1     1</code></pre>
 <div class="block">
 <p>
-<strong>Merke</strong>: Mit dem <code>[·,·]</code> Zugriff wird zuerst – vor dem Komma – die Zeile und dann – nach dem Komma – die Spalte adressiert. Man kann die Auswahl nach numerischem Index, mit einem logischen Vektor oder mit einem <code>character</code> Vektor durchführen.
+<strong>Merke</strong>: Mit dem <code>[·,·]</code>-Zugriff wird vor dem Komma die Zeile und nach dem Komma die Spalte adressiert. Man kann die Auswahl nach numerischem Index, mit einem logischen Vektor oder mit einem <code>character</code> Vektor durchführen.
 </p>
 </div>
 </div>
@@ -398,7 +396,7 @@ mdf[, <span class="kw">paste0</span>(<span class="st">&quot;Item&quot;</span>, <
 <pre><code>  Nummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 1      1     1     1    13          w       blau         2
 3      3     0     0    13          m       blau         0</code></pre>
-<p>Außerhalb der Funktion <code>subset</code> würde der Ausdruck <code>Augenfarbe == &quot;blau&quot;</code> einen Fehler ausgeben; schließlich ist <code>Augenfarbe</code> selbst keine <code>R</code>-Variable, sondern nur eine Spalte von <code>mdf</code>.<a href="#fn26" class="footnoteRef" id="fnref26"><sup>26</sup></a> Innerhalb der Funktion <code>subset</code> kann die logische Bedingung in dieser Form jedoch verarbeitet werden. Durch Angabe von <code>mdf</code> im ersten Argument teilen wir <code>subset</code> mit, aus welchem <code>data.frame</code> Zeilen ausgewählt werden sollen.</p>
+<p>Außerhalb der Funktion <code>subset</code> würde der Ausdruck <code>Augenfarbe == &quot;blau&quot;</code> einen Fehler ausgeben; schließlich ist <code>Augenfarbe</code> selbst keine <code>R</code>-Variable, sondern nur eine Spalte von <code>mdf</code>.<a href="#fn21" class="footnoteRef" id="fnref21"><sup>21</sup></a> Innerhalb der Funktion <code>subset</code> kann die logische Bedingung in dieser Form jedoch verarbeitet werden. Durch Angabe von <code>mdf</code> im ersten Argument teilen wir <code>subset</code> mit, aus welchem <code>data.frame</code> Zeilen ausgewählt werden sollen.</p>
 <p>Der äquivalente Befehl mit der <code>[·,·]</code>-Notation sähe folgendermaßen aus:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf[mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>, ]</code></pre></div>
 <p>Gerade bei der Verknüpfung mehrerer logischer Bedingungen ist es praktisch, nicht mehrfach die <code>$</code>-Notation verwenden zu müssen:</p>
@@ -427,6 +425,9 @@ mdf[, <span class="kw">paste0</span>(<span class="st">&quot;Item&quot;</span>, <
 <li><code>subset</code>: wählt Zeilen aus</li>
 <li><code>select</code>: wählt Spalten aus</li>
 </ul>
+<p>Um eine Übersicht über die Argumente einer Funktion zu erhalten, können wir mit dem <code>?</code>-Operator die <code>R</code>-Hilfe anfordern:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?subset</code></pre></div>
+<p>Leider ist die <code>R</code>-Hilfe oftmals kryptisch – und das nicht nur für Anfänger. Sie ist die offizielle Dokumentation von Funktionen und legt deswegen zwar großen Wert auf technische Genauigkeit, ist aber nicht immer sonderlich ausführlich oder gar verständlich. Wir werden in <a href="funktionen.html#funktionen">Kapitel 5</a> bei einer ausführlicheren Besprechung von Funktionen noch einmal darauf zurückkommen, wie wir mit der <code>R</code>-Hilfe umgehen können.</p>
 <p>Wenn wir die Namen der Argumente kennen, können wir die Funktion <code>subset</code> auch wie folgt aufrufen:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(<span class="dt">x =</span> mdf, <span class="dt">subset =</span> Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>,
        <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>))</code></pre></div>
@@ -447,14 +448,10 @@ mdf[, <span class="kw">paste0</span>(<span class="st">&quot;Item&quot;</span>, <
 3     0       blau
 4     1      braun
 5     1      gruen</code></pre>
-<p>Dieser Aufruf zeigt, dass wir im selben Aufruf manche Argumente anhand ihrer Position identifizieren können und manche anhand ihres Namens. Für das erste Argument – <code>mdf</code> – habe ich den Namen nicht extra angegeben – daher wurde das Argument anhand seiner Position identifiziert. Für die Auswahl der Spalten habe ich jedoch den Argumentnamen angegeben. <strong>Das war auch nötig</strong>, da <code>subset</code> als zweites Argument ansonsten die Auswahl der Zeilen erwartet hätte.</p>
-<p>In <code>R</code> kann man <strong>fast immer</strong><a href="#fn27" class="footnoteRef" id="fnref27"><sup>27</sup></a> Argumente per Position und per Name ansprechen. Oftmals wollen wir die Namen von Funktionsargumenten explizit verwenden. Wie wir im Beispiel oben gesehen haben, kann das Weglassen von Argumenten aber zu Fehlern führen, wenn es die Identifikation der Argumente ihrer Reihenfolge nach verhindert. Außerdem haben viele Funktionen <em>optionale</em> Argumente haben – also solche, die wir nicht immer angeben müssen. Dann können wir per Namen nur die Argumente ansprechen, die wir auch nutzen wirklich wollen. Wir können beispielsweise das Argument <code>select</code> weglassen, wenn wir eine Auswahl nach Zeilen, aber nicht nach Spalten treffen wollen. Umgekehrt muss ich das Argument <code>subset</code> nicht angeben – in dem Fall werden alle Zeilen ausgegeben, aber nur eine Teilmenge der Spalten. Ähnlich ist es bei der Funktion <code>mean</code>: Das Argument <code>na.rm</code> geben wir normalerweise nur an, wenn ein Vektor fehlende Werte enthält.</p>
-<p>Um eine Übersicht über die Argumente einer Funktion zu erhalten, können wir mit dem <code>?</code>-Operator die <code>R</code>-Hilfe anfordern:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?subset</code></pre></div>
-<p>Leider ist die <code>R</code>-Hilfe oftmals kryptisch – und das nicht nur für Anfänger. Sie ist die offizielle Dokumentation von Funktionen und legt deswegen zwar großen Wert auf technische Genauigkeit, ist aber nicht immer sonderlich ausführlich oder gar verständlich. Wir werden in <a href="funktionen.html#funktionen">Kapitel 5</a> bei einer ausführlicheren Besprechung von Funktionen noch einmal darauf zurückkommen, wie wir mit der <code>R</code>-Hilfe umgehen können.</p>
+<p>Dieser Aufruf zeigt, dass wir im selben Aufruf manche Argumente anhand ihrer Position identifizieren können und manche anhand ihres Namens. Für das erste Argument <code>mdf</code> habe ich den Namen nicht extra angegeben – daher wurde das Argument anhand seiner Position identifiziert. Für die Auswahl der Spalten habe ich jedoch den Argumentnamen angegeben. <strong>Das war auch nötig</strong>, da <code>subset</code> als zweites Argument ansonsten die Auswahl der Zeilen erwartet hätte.</p>
 <div class="block">
 <p>
-<strong>Merke</strong>: In <code>R</code> können Funktionsargumente per Position und per Namen identifiziert werden. Die Identifikation per Name schlägt dabei die Identifikation per Position.
+<strong>Merke</strong>: In <code>R</code> können Funktionsargumente per Position und per Namen identifiziert werden. Die Identifikation per Name schlägt dabei die Identifikation per Position. Argumente explizit mit ihrem Namen zu benennen ist oft sicherer als auf die richtige Reihenfolge der Argumente zu vertrauen.
 </p>
 </div>
 </div>
@@ -468,7 +465,7 @@ mdf[, <span class="kw">paste0</span>(<span class="st">&quot;Item&quot;</span>, <
 3       blau    13
 4      braun    12
 5      gruen    15</code></pre>
-<p>Genau wie die Zeilenauswahl, die ohne die <code>$</code>-Notation auskommt, ist es eine Besonderheit der Funktion <code>subset</code>, dass wir Spaltennamen ohne Anführungszeichen adressieren können. Einfach in die Konsole eingegeben würde der Ausdruck <code>c(Augenfarbe, Alter)</code> höchstwahrscheinlich<a href="#fn28" class="footnoteRef" id="fnref28"><sup>28</sup></a> einen Fehler verursachen, da <code>Augenfarbe</code> und <code>Alter</code> nicht unbedingt als Variablen definiert sind; sie sind bloß Spalten von <code>mdf</code>.</p>
+<p>Genau wie die Zeilenauswahl, die ohne die <code>$</code>-Notation auskommt, ist es eine Besonderheit der Funktion <code>subset</code>, dass wir Spaltennamen ohne Anführungszeichen adressieren können. Einfach in die Konsole eingegeben würde der Ausdruck <code>c(Augenfarbe, Alter)</code> höchstwahrscheinlich<a href="#fn22" class="footnoteRef" id="fnref22"><sup>22</sup></a> einen Fehler verursachen, da <code>Augenfarbe</code> und <code>Alter</code> nicht unbedingt als Variablen definiert sind; sie sind bloß Spalten von <code>mdf</code>.</p>
 <p>Die Auswahl von Spalten ohne Anführungszeichen ist noch keine allzu große Arbeitserleichterung im Vergleich zur <code>[·,·]</code>-Notation. Die Funktion <code>subset</code> lässt aber noch einen weiteren Sonderfall bei der Spaltenauswahl zu, der einiges an Schreibarbeit ersparen kann: Wir können den Doppelpunktoperator verwenden, um mehrere Spalten auszuwählen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(mdf, <span class="dt">select =</span> Item1<span class="op">:</span>Geschlecht)</code></pre></div>
 <pre><code>  Item1 Item2 Alter Geschlecht
@@ -538,13 +535,13 @@ mdf[[spalte]]</code></pre></div>
 5     1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf[, <span class="st">&quot;Item1&quot;</span>]</code></pre></div>
 <pre><code>[1] 1 0 0 1 1</code></pre>
-<p>Wenn wir nur eine Spalte auslesen, gibt die <code>[·,·]</code>-Auswahl einen Vektor aus, die <code>[·]</code>-Auswahl jedoch einen <code>data.frame</code> mit einer Spalte. Dieses Verhalten offenbart einen Sonderfall der <code>[·,·]</code>-Auswahl: Im Normalfall gibt <code>[·,·]</code> ebenfalls einen ganzen <code>data.frame</code> aus. Wenn wir aber nur eine einzige Spalte anfordern, “reduziert” sich die Ausgabe zu einem Vektor.</p>
-<p>Ich persönlich bevorzuge die <code>[·,·]</code>-Notation gegenüber der <code>[·]</code>-Notation zur Auswahl von Spalten, auch wenn ich hier ein zuzsätzliches Komma verwenden muss (ansonsten sind die beiden Notationen ja fast äquivalent zur Auswahl von Spalten). Wenn ich Code mit der <code>[·,·]</code>-Notation lese, weiß ich, dass Spalten ausgewählt werden – selbst wenn ich gar nicht weiß, was in dem Objekt steckt, auf dem die Auswahl stattfindet. Die <code>[·]</code>-Notation ist uneindeutiger: Sie könnte auch auf einem Vektor operieren. Code ist in erster Linie für Menschen gemacht, die ihn verstehen sollten. Deswegen ist verständlicher Code gegenüber kürzerem Code zu bevorzugen.</p>
+<p>Wenn wir nur eine Spalte auslesen, gibt die <code>[·,·]</code>-Auswahl einen Vektor aus, die <code>[·]</code>-Auswahl jedoch einen <code>data.frame</code> mit einer Spalte. Dieses Verhalten offenbart einen Sonderfall der <code>[·,·]</code>-Auswahl: Im Normalfall gibt <code>[·,·]</code> ebenfalls einen ganzen <code>data.frame</code> aus. Wenn wir aber nur eine einzige Spalte anfordern, „reduziert“ sich die Ausgabe zu einem Vektor.</p>
+<p>Ich persönlich bevorzuge die <code>[·,·]</code>-Notation gegenüber der <code>[·]</code>-Notation zur Auswahl von Spalten, auch wenn ich hier ein zusätzliches Komma verwenden muss (ansonsten sind die beiden Notationen ja fast äquivalent zur Auswahl von Spalten). Wenn ich Code mit der <code>[·,·]</code>-Notation lese, weiß ich, dass Spalten ausgewählt werden – selbst wenn ich gar nicht weiß, was in dem Objekt steckt, auf dem die Auswahl stattfindet. Die <code>[·]</code>-Notation ist uneindeutiger: Sie könnte auch auf einem Vektor operieren, der gar keine Spalten enthält. Wir merken uns: <strong>Code ist in erster Linie für Menschen gemacht; verständlicher Code ist gegenüber kürzerem Code zu bevorzugen.</strong></p>
 </div>
 <div id="nameindex" class="section level3">
 <h3><span class="header-section-number">3.5.3</span> Zugriff nach Name und Index</h3>
-<p>Wir haben nun alle wichtigen Möglichkeiten kennengelernt, Zugriffe auf <code>data.frames</code> durchzuführen. An dieser Stelle lohnt es sich deswegen, ein grundsätzliches Prinzip von Datenzugriffen in <code>R</code> festzustellen: <strong>Datenzugriffe können nach nach Index oder nach Name stattfinden</strong>. Dies gilt für Vektoren, <code>data.frames</code> und auch andere Datenstrukturen, die wir noch gar nicht behandelt haben.</p>
-<p>Wir haben bereits Beispiele für beide Arten des Datenzugriffs kennengelernt: In Vektoren haben wir Zugriffe mithilfe von Indexen durchgeführt, indem wir (a) die Position von auszuwählenden Elementen explizit mit einem numerischen Vektor angegeben haben, oder (b) indem wir einen logischen Vektor übergeben haben, der anhand von <code>TRUE</code> und <code>FALSE</code> Werten die Indexe auswählt, deren Elemente ausgegeben werden sollen. Der Vollständigkeit halber sei hier mitgeteilt, dass man sogar bei Vektoren Zugriffe nach Namen durchführen kann, wenn die Elemente des Vektors benannt sind. Das ist gar nicht so ungewöhnlich; wie folgt könnte man einen Vektor mit benannten Elementen erstellen und mit der bekannten <code>[·]</code>-Notation darauf zugreifen.</p>
+<p>Wir haben nun alle wichtigen Möglichkeiten kennengelernt, Zugriffe auf <code>data.frames</code> durchzuführen. An dieser Stelle lohnt es sich deswegen, ein grundsätzliches Prinzip von Datenzugriffen in <code>R</code> festzuhalten: <strong>Datenzugriffe können nach nach Index oder nach Name stattfinden</strong>. Dies gilt für Vektoren, <code>data.frames</code> und auch für andere Datenstrukturen, die wir noch gar nicht behandelt haben.</p>
+<p>Wir haben bereits Beispiele für beide Arten des Datenzugriffs kennengelernt: In Vektoren haben wir Zugriffe mithilfe von Indexen durchgeführt, indem wir (a) die Position von auszuwählenden Elementen mit einem numerischen Vektor angegeben haben, oder (b) indem wir einen logischen Vektor übergeben haben, der die Indexe auswählt, deren Elemente ausgegeben werden sollen. Der Vollständigkeit halber sei hier mitgeteilt, dass man sogar bei Vektoren Zugriffe nach Namen durchführen kann, wenn die Elemente des Vektors benannt sind. Das ist gar nicht so ungewöhnlich; wie folgt könnte man einen Vektor mit benannten Elementen erstellen und mit der bekannten <code>[·]</code>-Notation darauf zugreifen.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Benannte Vektoren erstellen funktioniert wie einen data.frame zu
 ## erstellen:
 vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">foo =</span> <span class="dv">1</span>, <span class="dt">bar =</span> <span class="dv">2</span>)
@@ -582,7 +579,7 @@ vec</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tapply</span>(mdf<span class="op">$</span>Alter, mdf<span class="op">$</span>Geschlecht, mean)</code></pre></div>
 <pre><code>   m    w 
 14.0 12.5 </code></pre>
-<p>Die Funktion <code>tapply</code> erhält als erstes Argument den Messwertvektor, für den Statistiken angefordert werden. Das zweite Argument ist die Gruppierungsvariable.<a href="#fn29" class="footnoteRef" id="fnref29"><sup>29</sup></a> Interessanterweise ist das dritte Argument eine Funktion, in diesem Fall die Funktion <code>mean</code>. So können wir die <em>mittlere</em> Punktzahl nach Geschlecht anfordern. Entsprechend könnten wir hier andere Funktionen übergeben, um etwa die Standardabweichung des Alters zu erfragen:</p>
+<p>Die Funktion <code>tapply</code> erhält als erstes Argument den Messwertvektor, für den Statistiken angefordert werden. Das zweite Argument ist die Gruppierungsvariable.<a href="#fn23" class="footnoteRef" id="fnref23"><sup>23</sup></a> Interessanterweise ist das dritte Argument eine Funktion, in diesem Fall die Funktion <code>mean</code>. So können wir die <em>mittlere</em> Punktzahl nach Geschlecht anfordern. Entsprechend könnten wir hier andere Funktionen übergeben, um etwa die Standardabweichung des Alters zu erfragen:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tapply</span>(mdf<span class="op">$</span>Alter, mdf<span class="op">$</span>Geschlecht, sd)</code></pre></div>
 <pre><code>        m         w 
 1.0000000 0.7071068 </code></pre>
@@ -591,7 +588,7 @@ vec</code></pre></div>
 <pre><code>  blau braun grau gruen
 m   13    NA   14    15
 w   13    12   NA    NA</code></pre>
-<p>Mit nur fünf Datenpunkten macht diese Anfrage hier nur wenig Sinn, da jeder ausgegebene Mittelwert nur anhand eines einzelnen Wertes gebildet wurde,<a href="#fn30" class="footnoteRef" id="fnref30"><sup>30</sup></a> was die Idee des Mittelwerts eher ad absurdum führt. Manche Kombinationen von Geschlecht und Augenfarbe kommen in unseren Daten sogar gar nicht vor; in diesen Fällen wird <code>NA</code> ausgegeben. <code>tapply</code> zeigt ihre Stärke vor allem, wenn man viele – und nicht nur fünf – Datenpunkte hat. Das gilt gerade dann, wenn wir mehrere Gruppierungsvariablen angeben.</p>
+<p>Mit nur fünf Datenpunkten macht diese Anfrage hier nur wenig Sinn, da jeder ausgegebene Mittelwert nur anhand eines einzelnen Wertes gebildet wurde,<a href="#fn24" class="footnoteRef" id="fnref24"><sup>24</sup></a> was die Idee des Mittelwerts eher ad absurdum führt. Manche Kombinationen von Geschlecht und Augenfarbe kommen in unseren Daten sogar gar nicht vor; in diesen Fällen wird <code>NA</code> ausgegeben. <code>tapply</code> zeigt ihre Stärke vor allem, wenn man viele – und nicht nur fünf – Datenpunkte hat. Das gilt gerade dann, wenn wir mehrere Gruppierungsvariablen angeben.</p>
 </div>
 <div id="nrow-und-ncol" class="section level3">
 <h3><span class="header-section-number">3.6.2</span> <code>nrow</code> und <code>ncol</code></h3>
@@ -620,9 +617,9 @@ w   13    12   NA    NA</code></pre>
 </div>
 <div id="sortieren-dplyrarrange" class="section level3">
 <h3><span class="header-section-number">3.6.4</span> Sortieren: <code>dplyr::arrange</code></h3>
-<p>Oftmals wollen wir Datentabellen nach einer oder mehreren Variablen sortieren. Dies funktioniert am bequemsten, wenn wir das <em>Paket</em> <code>dplyr</code> laden <span class="citation">(Wickham et al. 2018)</span>:</p>
+<p>Oftmals wollen wir Datentabellen nach einer oder mehreren Variablen sortieren. Dies funktioniert am bequemsten, wenn wir das <em>Paket</em> <code>dplyr</code> laden <span class="citation">(Wickham, François, Henry, &amp; Müller, 2018)</span>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)</code></pre></div>
-<p>Voraussetzung dafür, dass ich das Paket <code>dplyr</code> nutzen kann ist, dass ich das Paket auf meinem Rechner installiert habe. Falls das Paket noch nicht installiert ist (in dem Fall ergibt der Befehl <code>library('dyplr')</code> einen Fehler) , könnte ich es mit dem folgenden Befehl installieren:</p>
+<p>Voraussetzung dafür, dass ich das Paket <code>dplyr</code> nutzen kann ist, dass ich das Paket auf meinem Rechner installiert habe. Falls das Paket noch nicht installiert ist – in dem Fall ergibt der Befehl <code>library('dyplr')</code> einen Fehler) –. können wir es es mit dem folgenden Befehl installieren:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</code></pre></div>
 <p>Pakete stellen zusätzliche Funktionen zur Verfügung, die in der Basisversion von <code>R</code> nicht enthalten sind. Um ein Paket zu nutzen, müssen wir es mit der Funktion <code>library</code> in unsere <code>R</code>-Umgebung laden. Andernfalls könnten wir die Funktionen nicht nutzen, die etwa <code>dplyr</code> enthält. Die Funktion <code>arrange</code> aus <code>dplyr</code> ermöglicht es uns, einen <code>data.frame</code> zu sortieren:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(mdf, Testscore) <span class="co"># dplyr muss geladen sein</span></code></pre></div>
@@ -654,8 +651,8 @@ w   13    12   NA    NA</code></pre>
 <h2><span class="header-section-number">3.7</span> Zusammenfassung</h2>
 <ul>
 <li>Wir haben den <code>data.frame</code> als Datenstruktur zur Speicherung von psychometrischen Daten kennengelernt</li>
-<li>Wir haben den Zugriff auf einzelne Spalten <code>data.frames</code> mit der <code>$</code>-Notation und der <code>[[·]]</code> kennengelernt</li>
-<li>Mit der</li>
+<li>Wir haben die <code>$</code>-Notation für den Zugriff auf einzelne Spalten von <code>data.frames</code> kennengelernt</li>
+<li>Mit der <code>[·,·]</code>-Notation und der Funktion <code>subset</code> können wir Zeilen und Spalten aus <code>data.frames</code> auslesen</li>
 <li>Zur Anforderung von deskriptiven Statistiken können wir die Funktionen <code>table</code> und <code>tapply</code> verwenden</li>
 <li>Wir haben weitere Funktionen kennengelernt, die uns einen Überblick über <code>data.frames</code> verschaffen:
 <ul>
@@ -674,6 +671,7 @@ w   13    12   NA    NA</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(mdf, <span class="dt">select =</span> <span class="st">&quot;Item1&quot;</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf[, <span class="st">&quot;Item1&quot;</span>]</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf[, <span class="st">&quot;Item1&quot;</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf[<span class="st">&quot;Item1&quot;</span>]</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf[[<span class="st">&quot;Item1&quot;</span>]]</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf<span class="op">$</span>Item1</code></pre></div>
 <ol start="2" style="list-style-type: decimal">
@@ -688,16 +686,15 @@ w   13    12   NA    NA</code></pre>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="22">
-<li id="fn22"><p>Beispielsweise können die Daten in einem <em>Spreadsheet-Editor</em> wie Excel eingegeben worden sein und wir importieren diese dann in <code>R</code>.<a href="dataframes.html#fnref22">↩</a></p></li>
-<li id="fn23"><p>Es ist etwas unglücklich, dass der Begriff “Variable” doppeldeutig ist: (1) In <code>R</code> sind Variablen die Speicherorte von Objekten; ich erstelle sie mit der “<code>&lt;-</code>”-Zuweisung. (2) Andererseits werden auch Messwerte – etwa die Punktzahlen in einem Testitem – als Variablen bezeichnet. In diesem Sinne würde der Begriff Variable in <code>R</code> auf die Spalte in einem <code>data.frame</code> verweisen, da Spalten Messvariablen beinhalten. Diese Doppeldeutigkeit ist deswegen unglücklich, da eine Spalte in einem <code>data.frame</code> keine <code>R</code>-Variable ist. Stattdessen ist der gesamte <code>data.frame</code> in <strong>einer</strong> Variablen abgespeichert.<a href="dataframes.html#fnref23">↩</a></p></li>
-<li id="fn24"><p>Beachtet, dass durch diesen Aufruf der <code>data.frame</code>, der in der Variablen <code>mdf</code> abgespeichert ist, nicht verändert wird. Der <code>[·,·]</code>-Zugriff gibt stattdessen einen neuen <code>data.frame</code> zurück, der nur die Fälle enthält, bei denen <code>mdf$Augenfarbe == &quot;blau&quot;</code> <code>TRUE</code> ergibt. Wir müssten das Ergebnis der Funktion in einer Variablen speichern, wenn wir damit weiter arbeiten wollen (Erinnerung: <a href="vektoren.html#ausgabevsabspeichern">Kapitel 2</a>).<a href="dataframes.html#fnref24">↩</a></p></li>
-<li id="fn25"><p>Auch Zeilen können benannt sein. Den Fall hatten wir bislang aber nicht und es kommt auch nicht oft vor, dass Zeilen explizit benannt sind. Häufiger ist der Fall, in dem wir Spalten nach Namen auswählen.<a href="dataframes.html#fnref25">↩</a></p></li>
-<li id="fn26"><p>Es macht an dieser Stelle Sinn, einen Moment inne zu halten und zu überlegen, warum es eigentlich außergewöhnlich ist, dass der Befehl <code>Augenfarbe == &quot;blau&quot;</code> innerhalb der Funktion <code>subset</code> funktioniert.<a href="dataframes.html#fnref26">↩</a></p></li>
-<li id="fn27"><p>Eine Ausnahme bildet die Funktion <code>c</code>, für die wir keine Funktionsnamen angeben. Hier gilt nämlich: Wir können beliebig viele Vektoren als Argumente angeben; deswegen gibt es natürlich keinen separaten Namen für jedes mögliche Argument. Feste Namen gibt es aber dann, wenn es eine feste Anzahl an möglichen Argumenten gibt – wie bei der Funktion <code>subset</code>.<a href="dataframes.html#fnref27">↩</a></p></li>
-<li id="fn28"><p>Unter welchen Umständen würde <code>R</code> keinen Fehler ausgeben, wenn wir <code>c(Augenfarbe, Alter)</code> in die Konsole eingeben? Es ist nützlich, diesen Punkt zu verstehen.<a href="dataframes.html#fnref28">↩</a></p></li>
-<li id="fn29"><p>Beachtet, dass sowohl Messwerte als auch Gruppierungsvariable als <strong>Vektoren</strong> übergeben werden. Ich behandle die Funktion <code>tapply</code> jedoch im Kapitel zu <code>data.frames</code>, da es zumeist so sein wird, dass wir beide Vektoren aus <strong>einem</strong> <code>data.frame</code> mit der <code>$</code>-Notation auslesen werden.<a href="dataframes.html#fnref29">↩</a></p></li>
-<li id="fn30"><p>Wie viele Datenpunkte in die Berechnung jedes Mittelwerts eingehen, können wir in diesem Fall prüfen mit <code>table(mdf$Geschlecht, mdf$Augenfarbe)</code>.<a href="dataframes.html#fnref30">↩</a></p></li>
+<ol start="17">
+<li id="fn17"><p>Beispielsweise können die Daten in einem <em>Spreadsheet-Editor</em> wie Excel eingegeben worden sein und wir importieren diese dann in <code>R</code>.<a href="dataframes.html#fnref17">↩</a></p></li>
+<li id="fn18"><p>Es ist etwas unglücklich, dass der Begriff “Variable” doppeldeutig ist: (1) In <code>R</code> sind Variablen die Speicherorte von Objekten; ich erstelle sie mit der “<code>&lt;-</code>”-Zuweisung. (2) Andererseits werden auch Messwerte – etwa die Punktzahlen in einem Testitem – als Variablen bezeichnet. In diesem Sinne würde der Begriff Variable in <code>R</code> auf die Spalte in einem <code>data.frame</code> verweisen, da Spalten Messvariablen beinhalten. Diese Doppeldeutigkeit ist deswegen unglücklich, da eine Spalte in einem <code>data.frame</code> keine <code>R</code>-Variable ist. Stattdessen ist der gesamte <code>data.frame</code> in <strong>einer</strong> Variablen abgespeichert.<a href="dataframes.html#fnref18">↩</a></p></li>
+<li id="fn19"><p>Beachtet, dass durch diesen Aufruf der <code>data.frame</code>, der in der Variablen <code>mdf</code> abgespeichert ist, nicht verändert wird. Der <code>[·,·]</code>-Zugriff gibt stattdessen einen neuen <code>data.frame</code> zurück, der nur die Fälle enthält, bei denen <code>mdf$Augenfarbe == &quot;blau&quot;</code> <code>TRUE</code> ergibt. Wir müssten das Ergebnis der Funktion in einer Variablen speichern, wenn wir damit weiter arbeiten wollen (Erinnerung: <a href="vektoren.html#ausgabevsabspeichern">Kapitel 2</a>).<a href="dataframes.html#fnref19">↩</a></p></li>
+<li id="fn20"><p>Auch Zeilen können benannt sein. Den Fall hatten wir bislang aber nicht und es kommt auch nicht oft vor, dass Zeilen explizit benannt sind. Häufiger ist der Fall, in dem wir Spalten nach Namen auswählen.<a href="dataframes.html#fnref20">↩</a></p></li>
+<li id="fn21"><p>Es macht an dieser Stelle Sinn, einen Moment inne zu halten und zu überlegen, warum es eigentlich außergewöhnlich ist, dass der Befehl <code>Augenfarbe == &quot;blau&quot;</code> innerhalb der Funktion <code>subset</code> funktioniert.<a href="dataframes.html#fnref21">↩</a></p></li>
+<li id="fn22"><p>Unter welchen Umständen würde <code>R</code> keinen Fehler ausgeben, wenn wir <code>c(Augenfarbe, Alter)</code> in die Konsole eingeben? Es ist nützlich, diesen Punkt zu verstehen.<a href="dataframes.html#fnref22">↩</a></p></li>
+<li id="fn23"><p>Beachtet, dass sowohl Messwerte als auch Gruppierungsvariable als <strong>Vektoren</strong> übergeben werden. Ich behandle die Funktion <code>tapply</code> jedoch im Kapitel zu <code>data.frames</code>, da es zumeist so sein wird, dass wir beide Vektoren aus <strong>einem</strong> <code>data.frame</code> mit der <code>$</code>-Notation auslesen werden.<a href="dataframes.html#fnref23">↩</a></p></li>
+<li id="fn24"><p>Wie viele Datenpunkte in die Berechnung jedes Mittelwerts eingehen, können wir in diesem Fall prüfen mit <code>table(mdf$Geschlecht, mdf$Augenfarbe)</code>.<a href="dataframes.html#fnref24">↩</a></p></li>
 </ol>
 </div>
             </section>
