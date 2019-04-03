@@ -321,7 +321,7 @@ m w
 <pre><code>  Nummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 1      1     1     1    13          w       blau         2
 4      4     1     0    12          w      braun         1</code></pre>
-<p>Beachtet, dass wir hier ohne Klammerung der ODER-Operation andere Ausgabe erhalten (Erinnerung: Diesen Fall kennen wir auch aus <a href="vektoren.html#praezedenz">Kapitel 2</a>):</p>
+<p>Beachtet, dass wir hier ohne Klammerung der ODER-Operation eine andere Ausgabe erhalten (Erinnerung: Diesen Fall kennen wir auch aus <a href="vektoren.html#praezedenz">Kapitel 2</a>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mdf[mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span> <span class="op">|</span><span class="st"> </span>mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;braun&quot;</span> <span class="op">&amp;</span><span class="st"> </span>mdf<span class="op">$</span>Item1 <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ]</code></pre></div>
 <pre><code>  Nummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 1      1     1     1    13          w       blau         2

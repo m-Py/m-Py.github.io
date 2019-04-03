@@ -749,11 +749,11 @@ daten</code></pre></div>
 <pre><code>[1] FALSE  TRUE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>) <span class="op">|</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>)) <span class="op">&amp;</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>[1] FALSE FALSE</code></pre>
-<p>Wir werden logische Ausdrücke vor allem zur Fallauswahl in Datentabellen verwenden (siehe <a href="dataframes.html#datenzugriffe">Kapitel 3</a>). Dann kann es sehr wichtig sein auf korrekte Klammerung zu achten. Andernfalls besteht die Gefahr, dass wir nicht genau die Fälle auswählen, die wir eigentlich auswählen wollen.</p>
+<p>Wir werden logische Ausdrücke vor allem zur Fallauswahl in Datentabellen verwenden (siehe <a href="dataframes.html#datenzugriffe">Kapitel 3</a>). Dann kann es sehr wichtig sein, auf korrekte Klammerung zu achten. Andernfalls besteht die Gefahr, dass wir nicht genau die Fälle auswählen, die wir eigentlich auswählen wollen.</p>
 <p>Betrachten wir ein weiteres Beispiel zur Steuerung von Präzedenz: Nehmen wir an, wir benötigen eine Sequenz aller Zahlen zwischen 1 und 10 – außer der 8.<a href="#fn17" class="footnoteRef" id="fnref17"><sup>17</sup></a> Ein naheliegender Befehl wäre folgender:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>[<span class="op">-</span><span class="dv">8</span>]</code></pre></div>
 <pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
-<p>Das hat aber nicht funktioniert, die 8 ist in der Ausgabe enthalten. Woran liegt das? <strong>Die Auswahl per eckiger Klammer hat eine höhere Präzedenz als der Doppelpunktoperator.</strong> Die Klammerungsoperation zur Auswahl aus einem Vektor wurde also nicht auf den Vektor <code>1:10</code>, sondern auf den Vektor <code>10</code> angewendet (Erinnerung: einzelne Zahlen sind Vektoren). Das heißt in diesem Beispiel wurde als erstes das achte Element aus dem Vektor <code>10</code> ausgeschlossen, das aber gar nicht existiert. Stattdessen erhalten wir einfach wieder <code>10</code>:</p>
+<p>Das hat aber nicht funktioniert, die 8 ist in der Ausgabe enthalten. Woran liegt das? <strong>Die Auswahl per eckiger Klammer hat eine höhere Präzedenz als der Doppelpunktoperator.</strong> Die Klammerungsoperation zur Auswahl aus einem Vektor wurde also nicht auf den Vektor <code>1:10</code>, sondern auf den Vektor <code>10</code> angewendet (Erinnerung: Einzelne Zahlen sind Vektoren). Das heißt, in diesem Beispiel wurde als Erstes das achte Element aus dem Vektor <code>10</code> ausgeschlossen, das aber gar nicht existiert. Stattdessen erhalten wir einfach wieder <code>10</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">10</span>[<span class="op">-</span><span class="dv">8</span>]</code></pre></div>
 <pre><code>[1] 10</code></pre>
 <p>Durch Klammerung können wir das gewünschte Ergebnis erhalten:</p>
@@ -761,7 +761,7 @@ daten</code></pre></div>
 <pre><code>[1]  1  2  3  4  5  6  7  9 10</code></pre>
 <div class="block">
 <p>
-<strong>Merke</strong>: Im Zweifel verwenden wir lieber einmal zu viel als einmal zu wenig Klammern.
+<strong>Merke</strong>: Im Zweifel verwenden wir Klammern lieber einmal zu viel als einmal zu wenig.
 </p>
 </div>
 
