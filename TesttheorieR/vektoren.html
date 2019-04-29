@@ -520,7 +520,7 @@ falsch &lt;-<span class="st"> </span><span class="ot">FALSE</span></code></pre><
 <pre><code>[1]  TRUE FALSE FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>) <span class="op">|</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>[1]  TRUE  TRUE FALSE</code></pre>
-<p>Auch das logische NICHT arbeitet vektorisiert, d.h. kann auf einen logischen Vektor angewendet werden, der beliebig viele Elemente enthält und invertiert alle Element darin:</p>
+<p>Auch das logische NICHT arbeitet vektorisiert. Es kann auf einen logischen Vektor angewendet werden, der beliebig viele Elemente enthält und invertiert alle Elemente darin:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">!</span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>[1] FALSE  TRUE</code></pre>
 <p>Während die Operationen UND, ODER und NICHT an dieser Stelle nur abstrakt eingeführt werden, werden wir in weiteren Abschnitten (<a href="vektoren.html#logischerZugriff">Kapitel 2</a> und <a href="dataframes.html#datenzugriffe">Kapitel 3</a>) noch lernen, wie wir logische Bedingungen verwenden, um gezielt Daten mit bestimmten Eigenschaften auszuwählen.</p>
@@ -552,7 +552,6 @@ In <span class="kw">mean.default</span>(laune_faktor) <span class="op">:</span>
 <p><code>R</code> hat einen eigenen Datentyp, um fehlende Werte zu kodieren: <code>NA</code>.<a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a> Da wir mit echten Datensätzen arbeiten, die oftmals „messy“ sind, d.h. nicht notwendigerweise vollständig, ist diese Eigenschaft sehr nützlich. Gerade bei der Arbeit mit Daten in der psychologischen Diagnostik ist dies wichtig: Menschen geben in Fragebögen eben nicht immer auf alle Fragen eine Antwort.</p>
 <p>Man kann selber Vektoren erstellen, die fehlende Werte enthalten:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">messy_data &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">3</span>, <span class="ot">NA</span>, <span class="dv">6</span>, <span class="ot">NA</span>, <span class="dv">5</span>)</code></pre></div>
-<p><code>R</code> hat einen eigenen Datentyp, um fehlende Werte zu kodieren:</p>
 <p>Die Anwesenheit von fehlenden Werten hat Auswirkungen darauf, welche Berechnungen <code>R</code> mit dem Vektor anstellen kann. Etwa können wir nicht mehr ohne Weiteres einen Mittelwert berechnen:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(messy_data) <span class="co"># geht nicht wegen des fehlenden Werts</span></code></pre></div>
 <pre><code>[1] NA</code></pre>
