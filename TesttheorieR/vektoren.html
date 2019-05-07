@@ -520,7 +520,7 @@ falsch &lt;-<span class="st"> </span><span class="ot">FALSE</span></code></pre><
 <pre><code>[1]  TRUE FALSE FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>) <span class="op">|</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>[1]  TRUE  TRUE FALSE</code></pre>
-<p>Auch das logische NICHT arbeitet vektorisiert. Es kann auf einen logischen Vektor angewendet werden, der beliebig viele Elemente enthält und invertiert alle Elemente darin:</p>
+<p>Auch das logische NICHT arbeitet vektorisiert. Es kann auf einen logischen Vektor angewendet werden, der beliebig viele Elemente enthält und kehrt alle Elemente darin um:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">!</span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>[1] FALSE  TRUE</code></pre>
 <p>Während die Operationen UND, ODER und NICHT an dieser Stelle nur abstrakt eingeführt werden, werden wir in weiteren Abschnitten (<a href="vektoren.html#logischerZugriff">Kapitel 2</a> und <a href="dataframes.html#datenzugriffe">Kapitel 3</a>) noch lernen, wie wir logische Bedingungen verwenden, um gezielt Daten mit bestimmten Eigenschaften auszuwählen.</p>
@@ -592,11 +592,11 @@ text1 <span class="op">==</span><span class="st"> &quot;Hallo Welt&quot;</span><
 <pre><code>[1] FALSE</code></pre>
 <p>Für Vektoren vom Typ <code>factor</code> lässt sich genauso eine Abfrage auf Gleichheit umsetzen. Hier wird beim Test auf Gleichheit das überprüfte <code>factor</code>-Label in Anführungszeichen gesetzt:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">geschlecht &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>)
-geschlecht &lt;-<span class="st"> </span><span class="kw">factor</span>(laune, <span class="dt">levels =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,
+geschlecht &lt;-<span class="st"> </span><span class="kw">factor</span>(geschlecht, <span class="dt">levels =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,
                      <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;weiblich&quot;</span>, <span class="st">&quot;maennlich&quot;</span>, <span class="st">&quot;divers&quot;</span>))
 
 geschlecht <span class="op">==</span><span class="st"> &quot;maennlich&quot;</span></code></pre></div>
-<pre><code>[1] FALSE  TRUE FALSE FALSE  TRUE FALSE</code></pre>
+<pre><code>[1] FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE</code></pre>
 <p>Wenn zwei Vektoren gleicher Länge mit logischen Operatoren verglichen werden, werden die Elemente komponentenweise verglichen:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">score_test1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">19</span>, <span class="dv">44</span>, <span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">22</span>)
 score_test2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">26</span>, <span class="dv">23</span>, <span class="dv">29</span>, <span class="dv">18</span>, <span class="dv">32</span>, <span class="dv">19</span>)

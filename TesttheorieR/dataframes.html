@@ -483,7 +483,7 @@ mdf[, <span class="kw">paste0</span>(<span class="st">&quot;Item&quot;</span>, <
 4     1     0    12          w
 5     1     1    15          m</code></pre>
 <p>Von „links nach rechts“ wählt der Doppelpunktperator alle Spalten zwischen einschließlich <code>Item1</code> und <code>Geschlecht</code> aus. Auch hier verzichten wir auf die Angabe von Anführungszeichen.</p>
-<p>Eine weitere Vereinfachung durch die Funktion <code>subset</code>: Wir können angeben, welche Spalten wir <strong>nicht</strong> ausgeben wollen:</p>
+<p>Es gibt noch eine weitere Vereinfachung, die uns die Funktion <code>subset</code> bietet. Wir können angeben, welche Spalten wir <strong>nicht</strong> ausgeben wollen:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(mdf, <span class="dt">select =</span> <span class="op">-</span><span class="kw">c</span>(Geschlecht, Alter))</code></pre></div>
 <pre><code>  Nummer Item1 Item2 Augenfarbe Testscore
 1      1     1     1       blau         2
