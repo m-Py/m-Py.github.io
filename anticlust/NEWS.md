@@ -6,27 +6,31 @@
 This is a rather big update including several changes that may break
 code used with earlier versions. In particular:
 
+- The package title was changed to »`anticlust`: Subset partitioning via
+  anticlustering«
+
 - The arguments `parallelize`, `seed` and `standardize` were removed
   from the function `anticlustering()`. Parallelization was used to
-  speed up the random sampling method, but as the exchange algorithm is
-  much better -- I do not intend to extend code for the random sampling
-  method -- having options for parallelization is an unnecessary burden
-  in my code base. Therefore, the option `seed` is also no longer needed
-  as it was only used to ensure reproducibility when using the parallel
-  option. The argument `standardize` has also been removed. To
-  standardize the input, users now have to call the function `scale()`
-  before calling the `anticlustering()` function. The philosophy behind
-  these changes is that the main function of the `anticlust` package
-  should not have too many arguments, making it easier usable. I also
-  expect that it this makes it easier to adapt the code base in the
-  future.
+  speed up the random sampling method, but as the exchange algorithm has
+  proven to be much better---for which reason I do not intend to extend
+  code for the random sampling method---having options for
+  parallelization is an unnecessary burden in my code base. Therefore,
+  the option `seed` is also no longer needed as it was only used to
+  ensure reproducibility when using the parallel option. The argument
+  `standardize` has also been removed. Users now have to manually call
+  the function `scale()` on the input before calling the
+  `anticlustering()` function. The philosophy behind these changes is
+  that the main function of the `anticlust` package should not have too
+  many arguments, making it easier usable. I also expect that it this
+  makes it easier to adapt the code base in the future.
 
 - Minor change: The argument `preclustering` now only accepts
   `TRUE`/`FALSE` as it used to before (see the discussion
   [here](https://github.com/m-Py/anticlust/issues/19)). To induce
   customized clustering constraints, we can still use the argument
-  `categories`. In the following example, we restrict the exchange 
-  partners for each element to four similar elements:
+  `categories`. In the following example, we restrict the exchange
+  partners for each element to four similar elements by creating
+  clusters of size 5:
 
 ```R
 anticlustering(
@@ -38,14 +42,14 @@ anticlustering(
 
 - An enhancement was added to the `balanced_clustering()` function: The
   heuristic algorithm to create equal-sized clusters was replaced by one
-  that is much faster and better (courteously contributed by Meik
-  Michalke). This method is also called when the argument
-  `preclustering` is `TRUE` in a function call of the `anticlustering()`
-  function (unless the argument `method` is "ilp", in which case an
-  exact clustering algorithm is called).
+  that is much faster and better (courteously contributed by [Meik
+  Michalke](https://reaktanz.de/?c=hacking&s=koRpus)). This method is
+  also called when the argument `preclustering` is `TRUE` in a function
+  call of the `anticlustering()` function (unless the argument `method`
+  is "ilp", in which case an exact clustering algorithm is called).
 
-- A new function is available: `n_partitions()` computes the number of 
-  balanced partitions for given *N* and *K*.
+- A new function is available: `n_partitions()` computes the number of
+  equal-sized partitions for given *N* and *K*.
 
 - A new function is available: `generate_exchange_partners()` can be
   used to group elements that serve as exchange partners when using one
@@ -69,8 +73,20 @@ anticlustering(
 )
 ```
 
-- In another example, we restrict the exchange partners to four similar
-  elements within the same species:
+- Note that the function `generate_exchange_partners()` takes as
+  argument the number of exchange partners «`p`»; this is different from
+  the anticlustering and clustering functions that take as input the
+  size of the expected cluster «`K`». Hence, `K = 5` and `p = 4` will
+  lead to the same number of exchange partners.[^addedargument] In
+  another example, we restrict the exchange partners to four similar
+  elements within the same species (here, balanced input is necessary
+  again because internally, clusters of equal size are computed using
+  the function `balanced_clustering()` on each category separately):
+
+[^addedargument]: Maybe the argument `p` will be added to the
+`anticlustering()` function in a future release (in this case, the
+function `generate_exchange_partners()` would be called internally).
+This is probably a useful extension. 
 
 ```R
 anticlustering(
@@ -84,9 +100,6 @@ anticlustering(
   )
 )
 ```
-
-- The package title was changed: `anticlust`: Subset partitioning via
-  anticlustering
 
 Moreover, several internal changes were implemented to the code base to
 enhance future maintainability. For example, to differentiate between
