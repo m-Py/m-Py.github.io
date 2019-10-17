@@ -262,20 +262,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Hypothetische Antworten auf das Bundesland Multiple-Choice-Item:</span>
 bundesland_answers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">2</span>)
 bundesland_key     &lt;-<span class="st"> </span><span class="dv">2</span>
-
 bundesland_score   &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="dt">test =</span> bundesland_answers <span class="op">==</span><span class="st"> </span>bundesland_key,
                              <span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">0</span>)
 bundesland_score</code></pre></div>
 <pre><code>[1] 0 1 0 0 1 0 1</code></pre>
-<p>Was ist hier passiert? Ich habe im Vektor <code>bundesland_answers</code> hypothetische Antworten generiert; die Variable <code>bundesland_key</code> enthält den Schlüssel, d.h. die korrekte Antwort. Mithilfe der Funktion <code>ifelse</code> gleiche ich die Antworten mit dem Schlüssel ab. <code>ifelse</code> nimmt drei Argumente entgegen. Diese heißen <code>test</code>, <code>yes</code>, und <code>no</code>:<a href="#fn28" class="footnoteRef" id="fnref28"><sup>28</sup></a></p>
+<p>Was ist hier passiert? Ich habe im Vektor <code>bundesland_answers</code> hypothetische Antworten generiert; die Variable <code>bundesland_key</code> enthält den Schlüssel, d.h. die korrekte Antwort. Mithilfe der Funktion <code>ifelse</code> gleiche ich die Antworten mit dem Schlüssel ab. <code>ifelse</code> nimmt drei Argumente entgegen. Diese heißen <code>test</code>, <code>yes</code>, und <code>no</code>:</p>
 <ul>
-<li><code>test</code>: Vergleicht jede Antwort mit dem Schlüssel, hier: <code>bundesland_answers == bundesland_key</code>. Ergebnis dieses Vergleichs ist der folgende logische Vektor (im Allgemeinen kann <code>test</code> einen beliebigen logischen Vektor als Argument annehmen):</li>
+<li><code>test</code>: Ein logischer Vektor – hier der Vergleich jeder Antwort mit dem Schlüssel</li>
+<li><code>yes</code>: Die Ausgabe an den Positionen, an denen der <code>test</code> <code>TRUE</code> ergibt</li>
+<li><code>no</code>: Die Ausgabe an den Positionen, an denen der <code>test</code> <code>FALSE</code> ergibt</li>
 </ul>
+<p>In diesem Fall wird dem Argument <code>test</code> der folgende logische Vektor übergeben:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bundesland_answers <span class="op">==</span><span class="st"> </span>bundesland_key</code></pre></div>
 <pre><code>[1] FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE</code></pre>
-<ul>
-<li><code>yes</code>: Der Wert, der angenommen werden soll für Elemente, für die der <code>test</code> <code>TRUE</code> ergab (hier: <code>1</code>)</li>
-<li><code>no</code>: Der Wert, der angenommen werden soll für Elemente, für die der <code>test</code> <code>FALSE</code> ergab (hier: <code>0</code>). Praktisch: ich muss nicht angeben, welche falschen Werte alle möglich sind; es reicht aus, den richtigen Wert anzugeben, alle anderen sind automatisch falsch</li>
-</ul>
+<p>An allen Positionen, an denen dieser Vergleich <code>TRUE</code> ergibt, gibt die Funktion <code>ifelse</code> den Wert 1 aus – also den Wert, der dem Argument <code>yes</code> übergeben wurde. An allen anderen Positionen steht 0 – also der Wert, der dem Argument <code>no</code> übergeben wurde. Praktisch: Ich muss nicht angeben, welche falschen Werte alle möglich sind; es reicht aus, im <code>test</code> mit dem richtigen Wert zu vergleichen. Alle anderen Werten werden dann automatisch als falsch interpretiert.</p>
 <p>Nach der Umkodierung können wir mit der Funktion <code>mean</code> die Schwierigkeit des Items berechnen:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(bundesland_score)</code></pre></div>
 <pre><code>[1] 0.4285714</code></pre>
@@ -348,7 +348,7 @@ item1_inv -1.00  0.57      1.00</code></pre>
 <div id="umgang-mit-fehlenden-werten" class="section level2">
 <h2><span class="header-section-number">5.3</span> Umgang mit fehlenden Werten</h2>
 <blockquote>
-<p>Real data have missing values. Missing values are an integral part of the R language. Many functions have arguments that control how missing values are to be handled. – Patrick Burns<a href="#fn29" class="footnoteRef" id="fnref29"><sup>29</sup></a></p>
+<p>Real data have missing values. Missing values are an integral part of the R language. Many functions have arguments that control how missing values are to be handled. – Patrick Burns<a href="#fn28" class="footnoteRef" id="fnref28"><sup>28</sup></a></p>
 </blockquote>
 <p>Wir lernen nun den rudimentären Umgang mit fehlenden Werten in <code>R</code> kennen. Dabei könnte man vermutlich beliebig sophistiziert vorgehen, jedoch werden wir nur einen basalen und wichtigen Spezialfall kennenlernen:</p>
 <ol style="list-style-type: decimal">
@@ -380,7 +380,7 @@ npi &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">npi<span class="op">$</span>casenum &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(npi)</code></pre></div>
 <div id="identifikation-von-fehlenden-werten" class="section level3">
 <h3><span class="header-section-number">5.3.1</span> Identifikation von fehlenden Werten</h3>
-<p>Das NPI besteht aus 40 Items. Aus dem <em>Codebuch</em> des NPI Datensatzes<a href="#fn30" class="footnoteRef" id="fnref30"><sup>30</sup></a> erfahren wir, dass Antworten auf die NPI Items die Werte 1 und 2 annehmen können. Die Antwort auf jedes Item des NPI besteht aus einer „forced choice“ zwischen zwei Aussagen; eine davon wird als Indikator für Narzissmus interpretiert. Item 1 besteht beispielsweise aus den folgenden beiden Aussagen:</p>
+<p>Das NPI besteht aus 40 Items. Aus dem <em>Codebuch</em> des NPI Datensatzes<a href="#fn29" class="footnoteRef" id="fnref29"><sup>29</sup></a> erfahren wir, dass Antworten auf die NPI Items die Werte 1 und 2 annehmen können. Die Antwort auf jedes Item des NPI besteht aus einer „forced choice“ zwischen zwei Aussagen; eine davon wird als Indikator für Narzissmus interpretiert. Item 1 besteht beispielsweise aus den folgenden beiden Aussagen:</p>
 <blockquote>
 <ol style="list-style-type: decimal">
 <li>I have a natural talent for influencing people.</li>
@@ -401,7 +401,7 @@ npi &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="
 <li><code>na.omit</code>: Gibt von einem <code>data.frame</code> nur die Zeilen ohne fehlende Werte aus</li>
 </ul>
 <p>Der erste Schritt ist, alle fehlenden Werte – die derzeit mit 0 kodiert sind – in <code>NA</code> umzuwandeln. Nur <code>NA</code> wird von <code>R</code> tatsächlich als fehlend interpretiert; Konventionen, die Werte wie -99 oder 0 als fehlend klassifizieren, kennt <code>R</code> nicht.</p>
-<p>Am liebsten würden wir im NPI-Datensatz alle Werte auf <code>NA</code> setzen, die per 0 als fehlend klassifiziert wurden. Dafür könnten wir ein Vorgehen verwenden, das wir in <a href="vektoren.html#vektorAendern">Kapitel 2</a> für Vektoren kennengelernt haben. Dieses Vorgehen funktioniert bei <code>data.frames</code> tatsächlich gleichermaßen:<a href="#fn31" class="footnoteRef" id="fnref31"><sup>31</sup></a></p>
+<p>Am liebsten würden wir im NPI-Datensatz alle Werte auf <code>NA</code> setzen, die per 0 als fehlend klassifiziert wurden. Dafür könnten wir ein Vorgehen verwenden, das wir in <a href="vektoren.html#vektorAendern">Kapitel 2</a> für Vektoren kennengelernt haben. Dieses Vorgehen funktioniert bei <code>data.frames</code> tatsächlich gleichermaßen:<a href="#fn30" class="footnoteRef" id="fnref30"><sup>30</sup></a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">npi[npi <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></code></pre></div>
 <p>Dabei ergibt sich jedoch ein Problem: Fehlende Werte wurden im Datensatz zwar mit 0 kodiert, jedoch existiert eine Spalte (<code>score</code>), die den Wert 0 aus zwei Gründen enthalten kann:</p>
 <ol style="list-style-type: decimal">
@@ -461,10 +461,9 @@ npi<span class="op">$</span>Q40_score &lt;-<span class="st"> </span><span class=
 <hr />
 <ol start="27">
 <li id="fn27"><p>Im Allgemeinen muss ein Schlüssel nicht Korrektheit anzeigen, sondern kann auch Merkmalsausprägung in einem Persönlichkeitsinventar kodieren. Wir werden das im Narcissistic Personality Inventory kennenlernen.<a href="rohdaten.html#fnref27">↩</a></p></li>
-<li id="fn28"><p>Wie wir gesehen haben, können wir Argumente in Funktionen per Name und per Position ansteuern.<a href="rohdaten.html#fnref28">↩</a></p></li>
-<li id="fn29"><p><a href="http://www.burns-stat.com/documents/tutorials/why-use-the-r-language/" class="uri">http://www.burns-stat.com/documents/tutorials/why-use-the-r-language/</a><a href="rohdaten.html#fnref29">↩</a></p></li>
-<li id="fn30"><p>Dieses wird gemeinsam mit den Daten des „Open Source Psychometrics Project“ <a href="https://openpsychometrics.org/_rawdata" class="uri">https://openpsychometrics.org/_rawdata</a> runtergeladen.<a href="rohdaten.html#fnref30">↩</a></p></li>
-<li id="fn31"><p>Beachtet, dass hier ein Zugriff auf <code>data.frames</code> mit eckigen Klammern stattfindet (siehe <a href="#fortgeschritten">Kapitel 3.5</a>). Der Befehl sieht recht harmlos aus, aber tatsächlich steckt hier etwas mehr dahinter, als wir bislang behandelt haben. Wir nehmen zunächst einmal einfach hin, dass die Umkodierung von Werten in <code>data.frames</code> ebenso funktioniert wie bei Vektoren. Wie wir schon bei Vektoren kennengelernt haben, sind viele Operationen in <code>R</code> so allgemein, dass sie auf allen Daten eines Objekts stattfinden.<a href="rohdaten.html#fnref31">↩</a></p></li>
+<li id="fn28"><p><a href="http://www.burns-stat.com/documents/tutorials/why-use-the-r-language/" class="uri">http://www.burns-stat.com/documents/tutorials/why-use-the-r-language/</a><a href="rohdaten.html#fnref28">↩</a></p></li>
+<li id="fn29"><p>Dieses wird gemeinsam mit den Daten des „Open Source Psychometrics Project“ <a href="https://openpsychometrics.org/_rawdata" class="uri">https://openpsychometrics.org/_rawdata</a> runtergeladen.<a href="rohdaten.html#fnref29">↩</a></p></li>
+<li id="fn30"><p>Beachtet, dass hier ein Zugriff auf <code>data.frames</code> mit eckigen Klammern stattfindet (siehe <a href="#fortgeschritten">Kapitel 3.5</a>). Der Befehl sieht recht harmlos aus, aber tatsächlich steckt hier etwas mehr dahinter, als wir bislang behandelt haben. Wir nehmen zunächst einmal einfach hin, dass die Umkodierung von Werten in <code>data.frames</code> ebenso funktioniert wie bei Vektoren. Wie wir schon bei Vektoren kennengelernt haben, sind viele Operationen in <code>R</code> so allgemein, dass sie auf allen Daten eines Objekts stattfinden.<a href="rohdaten.html#fnref30">↩</a></p></li>
 </ol>
 </div>
             </section>
