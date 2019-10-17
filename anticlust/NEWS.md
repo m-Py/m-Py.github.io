@@ -4,7 +4,7 @@
 2019-10-17
 
 This is a rather big update including several changes that may break
-code used with earlier versions. In particular:
+code used with earlier versions.
 
 - The package title was changed to »`anticlust`: Subset partitioning via
   anticlustering«
@@ -19,10 +19,10 @@ code used with earlier versions. In particular:
   ensure reproducibility when using the parallel option. The argument
   `standardize` has also been removed. Users now have to manually call
   the function `scale()` on the input before calling the
-  `anticlustering()` function. The philosophy behind these changes is
-  that the main function of the `anticlust` package should not have too
-  many arguments, making it easier usable. I also expect that it this
-  makes it easier to adapt the code base in the future.
+  `anticlustering()` function if they wish to standardize the input. The 
+  philosophy behind these changes is that the main function of the `anticlust` 
+  package should not have too many arguments, making it easier usable. I also 
+  expect that it this makes it easier to adapt the code base in the future.
 
 - Minor change: The argument `preclustering` now only accepts
   `TRUE`/`FALSE` as it used to before (see the discussion
