@@ -1,7 +1,7 @@
 
 # anticlust 0.3.0
 
-2019-10-17
+2019-10-30
 
 This is a rather big update including several changes that may break
 code used with earlier versions.
