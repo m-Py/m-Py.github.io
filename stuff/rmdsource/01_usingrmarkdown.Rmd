@@ -21,7 +21,7 @@ papaja (and R Markdown) make use of a bunch of open source software in order to
 convert a simple .Rmd file to pdf manuscripts. In RStudio, most of these dependencies
 do not need to be installed manually as they come with the installation package. This
 repository contains guidelines on how to install R Markdown and papaja on an Ubuntu
-system (14.04 +) without the requirement of an RStudio installation, which is
+system without the requirement of an RStudio installation, which is
 somewhat less convenient (but maybe worthy). There is no warranty that it will work
 the same way on your system, it is just an explanation of how I did it. I wanted to
 share this because I found it somewhat tricky to make papaja run outside of RStudio.
@@ -35,7 +35,7 @@ your normal terminal. Commands starting with `>` must be executed in your R cons
 -- as described in the papaja GitHub repository:
 
 ```
-$ sudo apt-get install texlive texlive-latex-extra texlive-bibtex-extra texlive-publishers texlive-fonts-recommended texlive-fonts-extra texlive-humanities
+$ sudo apt install texlive texlive-latex-extra texlive-bibtex-extra texlive-publishers texlive-fonts-recommended texlive-fonts-extra texlive-humanities
 ```
 
 ### 2) Install some required GNU libraries
@@ -44,10 +44,10 @@ If these libraries are not available on your system, install them. They are requ
 to install the `devtools` package that we need to install papaja:
 
 ```
-$ sudo apt-get install libcurl4-openssl-dev
-$ sudo apt-get install libxml2-dev
-$ sudo apt-get install libgsl0-dev
-$ sudo apt-get install libssl-dev
+$ sudo apt install libcurl4-openssl-dev
+$ sudo apt install libxml2-dev
+$ sudo apt install libgsl0-dev
+$ sudo apt install libssl-dev
 ```
 
 ### 3) Install the required R packages
@@ -62,24 +62,30 @@ $ sudo apt-get install libssl-dev
 ```
 > devtools::install_github("crsh/papaja")
 ```
+
 - some dependencies (including `rmarkdown`) are -- if not available -- automatically
   installed in the process
 
 
 ### 4) Install pandoc
-- rmarkdown makes use of pandoc library to do its conversions between file formats,
-  especially to convert to pdf
+- rmarkdown makes use of pandoc library to do its conversions between file formats
 - We need a recent version of pandoc which is not included in all available
-  installation packages (e.g. standard Ubuntu repository)
+  installation packages (now the standard Ubuntu repository should work)
 - If you are using a 64-Bit system, check this link and install the debian package
-  (and then skip to **5) ImageMagick**)
+- Update: Now, the standard Ubuntu repo should be enough, so just do
+
+```
+$ sudo apt install pandoc pandoc-citeproc
+```
+
+- For 32-bit systems, consider this advice, otherwise skip to **ImageMagick**
     + <a href="http://pandoc.org/installing.html#linux"
       target="_blank">http://pandoc.org/installing.html#linux</a>
 - If you are using a 32-Bit system, installing pandoc is less convenient:
     + install Haskell platform, which includes an installation tool that will install pandoc:
 
 ```
-$ sudo apt-get install haskell-platform
+$ sudo apt install haskell-platform
 ```
     
 - Now you can use `cabal` in your terminal, an installation tool for Haskell software
@@ -117,7 +123,7 @@ PATH=/home/yourName/.cabal/bin:"$PATH"
 - install ImageMagick by:
 
 ```
-$ sudo apt-get install imagemagick imagemagick-doc
+$ sudo apt install imagemagick imagemagick-doc
 ```
 
 ### 6) Create a manuscript and enjoy
