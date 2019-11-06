@@ -114,8 +114,8 @@ little, but the study will still have little informative value. **Note
 that adjusting the prior after the results are known is illegitimate 
 anyway**. This is known as prior hacking. If you expect a small 
 effect size a priori, you can adjust the scaling of the default Cauchy 
-prior to accommodate this expectation [see @rouder2009; 
-https://github.com/m-Py/bayesEd].
+prior to accommodate this expectation (a visualization of the prior
+scale is for example found here: https://github.com/m-Py/bayesEd).
 
 The code used to produce this simulation can be retrieved from 
 [here](./rmdsource/rsource/expectedBF.R) and 
