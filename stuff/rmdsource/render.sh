@@ -16,15 +16,21 @@
 
 R -e 'source("renderAll.r")'
 
-cd ..
-git add .
-cd -
-
-# No test if any files were changed; output may be misleading
-if [ $# -eq 0 ]
-  then
-    echo "Changes have been staged, but not committed"
+# test if there have been changes to the repo, stage and maybe commit them:
+if ! git diff-index --quiet HEAD --; then  
+  cd ..
+  git add .
+  cd -
+  # test if changes should be committed
+  if [ $# -eq 0 ]
+    then
+      echo "Changes have been staged, but not committed"
+  else 
+    git commit -m $1
+    echo "Changes have been committed"
+  fi
 else 
-  git commit -m $1
-  echo "Changes have been committed" # does not test if they actually were ;)
+  echo "There have been no changes to the repository"
 fi
+
+git status
