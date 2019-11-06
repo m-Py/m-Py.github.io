@@ -3,7 +3,7 @@
 
 # This script renders all changed posts and commits the changes to git
 
-# has one parameter that is the commit message, has to be passed in the form
+# Has one parameter that is the commit message, has to be passed as shown in the example below
 # If no commit message is passed, the changes are only staged and not committed
 
 # Usage
