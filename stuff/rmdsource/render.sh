@@ -3,6 +3,10 @@
 
 # This script renders all changed posts and commits the changes to git
 
+# If no post was rendered, this script will still stage and commit --
+# there is no test if any file was actually changed. This may be 
+# convenient anyway
+
 # Has one parameter that is the commit message, has to be passed as shown in the example below
 # If no commit message is passed, the changes are only staged and not committed
 
