@@ -392,6 +392,13 @@ summary {
 $ git checkout branch2
 $ git stash pop</code></pre>
 <p>See <a href="https://stackoverflow.com/questions/556923/how-do-i-merge-my-local-uncommitted-changes-into-another-git-branch">here</a></p>
+<p><a href="https://happygitwithr.com/git-branches.html#switching-branches">This source</a> discusses that a commit in the old branch resetting it later is a safer option and (see below).</p>
+</div>
+<div id="undo-the-most-recent-commit" class="section level3">
+<h3>Undo the most recent commit</h3>
+<p>This command undoes the most recent commit but keeps the changes (that are unstaged then):</p>
+<pre><code>$ git reset HEAD~</code></pre>
+<p>See <a href="https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-local-commits-in-git">here</a></p>
 </div>
 <div id="removing-an-obsolete-remote" class="section level3">
 <h3>Removing an obsolete remote</h3>

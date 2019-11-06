@@ -57,6 +57,22 @@ $ git stash pop
 
 See [here](https://stackoverflow.com/questions/556923/how-do-i-merge-my-local-uncommitted-changes-into-another-git-branch)
 
+[This 
+source](https://happygitwithr.com/git-branches.html#switching-branches) 
+discusses that a commit in the old branch resetting it later is a safer
+option and (see below). 
+
+### Undo the most recent commit
+
+This command undoes the most recent commit but keeps the changes (that
+are unstaged then):
+
+```
+$ git reset HEAD~
+```
+
+See [here](https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-local-commits-in-git)
+
 ### Removing an obsolete remote
 
 When performing a merge pull request on Github (and afterwards deleting 
