@@ -1,0 +1,82 @@
+---
+title: "Some notes on git"
+date: November 06, 2019
+author: Martin Papenberg
+---
+
+Last updated: 2019-11-06
+
+### Merging
+
+When working on a development branch that has to be merged into a 
+master branch and -- for some stupid reason -- clean merging does not
+work, use git merge with the option `ours`:
+
+```
+$ git merge branch -X ours
+```
+
+This is better than the option suggested by Github if a pull request 
+fails and they suggest to resort to the command line; when following
+their instructions, it may be necessary to resolve conflicts manually,
+which is error prone.
+
+See [here](https://stackoverflow.com/questions/13594344/force-git-to-always-choose-the-newer-version-during-a-merge)
+
+### Stashing
+
+[Stashing](https://git-scm.com/book/en/v1/Git-Tools-Stashing) is 
+something different than staging; stashing can be done to not commit 
+dirty changes, for example if we wish to switch to a different branch 
+before we have finished our work. Staging is the more common process 
+done via `git add`. Files can be stashed using `git stash` and retrieved
+using `git stash pop`.
+
+### Setting up a new branch
+
+Simply via:
+
+```
+$ git branch newbranch
+```
+
+To switch the the new branch, do not use the `branch` command (according
+to the help file, the `branch` command only lists, creates, or deletes 
+branches), but the checkout command:
+
+```
+$ git checkout newbranch
+```
+
+If you have made changes in one branch but would like to work in the 
+other branch, one option is stashing:
+
+```
+$ git stash
+$ git checkout branch2
+$ git stash pop
+```
+
+See [here](https://stackoverflow.com/questions/556923/how-do-i-merge-my-local-uncommitted-changes-into-another-git-branch)
+
+### Removing an obsolete remote
+
+When performing a merge pull request on Github (and afterwards deleting 
+the obsolete devel branch there), the local repository will still 
+believe that the branch exists remotely. Use the following commands to 
+first remove the branch locally and then the reference to the remote 
+branch:
+
+```
+$ git branch -d devel
+$ git fetch --prune
+```
+
+The latter command removes the remote reference from the local 
+repository.
+
+&nbsp;
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
