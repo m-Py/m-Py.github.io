@@ -9,25 +9,20 @@ csl: "./lit/apa.csl"
 
 ---
 
-The usage of Bayesian statistics, and in particular the usage of Bayes
-factors is on the rise in Psychology. Bayes factors have been advocated
-as an alternative to statistical null hypothesis significance testing
-relying on *p*-values [@wagenmakers2017; xx]. They quantify the relative
-evidence that data provide for two different hypotheses. As a prominent
-application in Psychology, several "default" Bayes factors have been
-proposed that compare an alternative hypothesis assuming an effect
-(e.g. there is a difference between two means) to a null hypothesis
-assuming no effect (e.g. there is no difference between two means). Such
-Bayes factors quantify how much better a specified alternative
-hypothesis describes the data than the null hypothesis [^1]. For
-example, when obtaining a Bayes factor of size 5, the data are 5 times
-more likely under the alternative hypothesis than under the null
-hypothesis; you may say that the data favor the alternative hypothesis
-by a factor of 5 [^2]. I will not give a detailed introduction to Bayes
-factors here, there is a variety treatments on Bayes factors, including
-the mathematical and philosophical basics [e.g., ...], how to compute
-them [e.g., ...], how to interpret them [e.g., ...] and how they differ
-from *p*-values [e.g., ...].
+The usage of Bayesian statistics, and in particular the usage of Bayes 
+factors is on the rise in Psychology. Bayes factors have been advocated 
+as an alternative to statistical null hypothesis significance testing 
+relying on *p*-values. They quantify the relative evidence that data 
+provide for two different hypotheses. As a prominent application in 
+Psychology, several "default" Bayes factors have been proposed that 
+compare an alternative hypothesis assuming an effect (e.g. there is a 
+difference between two means) to a null hypothesis assuming no effect 
+(e.g. there is no difference between two means). Such Bayes factors 
+quantify how much better a specified alternative hypothesis describes 
+the data than the null hypothesis [^1]. For example, when obtaining a 
+Bayes factor of size 5, the data are 5 times more likely under the 
+alternative hypothesis than under the null hypothesis; you may say that 
+the data favor the alternative hypothesis by a factor of 5 [^2].
 
 The general appraisal of Bayes factors seems to reach from "*will save
 statistical inference in Psychology from evil p-values*" to "*dangerous
@@ -36,37 +31,25 @@ may think of Bayes factors, given their increasing occurrence in
 Psychological research it is probably useful to know how they behave
 under different settings. In this post I therefore describe what Bayes
 factors you should expect when varying the sample size and effect
-size. As is done often, I will stick to the example of the independent
+size. As is usually done, I will stick to the example of the independent
 sample *t*-test that compares two means, and I will use the "default"
 Bayes factor proposed by @rouder2009, which is implemented in the R
-package BayesFactor [@R-BayesFactor] [^3]. Note that for this reason my
-evaluation of Bayes factors is limited to this specific model.
-
-## The default Bayes factor
+package BayesFactor [@R-BayesFactor] [^3]. Hence, my evaluation of Bayes 
+factors is limited to this specific model.
 
 ## The distribution of Bayes factors
 
-The following plot illustrates the distribution of Bayes factors for
-different sample sizes and effect sizes *d* = 0 (meaning that the null
-hypothesis is true), *d* = 0.2 (a small effect), *d* = 0.5 (a medium
-effect) and *d* = 0.8 (a large effect). What I mean with distribution is
-explained below. Note that null and small effect share the same scaling
-of the y-axis; medium and large effect also share the same scaling but
-this scaling is different to the scaling of the y-axis of null and small
-effect (simply because the values of the Bayes factor differ very
-strongly by effect size). The data were generated in a simulation
-assuming normally distributed scores (*M* = 0 for one group and *M* =
-*d* for the other group; *SD* = 1 for both groups).
-
-So, what do the plots mean? Each plot illustrates the 20%, 50%, and 80%
-quantiles of the Bayes factors that you obtain for different sample
-sizes. Given a sample size and a effect size, 80% of all Bayes factors
-will be smaller than the corresponding green dot indicates; 50% will be
-smaller than the red dot, 20% will be smaller than the black dot. What
-does this tell us? Assume we are planning a study to compare two
-independent means and we want to use the default Cauchy Bayes factor. In
-this case we are interested in the number of participants we need to
-obtain meaningful results.
+The following plot illustrates the distribution of the default Bayes 
+factors for different sample sizes and effect sizes *d* = 0 (meaning 
+that the null hypothesis is true), *d* = 0.2 (a small effect), *d* = 0.5 
+(a medium effect) and *d* = 0.8 (a large effect). Note that null and 
+small effect share the same scaling of the y-axis; medium and large 
+effect also share the same scaling but this scaling is different to the 
+scaling of the y-axis of null and small effect (simply because the 
+values of the Bayes factor differ very strongly by effect size). The 
+data were generated in a simulation assuming normally distributed scores 
+(*M* = 0 for one group and *M* = *d* for the other group; *SD* = 1 for 
+both groups).
 
 
 ```{r,  message = FALSE, warning = FALSE, echo = FALSE, results="hide", fig.width = 8}
@@ -106,15 +89,38 @@ legend("bottomright", legend=paste0(c(80, 50, 20), "% of all BFs are smaller"), 
        col = 3:1, bty="n")
 ```
 
-There are other treatments relevant to this question:
 
-Sequential Hypothesis Testing With Bayes Factors: Efficiently Testing
-Mean Differences (Schönbrodt, 2015) 
+So, what do the plots mean? Each plot illustrates the 20%, 50%, and 80%
+quantiles of the Bayes factors that you obtain for different sample
+sizes. Given a sample size and a effect size, 80% of all Bayes factors
+will be smaller than the corresponding green dot indicates; 50% will be
+smaller than the red dot, 20% will be smaller than the black dot. What
+does this tell us? Assume we are planning a study to compare two
+independent means and we want to use the default Cauchy Bayes factor. In
+this case we are interested in the number of participants we need to
+obtain meaningful results.
 
-Dance of the Bayes factors (Lakens, 2016)
-http://daniellakens.blogspot.de/2016/07/dance-of-bayes-factors.html
+The main message is that it is really hard to obtain meaningful evidence 
+for the alternative hypothesis when the true effect is small. If the 
+true effect size is 0.2, we rarely see Bayes factor above 1. With N = 
+1000, we just barely have a 80% chance that our Bayes factor is larger 
+than the inconclusive 1. This means that most studies using a default 
+Bayes factor are doomed to fail when the effect size is expected to be 
+small. This has been noted by many before, but it should be noted 
+nevertheless. Note that this is not really a problem of Bayes factors. 
+Between-group designs are notoriously "underpowered" when effect sizes 
+are small. Adjusting the prior to a smaller expected effect size helps a 
+little, but the study will still have little informative value.
 
-&nbsp;
+The code used to produce this simulation can be retrieved from 
+[here](./rmdsource/rsource/expectedBF.R) and 
+[here](./rmdsource/rsource/functions.R). This code has also been 
+implemented into the `R` package 
+[bayesEd](https://github.com/m-Py/bayesEd).
+
+---
+
+Last update: `r Sys.Date()`
 
 ### <a href="index.html">Back to the front page</a>
 
