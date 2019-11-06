@@ -4,8 +4,6 @@ date: November 06, 2019
 author: Martin Papenberg
 ---
 
-Last updated: 2019-11-06
-
 ### Merging
 
 When working on a development branch that has to be merged into a 
@@ -75,7 +73,9 @@ $ git fetch --prune
 The latter command removes the remote reference from the local 
 repository.
 
-&nbsp;
+---
+
+Last updated: 2019-11-06
 
 ### <a href="index.html">Back to the front page</a>
 
