@@ -12,14 +12,14 @@ running smoothly.
 
 Why is Kubuntu good for writing in R Markdown? First, by default it 
 ships the awesome text editor [Kate](https://kate-editor.org/) that has 
-nice R Markdown highlighting,[^atom] including highlighting for math 
-equations. It even deals with the stupid ambiguity of `$` being used as 
-a column selector in inline `R` code as well as an introducer of math 
-mode. Second, KDE offers the nice `R` IDE 
-[rkward](https://rkward.kde.org) that includes Kate as its code editor. 
-Even better, rkward can be used from any operating system, not just from 
-Kubuntu or other Linux systems. I really encourage everyone to try it 
-out, if only to see an alternative to RStudio.
+nice R Markdown syntax highlighting,[^atom] spell checking (enabled by 
+default), and syntax highlighting for math equations. It even deals with 
+the stupid ambiguity of `$` being used as a column selector in inline 
+`R` code as well as an introducer of math mode. Second, KDE offers the 
+nice `R` IDE [rkward](https://rkward.kde.org) that includes Kate as its 
+code editor. Even better, rkward can be used from any operating system, 
+not just from Kubuntu or other Linux systems. I really encourage 
+everyone to try it out, if only to see an alternative to RStudio.
 
 [^atom]: In general, writing in R Markdown now seems to be much more 
 comfortable than some years back. The [atom editor](https://atom.io/) 
