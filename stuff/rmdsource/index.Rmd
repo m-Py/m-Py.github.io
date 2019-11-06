@@ -18,7 +18,7 @@ environments for working with `R` and R Markdown.
 
 ### Posts:
 
-- <a href="08_SpellChecking.html">2019/11: Installing German dictionary for spell checking
+- <a href="08_SpellChecking.html">2019/11: German dictionary for spell checking in Ubuntu
 - <a href="07_SettingUpKate.html">2019/11: Setting up R Markdown on Kubuntu
 - <a href="05_setUpRMDemacs.html">2017/12: Setting up emacs for R Markdown on Ubuntu</a>
 - <a href="04_framebreaks.html">2016/11: Use {.allowframebreaks} to show the complete reference list in R Markdown Beamer slides</a>
