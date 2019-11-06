@@ -1,0 +1,21 @@
+---
+title: "Installing German dictionary for spell checking"
+date: November 06, 2019
+author: Martin Papenberg
+---
+
+When using text editors or email programs in Ubuntu, spell checking is 
+usually enabled (for example when using [Kate](https://kate-editor.org/) 
+or [rkward](https://rkward.kde.org), but a native dictionary may not be 
+available. A german dictionary can be installed as follows:
+
+```
+$ sudo apt install aspell-de
+```
+
+
+&nbsp;
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;

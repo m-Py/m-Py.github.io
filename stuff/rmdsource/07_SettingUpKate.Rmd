@@ -26,7 +26,13 @@ comfortable than some years back. The [atom editor](https://atom.io/)
 also includes a nice mode for R Markdown documents. However, for now I 
 prefer Kate. 
 
-As said, Kate should be included by default in the Kubuntu repository. 
+As said, Kate should be included by default in the Kubuntu repository.
+If you are using a different Ubuntu flavor, the following works:
+
+```
+$ sudo apt install kate
+```
+
 rkward can be installed using the standard Ubuntu repository:
 
 ```
