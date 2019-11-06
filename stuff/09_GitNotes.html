@@ -372,8 +372,9 @@ summary {
 
 <div id="merging" class="section level3">
 <h3>Merging</h3>
-<p>When working on a development branch that has to be merged into a master branch and – for some stupid reason – clean merging does not work, use git merge with the option <code>ours</code>:</p>
-<pre><code>$ git merge branch -X ours</code></pre>
+<p>Merging means: collect the commits from one branch and put them into the branch that I am currently working on – not the other way around.</p>
+<p>When working on a development branch that has to be merged into a master branch and – for some stupid reason – clean merging does not work, use git merge with the option <code>ours</code> or <code>theirs</code>:</p>
+<pre><code>$ git merge branch -X theirs</code></pre>
 <p>This is better than the option suggested by Github if a pull request fails and they suggest to resort to the command line; when following their instructions, it may be necessary to resolve conflicts manually, which is error prone.</p>
 <p>See <a href="https://stackoverflow.com/questions/13594344/force-git-to-always-choose-the-newer-version-during-a-merge">here</a></p>
 </div>
@@ -421,6 +422,7 @@ $ git fetch --prune</code></pre>
 <div id="pull-fetch-and-merge" class="section level3">
 <h3>Pull, fetch, and merge</h3>
 <p><a href="https://longair.net/blog/2009/04/16/git-fetch-and-merge/">git: fetch and merge, don’t pull</a></p>
+<p>This post has a nice example of what to do when some commits go wrong and shoud be reverted.</p>
 <hr />
 <p>Last updated: 2019-11-06</p>
 </div>
