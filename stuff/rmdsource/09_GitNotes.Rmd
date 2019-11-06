@@ -89,6 +89,28 @@ $ git fetch --prune
 The latter command removes the remote reference from the local 
 repository.
 
+### Creating a feature development branch from devel
+
+```
+$ git checkout -b feature develop
+```
+
+See [here](https://nvie.com/posts/a-successful-git-branching-model/)
+
+### Using git diff when changes are already staged
+
+Using `git diff myfile` does not work when the changes are already 
+staged, but sometimes we still want to see the changes that have been
+done since the most recent commit. This works:
+
+```
+$ git diff HEAD myfile
+```
+
+HEAD is usually the most recent commit on the branch we are working on,
+the parent of our next commit (see 
+[here](https://stackoverflow.com/questions/2304087/what-is-head-in-git)).
+
 ---
 
 Last updated: 2019-11-06

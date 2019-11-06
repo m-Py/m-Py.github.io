@@ -406,6 +406,17 @@ $ git stash pop</code></pre>
 <pre><code>$ git branch -d devel
 $ git fetch --prune</code></pre>
 <p>The latter command removes the remote reference from the local repository.</p>
+</div>
+<div id="creating-a-feature-development-branch-from-devel" class="section level3">
+<h3>Creating a feature development branch from devel</h3>
+<pre><code>$ git checkout -b feature develop</code></pre>
+<p>See <a href="https://nvie.com/posts/a-successful-git-branching-model/">here</a></p>
+</div>
+<div id="using-git-diff-when-changes-are-already-staged" class="section level3">
+<h3>Using git diff when changes are already staged</h3>
+<p>Using <code>git diff myfile</code> does not work when the changes are already staged, but sometimes we still want to see the changes that have been done since the most recent commit. This works:</p>
+<pre><code>$ git diff HEAD myfile</code></pre>
+<p>HEAD is usually the most recent commit on the branch we are working on, the parent of our next commit (see <a href="https://stackoverflow.com/questions/2304087/what-is-head-in-git">here</a>).</p>
 <hr />
 <p>Last updated: 2019-11-06</p>
 </div>
