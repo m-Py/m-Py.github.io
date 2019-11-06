@@ -373,7 +373,7 @@ summary {
 <div id="merging" class="section level3">
 <h3>Merging</h3>
 <p>Merging means: collect the commits from one branch and put them into the branch that I am currently working on – not the other way around.</p>
-<p>When working on a development branch that has to be merged into a master branch and – for some stupid reason – clean merging does not work, use git merge with the option <code>ours</code> or <code>theirs</code>:</p>
+<p>When working on a development branch that has to be merged into a master branch and – for some stupid reason – clean merging does not work, use git merge with the option <code>ours</code> (when merging master into devel) or <code>theirs</code> (when merging devel into master).</p>
 <pre><code>$ git merge branch -X theirs</code></pre>
 <p>This is better than the option suggested by Github if a pull request fails and they suggest to resort to the command line; when following their instructions, it may be necessary to resolve conflicts manually, which is error prone.</p>
 <p>See <a href="https://stackoverflow.com/questions/13594344/force-git-to-always-choose-the-newer-version-during-a-merge">here</a></p>

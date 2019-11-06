@@ -11,7 +11,8 @@ the branch that I am currently working on -- not the other way around.
 
 When working on a development branch that has to be merged into a 
 master branch and -- for some stupid reason -- clean merging does not
-work, use git merge with the option `ours` or `theirs`:
+work, use git merge with the option `ours` (when merging master into 
+devel) or `theirs` (when merging devel into master).
 
 ```
 $ git merge branch -X theirs
