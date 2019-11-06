@@ -20,6 +20,7 @@ cd ..
 git add .
 cd -
 
+# No test if any files were changed; output may be misleading
 if [ $# -eq 0 ]
   then
     echo "Changes have been staged, but not committed"
