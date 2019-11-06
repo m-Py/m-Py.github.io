@@ -21,5 +21,5 @@ if [ $# -eq 0 ]
     echo "Changes have been staged, but not committed"
 else 
   git commit -m $1
-  echo "Changes have been committed"
+  echo "Changes have been committed" # does not test if they actually were ;)
 fi
