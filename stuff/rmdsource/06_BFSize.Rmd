@@ -111,7 +111,7 @@ nevertheless. Note that this is not really a problem of Bayes factors.
 Between-group designs are notoriously "underpowered" when effect sizes 
 are small. Adjusting the prior to a smaller expected effect size helps a 
 little, but the study will still have little informative value. **Note 
-that adjusting the prior after the results are known is infeasible 
+that adjusting the prior after the results are known is illegitimate 
 anyway**. This is known as prior hacking. If you expect a small 
 effect size a priori, you can adjust the scaling of the default Cauchy 
 prior to accommodate this expectation [see @rouder2009; 
