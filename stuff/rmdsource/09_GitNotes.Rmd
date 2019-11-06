@@ -111,6 +111,10 @@ HEAD is usually the most recent commit on the branch we are working on,
 the parent of our next commit (see 
 [here](https://stackoverflow.com/questions/2304087/what-is-head-in-git)).
 
+### Pull, fetch, and merge
+
+[git: fetch and merge, don’t pull](https://longair.net/blog/2009/04/16/git-fetch-and-merge/)
+
 ---
 
 Last updated: 2019-11-06
