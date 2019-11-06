@@ -20,7 +20,7 @@ Ubuntu.
 Just install emacs using official repository:
 
 ```
-$ sudo apt-get install emacs
+$ sudo apt install emacs
 ```
 
 If you have not already used emacs, getting to know emacs in itself will
@@ -39,7 +39,7 @@ target="_blank">http://ess.r-project.org/</a>). It can be installed
 through the standard package manager:
 
 ```
-$ sudo apt-get install ess
+$ sudo apt install ess
 ```
 
 ### Setting up markdown-mode
@@ -147,7 +147,7 @@ In this case, it may be necessary to install the required dictionary,
 for example like this:
 
 ```
-$apt-get install aspell-de
+$ sudo apt install aspell-de
 ```
 
 ### Activate syntax highlighting for LaTex equations
@@ -220,8 +220,7 @@ file:
 
 ### My .emacs file
 
-After setting up emacs as described here, I obtain this <a
-href="https://raw.githubusercontent.com/m-Py/m-Py.github.io/master/rmdsource/.emacs"
+After setting up emacs as described here, I obtain this <a href="./rmdsource/.emacs" 
 target="_blank">`.emacs` </a>file. Feel free to use any of it if you
 like.
 

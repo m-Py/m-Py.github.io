@@ -1,0 +1,69 @@
+---
+title: "Setting up R Markdown on Kubuntu"
+date: November 06, 2019
+author: Martin Papenberg
+---
+
+After some time I returned to [KDE](https://kde.org/) (in particular, to 
+[Kubuntu](https://kubuntu.org/)) on my working computer. I had always 
+liked its style but unfortunately I always had some problems with 
+stability. With the most recent version 19.10, everything seems to be 
+running smoothly. 
+
+Why is Kubuntu good for writing in R Markdown? First, by default it 
+ships the awesome text editor [Kate](https://kate-editor.org/) that has 
+nice R Markdown highlighting,[^atom] including highlighting for math 
+equations. It even deals with the stupid ambiguity of `$` being used as 
+a column selector in inline `R` code as well as an introducer of math 
+mode. Second, KDE offers the nice `R` IDE 
+[rkward](https://rkward.kde.org) that includes Kate as its code editor. 
+Even better, rkward can be used from any operating system, not just from 
+Kubuntu or other Linux systems. I really encourage everyone to try it 
+out, if only to see an alternative to RStudio.
+
+[^atom]: In general, writing in R Markdown now seems to be much more 
+comfortable than some years back. The [atom editor](https://atom.io/) 
+also includes a nice mode for R Markdown documents. However, for now I 
+prefer Kate. 
+
+As said, Kate should be included by default in the Kubuntu repository. 
+rkward can be installed using the standard Ubuntu repository:
+
+```
+$ sudo apt install rkward
+```
+
+Note that this version will be slightly outdated, and more recent 
+versions are available through the launchpad project (see the section 
+"Inofficial Ubuntu repositories" 
+[here](https://rkward.kde.org/Binaries_and_Build_Scripts)).
+
+### Document preview
+
+Since version *xy* (TODO), rkward has a live preview mode built-in. It 
+can be set up as follows: (TODO). It will only preview html documents, 
+but I think for the purpose of editing the writing this should be 
+enough. 
+
+### Setting hard line breaks
+
+As discussed [here](05_setUpRMDemacs.html), I prefer hard line breaks as 
+opposed to soft breaks. Any text editor I use for writing R Markdown 
+should include functionality for hard line breaks. Fortunately, Kate 
+(and hence, rkward) does. However, we first have to define a custom 
+shortcut for this functionality. This is done via `Settings -> Configure 
+Shortcuts -> Apply Word Wrap`. I use `Alt-Q` to insert hard line wraps.
+
+### Useful Kate features
+
+- Focus the Terminal: `F4` (goes back as well)
+- Recognizes git repositories as project, the developers even plan to 
+integrate git better in Kate in the future (see 
+[here](https://kate-editor.org/post/2019/2019-10-20-git-client-
+integration/))
+- Set the column limit for hard line breaks: 
+  `Settings -> Configure Kate -> Editing -> Wrap Words at`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;

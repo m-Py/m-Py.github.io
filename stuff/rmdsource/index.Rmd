@@ -1,5 +1,5 @@
 ---
-title: "blank"
+title: "No RStudio"
 author: "by Martin Papenberg"
 ---
 
@@ -8,8 +8,17 @@ usually about <a href="http://rmarkdown.rstudio.com/" target="_blank"> R
 Markdown </a>or other <a href="https://www.r-project.org/"
 target="_blank">R</a>-related stuff.
 
+With regard to the title: I love RStudio and I believe that the RStudio 
+company has been incredibly important for the development of `R` in the 
+recent years. I also advise every `R` newby to work with RStudio -- 
+everything "just works", and RStudio includes helpful features for 
+useRs on all levels. However, I also like to tinker around and try 
+stuff in unconventional ways. This includes trying out different 
+environments for working with `R` and R Markdown.
+
 ### Posts:
 
+- <a href="07_SettingUpKate.html">Setting up R Markdown on Kubuntu
 - <a href="05_setUpRMDemacs.html">Setting up emacs for R Markdown on
   Ubuntu</a>
 - <a href="04_framebreaks.html">Use {.allowframebreaks} to show the
