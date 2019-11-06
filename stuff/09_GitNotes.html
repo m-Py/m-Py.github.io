@@ -388,6 +388,9 @@ summary {
 <pre><code>$ git branch newbranch</code></pre>
 <p>To switch the the new branch, do not use the <code>branch</code> command (according to the help file, the <code>branch</code> command only lists, creates, or deletes branches), but the checkout command:</p>
 <pre><code>$ git checkout newbranch</code></pre>
+<p>A shortcut for both is:</p>
+<pre><code>git checkout -b newbranch</code></pre>
+<p>See <a href="https://happygitwithr.com/git-branches.html">here</a></p>
 <p>If you have made changes in one branch but would like to work in the other branch, one option is stashing:</p>
 <pre><code>$ git stash
 $ git checkout branch2

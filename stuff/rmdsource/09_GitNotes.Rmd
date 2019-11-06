@@ -50,6 +50,14 @@ branches), but the checkout command:
 $ git checkout newbranch
 ```
 
+A shortcut for both is:
+
+```
+git checkout -b newbranch
+```
+
+See [here](https://happygitwithr.com/git-branches.html)
+
 If you have made changes in one branch but would like to work in the 
 other branch, one option is stashing:
 
