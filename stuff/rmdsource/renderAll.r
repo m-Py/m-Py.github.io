@@ -13,7 +13,7 @@ files <- unique(c(staged_files, changed_files, new_files))
 rmds <- files[grepl(pattern =".Rmd", x = files)]
 rmds <- sapply(strsplit(rmds, split = "/"), function(x) { x[grepl(x, pattern = ".Rmd")] })
 
-message("\nRendering ", c("no file", "file", "files")[(length(rmds) > 1) + 1], " ", toString(rmds))
+message("\nRendering ", c("no file", "file", "files")[length(rmds) + 1], " ", toString(rmds))
 
 for (i in rmds) {
     rmarkdown::render(i, output_dir="../")
