@@ -142,9 +142,15 @@ the parent of our next commit (see
 This post has a nice example of what to do when some commits go wrong 
 and shoud be reverted.
 
+### Showing commits
+
+```
+$ git log --pretty=oneline
+```
+
 ---
 
-Last updated: 2019-11-06
+Last updated: `r Sys.Date()`
 
 ### <a href="index.html">Back to the front page</a>
 
