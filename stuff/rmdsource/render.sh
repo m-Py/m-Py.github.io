@@ -12,7 +12,7 @@
 
 # Usage
 # ./render.sh
-# ./render.sh { "this is my commit message" }
+# ./render.sh "this is my commit message"
 
 R -e 'source("renderAll.r")'
 
@@ -26,7 +26,7 @@ if ! git diff-index --quiet HEAD --; then
     then
       echo "Changes have been staged, but not committed"
   else 
-    git commit -m $1
+    git commit -m "$1"
     echo "Changes have been committed"
   fi
 else 
