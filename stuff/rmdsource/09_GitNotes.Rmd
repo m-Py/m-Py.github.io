@@ -84,6 +84,17 @@ $ git reset HEAD~
 ```
 
 See [here](https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-local-commits-in-git)
+and [here](https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified).
+
+HEAD~ is the parent of head (i.e., our latest commit on the current 
+branch)---the previous commit.
+
+The following will undo the latest commit and remove all work done since
+the last commit (danger territory).
+
+```
+$ git reset --hard HEAD~
+```
 
 ### Removing an obsolete remote
 

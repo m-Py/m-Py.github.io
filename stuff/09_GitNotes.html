@@ -402,7 +402,10 @@ $ git stash pop</code></pre>
 <h3>Undo the most recent commit</h3>
 <p>This command undoes the most recent commit but keeps the changes (that are unstaged then):</p>
 <pre><code>$ git reset HEAD~</code></pre>
-<p>See <a href="https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-local-commits-in-git">here</a></p>
+<p>See <a href="https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-local-commits-in-git">here</a> and <a href="https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified">here</a>.</p>
+<p>HEAD~ is the parent of head (i.e., our latest commit on the current branch)—the previous commit.</p>
+<p>The following will undo the latest commit and remove all work done since the last commit (danger territory).</p>
+<pre><code>$ git reset --hard HEAD~</code></pre>
 </div>
 <div id="removing-an-obsolete-remote" class="section level3">
 <h3>Removing an obsolete remote</h3>
