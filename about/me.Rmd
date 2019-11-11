@@ -54,8 +54,6 @@ from https://osf.io/y4a6k/.
 
 ### Software
 
-Software
-
 - [anticlust: Using anticlustering to create equivalent stimulus sets in R](https://github.com/m-Py/anticlust)
 - [propint: An R package to compute interactions in proportions](https://github.com/m-Py/propint)
 - [cower: An R package for power analyses of the comparison of correlations](https://github.com/m-Py/cower)
