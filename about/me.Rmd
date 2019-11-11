@@ -13,10 +13,11 @@ Düsseldorf](https://www.uni-duesseldorf.de/home/en/home.html). I am
 interested in measurement, personality[^diss] and programming[^R], 
 among others.
 
-Currently, I am primarily working on the `R` package `anticlust` package 
-that enables the automatic selection of stimuli for psychological 
-experiments. Check out my latest preprint on the anticlustering method: 
-[Using anticlustering to partition a stimulus pool into equivalent 
+Currently, I am primarily working on the `R` package 
+[`anticlust`](https://github.com/m-Py/anticlust) package that enables 
+the automatic selection of stimuli for psychological experiments. Check 
+out my latest preprint on the anticlustering method: [Using 
+anticlustering to partition a stimulus pool into equivalent 
 parts](https://psyarxiv.com/3razc/).
 
 ### Preprints
@@ -54,7 +55,7 @@ from https://osf.io/y4a6k/.
 
 ### Software
 
-- [anticlust: Using anticlustering to create equivalent stimulus sets in R](https://github.com/m-Py/anticlust)
+- [anticlust: Subset partitioning via anticlustering](https://github.com/m-Py/anticlust)
 - [propint: An R package to compute interactions in proportions](https://github.com/m-Py/propint)
 - [cower: An R package for power analyses of the comparison of correlations](https://github.com/m-Py/cower)
 - [prmisc: An R package to print statistical results in R markdown](https://github.com/m-Py/prmisc)
