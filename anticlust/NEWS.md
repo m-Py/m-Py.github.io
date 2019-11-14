@@ -1,3 +1,34 @@
+
+
+# Devel
+
+This section describes changes that will be part of upcoming releases. 
+If you would like to check out the latest features, install the 
+development version:
+
+```{r}
+remotes::install_github("m-Py/anticlust@devel")
+```
+
+**Major**
+
+New easy-to-use interface for stimulus selection in psychology: The 
+function `select_stimuli()` (and also another function 
+`divide_and_select()`). These functions can be used to select stimuli 
+for a variety of research designs and to only select a subset of all 
+stimuli. See the [new vignette](LINK) for an overview to the new 
+functionality (currently, I am still working on the vignette and the 
+implementation; but feel free to check it out). The functions 
+`select_stimuli()` does not only provide a new interface for stimulus 
+selection but also implements brand new algorithms that combine cluster 
+analyis and anticlustering.
+
+**Minor**
+
+The function `mean_sd_obj()` no longer computes the discrepancy of 
+medians, only in means and standard deviations (as the name would also 
+suggest)
+
   
 # anticlust 0.3.0
 
@@ -425,22 +456,3 @@ by grouping variables.
   time
 
 In `anticlustering`, the default value of `preclustering` is now FALSE.
-
-
-# Under development
-
-*Major*
-
-- New easy-to-use interface for stimulus selection: The functions 
-  `select_stimuli()` and `divide_and_select()`. They can be used to 
-  select stimuli for different designs and to only select a subset of 
-  all stimuli. See the new vignette for an introduction to the new 
-  functionality. The functions `select_stimuli()` does not only provide
-  a new interface for stimulus selection but also implements brand new 
-  algorithms that combine cluster analyis and anticlustering.
-
-*Minor*
-
-- The function `mean_sd_obj()` no longer computes the discrepancy of 
-  medians, only in means and standard deviations (as the name would
-  also suggest)
