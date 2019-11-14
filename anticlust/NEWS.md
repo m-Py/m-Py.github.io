@@ -1,4 +1,22 @@
 
+# anticlust 0.3.1
+
+*Major*
+
+- New easy-to-use interface for stimulus selection: The functions 
+  `select_stimuli()` and `divide_and_select()`. They can be used to 
+  select stimuli for different designs and to only select a subset of 
+  all stimuli. See the new vignette for an introduction to the new 
+  functionality. The functions `select_stimuli()` does not only provide
+  a new interface for stimulus selection but also implements brand new 
+  algorithms that combine cluster analyis and anticlustering.
+
+*Minor*
+
+- The function `mean_sd_obj()` no longer computes the discrepancy of 
+  medians, only in means and standard deviations (as the name would
+  also suggest)
+  
 # anticlust 0.3.0
 
 2019-10-30
