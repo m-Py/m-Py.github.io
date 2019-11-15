@@ -372,27 +372,376 @@ summary {
 
 <p>Linear mixed models are the hottest shit in psychology (and I assume in other areas of research as well) to analyze complex data involving multiple measures per research unit (such as a human). I see two problems with this trend:</p>
 <ol style="list-style-type: decimal">
-<li>Noboby<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> understands them</li>
+<li>Noboby<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> understands linear mixed models</li>
 <li>Noboby admits they don’t understand them</li>
 </ol>
-<p>What everyone should unterstand is that clustering of data should somehow be taken into account when analyzing data; you do not compute an independent t-test when collecting multiple measures from the same persons. Data within persons (or any unit of analysis, i.e., clusters in general) tends to be more similar than data between persons and the analysis needs to reflects that. The usual assumption of independence of measures does not hold and this correlation must be taken into account.</p>
+<p>What everyone should unterstand is that clustering of data should somehow be taken into account when analyzing data; you do not compute an independent t-test when collecting multiple measures from the same persons. Data collected from the same person tends to be more similar than data from different persons, and the analysis needs to reflects that.</p>
 <p>Because nobody understands linear mixed models, we must look for simpler alternatives.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> One option is to use cluster robust standard errors in an otherwise standard regression framework. This post explores the function <code>lm_robust()</code> from the package <code>estimatr</code>.</p>
-<div id="example-1-mimicking-a-between-within-anova" class="section level2">
-<h2>Example 1: Mimicking a between-within ANOVA</h2>
+<div id="example-1-mimicking-a-between-within-anova" class="section level1">
+<h1>Example 1: Mimicking a Between-Within ANOVA</h1>
+<p>In the first example, I compute (a) a mixed ANOVA involving a between-subjects and a within-subjects factor, (b) a linear regression that ignores the repeated measures character of the data, and (c) a cluster robust regression that incorporates the clustered nature of the data.</p>
+<p>In this case, all three analyses yield an astonishing agreement. The analyses that incorporate the dependence in the data (mixed ANOVA and robust regression) do not differ from the normal regression because in this data, the intraclass correlation is very low – meaning that the responses within persons are not more similar than responses of different persons. Hence, it hardly makes a difference whether we use robust or uncorrected regression.</p>
+<p>First we load some <code>R</code> packages that are needed for our analyses:</p>
+<pre class="r"><code>library(afex) # for ANOVA
+library(dplyr) # for displaying descriptive results
+library(estimatr) # for robust regression standard errors
+library(emmeans) # for &quot;post hoc&quot; tests
+library(ICC) # to compute the intraclass correlation</code></pre>
 <p>The first example is a classical experimental design in psychology where multiple measures are taken per person and and experimental manipulation varies between persons. The classical approach for analyzing this data is a mixed ANOVA. I use the <code>R</code> package <code>afex</code> for the ANOVA and compare the results to a linear regression using <code>estimatr::lm_robust()</code>.</p>
-<p>Load the data:</p>
+<p>Load the data; it is a data frame in long format where each row is a response of a participant (<em>n</em> = 416) to one of three items. So, the data frame consists of 1248 rows:</p>
+<pre class="r"><code>ldf &lt;- read.csv(&quot;./rsource/longdata.csv&quot;)
+head(ldf)</code></pre>
+<pre><code>##   casenum order    agent     action permissibility
+## 1       1     1    human do nothing             40
+## 2       2     1 computer do nothing             30
+## 3       3     2    human do nothing             30
+## 4       4     2 computer do nothing             20
+## 5       5     3    human do nothing             90
+## 6       6     3 computer do nothing             50</code></pre>
+<pre class="r"><code>nrow(ldf)</code></pre>
+<pre><code>## [1] 1248</code></pre>
 <p>Do ANOVA:</p>
-<p>Do robust standard error analysis:</p>
-<p>Conclusion</p>
+<pre class="r"><code>aov_analysis &lt;- aov_ez(
+  id = &quot;casenum&quot;, 
+  dv = &quot;permissibility&quot;, 
+  data = ldf,
+  between = &quot;agent&quot;, 
+  within = &quot;action&quot;
+)
+aov_analysis</code></pre>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: permissibility
+##         Effect           df    MSE          F  ges p.value
+## 1        agent       1, 414 790.78       1.71 .001     .19
+## 2       action 1.93, 799.37 851.97 108.69 ***  .15  &lt;.0001
+## 3 agent:action 1.93, 799.37 851.97  14.44 ***  .02  &lt;.0001
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1
+## 
+## Sphericity correction method: GG</code></pre>
+<p>We have a significant (and rather large) main effect of action: redirecting was most permissible, and choosing at random was least permissible, as shown by the descriptive statistics by action:</p>
+<pre class="r"><code>ldf %&gt;%
+  group_by(action) %&gt;%
+  summarise(
+    mean = mean(permissibility), 
+    sd = sd(permissibility)
+  ) %&gt;% arrange(-mean) # sort by permissibility</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##   action         mean    sd
+##   &lt;fct&gt;         &lt;dbl&gt; &lt;dbl&gt;
+## 1 redirect       59.9  27.6
+## 2 do nothing     47.8  28.7
+## 3 random action  30.7  30.1</code></pre>
+<p>Post hoc tests on the main effect of action confirm that all actions significantly differ in their rated permissibility:</p>
+<pre class="r"><code>pairs(emmeans(aov_analysis$aov, &quot;action&quot;))</code></pre>
+<pre><code>##  contrast                   estimate   SE  df t.ratio p.value
+##  do.nothing - random.action     17.0 1.99 828   8.571 &lt;.0001 
+##  do.nothing - redirect         -12.1 1.99 828  -6.105 &lt;.0001 
+##  random.action - redirect      -29.2 1.99 828 -14.675 &lt;.0001 
+## 
+## Results are averaged over the levels of: agent 
+## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+<p>The significant interaction can be illustrated by splitting average permissibility by agent and action:</p>
+<pre class="r"><code>ldf %&gt;%
+  group_by(action, agent) %&gt;%
+  summarise(
+    mean = mean(permissibility), 
+    sd = sd(permissibility)
+  ) %&gt;% 
+  arrange(-mean)</code></pre>
+<pre><code>## # A tibble: 6 x 4
+## # Groups:   action [3]
+##   action        agent     mean    sd
+##   &lt;fct&gt;         &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt;
+## 1 redirect      human     63.1  27.0
+## 2 redirect      computer  56.7  27.8
+## 3 do nothing    human     48.5  28.8
+## 4 do nothing    computer  47.1  28.8
+## 5 random action computer  37.8  30.5
+## 6 random action human     23.7  28.0</code></pre>
+<p>While the random choice is generally the worst, it is even more inadmissible when done by a human; redirecting, on the other hand, is significantly more permissible when done by a human. These constitute pairwise significant differences (into different directions), as confirmed by post-hoc tests:</p>
+<pre class="r"><code># split interaction
+pairs(emmeans(aov_analysis$aov, &quot;agent&quot;, by = &quot;action&quot;))</code></pre>
+<pre><code>## action = do.nothing:
+##  contrast         estimate   SE   df t.ratio p.value
+##  computer - human    -1.44 2.79 1242 -0.516  0.6058 
+## 
+## action = random.action:
+##  contrast         estimate   SE   df t.ratio p.value
+##  computer - human    14.09 2.79 1242  5.041  &lt;.0001 
+## 
+## action = redirect:
+##  contrast         estimate   SE   df t.ratio p.value
+##  computer - human    -6.39 2.79 1242 -2.288  0.0223</code></pre>
+<div id="reproducing-the-results-using-linear-regression" class="section level2">
+<h2>Reproducing the results using linear regression</h2>
+<p>Everyone has heard that ANOVAs and linear regression is something like the same thing. So, how would we encode our design as a linear regression model (that however simply ignores the clustering of the data within participants)?</p>
+<pre class="r"><code>lm_analysis &lt;- lm(permissibility ~ agent * action, data = ldf)
+summary(lm_analysis)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = permissibility ~ agent * action, data = ldf)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -63.12 -23.70   1.49  21.49  76.30 
+## 
+## Coefficients:
+##                                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                      47.067      1.976  23.823  &lt; 2e-16 ***
+## agenthuman                        1.442      2.794   0.516 0.605811    
+## actionrandom action              -9.279      2.794  -3.321 0.000924 ***
+## actionredirect                    9.663      2.794   3.459 0.000562 ***
+## agenthuman:actionrandom action  -15.529      3.951  -3.930 8.97e-05 ***
+## agenthuman:actionredirect         4.952      3.951   1.253 0.210375    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 28.49 on 1242 degrees of freedom
+## Multiple R-squared:  0.1682, Adjusted R-squared:  0.1648 
+## F-statistic: 50.23 on 5 and 1242 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>The output of the <code>lm()</code> function looks different than a usual ANOVA table because the factor having three levels is treated differently than in an ANOVA effects table; instead of yielding a single effect for <code>action</code>, we get two effects, one for action:redirect and one for action:random. These effects are interpreted in reference to the remaining action, i.e., “do nothing” in this case. In a way, this result table is more informative than an ANOVA table because we know that both actions are significantly different from the third action. However, we could also format the results of the regression function <code>lm()</code> as an ANOVA table using the <code>aov()</code> function – after all, it is the same:</p>
+<pre class="r"><code># summarize the regression as an anova:
+summary(aov(lm_analysis))</code></pre>
+<pre><code>##                Df  Sum Sq Mean Sq F value   Pr(&gt;F)    
+## agent           1    1354    1354   1.668    0.197    
+## action          2  178806   89403 110.111  &lt; 2e-16 ***
+## agent:action    2   23751   11876  14.626 5.27e-07 ***
+## Residuals    1242 1008427     812                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Interestingly, the results are more of less the same as before (compare the F values of the ANOVA table using <code>afex</code> and the <code>lm()</code> function), even though our regression completely ignores that responses are clustered within people! This is also obvious from post-hoc tests applied to the output object of the <code>lm()</code> function:</p>
+<pre class="r"><code># post hoc tests
+pairs(emmeans(lm_analysis, &quot;action&quot;))</code></pre>
+<pre><code>##  contrast                   estimate   SE   df t.ratio p.value
+##  do nothing - random action     17.0 1.98 1242   8.626 &lt;.0001 
+##  do nothing - redirect         -12.1 1.98 1242  -6.144 &lt;.0001 
+##  random action - redirect      -29.2 1.98 1242 -14.771 &lt;.0001 
+## 
+## Results are averaged over the levels of: agent 
+## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+<pre class="r"><code>pairs(emmeans(lm_analysis, &quot;agent&quot;, by = &quot;action&quot;))</code></pre>
+<pre><code>## action = do nothing:
+##  contrast         estimate   SE   df t.ratio p.value
+##  computer - human    -1.44 2.79 1242 -0.516  0.6058 
+## 
+## action = random action:
+##  contrast         estimate   SE   df t.ratio p.value
+##  computer - human    14.09 2.79 1242  5.041  &lt;.0001 
+## 
+## action = redirect:
+##  contrast         estimate   SE   df t.ratio p.value
+##  computer - human    -6.39 2.79 1242 -2.288  0.0223</code></pre>
+<p>There is hardly any difference in the standard errors and test statistics between the mixed ANOVA and the regression.</p>
 </div>
-<div id="example-2-something-else" class="section level2">
-<h2>Example 2: Something else</h2>
-<p>In the above example, we did not gain much using the robust regression. Such a method is better suited if we have multiple measures per person that are not balanced across experimental conditions, and per condition we have several measures. Such a design can no longer be analyzed using an ANOVA<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<div id="cluster-robust-linear-regression" class="section level2">
+<h2>Cluster robust linear regression</h2>
+<p>Even though we could reproduce the results of the mixed ANOVA using a linear regression that ignores the repeated measures per person, this approach is not feasible in general. We set out to learn about robust regression models that allow to incorporate repeated measures. To this end, we can use the function <code>lm_robust()</code> from the package <code>estimatr</code>:</p>
+<pre class="r"><code>rlm_analysis &lt;- lm_robust(
+  permissibility ~ agent * action, 
+  cluster = casenum, 
+  data = ldf
+)</code></pre>
+<p>This was easy enough; we just informed the function <code>lm_robust()</code> about the dependence of responses within persons by passing the ID variable <code>casenum</code> to the parameter <code>cluster</code>. Let’s check out the results:</p>
+<pre class="r"><code>summary(rlm_analysis)</code></pre>
+<pre><code>## 
+## Call:
+## lm_robust(formula = permissibility ~ agent * action, data = ldf, 
+##     clusters = casenum)
+## 
+## Standard error type:  CR2 
+## 
+## Coefficients:
+##                                Estimate Std. Error t value  Pr(&gt;|t|)
+## (Intercept)                      47.067      1.994 23.6101 1.226e-60
+## agenthuman                        1.442      2.820  0.5115 6.093e-01
+## actionrandom action              -9.279      2.704 -3.4316 7.243e-04
+## actionredirect                    9.663      3.048  3.1709 1.750e-03
+## agenthuman:actionrandom action  -15.529      3.670 -4.2310 2.866e-05
+## agenthuman:actionredirect         4.952      4.313  1.1482 2.516e-01
+##                                CI Lower CI Upper  DF
+## (Intercept)                      43.137   50.998 207
+## agenthuman                       -4.101    6.985 414
+## actionrandom action             -14.610   -3.948 207
+## actionredirect                    3.655   15.672 207
+## agenthuman:actionrandom action  -22.743   -8.314 414
+## agenthuman:actionredirect        -3.526   13.430 414
+## 
+## Multiple R-squared:  0.1682 ,    Adjusted R-squared:  0.1648 
+## F-statistic: 57.19 on 5 and 415 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Again, we obtain more or less the same results, which is also evident from looking at the pairwise post-hoc tests:</p>
+<pre class="r"><code>pairs(emmeans(rlm_analysis, &quot;action&quot;))</code></pre>
+<pre><code>##  contrast                   estimate   SE   df t.ratio p.value
+##  do nothing - random action     17.0 1.84 1242   9.287 &lt;.0001 
+##  do nothing - redirect         -12.1 2.16 1242  -5.630 &lt;.0001 
+##  random action - redirect      -29.2 1.96 1242 -14.881 &lt;.0001 
+## 
+## Results are averaged over the levels of: agent 
+## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+<pre class="r"><code>pairs(emmeans(rlm_analysis, &quot;agent&quot;, by = &quot;action&quot;))</code></pre>
+<pre><code>## action = do nothing:
+##  contrast         estimate   SE   df t.ratio p.value
+##  computer - human    -1.44 2.82 1242 -0.511  0.6091 
+## 
+## action = random action:
+##  contrast         estimate   SE   df t.ratio p.value
+##  computer - human    14.09 2.87 1242  4.907  &lt;.0001 
+## 
+## action = redirect:
+##  contrast         estimate   SE   df t.ratio p.value
+##  computer - human    -6.39 2.69 1242 -2.378  0.0175</code></pre>
+<p>Why do the robust and normal regression results not differ? The reason is that the intraclass correlation (ICC) is untypically low (even slightly below zero):</p>
+<pre class="r"><code>ICCbare(ldf$casenum, ldf$permissibility, ldf)</code></pre>
+<pre><code>## [1] -0.09254519</code></pre>
+<p>This means there is no correlation of answers within persons. This is however pretty unusual.</p>
+</div>
+</div>
+<div id="example-2-another-mixed-anova" class="section level1">
+<h1>Example 2: Another Mixed ANOVA</h1>
+<p>We load another data set with a similar experimental design:</p>
+<pre class="r"><code>ldf &lt;- read.csv(&quot;./rsource/longdata2.csv&quot;)
+head(ldf)</code></pre>
+<pre><code>##   casenum      guilt action permissibility
+## 1     129     guilty swerve              0
+## 2     129     guilty   stay            100
+## 3     130 not guilty swerve             20
+## 4     130 not guilty   stay             90
+## 5     131     guilty swerve             30
+## 6     131     guilty   stay             70</code></pre>
+<pre class="r"><code>nrow(ldf)</code></pre>
+<pre><code>## [1] 376</code></pre>
+<p>This time, the intraclass correlation is substantial:</p>
+<pre class="r"><code>ICCbare(ldf$casenum, ldf$permissibility, ldf)</code></pre>
+<pre><code>## NAs removed from rows:
+##  105 243 244</code></pre>
+<pre><code>## [1] -0.2920469</code></pre>
+<p>Let’s do the ANOVA:</p>
+<pre class="r"><code>aov_analysis &lt;- aov_ez(
+  id = &quot;casenum&quot;, 
+  dv = &quot;permissibility&quot;, 
+  data = ldf,
+  between = &quot;guilt&quot;, 
+  within = &quot;action&quot;
+)
+aov_analysis</code></pre>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: permissibility
+##         Effect     df     MSE       F  ges p.value
+## 1        guilt 1, 184  782.29  3.42 + .007     .07
+## 2       action 1, 184 1402.03    2.13 .007     .15
+## 3 guilt:action 1, 184 1402.03 8.79 **  .03    .003
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>pairs(emmeans(aov_analysis$aov, &quot;action&quot;))</code></pre>
+<pre><code>##  contrast      estimate   SE  df t.ratio p.value
+##  stay - swerve     5.66 3.88 184 1.458   0.1465 
+## 
+## Results are averaged over the levels of: guilt</code></pre>
+<pre class="r"><code>pairs(emmeans(aov_analysis$aov, &quot;guilt&quot;))</code></pre>
+<pre><code>##  contrast            estimate  SE  df t.ratio p.value
+##  guilty - not guilty     5.36 2.9 184 1.848   0.0662 
+## 
+## Results are averaged over the levels of: action</code></pre>
+<pre class="r"><code>pairs(emmeans(aov_analysis$aov, &quot;guilt&quot;, by = &quot;action&quot;))</code></pre>
+<pre><code>## action = stay:
+##  contrast            estimate   SE  df t.ratio p.value
+##  guilty - not guilty    16.87 4.85 341  3.481  0.0006 
+## 
+## action = swerve:
+##  contrast            estimate   SE  df t.ratio p.value
+##  guilty - not guilty    -6.15 4.85 341 -1.269  0.2052</code></pre>
+<p>Next, let’s ignore the repeated measures and just do a regression:</p>
+<pre class="r"><code>lm_analysis &lt;- lm(permissibility ~ guilt * action, data = ldf)
+summary(aov(lm_analysis))</code></pre>
+<pre><code>##               Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## guilt          1   2988    2988   2.729 0.099412 .  
+## action         1   3158    3158   2.883 0.090344 .  
+## guilt:action   1  12906   12906  11.785 0.000665 ***
+## Residuals    369 404097    1095                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 3 observations deleted due to missingness</code></pre>
+<pre class="r"><code>pairs(emmeans(lm_analysis, &quot;action&quot;))</code></pre>
+<pre><code>##  contrast      estimate   SE  df t.ratio p.value
+##  stay - swerve     5.91 3.43 369 1.726   0.0852 
+## 
+## Results are averaged over the levels of: guilt</code></pre>
+<pre class="r"><code>pairs(emmeans(lm_analysis, &quot;guilt&quot;))</code></pre>
+<pre><code>##  contrast            estimate   SE  df t.ratio p.value
+##  guilty - not guilty     5.61 3.43 369 1.638   0.1023 
+## 
+## Results are averaged over the levels of: action</code></pre>
+<pre class="r"><code>pairs(emmeans(lm_analysis, &quot;guilt&quot;, by = &quot;action&quot;))</code></pre>
+<pre><code>## action = stay:
+##  contrast            estimate   SE  df t.ratio p.value
+##  guilty - not guilty    17.38 4.84 369  3.591  0.0004 
+## 
+## action = swerve:
+##  contrast            estimate   SE  df t.ratio p.value
+##  guilty - not guilty    -6.15 4.85 369 -1.268  0.2058</code></pre>
+<p>Let’s repeat using robust regression:</p>
+<pre class="r"><code>rlm_analysis &lt;- lm_robust(
+  permissibility ~ guilt * action, 
+  cluster = casenum, 
+  data = ldf
+)
+
+summary(rlm_analysis)</code></pre>
+<pre><code>## 
+## Call:
+## lm_robust(formula = permissibility ~ guilt * action, data = ldf, 
+##     clusters = casenum)
+## 
+## Standard error type:  CR2 
+## 
+## Coefficients:
+##                              Estimate Std. Error t value  Pr(&gt;|t|)
+## (Intercept)                     53.55      3.601  14.872 3.320e-26
+## guiltnot guilty                -17.38      4.919  -3.533 5.197e-04
+## actionswerve                   -17.68      5.634  -3.138 2.287e-03
+## guiltnot guilty:actionswerve    23.53      7.762   3.031 2.785e-03
+##                              CI Lower CI Upper     DF
+## (Intercept)                    46.397   60.700  92.00
+## guiltnot guilty               -27.084   -7.673 184.98
+## actionswerve                  -28.868   -6.490  91.75
+## guiltnot guilty:actionswerve    8.216   38.844 184.70
+## 
+## Multiple R-squared:  0.04502 ,   Adjusted R-squared:  0.03726 
+## F-statistic: 4.693 on 3 and 186 DF,  p-value: 0.003488</code></pre>
+<pre class="r"><code>pairs(emmeans(rlm_analysis, &quot;action&quot;))</code></pre>
+<pre><code>##  contrast      estimate   SE  df t.ratio p.value
+##  stay - swerve     5.91 3.88 369 1.524   0.1284 
+## 
+## Results are averaged over the levels of: guilt</code></pre>
+<pre class="r"><code>pairs(emmeans(rlm_analysis, &quot;guilt&quot;))</code></pre>
+<pre><code>##  contrast            estimate  SE  df t.ratio p.value
+##  guilty - not guilty     5.61 2.9 369 1.936   0.0537 
+## 
+## Results are averaged over the levels of: action</code></pre>
+<pre class="r"><code>pairs(emmeans(rlm_analysis, &quot;guilt&quot;, by = &quot;action&quot;))</code></pre>
+<pre><code>## action = stay:
+##  contrast            estimate   SE  df t.ratio p.value
+##  guilty - not guilty    17.38 4.92 369  3.533  0.0005 
+## 
+## action = swerve:
+##  contrast            estimate   SE  df t.ratio p.value
+##  guilty - not guilty    -6.15 4.77 369 -1.290  0.1979</code></pre>
+<p>Did we learn anything? So it does not make a difference :D</p>
+<div id="example-3-somthing-else" class="section level2">
+<h2>Example 3: Somthing else</h2>
+<p>In the above example, we did not gain much using the robust regression. The mixed ANOVAs were perfectly fine. However, ANOVA is not always feasible (and generally disliked by some people anyway; beware those). Such a method is better suited if we have multiple measures per person that are not balanced across experimental conditions, and per condition we have several measures. Such a design can no longer be analyzed using an ANOVA<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
+<p>I think that using cluster robust estimates is a nice alternatives to mixed models, owing to the simplified application and interpretation. In my <code>R</code> package <a href="https://github.com/m-Py/propint">propint</a>, I implemented some cluster robust standard errors for the computation and comparison of proportions (as an alternative to logistic regression models).</p>
 <hr />
 <p>Last updated: 2019-11-15</p>
 <div id="back-to-the-front-page" class="section level3">
 <h3><a href="index.html">Back to the front page</a></h3>
 <p> </p>
+</div>
 </div>
 </div>
 <div class="footnotes">

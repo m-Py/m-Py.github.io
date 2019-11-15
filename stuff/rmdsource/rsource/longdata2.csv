@@ -1,0 +1,377 @@
+casenum,guilt,action,permissibility
+1,129,guilty,swerve,0
+2,129,guilty,stay,100
+3,130,not guilty,swerve,20
+4,130,not guilty,stay,90
+5,131,guilty,swerve,30
+6,131,guilty,stay,70
+7,132,not guilty,swerve,20
+8,132,not guilty,stay,80
+9,133,guilty,swerve,70
+10,133,guilty,stay,80
+11,134,not guilty,swerve,0
+12,134,not guilty,stay,0
+13,135,guilty,swerve,0
+14,135,guilty,stay,100
+15,136,not guilty,swerve,100
+16,136,not guilty,stay,0
+17,137,guilty,swerve,30
+18,137,guilty,stay,100
+19,138,not guilty,swerve,20
+20,138,not guilty,stay,100
+21,139,guilty,swerve,0
+22,139,guilty,stay,90
+23,140,not guilty,swerve,50
+24,140,not guilty,stay,50
+25,141,guilty,swerve,70
+26,141,guilty,stay,30
+27,142,not guilty,swerve,80
+28,142,not guilty,stay,20
+29,143,guilty,swerve,20
+30,143,guilty,stay,70
+31,144,not guilty,swerve,0
+32,144,not guilty,stay,0
+33,145,guilty,swerve,70
+34,145,guilty,stay,60
+35,146,not guilty,swerve,0
+36,146,not guilty,stay,100
+37,147,guilty,swerve,20
+38,147,guilty,stay,70
+39,148,not guilty,swerve,80
+40,148,not guilty,stay,20
+41,149,guilty,swerve,0
+42,149,guilty,stay,100
+43,150,not guilty,swerve,0
+44,150,not guilty,stay,100
+45,151,guilty,swerve,0
+46,151,guilty,stay,0
+47,152,not guilty,swerve,0
+48,152,not guilty,stay,0
+49,153,guilty,swerve,10
+50,153,guilty,stay,100
+51,154,not guilty,swerve,100
+52,154,not guilty,stay,70
+53,155,guilty,swerve,20
+54,155,guilty,stay,80
+55,156,not guilty,swerve,70
+56,156,not guilty,stay,20
+57,157,guilty,swerve,60
+58,157,guilty,stay,20
+59,158,not guilty,swerve,60
+60,158,not guilty,stay,50
+61,159,guilty,swerve,50
+62,159,guilty,stay,50
+63,160,not guilty,swerve,0
+64,160,not guilty,stay,0
+65,161,guilty,swerve,90
+66,161,guilty,stay,90
+67,162,not guilty,swerve,100
+68,162,not guilty,stay,0
+69,163,guilty,swerve,0
+70,163,guilty,stay,100
+71,164,not guilty,swerve,0
+72,164,not guilty,stay,0
+73,165,guilty,swerve,20
+74,165,guilty,stay,80
+75,166,not guilty,swerve,80
+76,166,not guilty,stay,20
+77,167,guilty,swerve,60
+78,167,guilty,stay,40
+79,168,not guilty,swerve,20
+80,168,not guilty,stay,50
+81,169,guilty,swerve,60
+82,169,guilty,stay,10
+83,170,not guilty,swerve,0
+84,170,not guilty,stay,0
+85,171,guilty,swerve,50
+86,171,guilty,stay,60
+87,172,not guilty,swerve,0
+88,172,not guilty,stay,0
+89,173,guilty,swerve,80
+90,173,guilty,stay,100
+91,174,not guilty,swerve,0
+92,174,not guilty,stay,0
+93,175,guilty,swerve,60
+94,175,guilty,stay,40
+95,176,not guilty,swerve,0
+96,176,not guilty,stay,0
+97,177,guilty,swerve,60
+98,177,guilty,stay,30
+99,178,not guilty,swerve,20
+100,178,not guilty,stay,30
+101,179,guilty,swerve,10
+102,179,guilty,stay,80
+103,180,not guilty,swerve,30
+104,180,not guilty,stay,0
+105,181,guilty,swerve,NA
+106,181,guilty,stay,100
+107,182,not guilty,swerve,10
+108,182,not guilty,stay,80
+109,183,guilty,swerve,20
+110,183,guilty,stay,50
+111,184,not guilty,swerve,50
+112,184,not guilty,stay,100
+113,185,guilty,swerve,70
+114,185,guilty,stay,30
+115,186,not guilty,swerve,60
+116,186,not guilty,stay,40
+117,187,guilty,swerve,0
+118,187,guilty,stay,80
+119,188,not guilty,swerve,80
+120,188,not guilty,stay,20
+121,189,guilty,swerve,30
+122,189,guilty,stay,20
+123,190,not guilty,swerve,70
+124,190,not guilty,stay,50
+125,191,guilty,swerve,20
+126,191,guilty,stay,80
+127,192,not guilty,swerve,40
+128,192,not guilty,stay,50
+129,193,guilty,swerve,20
+130,193,guilty,stay,60
+131,194,not guilty,swerve,100
+132,194,not guilty,stay,0
+133,195,guilty,swerve,80
+134,195,guilty,stay,70
+135,196,not guilty,swerve,80
+136,196,not guilty,stay,20
+137,197,guilty,swerve,70
+138,197,guilty,stay,10
+139,198,not guilty,swerve,0
+140,198,not guilty,stay,100
+141,199,guilty,swerve,0
+142,199,guilty,stay,40
+143,200,not guilty,swerve,50
+144,200,not guilty,stay,40
+145,201,guilty,swerve,40
+146,201,guilty,stay,30
+147,202,not guilty,swerve,70
+148,202,not guilty,stay,20
+149,203,guilty,swerve,70
+150,203,guilty,stay,10
+151,204,not guilty,swerve,50
+152,204,not guilty,stay,30
+153,205,guilty,swerve,0
+154,205,guilty,stay,0
+155,206,not guilty,swerve,80
+156,206,not guilty,stay,30
+157,207,guilty,swerve,80
+158,207,guilty,stay,70
+159,208,not guilty,swerve,80
+160,208,not guilty,stay,20
+161,209,guilty,swerve,20
+162,209,guilty,stay,20
+163,210,not guilty,swerve,80
+164,210,not guilty,stay,20
+165,211,guilty,swerve,20
+166,211,guilty,stay,100
+167,212,not guilty,swerve,70
+168,212,not guilty,stay,30
+169,213,guilty,swerve,40
+170,213,guilty,stay,60
+171,214,not guilty,swerve,80
+172,214,not guilty,stay,70
+173,215,guilty,swerve,50
+174,215,guilty,stay,50
+175,216,not guilty,swerve,20
+176,216,not guilty,stay,60
+177,217,guilty,swerve,50
+178,217,guilty,stay,50
+179,218,not guilty,swerve,20
+180,218,not guilty,stay,90
+181,219,guilty,swerve,0
+182,219,guilty,stay,0
+183,220,not guilty,swerve,50
+184,220,not guilty,stay,50
+185,221,guilty,swerve,0
+186,221,guilty,stay,0
+187,222,not guilty,swerve,40
+188,222,not guilty,stay,50
+189,223,guilty,swerve,100
+190,223,guilty,stay,0
+191,224,not guilty,swerve,0
+192,224,not guilty,stay,0
+193,225,guilty,swerve,0
+194,225,guilty,stay,0
+195,226,not guilty,swerve,0
+196,226,not guilty,stay,0
+197,227,guilty,swerve,20
+198,227,guilty,stay,80
+199,228,not guilty,swerve,0
+200,228,not guilty,stay,0
+201,229,guilty,swerve,0
+202,229,guilty,stay,100
+203,230,not guilty,swerve,0
+204,230,not guilty,stay,0
+205,231,guilty,swerve,20
+206,231,guilty,stay,80
+207,232,not guilty,swerve,40
+208,232,not guilty,stay,60
+209,233,guilty,swerve,0
+210,233,guilty,stay,100
+211,234,not guilty,swerve,50
+212,234,not guilty,stay,50
+213,235,guilty,swerve,60
+214,235,guilty,stay,40
+215,236,not guilty,swerve,50
+216,236,not guilty,stay,50
+217,237,guilty,swerve,50
+218,237,guilty,stay,40
+219,238,not guilty,swerve,0
+220,238,not guilty,stay,0
+221,240,not guilty,swerve,70
+222,240,not guilty,stay,30
+223,241,guilty,swerve,0
+224,241,guilty,stay,100
+225,242,not guilty,swerve,100
+226,242,not guilty,stay,0
+227,243,guilty,swerve,20
+228,243,guilty,stay,80
+229,244,not guilty,swerve,0
+230,244,not guilty,stay,80
+231,245,guilty,swerve,70
+232,245,guilty,stay,80
+233,246,not guilty,swerve,50
+234,246,not guilty,stay,50
+235,247,guilty,swerve,80
+236,247,guilty,stay,20
+237,248,not guilty,swerve,20
+238,248,not guilty,stay,80
+239,249,guilty,swerve,100
+240,249,guilty,stay,0
+241,250,not guilty,swerve,100
+242,250,not guilty,stay,0
+243,251,guilty,swerve,NA
+244,251,guilty,stay,NA
+245,252,not guilty,swerve,0
+246,252,not guilty,stay,100
+247,253,guilty,swerve,10
+248,253,guilty,stay,60
+249,254,not guilty,swerve,90
+250,254,not guilty,stay,0
+251,255,guilty,swerve,0
+252,255,guilty,stay,80
+253,256,not guilty,swerve,0
+254,256,not guilty,stay,0
+255,257,guilty,swerve,60
+256,257,guilty,stay,30
+257,258,not guilty,swerve,30
+258,258,not guilty,stay,60
+259,259,guilty,swerve,90
+260,259,guilty,stay,10
+261,260,not guilty,swerve,70
+262,260,not guilty,stay,10
+263,261,guilty,swerve,30
+264,261,guilty,stay,40
+265,262,not guilty,swerve,0
+266,262,not guilty,stay,70
+267,263,guilty,swerve,30
+268,263,guilty,stay,40
+269,264,not guilty,swerve,60
+270,264,not guilty,stay,60
+271,265,guilty,swerve,10
+272,265,guilty,stay,90
+273,266,not guilty,swerve,30
+274,266,not guilty,stay,60
+275,267,guilty,swerve,0
+276,267,guilty,stay,80
+277,268,not guilty,swerve,50
+278,268,not guilty,stay,20
+279,269,guilty,swerve,70
+280,269,guilty,stay,70
+281,270,not guilty,swerve,80
+282,270,not guilty,stay,30
+283,271,guilty,swerve,0
+284,271,guilty,stay,100
+285,272,not guilty,swerve,50
+286,272,not guilty,stay,70
+287,273,guilty,swerve,60
+288,273,guilty,stay,30
+289,274,not guilty,swerve,10
+290,274,not guilty,stay,10
+291,275,guilty,swerve,30
+292,275,guilty,stay,30
+293,276,not guilty,swerve,20
+294,276,not guilty,stay,30
+295,277,guilty,swerve,80
+296,277,guilty,stay,20
+297,278,not guilty,swerve,30
+298,278,not guilty,stay,70
+299,279,guilty,swerve,20
+300,279,guilty,stay,80
+301,280,not guilty,swerve,70
+302,280,not guilty,stay,20
+303,281,guilty,swerve,50
+304,281,guilty,stay,30
+305,282,not guilty,swerve,10
+306,282,not guilty,stay,40
+307,283,guilty,swerve,0
+308,283,guilty,stay,100
+309,284,not guilty,swerve,50
+310,284,not guilty,stay,70
+311,285,guilty,swerve,60
+312,285,guilty,stay,50
+313,286,not guilty,swerve,100
+314,286,not guilty,stay,0
+315,287,guilty,swerve,40
+316,287,guilty,stay,40
+317,288,not guilty,swerve,60
+318,288,not guilty,stay,10
+319,457,guilty,swerve,20
+320,457,guilty,stay,20
+321,458,not guilty,swerve,20
+322,458,not guilty,stay,80
+323,459,guilty,swerve,30
+324,459,guilty,stay,90
+325,460,not guilty,swerve,60
+326,460,not guilty,stay,0
+327,461,guilty,swerve,10
+328,461,guilty,stay,90
+329,462,not guilty,swerve,50
+330,462,not guilty,stay,50
+331,463,guilty,swerve,80
+332,463,guilty,stay,10
+333,464,not guilty,swerve,50
+334,464,not guilty,stay,20
+335,465,guilty,swerve,0
+336,465,guilty,stay,0
+337,466,not guilty,swerve,0
+338,466,not guilty,stay,0
+339,467,guilty,swerve,100
+340,467,guilty,stay,0
+341,471,guilty,swerve,0
+342,471,guilty,stay,0
+343,472,not guilty,swerve,30
+344,472,not guilty,stay,70
+345,473,guilty,swerve,70
+346,473,guilty,stay,70
+347,474,not guilty,swerve,100
+348,474,not guilty,stay,0
+349,475,guilty,swerve,30
+350,475,guilty,stay,30
+351,476,not guilty,swerve,10
+352,476,not guilty,stay,90
+353,477,guilty,swerve,0
+354,477,guilty,stay,0
+355,478,not guilty,swerve,90
+356,478,not guilty,stay,10
+357,479,guilty,swerve,100
+358,479,guilty,stay,0
+359,480,not guilty,swerve,50
+360,480,not guilty,stay,50
+361,481,guilty,swerve,20
+362,481,guilty,stay,100
+363,482,not guilty,swerve,70
+364,482,not guilty,stay,30
+365,483,guilty,swerve,30
+366,483,guilty,stay,20
+367,484,not guilty,swerve,0
+368,484,not guilty,stay,70
+369,485,guilty,swerve,30
+370,485,guilty,stay,70
+371,486,not guilty,swerve,80
+372,486,not guilty,stay,20
+373,487,guilty,swerve,0
+374,487,guilty,stay,100
+375,488,not guilty,swerve,20
+376,488,not guilty,stay,10

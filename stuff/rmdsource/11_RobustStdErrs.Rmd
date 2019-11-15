@@ -6,6 +6,10 @@ author: Martin Papenberg
 
 ```{r setup, include = FALSE}
 library(knitr)
+opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE
+)
 ```
 
 Linear mixed models are the hottest shit in psychology (and I assume
@@ -13,23 +17,36 @@ in other areas of research as well) to analyze complex data involving
 multiple measures per research unit (such as a human). I see two 
 problems with this trend:
 
-1. Noboby[^1] understands them
+1. Noboby[^1] understands linear mixed models
 2. Noboby admits they don't understand them
 
 What everyone should unterstand is that clustering of data should 
 somehow be taken into account when analyzing data; you do not compute an 
 independent t-test when collecting multiple measures from the same 
-persons. Data within persons (or any unit of analysis, i.e., clusters in 
-general) tends to be more similar than data between persons and the 
-analysis needs to reflects that. The usual assumption of independence of 
-measures does not hold and this correlation must be taken into account.
+persons. Data collected from the same person tends to be more similar 
+than data from different persons, and the analysis needs to reflects 
+that.
 
 Because nobody understands linear mixed models, we must look for simpler
 alternatives.[^2] One option is to use cluster robust standard errors
 in an otherwise standard regression framework. This post explores the
 function `lm_robust()` from the package `estimatr`.
 
-## Example 1: Mimicking a between-within ANOVA
+# Example 1: Mimicking a Between-Within ANOVA
+
+In the first example, I compute (a) a mixed ANOVA involving a 
+between-subjects and a within-subjects factor, (b) a linear regression 
+that ignores the repeated measures character of the data, and (c) a 
+cluster robust regression that incorporates the clustered nature of the 
+data. 
+
+In this case, all three analyses yield an astonishing agreement. 
+The analyses that incorporate the dependence in the data (mixed ANOVA 
+and robust regression) do not differ from the normal regression because 
+in this data, the intraclass correlation is very low -- meaning that the 
+responses within persons are not more similar than responses of 
+different persons. Hence, it hardly makes a difference whether we use 
+robust or uncorrected regression.
 
 First we load some `R` packages that are needed for our analyses:
 
@@ -38,7 +55,7 @@ library(afex) # for ANOVA
 library(dplyr) # for displaying descriptive results
 library(estimatr) # for robust regression standard errors
 library(emmeans) # for "post hoc" tests
-library(ICC)
+library(ICC) # to compute the intraclass correlation
 ```
 
 The first example is a classical experimental design in psychology where 
@@ -59,9 +76,14 @@ nrow(ldf)
 
 Do ANOVA:
 
-```{r}
-aov_analysis <- aov_ez("casenum", "permissibility", ldf,
-                       between = "agent", within = "action")
+```{r, message = FALSE}
+aov_analysis <- aov_ez(
+  id = "casenum", 
+  dv = "permissibility", 
+  data = ldf,
+  between = "agent", 
+  within = "action"
+)
 aov_analysis
 ```
 
@@ -75,14 +97,18 @@ ldf %>%
   summarise(
     mean = mean(permissibility), 
     sd = sd(permissibility)
-  ) %>% 
-  arrange(-mean)
+  ) %>% arrange(-mean) # sort by permissibility
 ```
 
-The significant interaction is mainly driven by the fact that while the 
-random choice is generally the worst, it is even more inadmissible when 
-done by a human; redirecting, on the other hand, is slightly more 
-permissible when done by a human.
+Post hoc tests on the main effect of action confirm that all actions 
+significantly differ in their rated permissibility:
+
+```{r}
+pairs(emmeans(aov_analysis$aov, "action"))
+```
+
+The significant interaction can be illustrated by splitting average 
+permissibility by agent and action: 
 
 ```{r}
 ldf %>%
@@ -92,17 +118,70 @@ ldf %>%
     sd = sd(permissibility)
   ) %>% 
   arrange(-mean)
+
 ```
 
-**Can we reproduce these results using robust standard error 
-regression?**
+While the random choice is generally the worst, it is even more 
+inadmissible when done by a human; redirecting, on the other hand, is 
+significantly more permissible when done by a human. These constitute 
+pairwise significant differences (into different directions), as 
+confirmed by post-hoc tests:
 
-First, how would we encode our design as a linear regression model?
+```{r}
+# split interaction
+pairs(emmeans(aov_analysis$aov, "agent", by = "action"))
+```
+
+## Reproducing the results using linear regression
+
+Everyone has heard that ANOVAs and linear regression is something like 
+the same thing. So, how would we encode our design as a linear 
+regression model (that however simply ignores the clustering of the data 
+within participants)?
 
 ```{r}
 lm_analysis <- lm(permissibility ~ agent * action, data = ldf)
 summary(lm_analysis)
 ```
+
+The output of the `lm()` function looks different than a usual ANOVA 
+table because the factor having three levels is treated differently than 
+in an ANOVA effects table; instead of yielding a single effect for 
+`action`, we get two effects, one for action:redirect and one for 
+action:random. These effects are interpreted in reference to the 
+remaining action, i.e., "do nothing" in this case. In a way, this result 
+table is more informative than an ANOVA table because we know that both 
+actions are significantly different from the third action. However, we 
+could also format the results of the regression function `lm()` as an 
+ANOVA table using the `aov()` function -- after all, it is the same:
+
+```{r}
+# summarize the regression as an anova:
+summary(aov(lm_analysis))
+```
+
+Interestingly, the results are more of less the same as before (compare 
+the F values of the ANOVA table using `afex` and the `lm()` function), 
+even though our regression completely ignores that responses are 
+clustered within people! This is also obvious from post-hoc tests 
+applied to the output object of the `lm()` function:
+
+```{r}
+# post hoc tests
+pairs(emmeans(lm_analysis, "action"))
+pairs(emmeans(lm_analysis, "agent", by = "action"))
+```
+
+There is hardly any difference in the standard errors and test 
+statistics between the mixed ANOVA and the regression.
+
+## Cluster robust linear regression
+
+Even though we could reproduce the results of the mixed ANOVA using
+a linear regression that ignores the repeated measures per person, this
+approach is not feasible in general. We set out to learn about robust
+regression models that allow to incorporate repeated measures. To this
+end, we can use the function `lm_robust()` from the package `estimatr`:
 
 ```{r}
 rlm_analysis <- lm_robust(
@@ -110,23 +189,103 @@ rlm_analysis <- lm_robust(
   cluster = casenum, 
   data = ldf
 )
+```
+
+This was easy enough; we just informed the function `lm_robust()` about 
+the dependence of responses within persons by passing the ID variable 
+`casenum` to the parameter `cluster`. Let's check out the results:
+
+```{r}
 summary(rlm_analysis)
 ```
 
-In this case, the clustered and unclustered regressions do not differ 
-much; that was to be expected because the intraclass correlation is 
-untypically low (even below zero):
+Again, we obtain more or less the same results, which is also 
+evident from looking at the pairwise post-hoc tests:
+
+```{r}
+pairs(emmeans(rlm_analysis, "action"))
+pairs(emmeans(rlm_analysis, "agent", by = "action"))
+```
+
+Why do the robust and normal regression results not differ? The reason 
+is that the intraclass correlation (ICC) is untypically low (even 
+slightly below zero):
 
 ```{r}
 ICCbare(ldf$casenum, ldf$permissibility, ldf)
 ```
 
-## Example 2: Something else
+This means there is no correlation of answers within persons. This is 
+however pretty unusual.
 
-In the above example, we did not gain much using the robust regression.
-Such a method is better suited if we have multiple measures per person
-that are not balanced across experimental conditions, and per condition
-we have several measures. Such a design can no longer be analyzed using
+# Example 2: Another Mixed ANOVA
+
+We load another data set with a similar experimental design:
+
+```{r}
+ldf <- read.csv("./rsource/longdata2.csv")
+head(ldf)
+nrow(ldf)
+```
+
+This time, the intraclass correlation is substantial:
+
+```{r}
+ICCbare(ldf$casenum, ldf$permissibility, ldf)
+```
+
+Let's do the ANOVA:
+
+```{r}
+aov_analysis <- aov_ez(
+  id = "casenum", 
+  dv = "permissibility", 
+  data = ldf,
+  between = "guilt", 
+  within = "action"
+)
+aov_analysis
+pairs(emmeans(aov_analysis$aov, "action"))
+pairs(emmeans(aov_analysis$aov, "guilt"))
+pairs(emmeans(aov_analysis$aov, "guilt", by = "action"))
+```
+
+Next, let's ignore the repeated measures and just do a regression:
+
+```{r}
+lm_analysis <- lm(permissibility ~ guilt * action, data = ldf)
+summary(aov(lm_analysis))
+pairs(emmeans(lm_analysis, "action"))
+pairs(emmeans(lm_analysis, "guilt"))
+pairs(emmeans(lm_analysis, "guilt", by = "action"))
+```
+
+Let's repeat using robust regression:
+
+```{r}
+rlm_analysis <- lm_robust(
+  permissibility ~ guilt * action, 
+  cluster = casenum, 
+  data = ldf
+)
+
+summary(rlm_analysis)
+
+pairs(emmeans(rlm_analysis, "action"))
+pairs(emmeans(rlm_analysis, "guilt"))
+pairs(emmeans(rlm_analysis, "guilt", by = "action"))
+```
+
+Did we learn anything? So it does not make a difference :D
+
+## Example 3: Somthing else
+
+In the above example, we did not gain much using the robust regression. 
+The mixed ANOVAs were perfectly fine. However, ANOVA is not always 
+feasible (and generally disliked by some people anyway; beware those). 
+Such a method is better suited if we have multiple measures per person 
+that are not balanced across experimental conditions, and per condition 
+we have several measures. Such a design can no longer be analyzed using 
 an ANOVA[^3].
 
 ## Conclusion
