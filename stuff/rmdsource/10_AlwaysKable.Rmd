@@ -1,0 +1,67 @@
+---
+title: "How to always use kable for data frame output"
+date: November 15, 2019
+author: Martin Papenberg
+---
+
+When writing R Markdown documents and printing a table (e.g., an `R` 
+data frame), it is handy to use a formatting function such as 
+`knitr::kable()` so that the table looks nicely; otherwise the R 
+Markdown output just mimics the `R` console. For example:
+
+```{r}
+head(iris)
+```
+
+Instead we want:
+
+```{r}
+knitr::kable(head(iris))
+```
+
+However, I don't want to call `kable()` all the time -- it just clutters 
+my code and distracts from the important parts. Fortunately, it is 
+possible to define `kable()` (or any other formatting function) as the 
+default printing method for data frame (or matrices). This method is 
+described in the knitr vignette [Custom Print 
+Methods](https://cran.r-project.org/web/packages/knitr/vignettes/knit_print.html). 
+To this end, add the following code in an early chunk of your R Markdown 
+document:
+
+```{r}
+library(knitr) # it is necessary to load knitr
+knit_print.data.frame = function(x, ...) {
+    res = paste(c("", "", kable(x)), collapse = "\n")
+    asis_output(res)
+}
+registerS3method("knit_print", "data.frame", knit_print.data.frame)
+```
+
+Now, if we output a data frame, we get the `kable()` output:
+
+```{r}
+head(iris)
+```
+
+I am not sure if there is an easier way available, but this works for 
+me. If we also want to print matrices using kable, we could adapt the 
+procedure as follows:
+
+```{r}
+knit_print.matrix = function(x, ...) {
+    res = paste(c("", "", kable(x)), collapse = "\n")
+    asis_output(res)
+}
+registerS3method("knit_print", "matrix", knit_print.matrix)
+```
+
+I am not sure yet if there is a better way to dispatch the printing
+function to both matrices and data frames at the same time.
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;

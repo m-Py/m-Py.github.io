@@ -16,8 +16,8 @@ nice R Markdown syntax highlighting,[^atom] spell checking (enabled by
 default), and syntax highlighting for math equations. It even deals with 
 the stupid ambiguity of `$` being used as a column selector in inline 
 `R` code as well as an introducer of math mode. Second, KDE offers the 
-nice `R` IDE [rkward](https://rkward.kde.org) that includes Kate as its 
-code editor. Even better, rkward can be used from any operating system, 
+nice `R` IDE [RKward](https://rkward.kde.org) that includes Kate as its 
+code editor. Even better, RKward can be used from any operating system, 
 not just from Kubuntu or other Linux systems. I really encourage 
 everyone to try it out, if only to see an alternative to RStudio.
 
@@ -33,7 +33,7 @@ If you are using a different Ubuntu flavor, the following works:
 $ sudo apt install kate
 ```
 
-rkward can be installed using the standard Ubuntu repository:
+RKward can be installed using the standard Ubuntu repository:
 
 ```
 $ sudo apt install rkward
@@ -46,17 +46,55 @@ versions are available through the launchpad project (see the section
 
 ### Document preview
 
-Since version *xy* (TODO), rkward has a live preview mode built-in. It 
-can be set up as follows: (TODO). It will only preview html documents, 
-but I think for the purpose of editing the writing this should be 
-enough. 
+In the latest "daily-build" version of RKward, it is possible to 
+activate document preview for R Markdown documents. It will only preview 
+html documents, but I think for the purpose of editing the writing this 
+should be enough. (I heard that pdf preview is on the maybe-to-do list.)
 
-### Setting hard line breaks
+To download the most up-to-date version, add the daily build Launchpad 
+repository [as follows](https://launchpad.net/~rkward-devel/+archive/ubuntu/rkward-kf5-daily-r35):
+
+```
+sudo add-apt-repository ppa:rkward-devel/rkward-kf5-daily-r35
+sudo apt update
+```
+
+This may require that you use the CRAN R repository and not the Ubuntu 
+one; see [here](https://cran.r-project.org/bin/linux/ubuntu/) how to use 
+CRAN R on Ubuntu).
+
+To activate the Preview mode, click the Preview button in the tool bar. 
+To ensure that the Preview button appears in the tool bar, go to 
+`Settings -> Configure Toolbars -> mainToolBar <rkward_commandeditor>`. 
+In this menu, drag `Preview` to `Current Actions`. Now, if you click 
+`Preview` in the tool bar above the text editor, a html version of your 
+R Markdown document will be rendered whenever you save your file. It 
+looks like this:
+
+<img src = "../img/rkward.png" width = 850 alt = "Live preview of R Markdown documents in RKward">
+
+### Additional more notes on R Markdown and RKward 
+
+One minor problem with RKward is that it does not really "understand" 
+what R Markdown files are (that new stuff). Sometimes, it may be needed 
+to reset the syntax highlighting -- RKward may think it is dealing with 
+an R script when it actually handles an Rmd file. This is easy, however. 
+Just select the button in the bottom right of the screen where syntax 
+highlighting can be changed to "R Markdown".
+
+To ensure that RKward shows Rmd files when you use the file browser when 
+opening a file, define the file extensions ".rmd" and ".Rmd" as R script 
+file extensions (RKward does not yet "understand" that Rmd files are 
+actually valid R files). To this end, go via `Settings -> Configure 
+RKward -> Script editor`. Here, add `*.rmd *.Rmd` to `R script file 
+filters`.
+
+### Setting hard line breaks in Kate
 
 As discussed [here](05_setUpRMDemacs.html), I prefer hard line breaks as 
 opposed to soft breaks. Any text editor I use for writing R Markdown 
 should include functionality for hard line breaks. Fortunately, Kate 
-(and hence, rkward) does. However, we first have to define a custom 
+(and hence, RKward) does. However, we first have to define a custom 
 shortcut for this functionality. This is done via `Settings -> Configure 
 Shortcuts -> Apply Word Wrap`. I use `Alt-Q` to insert hard line wraps.
 
@@ -70,6 +108,10 @@ integration/))
 - Set the column limit for hard line breaks: 
   `Settings -> Configure Kate -> Editing -> Wrap Words at`
 
+---
+
+Last updated: `r Sys.Date()`
+  
 ### <a href="index.html">Back to the front page</a>
 
 &nbsp;
