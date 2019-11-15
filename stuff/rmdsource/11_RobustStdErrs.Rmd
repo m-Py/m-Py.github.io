@@ -4,6 +4,10 @@ date: November 15, 2019
 author: Martin Papenberg
 ---
 
+```{r setup, include = FALSE}
+library(knitr)
+```
+
 Linear mixed models are the hottest shit in psychology (and I assume
 in other areas of research as well) to analyze complex data involving 
 multiple measures per research unit (such as a human). I see two 
@@ -27,19 +31,95 @@ function `lm_robust()` from the package `estimatr`.
 
 ## Example 1: Mimicking a between-within ANOVA
 
+First we load some `R` packages that are needed for our analyses:
+
+```{r, message = FALSE}
+library(afex) # for ANOVA
+library(dplyr) # for displaying descriptive results
+library(estimatr) # for robust regression standard errors
+library(emmeans) # for "post hoc" tests
+library(ICC)
+```
+
 The first example is a classical experimental design in psychology where 
 multiple measures are taken per person and and experimental manipulation
 varies between persons. The classical approach for analyzing this data
 is a mixed ANOVA. I use the `R` package `afex` for the ANOVA and compare
 the results to a linear regression using `estimatr::lm_robust()`.
 
-Load the data:
+Load the data; it is a data frame in long format where each row is a 
+response of a participant (*n* = 416) to one of three items. So, the
+data frame consists of `r 416 * 3` rows:
+
+```{r}
+ldf <- read.csv("./rsource/longdata.csv")
+head(ldf)
+nrow(ldf)
+```
 
 Do ANOVA:
 
-Do robust standard error analysis:
+```{r}
+aov_analysis <- aov_ez("casenum", "permissibility", ldf,
+                       between = "agent", within = "action")
+aov_analysis
+```
 
-Conclusion
+We have a significant (and rather large) main effect of action: 
+redirecting was most permissible, and choosing at random was least
+permissible, as shown by the descriptive statistics by action:
+
+```{r}
+ldf %>%
+  group_by(action) %>%
+  summarise(
+    mean = mean(permissibility), 
+    sd = sd(permissibility)
+  ) %>% 
+  arrange(-mean)
+```
+
+The significant interaction is mainly driven by the fact that while the 
+random choice is generally the worst, it is even more inadmissible when 
+done by a human; redirecting, on the other hand, is slightly more 
+permissible when done by a human.
+
+```{r}
+ldf %>%
+  group_by(action, agent) %>%
+  summarise(
+    mean = mean(permissibility), 
+    sd = sd(permissibility)
+  ) %>% 
+  arrange(-mean)
+```
+
+**Can we reproduce these results using robust standard error 
+regression?**
+
+First, how would we encode our design as a linear regression model?
+
+```{r}
+lm_analysis <- lm(permissibility ~ agent * action, data = ldf)
+summary(lm_analysis)
+```
+
+```{r}
+rlm_analysis <- lm_robust(
+  permissibility ~ agent * action, 
+  cluster = casenum, 
+  data = ldf
+)
+summary(rlm_analysis)
+```
+
+In this case, the clustered and unclustered regressions do not differ 
+much; that was to be expected because the intraclass correlation is 
+untypically low (even below zero):
+
+```{r}
+ICCbare(ldf$casenum, ldf$permissibility, ldf)
+```
 
 ## Example 2: Something else
 
@@ -49,7 +129,14 @@ that are not balanced across experimental conditions, and per condition
 we have several measures. Such a design can no longer be analyzed using
 an ANOVA[^3].
 
+## Conclusion
 
+I think that using cluster robust estimates is a nice alternatives to 
+mixed models, owing to the simplified application and interpretation.
+In my `R` package [propint](https://github.com/m-Py/propint), I 
+implemented some cluster robust standard errors for the computation and
+comparison of proportions (as an alternative to logistic regression 
+models). 
 
 [^1]: Or a sufficient amount of researchers (at least in my field), so
 that I feel entitled to use this wording.

@@ -1,0 +1,1249 @@
+casenum,order,agent,action,permissibility
+1,1,1,human,do nothing,40
+2,2,1,computer,do nothing,30
+3,3,2,human,do nothing,30
+4,4,2,computer,do nothing,20
+5,5,3,human,do nothing,90
+6,6,3,computer,do nothing,50
+7,7,4,human,do nothing,40
+8,8,4,computer,do nothing,70
+9,9,5,human,do nothing,80
+10,10,5,computer,do nothing,80
+11,11,6,human,do nothing,40
+12,12,6,computer,do nothing,70
+13,13,1,human,do nothing,50
+14,14,1,computer,do nothing,20
+15,15,2,human,do nothing,30
+16,16,2,computer,do nothing,30
+17,17,3,human,do nothing,30
+18,18,3,computer,do nothing,50
+19,19,4,human,do nothing,70
+20,20,4,computer,do nothing,80
+21,21,5,human,do nothing,20
+22,22,5,computer,do nothing,20
+23,23,6,human,do nothing,20
+24,24,6,computer,do nothing,60
+25,25,1,human,do nothing,70
+26,26,1,computer,do nothing,40
+27,27,2,human,do nothing,40
+28,28,2,computer,do nothing,50
+29,29,3,human,do nothing,40
+30,30,3,computer,do nothing,60
+31,31,4,human,do nothing,50
+32,32,4,computer,do nothing,60
+33,33,5,human,do nothing,70
+34,34,5,computer,do nothing,100
+35,35,6,human,do nothing,50
+36,36,6,computer,do nothing,30
+37,37,1,human,do nothing,90
+38,38,1,computer,do nothing,100
+39,39,2,human,do nothing,70
+40,40,2,computer,do nothing,100
+41,41,3,human,do nothing,30
+42,42,3,computer,do nothing,50
+43,43,4,human,do nothing,70
+44,44,4,computer,do nothing,100
+45,45,5,human,do nothing,50
+46,46,5,computer,do nothing,40
+47,47,6,human,do nothing,40
+48,48,6,computer,do nothing,50
+49,49,1,human,do nothing,30
+50,50,1,computer,do nothing,20
+51,51,2,human,do nothing,90
+52,52,2,computer,do nothing,0
+53,53,3,human,do nothing,60
+54,54,3,computer,do nothing,70
+55,55,4,human,do nothing,10
+56,56,4,computer,do nothing,60
+57,57,5,human,do nothing,70
+58,58,5,computer,do nothing,30
+59,59,6,human,do nothing,0
+60,60,6,computer,do nothing,70
+61,61,1,human,do nothing,30
+62,62,1,computer,do nothing,100
+63,63,2,human,do nothing,20
+64,64,2,computer,do nothing,20
+65,65,3,human,do nothing,0
+66,66,3,computer,do nothing,80
+67,67,4,human,do nothing,80
+68,68,4,computer,do nothing,50
+69,69,5,human,do nothing,70
+70,70,5,computer,do nothing,80
+71,71,6,human,do nothing,20
+72,72,6,computer,do nothing,50
+73,73,1,human,do nothing,70
+74,74,1,computer,do nothing,40
+75,75,2,human,do nothing,30
+76,76,2,computer,do nothing,70
+77,77,3,human,do nothing,70
+78,78,3,computer,do nothing,30
+79,79,4,human,do nothing,0
+80,80,4,computer,do nothing,60
+81,81,5,human,do nothing,100
+82,82,5,computer,do nothing,100
+83,83,6,human,do nothing,10
+84,84,6,computer,do nothing,50
+85,85,1,human,do nothing,0
+86,86,1,computer,do nothing,30
+87,87,2,human,do nothing,50
+88,88,2,computer,do nothing,30
+89,89,3,human,do nothing,0
+90,90,3,computer,do nothing,40
+91,91,4,human,do nothing,50
+92,92,4,computer,do nothing,20
+93,93,5,human,do nothing,0
+94,94,5,computer,do nothing,70
+95,95,6,human,do nothing,50
+96,96,6,computer,do nothing,60
+97,97,1,human,do nothing,20
+98,98,1,computer,do nothing,50
+99,99,2,human,do nothing,70
+100,100,2,computer,do nothing,80
+101,101,3,human,do nothing,50
+102,102,3,computer,do nothing,100
+103,103,4,human,do nothing,50
+104,104,4,computer,do nothing,70
+105,105,5,human,do nothing,70
+106,106,5,computer,do nothing,20
+107,107,6,human,do nothing,40
+108,108,6,computer,do nothing,20
+109,109,1,human,do nothing,100
+110,110,1,computer,do nothing,50
+111,111,2,human,do nothing,30
+112,112,2,computer,do nothing,50
+113,113,3,human,do nothing,40
+114,114,3,computer,do nothing,50
+115,115,4,human,do nothing,30
+116,116,4,computer,do nothing,30
+117,117,5,human,do nothing,20
+118,118,5,computer,do nothing,60
+119,119,6,human,do nothing,60
+120,120,6,computer,do nothing,0
+121,121,1,human,do nothing,20
+122,122,1,computer,do nothing,80
+123,123,2,human,do nothing,40
+124,124,2,computer,do nothing,100
+125,125,3,human,do nothing,50
+126,126,3,computer,do nothing,90
+127,127,4,human,do nothing,100
+128,128,4,computer,do nothing,90
+129,129,5,human,do nothing,60
+130,130,5,computer,do nothing,30
+131,131,6,human,do nothing,70
+132,132,6,computer,do nothing,30
+133,133,1,human,do nothing,20
+134,134,1,computer,do nothing,80
+135,135,2,human,do nothing,50
+136,136,2,computer,do nothing,20
+137,137,3,human,do nothing,40
+138,138,3,computer,do nothing,40
+139,139,4,human,do nothing,100
+140,140,4,computer,do nothing,20
+141,141,5,human,do nothing,50
+142,142,5,computer,do nothing,0
+143,143,6,human,do nothing,30
+144,144,6,computer,do nothing,50
+145,145,1,human,do nothing,30
+146,146,1,computer,do nothing,10
+147,147,2,human,do nothing,30
+148,148,2,computer,do nothing,30
+149,149,3,human,do nothing,100
+150,150,3,computer,do nothing,100
+151,151,4,human,do nothing,10
+152,152,4,computer,do nothing,60
+153,153,5,human,do nothing,80
+154,154,5,computer,do nothing,0
+155,155,6,human,do nothing,70
+156,156,6,computer,do nothing,80
+157,157,1,human,do nothing,40
+158,158,1,computer,do nothing,70
+159,159,2,human,do nothing,90
+160,160,2,computer,do nothing,30
+161,161,3,human,do nothing,80
+162,162,3,computer,do nothing,40
+163,163,4,human,do nothing,30
+164,164,4,computer,do nothing,80
+165,165,5,human,do nothing,0
+166,166,5,computer,do nothing,50
+167,167,6,human,do nothing,20
+168,168,6,computer,do nothing,20
+169,169,1,human,do nothing,10
+170,170,1,computer,do nothing,10
+171,171,2,human,do nothing,30
+172,172,2,computer,do nothing,60
+173,173,3,human,do nothing,70
+174,174,3,computer,do nothing,70
+175,175,4,human,do nothing,20
+176,176,4,computer,do nothing,70
+177,177,5,human,do nothing,50
+178,178,5,computer,do nothing,70
+179,179,6,human,do nothing,20
+180,180,6,computer,do nothing,20
+181,181,1,human,do nothing,30
+182,182,1,computer,do nothing,100
+183,183,2,human,do nothing,50
+184,184,2,computer,do nothing,40
+185,185,3,human,do nothing,30
+186,186,3,computer,do nothing,70
+187,187,4,human,do nothing,0
+188,188,4,computer,do nothing,0
+189,189,5,human,do nothing,70
+190,190,5,computer,do nothing,40
+191,191,6,human,do nothing,30
+192,192,6,computer,do nothing,0
+193,193,1,human,do nothing,100
+194,194,1,computer,do nothing,100
+195,195,2,human,do nothing,90
+196,196,2,computer,do nothing,20
+197,197,3,human,do nothing,40
+198,198,3,computer,do nothing,50
+199,199,4,human,do nothing,60
+200,200,4,computer,do nothing,40
+201,201,5,human,do nothing,20
+202,202,5,computer,do nothing,10
+203,203,6,human,do nothing,30
+204,204,6,computer,do nothing,0
+205,205,1,human,do nothing,100
+206,206,1,computer,do nothing,10
+207,207,2,human,do nothing,10
+208,208,2,computer,do nothing,50
+209,209,3,human,do nothing,40
+210,210,3,computer,do nothing,50
+211,211,4,human,do nothing,60
+212,212,4,computer,do nothing,30
+213,213,5,human,do nothing,50
+214,214,5,computer,do nothing,40
+215,215,6,human,do nothing,60
+216,216,6,computer,do nothing,10
+217,217,1,human,do nothing,30
+218,218,1,computer,do nothing,100
+219,219,2,human,do nothing,40
+220,220,2,computer,do nothing,60
+221,221,3,human,do nothing,100
+222,222,3,computer,do nothing,20
+223,223,4,human,do nothing,20
+224,224,4,computer,do nothing,40
+225,225,5,human,do nothing,20
+226,226,5,computer,do nothing,0
+227,227,6,human,do nothing,100
+228,228,6,computer,do nothing,50
+229,229,1,human,do nothing,30
+230,230,1,computer,do nothing,20
+231,231,2,human,do nothing,20
+232,232,2,computer,do nothing,30
+233,233,3,human,do nothing,90
+234,234,3,computer,do nothing,70
+235,235,4,human,do nothing,30
+236,236,4,computer,do nothing,40
+237,237,5,human,do nothing,50
+238,238,5,computer,do nothing,60
+239,239,6,human,do nothing,50
+240,240,6,computer,do nothing,40
+241,241,1,human,do nothing,80
+242,242,1,computer,do nothing,80
+243,243,2,human,do nothing,50
+244,244,2,computer,do nothing,40
+245,245,3,human,do nothing,20
+246,246,3,computer,do nothing,30
+247,247,4,human,do nothing,80
+248,248,4,computer,do nothing,20
+249,249,5,human,do nothing,80
+250,250,5,computer,do nothing,50
+251,251,6,human,do nothing,40
+252,252,6,computer,do nothing,20
+253,253,1,human,do nothing,0
+254,254,1,computer,do nothing,0
+255,255,2,human,do nothing,20
+256,256,2,computer,do nothing,90
+257,257,3,human,do nothing,80
+258,258,3,computer,do nothing,30
+259,259,4,human,do nothing,70
+260,260,4,computer,do nothing,20
+261,261,5,human,do nothing,20
+262,262,5,computer,do nothing,90
+263,263,6,human,do nothing,70
+264,264,6,computer,do nothing,40
+265,265,1,human,do nothing,100
+266,266,1,computer,do nothing,20
+267,267,2,human,do nothing,80
+268,268,2,computer,do nothing,0
+269,269,3,human,do nothing,60
+270,270,3,computer,do nothing,30
+271,271,4,human,do nothing,40
+272,272,4,computer,do nothing,50
+273,273,5,human,do nothing,0
+274,274,5,computer,do nothing,70
+275,275,6,human,do nothing,80
+276,276,6,computer,do nothing,50
+277,277,1,human,do nothing,70
+278,278,1,computer,do nothing,50
+279,279,2,human,do nothing,100
+280,280,2,computer,do nothing,40
+281,281,3,human,do nothing,0
+282,282,3,computer,do nothing,50
+283,283,4,human,do nothing,20
+284,284,4,computer,do nothing,70
+285,285,5,human,do nothing,0
+286,286,5,computer,do nothing,50
+287,287,6,human,do nothing,70
+288,288,6,computer,do nothing,30
+289,289,1,human,do nothing,90
+290,290,1,computer,do nothing,10
+291,291,2,human,do nothing,50
+292,292,2,computer,do nothing,20
+293,293,3,human,do nothing,20
+294,294,3,computer,do nothing,50
+295,295,4,human,do nothing,80
+296,296,4,computer,do nothing,70
+297,297,5,human,do nothing,0
+298,298,5,computer,do nothing,80
+299,299,6,human,do nothing,70
+300,300,6,computer,do nothing,10
+301,301,1,human,do nothing,30
+302,302,1,computer,do nothing,50
+303,303,2,human,do nothing,80
+304,304,2,computer,do nothing,100
+305,305,3,human,do nothing,50
+306,306,3,computer,do nothing,70
+307,307,4,human,do nothing,100
+308,308,4,computer,do nothing,30
+309,309,5,human,do nothing,20
+310,310,5,computer,do nothing,60
+311,311,6,human,do nothing,60
+312,312,6,computer,do nothing,30
+313,313,1,human,do nothing,10
+314,314,1,computer,do nothing,30
+315,315,2,human,do nothing,30
+316,316,2,computer,do nothing,30
+317,317,3,human,do nothing,100
+318,318,3,computer,do nothing,40
+319,319,4,human,do nothing,70
+320,320,4,computer,do nothing,30
+321,321,5,human,do nothing,60
+322,322,5,computer,do nothing,50
+323,323,6,human,do nothing,80
+324,324,6,computer,do nothing,30
+325,325,1,human,do nothing,60
+326,326,1,computer,do nothing,100
+327,327,2,human,do nothing,50
+328,328,2,computer,do nothing,0
+329,329,3,human,do nothing,100
+330,330,3,computer,do nothing,70
+331,331,4,human,do nothing,10
+332,332,4,computer,do nothing,90
+333,333,5,human,do nothing,50
+334,334,5,computer,do nothing,40
+335,335,6,human,do nothing,90
+336,336,6,computer,do nothing,80
+337,337,1,human,do nothing,90
+338,338,1,computer,do nothing,10
+339,339,2,human,do nothing,0
+340,340,2,computer,do nothing,20
+341,341,3,human,do nothing,0
+342,342,3,computer,do nothing,100
+343,343,4,human,do nothing,20
+344,344,4,computer,do nothing,70
+345,345,5,human,do nothing,60
+346,346,5,computer,do nothing,0
+347,347,6,human,do nothing,60
+348,348,6,computer,do nothing,70
+349,349,1,human,do nothing,30
+350,350,1,computer,do nothing,10
+351,351,2,human,do nothing,0
+352,352,2,computer,do nothing,50
+353,353,3,human,do nothing,50
+354,354,3,computer,do nothing,90
+355,355,4,human,do nothing,30
+356,356,4,computer,do nothing,50
+357,357,5,human,do nothing,60
+358,358,5,computer,do nothing,0
+359,359,6,human,do nothing,30
+360,360,6,computer,do nothing,100
+361,361,1,human,do nothing,50
+362,362,1,computer,do nothing,90
+363,363,2,human,do nothing,70
+364,364,2,computer,do nothing,80
+365,365,3,human,do nothing,50
+366,366,3,computer,do nothing,40
+367,367,4,human,do nothing,80
+368,368,4,computer,do nothing,50
+369,369,5,human,do nothing,80
+370,370,5,computer,do nothing,20
+371,371,6,human,do nothing,50
+372,372,6,computer,do nothing,50
+373,373,1,human,do nothing,10
+374,374,1,computer,do nothing,20
+375,375,2,human,do nothing,40
+376,376,2,computer,do nothing,20
+377,377,3,human,do nothing,30
+378,378,3,computer,do nothing,40
+379,379,4,human,do nothing,30
+380,380,4,computer,do nothing,80
+381,381,5,human,do nothing,30
+382,382,5,computer,do nothing,80
+383,383,6,human,do nothing,60
+384,384,6,computer,do nothing,0
+385,385,1,human,do nothing,30
+386,386,1,computer,do nothing,10
+387,387,2,human,do nothing,80
+388,388,2,computer,do nothing,0
+389,389,3,human,do nothing,0
+390,390,3,computer,do nothing,60
+391,391,4,human,do nothing,100
+392,392,4,computer,do nothing,20
+393,393,5,human,do nothing,80
+394,394,5,computer,do nothing,90
+395,395,6,human,do nothing,30
+396,396,6,computer,do nothing,30
+397,397,1,human,do nothing,50
+398,398,1,computer,do nothing,70
+399,399,2,human,do nothing,60
+400,400,2,computer,do nothing,100
+401,401,3,human,do nothing,90
+402,402,3,computer,do nothing,0
+403,403,4,human,do nothing,60
+404,404,4,computer,do nothing,20
+405,405,5,human,do nothing,80
+406,406,5,computer,do nothing,30
+407,407,6,human,do nothing,40
+408,408,6,computer,do nothing,30
+409,409,1,human,do nothing,60
+410,410,1,computer,do nothing,60
+411,411,2,human,do nothing,70
+412,412,2,computer,do nothing,30
+413,413,3,human,do nothing,20
+414,414,3,computer,do nothing,40
+415,415,4,human,do nothing,80
+416,416,4,computer,do nothing,10
+417,1,1,human,redirect,40
+418,2,1,computer,redirect,70
+419,3,2,human,redirect,70
+420,4,2,computer,redirect,100
+421,5,3,human,redirect,80
+422,6,3,computer,redirect,50
+423,7,4,human,redirect,60
+424,8,4,computer,redirect,30
+425,9,5,human,redirect,80
+426,10,5,computer,redirect,40
+427,11,6,human,redirect,90
+428,12,6,computer,redirect,10
+429,13,1,human,redirect,50
+430,14,1,computer,redirect,80
+431,15,2,human,redirect,80
+432,16,2,computer,redirect,30
+433,17,3,human,redirect,80
+434,18,3,computer,redirect,50
+435,19,4,human,redirect,30
+436,20,4,computer,redirect,20
+437,21,5,human,redirect,70
+438,22,5,computer,redirect,80
+439,23,6,human,redirect,80
+440,24,6,computer,redirect,0
+441,25,1,human,redirect,30
+442,26,1,computer,redirect,50
+443,27,2,human,redirect,40
+444,28,2,computer,redirect,70
+445,29,3,human,redirect,90
+446,30,3,computer,redirect,20
+447,31,4,human,redirect,50
+448,32,4,computer,redirect,40
+449,33,5,human,redirect,70
+450,34,5,computer,redirect,30
+451,35,6,human,redirect,60
+452,36,6,computer,redirect,80
+453,37,1,human,redirect,40
+454,38,1,computer,redirect,50
+455,39,2,human,redirect,80
+456,40,2,computer,redirect,20
+457,41,3,human,redirect,60
+458,42,3,computer,redirect,30
+459,43,4,human,redirect,50
+460,44,4,computer,redirect,100
+461,45,5,human,redirect,90
+462,46,5,computer,redirect,60
+463,47,6,human,redirect,70
+464,48,6,computer,redirect,40
+465,49,1,human,redirect,70
+466,50,1,computer,redirect,60
+467,51,2,human,redirect,10
+468,52,2,computer,redirect,100
+469,53,3,human,redirect,70
+470,54,3,computer,redirect,20
+471,55,4,human,redirect,80
+472,56,4,computer,redirect,60
+473,57,5,human,redirect,70
+474,58,5,computer,redirect,70
+475,59,6,human,redirect,80
+476,60,6,computer,redirect,80
+477,61,1,human,redirect,80
+478,62,1,computer,redirect,100
+479,63,2,human,redirect,20
+480,64,2,computer,redirect,70
+481,65,3,human,redirect,20
+482,66,3,computer,redirect,30
+483,67,4,human,redirect,80
+484,68,4,computer,redirect,50
+485,69,5,human,redirect,30
+486,70,5,computer,redirect,70
+487,71,6,human,redirect,100
+488,72,6,computer,redirect,50
+489,73,1,human,redirect,30
+490,74,1,computer,redirect,60
+491,75,2,human,redirect,70
+492,76,2,computer,redirect,70
+493,77,3,human,redirect,80
+494,78,3,computer,redirect,30
+495,79,4,human,redirect,100
+496,80,4,computer,redirect,40
+497,81,5,human,redirect,100
+498,82,5,computer,redirect,20
+499,83,6,human,redirect,90
+500,84,6,computer,redirect,30
+501,85,1,human,redirect,100
+502,86,1,computer,redirect,30
+503,87,2,human,redirect,70
+504,88,2,computer,redirect,70
+505,89,3,human,redirect,10
+506,90,3,computer,redirect,70
+507,91,4,human,redirect,50
+508,92,4,computer,redirect,90
+509,93,5,human,redirect,100
+510,94,5,computer,redirect,50
+511,95,6,human,redirect,50
+512,96,6,computer,redirect,60
+513,97,1,human,redirect,70
+514,98,1,computer,redirect,100
+515,99,2,human,redirect,90
+516,100,2,computer,redirect,100
+517,101,3,human,redirect,80
+518,102,3,computer,redirect,100
+519,103,4,human,redirect,40
+520,104,4,computer,redirect,100
+521,105,5,human,redirect,30
+522,106,5,computer,redirect,80
+523,107,6,human,redirect,70
+524,108,6,computer,redirect,80
+525,109,1,human,redirect,100
+526,110,1,computer,redirect,80
+527,111,2,human,redirect,100
+528,112,2,computer,redirect,80
+529,113,3,human,redirect,100
+530,114,3,computer,redirect,60
+531,115,4,human,redirect,70
+532,116,4,computer,redirect,60
+533,117,5,human,redirect,80
+534,118,5,computer,redirect,50
+535,119,6,human,redirect,60
+536,120,6,computer,redirect,100
+537,121,1,human,redirect,90
+538,122,1,computer,redirect,100
+539,123,2,human,redirect,60
+540,124,2,computer,redirect,60
+541,125,3,human,redirect,50
+542,126,3,computer,redirect,100
+543,127,4,human,redirect,100
+544,128,4,computer,redirect,100
+545,129,5,human,redirect,90
+546,130,5,computer,redirect,60
+547,131,6,human,redirect,70
+548,132,6,computer,redirect,60
+549,133,1,human,redirect,80
+550,134,1,computer,redirect,20
+551,135,2,human,redirect,50
+552,136,2,computer,redirect,70
+553,137,3,human,redirect,70
+554,138,3,computer,redirect,50
+555,139,4,human,redirect,90
+556,140,4,computer,redirect,90
+557,141,5,human,redirect,50
+558,142,5,computer,redirect,90
+559,143,6,human,redirect,80
+560,144,6,computer,redirect,50
+561,145,1,human,redirect,80
+562,146,1,computer,redirect,50
+563,147,2,human,redirect,70
+564,148,2,computer,redirect,90
+565,149,3,human,redirect,0
+566,150,3,computer,redirect,100
+567,151,4,human,redirect,90
+568,152,4,computer,redirect,80
+569,153,5,human,redirect,80
+570,154,5,computer,redirect,100
+571,155,6,human,redirect,80
+572,156,6,computer,redirect,30
+573,157,1,human,redirect,70
+574,158,1,computer,redirect,30
+575,159,2,human,redirect,90
+576,160,2,computer,redirect,60
+577,161,3,human,redirect,80
+578,162,3,computer,redirect,90
+579,163,4,human,redirect,60
+580,164,4,computer,redirect,40
+581,165,5,human,redirect,100
+582,166,5,computer,redirect,50
+583,167,6,human,redirect,70
+584,168,6,computer,redirect,30
+585,169,1,human,redirect,90
+586,170,1,computer,redirect,100
+587,171,2,human,redirect,70
+588,172,2,computer,redirect,30
+589,173,3,human,redirect,90
+590,174,3,computer,redirect,70
+591,175,4,human,redirect,90
+592,176,4,computer,redirect,50
+593,177,5,human,redirect,90
+594,178,5,computer,redirect,30
+595,179,6,human,redirect,100
+596,180,6,computer,redirect,30
+597,181,1,human,redirect,20
+598,182,1,computer,redirect,0
+599,183,2,human,redirect,80
+600,184,2,computer,redirect,70
+601,185,3,human,redirect,50
+602,186,3,computer,redirect,30
+603,187,4,human,redirect,0
+604,188,4,computer,redirect,70
+605,189,5,human,redirect,70
+606,190,5,computer,redirect,40
+607,191,6,human,redirect,70
+608,192,6,computer,redirect,70
+609,193,1,human,redirect,40
+610,194,1,computer,redirect,50
+611,195,2,human,redirect,90
+612,196,2,computer,redirect,70
+613,197,3,human,redirect,70
+614,198,3,computer,redirect,60
+615,199,4,human,redirect,60
+616,200,4,computer,redirect,60
+617,201,5,human,redirect,70
+618,202,5,computer,redirect,70
+619,203,6,human,redirect,70
+620,204,6,computer,redirect,100
+621,205,1,human,redirect,100
+622,206,1,computer,redirect,60
+623,207,2,human,redirect,80
+624,208,2,computer,redirect,70
+625,209,3,human,redirect,60
+626,210,3,computer,redirect,40
+627,211,4,human,redirect,50
+628,212,4,computer,redirect,70
+629,213,5,human,redirect,30
+630,214,5,computer,redirect,60
+631,215,6,human,redirect,60
+632,216,6,computer,redirect,80
+633,217,1,human,redirect,50
+634,218,1,computer,redirect,20
+635,219,2,human,redirect,60
+636,220,2,computer,redirect,70
+637,221,3,human,redirect,0
+638,222,3,computer,redirect,40
+639,223,4,human,redirect,80
+640,224,4,computer,redirect,60
+641,225,5,human,redirect,70
+642,226,5,computer,redirect,0
+643,227,6,human,redirect,0
+644,228,6,computer,redirect,60
+645,229,1,human,redirect,80
+646,230,1,computer,redirect,80
+647,231,2,human,redirect,20
+648,232,2,computer,redirect,70
+649,233,3,human,redirect,10
+650,234,3,computer,redirect,10
+651,235,4,human,redirect,50
+652,236,4,computer,redirect,30
+653,237,5,human,redirect,50
+654,238,5,computer,redirect,40
+655,239,6,human,redirect,50
+656,240,6,computer,redirect,60
+657,241,1,human,redirect,30
+658,242,1,computer,redirect,50
+659,243,2,human,redirect,50
+660,244,2,computer,redirect,80
+661,245,3,human,redirect,90
+662,246,3,computer,redirect,100
+663,247,4,human,redirect,20
+664,248,4,computer,redirect,90
+665,249,5,human,redirect,20
+666,250,5,computer,redirect,50
+667,251,6,human,redirect,50
+668,252,6,computer,redirect,20
+669,253,1,human,redirect,20
+670,254,1,computer,redirect,20
+671,255,2,human,redirect,80
+672,256,2,computer,redirect,80
+673,257,3,human,redirect,40
+674,258,3,computer,redirect,70
+675,259,4,human,redirect,80
+676,260,4,computer,redirect,100
+677,261,5,human,redirect,50
+678,262,5,computer,redirect,20
+679,263,6,human,redirect,10
+680,264,6,computer,redirect,70
+681,265,1,human,redirect,100
+682,266,1,computer,redirect,50
+683,267,2,human,redirect,60
+684,268,2,computer,redirect,100
+685,269,3,human,redirect,40
+686,270,3,computer,redirect,70
+687,271,4,human,redirect,80
+688,272,4,computer,redirect,50
+689,273,5,human,redirect,100
+690,274,5,computer,redirect,70
+691,275,6,human,redirect,50
+692,276,6,computer,redirect,10
+693,277,1,human,redirect,70
+694,278,1,computer,redirect,100
+695,279,2,human,redirect,70
+696,280,2,computer,redirect,80
+697,281,3,human,redirect,70
+698,282,3,computer,redirect,70
+699,283,4,human,redirect,90
+700,284,4,computer,redirect,70
+701,285,5,human,redirect,50
+702,286,5,computer,redirect,80
+703,287,6,human,redirect,80
+704,288,6,computer,redirect,80
+705,289,1,human,redirect,10
+706,290,1,computer,redirect,90
+707,291,2,human,redirect,50
+708,292,2,computer,redirect,80
+709,293,3,human,redirect,80
+710,294,3,computer,redirect,50
+711,295,4,human,redirect,30
+712,296,4,computer,redirect,70
+713,297,5,human,redirect,70
+714,298,5,computer,redirect,50
+715,299,6,human,redirect,80
+716,300,6,computer,redirect,50
+717,301,1,human,redirect,80
+718,302,1,computer,redirect,50
+719,303,2,human,redirect,20
+720,304,2,computer,redirect,0
+721,305,3,human,redirect,20
+722,306,3,computer,redirect,60
+723,307,4,human,redirect,20
+724,308,4,computer,redirect,60
+725,309,5,human,redirect,80
+726,310,5,computer,redirect,60
+727,311,6,human,redirect,60
+728,312,6,computer,redirect,90
+729,313,1,human,redirect,80
+730,314,1,computer,redirect,80
+731,315,2,human,redirect,90
+732,316,2,computer,redirect,60
+733,317,3,human,redirect,0
+734,318,3,computer,redirect,70
+735,319,4,human,redirect,60
+736,320,4,computer,redirect,30
+737,321,5,human,redirect,30
+738,322,5,computer,redirect,40
+739,323,6,human,redirect,80
+740,324,6,computer,redirect,100
+741,325,1,human,redirect,70
+742,326,1,computer,redirect,80
+743,327,2,human,redirect,60
+744,328,2,computer,redirect,0
+745,329,3,human,redirect,0
+746,330,3,computer,redirect,40
+747,331,4,human,redirect,0
+748,332,4,computer,redirect,70
+749,333,5,human,redirect,50
+750,334,5,computer,redirect,60
+751,335,6,human,redirect,0
+752,336,6,computer,redirect,50
+753,337,1,human,redirect,70
+754,338,1,computer,redirect,0
+755,339,2,human,redirect,100
+756,340,2,computer,redirect,80
+757,341,3,human,redirect,100
+758,342,3,computer,redirect,0
+759,343,4,human,redirect,80
+760,344,4,computer,redirect,70
+761,345,5,human,redirect,100
+762,346,5,computer,redirect,0
+763,347,6,human,redirect,50
+764,348,6,computer,redirect,20
+765,349,1,human,redirect,70
+766,350,1,computer,redirect,10
+767,351,2,human,redirect,100
+768,352,2,computer,redirect,50
+769,353,3,human,redirect,30
+770,354,3,computer,redirect,20
+771,355,4,human,redirect,70
+772,356,4,computer,redirect,50
+773,357,5,human,redirect,30
+774,358,5,computer,redirect,0
+775,359,6,human,redirect,60
+776,360,6,computer,redirect,0
+777,361,1,human,redirect,50
+778,362,1,computer,redirect,100
+779,363,2,human,redirect,20
+780,364,2,computer,redirect,0
+781,365,3,human,redirect,10
+782,366,3,computer,redirect,60
+783,367,4,human,redirect,80
+784,368,4,computer,redirect,50
+785,369,5,human,redirect,80
+786,370,5,computer,redirect,80
+787,371,6,human,redirect,60
+788,372,6,computer,redirect,70
+789,373,1,human,redirect,70
+790,374,1,computer,redirect,80
+791,375,2,human,redirect,40
+792,376,2,computer,redirect,30
+793,377,3,human,redirect,70
+794,378,3,computer,redirect,20
+795,379,4,human,redirect,80
+796,380,4,computer,redirect,10
+797,381,5,human,redirect,70
+798,382,5,computer,redirect,20
+799,383,6,human,redirect,70
+800,384,6,computer,redirect,50
+801,385,1,human,redirect,90
+802,386,1,computer,redirect,90
+803,387,2,human,redirect,80
+804,388,2,computer,redirect,40
+805,389,3,human,redirect,100
+806,390,3,computer,redirect,30
+807,391,4,human,redirect,100
+808,392,4,computer,redirect,60
+809,393,5,human,redirect,80
+810,394,5,computer,redirect,90
+811,395,6,human,redirect,70
+812,396,6,computer,redirect,50
+813,397,1,human,redirect,100
+814,398,1,computer,redirect,50
+815,399,2,human,redirect,80
+816,400,2,computer,redirect,20
+817,401,3,human,redirect,30
+818,402,3,computer,redirect,100
+819,403,4,human,redirect,80
+820,404,4,computer,redirect,70
+821,405,5,human,redirect,80
+822,406,5,computer,redirect,70
+823,407,6,human,redirect,90
+824,408,6,computer,redirect,30
+825,409,1,human,redirect,70
+826,410,1,computer,redirect,70
+827,411,2,human,redirect,50
+828,412,2,computer,redirect,10
+829,413,3,human,redirect,10
+830,414,3,computer,redirect,60
+831,415,4,human,redirect,80
+832,416,4,computer,redirect,80
+833,1,1,human,random action,10
+834,2,1,computer,random action,20
+835,3,2,human,random action,30
+836,4,2,computer,random action,40
+837,5,3,human,random action,10
+838,6,3,computer,random action,10
+839,7,4,human,random action,20
+840,8,4,computer,random action,50
+841,9,5,human,random action,0
+842,10,5,computer,random action,20
+843,11,6,human,random action,0
+844,12,6,computer,random action,40
+845,13,1,human,random action,10
+846,14,1,computer,random action,0
+847,15,2,human,random action,0
+848,16,2,computer,random action,60
+849,17,3,human,random action,50
+850,18,3,computer,random action,50
+851,19,4,human,random action,0
+852,20,4,computer,random action,40
+853,21,5,human,random action,70
+854,22,5,computer,random action,0
+855,23,6,human,random action,30
+856,24,6,computer,random action,80
+857,25,1,human,random action,0
+858,26,1,computer,random action,40
+859,27,2,human,random action,10
+860,28,2,computer,random action,70
+861,29,3,human,random action,0
+862,30,3,computer,random action,30
+863,31,4,human,random action,40
+864,32,4,computer,random action,10
+865,33,5,human,random action,80
+866,34,5,computer,random action,30
+867,35,6,human,random action,60
+868,36,6,computer,random action,30
+869,37,1,human,random action,0
+870,38,1,computer,random action,10
+871,39,2,human,random action,0
+872,40,2,computer,random action,40
+873,41,3,human,random action,20
+874,42,3,computer,random action,50
+875,43,4,human,random action,60
+876,44,4,computer,random action,0
+877,45,5,human,random action,10
+878,46,5,computer,random action,50
+879,47,6,human,random action,10
+880,48,6,computer,random action,40
+881,49,1,human,random action,50
+882,50,1,computer,random action,40
+883,51,2,human,random action,0
+884,52,2,computer,random action,10
+885,53,3,human,random action,10
+886,54,3,computer,random action,60
+887,55,4,human,random action,10
+888,56,4,computer,random action,10
+889,57,5,human,random action,30
+890,58,5,computer,random action,50
+891,59,6,human,random action,0
+892,60,6,computer,random action,80
+893,61,1,human,random action,0
+894,62,1,computer,random action,0
+895,63,2,human,random action,20
+896,64,2,computer,random action,10
+897,65,3,human,random action,0
+898,66,3,computer,random action,20
+899,67,4,human,random action,100
+900,68,4,computer,random action,100
+901,69,5,human,random action,0
+902,70,5,computer,random action,0
+903,71,6,human,random action,50
+904,72,6,computer,random action,80
+905,73,1,human,random action,0
+906,74,1,computer,random action,80
+907,75,2,human,random action,50
+908,76,2,computer,random action,0
+909,77,3,human,random action,10
+910,78,3,computer,random action,10
+911,79,4,human,random action,0
+912,80,4,computer,random action,70
+913,81,5,human,random action,100
+914,82,5,computer,random action,100
+915,83,6,human,random action,10
+916,84,6,computer,random action,0
+917,85,1,human,random action,0
+918,86,1,computer,random action,20
+919,87,2,human,random action,60
+920,88,2,computer,random action,90
+921,89,3,human,random action,50
+922,90,3,computer,random action,50
+923,91,4,human,random action,10
+924,92,4,computer,random action,90
+925,93,5,human,random action,0
+926,94,5,computer,random action,30
+927,95,6,human,random action,70
+928,96,6,computer,random action,60
+929,97,1,human,random action,0
+930,98,1,computer,random action,50
+931,99,2,human,random action,30
+932,100,2,computer,random action,60
+933,101,3,human,random action,10
+934,102,3,computer,random action,50
+935,103,4,human,random action,30
+936,104,4,computer,random action,90
+937,105,5,human,random action,20
+938,106,5,computer,random action,20
+939,107,6,human,random action,50
+940,108,6,computer,random action,30
+941,109,1,human,random action,100
+942,110,1,computer,random action,50
+943,111,2,human,random action,0
+944,112,2,computer,random action,40
+945,113,3,human,random action,20
+946,114,3,computer,random action,70
+947,115,4,human,random action,10
+948,116,4,computer,random action,10
+949,117,5,human,random action,30
+950,118,5,computer,random action,10
+951,119,6,human,random action,0
+952,120,6,computer,random action,30
+953,121,1,human,random action,10
+954,122,1,computer,random action,70
+955,123,2,human,random action,20
+956,124,2,computer,random action,40
+957,125,3,human,random action,0
+958,126,3,computer,random action,60
+959,127,4,human,random action,0
+960,128,4,computer,random action,90
+961,129,5,human,random action,10
+962,130,5,computer,random action,20
+963,131,6,human,random action,50
+964,132,6,computer,random action,60
+965,133,1,human,random action,10
+966,134,1,computer,random action,100
+967,135,2,human,random action,30
+968,136,2,computer,random action,10
+969,137,3,human,random action,10
+970,138,3,computer,random action,20
+971,139,4,human,random action,0
+972,140,4,computer,random action,20
+973,141,5,human,random action,0
+974,142,5,computer,random action,10
+975,143,6,human,random action,20
+976,144,6,computer,random action,50
+977,145,1,human,random action,0
+978,146,1,computer,random action,50
+979,147,2,human,random action,70
+980,148,2,computer,random action,20
+981,149,3,human,random action,0
+982,150,3,computer,random action,0
+983,151,4,human,random action,0
+984,152,4,computer,random action,30
+985,153,5,human,random action,20
+986,154,5,computer,random action,0
+987,155,6,human,random action,60
+988,156,6,computer,random action,20
+989,157,1,human,random action,50
+990,158,1,computer,random action,40
+991,159,2,human,random action,90
+992,160,2,computer,random action,50
+993,161,3,human,random action,50
+994,162,3,computer,random action,100
+995,163,4,human,random action,0
+996,164,4,computer,random action,10
+997,165,5,human,random action,0
+998,166,5,computer,random action,50
+999,167,6,human,random action,20
+1000,168,6,computer,random action,30
+1001,169,1,human,random action,0
+1002,170,1,computer,random action,0
+1003,171,2,human,random action,50
+1004,172,2,computer,random action,80
+1005,173,3,human,random action,0
+1006,174,3,computer,random action,60
+1007,175,4,human,random action,0
+1008,176,4,computer,random action,70
+1009,177,5,human,random action,20
+1010,178,5,computer,random action,40
+1011,179,6,human,random action,50
+1012,180,6,computer,random action,20
+1013,181,1,human,random action,0
+1014,182,1,computer,random action,0
+1015,183,2,human,random action,60
+1016,184,2,computer,random action,50
+1017,185,3,human,random action,30
+1018,186,3,computer,random action,90
+1019,187,4,human,random action,40
+1020,188,4,computer,random action,0
+1021,189,5,human,random action,30
+1022,190,5,computer,random action,40
+1023,191,6,human,random action,20
+1024,192,6,computer,random action,0
+1025,193,1,human,random action,50
+1026,194,1,computer,random action,30
+1027,195,2,human,random action,0
+1028,196,2,computer,random action,30
+1029,197,3,human,random action,0
+1030,198,3,computer,random action,30
+1031,199,4,human,random action,40
+1032,200,4,computer,random action,70
+1033,201,5,human,random action,0
+1034,202,5,computer,random action,20
+1035,203,6,human,random action,0
+1036,204,6,computer,random action,100
+1037,205,1,human,random action,100
+1038,206,1,computer,random action,0
+1039,207,2,human,random action,0
+1040,208,2,computer,random action,20
+1041,209,3,human,random action,50
+1042,210,3,computer,random action,60
+1043,211,4,human,random action,80
+1044,212,4,computer,random action,40
+1045,213,5,human,random action,30
+1046,214,5,computer,random action,60
+1047,215,6,human,random action,20
+1048,216,6,computer,random action,10
+1049,217,1,human,random action,10
+1050,218,1,computer,random action,0
+1051,219,2,human,random action,30
+1052,220,2,computer,random action,80
+1053,221,3,human,random action,100
+1054,222,3,computer,random action,0
+1055,223,4,human,random action,10
+1056,224,4,computer,random action,70
+1057,225,5,human,random action,0
+1058,226,5,computer,random action,0
+1059,227,6,human,random action,0
+1060,228,6,computer,random action,60
+1061,229,1,human,random action,0
+1062,230,1,computer,random action,50
+1063,231,2,human,random action,50
+1064,232,2,computer,random action,50
+1065,233,3,human,random action,10
+1066,234,3,computer,random action,20
+1067,235,4,human,random action,30
+1068,236,4,computer,random action,60
+1069,237,5,human,random action,0
+1070,238,5,computer,random action,60
+1071,239,6,human,random action,30
+1072,240,6,computer,random action,30
+1073,241,1,human,random action,0
+1074,242,1,computer,random action,80
+1075,243,2,human,random action,30
+1076,244,2,computer,random action,50
+1077,245,3,human,random action,90
+1078,246,3,computer,random action,100
+1079,247,4,human,random action,80
+1080,248,4,computer,random action,80
+1081,249,5,human,random action,20
+1082,250,5,computer,random action,50
+1083,251,6,human,random action,10
+1084,252,6,computer,random action,10
+1085,253,1,human,random action,10
+1086,254,1,computer,random action,0
+1087,255,2,human,random action,10
+1088,256,2,computer,random action,20
+1089,257,3,human,random action,0
+1090,258,3,computer,random action,90
+1091,259,4,human,random action,30
+1092,260,4,computer,random action,0
+1093,261,5,human,random action,70
+1094,262,5,computer,random action,50
+1095,263,6,human,random action,60
+1096,264,6,computer,random action,10
+1097,265,1,human,random action,100
+1098,266,1,computer,random action,40
+1099,267,2,human,random action,0
+1100,268,2,computer,random action,0
+1101,269,3,human,random action,80
+1102,270,3,computer,random action,30
+1103,271,4,human,random action,50
+1104,272,4,computer,random action,80
+1105,273,5,human,random action,20
+1106,274,5,computer,random action,30
+1107,275,6,human,random action,20
+1108,276,6,computer,random action,10
+1109,277,1,human,random action,20
+1110,278,1,computer,random action,0
+1111,279,2,human,random action,0
+1112,280,2,computer,random action,70
+1113,281,3,human,random action,0
+1114,282,3,computer,random action,100
+1115,283,4,human,random action,0
+1116,284,4,computer,random action,0
+1117,285,5,human,random action,80
+1118,286,5,computer,random action,20
+1119,287,6,human,random action,30
+1120,288,6,computer,random action,10
+1121,289,1,human,random action,90
+1122,290,1,computer,random action,100
+1123,291,2,human,random action,0
+1124,292,2,computer,random action,10
+1125,293,3,human,random action,20
+1126,294,3,computer,random action,50
+1127,295,4,human,random action,80
+1128,296,4,computer,random action,0
+1129,297,5,human,random action,20
+1130,298,5,computer,random action,70
+1131,299,6,human,random action,40
+1132,300,6,computer,random action,30
+1133,301,1,human,random action,0
+1134,302,1,computer,random action,70
+1135,303,2,human,random action,0
+1136,304,2,computer,random action,0
+1137,305,3,human,random action,0
+1138,306,3,computer,random action,90
+1139,307,4,human,random action,0
+1140,308,4,computer,random action,70
+1141,309,5,human,random action,20
+1142,310,5,computer,random action,30
+1143,311,6,human,random action,60
+1144,312,6,computer,random action,60
+1145,313,1,human,random action,0
+1146,314,1,computer,random action,40
+1147,315,2,human,random action,0
+1148,316,2,computer,random action,80
+1149,317,3,human,random action,0
+1150,318,3,computer,random action,10
+1151,319,4,human,random action,20
+1152,320,4,computer,random action,0
+1153,321,5,human,random action,70
+1154,322,5,computer,random action,50
+1155,323,6,human,random action,90
+1156,324,6,computer,random action,10
+1157,325,1,human,random action,0
+1158,326,1,computer,random action,50
+1159,327,2,human,random action,50
+1160,328,2,computer,random action,100
+1161,329,3,human,random action,20
+1162,330,3,computer,random action,80
+1163,331,4,human,random action,20
+1164,332,4,computer,random action,70
+1165,333,5,human,random action,0
+1166,334,5,computer,random action,50
+1167,335,6,human,random action,0
+1168,336,6,computer,random action,50
+1169,337,1,human,random action,0
+1170,338,1,computer,random action,0
+1171,339,2,human,random action,10
+1172,340,2,computer,random action,0
+1173,341,3,human,random action,0
+1174,342,3,computer,random action,0
+1175,343,4,human,random action,0
+1176,344,4,computer,random action,0
+1177,345,5,human,random action,20
+1178,346,5,computer,random action,0
+1179,347,6,human,random action,50
+1180,348,6,computer,random action,20
+1181,349,1,human,random action,60
+1182,350,1,computer,random action,0
+1183,351,2,human,random action,0
+1184,352,2,computer,random action,80
+1185,353,3,human,random action,10
+1186,354,3,computer,random action,20
+1187,355,4,human,random action,0
+1188,356,4,computer,random action,50
+1189,357,5,human,random action,20
+1190,358,5,computer,random action,0
+1191,359,6,human,random action,0
+1192,360,6,computer,random action,0
+1193,361,1,human,random action,20
+1194,362,1,computer,random action,0
+1195,363,2,human,random action,0
+1196,364,2,computer,random action,80
+1197,365,3,human,random action,0
+1198,366,3,computer,random action,40
+1199,367,4,human,random action,40
+1200,368,4,computer,random action,90
+1201,369,5,human,random action,0
+1202,370,5,computer,random action,0
+1203,371,6,human,random action,70
+1204,372,6,computer,random action,10
+1205,373,1,human,random action,10
+1206,374,1,computer,random action,0
+1207,375,2,human,random action,0
+1208,376,2,computer,random action,50
+1209,377,3,human,random action,0
+1210,378,3,computer,random action,0
+1211,379,4,human,random action,50
+1212,380,4,computer,random action,20
+1213,381,5,human,random action,20
+1214,382,5,computer,random action,20
+1215,383,6,human,random action,30
+1216,384,6,computer,random action,10
+1217,385,1,human,random action,0
+1218,386,1,computer,random action,0
+1219,387,2,human,random action,0
+1220,388,2,computer,random action,30
+1221,389,3,human,random action,0
+1222,390,3,computer,random action,60
+1223,391,4,human,random action,0
+1224,392,4,computer,random action,50
+1225,393,5,human,random action,0
+1226,394,5,computer,random action,10
+1227,395,6,human,random action,20
+1228,396,6,computer,random action,50
+1229,397,1,human,random action,0
+1230,398,1,computer,random action,0
+1231,399,2,human,random action,20
+1232,400,2,computer,random action,100
+1233,401,3,human,random action,80
+1234,402,3,computer,random action,50
+1235,403,4,human,random action,10
+1236,404,4,computer,random action,30
+1237,405,5,human,random action,10
+1238,406,5,computer,random action,30
+1239,407,6,human,random action,0
+1240,408,6,computer,random action,20
+1241,409,1,human,random action,40
+1242,410,1,computer,random action,30
+1243,411,2,human,random action,0
+1244,412,2,computer,random action,0
+1245,413,3,human,random action,0
+1246,414,3,computer,random action,70
+1247,415,4,human,random action,20
+1248,416,4,computer,random action,10
