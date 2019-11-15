@@ -1,0 +1,70 @@
+---
+title: "Cluster robust standard errors"
+date: November 15, 2019
+author: Martin Papenberg
+---
+
+Linear mixed models are the hottest shit in psychology (and I assume
+in other areas of research as well) to analyze complex data involving 
+multiple measures per research unit (such as a human). I see two 
+problems with this trend:
+
+1. Noboby[^1] understands them
+2. Noboby admits they don't understand them
+
+What everyone should unterstand is that clustering of data should 
+somehow be taken into account when analyzing data; you do not compute an 
+independent t-test when collecting multiple measures from the same 
+persons. Data within persons (or any unit of analysis, i.e., clusters in 
+general) tends to be more similar than data between persons and the 
+analysis needs to reflects that. The usual assumption of independence of 
+measures does not hold and this correlation must be taken into account.
+
+Because nobody understands linear mixed models, we must look for simpler
+alternatives.[^2] One option is to use cluster robust standard errors
+in an otherwise standard regression framework. This post explores the
+function `lm_robust()` from the package `estimatr`.
+
+## Example 1: Mimicking a between-within ANOVA
+
+The first example is a classical experimental design in psychology where 
+multiple measures are taken per person and and experimental manipulation
+varies between persons. The classical approach for analyzing this data
+is a mixed ANOVA. I use the `R` package `afex` for the ANOVA and compare
+the results to a linear regression using `estimatr::lm_robust()`.
+
+Load the data:
+
+Do ANOVA:
+
+Do robust standard error analysis:
+
+Conclusion
+
+## Example 2: Something else
+
+In the above example, we did not gain much using the robust regression.
+Such a method is better suited if we have multiple measures per person
+that are not balanced across experimental conditions, and per condition
+we have several measures. Such a design can no longer be analyzed using
+an ANOVA[^3].
+
+
+
+[^1]: Or a sufficient amount of researchers (at least in my field), so
+that I feel entitled to use this wording.
+
+[^2]: There are also valid reasons for looking for alternatives, for 
+example see [here](https://psycnet.apa.org/record/2016-22467-001).
+
+[^3]: Well, it can be analyzed (and it is often done this way) if we 
+compute aggregate measures per person/condition, such as median response 
+time per condition.
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
