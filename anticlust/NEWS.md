@@ -6,7 +6,7 @@ This section describes changes that will be part of upcoming releases.
 If you would like to check out the latest features, install the 
 development version:
 
-```{r}
+```R
 remotes::install_github("m-Py/anticlust@devel")
 ```
 
