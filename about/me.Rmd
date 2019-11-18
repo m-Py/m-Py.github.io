@@ -1,5 +1,8 @@
 ---
 title: "About me"
+output:
+  html_document:
+    theme: sandstone
 ---
 
 <img src = "me.png" width = 130 alt = "Photo of Martin Papenberg">
