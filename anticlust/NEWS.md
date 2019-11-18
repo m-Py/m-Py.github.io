@@ -1,14 +1,13 @@
+---
+title: "NEWS for the `R` package `anticlust`"
+output:
+  html_document:
+    theme: united
+---
 
+## development version
 
-# Devel
-
-This section describes changes that will be part of upcoming releases. 
-If you would like to check out the latest features, install the 
-development version:
-
-```R
-remotes::install_github("m-Py/anticlust@devel")
-```
+Expected changes in upcoming releases: 
 
 **Major**
 
@@ -29,8 +28,16 @@ The function `mean_sd_obj()` no longer computes the discrepancy of
 medians, only in means and standard deviations (as the name would also 
 suggest)
 
+---
+
+If you would like to check out the latest features, install the 
+development version:
+
+```R
+remotes::install_github("m-Py/anticlust@devel")
+```
   
-# anticlust 0.3.0
+## anticlust 0.3.0
 
 2019-10-30
 
@@ -141,7 +148,7 @@ input: usually, I want a complete matrix (having upper and lower
 triangular) and not a reduced matrix of class `dist`. Also, it is not
 really more effort to add a custom S3 class.
 
-# anticlust 0.2.9-5
+## anticlust 0.2.9-5
 
 2019-09-17
 
@@ -159,7 +166,7 @@ really more effort to add a custom S3 class.
   larger values indicate stronger agreement between elements. This is 
   unlike the other functions, but common for cluster editing.
 
-# anticlust 0.2.9-4
+## anticlust 0.2.9-4
 
 2019-07-23
 
@@ -256,7 +263,7 @@ in each iteration of the exchange method, 4 rows/columns need
 to be investigated, independent of N). The new approach is 
 a lot faster and especially benefial when we pass distance as input. 
 
-# anticlust 0.2.9-3
+## anticlust 0.2.9-3
 
 2019-07-22
 
@@ -268,7 +275,7 @@ New feature:
   dissimilar between sets -- as opposed to the usual anticlustering 
   where all features are made similar. See `?schaper2019` for an example.
 
-# anticlust 0.2.9-2
+## anticlust 0.2.9-2
 
 2019-07-18
 
@@ -310,7 +317,7 @@ Internal changes:
   users do not need to deal with the handling of `NA` themselves.
 
 
-# anticlust 0.2.9
+## anticlust 0.2.9
 
 2019-07-09
 
@@ -350,7 +357,7 @@ Internal changes:
   thoroughly and part of the `anticlustering()` docs have been reworked
   (now advocating the exchange method as the preferable option).
 
-# anticlust 0.2.8
+## anticlust 0.2.8
 
 2019-07-05
 
@@ -408,7 +415,7 @@ Minor changes:
   cluster centroid using the new argument `cex_centroid`
   
 
-# anticlust 0.2.6
+## anticlust 0.2.6
 
 2019-06-19
 
@@ -416,7 +423,7 @@ Minor update: `plot_clusters` now has an additional argument
 `illustrate_variance`. If this argument is set to `TRUE`, a cluster
 solution is illustrated with the k-means variance criterion.
 
-# anticlust 0.2.5
+## anticlust 0.2.5
 
 2019-05-27
 
@@ -438,7 +445,7 @@ An example data set is now included with the package, courteously
 provided by Marie Lusia Schaper and Ute Bayen. For details, see 
 `?schaper2019`.
 
-# anticlust 0.2.4
+## anticlust 0.2.4
 
 2019-04-26
 
