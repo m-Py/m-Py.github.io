@@ -10,11 +10,17 @@ files <- unique(c(staged_files, changed_files, new_files))
 
 
 # only select Rmd files
-rmds <- files[grepl(pattern =".Rmd", x = files)]
+rmds <- files[grepl(pattern =".Rmd", x = files)] 
+# rmds <- list.files(patter = ".Rmd")
 rmds <- sapply(strsplit(rmds, split = "/"), function(x) { x[grepl(x, pattern = ".Rmd")] })
 
 message("\nRendering ", c("no file", "file", "files")[length(rmds) + 1], " ", toString(rmds))
 
 for (i in rmds) {
-    rmarkdown::render(i, output_dir="../")
+  rmarkdown::render(
+    i, 
+    output_dir="../", 
+    output_format = "html_document",
+    output_options = list(theme = "sandstone") # flatly, united, 
+  )
 }
