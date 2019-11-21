@@ -18,6 +18,7 @@ environments for working with `R` and R Markdown.
 
 ### Posts:
 
+- <a href="12_BF_Dependent_SD.html">2019/11: Bayes factors for the comparison of variances
 - <a href="10_AlwaysKable.html">2019/11: How to always use kable for data frame output
 - <a href="09_GitNotes.html">2019/11: Some notes on git
 - <a href="08_SpellChecking.html">2019/11: German dictionary for spell checking in Ubuntu
