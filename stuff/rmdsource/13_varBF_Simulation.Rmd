@@ -154,7 +154,7 @@ null hypothesis was true, i.e., when both standard deviations was 15.
 Note that some conceivable conditions were not realized: $N$ might be 
 much larger than 200, and maybe adjusting the means also has an effect 
 (but I don't think so). The code is available 
-[here](./rsource/simulation_bf_var.R).
+[here](./rmdsource/rsource/simulation_bf_var.R).
 
 The results are displayed in the following plot: 
 
