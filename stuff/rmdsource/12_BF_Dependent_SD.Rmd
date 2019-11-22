@@ -6,28 +6,33 @@ author: Martin Papenberg
 
 Even though psychologists are often interested in comparing mean values 
 between conditions, it can also be of interest whether the dispersion, 
-i.e., the variance of the measurements is different between some 
-conditions---even if just to test the validity of the assumption of 
-homogeneous variances that is made by many statistical procedures. As 
-far as I can tell, there is not yet an elaborate and accessible solution 
-to compare variances using a Bayes factor.[^0] Here, I present such an 
-option.
+i.e., the variance of the measurements differ---even if just to test 
+the validity of the assumption of homogeneous variances that is made by 
+many statistical procedures. As far as I can tell, there is not yet an 
+elaborate and accessible solution to compare variances using a Bayes 
+factor.[^0] Here, I discuss two such options.
 
 ## Independent variances
 
-The classical test to compare the equality of two variances measured 
-from two independent groups is the *F* test. However, other tests like 
-the Levene test should usually be preferred. The Levene test is 
-well-known because it is commonly used to test the assumption of 
-"homogeneity" in variances before conducting an ANOVA. However, the 
-logic of significance tests forbids that the output of the test can be 
-interpreted as evidence of variance equality; we may only conclude the 
-absence of variance homogeneity if the *p* value is small. Wouldn't it 
-be nice to actually have a test of the equality of variances whose 
-result may actually give evidence in favor of variance homogeneity. This 
-is what a Bayes factor can do---and I actually think this functionality 
-is needed---for which reason I implemented it in `R`. You can install my 
-small package `varBF` as follows: 
+The Levene test is a well-known test to compare several variances 
+because it is commonly used to test the assumption of "homogeneity" in 
+variances before conducting an ANOVA. However, the logic of significance 
+tests forbids that the output of the test can be interpreted as evidence 
+of variance equality; we may only conclude the absence of variance 
+homogeneity if the *p* value is small. Wouldn't it be nice to actually 
+have a test that can yield direct evidence in favor of variance 
+homogeneity. This is what a Bayes factor can do. 
+
+Apparently, the output of a Levene test can conveniently be converted to 
+a Bayes factor.[^2] [According to 
+Wikipedia](https://en.wikipedia.org/wiki/Levene%27s_test), the "Levene 
+test is equivalent to a 1-way between-groups [...] (ANOVA) with the 
+dependent variable being the absolute value of the difference between a 
+score and the mean of the group to which the score belongs [...]." Thus, 
+the Levene test is an ANOVA, and there are known methods to compute 
+Bayes factors for ANOVA designs. Because I think this functionality is 
+needed, I implemented it in `R`. You can install my small package 
+`varBF` as follows: 
 
 ```{r, eval = FALSE}
 # if the package `remotes` is not available, type:
@@ -35,29 +40,15 @@ small package `varBF` as follows:
 remotes::install_github("m-Py/varBF")
 ```
 
-Apparently, the output of a Levene test can conveniently be converted 
-to a Bayes factor.[^2] [According to 
-Wikipedia](https://en.wikipedia.org/wiki/Levene%27s_test), the "Levene
-test is equivalent to a 1-way between-groups analysis of variance 
-(ANOVA) with the dependent variable being the absolute value of the 
-difference between a score and the mean of the group to which the score 
-belongs [...]." Thus, the Levene test is an ANOVA, and luckily there are 
-known methods to compute Bayes factors for ANOVA designs. In particular, 
-we can exploit the function 
+The package `varBF` calls the function 
 [`oneWayAOV.Fstat()`](https://www.rdocumentation.org/packages/BayesFactor/
 versions/0.9.12-4.2/topics/oneWayAOV.Fstat) 
 from the awesome `R` package [`BayesFactor`](https://richarddmorey.github.io/BayesFactor/)
 (Morey & Rouder, 2015) that converts an *F* value from a one way ANOVA 
 to a Bayes factor.
 
-To me, the most striking advantange of Bayes factors in comparison to 
-*p* values is that they may yield evidence in favor of the null 
-hypothesis. So instead of just stating that two variances are not 
-significantly different, we can state that the data favors the null 
-hypothesis of equal variances. Isn't that a nice improvement...
-
-For example, lets assume we have collected lots of data, e.g., 1,000 
-observations for two groups:
+As an example, lets assume we have collected lots of data, e.g., 1,000 
+normally distributed observations for two independent groups:
 
 ```{r}
 # Generate data from a normal distribution with mean = 100 
@@ -71,8 +62,8 @@ sd(group2)
 Here, the true variances (i.e., standard deviations) are the same, and 
 the standard deviations observed in the two samples are also quite 
 similar to each other. Let's test if we also obtain convincing 
-statistical evidence favoring the null hypothesis of equal variances by 
-computing a Bayes factor:
+statistical evidence favoring the null hypothesis by computing a Bayes 
+factor:
 
 ```{r}
 library(varBF)
@@ -80,7 +71,7 @@ indepvarBF(group1, group2)
 ```
 
 The result is the Bayes factor $BF_{10}$. That is, the probability of 
-the data (i.e., the deviation of the variances) under an alternative 
+the data (i.e., the dissimilarity of the variances) under an alternative 
 hypothesis---assuming there is a difference---as compared to the 
 probability of the data under the null hypothesis of equal 
 variances.[^3] To assess the degree to which the data favor the null 
@@ -92,7 +83,8 @@ hypothesis, we compute the inverse Bayes factor $BF_{01}$ as follows:
 
 Ergo, the data favors the null hypothesis by a factor of approximately 
 `r round(1 / indepvarBF(group1, group2))` as compared to the 
-alternative hypothesis.
+alternative hypothesis. The data yield evidence that the variances are
+equal; the classical Levene test could not have given this output.
 
 Next, let's check out an example of how the function behaves when the 
 true variances are different:[^4]
@@ -109,7 +101,7 @@ Here, the true standard deviations are 15 and 20, and I generated 200
 data points from each distribution. The Bayes factor $BF_{10}$ favoring 
 the alternative hypothesis is approximately `r round(indepvarBF(group1, 
 group2))`. Note that the Bayes factor may vary considerably when 
-repeating sampling.
+repeating the process.
 
 I found this approach to testing the equality in variances interesting 
 and useful. There is (at least) one catch, however, as the conversion 
@@ -120,21 +112,26 @@ to the `BayesFactor` documentation.
 ## Dependent variances
 
 When comparing any measures resulting from paired data, the dependence 
-in data should be taken into account. For this reason, we for example 
-have the great paired *t* test. There is a simple frequentist test to 
-compare whether variances from paired data differ, the "Morgan-Pitman" 
-test (Wilcox, 2015). As I learned very recently, "Morgan-Pitman" test 
-reduces to testing the "nullity" of a correlation, which I found quite 
-odd. What should be correlated when comapring variances? If we have 
-paired vectors of data *x* and *y*, we test the correlation between $x + 
-y$ and $x - y$; if the result is significant, we conclude that the 
-variances of $x$ and $y$ differ. This approach can be extended into a 
-Bayesian test,[^5] because Bayes factors assessing the nullity of a 
-correlation exist. My implementation (the function `depvarBF()`) in the 
-package `varBF` wraps the `correlationBF()` function from the 
-`BayesFactor` package. To test it, I have to generate some correlated 
-paired data. Therefore, I define the following function that generates 
-normal bivariate paired data by calling the `R` package `MASS`:
+in data should be taken into account. For example, we have the great 
+paired *t* test to test if dependent means differ. As I learned very 
+recently, there is a simple frequentist test to assess whether variances 
+from paired data differ, the "Morgan-Pitman" test (Wilcox, 2015). The 
+Morgan-Pitman test reduces to testing the "nullity" of a correlation, 
+which I found quite odd. What should be correlated when we actually 
+compare variances? If we have paired vectors of data *x* and *y*, we 
+test the correlation between $x + y$ and $x - y$. That is, for each pair 
+observations, we compute the sum and the difference, and across all 
+observations, we correlate the sum with the difference. If the 
+correlation significantly differs from zero, we conclude that the 
+variances of $x$ and $y$ differ.
+
+The Morgan-Pitman approach can be extended into a Bayesian method,[^5] 
+because Bayes factors assessing the nullity of a correlation exist. My 
+implementation (the function `depvarBF()`) in the package `varBF` wraps 
+the `correlationBF()` function from the `BayesFactor` package. To 
+illustrate its functionality, I have to generate some correlated paired 
+data. Therefore, I define a function that generates normal bivariate 
+paired data by calling the `R` package `MASS`:
 
 ```{r}
 # Generate bivariate normal data with specified correlation
@@ -201,23 +198,21 @@ favor of a null hypothesis.
 
 ## Conclusion
 
-I discussed two "non-standard" Bayes factors for the comparison of 
-variances. As I am not an expert in coming up with Bayes factors, this 
-approach should be assessed by other people before we all start using 
-it. The code (it is really not that much) for the two functions 
-`depvarBF()` and `indepvarBF()` is available from 
+I believe that there is a need for Bayes factors comparing variances, 
+but so far no accessible solution seems to exist. I discussed two 
+"non-standard" Bayes factors for the comparison of variances. As I am 
+not an expert in coming up with Bayes factors, this approach should be 
+assessed by other people before we all start using it. The code (it is 
+really not that much) for the two functions `depvarBF()` and 
+`indepvarBF()` is available from 
 [here](https://github.com/m-Py/varBF/blob/master/R/depvarBF.R) and 
 [here](https://github.com/m-Py/varBF/blob/master/R/indepvarBF.R).
-I am rather optimistic that some of the points discussed here 
-make sense---and I believe that there is a need for Bayes factors 
-comparing variances. 
 
 ## References
 
 Morey, R. D., & Rouder, J. N. (2015). BayesFactor: Computation of Bayes 
 factors for common designs. Retrieved
 from https://CRAN.R-project.org/package=BayesFactor
-
 
 Rouder, J. N., Morey, R. D., Speckman, P. L., Province, J. M., (2012) 
 Default Bayes Factors for ANOVA Designs. *Journal of Mathematical 
