@@ -1,20 +1,14 @@
 ---
-title: "No RStudio"
+title: "Some Things and some Stuff"
 author: "by Martin Papenberg"
 ---
 
-Here I share some thoughts and write up things that interest me. It is
-usually about <a href="http://rmarkdown.rstudio.com/" target="_blank"> R
-Markdown </a>or other <a href="https://www.r-project.org/"
-target="_blank">R</a>-related stuff. [About me](../about/me.html).
+Here I share some thoughts and write up things that interest me. It is 
+usually about statistics, <a href="http://rmarkdown.rstudio.com/" 
+target="_blank"> R Markdown </a>or other <a 
+href="https://www.r-project.org/" target="_blank">R</a>-related stuff. 
 
-With regard to the title: I love RStudio and I believe that the RStudio 
-company has been incredibly important for the development of `R` in the 
-recent years. I also advise every `R` newby to work with RStudio -- 
-everything "just works", and RStudio includes helpful features for 
-useRs on all levels. However, I also like to tinker around and try 
-stuff in unconventional ways. This includes trying out different 
-environments for working with `R` and R Markdown.
+[About me](../about/me.html).
 
 ### Posts:
 

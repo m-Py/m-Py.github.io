@@ -17,17 +17,17 @@ option.
 
 The classical test to compare the equality of two variances measured 
 from two independent groups is the *F* test. However, other tests like 
-the Levene test should usually be preferred. The Levene test is commonly 
-used to test the assumption of "homogeneity" in variances before an 
-ANOVA is conducted. However, the logic of significance tests forbids 
-that the test can be interpreted as evidence of variance equality; we 
-may only conclude the absence of variance homogeneity if the test result 
-is significant. Wouldn't it be nice to actually have a test of the 
-equality of variances whose result may actually give evidence in favor 
-of variance homogeneity. This is what a Bayes factor can do---and I 
-actually think this functionality is needed---for which reason I 
-implemented it in `R`. You can install my small package `varBF` as 
-follows: 
+the Levene test should usually be preferred. The Levene test is 
+well-known because it is commonly used to test the assumption of 
+"homogeneity" in variances before conducting an ANOVA. However, the 
+logic of significance tests forbids that the output of the test can be 
+interpreted as evidence of variance equality; we may only conclude the 
+absence of variance homogeneity if the *p* value is small. Wouldn't it 
+be nice to actually have a test of the equality of variances whose 
+result may actually give evidence in favor of variance homogeneity. This 
+is what a Bayes factor can do---and I actually think this functionality 
+is needed---for which reason I implemented it in `R`. You can install my 
+small package `varBF` as follows: 
 
 ```{r, eval = FALSE}
 # if the package `remotes` is not available, type:
