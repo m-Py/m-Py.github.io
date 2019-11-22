@@ -41,8 +41,7 @@ remotes::install_github("m-Py/varBF")
 ```
 
 The package `varBF` calls the function 
-[`oneWayAOV.Fstat()`](https://www.rdocumentation.org/packages/BayesFactor/
-versions/0.9.12-4.2/topics/oneWayAOV.Fstat) 
+[`oneWayAOV.Fstat()`](https://www.rdocumentation.org/packages/BayesFactor/versions/0.9.12-4.2/topics/oneWayAOV.Fstat) 
 from the awesome `R` package [`BayesFactor`](https://richarddmorey.github.io/BayesFactor/)
 (Morey & Rouder, 2015) that converts an *F* value from a one way ANOVA 
 to a Bayes factor.
