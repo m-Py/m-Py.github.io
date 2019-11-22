@@ -47,8 +47,8 @@ from the awesome `R` package [`BayesFactor`](https://richarddmorey.github.io/Bay
 (Morey & Rouder, 2015) that converts an *F* value from a one way ANOVA 
 to a Bayes factor.
 
-As an example, lets assume we have collected lots of data, e.g., 1,000 
-normally distributed observations for two independent groups:
+As an example, lets assume we have collected lots of data, e.g., 2,000 
+normally distributed observations across two independent groups:
 
 ```{r}
 # Generate data from a normal distribution with mean = 100 
@@ -120,7 +120,7 @@ Morgan-Pitman test reduces to testing the "nullity" of a correlation,
 which I found quite odd. What should be correlated when we actually 
 compare variances? If we have paired vectors of data *x* and *y*, we 
 test the correlation between $x + y$ and $x - y$. That is, for each pair 
-observations, we compute the sum and the difference, and across all 
+of observations, we compute the sum and the difference, and across all 
 observations, we correlate the sum with the difference. If the 
 correlation significantly differs from zero, we conclude that the 
 variances of $x$ and $y$ differ.
