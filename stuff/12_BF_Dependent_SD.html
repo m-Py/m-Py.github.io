@@ -391,27 +391,27 @@ remotes::install_github(&quot;m-Py/varBF&quot;)</code></pre>
 group1 &lt;- rnorm(1000, mean = 100, sd = 15)
 group2 &lt;- rnorm(1000, mean = 100, sd = 15)
 sd(group1)</code></pre>
-<pre><code>## [1] 14.98604</code></pre>
+<pre><code>## [1] 15.18114</code></pre>
 <pre class="r"><code>sd(group2)</code></pre>
-<pre><code>## [1] 14.70035</code></pre>
+<pre><code>## [1] 15.28612</code></pre>
 <p>Here, the true variances (i.e., standard deviations) are the same, and the standard deviations observed in the two samples are also quite similar to each other. Let’s test if we also obtain convincing statistical evidence favoring the null hypothesis by computing a Bayes factor:</p>
 <pre class="r"><code>library(varBF)
 indepvarBF(group1, group2)</code></pre>
-<pre><code>## [1] 0.05375285</code></pre>
+<pre><code>## [1] 0.06474799</code></pre>
 <p>The result is the Bayes factor <span class="math inline">\(BF_{10}\)</span>. That is, the probability of the data (i.e., the dissimilarity of the variances) under an alternative hypothesis—assuming there is a difference—as compared to the probability of the data under the null hypothesis of equal variances.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> To assess the degree to which the data favor the null hypothesis, we compute the inverse Bayes factor <span class="math inline">\(BF_{01}\)</span> as follows:</p>
 <pre class="r"><code>1 / indepvarBF(group1, group2)</code></pre>
-<pre><code>## [1] 18.60367</code></pre>
-<p>Ergo, the data favors the null hypothesis by a factor of approximately 19 as compared to the alternative hypothesis. The data yield evidence that the variances are equal; the classical Levene test could not have given this output.</p>
+<pre><code>## [1] 15.44449</code></pre>
+<p>Ergo, the data favors the null hypothesis by a factor of approximately 15 as compared to the alternative hypothesis. The data yield evidence that the variances are equal; the classical Levene test could not have given this output.</p>
 <p>Next, let’s check out an example of how the function behaves when the true variances are different:<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
 <pre class="r"><code>group1 &lt;- rnorm(200, mean = 100, sd = 15)
 group2 &lt;- rnorm(200, mean = 100, sd = 20)
 sd(group1)</code></pre>
-<pre><code>## [1] 13.2376</code></pre>
+<pre><code>## [1] 15.64175</code></pre>
 <pre class="r"><code>sd(group2)</code></pre>
-<pre><code>## [1] 21.94703</code></pre>
+<pre><code>## [1] 20.75428</code></pre>
 <pre class="r"><code>indepvarBF(group1, group2)</code></pre>
-<pre><code>## [1] 4262299</code></pre>
-<p>Here, the true standard deviations are 15 and 20, and I generated 200 data points from each distribution. The Bayes factor <span class="math inline">\(BF_{10}\)</span> favoring the alternative hypothesis is approximately 4.26229910^{6}. Note that the Bayes factor may vary considerably when repeating the process.</p>
+<pre><code>## [1] 97.91963</code></pre>
+<p>Here, the true standard deviations are 15 and 20, and I generated 200 data points from each distribution. The Bayes factor <span class="math inline">\(BF_{10}\)</span> favoring the alternative hypothesis is approximately 98. Note that the Bayes factor may vary considerably when repeating the process.</p>
 <p>I found this approach to testing the equality in variances interesting and useful. There is (at least) one catch, however, as the conversion from <em>F</em> value to Bayes factor is only expected to work safely for balanced designs having the same group size for each sample, according to the <code>BayesFactor</code> documentation.</p>
 </div>
 <div id="dependent-variances" class="section level2">
@@ -447,11 +447,11 @@ paired_data &lt;- function(n, m1, m2, sd1, sd2, r) {
 )
 # check out the observed correlation (true correlation is .3)
 cor(pairs[, 1], pairs[, 2])</code></pre>
-<pre><code>## [1] 0.3290177</code></pre>
+<pre><code>## [1] 0.2959179</code></pre>
 <pre class="r"><code># check out the Bayes factor: 
 depvarBF(pairs[, 1], pairs[, 2])</code></pre>
-<pre><code>## [1] 9.604335</code></pre>
-<p>The data favors the alternative hypothesis by a factor of approximately 10 as compared to the null hypothesis. Let’s repeat the procedure, but this time we assume that the true variances are equal; we then check out the inverse Bayes factor <span class="math inline">\(BF_{01}\)</span>:</p>
+<pre><code>## [1] 128.072</code></pre>
+<p>The data favors the alternative hypothesis by a factor of approximately 128 as compared to the null hypothesis. Let’s repeat the procedure, but this time we assume that the true variances are equal; we then check out the inverse Bayes factor <span class="math inline">\(BF_{01}\)</span>:</p>
 <pre class="r"><code>pairs &lt;- paired_data(
   n = 200, 
   m1 = 100, 
@@ -461,8 +461,8 @@ depvarBF(pairs[, 1], pairs[, 2])</code></pre>
   r = 0.3
 )
 1 / depvarBF(pairs[, 1], pairs[, 2])</code></pre>
-<pre><code>## [1] 0.7270814</code></pre>
-<p>The data favors the null hypothesis by a factor of approximately 1 as compared to the alternative hypothesis. It is often more difficult to obtain evidence in favor of a null hypothesis.</p>
+<pre><code>## [1] 5.21651</code></pre>
+<p>The data favors the null hypothesis by a factor of approximately 5 as compared to the alternative hypothesis. It is often more difficult to obtain evidence in favor of a null hypothesis.</p>
 </div>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>

@@ -131,7 +131,7 @@ implementation (the function `depvarBF()`) in the package `varBF` wraps
 the `correlationBF()` function from the `BayesFactor` package. To 
 illustrate its functionality, I have to generate some correlated paired 
 data. Therefore, I define a function that generates normal bivariate 
-paired data by calling the `R` package `MASS`:
+paired data by calling the `R` package `MASS`: 
 
 ```{r}
 # Generate bivariate normal data with specified correlation
