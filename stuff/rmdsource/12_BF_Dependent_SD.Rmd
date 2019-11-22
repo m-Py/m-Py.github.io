@@ -204,7 +204,11 @@ favor of a null hypothesis.
 I discussed two "non-standard" Bayes factors for the comparison of 
 variances. As I am not an expert in coming up with Bayes factors, this 
 approach should be assessed by other people before we all start using 
-it. But I am rather optimistic that some of the points discussed here 
+it. The code (it is really not that much) for the two functions 
+`depvarBF()` and `indepvarBF()` is available from 
+[here](https://github.com/m-Py/varBF/blob/master/R/depvarBF.R) and 
+[here](https://github.com/m-Py/varBF/blob/master/R/indepvarBF.R).
+I am rather optimistic that some of the points discussed here 
 make sense---and I believe that there is a need for Bayes factors 
 comparing variances. 
 
