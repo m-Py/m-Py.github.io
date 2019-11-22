@@ -148,6 +148,30 @@ and shoud be reverted.
 $ git log --pretty=oneline
 ```
 
+### Setting an upstream
+
+When I create a git repository locally and not on Github first and then
+start pushing to a remote repository (such as Github), I have to 
+configure git to know where to push. First, add the remote as described
+[here]https://help.github.com/en/github/using-git/adding-a-remote):
+
+```
+$ git remote add origin https://github.com/user/repo.git
+# Set a new remote
+
+$ git remote -v
+# Verify new remote
+> origin  https://github.com/user/repo.git (fetch)
+> origin  https://github.com/user/repo.git (push)
+```
+
+Then, make sure that pushing and pulling actually uses this remote by 
+default, as described [here](https://stackoverflow.com/questions/6089294/why-do-i-need-to-do-set-upstream-all-the-time):
+
+```
+git push -u origin my_branch
+```
+
 ---
 
 Last updated: `r Sys.Date()`
