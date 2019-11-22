@@ -8,7 +8,7 @@ Even though psychologists are often interested in comparing mean values
 between conditions, it can also be of interest whether the dispersion, 
 i.e., the variance of the measurements is different between some 
 conditions---even if just to test the validity of the assumption of 
-homogeneous variances that is made in many statistical procedures. As 
+homogeneous variances that is made by many statistical procedures. As 
 far as I can tell, there is not yet an elaborate and accessible solution 
 to compare variances using a Bayes factor.[^0] Here, I present such an 
 option.
@@ -16,18 +16,18 @@ option.
 ## Independent variances
 
 The classical test to compare the equality of two variances measured 
-from two independent groups is the *F* test. However, [according to 
-Wikipedia](https://en.wikipedia.org/wiki/F-test_of_equality_of_variances 
-), other tests like Levene test should be preferred. The Levene test is 
-commonly used to test the assumption of "homogeneity" in variances 
-before an ANOVA is conducted. However, the logic of significance tests 
-forbids that the test can be interpreted as evidence of variance 
-equality; we can only conclude the absence of variance homogeneity if 
-the test result is significant. Wouldn't it be nice to actually have a 
-test of the equality of variances whose result may actually give 
-evidence in favor of variance homogeneity. This is what a Bayes factor 
-can do. I actually think this functionality is needed---for which reason 
-I implemented it in `R`. You can install my small package as follows: 
+from two independent groups is the *F* test. However, other tests like 
+the Levene test should usually be preferred. The Levene test is commonly 
+used to test the assumption of "homogeneity" in variances before an 
+ANOVA is conducted. However, the logic of significance tests forbids 
+that the test can be interpreted as evidence of variance equality; we 
+may only conclude the absence of variance homogeneity if the test result 
+is significant. Wouldn't it be nice to actually have a test of the 
+equality of variances whose result may actually give evidence in favor 
+of variance homogeneity. This is what a Bayes factor can do---and I 
+actually think this functionality is needed---for which reason I 
+implemented it in `R`. You can install my small package `varBF` as 
+follows: 
 
 ```{r, eval = FALSE}
 # if the package `remotes` is not available, type:
@@ -43,8 +43,8 @@ test is equivalent to a 1-way between-groups analysis of variance
 difference between a score and the mean of the group to which the score 
 belongs [...]." Thus, the Levene test is an ANOVA, and luckily there are 
 known methods to compute Bayes factors for ANOVA designs. In particular, 
-we can use the function 
-[`oneWayAOV.Fstat`](https://www.rdocumentation.org/packages/BayesFactor/
+we can exploit the function 
+[`oneWayAOV.Fstat()`](https://www.rdocumentation.org/packages/BayesFactor/
 versions/0.9.12-4.2/topics/oneWayAOV.Fstat) 
 from the awesome `R` package [`BayesFactor`](https://richarddmorey.github.io/BayesFactor/)
 (Morey & Rouder, 2015) that converts an *F* value from a one way ANOVA 
@@ -71,8 +71,8 @@ sd(group2)
 Here, the true variances (i.e., standard deviations) are the same, and 
 the standard deviations observed in the two samples are also quite 
 similar to each other. Let's test if we also obtain convincing 
-statistical evidence that our Bayes factor favors the null hypothesis of 
-equal variances:
+statistical evidence favoring the null hypothesis of equal variances by 
+computing a Bayes factor:
 
 ```{r}
 library(varBF)
@@ -82,9 +82,9 @@ indepvarBF(group1, group2)
 The result is the Bayes factor $BF_{10}$. That is, the probability of 
 the data (i.e., the deviation of the variances) under an alternative 
 hypothesis---assuming there is a difference---as compared to the 
-probability of the data under the null hypothesis of equal variances. To 
-assess the degree to which the data favor the null hypothesis, we 
-compute the inverse Bayes factor $BF_{01}$ as follows: 
+probability of the data under the null hypothesis of equal 
+variances.[^3] To assess the degree to which the data favor the null 
+hypothesis, we compute the inverse Bayes factor $BF_{01}$ as follows: 
 
 ```{r}
 1 / indepvarBF(group1, group2)
@@ -92,7 +92,7 @@ compute the inverse Bayes factor $BF_{01}$ as follows:
 
 Ergo, the data favors the null hypothesis by a factor of approximately 
 `r round(1 / indepvarBF(group1, group2))` as compared to the 
-alternative hypothesis.[^3]
+alternative hypothesis.
 
 Next, let's check out an example of how the function behaves when the 
 true variances are different:[^4]
@@ -108,8 +108,8 @@ indepvarBF(group1, group2)
 Here, the true standard deviations are 15 and 20, and I generated 200 
 data points from each distribution. The Bayes factor $BF_{10}$ favoring 
 the alternative hypothesis is approximately `r round(indepvarBF(group1, 
-group2))`. Note that the Bayes factor varies strongly from sample to 
-sample.
+group2))`. Note that the Bayes factor may vary considerably when 
+repeating sampling.
 
 I found this approach to testing the equality in variances interesting 
 and useful. There is (at least) one catch, however, as the conversion 
@@ -133,7 +133,7 @@ Bayesian test,[^5] because Bayes factors assessing the nullity of a
 correlation exist. My implementation (the function `depvarBF()`) in the 
 package `varBF` wraps the `correlationBF()` function from the 
 `BayesFactor` package. To test it, I have to generate some correlated 
-paired data. To this end, I define the following function that generates 
+paired data. Therefore, I define the following function that generates 
 normal bivariate paired data by calling the `R` package `MASS`:
 
 ```{r}
@@ -144,15 +144,15 @@ normal bivariate paired data by calling the `R` package `MASS`:
 # param m2: the mean of the second variable
 # param sd1: the standard deviation of the first variable
 # param sd2: the standard deviation of the second variable
-# param r: the «true» correlation between the measures
+# param r: the »true« correlation between the two measures
 # 
 # return: the data set (two columns with random normal data generated 
 #     via MASS::mvrnom)
 paired_data <- function(n, m1, m2, sd1, sd2, r) {
   cor_matrix <- matrix(c(1, r, r, 1), ncol = 2)
   sds <- c(sd1, sd2)
-  b <- sds %*% t(sds)
-  cov_matrix <- b * cor_matrix
+  vars <- sds %*% t(sds)
+  cov_matrix <- vars * cor_matrix
   MASS::mvrnorm(n, mu = c(m1, m2), Sigma = cov_matrix)
 }
 ```
@@ -170,11 +170,17 @@ pairs <- paired_data(
   sd2 = 20, 
   r = 0.3
 )
+# check out the observed correlation (true correlation is .3)
+cor(pairs[, 1], pairs[, 2])
+# check out the Bayes factor: 
 depvarBF(pairs[, 1], pairs[, 2])
 ```
 
-Let's repeat this using the same true variances for the two measures; we 
-then check out the inverse Bayes factor $BF_{01}$:
+The data favors the alternative hypothesis by a factor of approximately 
+`r round(depvarBF(pairs[, 1], pairs[, 2]))` as compared to the null 
+hypothesis. Let's repeat the procedure, but this time we assume that the 
+true variances are equal; we then check out the inverse Bayes factor 
+$BF_{01}$:
 
 ```{r}
 pairs <- paired_data(
@@ -188,15 +194,17 @@ pairs <- paired_data(
 1 / depvarBF(pairs[, 1], pairs[, 2])
 ```
 
-It is often more difficult to obtain evidence in favor of a null 
-hypothesis. 
+The data favors the null hypothesis by a factor of approximately `r 
+round(1 / depvarBF(pairs[, 1], pairs[, 2]))` as compared to the 
+alternative hypothesis. It is often more difficult to obtain evidence in 
+favor of a null hypothesis. 
 
 ## Conclusion
 
 I discussed two "non-standard" Bayes factors for the comparison of 
-variances. As I am not an expert in inventing Bayes factors, this 
+variances. As I am not an expert in coming up with Bayes factors, this 
 approach should be assessed by other people before we all start using 
-it. But I am rather optimistic that some of the things discussed here 
+it. But I am rather optimistic that some of the points discussed here 
 make sense---and I believe that there is a need for Bayes factors 
 comparing variances. 
 
@@ -226,18 +234,18 @@ Last updated: `r Sys.Date()`
 who commented 
 [here](http://forum.cogsci.nl/discussion/2115/f-test-of-equality-of-variances), 
 earlier this year, the Bayesian flagship software JASP does not yet have 
-an option for testing the equality of variances. But apparently their 
+an option for testing the equality of variances, but apparently their 
 group is on it.
 
 [^2]: I did come up with this myself, but I stole the idea from [this forum 
 thread](http://forum.cogsci.nl/discussion/2115/f-test-of-equality-of-variances)
 
-[^3]: Note that I did not talk about the nature of the competing 
-alternative hypothesis that has been used. See Rouder, Morey, Speckman 
+[^3]: Note that I do not talk about the nature of the competing 
+alternative hypothesis that is being used. See Rouder, Morey, Speckman 
 and Province (2012) and the `R` help page for the `BayesFactor` function 
-`anovaBF()` for more information. I used the default prior option 
-`"medium"`, which can however be adjusted using the function 
-`indepvarBF()`.
+`anovaBF()` for more information. My function uses the default prior 
+option `"medium"`, which can however be adjusted using the argument 
+`rscale`.
 
 [^4]: To evaluate the method, I think of preparing a more systematic 
 simulation assessing the performance under varying circumstances (such 
