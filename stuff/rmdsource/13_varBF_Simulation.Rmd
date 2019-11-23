@@ -167,14 +167,17 @@ The three facet panels realize the three effect sizes under
 investigation. In the right panel, we have a null effect where because 
 both standard deviations / variances had the same value. In the left 
 panel, we have the largest effect size. Data points illustrate Bayes 
-factor quantiles. The y axis illustrates the Bayes factor and is given 
+factor quantiles. The $y$ axis represents the Bayes factor and is given 
 on a log scale because the Bayes factor quickly becomes huge for larger 
-effects. The red dots indicate that for a given combination of $N$ and 
-effect size (aggregated over the different correlation coefficients that 
-are ignored in this plot), 20% of all observed Bayes factors were 
-smaller, i.e., 80% were larger. The black line illustrates inconclusive 
-evidence: A Bayes factor of 1 neither favors the null nor the 
-alternative.
+effects. 
+
+The dots connected by the lowest line indicate the 20% quantile. This 
+means that 20% of all observed Bayes factors were smaller than the Bayes 
+factor that is illustrated, i.e., 80% were larger. Note that these Bayes 
+factors were averaged over the different correlation coefficients that 
+are ignored in this plot. The black line illustrates the threshold of 
+inconclusive evidence: A Bayes factor of 1 neither favors the null nor 
+the alternative.
 
 Overall, the distribution of Bayes factors [looks as it 
 should](06_BFSize.html). For our largest effect, the effect size quickly 
@@ -186,8 +189,9 @@ hypothesis increases with increasing $N$, which is good. However,
 finding evidence that favors the null often requires large $N$. In the 
 current simulation, for $N = 100$, we barely miss the mark that 80% of 
 all Bayes factors $BF01$ favor the null hypothesis by a factor of at 
-least 3. This is no reason to worry as it is a general property of Bayes 
-factors.
+least 3 (in this cases the Bayes factor $BF10$ favoring the alternative 
+hypothesis is 0.33). This is no reason to worry as it is a general 
+property of Bayes factors.
 
 Out of interest, we may also plot the distribution of Bayes factors by
 the correlation between the measures:

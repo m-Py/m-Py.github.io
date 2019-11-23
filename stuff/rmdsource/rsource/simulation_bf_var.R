@@ -94,9 +94,13 @@ quants <- all_runs %>%
   ungroup() %>%
   pivot_longer(
     cols = starts_with("pt"), 
-    names_to = "quant", 
+    names_to = "Quantile", 
     values_to = "BayesFactor",
     names_prefix = "pt"
+  ) %>%
+  mutate(Quantile = ordered(
+    paste0(Quantile, "%"), 
+    levels = paste0(c(80, 50, 20), "%"))
   )
 
 # Plot the quantiles on a log scale - facetted by N 
@@ -104,9 +108,10 @@ scaleFUN <- function(x) sprintf("%.2f", x)
 png(filename = "Rplot001.png", width = 1200, height = 640, pointsize = 48)
 quants %>%
   mutate(Effect = factor(paste("SD1 = 15, SD2 =", sd2))) %>%
-  ggplot(aes(x = N, y = BayesFactor, colour = quant)) + 
+  ggplot(aes(x = N, y = BayesFactor, colour = Quantile)) + 
   geom_line() + 
   geom_point(size = 5) + 
+  scale_color_manual(values = c('#383745', '#A17724', '#9E9CC2')) + 
   facet_grid(~ Effect) + 
   geom_hline(yintercept = 1, size = 1.3) +
   scale_y_continuous(trans = "log", breaks = c(0, 0.1, 1/3, 1, 5, 10, 20, 50, 100, 1000, 10000, 100000), labels = scaleFUN) + 
@@ -126,17 +131,22 @@ quants_r <- all_runs %>%
   ungroup() %>%
   pivot_longer(
     cols = starts_with("pt"), 
-    names_to = "quant", 
+    names_to = "Quantile", 
     values_to = "BayesFactor",
     names_prefix = "pt"
+  ) %>%
+  mutate(Quantile = ordered(
+    paste0(Quantile, "%"), 
+    levels = paste0(c(80, 50, 20), "%"))
   )
 
 png(filename = "Rplot002.png", width = 1200, height = 640, pointsize = 48)
 quants_r %>%
   mutate(Effect = factor(paste("SD1 = 15, SD2 =", sd2))) %>%
-  ggplot(aes(x = r, y = BayesFactor, colour = quant)) + 
+  ggplot(aes(x = r, y = BayesFactor, colour = Quantile)) + 
   geom_line() + 
   geom_point(size = 5) + 
+  scale_color_manual(values = c('#383745', '#A17724', '#9E9CC2')) + 
   facet_grid(~ Effect) + 
   geom_hline(yintercept = 1, size = 1.3) +
   scale_y_continuous(trans = "log", breaks = c(0, 0.1, 1/3, 1, 5, 10, 20, 50, 100, 1000, 10000, 100000), labels = scaleFUN) + 
