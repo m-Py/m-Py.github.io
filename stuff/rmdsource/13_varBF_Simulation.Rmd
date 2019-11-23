@@ -8,14 +8,15 @@ output:
 ---
 
 This post explores the properties of a [Bayes factors for the comparison 
-of two dependent variances](12_BF_Dependent_SD.html) via simulation. To 
-this end, I investigate whether the Bayes factors agree with a known 
-"ground truth" that I induce in a computer simulation. The major benefit 
-of simulation studies is that we can compare the output of a method to a 
-known hypothetical state of nature. 
+of two dependent variances](12_BF_Dependent_SD.html) via simulation. The 
+major benefit of simulation studies is that we can compare the output of 
+a method to a known hypothetical state of nature. To determine the 
+usefulnes of the Bayes factor, I am can investigate whether it agrees 
+with known "ground truths". 
 
-Because I investigate a Bayes factor comparing two dependent variances, 
-I need a function to create bivariate normal data:
+Because I investigate a Bayes factor comparing two **dependent** 
+variances, I first need a function that creates correlated data (i.e., 
+bivariate normal data):
 
 ```{r}
 # Generate bivariate normal data with specified correlation
@@ -42,8 +43,8 @@ This function creates two columns of data and I can specify the true
 means, standard deviations and the true correlation between the 
 measures. Note that this does not imply that each data set that is 
 generated via using this function has these exact parameters: due to 
-sampling error, that values observed in a sample will vary across 
-simulation runs.
+sampling error, the descriptive statistics will vary across simulation 
+runs.
 
 Next, I specify a function that generates data using `paired_data()` and
 then calls computes the Bayes factor comparing the variances of the two
@@ -58,22 +59,23 @@ compare_correlated_variances <- function(X, n, m1, m2, sd1, sd2, r) {
 ```
 
 The first function parameter `X` is somewhat a nuissance, but stay with 
-me for a moment---I use it to call the function as many times as I want 
-to in a single step.
-
-The simulation principle following now is actually rather simple: I 
-systematically vary relevant input parameters, such as 
+me for a moment---I just defined this function to be able to repeat the 
+process of generating data and computing a Bayes factor as often as I 
+want. The simulation principle following now is actually rather simple: 
+Using the function `compare_correlated_variances()`, I systematically 
+vary relevant input parameters between simulation runs, such as 
 
 - the "effect size" (i.e., how different are the variances)
 - the sample size
 - the correlation between the measures
 
-In general, simulations are computationally demanding because there is a 
-large combinatorial space that results from crossing all possible 
-combinations of input parameters. Usually, we have to restrict 
-ourselves. To repeat the process for just one possible combination of 
-parameters, we can use the `lapply()` function to repeat the 
-computations 100 times as follows: 
+For each combination of parameters, I repeat the simulation process 
+often, e.g., 1,000 times. In general, simulations are computationally 
+demanding because there is a large combinatorial space that results from 
+crossing all possible combinations of input parameters. Usually, we have 
+to restrict ourselves. To repeat the process for just one possible 
+combination of parameters, we can use the `lapply()` function to repeat 
+the computations 100 times as follows: 
 
 ```{r}
 # Generate 100 bivariate data sets and compute a Bayes factor each time:
@@ -89,8 +91,8 @@ BFs <- lapply(
 )
 ```
 
-To print the output of the `lapply()` function in an understandable way, 
-I define the following function that returns the quantiles of the Bayes 
+To print the output of the `lapply()` function in an comprehensible way, 
+I define the following function returning the quantiles of the Bayes 
 factor across simulation runs:
 
 ```{r}
@@ -123,8 +125,8 @@ Remember, the Bayes factor quantifies the degree to which the
 alternative hypothesis is favored over the null hypothesis. Therefore, 
 more than 80% of all simulation runs (each representing a hypothetical 
 study) indicate very strong evidence in favor of the hypothesis that the 
-variances are different. This is good because this is with the "ground 
-truth": we know that the "true" variances differ. 
+variances are different. This is good because this is consistent with 
+the "ground truth" that the "true" variances differ. 
 
 Therefore, given 
 
@@ -133,59 +135,58 @@ Therefore, given
 - a correlation between samples of $r = .3$
 
 the Bayes factor will generally yield evidence that is consistent with 
-the true state of the nature. Next we wish to find out whether this 
-property holds for all sorts of different conditions.
-
-In my simulation, I crossed the following conditions: 
-
-- The correlation between the measures varied between 0.1, 0.3, 0.5 and 0.7
-- The standard deviation of one measure varied between 11, 13 and 15
-- $N$ varied between 20, 40, ..., 180 and 200
-
-This resulted in 150 parameter combinations, for which I simulated 1,000 
-data sets, respectively. This did not even take as long as one might 
-expect, only ~ 5min. In total, I ended up with 150,000 Bayes factors.
+the true state of the nature. This is good, but we wish to find out 
+whether this property holds for all sorts of different conditions.
 
 Across all simulation runs, the true mean of both measures was always 
 set to 100; the standard deviation of one measure was always set to 15. 
-Therefore, I varied the effect size by adjusting the other standard 
-deviation (between 11, 13 and 15). One condition was realized where the 
-null hypothesis was true, i.e., when both standard deviations was 15. 
-Note that some conceivable conditions were not realized: $N$ might be 
-much larger than 200, and maybe adjusting the means also has an effect 
-(but I don't think so). The code is available 
-[here](./rmdsource/rsource/simulation_bf_var.R).
+I varied the effect size by adjusting the other standard deviation 
+(between 11, 13 and 15). One condition was realized where the null 
+hypothesis was true, i.e., when both standard deviations was 15. In 
+total, the following conditions varied across simulation runs: 
 
-The results are displayed in the following plot: 
+- The correlation between the measures varied between $0.1$, $0.3$, $0.5$ and $0.7$
+- The standard deviation of one measure varied between $11$, $13$ and $15$
+- $N$ varied between $20$, $40$, ..., $180$ and $200$
+
+This resulted in 150 parameter combinations, for each of which I 
+simulated 1,000 data sets. In total, I ended up with 150,000 Bayes 
+factors. The computations did not even take as long as one might 
+expect, only ~5min on my personal computer. The complete simulation code 
+is available for reproducibility from 
+[here](./rmdsource/rsource/simulation_bf_var.R). 
+
+The results of the simulation are displayed in the following plot: 
 
 ```{r, echo = FALSE}
 knitr::include_graphics("./rsource/Rplot001.png")
 ```
 
-In the plot, the three panels realize the three effect sizes under 
-investigation; in the right panel, there is the null effect where 
-both standard deviations / variances have the same value. In the left 
-panel, there is the largest effect size. Data points illustrate Bayes 
+The three facet panels realize the three effect sizes under 
+investigation. In the right panel, we have a null effect where because 
+both standard deviations / variances had the same value. In the left 
+panel, we have the largest effect size. Data points illustrate Bayes 
 factor quantiles. The y axis illustrates the Bayes factor and is given 
 on a log scale because the Bayes factor quickly becomes huge for larger 
-effects. The red dots indicate that for a given combination of 
-$N$ and effect size (aggregated over the different correlation 
-coefficients that are ignored in this plot), 20% of all observed Bayes
-factors were smaller, i.e., 80% were larger. The black line illustrate 
-the case of indifference: A Bayes factor of 1 neither favors the null 
-nor the alternative.
+effects. The red dots indicate that for a given combination of $N$ and 
+effect size (aggregated over the different correlation coefficients that 
+are ignored in this plot), 20% of all observed Bayes factors were 
+smaller, i.e., 80% were larger. The black line illustrates inconclusive 
+evidence: A Bayes factor of 1 neither favors the null nor the 
+alternative.
 
 Overall, the distribution of Bayes factors [looks as it 
-should](06_BFSize.html). For a large effect, the effect size quickly 
-increase as the sample size increases. A sample size of 100 is enough to 
-ensure that more than 80% of all observed Bayes factors are larger than 
-5, which is considerable evidence favoring the alternative hypothesis. 
-When the null effect is true, the evidence favoring the null hypothesis 
-increases with increasing $N$, which is good. However, finding evidence 
-that favors the null often requires large $N$. In the current 
-simulation, for $N = 100$, we barely miss the mark that 80% of all Bayes 
-factors $BF01$ favor the null hypothesis by a factor of at least 3. This 
-is no reason to worry as it is a general property of Bayes factors.
+should](06_BFSize.html). For our largest effect, the effect size quickly 
+increase as the sample size increases. Here, a sample size of 100 was 
+enough to ensure that more than 80% of all observed Bayes factors are 
+larger than 5, which is considerable evidence favoring the alternative 
+hypothesis. When the null effect is true, the evidence favoring the null 
+hypothesis increases with increasing $N$, which is good. However, 
+finding evidence that favors the null often requires large $N$. In the 
+current simulation, for $N = 100$, we barely miss the mark that 80% of 
+all Bayes factors $BF01$ favor the null hypothesis by a factor of at 
+least 3. This is no reason to worry as it is a general property of Bayes 
+factors.
 
 Out of interest, we may also plot the distribution of Bayes factors by
 the correlation between the measures:
@@ -194,31 +195,35 @@ the correlation between the measures:
 knitr::include_graphics("./rsource/Rplot002.png")
 ```
 
-This plot is interesting as well. As one might have expected, the size 
-of the Bayes factors increases with increasing correlation (however, 
+The information contained in this plot is very interesting. The size of 
+the Bayes factors increases with increasing correlation (however, 
 apparently this is not the case when the null hypothesis is true!). This 
-is why using within-subject designs usually pays offs: the correlated 
-nature of the data leads to more informative inferences, at least when
+is why using within-subject designs usually pays off: the correlated 
+nature of the data leads to more informative inferences, at least when 
 there is an effect.
 
 ## Limitations
 
-In this post, I restricted the investigation of the Bayes factors to 
+In this post, I restricted the investigation of the Bayes factor to only 
+a subset of all conceivable conditions. $N$ might be much larger than 
+200. Maybe adjusting the means also has an effect on the detectability 
+of differences in variance. Moreover, the investigation was limited to 
 normal input data. Real data in psychological research is never truly 
 normal, and in many cases not even approximately normal. There is some 
 evidence that the Morgan-Pitman test that is the basis for the Bayes 
 factor comparing dependent variances is particularly susceptible to 
-deviations from normality, so exploring non-normal data should be done
+deviations from normality, so exploring non-normal data should be done 
 in the future. However, [simulating correlated non-normal data is 
-hard](https://psychometroscar.com/2019/10/16/how-to-simulate-correlated-log-normal-random-variables-the-right-way/).
-Still, this is plans for the future. 
+hard](https://psychometroscar.com/2019/10/16/how-to-simulate-correlated-
+log-normal-random-variables-the-right-way/). Still, this is plans for 
+the future. 
 
 ## Conclusions 
 
 Based on the current simulations, I would conclude that the Bayes factor 
-for the comparison of dependent variances works as one should expect. 
-However, of course this simulation is not an exhaustive evalution, but 
-it gives reason for hope.
+for the comparison of dependent variances works as one should expect. Of 
+course this simulation is not an exhaustive evaluation, but it gives 
+some reason for optimism.
 
 ---
 
