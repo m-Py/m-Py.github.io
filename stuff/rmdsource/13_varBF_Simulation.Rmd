@@ -59,11 +59,12 @@ compare_correlated_variances <- function(X, n, m1, m2, sd1, sd2, r) {
 ```
 
 The first function parameter `X` is somewhat a nuissance, but stay with 
-me for a moment---I just defined this function to be able to repeat the 
-process of generating data and computing a Bayes factor as often as I 
-want. The simulation principle following now is actually rather simple: 
-Using the function `compare_correlated_variances()`, I systematically 
-vary relevant input parameters between simulation runs, such as 
+me for a moment. I defined the function to repeat the process of 
+generating data and computing a Bayes factor as often as I want; the 
+parameter `X` is used for the purpose of repetition, as shown below. The 
+simulation principle following now is actually rather simple: Using the 
+function `compare_correlated_variances()`, I systematically vary 
+relevant input parameters between simulation runs, such as 
 
 - the "effect size" (i.e., how different are the variances)
 - the sample size
