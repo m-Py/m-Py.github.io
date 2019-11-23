@@ -91,7 +91,7 @@ quants <- all_runs %>%
     pt50 = quantile(BayesFactor, 0.5), 
     pt80 = quantile(BayesFactor, 0.8)
   ) %>%
-  ungroup %>%
+  ungroup() %>%
   pivot_longer(
     cols = starts_with("pt"), 
     names_to = "quant", 
@@ -123,7 +123,7 @@ quants_r <- all_runs %>%
     pt50 = quantile(BayesFactor, 0.5), 
     pt80 = quantile(BayesFactor, 0.8)
   ) %>%
-  ungroup %>%
+  ungroup() %>%
   pivot_longer(
     cols = starts_with("pt"), 
     names_to = "quant", 
@@ -142,4 +142,3 @@ quants_r %>%
   scale_y_continuous(trans = "log", breaks = c(0, 0.1, 1/3, 1, 5, 10, 20, 50, 100, 1000, 10000, 100000), labels = scaleFUN) + 
   theme_bw(base_size = 22)
 dev.off()
-
