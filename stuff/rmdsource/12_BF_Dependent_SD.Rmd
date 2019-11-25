@@ -10,7 +10,7 @@ i.e., the variance of the measurements differ---even if just to test
 the validity of the assumption of homogeneous variances that is made by 
 many statistical procedures. As far as I can tell, there is not yet an 
 elaborate and accessible solution to compare variances using a Bayes 
-factor.[^0] Here, I discuss two such options.
+factor.[^0] Here, I discuss two such options. 
 
 ## Independent variances
 
