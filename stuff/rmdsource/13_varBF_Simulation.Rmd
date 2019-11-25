@@ -139,6 +139,8 @@ the Bayes factor will generally yield evidence that is consistent with
 the true state of the nature. This is good, but we wish to find out 
 whether this property holds for all sorts of different conditions.
 
+## The simulation
+
 Across all simulation runs, the true mean of both measures was always 
 set to 100; the standard deviation of one measure was always set to 15. 
 I varied the effect size by adjusting the other standard deviation 
