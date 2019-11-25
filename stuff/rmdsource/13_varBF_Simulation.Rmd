@@ -148,7 +148,7 @@ I varied the effect size by adjusting the other standard deviation
 hypothesis was true, i.e., when both standard deviations was 15. In 
 total, the following conditions varied across simulation runs: 
 
-- The correlation between the measures varied between $0.1$, $0.3$, $0.5$ and $0.7$
+- The correlation between the measures varied between $0$, $0.1$, $0.3$, $0.5$ and $0.7$
 - The standard deviation of one measure varied between $11$, $13$ and $15$
 - $N$ varied between $20$, $40$, ..., $180$ and $200$
 

@@ -449,44 +449,44 @@ BF_quantiles &lt;- function(BFs) {
 <tbody>
 <tr class="odd">
 <td align="left">10%</td>
-<td align="left">20.31</td>
+<td align="left">12.78</td>
 </tr>
 <tr class="even">
 <td align="left">20%</td>
-<td align="left">53.43</td>
+<td align="left">32.36</td>
 </tr>
 <tr class="odd">
 <td align="left">30%</td>
-<td align="left">97.35</td>
+<td align="left">103.82</td>
 </tr>
 <tr class="even">
 <td align="left">40%</td>
-<td align="left">192.77</td>
+<td align="left">375.68</td>
 </tr>
 <tr class="odd">
 <td align="left">50%</td>
-<td align="left">493.63</td>
+<td align="left">1,195.41</td>
 </tr>
 <tr class="even">
 <td align="left">60%</td>
-<td align="left">1,613.63</td>
+<td align="left">2,321.91</td>
 </tr>
 <tr class="odd">
 <td align="left">70%</td>
-<td align="left">3,728.44</td>
+<td align="left">7,289.37</td>
 </tr>
 <tr class="even">
 <td align="left">80%</td>
-<td align="left">16,671.38</td>
+<td align="left">48,085.05</td>
 </tr>
 <tr class="odd">
 <td align="left">90%</td>
-<td align="left">53,073.03</td>
+<td align="left">155,457.70</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>What does this tell us? For example, only 20% of all observed Bayes factors that were smaller than 53.43. Remember, the Bayes factor quantifies the degree to which the alternative hypothesis is favored over the null hypothesis. Therefore, more than 80% of all simulation runs (each representing a hypothetical study) indicate very strong evidence in favor of the hypothesis that the variances are different. This is good because this is consistent with the “ground truth” that the “true” variances differ.</p>
+<p>What does this tell us? For example, only 20% of all observed Bayes factors that were smaller than 32.36. Remember, the Bayes factor quantifies the degree to which the alternative hypothesis is favored over the null hypothesis. Therefore, more than 80% of all simulation runs (each representing a hypothetical study) indicate very strong evidence in favor of the hypothesis that the variances are different. This is good because this is consistent with the “ground truth” that the “true” variances differ.</p>
 <p>Therefore, given</p>
 <ul>
 <li>a standard deviation of 10 in one group and 15 in another group</li>
@@ -498,7 +498,7 @@ BF_quantiles &lt;- function(BFs) {
 <h2>The simulation</h2>
 <p>Across all simulation runs, the true mean of both measures was always set to 100; the standard deviation of one measure was always set to 15. I varied the effect size by adjusting the other standard deviation (between 11, 13 and 15). One condition was realized where the null hypothesis was true, i.e., when both standard deviations was 15. In total, the following conditions varied across simulation runs:</p>
 <ul>
-<li>The correlation between the measures varied between <span class="math inline">\(0.1\)</span>, <span class="math inline">\(0.3\)</span>, <span class="math inline">\(0.5\)</span> and <span class="math inline">\(0.7\)</span></li>
+<li>The correlation between the measures varied between <span class="math inline">\(0\)</span>, <span class="math inline">\(0.1\)</span>, <span class="math inline">\(0.3\)</span>, <span class="math inline">\(0.5\)</span> and <span class="math inline">\(0.7\)</span></li>
 <li>The standard deviation of one measure varied between <span class="math inline">\(11\)</span>, <span class="math inline">\(13\)</span> and <span class="math inline">\(15\)</span></li>
 <li><span class="math inline">\(N\)</span> varied between <span class="math inline">\(20\)</span>, <span class="math inline">\(40\)</span>, …, <span class="math inline">\(180\)</span> and <span class="math inline">\(200\)</span></li>
 </ul>
