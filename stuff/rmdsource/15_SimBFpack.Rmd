@@ -1,0 +1,202 @@
+---
+title: "Comparing the Bartlett-Mulder and Levene-Anderson Bayes factor"
+date: November 26, 2019
+author: Martin Papenberg
+output:
+  html_document:
+    df_print: kable
+---
+
+```{r, include = FALSE}
+
+library(knitr)
+knitr::opts_chunk$set(message=FALSE, warning = FALSE)
+options(scipen = 999)
+
+```
+
+Earlier, I noted that [the Bartlett-Mulder and Levene-Anderson Bayes 
+factors for the comparison of independent variances may yield different 
+results](14_BFpack.html). This post explores this discrepancy a bit more
+systematically. 
+
+First, I define a function that computes a Levene test, a Bartlett 
+test, and the corresponding Bayes factors:
+
+```{r}
+
+# Function to compare variances from two independent groups
+#
+# param x: The first numeric vector, data points from one sample
+# param y: The second numeric vector, data points from the other sample
+# return: p values and Bayes factors for Bartlett and Levene test
+
+compare_variances <- function(x, y) {
+  nx <- length(x) 
+  ny <- length(y)
+  
+  # Levene test
+  lt <- car::leveneTest(
+    y = c(x, y),
+    group = factor(c(rep(1, nx), rep(2, ny)))
+  )
+  
+  # Bartlett test 
+  bt <- BFpack::bartlett_test(
+    x = c(x, y),
+    g = c(rep(1, nx), rep(2, ny))
+  )
+  
+  # Bartlett-Mulder Bayes factor
+  posteriors <- BFpack::BF(bt)$PHP_exploratory
+  BFB <- posteriors[2] / posteriors[1]
+
+  # Levene-Anderson Bayes factor
+  BFL <- varBF::indepvarBF(x, y)
+  
+  # Output
+  output <- c(
+    P_Levene = lt[["Pr(>F)"]][1],
+    P_Bartlett = bt$p.value,
+    BF_Levene = BFL,
+    BF_Bartlett = unname(BFB)
+  )
+  output
+}
+```
+
+Now, let's repeat the conditions from my previous post where I 
+generated data as follows: 
+
+```{r}
+# Generate syntactic data:
+n_group <- 100
+group1 <- rnorm(n_group, mean = 100, sd = 15)
+group2 <- rnorm(n_group, mean = 100, sd = 20)
+```
+
+Here, 100 data points are sampled from two populations that differ in 
+their true variance: in one case, the standard deviation is 15, in the 
+other case, the standard deviation is 20.
+
+Let's apply the above defined function to see how it behaves:
+
+```{r}
+compare_variances(group1, group2)
+```
+
+As we can see, the Levene and Bartlett *p*-values and Bayes factors 
+differ. Let's repeat the same conditions many times to check out whether 
+this represents a general pattern:
+
+```{r}
+simulate_variance_comparison <- function() {
+  n_group <- 100
+  group1 <- rnorm(n_group, mean = 100, sd = 15)
+  group2 <- rnorm(n_group, mean = 100, sd = 20)
+  compare_variances(group1, group2)
+}
+
+comparisons <- replicate(1000, simulate_variance_comparison())
+# convert to data frame:
+comparisons <- data.frame(t(comparisons))
+```
+
+Let's check out the simulation output (the first 6 cases):
+
+```{r}
+head(round(comparisons, 3))
+```
+
+I seems that whenever the *p*-values are small, the Bayes factor are 
+large. Moreover, the Bayes factors covary rather substantially: Whenever 
+the Levene-Anderson Bayes factor is large, so is the Bartlett-Mulders 
+Bayes factor. This is how it should be. Let's check this out more 
+formally by observing the correlations between the Bayes factors:
+
+```{r}
+round(cor(log(comparisons)), 2)
+```
+
+According to the correlation matrix, the Bayes factors agree with each 
+other (and with the *p*-values) pretty well. Note that I correlated the 
+log Bayes factors because the Bayes factor itself can be so huge that we 
+cannot find linear relationships with other variables.
+
+Next, let's compare the magnitude of the Bayes factors under 
+investigation. Is the Bartlett-Mulder Bayes factor generally larger? To 
+find out, I compare the Bayes factor quantiles:
+
+```{r}
+round(
+  data.frame(
+    Levene_Anderson = quantile(comparisons$BF_Levene, probs = seq(0.1, 0.9, 0.1)),
+    Bartlett_Mulder = quantile(comparisons$BF_Bartlett, probs = seq(0.1, 0.9, 0.1))
+  ),
+  2
+)
+
+```
+
+Okay, it seems that the median (50% quantile) Levene-Anderson Bayes 
+factor is slightly smaller than the median Bartlett-Mulder Bayes factor. 
+We also more often find very large Bartlett-Mulder Bayes factors. Hence,
+the Bartlett-Mulder Bayes factor has an advantage here because it more 
+often finds strong evidence in favor of the alternative hypothesis that 
+the variances are not equal---which is true in this case. But the 
+difference between the two Bayes factors is not huge; the input data is 
+much more important, as shown by the strong correlation between the two 
+Bayes factors above.
+
+Next, let's compare the two Bayes factors when the null hypothesis is 
+true.
+
+```{r}
+simulate_variance_comparison <- function() {
+  n_group <- 100
+  group1 <- rnorm(n_group, mean = 100, sd = 15)
+  group2 <- rnorm(n_group, mean = 100, sd = 15)
+  compare_variances(group1, group2)
+}
+
+comparisons <- replicate(1000, simulate_variance_comparison())
+# convert to data frame:
+comparisons <- data.frame(t(comparisons))
+```
+
+
+```{r}
+round(
+  data.frame(
+    Levene_Anderson = quantile(1 / comparisons$BF_Levene, probs = seq(0.1, 0.9, 0.1)),
+    Bartlett_Mulder = quantile(1 / comparisons$BF_Bartlett, probs = seq(0.1, 0.9, 0.1))
+  ),
+  2
+)
+
+```
+
+Here, I computed the Bayes factor $BF_{01}$, indicating the evidence of 
+the data favoring the null over the alternative hypothesis (because in 
+this case, the null hypothesis is true). The results are interesting, 
+because again the Bartlett-Mulder Bayes factor conveys stronger evidence 
+in favor of the true hypothesis. So it seems that for the conditions 
+tested (that are still very limited), the Bartlett-Mulder Bayes factor 
+from the package `BFpack` performs better than the Levene-Anderson test.
+
+## Limitations & conclusions
+
+Needless to say, this simulation only tested a very limited subset of 
+conceivable conditions: I did not vary $N$ at all, and only tested two 
+different effect sizes. Based on these limited conditions, the 
+Bartlett-Mulder Bayes factor performed better. However, conditions 
+of non-normality should also be assessed, because it seems that the 
+Levene test is more robust against violations of non-normality.
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
