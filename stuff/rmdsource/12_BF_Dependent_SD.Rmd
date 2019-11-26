@@ -2,6 +2,9 @@
 title: "Bayes factors for the comparison of variances"
 date: November 21, 2019
 author: Martin Papenberg
+output:
+  html_document:
+    df_print: kable
 ---
 
 Even though psychologists are often interested in comparing mean values 

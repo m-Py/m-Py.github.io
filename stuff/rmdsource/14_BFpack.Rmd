@@ -1,0 +1,232 @@
+---
+title: "`BFpack`: A new `R` package to compute Bayes factors"
+date: November 26, 2019
+author: Martin Papenberg
+output:
+  html_document:
+    df_print: kable
+---
+
+```{r, include = FALSE}
+
+library(knitr)
+knitr::opts_chunk$set(message=FALSE, warning = FALSE)
+options(scipen = 999)
+
+set.seed(123)
+
+```
+
+There is a new player in Bayes Factor town: The `R` package `BFpack`
+([Paper](https://arxiv.org/abs/1911.07728); [package 
+link](https://cran.r-project.org/web/packages/BFpack/index.html)). I 
+guess an extension of previous Bayes factor packages (such as 
+[`BayesFactor`](https://richarddmorey.github.io/BayesFactor/)) was 
+needed given that recent methodological advancements
+were not all immediately accompanied by accessible software. 
+
+The user interface of this package is interesting: There is only 
+one function that computes Bayes factors for a variety of statistical 
+tests: the function `BF()`. This is rather convenient. As argument, 
+`BF()` receives an `R` object capturing the results of a statistical 
+analysis. The function already `BF()` supports a wide range of objects, 
+such as linear regression objects, t-test objects, or ANOVA objects. 
+This is a good approach because it is clear what needs to be done 
+to compute a Bayes factor---just pass an object to `BF()`. The downside 
+is that users have to compute the "classical" analyses themselves and 
+therefore have to deal with a variety of different computation 
+interfaces. But I am not sure if this is even a downside.
+
+So the general approach is: Compute a "classical" statistical test and 
+convert the result to a Bayes factor---neat!
+
+I was particularly interested to see whether the package offers the 
+possibility to compare variances, because I was recently looking for 
+such functionality. And indeed, it is possible to compare independent 
+variances using a Bayes factor extension to the [Bartlett 
+test](https://en.wikipedia.org/wiki/Bartlett's_test). However, I am not 
+sure if it is also possible to compare dependent variances; at least the 
+function `BF()` does not seem to accept any corresponding object. 
+
+[Previously](12_BF_Dependent_SD.html), I described how I implemented a 
+Bayes factor for the comparison of independent variances. Let's call it 
+the "Levene-Anderson" Bayes factor, because it converts the results of a 
+classical *Levene* test to a Bayes factor, as proposed by Rich *Anderson* 
+[here](http://forum.cogsci.nl/discussion/2115/f-test-of-equality-of-variances). 
+Let's call the Bayes factor computed in the `BFpack` package 
+"Bartlett-Mulder" factor, because it is based on the *Bartlett* test and 
+Joris *Mulder* is the leading author of `BFpack` as well as the 
+accompanying manuscript. In the remainder of this post, I apply the 
+Bartlett-Mulder and the Levene-Anderson Bayes factors to a syntactic 
+data set and compare the outputs.
+
+
+
+## Bartlett-Mulder Bayes factor
+
+First, I generate 200 data points from two distributions (100 from 
+each) where the true variances are known to differ between 
+distributions:
+
+```{r}
+# Generate syntactic data:
+n_group <- 100
+group1 <- rnorm(n_group, mean = 100, sd = 15)
+group2 <- rnorm(n_group, mean = 100, sd = 20)
+```
+
+Next, I compute the Bayes factor. Note that I first need to compute the
+Bartlett test by hand and then pass its output to the `BF()` function:
+
+```{r}
+library(BFpack) # to install, use `install.packages("BFpack")
+
+# The function `bartlett_test()` takes a numeric vector (`x`)
+# and a grouping vector (`g`) as input
+bt <- bartlett_test(
+  x = c(group1, group2),
+  g = c(rep(1, n_group), rep(2, n_group))
+)
+BF(bt)
+```
+
+It seems that the default output of the `BF()` function does not contain 
+the Bayes factor, and instead only the posterior probabilities of the 
+competing hypotheses ("homogeneity of variances" versus "no homogeneity 
+of variances"). This seems questionable to me because the posterior odds 
+depend on the prior odds, i.e., the relative probabilities of the 
+competing hypotheses before seeing the data, for which everyone may have 
+a different intuition. The internals of the `R` object---obtained via 
+`str(BF(bt))`---also do not reveal the actual Bayes factor, which I find 
+unfortunate. 
+
+Anyway, we can derive the Bayes factor by hand. The posterior odds 
+correspond to the prior odds multiplied by the Bayes factor. In the 
+default base, the function `BF()` assumes prior odds of 1:1 (i.e., 
+before seeing the data, the alternative hypothesis was just as likely to 
+be true as the null hypothesis). Hence, we have:
+
+```{r, echo = FALSE, results = "asis"}
+
+bfact <- BF(bt)$PHP_exploratory
+podds1 <- round(bfact[2], 3)
+podds0 <- round(bfact[1], 3)
+post_odds <- paste0(
+  "\\frac{", 
+  podds1, 
+  "}{", 
+  podds0,
+  "}"
+)
+
+cat("$$", post_odds, " = \\frac{1}{1} \\cdot BF_{10} $$")
+```
+
+So, given the prior odds of 1:1, the Bayes factor $BF_{10}$ is just the 
+posterior probability of the alternative hypothesis divided by the 
+posterior probability of the null hypothesis. This yields:
+
+```{r, echo = FALSE, results = "asis"}
+cat("$$ BF_{10} = ", post_odds, " = ", round(podds1 / podds0, 2), "$$")
+```
+
+The Bayes factor of `r  round(podds1 / podds0, 2)` is strong evidence 
+favoring the alternative hypothesis that the variances are different. 
+This is consistent with the small *p*-value of `r bt$p.value` given by 
+the function `bartlett_test()`.
+
+## Levene-Anderson Bayes factor
+
+Using the package `varBF`, I compute the Levene-Anderson Bayes factor 
+for the same syntactic data that I generated above: 
+
+```{r}
+library(varBF) # to install, use `remotes::install_github("m-Py/varBF")`
+
+indepvarBF(group1, group2)
+
+```
+
+Note that in the `varBF` package, we have a different function 
+interface: We pass two numeric vectors whose variances are compared. 
+Moreover, the function internally computes the Levene test; it is not 
+necessary to do this by hand. The output is (only) the Bayes factor 
+$BF_{10}$ quantifying the degree to which the alternative hypothesis is 
+favored over the null hypothesis. 
+
+It is noteworthy that the Levene-Anderson Bayes factor (`r 
+round(indepvarBF(group1, group2), 2)`) is considerably smaller than the 
+Bartlett-Mulder Bayes factor (`r  round(podds1 / podds0, 2)`). It still 
+favors the alternative hypothesis, but to a smaller degree. Note that 
+different alternative hypotheses are actually tested in both cases---at 
+least I think so. So it should not be entirely surprising that the tests 
+give different results. However, another possible explanation for this 
+discrepancy can found by comparing the different classical analyses that 
+are converted to Bayes factors. The Levene-Anderson Bayes factor is 
+based on the Levene test. The Bartlett-Mulder Bayes factor is based on 
+the Bartlett test. As shown in the following, the Levene *p*-value is 
+much larger (about ten times as large) than the Bartlett *p*-value: 
+
+[^1]: 
+
+```{r}
+
+library(car) # # to install, use `install.packages("car")
+
+lt <- leveneTest(
+  y = c(group1, group2),
+  group = c(rep(1, n_group), rep(2, n_group))
+)
+
+# p value Levene test
+lt[["Pr(>F)"]][1]
+
+# p value Bartlett test
+bt$p.value
+
+```
+
+This result is consistent with the pattern that the Levene-Mulder Bayes 
+factor is larger than the Levene-Anderson Bayes factor---and it is 
+entirely unrelated to the hypotheses that are compared using the two 
+approaches. Maybe the Levene test is more conservative than the Bartlett 
+test. However, across several manual trials, I could not establish a 
+clear pattern with regard to the behavior of the two tests. Clearly, 
+this should be evaluated more rigorously than by just manually repeating 
+a single example.
+
+## Conclusions
+
+In this post, I discussed (parts of) the new `R` package `BFpack` for 
+the computation of Bayes factors. I only used it for a rather simple 
+computation, i.e., to compare independent variances. It is more 
+powerful, as it can be used to compute Bayes factors for much more 
+complex designs that may also include random factors. It can also be 
+used to specify more elaborate hypothesis than just "test if a null and 
+an alternative differ", which may even be its greatest strength. I am 
+also excited to see that it seems to enable the comparison of (sets of) 
+correlations, which was not possible using existing software before, as 
+far as I know. I am sure this package is of interest to many 
+researchers.
+
+My first impression of `BFpack` is that I like its interface: It is good 
+that you can simply pass `R` objects containing the results of 
+statistical analyses such as `lm()` or `aov()`. This approach also 
+makes the package conveniently extensible; I assume that we may expect 
+support for more statistical tests in the future. 
+
+What I did not quite like about `BFpack` is that it does not seem to 
+return Bayes factors by default, at least for the Bartlett test. This is 
+kind of irritating because `BFpack` is supposed to be a package for 
+computing Bayes factors. Personally, I would prefer if the `BF()` 
+function returns a Bayes factor, maybe in addition to posterior 
+probabilities. However, I assume the authors have good reasons for 
+preferring posterior probabilities over Bayes factors.
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
