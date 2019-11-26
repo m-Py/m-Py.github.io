@@ -124,7 +124,8 @@ cat("$$", post_odds, " = \\frac{1}{1} \\cdot BF_{10} $$")
 
 So, given the prior odds of 1:1, the Bayes factor $BF_{10}$ is just the 
 posterior probability of the alternative hypothesis divided by the 
-posterior probability of the null hypothesis. This yields:
+posterior probability of the null hypothesis (i.e., the Bayes factor is 
+the same as the posterior odds). This yields:
 
 ```{r, echo = FALSE, results = "asis"}
 cat("$$ BF_{10} = ", post_odds, " = ", round(podds1 / podds0, 2), "$$")
