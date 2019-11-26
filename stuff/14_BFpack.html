@@ -396,8 +396,16 @@ group2 &lt;- rnorm(n_group, mean = 100, sd = 20)</code></pre>
 bt &lt;- bartlett_test(
   x = c(group1, group2),
   g = c(rep(1, n_group), rep(2, n_group))
-)
-BF(bt)</code></pre>
+)</code></pre>
+<p>We can check out the output of the Bartlett test that contains the classical <em>p</em>-value:</p>
+<pre class="r"><code>print(bt)</code></pre>
+<pre><code>## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  c(group1, group2) and c(rep(1, n_group), rep(2, n_group))
+## Bartlett&#39;s K-squared = 11.521, df = 1, p-value = 0.0006883</code></pre>
+<p>The <em>p</em>-value is very small and hence, the result is “highly significant”. Now, let’s check out the corresponding Bayes factor:</p>
+<pre class="r"><code>BF(bt)</code></pre>
 <pre><code>## Call:
 ## BF.bartlett_htest(x = bt)
 ## 
@@ -411,7 +419,7 @@ BF(bt)</code></pre>
 ##    homogeneity of variances no homogeneity of variances 
 ##                       0.039                       0.961</code></pre>
 <p>It seems that the default output of the <code>BF()</code> function does not contain the Bayes factor, and instead only the posterior probabilities of the competing hypotheses (“homogeneity of variances” versus “no homogeneity of variances”). This seems questionable to me because the posterior odds depend on the prior odds, i.e., the relative probabilities of the competing hypotheses before seeing the data, for which everyone may have a different intuition. The internals of the <code>R</code> object—obtained via <code>str(BF(bt))</code>—also do not reveal the actual Bayes factor, which I find unfortunate.</p>
-<p>Anyway, we can derive the Bayes factor by hand. The posterior odds correspond to the prior odds multiplied by the Bayes factor. In the default base, the function <code>BF()</code> assumes prior odds of 1:1 (i.e., before seeing the data, the alternative hypothesis was just as likely to be true as the null hypothesis). Hence, we have:</p>
+<p>Anyway, we can derive the Bayes factor by hand based on the posterior probabilities. The ratio of the posterior probabilities (also called posterior odds) is the prior odds multiplied by the Bayes factor. In the default base, the function <code>BF()</code> assumes prior odds of 1:1, i.e., before seeing the data, the alternative hypothesis was just as likely to be true as the null hypothesis. Hence, we have:</p>
 <p><span class="math display">\[ \frac{0.961}{0.039}  = \frac{1}{1} \cdot BF_{10} \]</span></p>
 <p>So, given the prior odds of 1:1, the Bayes factor <span class="math inline">\(BF_{10}\)</span> is just the posterior probability of the alternative hypothesis divided by the posterior probability of the null hypothesis (i.e., the Bayes factor is the same as the posterior odds). This yields:</p>
 <p><span class="math display">\[ BF_{10} =  \frac{0.961}{0.039}  =  24.64 \]</span></p>
