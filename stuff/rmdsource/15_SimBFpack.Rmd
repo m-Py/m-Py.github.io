@@ -1,5 +1,5 @@
 ---
-title: "Comparing the Bartlett-Mulder and Levene-Anderson Bayes factor"
+title: "Comparing the Bartlett-Mulder and Levene-Anderson Bayes factors"
 date: November 26, 2019
 author: Martin Papenberg
 output:
@@ -11,17 +11,25 @@ output:
 
 library(knitr)
 knitr::opts_chunk$set(message=FALSE, warning = FALSE)
-options(scipen = 999)
+options(scipen = 999, digits = 2)
 
 ```
 
-Earlier, I noted that [the Bartlett-Mulder and Levene-Anderson Bayes 
-factors for the comparison of independent variances may yield different 
-results](14_BFpack.html). This post explores this discrepancy a bit more
-systematically. 
+In an earlier post, I noted that [the Bartlett-Mulder and 
+Levene-Anderson Bayes factors for the comparison of independent 
+variances may yield different results](14_BFpack.html). In this post I 
+explore this discrepancy a bit more systematically using Monte Carlo 
+computer simulations. I show that the the Bartlett-Mulder Bayes factor 
+from the new 
+[`BFpack`](https://cran.r-project.org/web/packages/BFpack/index.html) 
+package outperforms the Levene-Anderson Bayes factor across a variety of 
+conditions.
+
+## Preparing the simulation
 
 First, I define a function that computes a Levene test, a Bartlett 
-test, and the corresponding Bayes factors:
+test, and the corresponding Bayes factors given two samples of 
+numeric observations $x$ and $y$:
 
 ```{r}
 
@@ -65,133 +73,235 @@ compare_variances <- function(x, y) {
 }
 ```
 
-Now, let's repeat the conditions from my previous post where I 
-generated data as follows: 
+To show how it works, let's generate two vectors of normal data with 
+different standard deviations and feed them into the function 
+`compare_variances()`: 
 
 ```{r}
-# Generate syntactic data:
 n_group <- 100
 group1 <- rnorm(n_group, mean = 100, sd = 15)
 group2 <- rnorm(n_group, mean = 100, sd = 20)
-```
 
-Here, 100 data points are sampled from two populations that differ in 
-their true variance: in one case, the standard deviation is 15, in the 
-other case, the standard deviation is 20.
-
-Let's apply the above defined function to see how it behaves:
-
-```{r}
 compare_variances(group1, group2)
 ```
 
 As we can see, the Levene and Bartlett *p*-values and Bayes factors 
-differ. Let's repeat the same conditions many times to check out whether 
-this represents a general pattern:
+differ for the same data set.
+
+Next, I define a function that can be used to repeat the simulation 
+process while varying input parameters. The sample size per group 
+(function argument `N`) and one of the two standard deviations (function 
+argument `sd2`) vary between simulation runs; the parameter `nruns` 
+defines the number of repetitions for each combination of sample size 
+and standard deviation.
 
 ```{r}
-simulate_variance_comparison <- function() {
-  n_group <- 100
-  group1 <- rnorm(n_group, mean = 100, sd = 15)
-  group2 <- rnorm(n_group, mean = 100, sd = 20)
-  compare_variances(group1, group2)
+# This function allows a multiple length vector `N` and `sd2` as input 
+# for allowing to vary `N` and the effect size between simulation runs.
+# The parameter `nruns` then refers to the simulation runs for each 
+# combination of `N` and `sd2`!
+simulate_variance_comparison <- function(nruns, N, sd2) {
+  conditions <- expand.grid(N = N , sd2 = sd2)
+  results <- list()
+  for (i in 1:nrow(conditions)) {
+    sim_runs <- lapply(
+      X = 1:nruns,
+      simulate_variance_comparison_,
+      N = conditions$N[i],
+      sd2 = conditions$sd2[i]
+    )
+    results[[i]] <- data.frame(t(simplify2array(sim_runs, higher = FALSE)))
+    results[[i]]$N <- conditions$N[i]
+    results[[i]]$sd2 <- conditions$sd2[i]
+  }
+  do.call(rbind, results)
 }
 
-comparisons <- replicate(1000, simulate_variance_comparison())
-# convert to data frame:
-comparisons <- data.frame(t(comparisons))
+# helper function; generates data and computes BF for a single simulation run
+simulate_variance_comparison_ <- function(X, N, sd2) {
+  group1 <- rnorm(N, mean = 100, sd = 15)
+  group2 <- rnorm(N, mean = 100, sd = sd2)
+  compare_variances(group1, group2)
+}
+```
+
+## Simulation 1: Variances differ
+
+Now, let's simulate 100 runs where the true standard deviations 
+differ (15 versus 20):
+
+```{r}
+comparisons <- simulate_variance_comparison(
+  nruns = 100, # number of simulation runs
+  N = 100, # sample size per group
+  sd2 = 20 # defines the "effect size", difference between SDs
+)
 ```
 
 Let's check out the simulation output (the first 6 cases):
 
 ```{r}
-head(round(comparisons, 3))
+head(comparisons)
 ```
 
-I seems that whenever the *p*-values are small, the Bayes factor are 
-large. Moreover, the Bayes factors covary rather substantially: Whenever 
-the Levene-Anderson Bayes factor is large, so is the Bartlett-Mulders 
-Bayes factor. This is how it should be. Let's check this out more 
-formally by observing the correlations between the Bayes factors:
+Whenever the *p*-values are small, the Bayes factors are large; 
+moreover, the Bayes factors covary rather substantially: Whenever the 
+Levene-Anderson Bayes factor is large, so is the Bartlett-Mulders Bayes 
+factor. This is how it should be. Let's examine these relationships more 
+formally by observing the correlations between Bayes factors and 
+*p*-values:
 
 ```{r}
-round(cor(log(comparisons)), 2)
+cor(
+  log(comparisons[, c("P_Levene", "P_Bartlett", "BF_Levene", "BF_Bartlett")])
+)
 ```
 
 According to the correlation matrix, the Bayes factors agree with each 
-other (and with the *p*-values) pretty well. Note that I correlated the 
-log Bayes factors because the Bayes factor itself can be so huge that we 
-cannot find linear relationships with other variables.
+other pretty well. Note that I correlated the log Bayes factors because 
+Bayes factors can be so huge that we cannot find linear relationships 
+with other variables.
 
 Next, let's compare the magnitude of the Bayes factors under 
 investigation. Is the Bartlett-Mulder Bayes factor generally larger? To 
 find out, I compare the Bayes factor quantiles:
 
 ```{r}
-round(
-  data.frame(
-    Levene_Anderson = quantile(comparisons$BF_Levene, probs = seq(0.1, 0.9, 0.1)),
-    Bartlett_Mulder = quantile(comparisons$BF_Bartlett, probs = seq(0.1, 0.9, 0.1))
-  ),
-  2
+data.frame(
+  Levene_Anderson = quantile(comparisons$BF_Levene, probs = seq(0.1, 0.9, 0.1)),
+  Bartlett_Mulder = quantile(comparisons$BF_Bartlett, probs = seq(0.1, 0.9, 0.1))
 )
-
 ```
 
-Okay, it seems that the median (50% quantile) Levene-Anderson Bayes 
-factor is slightly smaller than the median Bartlett-Mulder Bayes factor. 
-We also more often find very large Bartlett-Mulder Bayes factors. Hence,
-the Bartlett-Mulder Bayes factor has an advantage here because it more 
-often finds strong evidence in favor of the alternative hypothesis that 
-the variances are not equal---which is true in this case. But the 
-difference between the two Bayes factors is not huge; the input data is 
-much more important, as shown by the strong correlation between the two 
-Bayes factors above.
+The median (50% quantile) Levene-Anderson Bayes factor is slightly 
+smaller than the median Bartlett-Mulder Bayes factor. We also more often 
+find very large Bartlett-Mulder Bayes factors. Hence, the 
+Bartlett-Mulder Bayes factor has an advantage because it generally 
+indicates stronger evidence in favor of the true hypothesis, i.e., the 
+hypothesis that the variances differ. However, note that the difference 
+between the Bayes factors is not huge; the input data is much more 
+important, as shown by the strong correlation between the two Bayes 
+factors.
+
+## Simulation 2: Variances do not differ
 
 Next, let's compare the two Bayes factors when the null hypothesis is 
-true.
+true:
 
 ```{r}
-simulate_variance_comparison <- function() {
-  n_group <- 100
-  group1 <- rnorm(n_group, mean = 100, sd = 15)
-  group2 <- rnorm(n_group, mean = 100, sd = 15)
-  compare_variances(group1, group2)
-}
+comparisons <- simulate_variance_comparison(
+  nruns = 100, 
+  N = 100, 
+  sd2 = 15 # sd1 is also 15, as we know - null effect!
+)
 
-comparisons <- replicate(1000, simulate_variance_comparison())
-# convert to data frame:
-comparisons <- data.frame(t(comparisons))
-```
-
-
-```{r}
-round(
-  data.frame(
-    Levene_Anderson = quantile(1 / comparisons$BF_Levene, probs = seq(0.1, 0.9, 0.1)),
-    Bartlett_Mulder = quantile(1 / comparisons$BF_Bartlett, probs = seq(0.1, 0.9, 0.1))
-  ),
-  2
+# Display the results as quantiles:
+data.frame(
+  Levene_Anderson = quantile(1 / comparisons$BF_Levene, probs = seq(0.1, 0.9, 0.1)),
+  Bartlett_Mulder = quantile(1 / comparisons$BF_Bartlett, probs = seq(0.1, 0.9, 0.1))
 )
 
 ```
 
-Here, I computed the Bayes factor $BF_{01}$, indicating the evidence of 
-the data favoring the null over the alternative hypothesis (because in 
-this case, the null hypothesis is true). The results are interesting, 
-because again the Bartlett-Mulder Bayes factor conveys stronger evidence 
-in favor of the true hypothesis. So it seems that for the conditions 
-tested (that are still very limited), the Bartlett-Mulder Bayes factor 
-from the package `BFpack` performs better than the Levene-Anderson test.
+Here, I computed the Bayes factor $BF_{01}$---by dividing $1$ by the 
+Bayes factor $BF_{10}$---representing the degree to which the data 
+favors the null hypothesis over the alternative. Again, the 
+Bartlett-Mulder Bayes factor are larger and hence convey stronger 
+evidence in favor of the true null hypothesis. 
 
-## Limitations & conclusions
+## Simulation 3: Variances differ -- more conditions
 
-Needless to say, this simulation only tested a very limited subset of 
-conceivable conditions: I did not vary $N$ at all, and only tested two 
-different effect sizes. Based on these limited conditions, the 
-Bartlett-Mulder Bayes factor performed better. However, conditions 
-of non-normality should also be assessed, because it seems that the 
-Levene test is more robust against violations of non-normality.
+To generalize the results, I repeat the simulations from above but
+include more conditions, i.e., I vary $N$ and the effect size between 
+conditions. First, I again assume that the true variances are different.
+Per condition, I simulate 1,000 runs, allowing for a rather precise 
+comparison:
+
+```{r, eval = FALSE}
+comparisons <- simulate_variance_comparison(
+  nruns = 1000, 
+  N = seq(from = 50, to = 300, by = 50), 
+  sd2 = c(18, 20, 22)
+)
+```
+
+I plot the Bayes factor quantiles by $N$ and method. The code needed to 
+reproduce all simulations and plots is available 
+[here](./rmdsource/rsource/simulation_bf_var2.R). 
+
+```{r, echo = FALSE}
+knitr::include_graphics("./rsource/sim3-post15.png")
+```
+
+It seems that across this variety of conditions, the Bartlett-Mulder 
+Bayes factor tends to yield higher Bayes factors, which is good because 
+the variances actually differ. However, note that the 20% quantile lines 
+mostly overlap. What does this mean? The lines themselves indicate that 
+80% of all observed Bayes factors were larger than the respective value. 
+In a frequentist mindset, this value is important because we often 
+expect that 80% of our studies should yield informative results (this 
+does not sound good when I say it like this, right?). At ~ $N = 300$, 
+80% of all Bayes factors seem to be larger than 5, which is more 
+or less convincing evidence that the variances actually differ. Note 
+that this threshold does not really differ between the two Bayes factors. 
+Hence, studies will mostly be equally informative, regardless of the 
+Bayes factor we compute (for the conditions that were realized in this 
+simulation).
+
+## Simulation 4: Variances do not differ -- more conditions
+
+In a forth simulation, I assumed a null effect and varied $N$ between 
+simulation runs using the following code: 
+
+```{r, eval = FALSE}
+comparisons <- simulate_variance_comparison(
+  nruns = 1000, 
+  N = seq(from = 50, to = 300, by = 50), 
+  sd2 = c(15) # null effect
+)
+```
+
+Hence, 1,000 simulation runs were conducted for various sample sizes.
+The results are illustrated in the following plot:
+
+```{r, echo = FALSE}
+knitr::include_graphics("./rsource/sim4-post15.png")
+```
+
+The $y$-axis displays the Bayes factor $BF_{01}$, meaning that larger 
+values indicate more evidence in favor of the null hypothesis. The plot 
+shows that the Bartlett-Mulder Bayes factor generally yields higher 
+evidence in favor of the null hypothesis, arguably to a non-negligible 
+degree.
+
+## Log normal data
+
+I repeated simulations 3 and 4 using log-normal instead of normal data. 
+The following plots illustrate the results. 
+
+```{r, echo = FALSE}
+knitr::include_graphics("./rsource/sim3-post15-log.png")
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("./rsource/sim4-post15-log.png")
+```
+
+The Bartlett-Mulder Bayes factor is favored even more for log-normal 
+input data; it always conveys stronger evidence for the true 
+hypothesis.
+
+## Conclusions
+
+The Bartlett-Mulder Bayes factor outperforms the Levene-Anderson Bayes 
+factor across a variety of conditions: for small to medium large $N$, 
+when the variances differ; when the variances are the same; for normal 
+data and for log-normal data. This is an important observation. 
+Apparently, the Bartlett-Mulder Bayes factor from the `BFpack` package 
+is well suited to test for variance homogeneity in independent samples. 
+Of course, it is always possible to cover more conditions in a 
+simulation, such as other data distributions, more effect sizes, or 
+larger $N$. 
 
 ---
 
