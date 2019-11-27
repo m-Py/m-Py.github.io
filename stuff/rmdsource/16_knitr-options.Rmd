@@ -1,0 +1,36 @@
+---
+title: "Useful `knitr` options"
+date: November 27, 2019
+author: Martin Papenberg
+---
+
+These are useful `knitr` options for starting an R Markdown document:
+
+```{r, eval = FALSE}
+
+library(knitr)
+knitr::opts_chunk$set(message=FALSE, warning = FALSE) # echo = FALSE
+options(scipen = 999, digits = 2)
+
+```
+
+I always got wrong that `digits` is in `options()` and not 
+`opts_chunk$set()`. The option `scipen = 999` disables the horrible 
+scientific number printing.
+
+Don't forget to include the following in the YAML header to ensure that 
+data frames are printed nicely:
+
+```YAML
+output:
+  html_document:
+    df_print: kable
+```
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;

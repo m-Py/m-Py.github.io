@@ -12,6 +12,7 @@ href="https://www.r-project.org/" target="_blank">R</a>-related stuff.
 
 ### Posts:
 
+- <a href="16_knitr-options.html">2019/11: Useful `knitr` options
 - <a href="15_SimBFpack.html">2019/11: Comparing the Bartlett-Mulder and Levene-Anderson Bayes factors
 - <a href="14_BFpack.html">2019/11: `BFpack`: A new `R` package to compute Bayes factors
 - <a href="13_varBF_Simulation.html">2019/11: Evaluating a Bayes factor for the comparison of dependent variances
