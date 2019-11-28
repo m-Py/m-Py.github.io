@@ -12,7 +12,6 @@ href="https://www.r-project.org/" target="_blank">R</a>-related stuff.
 
 ### Posts:
 
-- <a href="17_why-program.html">2019/11: Another reason to learn programming as a researcher
 - <a href="16_knitr-options.html">2019/11: Useful `knitr` options
 - <a href="15_SimBFpack.html">2019/11: Comparing the Bartlett-Mulder and Levene-Anderson Bayes factors
 - <a href="14_BFpack.html">2019/11: `BFpack`: A new `R` package to compute Bayes factors
