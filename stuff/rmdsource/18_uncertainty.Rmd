@@ -1,0 +1,152 @@
+---
+title: "Dealing with methodological uncertainty"
+date: November 28, 2019
+author: Martin Papenberg
+---
+
+As researchers, we are in a often in situations of uncertainty, and 
+probably feel overwhelmed a lot. As psychologists, the "overwhelmed" 
+part probably stems from methodological insecurity. To do good science, 
+we have to apply reasonable (statistical) methods to our data, but we 
+mostly lack training to fully grasp the mathematical background of those 
+methods---that we nevertheless apply. To make us feel worse, the methods 
+we are taught usually rely on assumptions that are trivially false for 
+most of our data (e.g., if we measure something on a likert scale, 
+variance and mean will be related, and often it is even obvious that the 
+data is not nearly normal---no test needed to confirm that). One of the 
+many questions we have to answer (if we do not wish to ignore it) is 
+if an available method works for our application How can we tell?
+
+## Example 1: Bayesian t-test
+
+Everyone who has heard about Bayes factors---or Bayesian statistics in 
+general---has heard about "priors", often accompanied with the sentiment
+"priors are arbitrary, hence Bayes is bad". We know that a prior has to
+be specified for a Bayesian analysis, we can't do without.
+
+In the context of Bayes factors, another word for the prior is simply 
+"hypothesis". Bayes factors compare the adequacy of two competing 
+hypotheses after looking at the data. The question is: How well could 
+each of the competing hypotheses have generated the data. The Bayes 
+factor is the ratio of the degree to which both hypotheses could have 
+generated the data. It is the amount to which one of the hypotheses 
+becomes more likely after seeing the data as compared to the other. 
+Hence, Bayes factors can quantify evidence in favor of a null 
+hypothesis, unlike *p*-values.
+
+In the case of a Bayesian independent $t$-test, the competing hypotheses 
+each guess how the population effect size Cohen's $d$---the normalized 
+difference between two group means---might be distributed. The null 
+hypothesis always assumes that $d = 0$, i.e., that there is no 
+difference between two group means. The alternative hypothesis assumes 
+that there is an effect in the population. The so called "default" 
+alternative hypothesis postulates that the distribution of $d$ is 
+described by a Cauchy distribution (see Rouder et al., 2009). The 
+following plot visualizes the Cauchy distribution:
+
+```{r, echo = FALSE}
+bayesEd::visualize_prior()
+```
+
+According to the alternative hypothesis, effect sizes near $0$ are most 
+likely, and larger effect sizes become increasingly unlikely. 
+
+The logic of the Bayes factor is as follows: we have two competing 
+hypotheses about the true nature of the difference in groups means; we 
+observe the actual difference in group means; we check how well both 
+hypotheses capture the difference in group means. The Bayes factor 
+$BF_{10}$ is the ratio of the probability of the data (i.e., the 
+difference in group means) under the alternative hypothesis divided by 
+the probability of the data under the null hypothesis. A larger value 
+indicates stronger evidence in favor of the alternative hypothesis that 
+there is a difference in group means.
+
+If we ignore the elephant in the room (how the hell do we compute the 
+probability of the data under each hypothesis---in most cases this is 
+non-trivial), I think this principle can be understood rather well by 
+non-mathematicians like me. That is: I do understand the meaning of the 
+priors---i.e., the competing statistical hypotheses---and I do 
+understand the meaning of the Bayes factor. 
+
+Other things are less clear: Why exactly is the "default" prior a 
+Cauchy; is a normal distribution not good enough (looks similar enough)?
+However, at this point I am satisfied with trusting clever 
+mathematicians who state that the Cauchy has several desirable 
+mathematical properties, i.e., that it has "fat tails", meaning that 
+very large values of Cohen's $d$ are still predicted by it. Maybe that is 
+a good thing. 
+
+Apparently, relying on methods is a mixture of understanding and trust. 
+We might trust methodologists who advocate a procedure for the data 
+structure we have, or a friend who has used it before and liked it. In 
+an ideal world, there is much understanding and no need for trust, but I 
+fear we do not live in this world. There has to be division of labor and 
+we should be able to trust methodologists who advocate methods. 
+Unfortunately, there is rarely agreement between experts. Bayes factors 
+in particular are disliked by many clever statisticians, and liked by 
+others. Probably, their usefulness depends on the concrete application. 
+
+## Example 2: Gunel-Dickey Bayes factor
+
+I turn to a second Bayes factor where I feel more trust is needed and 
+less understanding is possible, at least for people who lack a strong 
+mathematical background. The Bayes factor is computed to compare 
+independent proportions. For example, we may compare the probability of 
+dropping out of a school between two schools, where the units of 
+analysis are students, and the outcomes are 1 = dropped out; 0 = did not 
+drop out.
+
+We may expect that the analysis of this data may be more simple than the 
+Bayesian $t$-test because the data is more simple (dichotomous instead 
+of metric data), but it turns out that is not the case. The "default" 
+Bayes factor proposed to compare independent proportions is the 
+Gunel-Dickey Bayes factor (Jamil et al., 2017). It is for example 
+implemented in the `R` package `BayesFactor` (Morey & Rouder, 2015). 
+
+It is very difficult to comprehend the alternative hypothesis 
+implemented via the Gunel-Dickey Bayes factor. It is described by a 
+Dirichlet distribution, but it is not even very clear on which parameter 
+this distribution operates---it is not some "effect size" on the 
+difference in proportions. A Dirichlet distribution cannot conveniently 
+be plotted like the Cauchy. Really, I tried to understand it (for some 
+time), and I failed. 
+
+What I know is that the Gunel-Dickey Bayes factor operates according to 
+the usualy logic: the alternative hypothesis assumes there is an effect, 
+and it is contrasted with the null hypothesis that there is no effect.
+
+I recently reported a Gunel-Dickey Bayes factor in a paper I wrote, 
+arguing that two proportions do not differ. 
+
+## Conclusions
+
+How do we deal with methodological uncertainty?
+
+- Understand
+- Trust
+- Simulate
+ 
+Beyond that? Maybe we should start by admitting our methodological 
+insecurity, and by admitting our shortcomings. Maybe we should make 
+explicit that methodology is hard, following the most recent 
+developments is hard, and there is no shame in that. Then, we can decide 
+how to further deal with it. How much should we rely on understanding 
+and trust? Everyone has to decide for themselves, I guess. Maybe we 
+should also decrease our incredible focus on statistics, and not treat 
+people who struggle with it as idiots. 
+
+## References 
+
+Rouder, J N, P L Speckman, D Sun, R D Morey, and G Iverson. 2009. 
+“Bayesian T Tests for Accepting and Rejecting the Null Hypothesis.” 
+Psychonomic Bulletin & Review 16 (2). Springer: 225–37.
+
+a (or several) parameter 
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
