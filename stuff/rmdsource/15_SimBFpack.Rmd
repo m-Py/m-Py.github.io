@@ -19,10 +19,10 @@ In an earlier post, I noted that [the Bartlett-Mulder and
 Levene-Anderson Bayes factors for the comparison of independent 
 variances may yield different results](14_BFpack.html). In this post I 
 explore this discrepancy a bit more systematically using Monte Carlo 
-computer simulations. I show that the the Bartlett-Mulder Bayes factor 
-from the new 
+simulations. I show that the Bartlett-Mulder Bayes factor from the new 
+`R` package 
 [`BFpack`](https://cran.r-project.org/web/packages/BFpack/index.html) 
-package outperforms the Levene-Anderson Bayes factor across a variety of 
+outperforms the Levene-Anderson Bayes factor across a variety of 
 conditions.
 
 ## Preparing the simulation

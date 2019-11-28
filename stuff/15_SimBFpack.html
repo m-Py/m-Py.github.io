@@ -376,7 +376,7 @@ summary {
 </div>
 
 
-<p>In an earlier post, I noted that <a href="14_BFpack.html">the Bartlett-Mulder and Levene-Anderson Bayes factors for the comparison of independent variances may yield different results</a>. In this post I explore this discrepancy a bit more systematically using Monte Carlo computer simulations. I show that the the Bartlett-Mulder Bayes factor from the new <a href="https://cran.r-project.org/web/packages/BFpack/index.html"><code>BFpack</code></a> package outperforms the Levene-Anderson Bayes factor across a variety of conditions.</p>
+<p>In an earlier post, I noted that <a href="14_BFpack.html">the Bartlett-Mulder and Levene-Anderson Bayes factors for the comparison of independent variances may yield different results</a>. In this post I explore this discrepancy a bit more systematically using Monte Carlo simulations. I show that the Bartlett-Mulder Bayes factor from the new <code>R</code> package <a href="https://cran.r-project.org/web/packages/BFpack/index.html"><code>BFpack</code></a> outperforms the Levene-Anderson Bayes factor across a variety of conditions.</p>
 <div id="preparing-the-simulation" class="section level2">
 <h2>Preparing the simulation</h2>
 <p>First, I define a function that computes a Levene test, a Bartlett test, and the corresponding Bayes factors given two samples of numeric observations <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>:</p>
@@ -425,7 +425,7 @@ group2 &lt;- rnorm(n_group, mean = 100, sd = 20)
 
 compare_variances(group1, group2)</code></pre>
 <pre><code>##    P_Levene  P_Bartlett   BF_Levene BF_Bartlett 
-##     0.00097     0.00020    26.64469    78.14308</code></pre>
+##        0.20        0.17        0.33        0.20</code></pre>
 <p>As we can see, the Levene and Bartlett <em>p</em>-values and Bayes factors differ for the same data set.</p>
 <p>Next, I define a function that can be used to repeat the simulation process while varying input parameters. The sample size per group (function argument <code>N</code>) and one of the two standard deviations (function argument <code>sd2</code>) vary between simulation runs; the parameter <code>nruns</code> defines the number of repetitions for each combination of sample size and standard deviation.</p>
 <pre class="r"><code># This function allows a multiple length vector `N` and `sd2` as input 
@@ -481,49 +481,49 @@ simulate_variance_comparison_ &lt;- function(X, N, sd2) {
 <tbody>
 <tr class="odd">
 <td align="right">0.02</td>
-<td align="right">0.00</td>
-<td align="right">1.9</td>
-<td align="right">4.27</td>
+<td align="right">0.02</td>
+<td align="right">1.89</td>
+<td align="right">1.33</td>
 <td align="right">100</td>
 <td align="right">20</td>
 </tr>
 <tr class="even">
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">72.9</td>
-<td align="right">15.42</td>
-<td align="right">100</td>
-<td align="right">20</td>
-</tr>
-<tr class="odd">
+<td align="right">0.32</td>
 <td align="right">0.05</td>
-<td align="right">0.05</td>
-<td align="right">1.0</td>
-<td align="right">0.53</td>
-<td align="right">100</td>
-<td align="right">20</td>
-</tr>
-<tr class="even">
-<td align="right">0.01</td>
-<td align="right">0.06</td>
-<td align="right">4.3</td>
-<td align="right">0.50</td>
+<td align="right">0.25</td>
+<td align="right">0.56</td>
 <td align="right">100</td>
 <td align="right">20</td>
 </tr>
 <tr class="odd">
 <td align="right">0.01</td>
 <td align="right">0.01</td>
-<td align="right">5.5</td>
-<td align="right">2.03</td>
+<td align="right">2.83</td>
+<td align="right">2.28</td>
 <td align="right">100</td>
 <td align="right">20</td>
 </tr>
 <tr class="even">
+<td align="right">0.05</td>
+<td align="right">0.03</td>
+<td align="right">0.96</td>
+<td align="right">0.82</td>
+<td align="right">100</td>
+<td align="right">20</td>
+</tr>
+<tr class="odd">
 <td align="right">0.00</td>
 <td align="right">0.00</td>
-<td align="right">577.8</td>
-<td align="right">47965.38</td>
+<td align="right">18.59</td>
+<td align="right">144.88</td>
+<td align="right">100</td>
+<td align="right">20</td>
+</tr>
+<tr class="even">
+<td align="right">0.02</td>
+<td align="right">0.04</td>
+<td align="right">2.08</td>
+<td align="right">0.66</td>
 <td align="right">100</td>
 <td align="right">20</td>
 </tr>
@@ -535,10 +535,10 @@ simulate_variance_comparison_ &lt;- function(X, N, sd2) {
   log(comparisons[, c(&quot;P_Levene&quot;, &quot;P_Bartlett&quot;, &quot;BF_Levene&quot;, &quot;BF_Bartlett&quot;)])
 )</code></pre>
 <pre><code>##             P_Levene P_Bartlett BF_Levene BF_Bartlett
-## P_Levene        1.00       0.91     -1.00       -0.91
-## P_Bartlett      0.91       1.00     -0.91       -1.00
-## BF_Levene      -1.00      -0.91      1.00        0.91
-## BF_Bartlett    -0.91      -1.00      0.91        1.00</code></pre>
+## P_Levene         1.0       0.90     -1.00       -0.90
+## P_Bartlett       0.9       1.00     -0.89       -1.00
+## BF_Levene       -1.0      -0.89      1.00        0.89
+## BF_Bartlett     -0.9      -1.00      0.89        1.00</code></pre>
 <p>According to the correlation matrix, the Bayes factors agree with each other pretty well. Note that I correlated the log Bayes factors because Bayes factors can be so huge that we cannot find linear relationships with other variables.</p>
 <p>Next, let’s compare the magnitude of the Bayes factors under investigation. Is the Bartlett-Mulder Bayes factor generally larger? To find out, I compare the Bayes factor quantiles:</p>
 <pre class="r"><code>data.frame(
@@ -557,48 +557,48 @@ simulate_variance_comparison_ &lt;- function(X, N, sd2) {
 <tbody>
 <tr class="odd">
 <td>10%</td>
-<td align="right">0.30</td>
-<td align="right">0.23</td>
+<td align="right">0.31</td>
+<td align="right">0.21</td>
 </tr>
 <tr class="even">
 <td>20%</td>
+<td align="right">0.74</td>
 <td align="right">0.54</td>
-<td align="right">0.49</td>
 </tr>
 <tr class="odd">
 <td>30%</td>
-<td align="right">1.00</td>
-<td align="right">1.09</td>
+<td align="right">1.44</td>
+<td align="right">1.03</td>
 </tr>
 <tr class="even">
 <td>40%</td>
-<td align="right">1.63</td>
-<td align="right">2.03</td>
+<td align="right">2.27</td>
+<td align="right">2.63</td>
 </tr>
 <tr class="odd">
 <td>50%</td>
-<td align="right">2.83</td>
-<td align="right">2.95</td>
+<td align="right">3.12</td>
+<td align="right">5.40</td>
 </tr>
 <tr class="even">
 <td>60%</td>
-<td align="right">4.56</td>
-<td align="right">6.21</td>
+<td align="right">6.89</td>
+<td align="right">11.02</td>
 </tr>
 <tr class="odd">
 <td>70%</td>
-<td align="right">8.15</td>
-<td align="right">10.65</td>
+<td align="right">12.82</td>
+<td align="right">26.37</td>
 </tr>
 <tr class="even">
 <td>80%</td>
-<td align="right">23.87</td>
-<td align="right">27.70</td>
+<td align="right">33.73</td>
+<td align="right">82.72</td>
 </tr>
 <tr class="odd">
 <td>90%</td>
-<td align="right">125.74</td>
-<td align="right">342.37</td>
+<td align="right">102.94</td>
+<td align="right">254.72</td>
 </tr>
 </tbody>
 </table>
@@ -631,38 +631,38 @@ data.frame(
 <tbody>
 <tr class="odd">
 <td>10%</td>
-<td align="right">1.6</td>
-<td align="right">3.4</td>
+<td align="right">2.0</td>
+<td align="right">2.6</td>
 </tr>
 <tr class="even">
 <td>20%</td>
-<td align="right">2.8</td>
-<td align="right">4.7</td>
+<td align="right">3.1</td>
+<td align="right">6.2</td>
 </tr>
 <tr class="odd">
 <td>30%</td>
-<td align="right">3.5</td>
-<td align="right">6.6</td>
+<td align="right">3.9</td>
+<td align="right">7.8</td>
 </tr>
 <tr class="even">
 <td>40%</td>
-<td align="right">4.2</td>
-<td align="right">8.9</td>
+<td align="right">4.6</td>
+<td align="right">9.2</td>
 </tr>
 <tr class="odd">
 <td>50%</td>
-<td align="right">5.0</td>
-<td align="right">10.0</td>
+<td align="right">5.2</td>
+<td align="right">10.4</td>
 </tr>
 <tr class="even">
 <td>60%</td>
-<td align="right">5.7</td>
-<td align="right">11.0</td>
+<td align="right">5.6</td>
+<td align="right">10.8</td>
 </tr>
 <tr class="odd">
 <td>70%</td>
-<td align="right">6.0</td>
-<td align="right">11.8</td>
+<td align="right">6.2</td>
+<td align="right">11.5</td>
 </tr>
 <tr class="even">
 <td>80%</td>
@@ -671,7 +671,7 @@ data.frame(
 </tr>
 <tr class="odd">
 <td>90%</td>
-<td align="right">6.4</td>
+<td align="right">6.5</td>
 <td align="right">12.4</td>
 </tr>
 </tbody>
@@ -714,7 +714,7 @@ data.frame(
 <h2>Conclusions</h2>
 <p>The Bartlett-Mulder Bayes factor outperforms the Levene-Anderson Bayes factor across a variety of conditions: for small to medium large <span class="math inline">\(N\)</span>, when the variances differ; when the variances are the same; for normal data and for log-normal data. This is an important observation. Apparently, the Bartlett-Mulder Bayes factor from the <code>BFpack</code> package is well suited to test for variance homogeneity in independent samples. Of course, it is always possible to cover more conditions in a simulation, such as other data distributions, more effect sizes, or larger <span class="math inline">\(N\)</span>.</p>
 <hr />
-<p>Last updated: 2019-11-27</p>
+<p>Last updated: 2019-11-28</p>
 <div id="back-to-the-front-page" class="section level3">
 <h3><a href="index.html">Back to the front page</a></h3>
 <p> </p>
