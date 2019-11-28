@@ -425,7 +425,7 @@ group2 &lt;- rnorm(n_group, mean = 100, sd = 20)
 
 compare_variances(group1, group2)</code></pre>
 <pre><code>##    P_Levene  P_Bartlett   BF_Levene BF_Bartlett 
-##        0.20        0.17        0.33        0.20</code></pre>
+##      0.0054      0.0037      5.9214      5.2609</code></pre>
 <p>As we can see, the Levene and Bartlett <em>p</em>-values and Bayes factors differ for the same data set.</p>
 <p>Next, I define a function that can be used to repeat the simulation process while varying input parameters. The sample size per group (function argument <code>N</code>) and one of the two standard deviations (function argument <code>sd2</code>) vary between simulation runs; the parameter <code>nruns</code> defines the number of repetitions for each combination of sample size and standard deviation.</p>
 <pre class="r"><code># This function allows a multiple length vector `N` and `sd2` as input 
@@ -458,9 +458,9 @@ simulate_variance_comparison_ &lt;- function(X, N, sd2) {
 </div>
 <div id="simulation-1-variances-differ" class="section level2">
 <h2>Simulation 1: Variances differ</h2>
-<p>Now, let’s simulate 100 runs where the true standard deviations differ (15 versus 20):</p>
+<p>Now, let’s simulate 1,000 runs where the true standard deviations differ (15 versus 20):</p>
 <pre class="r"><code>comparisons &lt;- simulate_variance_comparison(
-  nruns = 100, # number of simulation runs
+  nruns = 1000, # number of simulation runs
   N = 100, # sample size per group
   sd2 = 20 # defines the &quot;effect size&quot;, difference between SDs
 )</code></pre>
@@ -480,50 +480,50 @@ simulate_variance_comparison_ &lt;- function(X, N, sd2) {
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">0.02</td>
-<td align="right">0.02</td>
-<td align="right">1.89</td>
-<td align="right">1.33</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">37.6</td>
+<td align="right">60.1</td>
 <td align="right">100</td>
 <td align="right">20</td>
 </tr>
 <tr class="even">
-<td align="right">0.32</td>
-<td align="right">0.05</td>
-<td align="right">0.25</td>
-<td align="right">0.56</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">17.0</td>
+<td align="right">16.8</td>
 <td align="right">100</td>
 <td align="right">20</td>
 </tr>
 <tr class="odd">
-<td align="right">0.01</td>
-<td align="right">0.01</td>
-<td align="right">2.83</td>
-<td align="right">2.28</td>
-<td align="right">100</td>
-<td align="right">20</td>
-</tr>
-<tr class="even">
-<td align="right">0.05</td>
 <td align="right">0.03</td>
-<td align="right">0.96</td>
-<td align="right">0.82</td>
+<td align="right">0.01</td>
+<td align="right">1.5</td>
+<td align="right">3.3</td>
+<td align="right">100</td>
+<td align="right">20</td>
+</tr>
+<tr class="even">
+<td align="right">0.00</td>
+<td align="right">0.01</td>
+<td align="right">6.5</td>
+<td align="right">1.6</td>
 <td align="right">100</td>
 <td align="right">20</td>
 </tr>
 <tr class="odd">
 <td align="right">0.00</td>
 <td align="right">0.00</td>
-<td align="right">18.59</td>
-<td align="right">144.88</td>
+<td align="right">11.3</td>
+<td align="right">32.2</td>
 <td align="right">100</td>
 <td align="right">20</td>
 </tr>
 <tr class="even">
-<td align="right">0.02</td>
-<td align="right">0.04</td>
-<td align="right">2.08</td>
-<td align="right">0.66</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">125.6</td>
+<td align="right">43.2</td>
 <td align="right">100</td>
 <td align="right">20</td>
 </tr>
@@ -535,10 +535,10 @@ simulate_variance_comparison_ &lt;- function(X, N, sd2) {
   log(comparisons[, c(&quot;P_Levene&quot;, &quot;P_Bartlett&quot;, &quot;BF_Levene&quot;, &quot;BF_Bartlett&quot;)])
 )</code></pre>
 <pre><code>##             P_Levene P_Bartlett BF_Levene BF_Bartlett
-## P_Levene         1.0       0.90     -1.00       -0.90
-## P_Bartlett       0.9       1.00     -0.89       -1.00
-## BF_Levene       -1.0      -0.89      1.00        0.89
-## BF_Bartlett     -0.9      -1.00      0.89        1.00</code></pre>
+## P_Levene        1.00       0.89     -1.00       -0.89
+## P_Bartlett      0.89       1.00     -0.89       -1.00
+## BF_Levene      -1.00      -0.89      1.00        0.89
+## BF_Bartlett    -0.89      -1.00      0.89        1.00</code></pre>
 <p>According to the correlation matrix, the Bayes factors agree with each other pretty well. Note that I correlated the log Bayes factors because Bayes factors can be so huge that we cannot find linear relationships with other variables.</p>
 <p>Next, let’s compare the magnitude of the Bayes factors under investigation. Is the Bartlett-Mulder Bayes factor generally larger? To find out, I compare the Bayes factor quantiles:</p>
 <pre class="r"><code>data.frame(
@@ -557,48 +557,48 @@ simulate_variance_comparison_ &lt;- function(X, N, sd2) {
 <tbody>
 <tr class="odd">
 <td>10%</td>
-<td align="right">0.31</td>
-<td align="right">0.21</td>
+<td align="right">0.39</td>
+<td align="right">0.29</td>
 </tr>
 <tr class="even">
 <td>20%</td>
-<td align="right">0.74</td>
-<td align="right">0.54</td>
+<td align="right">0.67</td>
+<td align="right">0.69</td>
 </tr>
 <tr class="odd">
 <td>30%</td>
-<td align="right">1.44</td>
-<td align="right">1.03</td>
+<td align="right">1.22</td>
+<td align="right">1.28</td>
 </tr>
 <tr class="even">
 <td>40%</td>
-<td align="right">2.27</td>
-<td align="right">2.63</td>
+<td align="right">2.21</td>
+<td align="right">2.41</td>
 </tr>
 <tr class="odd">
 <td>50%</td>
-<td align="right">3.12</td>
-<td align="right">5.40</td>
+<td align="right">3.94</td>
+<td align="right">5.09</td>
 </tr>
 <tr class="even">
 <td>60%</td>
-<td align="right">6.89</td>
-<td align="right">11.02</td>
+<td align="right">7.85</td>
+<td align="right">10.35</td>
 </tr>
 <tr class="odd">
 <td>70%</td>
-<td align="right">12.82</td>
-<td align="right">26.37</td>
+<td align="right">15.59</td>
+<td align="right">24.02</td>
 </tr>
 <tr class="even">
 <td>80%</td>
-<td align="right">33.73</td>
-<td align="right">82.72</td>
+<td align="right">36.84</td>
+<td align="right">69.35</td>
 </tr>
 <tr class="odd">
 <td>90%</td>
-<td align="right">102.94</td>
-<td align="right">254.72</td>
+<td align="right">132.92</td>
+<td align="right">274.14</td>
 </tr>
 </tbody>
 </table>
@@ -609,7 +609,7 @@ simulate_variance_comparison_ &lt;- function(X, N, sd2) {
 <h2>Simulation 2: Variances do not differ</h2>
 <p>Next, let’s compare the two Bayes factors when the null hypothesis is true:</p>
 <pre class="r"><code>comparisons &lt;- simulate_variance_comparison(
-  nruns = 100, 
+  nruns = 1000, 
   N = 100, 
   sd2 = 15 # sd1 is also 15, as we know - null effect!
 )
@@ -631,43 +631,43 @@ data.frame(
 <tbody>
 <tr class="odd">
 <td>10%</td>
-<td align="right">2.0</td>
-<td align="right">2.6</td>
+<td align="right">1.9</td>
+<td align="right">3.3</td>
 </tr>
 <tr class="even">
 <td>20%</td>
-<td align="right">3.1</td>
-<td align="right">6.2</td>
+<td align="right">3.0</td>
+<td align="right">5.4</td>
 </tr>
 <tr class="odd">
 <td>30%</td>
-<td align="right">3.9</td>
-<td align="right">7.8</td>
+<td align="right">4.1</td>
+<td align="right">7.7</td>
 </tr>
 <tr class="even">
 <td>40%</td>
-<td align="right">4.6</td>
-<td align="right">9.2</td>
+<td align="right">4.8</td>
+<td align="right">9.0</td>
 </tr>
 <tr class="odd">
 <td>50%</td>
-<td align="right">5.2</td>
-<td align="right">10.4</td>
+<td align="right">5.3</td>
+<td align="right">10.0</td>
 </tr>
 <tr class="even">
 <td>60%</td>
-<td align="right">5.6</td>
-<td align="right">10.8</td>
+<td align="right">5.8</td>
+<td align="right">10.9</td>
 </tr>
 <tr class="odd">
 <td>70%</td>
-<td align="right">6.2</td>
-<td align="right">11.5</td>
+<td align="right">6.1</td>
+<td align="right">11.6</td>
 </tr>
 <tr class="even">
 <td>80%</td>
 <td align="right">6.3</td>
-<td align="right">12.2</td>
+<td align="right">12.1</td>
 </tr>
 <tr class="odd">
 <td>90%</td>

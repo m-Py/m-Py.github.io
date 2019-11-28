@@ -127,12 +127,12 @@ simulate_variance_comparison_ <- function(X, N, sd2) {
 
 ## Simulation 1: Variances differ
 
-Now, let's simulate 100 runs where the true standard deviations 
+Now, let's simulate 1,000 runs where the true standard deviations 
 differ (15 versus 20):
 
 ```{r}
 comparisons <- simulate_variance_comparison(
-  nruns = 100, # number of simulation runs
+  nruns = 1000, # number of simulation runs
   N = 100, # sample size per group
   sd2 = 20 # defines the "effect size", difference between SDs
 )
@@ -190,7 +190,7 @@ true:
 
 ```{r}
 comparisons <- simulate_variance_comparison(
-  nruns = 100, 
+  nruns = 1000, 
   N = 100, 
   sd2 = 15 # sd1 is also 15, as we know - null effect!
 )
