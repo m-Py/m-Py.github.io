@@ -107,7 +107,7 @@ covariates. This method still has to be documented thoroughly, and I am
 working on it. 
 
 The results show that the the word sets are quite well balanced on 
-length and `Zipf.SUBTLEX_UK`. It seems that `anticlust` increased the 
+`Length` and `Zipf.SUBTLEX_UK`. It seems that `anticlust` increased the 
 difference in `CNC.Brysbaert` a little more than `LexOPS`, but the 
 values are quite similar for both packages.
 
