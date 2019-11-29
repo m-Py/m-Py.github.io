@@ -1,0 +1,318 @@
+---
+title: "Selecting experimental stimuli in `R`"
+date: November 29, 2019
+author: Martin Papenberg
+output:
+  html_document:
+    df_print: kable
+---
+
+```{r, include = FALSE}
+
+library(knitr)
+knitr::opts_chunk$set(warning = FALSE) # echo = FALSE
+options(scipen = 999, digits = 2)
+
+knit_print.matrix = function(x, ...) {
+    res = paste(c("", "", kable(x)), collapse = "\n")
+    asis_output(res)
+}
+registerS3method("knit_print", "matrix", knit_print.matrix)
+
+```
+
+I spent the better part of the last year working on anticlustering, a 
+methodology to select stimuli for experiments in psychology. The work 
+culminated in the the `R` package 
+[`anticlust`](https://github.com/m-Py/anticlust) and the manuscript 
+»[Using anticlustering to partition a stimulus pool into equivalent 
+parts](https://psyarxiv.com/3razc/)« 
+
+I was made aware of another `R` package that was also designed to select 
+stimuli for experiments: 
+[`LexOPS`](https://github.com/JackEdTaylor/LexOPS/). Interestingly, both 
+packages were first uploaded to Github on October 25, 2018.
+
+In this post I compare the results of the two packages by applying each 
+to three data sets that vary in size from very large to rather small.
+
+## Example 1: Large data set `lexops`
+
+We start by looking at a data set that is built into the `lexops`.
+
+```{r}
+library(LexOPS)
+library(anticlust)
+```
+
+```{r}
+nrow(lexops)
+
+stim <- lexops %>%
+  subset(PK.Brysbaert >= 0.9) %>%
+  split_by(CNC.Brysbaert, 1:2 ~ 4:5) %>%
+  control_for(Length, 0:0) %>%
+  control_for(Zipf.SUBTLEX_UK, -0.2:0.2) %>%
+  generate(n = 25) %>%
+  long_format()
+```
+
+Let's check out the means and standard deviations of the variables that 
+were considered, using the function `mean_sd_tab()` from the `anticlust`
+package.
+
+```{r}
+# Compare descriptive statistics by set:
+mean_sd_tab(
+  stim[, c("CNC.Brysbaert", "Length", "Zipf.SUBTLEX_UK")], 
+  stim$condition,
+  na.rm = TRUE
+)
+```
+
+In brackets, we have the standard deviations by set, and before that the 
+mean values. As shown, the word sets are quite well balanced on `Length` 
+and `Zipf.SUBTLEX_UK`, and quite dissimilar with regard to 
+`CNC.Brysbaert`. That is good, because it is what we want!
+
+Let's do the same using the `anticlust` package:[^1]
+
+[^1]: Currently, you need to install the development version for this 
+functionality, see the vignette 
+[here](../anticlust/stimulus-selection.html)
+
+```{r}
+
+stimuli <- select_stimuli(
+   subset(lexops, PK.Brysbaert >= 0.9),
+   split_by = "CNC.Brysbaert",
+   equalize = c("Length", "Zipf.SUBTLEX_UK"),
+   design = 2, # specifies the number of groups
+   n = 25 # Number of stimuli per set
+)
+
+# Compare descriptive statistics by set:
+mean_sd_tab(
+  stimuli[, c("CNC.Brysbaert", "Length", "Zipf.SUBTLEX_UK")], 
+  stimuli$SET,
+  na.rm = TRUE
+)
+
+```
+
+Here, the `anticlust` package uses a methodology called 
+min-max-anticlustering---simultaneously maximizing differerences in 
+independent variables while minizimizing differences with regard to 
+covariates. This method still has to be documented thoroughly, and I am 
+working on it. 
+
+The results show that the the word sets are quite well balanced on 
+length and `Zipf.SUBTLEX_UK`. It seems that `anticlust` increased the 
+difference in `CNC.Brysbaert` a little more than `LexOPS`, but the 
+values are quite similar for both packages.
+
+## Example 2: Medium sized data set `oasis`
+
+Next, I use a stimulus set describing 900 images on the dimensions 
+valence, arousal and beauty (I also use this data set in the 
+[`anticlust` vignette for stimulus 
+selection](../anticlust/stimulus-selection.html)). I select three sets 
+each consisting of 40 stimuli. I have a slightly different goal than 
+before: I wish to create sets that are as similar as possible with 
+regard to **all** variables under considerations; I do not vary an 
+independent variable between sets. This is what the original 
+anticlustering accomplishes---it creates sets that are as similar as 
+possible. 
+
+Again, I start with the `LexOPS` package. To ensure that three sets are 
+created without having an independent variable, I have to use the 
+function `split_random()`:
+
+```{r}
+# read the data from internet
+oasis <- read.csv("https://raw.githubusercontent.com/aenneb/OASIS-beauty/master/means_per_image.csv")
+oasis$string <- paste0("item", 1:nrow(oasis)) # is needed for lexOPS 
+
+stims <- oasis %>%
+  split_random(3) %>%
+  control_for(Valence_mean, -1:1) %>%
+  control_for(Arousal_mean, -1:1) %>%
+  control_for(beauty_mean, -1:1) %>%
+  generate(40) %>%
+  long_format()
+
+# Compare descriptive statistics by set:
+mean_sd_tab(
+  stims[, c("Valence_mean", "Arousal_mean", "beauty_mean")], 
+  stims$condition
+)
+```
+
+This looks quite promising, but for this application, `anticlust` can 
+do better: 
+
+```{r}
+stimuli <- select_stimuli(
+  oasis,
+  equalize = c("Valence_mean", "Arousal_mean", "beauty_mean"),
+  design = 3, 
+  n = 40
+)
+
+# Compare descriptive statistics by set:
+mean_sd_tab(
+  stimuli[, c("Valence_mean", "Arousal_mean", "beauty_mean")], 
+  stimuli$SET
+)
+```
+
+## Example 3: Small data set `schaper2019`
+
+In a last example, I use the data set built into the `anticlust` 
+package. It consists of 96 items that were partitioned into 3 sets in 
+experiments by Schaper et al. (2019).
+
+In this example, I wish to create two sets that are dissimular with 
+regard to frequency but similar with regard to three other covariates. 
+However, when trying to partition the entire item pool into sets, 
+`LexOPS` fails. It can be used with the option `generate("all")`, in 
+which case it tries to use as many stimuli as possible, but I have not 
+yet had the case were this worked for me: 
+
+```{r}
+
+nrow(schaper2019)
+schaper2019$string <- paste0("item", 1:nrow(schaper2019))
+
+stim <- schaper2019 %>%
+  split_by(frequency, 0:18 ~ 18.1:Inf) %>% # 18 is the median
+  control_for(rating_consistent, -0.3:0.3) %>%
+  control_for(rating_inconsistent, -0.3:0.3) %>%
+  control_for(syllables, -2:2) %>%
+  generate("all") %>%
+  long_format()
+
+```
+
+In this case, `r nrow(stim)` items were extracted. The descriptive 
+statistics by set are given as follows:
+
+```{r}
+# Compare descriptive statistics by set:
+mean_sd_tab(
+  stim[, c("frequency", "rating_consistent", "rating_inconsistent", "syllables")], 
+  stim$condition
+)
+```
+
+This looks quite good. How does `anticlust` perform?
+
+```{r}
+# I just leave out the `n` argument to select *all* items
+stimuli <- select_stimuli(
+  schaper2019,
+  split_by = "frequency",
+  equalize = c("rating_consistent", "rating_inconsistent", "syllables"),
+  design = 2, 
+)
+
+mean_sd_tab(
+  stimuli[, c("frequency", "rating_consistent", "rating_inconsistent", "syllables")], 
+  stimuli$SET
+)
+```
+
+In this case, the difference with regard to frequency is smaller, but 
+the covariates are more similar and no items had to be discarded---all 
+96 items are part of the output. In general, `anticlust` will focus on 
+similarity in covariates more than dissimilarity with regard to the 
+independent variable. In my very personal opinion, this is more 
+important to avoid confounding.
+
+## Limitations
+
+Being the author of the `anticlust` package, I am naturally biased when 
+comparing it to the `LexOPS` package. Still, I try to offer a balanced 
+evaluation of both packages. And of course, this post only presents a 
+non-exhaustive evaluation.
+
+## Conclusions
+
+Advantages for `anticlust`:
+
+- seems to ensure covariate similarity better on a group level
+- can be used on small data sets; no subset selection is necessary
+- can balanced a categorical variable between sets
+
+Disadvantages for `anticlust`:
+
+- was not designed for very large item sets, takes some time for > 10000 
+stimuli. Was slower for the example by `LexOPS`
+- does not enable individual matching of stimuli, optimizes group level 
+similarity
+
+Advantages for `LexOPS`:
+
+- can implement more complex designs 
+- individual matches are possible (e.g., for each word you can have 
+another word with the same length)
+- has a shiny app, including functionality for visualization---when 
+selecting stimuli, visualizations of the variables can be extremely 
+helpful, (also see my [vignette](../anticlust/stimulus-selection.html))
+- fine grained control via the `tolerance` argument with regard to 
+individual matches; but it is also difficult to know how to best make use 
+of this option
+
+Disadvantages for `LexOPS`:
+
+- does not always find solutions for small data sets
+- cannot partition a complete item pool into subsets (this is what
+`anticlust` was originally designed to do)
+- cannot balance categorical variable between sets (?)
+
+To conclude, I think that both `R` packages for stimulus selection are 
+useful and have a right to exist (hell, for most tasks, there is a far 
+vaster amount of `R` packages available). Researchers interested in 
+specifying contraints regarding individual matches between stimuli may 
+be interested in using the `LexOPS` package. When researchers just want 
+to balance similarity on group level, the `anticlust` package seems to 
+have an edge, especially when the available item pool is not huge.
+
+## More information
+
+Unfortunately, this post too short to go into detail about the different 
+algorithmic frameworks underlying the `LexOPS` and `anticlust` packages. 
+A lot could be said about this, e.g., it had to be expected that 
+`anticlust` outperforms `LexOPS` in the Example 2. For more 
+background on the anticlustering methodology, check out my 
+[preprint](https://psyarxiv.com/3razc/). However, note that some of the 
+methodology presented in this post, especially min-max anticlustering, 
+has not been thoroughly documented. I am currently working on another 
+paper describing the latest developments for the `anticlust` package. So 
+stay tuned for that. The preprint describing the `LexOPS` package can be 
+found [here](https://psyarxiv.com/7sudw). 
+
+## References 
+
+Papenberg, M., & Klau, G. W. (2019, October 30). Using anticlustering to 
+partition a stimulus pool into equivalent parts. 
+https://doi.org/10.31234/osf.io/3razc
+
+Schaper, M. L., Kuhlmann, B. G., & Bayen, U. J. (2019). Metacognitive 
+expectancy effects in source monitoring: Beliefs, in-the-moment 
+experiences, or both? Journal of Memory and Language, 107, 95–110. 
+https://doi.org/10.1016/j.jml.2019.03.009
+
+Taylor, J. E., Beith, A., & Sereno, S. C. (2019, September 17). LexOPS: 
+An R Package and User Interface for the Controlled Generation of Word 
+Stimuli. https://doi.org/10.31234/osf.io/7sudw
+
+
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
