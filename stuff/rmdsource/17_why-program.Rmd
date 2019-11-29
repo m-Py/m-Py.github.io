@@ -5,18 +5,18 @@ author: Martin Papenberg
 ---
 
 A lot has been written on the reasons why researchers should learn how 
-to program. I like to add one: If you are like me, nobody has taught you 
-about the more "recent" developments in statistics, such as Bayes 
-factors or linear mixed models, but now we are somehow expected to know 
-about them. Trying to figure out everything by yourself is hard, but 
+to program. I'd like to add one: If you are like me, nobody has taught 
+you about the more "recent" developments in statistics, such as Bayes 
+factors or linear mixed models. Now we are somehow expected to 
+figure them out ourselves about them. This is a difficult task, but 
 being able to program helps. I really only "got" Bayes factors after I 
 implemented some myself in `R`---and there is still a lot I do not know. 
 If you know about Monte Carlo simulations, you can try to figure out the 
 behavior of any method under varying conditions, increasing your 
-trust and understanding, even if you lack a strong mathematical 
-background. I am not arguing that programming as method of learning is 
-optimal for everyone, or the only method of learning. But I do think it 
-often helps.
+understanding of and trust in a method---even if you lack a strong 
+mathematical background. I am not arguing that programming as method of 
+learning is optimal for everyone, or the only method of learning. But I 
+do think it often helps.
 
 ---
 
