@@ -437,9 +437,12 @@ summary {
 ## 18   1.6
 ## 19   4.6
 ## 20   3.4</code></pre>
+<p>The function <code>pull()</code> from the package <code>dplyr</code> can be used to select a columns as a vector:</p>
+<pre class="r"><code>dplyr::pull(sleep, extra)</code></pre>
+<pre><code>##  [1]  0.7 -1.6 -0.2 -1.2 -0.1  3.4  3.7  0.8  0.0  2.0  1.9  0.8  1.1  0.1
+## [15] -0.1  4.4  5.5  1.6  4.6  3.4</code></pre>
 <p>The function <code>select()</code> from the package <code>dplyr</code> can be used to select one or several columns as data frame:</p>
-<pre class="r"><code>library(dplyr)
-select(sleep, extra)</code></pre>
+<pre class="r"><code>dplyr::select(sleep, extra)</code></pre>
 <pre><code>##    extra
 ## 1    0.7
 ## 2   -1.6
@@ -474,17 +477,20 @@ microbenchmark(
   sleep[, &quot;extra&quot;],
   sleep[, &quot;extra&quot;, drop = FALSE],
   sleep[&quot;extra&quot;],
+  dplyr::pull(sleep, extra),
   dplyr::select(sleep, extra)
 )</code></pre>
 <pre><code>## Unit: nanoseconds
 ##                            expr    min     lq   mean median     uq     max
-##                     sleep$extra    561    932   1474   1482   1941    5130
-##                sleep[[&quot;extra&quot;]]   2703   3666   5596   4846   5752   37002
-##                sleep[, &quot;extra&quot;]   4628   5357   7691   6224   8528   29430
-##  sleep[, &quot;extra&quot;, drop = FALSE]   7799   9141  13420  11226  15951   53319
-##                  sleep[&quot;extra&quot;]   8131   9256  12235  10571  13793   33645
-##     dplyr::select(sleep, extra) 490991 503844 558652 524485 555186 2187843
+##                     sleep$extra    509    929   1427   1576   1778    4158
+##                sleep[[&quot;extra&quot;]]   2782   3763   4693   4172   5056   21572
+##                sleep[, &quot;extra&quot;]   4534   5663   7760   7036   9036   24360
+##  sleep[, &quot;extra&quot;, drop = FALSE]   8067   9878  13500  13467  16298   31459
+##                  sleep[&quot;extra&quot;]   8180   9860  13350  12768  15588   32086
+##       dplyr::pull(sleep, extra) 238909 253218 266381 260607 279340  350748
+##     dplyr::select(sleep, extra) 486947 500610 538289 522484 531972 2211427
 ##  neval
+##    100
 ##    100
 ##    100
 ##    100
@@ -501,23 +507,26 @@ microbenchmark(
   iris[, &quot;Sepal.Length&quot;],
   iris[, &quot;Sepal.Length&quot;, drop = FALSE],
   iris[&quot;Sepal.Length&quot;],
+  dplyr::pull(iris, Sepal.Length),
   dplyr::select(iris, Sepal.Length)
 )</code></pre>
 <pre><code>## Unit: nanoseconds
 ##                                  expr    min     lq   mean median     uq
-##                     iris$Sepal.Length    548    992   1614   1586   2060
-##                iris[[&quot;Sepal.Length&quot;]]   2908   3646   5449   4919   6290
-##                iris[, &quot;Sepal.Length&quot;]   4448   5467   7887   6283   8608
-##  iris[, &quot;Sepal.Length&quot;, drop = FALSE]   7936   9607  13886  11618  16370
-##                  iris[&quot;Sepal.Length&quot;]   8220   9615  13695  11272  16897
-##     dplyr::select(iris, Sepal.Length) 495452 523028 578708 535215 558122
+##                     iris$Sepal.Length    533   1195   1736   1606   1902
+##                iris[[&quot;Sepal.Length&quot;]]   2832   3713   4989   4222   5190
+##                iris[, &quot;Sepal.Length&quot;]   4461   5711   7378   7038   8774
+##  iris[, &quot;Sepal.Length&quot;, drop = FALSE]   7733   9676  12931  12006  15452
+##                  iris[&quot;Sepal.Length&quot;]   8186  10485  13456  12835  15248
+##       dplyr::pull(iris, Sepal.Length) 240854 260052 294382 272116 288716
+##     dplyr::select(iris, Sepal.Length) 484614 520556 539652 538021 560159
 ##      max neval
-##     5334   100
-##    28561   100
-##    47811   100
-##    62523   100
-##    50356   100
-##  2141166   100</code></pre>
+##    19612   100
+##    22344   100
+##    12889   100
+##    31784   100
+##    33054   100
+##  2021288   100
+##   625882   100</code></pre>
 <p>Interestingly, the operations take the same time, even for the larger data frame. The rank order in speed remains the same.</p>
 <p>Let’s check out a “very large” data frame having 100,000 rows:</p>
 <pre class="r"><code>data &lt;- data.frame(
@@ -533,17 +542,20 @@ nrow(data)</code></pre>
   data[, &quot;col1&quot;],
   data[, &quot;col1&quot;, drop = FALSE],
   data[&quot;col1&quot;],
+  dplyr::pull(data, col1),
   dplyr::select(data, col1)
 )</code></pre>
 <pre><code>## Unit: nanoseconds
 ##                          expr    min     lq   mean median     uq     max
-##                     data$col1    557    840   1348   1495   1732    2917
-##                data[[&quot;col1&quot;]]   2686   3510   4858   4612   5516   20494
-##                data[, &quot;col1&quot;]   4425   5308   7692   6168   8848   25233
-##  data[, &quot;col1&quot;, drop = FALSE]   7675   8591  12136  10399  15840   27210
-##                  data[&quot;col1&quot;]   7983   9592  13790  11902  16350   55426
-##     dplyr::select(data, col1) 485315 499765 539666 517391 531765 2077903
+##                     data$col1    518   1092   1485   1555   1763    3020
+##                data[[&quot;col1&quot;]]   2795   3556   4562   4185   5007    8374
+##                data[, &quot;col1&quot;]   4428   5747   8392   7698   9490   25354
+##  data[, &quot;col1&quot;, drop = FALSE]   7527   9735  13354  12041  15162   33227
+##                  data[&quot;col1&quot;]   8153  10589  14893  13222  16443   67393
+##       dplyr::pull(data, col1) 236861 253765 285870 262367 283163 1965278
+##     dplyr::select(data, col1) 481516 497876 519348 515912 532538  692486
 ##  neval
+##    100
 ##    100
 ##    100
 ##    100

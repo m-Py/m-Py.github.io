@@ -57,12 +57,18 @@ also read just one column as a data frame:
 sleep["extra"]
 ```
 
+The function `pull()` from the package `dplyr` can be used to select 
+a columns as a vector: 
+
+```{r}
+dplyr::pull(sleep, extra)
+```
+
 The function `select()` from the package `dplyr` can be used to select 
 one or several columns as data frame: 
 
 ```{r}
-library(dplyr)
-select(sleep, extra)
+dplyr::select(sleep, extra)
 ```
 
 ## Running time
@@ -81,6 +87,7 @@ microbenchmark(
   sleep[, "extra"],
   sleep[, "extra", drop = FALSE],
   sleep["extra"],
+  dplyr::pull(sleep, extra),
   dplyr::select(sleep, extra)
 )
 ```
@@ -103,6 +110,7 @@ microbenchmark(
   iris[, "Sepal.Length"],
   iris[, "Sepal.Length", drop = FALSE],
   iris["Sepal.Length"],
+  dplyr::pull(iris, Sepal.Length),
   dplyr::select(iris, Sepal.Length)
 )
 ```
@@ -127,6 +135,7 @@ microbenchmark(
   data[, "col1"],
   data[, "col1", drop = FALSE],
   data["col1"],
+  dplyr::pull(data, col1),
   dplyr::select(data, col1)
 )
 
