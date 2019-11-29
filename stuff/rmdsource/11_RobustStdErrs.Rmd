@@ -276,8 +276,6 @@ pairs(emmeans(rlm_analysis, "guilt"))
 pairs(emmeans(rlm_analysis, "guilt", by = "action"))
 ```
 
-Did we learn anything? So it does not make a difference :D
-
 ## Example 3: Somthing else
 
 In the above example, we did not gain much using the robust regression. 
