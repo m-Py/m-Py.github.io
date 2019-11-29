@@ -1,0 +1,144 @@
+---
+title: "Selecting columns from data frames in `R`"
+date: November 29, 2019
+author: Martin Papenberg
+---
+
+```{r, include = FALSE}
+
+library(knitr)
+knitr::opts_chunk$set(message=FALSE, warning = FALSE) # echo = FALSE
+options(scipen = 999, digits = 2)
+
+```
+
+There are quite many alternative ways to select a column from a data 
+frame in `R`. In this post I compare some of them with regard to their 
+running time. Note that this experiment is of purely scientific 
+interest; it does not have any practical consequences because the speed 
+of column selection will rarely be the bottleneck of your program.
+
+## The competitors
+
+The `$` selects a single column as a vector; it is the first 
+option I was introduced to and I still often use it:
+
+```{r}
+sleep$extra
+```
+
+The `[[·]]` notation selects a single column from a data frame like, 
+just like the `$` notation. However, the column name has to be quoted 
+(i.e., we pass a one element vector of type `character`; this has the 
+advantage that a function call or a variable can be inserted into the 
+double brackets):
+
+```{r}
+sleep[["extra"]]
+```
+
+The `[·,·]` notation can be used to select multiple columns, but can 
+also read just one column as a vector:
+
+```{r}
+sleep[, "extra"]
+```
+
+We obtain a data frame if we include the argument `drop = FALSE`:
+
+```{r}
+sleep[, "extra", drop = FALSE]
+```
+
+The `[·]` notation can be used to select multiple columns, but can 
+also read just one column as a data frame:
+
+```{r}
+sleep["extra"]
+```
+
+The function `select()` from the package `dplyr` can be used to select 
+one or several columns as data frame: 
+
+```{r}
+library(dplyr)
+select(sleep, extra)
+```
+
+## Running time
+
+Using the package `microbenchmark`, I compare the speed of selecting 
+single columns. First, I use the `sleep` data frame consisting of 20 
+rows; then, I use the `iris` data frame consisting of 150 rows.
+
+```{r}
+nrow(sleep)
+
+library(microbenchmark)
+microbenchmark(
+  sleep$extra, 
+  sleep[["extra"]],
+  sleep[, "extra"],
+  sleep[, "extra", drop = FALSE],
+  sleep["extra"],
+  dplyr::select(sleep, extra)
+)
+```
+
+I think it is quite interesting that the difference are rather 
+substantial. The `$` notation is fastest, about 4 times faster than the 
+`[[·]]` notation and more 10 times faster than the `[·]` notation. The 
+function `select()` was by far slowest. However, this operation still 
+only took about 500 microseconds. As I said, this is definitely not the 
+bottleneck of your program. 
+
+Let's repeat the test with a larger data frame:
+
+```{r}
+nrow(iris)
+
+microbenchmark(
+  iris$Sepal.Length, 
+  iris[["Sepal.Length"]],
+  iris[, "Sepal.Length"],
+  iris[, "Sepal.Length", drop = FALSE],
+  iris["Sepal.Length"],
+  dplyr::select(iris, Sepal.Length)
+)
+```
+
+Interestingly, the operations take the same time, even for the larger 
+data frame. The rank order in speed remains the same. 
+
+Let's check out a "very large" data frame having 100,000 rows:
+
+```{r}
+
+data <- data.frame(
+  col1 = rnorm(100000), 
+  col2 = rnorm(100000)
+)
+
+nrow(data)
+
+microbenchmark(
+  data$col1, 
+  data[["col1"]],
+  data[, "col1"],
+  data[, "col1", drop = FALSE],
+  data["col1"],
+  dplyr::select(data, col1)
+)
+
+```
+  
+We can state that the speed of reading a column from a data frame is 
+not affected by the number of rows!
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;

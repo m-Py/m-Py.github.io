@@ -12,6 +12,7 @@ href="https://www.r-project.org/" target="_blank">R</a>-related stuff.
 
 ### Posts:
 
+- <a href="19-columns.html">2019/11: Selecting columns from data frames in `R`
 - <a href="17_why-program.html">2019/11: Another reason to learn programming as a researcher
 - <a href="16_knitr-options.html">2019/11: Useful `knitr` options
 - <a href="15_SimBFpack.html">2019/11: Comparing the Bartlett-Mulder and Levene-Anderson Bayes factors
