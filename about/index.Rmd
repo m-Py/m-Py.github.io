@@ -7,21 +7,23 @@ output:
 
 <img src = "me.png" width = 130 alt = "Photo of Martin Papenberg">
 
-I am Martin Papenberg, working as a post-doc researcher at the the 
+Hi! I am Martin Papenberg, working as a post-doc researcher at the the 
 department of [Psychological Assessment and Differential 
-Psychology](http://www.psychologie.hhu.de/en/research-teams/ 
-psychological-assessment-and-differential-psychology.html) at [Heinrich 
-Heine University 
+Psychology](http://www.psychologie.hhu.de/en/research-teams/psychological-assessment-and-differential-psychology/arbeitsgruppe.html) 
+at [Heinrich Heine University 
 Düsseldorf](https://www.uni-duesseldorf.de/home/en/home.html). I am 
-interested in measurement, personality[^diss] and programming[^R], 
-among others.
+interested in measurement, personality[^diss] and programming[^R].
 
-Currently, I am primarily working on the `R` package 
+I am currently working on the `R` package 
 [`anticlust`](https://github.com/m-Py/anticlust) package that enables 
 the automatic selection of stimuli for psychological experiments. Check 
-out my latest preprint on the anticlustering method: [Using 
-anticlustering to partition a stimulus pool into equivalent 
-parts](https://psyarxiv.com/3razc/).
+out my [latest preprint on the anticlustering 
+method](https://psyarxiv.com/3razc/) or [my 
+vignette](../anticlust/stimulus-selection.html) illustrating how to use 
+the `anticlust` package for stimulus selection. If you have any 
+questions and/or wishes with regard to the `anticlust` package, feel 
+free to <a href = "mailto:martin.papenberg@hhu.de?subject=Help with the 
+anticlust package">send me an email</a>.
 
 ### Preprints
 
@@ -51,10 +53,10 @@ Retrieved from http://www.psychologie-aktuell.com/fileadmin/download/ptam/2-2017
 Papenberg, M. (2018). *On how testwiseness and acceptance reluctance 
 influence the validity of sequential knowledge tests*
 (Inaugural-Dissertation). Retrieved from 
-https://docserv.uni-duesseldorf.de/servlets/DocumentServlet?id=46569.
+https://docserv.uni-duesseldorf.de/servlets/DocumentServlet?id=46569
 
-Papenberg, M. (2018). Test theory in R [Testtheorie mit R]. Retrieved 
-from https://osf.io/y4a6k/.
+Papenberg, M. (2018). *Test theory in R* [Testtheorie mit R]. Retrieved 
+from https://osf.io/nghyv/
 
 ### Software
 
@@ -66,13 +68,18 @@ from https://osf.io/y4a6k/.
 - [BART: A JavaScript implementation of the Balloon Analogue Risk Task](https://github.com/m-Py/BART)
 
 ### Short CV
+
 | Year |  |
 | ---- | ------------- | 
-| 2018 | PhD (Dr. rer. nat) at the Faculty of Mathematics and Natural Sciences, University of Düsseldorf |
-| 2018 | BSc., Computer Science, University of Düsseldorf |
-| Since 2014 | Research assistant at the department of Psychological Assessment and Differential Psychology, University of Düsseldorf |
-| 2013 | MSc., Psychology, University of Düsseldorf |
-| 2011 | BSc., Psychology, University of Düsseldorf |
+| 2018 | Ph.D. (Dr. rer. nat), Faculty of Mathematics and Natural Sciences, Heinrich Heine University Düsseldorf |
+| 2018 | B.Sc., Computer Science, Heinrich Heine University Düsseldorf |
+| Since 2014 | Research assistant at the department of Psychological Assessment and Differential Psychology, Heinrich Heine University Düsseldorf |
+| 2013 | M.Sc., Psychology, Heinrich Heine University Düsseldorf |
+| 2011 | B.Sc., Psychology, Heinrich Heine University Düsseldorf |
+
+### Other
+
+[Some Things and some Stuff](../stuff/index.html)
 
 ### Contact
 
@@ -82,6 +89,7 @@ I like hearing from people!
 - [Twitter](https://twitter.com/MPapenberg)
 - [Github](https://github.com/m-Py)
 - [Google Scholar](https://scholar.google.de/citations?user=_h33JecAAAAJ&hl=de&oi=sra)
+- [Open Science Framework](https://osf.io/3gq2h)
 
 
 [^diss]: My doctoral dissertation dealt with personality influences on 
@@ -90,5 +98,5 @@ influence the validity of sequential knowledge
 tests](https://docserv.uni-duesseldorf.de/servlets/DocumentServlet?id=46569).
 
 [^R]: For example, I wrote an introduction to the statistical 
-programming language [R](https://cran.r-project.org/), [available for 
-free here](https://osf.io/nghyv/) (in German language).
+programming language [R](https://cran.r-project.org/), [freely available
+here](https://osf.io/nghyv/) (in German language).
