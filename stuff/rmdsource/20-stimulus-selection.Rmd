@@ -45,6 +45,10 @@ library(LexOPS)
 library(anticlust)
 ```
 
+Next, I extract two sets of stimuli each having 25 elements from the 
+entire pool of stimuli. The stimuli should differ on `CNC.Brysbaert` but 
+be similar on `Length` and `Zipf.SUBTLEX_UK`.
+
 ```{r}
 nrow(lexops)
 
