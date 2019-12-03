@@ -15,7 +15,7 @@ Düsseldorf](https://www.uni-duesseldorf.de/home/en/home.html). I am
 interested in measurement, personality[^diss] and programming[^R].
 
 I am currently working on the `R` package 
-[`anticlust`](https://github.com/m-Py/anticlust) package that enables 
+[`anticlust`](https://github.com/m-Py/anticlust) that enables 
 the automatic selection of stimuli for psychological experiments. Check 
 out my [latest preprint on the anticlustering 
 method](https://psyarxiv.com/3razc/) or [my 
