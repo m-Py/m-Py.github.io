@@ -95,7 +95,7 @@ I like hearing from people!
 [^diss]: My doctoral dissertation dealt with personality influences on 
 test achievement, see [On how testwiseness and acceptance reluctance 
 influence the validity of sequential knowledge 
-tests](https://docserv.uni-duesseldorf.de/servlets/DocumentServlet?id=46569).
+tests](https://docserv.uni-duesseldorf.de/servlets/DerivateServlet/Derivate-49582/%2B%2B%2B%2B%202018%20Dissertation%20Martin%20Papenberg.pdf).
 
 [^R]: For example, I wrote an introduction to the statistical 
 programming language [R](https://cran.r-project.org/), [freely available
