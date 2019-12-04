@@ -8,7 +8,7 @@ usually about statistics, <a href="http://rmarkdown.rstudio.com/"
 target="_blank"> R Markdown </a>or other <a 
 href="https://www.r-project.org/" target="_blank">R</a>-related stuff. 
 
-[About me](../about/me.html).
+[About me](../about/index.html).
 
 ### Posts:
 
