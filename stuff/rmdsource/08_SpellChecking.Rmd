@@ -1,5 +1,5 @@
 ---
-title: "German dictionary for spell checking in Ubuntu"
+title: "German dictionaries in Ubuntu"
 date: November 06, 2019
 author: Martin Papenberg
 ---
@@ -13,8 +13,25 @@ available. A german dictionary can be installed as follows:
 $ sudo apt install aspell-de
 ```
 
+## Support for R Markdown / Latex
 
-&nbsp;
+Related -- to include other language support in R Markdown / Latex, use:
+
+```
+sudo apt-cache search texlive german
+sudo apt install texlive-lang-german
+```
+
+Then, include this in the YAML header of an R Markdown document:
+
+```YAML
+header-includes:
+  - \usepackage[german]{babel}
+```
+  
+---
+
+Last updated: `r Sys.Date()`
 
 ### <a href="index.html">Back to the front page</a>
 
