@@ -1,0 +1,49 @@
+---
+title: "Find the $n$ smallest or largest elements in `R`"
+date: December 10, 2019
+author: Martin Papenberg
+output:
+  html_document:
+    df_print: kable
+---
+
+```{r, include = FALSE}
+
+library(knitr)
+knitr::opts_chunk$set(message=FALSE, warning = FALSE) # echo = FALSE
+options(scipen = 999, digits = 2)
+
+```
+
+The functions `which.min()` and `which.max()` can be used to find the 
+indeces of the smallest and largest elements, e.g.:
+
+```{r}
+data(iris)
+smallest <- which.min(iris$Sepal.Length)
+iris[smallest, ]
+
+largest <- which.max(iris$Sepal.Length)
+iris[largest, ]
+```
+
+To find the $n$ smallest or largest elements, use the function 
+`order()`:
+
+```{r}
+n <- 5
+
+smallest <- order(iris$Sepal.Length)[1:n]
+iris[smallest, ]
+
+largest <- order(iris$Sepal.Length, decreasing = TRUE)[1:n]
+iris[largest, ]
+```
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
