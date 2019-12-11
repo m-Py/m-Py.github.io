@@ -24,9 +24,18 @@ analyis and anticlustering.
 
 **Minor**
 
-The function `mean_sd_obj()` no longer computes the discrepancy of 
-medians, only in means and standard deviations (as the name would also 
-suggest)
+- The function `mean_sd_obj()` no longer computes the discrepancy of 
+  medians, only in means and standard deviations (as the name would also 
+  suggest)
+- I wrote a new implementation of the "centroid nearest neighbour" 
+  clustering algorithm that was added in version 0.3.0. It is now 
+  available when calling the function `balanced_clustering()` with 
+  argument `method = "nn"`. It produces the same clusters as `method = 
+  "heuristic"` (the default), but is faster and applicable to larger
+  data sets. It uses the function [`nn2()`](https://www.rdocumentation.org/packages/RANN/versions/2.6.1/topics/nn2)
+  from the `RANN` package to search for nearest neighbours, for which 
+  reason the implementation does not require to compute a quadratic 
+  distance matrix. It cannot be used with a distance matrix as input.
 
 ---
 

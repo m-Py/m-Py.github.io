@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -336,6 +335,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -378,7 +378,10 @@ summary {
 <p><strong>Major</strong></p>
 <p>New easy-to-use interface for stimulus selection in psychology: The function <code>select_stimuli()</code> (and also another function <code>divide_and_select()</code>). These functions can be used to select stimuli for a variety of research designs and to only select a subset of all stimuli. See the <a href="stimulus-selection.html">new vignette</a> for an overview to the new functionality (currently, I am still working on the vignette and the implementation; but feel free to check it out). The functions <code>select_stimuli()</code> does not only provide a new interface for stimulus selection but also implements brand new algorithms that combine cluster analyis and anticlustering.</p>
 <p><strong>Minor</strong></p>
-<p>The function <code>mean_sd_obj()</code> no longer computes the discrepancy of medians, only in means and standard deviations (as the name would also suggest)</p>
+<ul>
+<li>The function <code>mean_sd_obj()</code> no longer computes the discrepancy of medians, only in means and standard deviations (as the name would also suggest)</li>
+<li>I wrote a new implementation of the “centroid nearest neighbour” clustering algorithm that was added in version 0.3.0. It is now available when calling the function <code>balanced_clustering()</code> with argument <code>method = &quot;nn&quot;</code>. It produces the same clusters as <code>method =  &quot;heuristic&quot;</code> (the default), but is faster and applicable to larger data sets. It uses the function <a href="https://www.rdocumentation.org/packages/RANN/versions/2.6.1/topics/nn2"><code>nn2()</code></a> from the <code>RANN</code> package to search for nearest neighbours, for which reason the implementation does not require to compute a quadratic distance matrix. It cannot be used with a distance matrix as input.</li>
+</ul>
 <hr />
 <p>If you would like to check out the latest features, install the development version:</p>
 <pre class="r"><code>remotes::install_github(&quot;m-Py/anticlust@devel&quot;)</code></pre>
