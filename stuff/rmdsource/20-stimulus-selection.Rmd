@@ -38,19 +38,29 @@ to three data sets that vary in size from very large to rather small.
 
 ## Example 1: Large data set `lexops`
 
-We start by looking at a data set that is built into the `lexops`.
+First, let's load the packages:
 
 ```{r}
 library(LexOPS)
 library(anticlust)
 ```
 
-Next, I extract two sets of stimuli each having 25 elements from the 
-entire pool of stimuli. The stimuli should differ on `CNC.Brysbaert` but 
-be similar on `Length` and `Zipf.SUBTLEX_UK`.
+We start by using a data set that is built into the `lexops`:
 
 ```{r}
+head(lexops)
 nrow(lexops)
+```
+
+We now reproduce the the first example on the [package 
+website](https://jackedtaylor.github.io/LexOPSdocs/the-generate-pipeline.html).
+In this example, we extract two sets of stimuli each having 25 elements 
+from the entire pool of stimuli. The stimuli should differ on 
+`CNC.Brysbaert` but be similar on `Length` and `Zipf.SUBTLEX_UK`; for 
+more information on the variables we use for stimulus selection, follow 
+the link above. 
+
+```{r}
 
 stim <- lexops %>%
   subset(PK.Brysbaert >= 0.9) %>%
@@ -61,9 +71,15 @@ stim <- lexops %>%
   long_format()
 ```
 
-Let's check out the means and standard deviations of the variables that 
-were considered, using the function `mean_sd_tab()` from the `anticlust`
-package.
+We obtain a table like this:
+
+```{r}
+head(stim)
+```
+
+To validate the usefulness of the output, let's check out the means and 
+standard deviations of the variables that were considered, using the 
+function `mean_sd_tab()` from the `anticlust` package.
 
 ```{r}
 # Compare descriptive statistics by set:
@@ -86,7 +102,6 @@ functionality, see the vignette
 [here](../anticlust/stimulus-selection.html)
 
 ```{r}
-
 stimuli <- select_stimuli(
    subset(lexops, PK.Brysbaert >= 0.9),
    split_by = "CNC.Brysbaert",
@@ -105,15 +120,21 @@ mean_sd_tab(
 ```
 
 Here, the `anticlust` package uses a methodology called 
-min-max-anticlustering---simultaneously maximizing differerences in 
-independent variables while minizimizing differences with regard to 
-covariates. This method still has to be documented thoroughly, and I am 
-working on it. 
+min-max-anticlustering[^minmax]---simultaneously maximizing 
+differerences in independent variables while minizimizing differences 
+with regard to covariates. 
+
+[^minmax]: This method still has to be documented thoroughly -- I am 
+working on it ;)
 
 The results show that the the word sets are quite well balanced on 
 `Length` and `Zipf.SUBTLEX_UK`. It seems that `anticlust` increased the 
 difference in `CNC.Brysbaert` a little more than `LexOPS`, but the 
 values are quite similar for both packages.
+
+The `LexOPS` package was faster for this large data set ($N$ = 29783) 
+than the `anticlust` package (< 1 sec vs. about 1 min on my PC). For the 
+remaining two examples, running time is negligible.
 
 ## Example 2: Medium sized data set `oasis`
 
@@ -152,8 +173,7 @@ mean_sd_tab(
 )
 ```
 
-This looks quite promising, but for this application, `anticlust` can 
-do better: 
+For this application, `anticlust` can do much better: 
 
 ```{r}
 stimuli <- select_stimuli(
@@ -226,10 +246,10 @@ mean_sd_tab(
 )
 ```
 
-In this case, the difference with regard to frequency is smaller, but 
-the covariates are more similar and no items had to be discarded---all 
-96 items are part of the output. In general, `anticlust` will focus on 
-similarity in covariates more than dissimilarity with regard to the 
+The `anticlust` package did not discard any items---all 96 items are 
+part of the output. The difference with regard to frequency is smaller, 
+but the covariates are more similar. In general, `anticlust` will focus 
+on similarity in covariates more than dissimilarity with regard to the 
 independent variable. In my very personal opinion, this is more 
 important to avoid confounding.
 
@@ -247,11 +267,15 @@ Advantages for `anticlust`:
 - seems to ensure covariate similarity better on a group level
 - can be used on small data sets; no subset selection is necessary
 - can balanced a categorical variable between sets
+- most important (IMHO): algorithmic optimization of (dis)similarity; 
+  `LexOPS` takes as arguments specifications with regard to the allowed
+  dissimilarity and then checks if the requirements can be fulfilled. 
+  `anticlust` will just try to produce the best result it can get without
+  requiring user specification
 
 Disadvantages for `anticlust`:
 
-- was not designed for very large item sets, takes some time for > 10000 
-stimuli. Was slower for the example by `LexOPS`
+- Was slower for the very large data set than `LexOPS`
 - does not enable individual matching of stimuli, optimizes group level 
 similarity
 
@@ -284,17 +308,17 @@ have an edge, especially when the available item pool is not huge.
 
 ## More information
 
-Unfortunately, this post too short to go into detail about the different 
+This post was too short to go into detail about the different 
 algorithmic frameworks underlying the `LexOPS` and `anticlust` packages. 
-A lot could be said about this, e.g., it had to be expected that 
-`anticlust` outperforms `LexOPS` in the Example 2. For more 
-background on the anticlustering methodology, check out my 
+A lot could be said about this, e.g., why it had to be expected that 
+`anticlust` outperforms `LexOPS` in Example 2. For more background on 
+the anticlustering methodology, check out the 
 [preprint](https://psyarxiv.com/3razc/). However, note that some of the 
 methodology presented in this post, especially min-max anticlustering, 
-has not been thoroughly documented. I am currently working on another 
-paper describing the latest developments for the `anticlust` package. So 
-stay tuned for that. The preprint describing the `LexOPS` package can be 
-found [here](https://psyarxiv.com/7sudw). 
+has not been thoroughly documented. I am currently working on that -- so 
+stay tuned. The preprint describing the `LexOPS` package can be found 
+[here](https://psyarxiv.com/7sudw) and the accompanying website is 
+[here](https://jackedtaylor.github.io/LexOPSdocs/).
 
 ## References 
 
