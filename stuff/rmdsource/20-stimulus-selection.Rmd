@@ -65,6 +65,7 @@ the link above.
 stim <- lexops %>%
   subset(PK.Brysbaert >= 0.9) %>%
   split_by(CNC.Brysbaert, 1:2 ~ 4:5) %>%
+  split_by(BG.SUBTLEX_UK, 0:0.003 ~ 0.009:0.013) %>%
   control_for(Length, 0:0) %>%
   control_for(Zipf.SUBTLEX_UK, -0.2:0.2) %>%
   generate(n = 25) %>%
@@ -84,16 +85,16 @@ function `mean_sd_tab()` from the `anticlust` package.
 ```{r}
 # Compare descriptive statistics by set:
 mean_sd_tab(
-  stim[, c("CNC.Brysbaert", "Length", "Zipf.SUBTLEX_UK")], 
-  stim$condition,
-  na.rm = TRUE
+  stim[, c("CNC.Brysbaert", "BG.SUBTLEX_UK", "Length", "Zipf.SUBTLEX_UK")], 
+  stim$condition
 )
 ```
 
 In brackets, we have the standard deviations by set, and before that the 
 mean values. As shown, the word sets are quite well balanced on `Length` 
 and `Zipf.SUBTLEX_UK`, and quite dissimilar with regard to 
-`CNC.Brysbaert`. That is good, because it is what we want!
+`CNC.Brysbaert` and `BG.SUBTLEX_UK`. That is good, because it is what we 
+want!
 
 Let's do the same using the `anticlust` package:[^1]
 
@@ -104,37 +105,39 @@ functionality, see the vignette
 ```{r}
 stimuli <- select_stimuli(
    subset(lexops, PK.Brysbaert >= 0.9),
-   split_by = "CNC.Brysbaert",
+   split_by = c("CNC.Brysbaert", "BG.SUBTLEX_UK"),
    equalize = c("Length", "Zipf.SUBTLEX_UK"),
-   design = 2, # specifies the number of groups
+   design = c(2, 2), # specifies the number of groups
    n = 25 # Number of stimuli per set
 )
 
 # Compare descriptive statistics by set:
 mean_sd_tab(
-  stimuli[, c("CNC.Brysbaert", "Length", "Zipf.SUBTLEX_UK")], 
-  stimuli$SET,
-  na.rm = TRUE
+  stimuli[, c("CNC.Brysbaert", "BG.SUBTLEX_UK", "Length", "Zipf.SUBTLEX_UK")], 
+  stimuli$SET
 )
 
 ```
 
-Here, the `anticlust` package uses a methodology called 
-min-max-anticlustering[^minmax]---simultaneously maximizing 
-differerences in independent variables while minizimizing differences 
+The `anticlust` package uses a methodology called 
+min-max-anticlustering[^minmax]---it maximizes differerences with regard 
+to independent variables while simultaneously minizimizing differences 
 with regard to covariates. 
 
 [^minmax]: This method still has to be documented thoroughly -- I am 
-working on it ;)
+working on it.
 
 The results show that the the word sets are quite well balanced on 
-`Length` and `Zipf.SUBTLEX_UK`. It seems that `anticlust` increased the 
-difference in `CNC.Brysbaert` a little more than `LexOPS`, but the 
-values are quite similar for both packages.
+`Length` and `Zipf.SUBTLEX_UK`, while they are different with regard to 
+`CNC.Brysbaert` and `BG.SUBTLEX_UK`. It seems that `anticlust` ensured 
+covariate similarity with regard to `Zipf.SUBTLEX_UK` a little more 
+strictlythan `LexOPS`, but overall the results for both packages are 
+very similar.
 
-The `LexOPS` package was faster for this large data set ($N$ = 29783) 
-than the `anticlust` package (< 1 sec vs. about 1 min on my PC). For the 
-remaining two examples, running time is negligible.
+Note that the `LexOPS` package was faster for this large data set ($N$ = 
+29783) than the `anticlust` package (< 1 sec for `LexOPS` vs. about 1 
+min for `anticlust` on my PC). However, both running times are well 
+acceptable for everyday use.
 
 ## Example 2: Medium sized data set `oasis`
 
