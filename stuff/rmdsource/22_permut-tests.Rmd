@@ -80,10 +80,7 @@ assigned conditions to responses at random; the condition was not
 systematically related to the responses. The red line indicates the 
 observed *t*-value based on the real condition labels. We compare it to 
 the sampling distribution to assess its extremeness, i.e., to decide if 
-it is statistically significant. Unlike the traditional *t*-test, this 
-procedure to declare significance seems to be legitimate even if the 
-data are non-normal or if other assumptions of the traditional test are 
-violated.
+it is statistically significant. 
 
 Why are permutation tests called *permutation* tests? In the example, we 
 reshuffled the condition labels using the function `sample()`. The 
