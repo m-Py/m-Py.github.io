@@ -208,8 +208,11 @@ general we have $k!$ times more permutations than partitions if all
 groups are of equal size.
 
 This matter seems to have been overlooked at least in some of the the 
-statistical literature on permutation tests. For example, Ernst (2004) 
+statistical literature[^wiki] on permutation tests. For example, Ernst (2004) 
 writes in a publication in *Statistical Science*: 
+
+[^wiki]: The [wikipedia article](https://en.wikipedia.org/wiki/Resampling_(statistics)#Permutation_tests)
+on permutation tests also ignores this issue. 
 
 > Computation of the permutation distribution of a test statistic 
 involves careful enumeration of all $\binom{N}{n}$ divisions of the 

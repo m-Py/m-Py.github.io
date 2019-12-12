@@ -491,7 +491,7 @@ print(data)</code></pre>
 ## [[6]]
 ## [1] 2 2 1 1</code></pre>
 <p>For two groups, we generate the double amount of permutations as compared to partitions. For more than two groups, the discrepancy between the number of permutations and the number of partitions increases even more.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
-<p>This matter seems to have been overlooked at least in some of the the statistical literature on permutation tests. For example, Ernst (2004) writes in a publication in <em>Statistical Science</em>:</p>
+<p>This matter seems to have been overlooked at least in some of the the statistical literature<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> on permutation tests. For example, Ernst (2004) writes in a publication in <em>Statistical Science</em>:</p>
 <blockquote>
 <p>Computation of the permutation distribution of a test statistic involves careful enumeration of all <span class="math inline">\(\binom{N}{n}\)</span> divisions of the observations. This poses two computational challenges. First, the sheer number of calculations required becomes very large as the samples become only moderate in size. There are over 155 million ways to divide 30 observations into two groups of size 15, and over 5.5 trillion ways to divide them into three groups of size 10.</p>
 </blockquote>
@@ -537,6 +537,7 @@ P(N, K) = \frac{1}{K!} \cdot \prod\limits_{i=0}^{K - 1} \binom{N - \frac{iN}{K}}
 <li id="fn2"><p>Currently, this function is not an exported function, for which reason I have to use the <code>:::</code> operator to access it.<a href="#fnref2" class="footnote-back">↩</a></p></li>
 <li id="fn3"><p>If you want to learn more about the next permutation algorithm, check out <a href="https://www.nayuki.io/page/next-lexicographical-permutation-algorithm">this post</a>.<a href="#fnref3" class="footnote-back">↩</a></p></li>
 <li id="fn4"><p>For <span class="math inline">\(k = 3\)</span> groups: <span class="math inline">\(6\)</span> times more permutations than partitions; for <span class="math inline">\(k = 4\)</span> groups: <span class="math inline">\(24\)</span> times as many permutations; in general we have <span class="math inline">\(k!\)</span> times more permutations than partitions if all groups are of equal size.<a href="#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>The <a href="https://en.wikipedia.org/wiki/Resampling_(statistics)#Permutation_tests">wikipedia article</a> on permutation tests also ignores this issue.<a href="#fnref5" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 
