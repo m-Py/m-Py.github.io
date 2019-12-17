@@ -18,9 +18,9 @@ set.seed(123)
 ```
 
 *In this post, I discuss permutation tests by the example of the two 
-group t-test. I show that the number of possible permutations usually 
-assumed in the statistical literature is incorrect when the two groups 
-have the same size.*
+group t-test. I illustrate that the number of possible permutations 
+often assumed in the statistical literature is incorrect when the two 
+groups have the same size.*
 
 I only recently -- I think it was in the beginning of 2019 -- learned 
 about [permutation 
@@ -282,7 +282,16 @@ iterations for an exact permutation test when experimental groups are of
 equal size. This number has not been presented correctly in some of the 
 statistical literature on permutation tests. 
 
+EDIT 2019-12-17: I now found out that the special case of equal sample 
+sizes has indeed been treated in the statistical literature (Phipson & 
+Smyth, 2010), but since it seems that the issue still has not been 
+considered widely (e.g., Craig & Fisher, 2019).
+
 ## References 
+
+Craig, A. R., & Fisher, W. W. (2019). Randomization tests as alternative 
+analysis methods for behavior-analytic data. *Journal of the 
+Experimental Analysis of Behavior, 111*, 309–328. 
 
 Ernst, M. D. (2004). Permutation methods: a basis for exact inference. 
 *Statistical Science, 19*, 676-685.
@@ -291,6 +300,11 @@ Papenberg, M., & Klau, G. W. (2019, October 30). Using anticlustering to
 partition a stimulus pool into equivalent parts. 
 https://doi.org/10.31234/osf.io/3razc. Manuscript submitted for 
 publication. 
+
+Phipson, B., and Smyth, G. K. (2010). Permutation p-values should never 
+be zero: calculating exact p-values when permutations are randomly 
+drawn. *Statistical Applications in Genetics and Molecular Biology 9*, 
+Article 39.
 
 ---
 
