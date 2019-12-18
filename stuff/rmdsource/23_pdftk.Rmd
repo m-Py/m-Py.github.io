@@ -1,5 +1,5 @@
 ---
-title: "Some useful pdf manipulations"
+title: "Some useful pdf manipulations using pdftk"
 date: December 18, 2019
 author: Martin Papenberg
 ---
