@@ -1,0 +1,21 @@
+---
+title: "A better option for German language support in R Markdown"
+date: January 9, 2020
+author: Martin Papenberg
+---
+
+Found [here](https://stackoverflow.com/questions/59658664/germany-quotation-marks-broken-in-tinytex-rmarkdown-even-when-using-package-c)
+
+```YAML
+lang: de-DE
+header-includes:
+    - \usepackage{csquotes}
+```
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;

@@ -11,6 +11,7 @@ href="https://www.r-project.org/" target="_blank">R</a>-related stuff.
 [About me](../about/index.html).
 
 ### Posts:
+- <a href="24_germanRmd.html">2020/01: A better option for German language support in R Markdown
 - <a href="23_pdftk.html">2019/12: Some useful pdf manipulations using pdftk
 - <a href="22_permut-tests.html">2019/12: Number of permutations in permutation tests
 - <a href="21_nsmallest.html">2019/12: Find the $n$ smallest or largest elements in `R`
