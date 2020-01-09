@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title></title>
-  <meta name="description" content="Testtheorie mit R" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <title>5 Aufarbeitung von Fragebogendaten | Testtheorie mit R</title>
+  <meta name="description" content="5 Aufarbeitung von Fragebogendaten | Testtheorie mit R" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="" />
+  <meta property="og:title" content="5 Aufarbeitung von Fragebogendaten | Testtheorie mit R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,11 +16,12 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="" />
+  <meta name="twitter:title" content="5 Aufarbeitung von Fragebogendaten | Testtheorie mit R" />
   
   
   
 
+<meta name="author" content="Martin Papenberg" />
 
 
 
@@ -29,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="psychometrie.html">
-<link rel="next" href="funktionen.html">
+<link rel="prev" href="psychometrie.html"/>
+<link rel="next" href="funktionen.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -38,6 +39,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -48,41 +52,66 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -99,7 +128,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="einstieg.html"><a href="einstieg.html"><i class="fa fa-check"></i><b>1</b> Einstieg</a><ul>
-<li class="chapter" data-level="1.1" data-path="einstieg.html"><a href="einstieg.html#uber-dieses-skript"><i class="fa fa-check"></i><b>1.1</b> Über dieses Skript</a><ul>
+<li class="chapter" data-level="1.1" data-path="einstieg.html"><a href="einstieg.html#über-dieses-skript"><i class="fa fa-check"></i><b>1.1</b> Über dieses Skript</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="einstieg.html"><a href="einstieg.html#feedback-und-fehlermeldungen"><i class="fa fa-check"></i><b>1.1.1</b> Feedback und Fehlermeldungen</a></li>
 <li class="chapter" data-level="1.1.2" data-path="einstieg.html"><a href="einstieg.html#danksagung"><i class="fa fa-check"></i><b>1.1.2</b> Danksagung</a></li>
 </ul></li>
@@ -122,7 +151,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.2.4" data-path="vektoren.html"><a href="vektoren.html#na"><i class="fa fa-check"></i><b>2.2.4</b> <code>NA</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="vektoren.html"><a href="vektoren.html#logischevergleiche"><i class="fa fa-check"></i><b>2.3</b> Logische Vergleiche</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-uberprufe-das-gesetz-der-groen-zahlen"><i class="fa fa-check"></i><b>2.3.1</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
+<li class="chapter" data-level="2.3.1" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen"><i class="fa fa-check"></i><b>2.3.1</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
 <li class="chapter" data-level="2.3.2" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.3.2</b> Der <code>%in%</code> Operator</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.4</b> Zugriff auf Vektorelemente</a><ul>
@@ -132,7 +161,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="vektoren.html"><a href="vektoren.html#praezedenz"><i class="fa fa-check"></i><b>2.5</b> Präzedenz</a></li>
 <li class="chapter" data-level="2.6" data-path="vektoren.html"><a href="vektoren.html#zusammenfassung"><i class="fa fa-check"></i><b>2.6</b> Zusammenfassung</a></li>
-<li class="chapter" data-level="2.7" data-path="vektoren.html"><a href="vektoren.html#fragen-zum-vertiefenden-verstandnis"><i class="fa fa-check"></i><b>2.7</b> Fragen zum vertiefenden Verständnis</a></li>
+<li class="chapter" data-level="2.7" data-path="vektoren.html"><a href="vektoren.html#fragen-zum-vertiefenden-verständnis"><i class="fa fa-check"></i><b>2.7</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="dataframes.html"><a href="dataframes.html"><i class="fa fa-check"></i><b>3</b> <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.1" data-path="dataframes.html"><a href="dataframes.html#die-funktion-data.frame"><i class="fa fa-check"></i><b>3.1</b> Die Funktion <code>data.frame</code></a></li>
@@ -155,7 +184,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.6.4" data-path="dataframes.html"><a href="dataframes.html#sortieren-dplyrarrange"><i class="fa fa-check"></i><b>3.6.4</b> Sortieren: <code>dplyr::arrange</code></a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-1"><i class="fa fa-check"></i><b>3.7</b> Zusammenfassung</a></li>
-<li class="chapter" data-level="3.8" data-path="dataframes.html"><a href="dataframes.html#fragen-zum-vertiefenden-verstandnis-1"><i class="fa fa-check"></i><b>3.8</b> Fragen zum vertiefenden Verständnis</a></li>
+<li class="chapter" data-level="3.8" data-path="dataframes.html"><a href="dataframes.html#fragen-zum-vertiefenden-verständnis-1"><i class="fa fa-check"></i><b>3.8</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="psychometrie.html"><a href="psychometrie.html"><i class="fa fa-check"></i><b>4</b> Erste psychometrische Auswertungen</a><ul>
 <li class="chapter" data-level="4.1" data-path="psychometrie.html"><a href="psychometrie.html#summenwerte"><i class="fa fa-check"></i><b>4.1</b> Summenwerte</a></li>
@@ -163,8 +192,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a></li>
 <li class="chapter" data-level="4.4" data-path="psychometrie.html"><a href="psychometrie.html#trennschaerfe"><i class="fa fa-check"></i><b>4.4</b> Item-Trennschärfen</a></li>
 <li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#cronbachs-alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
-<li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilitat"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
-<li class="chapter" data-level="4.7" data-path="psychometrie.html"><a href="psychometrie.html#fragen-zum-vertiefenden-verstandnis-2"><i class="fa fa-check"></i><b>4.7</b> Fragen zum vertiefenden Verständnis</a></li>
+<li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilität"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="rohdaten.html"><a href="rohdaten.html"><i class="fa fa-check"></i><b>5</b> Aufarbeitung von Fragebogendaten</a><ul>
 <li class="chapter" data-level="5.1" data-path="rohdaten.html"><a href="rohdaten.html#umkodierung"><i class="fa fa-check"></i><b>5.1</b> Umkodierung von Antworten</a><ul>
@@ -175,6 +203,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.3.1" data-path="rohdaten.html"><a href="rohdaten.html#identifikation-von-fehlenden-werten"><i class="fa fa-check"></i><b>5.3.1</b> Identifikation von fehlenden Werten</a></li>
 <li class="chapter" data-level="5.3.2" data-path="rohdaten.html"><a href="rohdaten.html#vergleiche-mit-na"><i class="fa fa-check"></i><b>5.3.2</b> Vergleiche mit <code>NA</code></a></li>
 </ul></li>
+<li class="chapter" data-level="5.4" data-path="rohdaten.html"><a href="rohdaten.html#fragen-zum-vertiefenden-verständnis-2"><i class="fa fa-check"></i><b>5.4</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="funktionen.html"><a href="funktionen.html"><i class="fa fa-check"></i><b>6</b> Funktionen</a><ul>
 <li class="chapter" data-level="6.1" data-path="funktionen.html"><a href="funktionen.html#das-black-box-modell"><i class="fa fa-check"></i><b>6.1</b> Das Black-Box-Modell</a></li>
@@ -182,7 +211,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.2.1" data-path="funktionen.html"><a href="funktionen.html#help"><i class="fa fa-check"></i><b>6.2.1</b> Die <code>R</code>-Hilfe</a></li>
 <li class="chapter" data-level="6.2.2" data-path="funktionen.html"><a href="funktionen.html#namenlose-argumente"><i class="fa fa-check"></i><b>6.2.2</b> Namenlose Argumente</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="funktionen.html"><a href="funktionen.html#ruckgabewerte"><i class="fa fa-check"></i><b>6.3</b> Rückgabewerte</a></li>
+<li class="chapter" data-level="6.3" data-path="funktionen.html"><a href="funktionen.html#rückgabewerte"><i class="fa fa-check"></i><b>6.3</b> Rückgabewerte</a></li>
 <li class="chapter" data-level="6.4" data-path="funktionen.html"><a href="funktionen.html#seiteneffekte"><i class="fa fa-check"></i><b>6.4</b> Seiteneffekte</a></li>
 <li class="chapter" data-level="6.5" data-path="funktionen.html"><a href="funktionen.html#selbst-geschriebene-funktionen"><i class="fa fa-check"></i><b>6.5</b> Selbst geschriebene Funktionen</a><ul>
 <li class="chapter" data-level="6.5.1" data-path="funktionen.html"><a href="funktionen.html#definition-der-eigenen-funktion"><i class="fa fa-check"></i><b>6.5.1</b> Definition der eigenen Funktion</a></li>
@@ -190,11 +219,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.5.3" data-path="funktionen.html"><a href="funktionen.html#optionale-argumente"><i class="fa fa-check"></i><b>6.5.3</b> Optionale Argumente</a></li>
 <li class="chapter" data-level="6.5.4" data-path="funktionen.html"><a href="funktionen.html#wann-schreibe-ich-meine-eigene-funktion"><i class="fa fa-check"></i><b>6.5.4</b> Wann schreibe ich meine eigene Funktion</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="funktionen.html"><a href="funktionen.html#fragen-zum-vertiefenden-verstandnis-3"><i class="fa fa-check"></i><b>6.6</b> Fragen zum vertiefenden Verständnis</a></li>
+<li class="chapter" data-level="6.6" data-path="funktionen.html"><a href="funktionen.html#fragen-zum-vertiefenden-verständnis-3"><i class="fa fa-check"></i><b>6.6</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="schleifen.html"><a href="schleifen.html"><i class="fa fa-check"></i><b>7</b> Schleifen</a><ul>
 <li class="chapter" data-level="7.1" data-path="schleifen.html"><a href="schleifen.html#sequentielle-bepunktung-von-testitems"><i class="fa fa-check"></i><b>7.1</b> Sequentielle Bepunktung von Testitems</a></li>
-<li class="chapter" data-level="7.2" data-path="schleifen.html"><a href="schleifen.html#berechnung-von-part-whole-korrigierten-trennscharfen"><i class="fa fa-check"></i><b>7.2</b> Berechnung von part-whole korrigierten Trennschärfen</a></li>
+<li class="chapter" data-level="7.2" data-path="schleifen.html"><a href="schleifen.html#berechnung-von-part-whole-korrigierten-trennschärfen"><i class="fa fa-check"></i><b>7.2</b> Berechnung von part-whole korrigierten Trennschärfen</a></li>
 <li class="chapter" data-level="7.3" data-path="schleifen.html"><a href="schleifen.html#datenspeicherung-in-einer-schleife"><i class="fa fa-check"></i><b>7.3</b> Datenspeicherung in einer Schleife</a><ul>
 <li class="chapter" data-level="7.3.1" data-path="schleifen.html"><a href="schleifen.html#adressierung-per-name"><i class="fa fa-check"></i><b>7.3.1</b> Adressierung per Name</a></li>
 <li class="chapter" data-level="7.3.2" data-path="schleifen.html"><a href="schleifen.html#vektorspeicherung-adressierung-per-index"><i class="fa fa-check"></i><b>7.3.2</b> Vektorspeicherung – Adressierung per Index</a></li>
@@ -204,7 +233,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8" data-path="anhang.html"><a href="anhang.html"><i class="fa fa-check"></i><b>8</b> Anhang</a><ul>
 <li class="chapter" data-level="8.1" data-path="anhang.html"><a href="anhang.html#datenEinlesen"><i class="fa fa-check"></i><b>8.1</b> Daten einlesen</a></li>
 <li class="chapter" data-level="8.2" data-path="anhang.html"><a href="anhang.html#das-environment-sauber-halten"><i class="fa fa-check"></i><b>8.2</b> Das Environment sauber halten</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="anhang.html"><a href="anhang.html#variablen-loschen"><i class="fa fa-check"></i><b>8.2.1</b> Variablen löschen</a></li>
+<li class="chapter" data-level="8.2.1" data-path="anhang.html"><a href="anhang.html#variablen-löschen"><i class="fa fa-check"></i><b>8.2.1</b> Variablen löschen</a></li>
 <li class="chapter" data-level="8.2.2" data-path="anhang.html"><a href="anhang.html#mit-einem-sauberen-environment-starten"><i class="fa fa-check"></i><b>8.2.2</b> Mit einem sauberen Environment starten</a></li>
 </ul></li>
 </ul></li>
@@ -218,7 +247,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><div style="white-space: pre-line;">Testtheorie mit R</div></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Testtheorie mit R</a>
           </h1>
         </div>
 
@@ -228,7 +257,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="rohdaten" class="section level1">
 <h1><span class="header-section-number">5</span> Aufarbeitung von Fragebogendaten</h1>
-<p>Unser Ziel ist die Auswertung echter Daten aus Fragebögen wie den BIG-5 und dem Narcissistic Personality Inventory. Allerdings liegen echte Daten oftmals nicht in der Form vor, die wir benötigen. Echte Daten haben fehlende Werte, und meistens müssen wichtige Informationen erst aus den bestehenden Variablen abgeleitet werden. Aus diesem Grund beschäftigen wir uns im vorliegenden Kapitel mit den folgenden Themen:</p>
+<p>Unser Ziel ist die Auswertung echter Daten aus Fragebögen wie den BIG-5
+und dem Narcissistic Personality Inventory. Allerdings liegen echte
+Daten oftmals nicht in der Form vor, die wir benötigen. Echte Daten
+haben fehlende Werte, und meistens müssen wichtige Informationen erst
+aus den bestehenden Variablen abgeleitet werden. Aus diesem Grund
+beschäftigen wir uns im vorliegenden Kapitel mit den folgenden Themen:</p>
 <ol style="list-style-type: decimal">
 <li>Umkodierung von Antworten</li>
 <li>Invertierung von Antworten</li>
@@ -236,7 +270,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ol>
 <div id="umkodierung" class="section level2">
 <h2><span class="header-section-number">5.1</span> Umkodierung von Antworten</h2>
-<p>Eine wichtige Voraussetzung für eine psychometrische Analyse war im Beispiel in Kapitel 4 bereits gegeben: Jeder Wert kodierte genau die Information, die wir brauchten – nämlich ob Schüler/innen eine Aufgabe korrekt gelöst hatten oder nicht (dargestellt durch <code>1</code> und <code>0</code>). Bei echten Datenerhebungen wird im Normalfall aber nicht direkt Korrektheit kodiert, sondern diese wird aus der eigentlichen Antwort abgeleitet. Die Antwort könnte beispielsweise ein Kreuz in einem Multiple-Choice-Item sein:</p>
+<p>Eine wichtige Voraussetzung für eine psychometrische Analyse war im
+Beispiel in Kapitel 4 bereits gegeben: Jeder Wert kodierte genau die
+Information, die wir brauchten – nämlich ob Schüler/innen eine Aufgabe
+korrekt gelöst hatten oder nicht (dargestellt durch <code>1</code> und <code>0</code>). Bei
+echten Datenerhebungen wird im Normalfall aber nicht direkt Korrektheit
+kodiert, sondern diese wird aus der eigentlichen Antwort abgeleitet. Die
+Antwort könnte beispielsweise ein Kreuz in einem Multiple-Choice-Item
+sein:</p>
 <blockquote>
 <p>Aus wie vielen Bundesländern besteht die Bundesrepublik Deutschland?</p>
 </blockquote>
@@ -248,50 +289,101 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>21</li>
 </ol>
 </blockquote>
-<p>Bei der Dateneingabe des Tests kann zwischen 1 und 4 kodiert werden, welche der vier Antwortoptionen ausgewählt wurde. Ob ein Kreuz bei (1), (2), (3) oder (4) gesetzt wird, ist für die Datenauswertung aber nicht unbedingt von Belang. Es ist vor allem relevant, ob die Frage richtig beantwortet wurde – wir benötigen also die folgende Umkodierung der Daten:</p>
+<p>Bei der Dateneingabe des Tests kann zwischen 1 und 4 kodiert werden,
+welche der vier Antwortoptionen ausgewählt wurde. Ob ein Kreuz bei (1),
+(2), (3) oder (4) gesetzt wird, ist für die Datenauswertung aber nicht
+unbedingt von Belang. Es ist vor allem relevant, ob die Frage richtig
+beantwortet wurde – wir benötigen also die folgende Umkodierung der
+Daten:</p>
 <ul>
 <li><code>1</code> <span class="math inline">\(\to\)</span> <code>0</code></li>
 <li><code>2</code> <span class="math inline">\(\to\)</span> <code>1</code></li>
 <li><code>3</code> <span class="math inline">\(\to\)</span> <code>0</code></li>
 <li><code>4</code> <span class="math inline">\(\to\)</span> <code>0</code></li>
 </ul>
-<p>In psychometrischem Jargon: Der Wert <code>2</code> ist der <em>Schlüssel</em> (engl.: <em>key</em>) dieser Aufgabe. Ein Schlüssel kodiert den Eingabewert der richtigen Antwort.<a href="#fn27" class="footnoteRef" id="fnref27"><sup>27</sup></a> Wir lernen jetzt, wie wir solche Umkodierungen in <code>R</code> umsetzen. Die Stärke einer Programmiersprache wie <code>R</code>: Wenn wir einmal gelernt haben, wie wir für eine Item-Schlüssel-Kombination Daten als richtig und falsch umkodieren, können wir mit nur ein wenig mehr Aufwand diesen Prozess für beliebig viele Items wiederholen. Das <em>Narcissistic Personality Inventory</em> etwa hat 40 Items und wir haben keine Lust, 40 Mal eine Umkodierung händisch neu durchzuführen.</p>
+<p>In psychometrischem Jargon: Der Wert <code>2</code> ist der <em>Schlüssel</em> (engl.:
+<em>key</em>) dieser Aufgabe. Ein Schlüssel kodiert den Eingabewert der
+richtigen Antwort.<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a> Wir lernen jetzt, wie wir solche
+Umkodierungen in <code>R</code> umsetzen. Die Stärke einer Programmiersprache wie
+<code>R</code>: Wenn wir einmal gelernt haben, wie wir für eine
+Item-Schlüssel-Kombination Daten als richtig und falsch umkodieren,
+können wir mit nur ein wenig mehr Aufwand diesen Prozess für beliebig
+viele Items wiederholen. Das <em>Narcissistic Personality Inventory</em> etwa
+hat 40 Items und wir haben keine Lust, 40 Mal eine Umkodierung
+händisch neu durchzuführen.</p>
 <div id="die-funktion-ifelse" class="section level3">
 <h3><span class="header-section-number">5.1.1</span> Die Funktion <code>ifelse</code></h3>
-<p>Mit der Funktion <code>ifelse</code> lassen sich Transformationen, die anhand eines Schlüssels Korrektheit kodieren, bequem durchführen. Das folgende Beispiel basiert auf dem obigen Multiple-Choice-Item:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Hypothetische Antworten auf das Bundesland Multiple-Choice-Item:</span>
-bundesland_answers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">2</span>)
-bundesland_key     &lt;-<span class="st"> </span><span class="dv">2</span>
-bundesland_score   &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="dt">test =</span> bundesland_answers <span class="op">==</span><span class="st"> </span>bundesland_key,
-                             <span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">0</span>)
-bundesland_score</code></pre></div>
+<p>Mit der Funktion <code>ifelse</code> lassen sich Transformationen, die anhand
+eines Schlüssels Korrektheit kodieren, bequem durchführen. Das folgende
+Beispiel basiert auf dem obigen Multiple-Choice-Item:</p>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb364-1" title="1"><span class="co"># Hypothetische Antworten auf das Bundesland Multiple-Choice-Item:</span></a>
+<a class="sourceLine" id="cb364-2" title="2">bundesland_answers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb364-3" title="3">bundesland_key     &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb364-4" title="4">bundesland_score   &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="dt">test =</span> bundesland_answers <span class="op">==</span><span class="st"> </span>bundesland_key,</a>
+<a class="sourceLine" id="cb364-5" title="5">                             <span class="dt">yes =</span> <span class="dv">1</span>, <span class="dt">no =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb364-6" title="6">bundesland_score</a></code></pre></div>
 <pre><code>[1] 0 1 0 0 1 0 1</code></pre>
-<p>Was ist hier passiert? Ich habe im Vektor <code>bundesland_answers</code> hypothetische Antworten generiert; die Variable <code>bundesland_key</code> enthält den Schlüssel, d.h. die korrekte Antwort. Mithilfe der Funktion <code>ifelse</code> gleiche ich die Antworten mit dem Schlüssel ab. <code>ifelse</code> nimmt drei Argumente entgegen. Diese heißen <code>test</code>, <code>yes</code>, und <code>no</code>:</p>
+<p>Was ist hier passiert? Ich habe im Vektor <code>bundesland_answers</code>
+hypothetische Antworten generiert; die Variable <code>bundesland_key</code> enthält
+den Schlüssel, d.h. die korrekte Antwort. Mithilfe der Funktion <code>ifelse</code>
+gleiche ich die Antworten mit dem Schlüssel ab. <code>ifelse</code> nimmt drei
+Argumente entgegen. Diese heißen <code>test</code>, <code>yes</code>, und <code>no</code>:</p>
 <ul>
-<li><code>test</code>: Ein logischer Vektor – hier der Vergleich jeder Antwort mit dem Schlüssel</li>
+<li><code>test</code>: Ein logischer Vektor – hier der Vergleich jeder
+Antwort mit dem Schlüssel</li>
 <li><code>yes</code>: Die Ausgabe an den Positionen, an denen der <code>test</code> <code>TRUE</code> ergibt</li>
 <li><code>no</code>: Die Ausgabe an den Positionen, an denen der <code>test</code> <code>FALSE</code> ergibt</li>
 </ul>
-<p>In diesem Fall wird dem Argument <code>test</code> der folgende logische Vektor übergeben:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bundesland_answers <span class="op">==</span><span class="st"> </span>bundesland_key</code></pre></div>
+<p>In diesem Fall wird dem Argument <code>test</code> der folgende logische Vektor
+übergeben:</p>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb366-1" title="1">bundesland_answers <span class="op">==</span><span class="st"> </span>bundesland_key</a></code></pre></div>
 <pre><code>[1] FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE</code></pre>
-<p>An allen Positionen, an denen dieser Vergleich <code>TRUE</code> ergibt, gibt die Funktion <code>ifelse</code> den Wert 1 aus – also den Wert, der dem Argument <code>yes</code> übergeben wurde. An allen anderen Positionen steht 0 – also der Wert, der dem Argument <code>no</code> übergeben wurde. Praktisch: Ich muss nicht angeben, welche falschen Werte alle möglich sind; es reicht aus, im <code>test</code> mit dem richtigen Wert zu vergleichen. Alle anderen Werten werden dann automatisch als falsch interpretiert.</p>
-<p>Nach der Umkodierung können wir mit der Funktion <code>mean</code> die Schwierigkeit des Items berechnen:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(bundesland_score)</code></pre></div>
+<p>An allen Positionen, an denen dieser Vergleich <code>TRUE</code> ergibt, gibt die
+Funktion <code>ifelse</code> den Wert 1 aus – also den Wert, der dem Argument
+<code>yes</code> übergeben wurde. An allen anderen Positionen steht 0 – also der
+Wert, der dem Argument <code>no</code> übergeben wurde. Praktisch: Ich muss nicht
+angeben, welche falschen Werte alle möglich sind; es reicht aus, im
+<code>test</code> mit dem richtigen Wert zu vergleichen. Alle anderen Werten werden
+dann automatisch als falsch interpretiert.</p>
+<p>Nach der Umkodierung können wir mit der Funktion <code>mean</code> die
+Schwierigkeit des Items berechnen:</p>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb368-1" title="1"><span class="kw">mean</span>(bundesland_score)</a></code></pre></div>
 <pre><code>[1] 0.4285714</code></pre>
-<p>In diesem Fall hätten 43% der Testteilnehmer das Bundesland-Item korrekt beantwortet. Diese Information konnten wir aus den ursprünglichen Antwortkategorien 1, 2, 3 und 4 nicht herleiten. Auch um Item-Trennschärfen, Cronbachs Alpha oder andere Kennwerte zu bestimmen, ist die Umkodierung eine notwendige Voraussetzung.</p>
+<p>In diesem Fall hätten 43% der
+Testteilnehmer das Bundesland-Item korrekt beantwortet. Diese
+Information konnten wir aus den ursprünglichen Antwortkategorien 1, 2, 3
+und 4 nicht herleiten. Auch um Item-Trennschärfen, Cronbachs Alpha oder
+andere Kennwerte zu bestimmen, ist die Umkodierung eine notwendige
+Voraussetzung.</p>
 </div>
 </div>
 <div id="invertierung-von-antworten" class="section level2">
 <h2><span class="header-section-number">5.2</span> Invertierung von Antworten</h2>
-<p>Eine mögliche Umkodierung von Antworten ist das Abgleichen mit einem Schlüssel, etwa zur Feststellung der Korrektheit von Antworten. Eine weitere häufig auftretende Variante ist die <em>Invertierung</em> von Antworten. Betrachten wir folgende zwei Items, die in einer Big-5 Kurzskala den Aspekt Extraversion messen:</p>
+<p>Eine mögliche Umkodierung von Antworten ist das Abgleichen mit einem
+Schlüssel, etwa zur Feststellung der Korrektheit von Antworten. Eine
+weitere häufig auftretende Variante ist die <em>Invertierung</em> von
+Antworten. Betrachten wir folgende zwei Items, die in einer Big-5
+Kurzskala den Aspekt Extraversion messen:</p>
 <blockquote>
 <ol style="list-style-type: decimal">
 <li>Ich bin eher zurückhaltend, reserviert.</li>
 <li>Ich gehe aus mir heraus, bin gesellig.</li>
 </ol>
 </blockquote>
-<p>Beide Items werden auf einer Likertskala mit fünf Abstufungen gemessen, das heißt es werden Punktzahlen von 1 bis 5 vergeben. Das Problem ist, dass in Item 1 ein hoher Punktwert für wenig Extraversion steht, in Item 2 ein hoher Punktwert hingegen für eine hohe Ausprägung in Extraversion. Generell wollen wir einen <em>Summenwert</em> berechnen, also einen Wert, der die Extraversion eines jeden Testteilnehmers kodiert – und zwar über beide Items hinweg. Im vorliegenden Fall macht es aber keinen Sinn, die Punktzahlen beider Items zu addieren. Die höchste Ausprägung in Extraversion würde sich dann ergeben, wenn ein Item extravertiert beantwortet wird, aber das andere introvertiert. Damit die Punktzahlen in beiden Items „in dieselbe Richtung“ zu verstehen sind, wollen wir die Antworten auf Item 1 <em>invertieren</em>, sodass auch hier eine hohe Punktzahl für eine hohe Merkmalsausprägung in Extraversion steht. Das heißt, wir wollen die folgende Abbildung durchführen:</p>
+<p>Beide Items werden auf einer Likertskala mit fünf Abstufungen gemessen,
+das heißt es werden Punktzahlen von 1 bis 5 vergeben. Das Problem ist,
+dass in Item 1 ein hoher Punktwert für wenig Extraversion steht, in Item
+2 ein hoher Punktwert hingegen für eine hohe Ausprägung in
+Extraversion. Generell wollen wir einen <em>Summenwert</em> berechnen, also
+einen Wert, der die Extraversion eines jeden Testteilnehmers kodiert –
+und zwar über beide Items hinweg. Im vorliegenden Fall macht es aber
+keinen Sinn, die Punktzahlen beider Items zu addieren. Die höchste
+Ausprägung in Extraversion würde sich dann ergeben, wenn ein Item
+extravertiert beantwortet wird, aber das andere introvertiert. Damit die
+Punktzahlen in beiden Items „in dieselbe Richtung“ zu verstehen sind,
+wollen wir die Antworten auf Item 1 <em>invertieren</em>, sodass auch hier eine
+hohe Punktzahl für eine hohe Merkmalsausprägung in Extraversion
+steht. Das heißt, wir wollen die folgende Abbildung durchführen:</p>
 <ul>
 <li><code>1</code> <span class="math inline">\(\to\)</span> <code>5</code></li>
 <li><code>2</code> <span class="math inline">\(\to\)</span> <code>4</code></li>
@@ -299,16 +391,20 @@ bundesland_score</code></pre></div>
 <li><code>4</code> <span class="math inline">\(\to\)</span> <code>2</code></li>
 <li><code>5</code> <span class="math inline">\(\to\)</span> <code>1</code></li>
 </ul>
-<p>Wir könnten dies mit mehrfacher Anwendung von <code>ifelse</code> hinbekommen, was jedoch mühsam wäre. Es gibt eine mathematische Umformung, welche wir auch mit nur wenig Code umsetzen können:</p>
+<p>Wir könnten dies mit mehrfacher Anwendung von <code>ifelse</code> hinbekommen,
+was jedoch mühsam wäre. Es gibt eine mathematische Umformung, welche wir
+auch mit nur wenig Code umsetzen können:</p>
 <blockquote>
 <p>Invertierter Wert = Ursprungswert * (-1) + Höchster Skalenwert + 1</p>
 </blockquote>
-<p>Diese funktioniert, wenn unsere Punktzahlen zwischen 1 und dem höchstmöglichen Skalenwert liegen. Probieren wir es mit ein paar hypothetischen Antworten aus:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big5 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">item1 =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">5</span>),
-                   <span class="dt">item2 =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>))
-
-## Betrachte den data.frame:
-big5</code></pre></div>
+<p>Diese funktioniert, wenn unsere Punktzahlen zwischen 1 und dem
+höchstmöglichen Skalenwert liegen. Probieren wir es mit ein paar
+hypothetischen Antworten aus:</p>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb370-1" title="1">big5 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">item1 =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb370-2" title="2">                   <span class="dt">item2 =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb370-3" title="3"></a>
+<a class="sourceLine" id="cb370-4" title="4"><span class="co">## Betrachte den data.frame:</span></a>
+<a class="sourceLine" id="cb370-5" title="5">big5</a></code></pre></div>
 <pre><code>  item1 item2
 1     2     5
 2     3     3
@@ -318,16 +414,25 @@ big5</code></pre></div>
 6     2     5
 7     1     3
 8     5     2</code></pre>
-<p>Wir können uns mit der <code>cor</code> Funktion die Korrelation zwischen den zwei Items ausgeben lassen:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">cor</span>(big5), <span class="dv">2</span>)</code></pre></div>
+<p>Wir können uns mit der <code>cor</code> Funktion die Korrelation zwischen den
+zwei Items ausgeben lassen:</p>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb372-1" title="1"><span class="kw">round</span>(<span class="kw">cor</span>(big5), <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>      item1 item2
 item1  1.00 -0.57
 item2 -0.57  1.00</code></pre>
-<p>Ich habe die Antwortwerte absichtlich so gewählt, dass sich hier ein typisches Muster ergibt: Antworten auf unterschiedlich gepolte Items – die zur selbem Skala gehören – korrelieren typischerweise negativ miteinander. Das heißt: Hohe Antwortwerte im einen Item gehen tendenziell mit niedrigen Werten im anderen Item einher – wenn die unterschiedlich gepolten Items dasselbe Konstrukt erfassen. Durch die Invertierung erhalten wir Daten, die positiv miteinander korrelieren. Folgender Code führt die Invertierung durch:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 5 ist der höchst-mögliche Skalenwert</span>
-big5<span class="op">$</span>item1_inv &lt;-<span class="st"> </span>big5<span class="op">$</span>item1 <span class="op">*</span><span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="dv">6</span></code></pre></div>
-<p>Schauen wir uns die Daten an, um zu prüfen, ob die Transformation funktioniert hat:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big5[, <span class="kw">c</span>(<span class="st">&quot;item1&quot;</span>, <span class="st">&quot;item1_inv&quot;</span>)]</code></pre></div>
+<p>Ich habe die Antwortwerte absichtlich so gewählt, dass sich hier ein
+typisches Muster ergibt: Antworten auf unterschiedlich gepolte Items –
+die zur selbem Skala gehören – korrelieren typischerweise negativ
+miteinander. Das heißt: Hohe Antwortwerte im einen Item gehen
+tendenziell mit niedrigen Werten im anderen Item einher – wenn die
+unterschiedlich gepolten Items dasselbe Konstrukt erfassen. Durch die
+Invertierung erhalten wir Daten, die positiv miteinander
+korrelieren. Folgender Code führt die Invertierung durch:</p>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb374-1" title="1"><span class="co"># 5 ist der höchst-mögliche Skalenwert</span></a>
+<a class="sourceLine" id="cb374-2" title="2">big5<span class="op">$</span>item1_inv &lt;-<span class="st"> </span>big5<span class="op">$</span>item1 <span class="op">*</span><span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="dv">6</span></a></code></pre></div>
+<p>Schauen wir uns die Daten an, um zu prüfen, ob die Transformation
+funktioniert hat:</p>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb375-1" title="1">big5[, <span class="kw">c</span>(<span class="st">&quot;item1&quot;</span>, <span class="st">&quot;item1_inv&quot;</span>)]</a></code></pre></div>
 <pre><code>  item1 item1_inv
 1     2         4
 2     3         3
@@ -337,133 +442,254 @@ big5<span class="op">$</span>item1_inv &lt;-<span class="st"> </span>big5<span c
 6     2         4
 7     1         5
 8     5         1</code></pre>
-<p>Das hat geklappt! Schauen wir uns nun auch noch einmal die Inter-Itemkorrelationen an:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">cor</span>(big5), <span class="dv">2</span>)</code></pre></div>
+<p>Das hat geklappt! Schauen wir uns nun auch noch einmal die
+Inter-Itemkorrelationen an:</p>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb377-1" title="1"><span class="kw">round</span>(<span class="kw">cor</span>(big5), <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>          item1 item2 item1_inv
 item1      1.00 -0.57     -1.00
 item2     -0.57  1.00      0.57
 item1_inv -1.00  0.57      1.00</code></pre>
-<p>Wie wir sehen, korrelieren die Spalten <code>item2</code> und <code>item1_inv</code> genau wie <code>item2</code> und <code>item1</code> – nur mit positivem Vorzeichen. Ebenfalls interessant: <code>item1</code> und <code>item1_inv</code> korrelieren perfekt negativ – und das ist genau das, was wir mit der Invertierung erreichen wollten: Einen Punktwert errechnen, der genau in die entgegengesetzte Richtung zu interpretieren ist wie der ursprüngliche Wert.</p>
+<p>Wie wir sehen, korrelieren die Spalten <code>item2</code> und <code>item1_inv</code> genau wie
+<code>item2</code> und <code>item1</code> – nur mit positivem Vorzeichen. Ebenfalls
+interessant: <code>item1</code> und <code>item1_inv</code> korrelieren perfekt negativ – und
+das ist genau das, was wir mit der Invertierung erreichen wollten: Einen
+Punktwert errechnen, der genau in die entgegengesetzte Richtung zu
+interpretieren ist wie der ursprüngliche Wert.</p>
 </div>
 <div id="umgang-mit-fehlenden-werten" class="section level2">
 <h2><span class="header-section-number">5.3</span> Umgang mit fehlenden Werten</h2>
 <blockquote>
-<p>Real data have missing values. Missing values are an integral part of the R language. Many functions have arguments that control how missing values are to be handled. – Patrick Burns<a href="#fn28" class="footnoteRef" id="fnref28"><sup>28</sup></a></p>
+<p>Real data have missing values. Missing values are an integral part of
+the R language. Many functions have arguments that control how
+missing values are to be handled. – Patrick Burns<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a></p>
 </blockquote>
-<p>Wir lernen nun den rudimentären Umgang mit fehlenden Werten in <code>R</code> kennen. Dabei könnte man vermutlich beliebig sophistiziert vorgehen, jedoch werden wir nur einen basalen und wichtigen Spezialfall kennenlernen:</p>
+<p>Wir lernen nun den rudimentären Umgang mit fehlenden Werten in <code>R</code>
+kennen. Dabei könnte man vermutlich beliebig sophistiziert vorgehen,
+jedoch werden wir nur einen basalen und wichtigen Spezialfall
+kennenlernen:</p>
 <ol style="list-style-type: decimal">
-<li>Wir wandeln alle Werte in <code>NA</code> um, die als fehlend zu klassifizieren sind</li>
+<li>Wir wandeln alle Werte in <code>NA</code> um, die als fehlend zu klassifizieren
+sind</li>
 <li>Danach schließen wir alle Fälle mit fehlenden Werten aus</li>
 </ol>
-<p>Für dieses Beispiel laden wir Daten des Narcissistic Personality Inventory <span class="citation">(NPI; Raskin &amp; Terry, 1988)</span> ein. Die Daten von mehr als 11,000 Bearbeitungen des NPI sind erfreulicherweise über das „Open Source Psychometrics Project“ unter <a href="https://openpsychometrics.org/_rawdata" class="uri">https://openpsychometrics.org/_rawdata</a> abrufbar. Wenn wir die Daten heruntergeladen haben und die Datei „data.csv“ in unserem RStudio-Projektordner liegt (siehe <a href="anhang.html#datenEinlesen">Anhang</a>), können wir den Datensatz wie folgt einlesen:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Lese Daten ein
-npi &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data.csv&quot;</span>)</code></pre></div>
+<p>Für dieses Beispiel laden wir Daten des Narcissistic Personality
+Inventory <span class="citation">(NPI; Raskin &amp; Terry, 1988)</span> ein. Die Daten von mehr als 11,000
+Bearbeitungen des NPI sind erfreulicherweise über das „Open Source
+Psychometrics Project“ unter
+<a href="https://openpsychometrics.org/_rawdata">https://openpsychometrics.org/_rawdata</a>
+abrufbar. Wenn wir die Daten heruntergeladen haben und die Datei
+„data.csv“ in unserem RStudio-Projektordner liegt (siehe
+<a href="anhang.html#datenEinlesen">Anhang</a>), können wir den Datensatz wie folgt einlesen:</p>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb379-1" title="1"><span class="co">## Lese Daten ein</span></a>
+<a class="sourceLine" id="cb379-2" title="2">npi &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data.csv&quot;</span>)</a></code></pre></div>
 <p>Wie folgt verschaffen wir uns einen Überblick über die Daten:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(npi) <span class="co"># Wie viele Fälle</span></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb380-1" title="1"><span class="kw">nrow</span>(npi) <span class="co"># Wie viele Fälle</span></a></code></pre></div>
 <pre><code>[1] 11243</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(npi) <span class="co"># Wie viele Spalten</span></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb382-1" title="1"><span class="kw">ncol</span>(npi) <span class="co"># Wie viele Spalten</span></a></code></pre></div>
 <pre><code>[1] 44</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(npi, <span class="dt">n =</span> <span class="dv">3</span>) <span class="co"># Wie sehen die Daten aus</span></code></pre></div>
-<pre><code>  score Q1 Q2 Q3 Q4 Q5 Q6 Q7 Q8 Q9 Q10 Q11 Q12 Q13 Q14 Q15 Q16 Q17 Q18 Q19
-1    18  2  2  2  2  1  2  1  2  2   2   1   1   2   1   1   1   2   1   1
-2     6  2  2  2  1  2  2  1  2  1   1   2   2   2   1   2   2   1   1   2
-3    27  1  2  2  1  2  1  2  1  2   2   2   1   1   1   1   1   2   2   1
-  Q20 Q21 Q22 Q23 Q24 Q25 Q26 Q27 Q28 Q29 Q30 Q31 Q32 Q33 Q34 Q35 Q36 Q37
-1   1   1   1   1   2   2   2   1   2   2   2   1   2   1   1   1   2   2
-2   1   2   2   1   2   2   2   2   1   2   2   2   1   2   2   1   2   2
-3   1   2   2   2   2   1   2   1   1   2   1   2   2   1   1   2   1   1
-  Q38 Q39 Q40 elapse gender age
-1   2   1   2    211      1  50
-2   2   2   1    149      1  40
-3   2   1   2    168      1  28</code></pre>
-<p>Wir bemerken, dass keine Variable als “Fallnummer” fungiert. Generell ist es <strong>immer</strong> wichtig, dass jeder Datensatz durch eine eindeutige Fallnummer zu identifizieren ist. Da eine solche in den eingelesenen Daten jedoch nicht enthalten ist, fügen wir selber eine Fallnummer hinzu:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">npi<span class="op">$</span>casenum &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(npi)</code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb384-1" title="1"><span class="kw">head</span>(npi, <span class="dt">n =</span> <span class="dv">3</span>) <span class="co"># Wie sehen die Daten aus</span></a></code></pre></div>
+<pre><code>  score Q1 Q2 Q3 Q4 Q5 Q6 Q7 Q8 Q9 Q10 Q11 Q12 Q13 Q14 Q15 Q16 Q17 Q18 Q19 Q20
+1    18  2  2  2  2  1  2  1  2  2   2   1   1   2   1   1   1   2   1   1   1
+2     6  2  2  2  1  2  2  1  2  1   1   2   2   2   1   2   2   1   1   2   1
+3    27  1  2  2  1  2  1  2  1  2   2   2   1   1   1   1   1   2   2   1   1
+  Q21 Q22 Q23 Q24 Q25 Q26 Q27 Q28 Q29 Q30 Q31 Q32 Q33 Q34 Q35 Q36 Q37 Q38 Q39
+1   1   1   1   2   2   2   1   2   2   2   1   2   1   1   1   2   2   2   1
+2   2   2   1   2   2   2   2   1   2   2   2   1   2   2   1   2   2   2   2
+3   2   2   2   2   1   2   1   1   2   1   2   2   1   1   2   1   1   2   1
+  Q40 elapse gender age
+1   2    211      1  50
+2   1    149      1  40
+3   2    168      1  28</code></pre>
+<p>Wir bemerken, dass keine Variable als “Fallnummer” fungiert. Generell
+ist es <strong>immer</strong> wichtig, dass jeder Datensatz durch eine eindeutige
+Fallnummer zu identifizieren ist. Da eine solche in den eingelesenen
+Daten jedoch nicht enthalten ist, fügen wir selber eine Fallnummer
+hinzu:</p>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb386-1" title="1">npi<span class="op">$</span>casenum &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(npi)</a></code></pre></div>
 <div id="identifikation-von-fehlenden-werten" class="section level3">
 <h3><span class="header-section-number">5.3.1</span> Identifikation von fehlenden Werten</h3>
-<p>Das NPI besteht aus 40 Items. Aus dem <em>Codebuch</em> des NPI Datensatzes<a href="#fn29" class="footnoteRef" id="fnref29"><sup>29</sup></a> erfahren wir, dass Antworten auf die NPI Items die Werte 1 und 2 annehmen können. Die Antwort auf jedes Item des NPI besteht aus einer „forced choice“ zwischen zwei Aussagen; eine davon wird als Indikator für Narzissmus interpretiert. Item 1 besteht beispielsweise aus den folgenden beiden Aussagen:</p>
+<p>Das NPI besteht aus 40 Items. Aus dem <em>Codebuch</em> des NPI
+Datensatzes<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a> erfahren wir, dass Antworten auf die NPI Items
+die Werte 1 und 2 annehmen können. Die Antwort auf jedes Item des NPI
+besteht aus einer „forced choice“ zwischen zwei Aussagen; eine davon
+wird als Indikator für Narzissmus interpretiert. Item 1 besteht
+beispielsweise aus den folgenden beiden Aussagen:</p>
 <blockquote>
 <ol style="list-style-type: decimal">
 <li>I have a natural talent for influencing people.</li>
 <li>I am not good at influencing people.</li>
 </ol>
 </blockquote>
-<p>Die Wahl von Aussage 1 wird mit 1 kodiert, die Wahl von Aussage 2 mit 2. Nachgeschaltet wird folgende Umkodierung vorgenommen, die die Item-Scores berechnet: Wird die „narzisstische Aussage“ ausgewählt (hier Aussage 1: „I have a natural talent for influencing people.“), wird das Item mit 1 bepunktet. Wird die Aussage gewählt, die nicht für Narzissmus steht (hier Aussage 2: „I am not good at influencing people.“), wird eine 0 vergeben. Wie wir zu Beginn dieses Kapitels gelernt haben, können wir Item 1 wie folgt bepunkten:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">npi<span class="op">$</span>Q1_score &lt;-<span class="st"> </span><span class="kw">ifelse</span>(npi<span class="op">$</span>Q1 <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</code></pre></div>
-<p><strong>Aber Vorsicht: so würden wir einen Fehler machen</strong>! Die Spalte <code>npi$Q1</code> enthält nicht nur die Werte 1 und 2, sondern auch den Wert 0, wie wir mit dem Befehl <code>table(npi$Q1)</code> prüfen können:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(npi<span class="op">$</span>Q1)</code></pre></div>
+<p>Die Wahl von Aussage 1 wird mit 1 kodiert, die Wahl von Aussage 2 mit 2.
+Nachgeschaltet wird folgende Umkodierung vorgenommen, die die
+Item-Scores berechnet: Wird die „narzisstische Aussage“ ausgewählt (hier
+Aussage 1: „I have a natural talent for influencing people.“), wird das
+Item mit 1 bepunktet. Wird die Aussage gewählt, die nicht für Narzissmus
+steht (hier Aussage 2: „I am not good at influencing people.“), wird
+eine 0 vergeben. Wie wir zu Beginn dieses Kapitels gelernt haben, können
+wir Item 1 wie folgt bepunkten:</p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb387-1" title="1">npi<span class="op">$</span>Q1_score &lt;-<span class="st"> </span><span class="kw">ifelse</span>(npi<span class="op">$</span>Q1 <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</a></code></pre></div>
+<p><strong>Aber Vorsicht: so würden wir einen Fehler machen</strong>! Die Spalte
+<code>npi$Q1</code> enthält nicht nur die Werte 1 und 2, sondern auch den Wert 0,
+wie wir mit dem Befehl <code>table(npi$Q1)</code> prüfen können:</p>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" title="1"><span class="kw">table</span>(npi<span class="op">$</span>Q1)</a></code></pre></div>
 <pre><code>
    0    1    2 
   17 6872 4354 </code></pre>
-<p>Wie wir sehen, wurden die Antwortkategorien 0, 1 und 2 vergeben. Es kommt sogar 17 Mal die Antwortkategorie 0 vor – <strong>obwohl Antworten nur die Werte 1 und 2 annehmen dürfen</strong>. Wie kommt das? Die Antwort ist: Bei der Bearbeitung des NPI-Fragebogens – die im Rahmen einer Online-Studie stattfand – konnten Teilnehmer/innen Items unbeantwortet lassen. Fehlende Werte wurden mit einer 0 kodiert. Mit diesen fehlenden Werten müssen wir umgehen, bevor wir mit der psychometrischen Auswertung starten können.</p>
-<p>Dafür wenden wir ein recht radikales Vorgehen an: Wir schließen einfach alle Personen aus, bei denen mindestens eine Antwort fehlt. Folgende Funktionen können uns dabei helfen:</p>
+<p>Wie wir sehen, wurden die Antwortkategorien 0, 1 und 2 vergeben. Es
+kommt sogar 17 Mal die Antwortkategorie 0 vor –
+<strong>obwohl Antworten nur die Werte 1 und 2 annehmen dürfen</strong>. Wie kommt
+das? Die Antwort ist: Bei der Bearbeitung des NPI-Fragebogens – die im
+Rahmen einer Online-Studie stattfand – konnten Teilnehmer/innen Items
+unbeantwortet lassen. Fehlende Werte wurden mit einer 0 kodiert. Mit
+diesen fehlenden Werten müssen wir umgehen, bevor wir mit der
+psychometrischen Auswertung starten können.</p>
+<p>Dafür wenden wir ein recht radikales Vorgehen an: Wir schließen einfach
+alle Personen aus, bei denen mindestens eine Antwort fehlt. Folgende
+Funktionen können uns dabei helfen:</p>
 <ul>
-<li><code>complete.cases</code>: Gibt für einen <code>data.frame</code> aus, welche Zeilen <strong>keine</strong> fehlenden Werte enthalten (als logischen Vektor)</li>
-<li><code>na.omit</code>: Gibt von einem <code>data.frame</code> nur die Zeilen ohne fehlende Werte aus</li>
+<li><code>complete.cases</code>: Gibt für einen <code>data.frame</code> aus, welche Zeilen
+<strong>keine</strong> fehlenden Werte enthalten (als logischen Vektor)</li>
+<li><code>na.omit</code>: Gibt von einem <code>data.frame</code> nur die Zeilen ohne fehlende
+Werte aus</li>
 </ul>
-<p>Der erste Schritt ist, alle fehlenden Werte – die derzeit mit 0 kodiert sind – in <code>NA</code> umzuwandeln. Nur <code>NA</code> wird von <code>R</code> tatsächlich als fehlend interpretiert; Konventionen, die Werte wie -99 oder 0 als fehlend klassifizieren, kennt <code>R</code> nicht.</p>
-<p>Am liebsten würden wir im NPI-Datensatz alle Werte auf <code>NA</code> setzen, die per 0 als fehlend klassifiziert wurden. Dafür könnten wir ein Vorgehen verwenden, das wir in <a href="vektoren.html#vektorAendern">Kapitel 2</a> für Vektoren kennengelernt haben. Dieses Vorgehen funktioniert bei <code>data.frames</code> tatsächlich gleichermaßen:<a href="#fn30" class="footnoteRef" id="fnref30"><sup>30</sup></a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">npi[npi <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></code></pre></div>
-<p>Dabei ergibt sich jedoch ein Problem: Fehlende Werte wurden im Datensatz zwar mit 0 kodiert, jedoch existiert eine Spalte (<code>score</code>), die den Wert 0 aus zwei Gründen enthalten kann:</p>
+<p>Der erste Schritt ist, alle fehlenden Werte – die derzeit mit 0 kodiert
+sind – in <code>NA</code> umzuwandeln. Nur <code>NA</code> wird von <code>R</code> tatsächlich als
+fehlend interpretiert; Konventionen, die Werte wie -99 oder 0 als
+fehlend klassifizieren, kennt <code>R</code> nicht.</p>
+<p>Am liebsten würden wir im NPI-Datensatz alle Werte auf <code>NA</code> setzen, die
+per 0 als fehlend klassifiziert wurden. Dafür könnten wir ein Vorgehen
+verwenden, das wir in <a href="vektoren.html#vektorAendern">Kapitel 2</a> für Vektoren
+kennengelernt haben. Dieses Vorgehen funktioniert bei <code>data.frames</code>
+tatsächlich gleichermaßen:<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a></p>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb390-1" title="1">npi[npi <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
+<p>Dabei ergibt sich jedoch ein Problem: Fehlende Werte wurden im Datensatz
+zwar mit 0 kodiert, jedoch existiert eine Spalte (<code>score</code>), die den Wert
+0 aus zwei Gründen enthalten kann:</p>
 <ol style="list-style-type: decimal">
 <li>Der Wert fehlt.</li>
-<li>Eine Person hat in keinem der 40 Items der narzisstischen Aussage zugestimmt.</li>
+<li>Eine Person hat in keinem der 40 Items der narzisstischen Aussage
+zugestimmt.</li>
 </ol>
-<p>Der Gesamt-Testscore (<code>npi$score</code>) kann also wirklich den Wert 0 annehmen, wenn Teilnehmer/innen kein einziges Mal der narzisstischen Aussage zugestimmt haben – und dies kam tatsächlich 73 Mal vor. Würden wir alle Personen ausschließen, die in irgendeiner Spalte den Wert 0 haben, würden wir zu viele Personen ausschließen. Wir würden sogar eine Verzerrung in den Datensatz einfügen, da wir gezielt die Personen ausschließen, die besonders wenig narzisstisch sind. Hier war es also kein gutes Vorgehen, 0 als Kodierung für fehlende Werte zu verwenden. Stattdessen wird oftmals ein Wert verwendet, der selbst nicht Teil des legalen Wertebereichs ist – idealerweise sollte der Wert in gar keiner Spalte einer Datentabelle vorkommen können. Eine Konvention ist es, die Zahl -99 zu verwenden, die dieses Kriterium oftmals erfüllt.</p>
-<p>Um Personen mit fehlenden Werten zu identifizieren, erstellen wir zunächst einen <code>data.frame</code>, der die Spalte <code>score</code> nicht enthält. Da wir die Spalte aber nicht gänzlich verlieren wollen, speichern wir den <code>data.frame</code> in einer neuen Variablen ab.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># temp = temporäre Variable</span>
-temp &lt;-<span class="st"> </span><span class="kw">subset</span>(npi, <span class="dt">select =</span> <span class="op">-</span>score)</code></pre></div>
+<p>Der Gesamt-Testscore (<code>npi$score</code>) kann also wirklich den Wert 0
+annehmen, wenn Teilnehmer/innen kein einziges Mal der narzisstischen
+Aussage zugestimmt haben – und dies kam tatsächlich 73 Mal vor. Würden
+wir alle Personen ausschließen, die in irgendeiner Spalte den Wert 0
+haben, würden wir zu viele Personen ausschließen. Wir würden sogar eine
+Verzerrung in den Datensatz einfügen, da wir gezielt die Personen
+ausschließen, die besonders wenig narzisstisch sind. Hier war es also
+kein gutes Vorgehen, 0 als Kodierung für fehlende Werte zu verwenden.
+Stattdessen wird oftmals ein Wert verwendet, der selbst nicht Teil des
+legalen Wertebereichs ist – idealerweise sollte der Wert in gar keiner
+Spalte einer Datentabelle vorkommen können. Eine Konvention ist es, die
+Zahl -99 zu verwenden, die dieses Kriterium oftmals erfüllt.</p>
+<p>Um Personen mit fehlenden Werten zu identifizieren, erstellen wir
+zunächst einen <code>data.frame</code>, der die Spalte <code>score</code> nicht enthält. Da
+wir die Spalte aber nicht gänzlich verlieren wollen, speichern wir den
+<code>data.frame</code> in einer neuen Variablen ab.</p>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb391-1" title="1"><span class="co"># temp = temporäre Variable</span></a>
+<a class="sourceLine" id="cb391-2" title="2">temp &lt;-<span class="st"> </span><span class="kw">subset</span>(npi, <span class="dt">select =</span> <span class="op">-</span>score)</a></code></pre></div>
 <p>Nun setzen wir in diesem temporären <code>data.frame</code> alle Nullen auf <code>NA</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp[temp <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></code></pre></div>
-<p>Als Nächstes nutzen wir die Funktion <code>complete.cases</code>, um herauszufinden, in welchen Zeilen von <code>temp</code> fehlende Werte vorliegen:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_complete &lt;-<span class="st"> </span><span class="kw">complete.cases</span>(temp)
-<span class="kw">head</span>(is_complete, <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb392-1" title="1">temp[temp <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
+<p>Als Nächstes nutzen wir die Funktion <code>complete.cases</code>, um
+herauszufinden, in welchen Zeilen von <code>temp</code> fehlende Werte vorliegen:</p>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb393-1" title="1">is_complete &lt;-<span class="st"> </span><span class="kw">complete.cases</span>(temp)</a>
+<a class="sourceLine" id="cb393-2" title="2"><span class="kw">head</span>(is_complete, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code> [1]  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
-<p>Die Funktion <code>complete.cases</code> gibt einen logischen Vektor der Länge <code>nrow(temp)</code> zurück, der pro Zeile kodiert, ob irgendwo ein fehlender Wert vorliegt. Also können wir wie folgt überprüfen, wie viele Fälle mit fehlenden Werten es insgesamt gibt:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="op">!</span>is_complete)</code></pre></div>
+<p>Die Funktion <code>complete.cases</code> gibt einen logischen Vektor der Länge
+<code>nrow(temp)</code> zurück, der pro Zeile kodiert, ob irgendwo ein fehlender
+Wert vorliegt. Also können wir wie folgt überprüfen, wie viele Fälle mit
+fehlenden Werten es insgesamt gibt:</p>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb395-1" title="1"><span class="kw">sum</span>(<span class="op">!</span>is_complete)</a></code></pre></div>
 <pre><code>[1] 825</code></pre>
-<p>Ebenfalls können wir nun aus dem ursprünglichen Datensatz <code>npi</code> nur die vollständigen Fällen auswählen:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">npi_clean &lt;-<span class="st"> </span>npi[is_complete, ]
-
-<span class="kw">nrow</span>(npi_clean)</code></pre></div>
+<p>Ebenfalls können wir nun aus dem ursprünglichen Datensatz <code>npi</code> nur die
+vollständigen Fällen auswählen:</p>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb397-1" title="1">npi_clean &lt;-<span class="st"> </span>npi[is_complete, ]</a>
+<a class="sourceLine" id="cb397-2" title="2"></a>
+<a class="sourceLine" id="cb397-3" title="3"><span class="kw">nrow</span>(npi_clean)</a></code></pre></div>
 <pre><code>[1] 10418</code></pre>
-<p>Mit dem Datensatz <code>npi_clean</code> können wir nun psychometrische Berechnungen durchführen, da wir nur vollständige Datensätze ausgewählt haben. Dabei ist unser nächstes Ziel, für alle 40 Items eine dichotome Bepunktung durchzuführen. Wir wissen bereits, wie das funktioniert, nämlich indem wir mit <code>ifelse</code> die Antworten auf jedes Item mit dem Schlüssel abgleichen. Der Schlüssel für das NPI kodiert für jedes der 40 Items den Wert, der für Narzissmus steht. Dies wäre wie folgt möglich:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Hier kein legaler R-Code, nur exemplarisch:</span>
-npi_key &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, ..., <span class="dv">2</span>) <span class="co"># 40 Schlüsselemente</span>
-
-npi<span class="op">$</span>Q1_score &lt;-<span class="st"> </span><span class="kw">ifelse</span>(npi<span class="op">$</span>Q1 <span class="op">==</span><span class="st"> </span>npi_key[<span class="dv">1</span>], <span class="dv">1</span>, <span class="dv">0</span>)
-
-<span class="co"># ...</span>
-
-npi<span class="op">$</span>Q40_score &lt;-<span class="st"> </span><span class="kw">ifelse</span>(npi<span class="op">$</span>Q40 <span class="op">==</span><span class="st"> </span>npi_key[<span class="dv">40</span>], <span class="dv">1</span>, <span class="dv">0</span>)</code></pre></div>
-<p>Da wir nicht denselben Code – mit leichten Abwandlungen – 40 Mal wiederholen wollen, werden wir in Kapitel 7 lernen, diese Umkodierungen effizient durchzuführen, also auf einmal für alle 40 Spalten.</p>
+<p>Mit dem Datensatz <code>npi_clean</code> können wir nun psychometrische
+Berechnungen durchführen, da wir nur vollständige Datensätze ausgewählt
+haben. Dabei ist unser nächstes Ziel, für alle 40 Items eine dichotome
+Bepunktung durchzuführen. Wir wissen bereits, wie das funktioniert,
+nämlich indem wir mit <code>ifelse</code> die Antworten auf jedes Item mit dem
+Schlüssel abgleichen. Der Schlüssel für das NPI kodiert für jedes der 40
+Items den Wert, der für Narzissmus steht. Dies wäre wie folgt möglich:</p>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb399-1" title="1"><span class="co"># Hier kein legaler R-Code, nur exemplarisch:</span></a>
+<a class="sourceLine" id="cb399-2" title="2">npi_key &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, ..., <span class="dv">2</span>) <span class="co"># 40 Schlüsselemente</span></a>
+<a class="sourceLine" id="cb399-3" title="3"></a>
+<a class="sourceLine" id="cb399-4" title="4">npi<span class="op">$</span>Q1_score &lt;-<span class="st"> </span><span class="kw">ifelse</span>(npi<span class="op">$</span>Q1 <span class="op">==</span><span class="st"> </span>npi_key[<span class="dv">1</span>], <span class="dv">1</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb399-5" title="5"></a>
+<a class="sourceLine" id="cb399-6" title="6"><span class="co"># ...</span></a>
+<a class="sourceLine" id="cb399-7" title="7"></a>
+<a class="sourceLine" id="cb399-8" title="8">npi<span class="op">$</span>Q40_score &lt;-<span class="st"> </span><span class="kw">ifelse</span>(npi<span class="op">$</span>Q40 <span class="op">==</span><span class="st"> </span>npi_key[<span class="dv">40</span>], <span class="dv">1</span>, <span class="dv">0</span>)</a></code></pre></div>
+<p>Da wir nicht denselben Code – mit leichten Abwandlungen – 40 Mal
+wiederholen wollen, werden wir in Kapitel 7 lernen, diese Umkodierungen
+effizient durchzuführen, also auf einmal für alle 40 Spalten.</p>
 </div>
 <div id="vergleiche-mit-na" class="section level3">
 <h3><span class="header-section-number">5.3.2</span> Vergleiche mit <code>NA</code></h3>
-<p>Die Funktion <code>complete.cases</code> gibt uns pro Zeile aus, ob darin Werte fehlen. Es gibt einige weitere Funktionen, um das Vorliegen von fehlenden Werten zu prüfen.</p>
-<p>Eine allgemein nützliche Funktion zum Betrachten von <code>data.frames</code> ist die Funktion <code>summary</code>. Sie gibt uns wie folgt einen schnellen Überblick über alle Spalten eines <code>data.frames</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(npi)
-<span class="co"># Ausgabe unterdrückt, da pro Spalte eine Tabelle ausgegeben wird</span></code></pre></div>
-<p>Neben einigen deskriptiven Statistiken gibt <code>summary</code> auch für jede Spalte an, wie viele Werte darin fehlen. Für eine einzelne Spalte können wir auch mit der Funktion <code>is.na</code> überprüfen, ob sie fehlende Werte enthält:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">is.na</span>(temp<span class="op">$</span>Q1))</code></pre></div>
+<p>Die Funktion <code>complete.cases</code> gibt uns pro Zeile aus, ob darin Werte
+fehlen. Es gibt einige weitere Funktionen, um das Vorliegen von
+fehlenden Werten zu prüfen.</p>
+<p>Eine allgemein nützliche Funktion zum Betrachten von <code>data.frames</code> ist
+die Funktion <code>summary</code>. Sie gibt uns wie folgt einen schnellen Überblick
+über alle Spalten eines <code>data.frames</code>:</p>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb400-1" title="1"><span class="kw">summary</span>(npi)</a>
+<a class="sourceLine" id="cb400-2" title="2"><span class="co"># Ausgabe unterdrückt, da pro Spalte eine Tabelle ausgegeben wird</span></a></code></pre></div>
+<p>Neben einigen deskriptiven Statistiken gibt <code>summary</code> auch für jede
+Spalte an, wie viele Werte darin fehlen. Für eine einzelne Spalte können
+wir auch mit der Funktion <code>is.na</code> überprüfen, ob sie fehlende Werte
+enthält:</p>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb401-1" title="1"><span class="kw">sum</span>(<span class="kw">is.na</span>(temp<span class="op">$</span>Q1))</a></code></pre></div>
 <pre><code>[1] 17</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">is.na</span>(temp<span class="op">$</span>Q40))</code></pre></div>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb403-1" title="1"><span class="kw">sum</span>(<span class="kw">is.na</span>(temp<span class="op">$</span>Q40))</a></code></pre></div>
 <pre><code>[1] 34</code></pre>
-<p>Die Funktion <code>is.na</code> prüft in einem Vektor, welche Werte <code>NA</code> sind und gibt an den entsprechenden Positionen <code>TRUE</code> zurück, ansonsten <code>FALSE</code>. <strong>Wichtig</strong>: Man <strong>muss</strong> <code>is.na</code> verwenden, um zu prüfen, ob Werte in einem Vektor <code>NA</code> sind. Folgender „naiver“ Vergleich mit <code>NA</code> geht schief:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(npi<span class="op">$</span>Q1 <span class="op">==</span><span class="st"> </span><span class="ot">NA</span>)</code></pre></div>
+<p>Die Funktion <code>is.na</code> prüft in einem Vektor, welche Werte <code>NA</code> sind und
+gibt an den entsprechenden Positionen <code>TRUE</code> zurück, ansonsten <code>FALSE</code>.
+<strong>Wichtig</strong>: Man <strong>muss</strong> <code>is.na</code> verwenden, um zu prüfen, ob Werte in
+einem Vektor <code>NA</code> sind. Folgender „naiver“ Vergleich mit <code>NA</code> geht
+schief:</p>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb405-1" title="1"><span class="kw">head</span>(npi<span class="op">$</span>Q1 <span class="op">==</span><span class="st"> </span><span class="ot">NA</span>)</a></code></pre></div>
 <pre><code>[1] NA NA NA NA NA NA</code></pre>
-<p>Ein logischer Vergleich mit <code>NA</code> ergibt immer <code>NA</code>, da beim fehlenden Wert keine Aussage darüber gemacht werden kann, ob er einem anderen Wert entspricht. Man kennt den fehlenden Wert zwar nicht, aber irgendeine Ausprägung hat er in der Realität.</p>
-<p>Interessant ist auch der Umgang der UND- und ODER-Operationen mit fehlenden Werten. Der Befehl <code>TRUE &amp; NA</code> gibt <code>NA</code> aus. Denn je nachdem, ob der fehlende Wert <code>TRUE</code> oder <code>FALSE</code> wäre, wäre das Ergebnis auch entweder <code>TRUE</code> oder <code>FALSE</code>. Wir können in diesem Fall nicht voraussagen, was das Ergebnis der UND-Operation wäre, da der fehlende Wert unbekannt, aber kritisch für das Ergebnis ist. Anders sieht es bei dem Befehl <code>TRUE | NA</code> aus. Dieser ergibt <code>TRUE</code>, da auf jeden Fall eine Bedingung erfüllt ist und nur eine Bedingung erfüllt sein muss, damit die ODER-Bedingung <code>TRUE</code> ergibt. Mit diesen Erklärungen im Hinterkopf können wir auch nachvollziehen, was passiert, wenn wir <code>FALSE</code> mit <code>NA</code> per UND und ODER verknüpfen: <code>FALSE | NA</code> ergibt <code>NA</code>, <code>FALSE &amp; NA</code> ergibt <code>FALSE</code>.</p>
-
+<p>Ein logischer Vergleich mit <code>NA</code> ergibt immer <code>NA</code>, da beim fehlenden
+Wert keine Aussage darüber gemacht werden kann, ob er einem anderen Wert
+entspricht. Man kennt den fehlenden Wert zwar nicht, aber irgendeine
+Ausprägung hat er in der Realität.</p>
+<p>Interessant ist auch der Umgang der UND- und ODER-Operationen mit
+fehlenden Werten. Der Befehl <code>TRUE &amp; NA</code> gibt <code>NA</code> aus. Denn je nachdem,
+ob der fehlende Wert <code>TRUE</code> oder <code>FALSE</code> wäre, wäre das Ergebnis auch
+entweder <code>TRUE</code> oder <code>FALSE</code>. Wir können in diesem Fall nicht
+voraussagen, was das Ergebnis der UND-Operation wäre, da der fehlende
+Wert unbekannt, aber kritisch für das Ergebnis ist. Anders sieht es bei
+dem Befehl <code>TRUE | NA</code> aus. Dieser ergibt <code>TRUE</code>, da auf jeden Fall eine
+Bedingung erfüllt ist und nur eine Bedingung erfüllt sein muss, damit
+die ODER-Bedingung <code>TRUE</code> ergibt. Mit diesen Erklärungen im Hinterkopf
+können wir auch nachvollziehen, was passiert, wenn wir <code>FALSE</code> mit <code>NA</code>
+per UND und ODER verknüpfen: <code>FALSE | NA</code> ergibt <code>NA</code>, <code>FALSE &amp; NA</code>
+ergibt <code>FALSE</code>.</p>
 </div>
+</div>
+<div id="fragen-zum-vertiefenden-verständnis-2" class="section level2">
+<h2><span class="header-section-number">5.4</span> Fragen zum vertiefenden Verständnis</h2>
+<ol style="list-style-type: decimal">
+<li><p>Gegeben ist der Antwortvektor <code>c(1, 2, 2, 1, 4, 5, 2, 2, 2, 3)</code> und
+der Schlüssel <code>2</code>. Wie kann ich die Item-Schwierigkeit ohne Anwendung
+der Funktion <code>ifelse()</code> bestimmen? Was ist die Item-Schwierigkeit?</p></li>
+<li><p>Gegeben ist der Antwortvektor <code>c(2, 3, 2, 4, 5, 6, 2, 3)</code>, der die
+Antworten auf das Item eines Persönlichkeitsinventars enthält. Die
+Antworten wurden auf einer Likertskala gegeben, die zwischen 1 und 6
+kodiert war. Da das Item negativ gepolt ist, müssen die Antworten
+vor der Analyse invertiert werden. Was ist der Mittelwert der
+umgepolten Antworten (d.h. die Item-Schwierigkeit)?</p></li>
+</ol>
+
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="27">
-<li id="fn27"><p>Im Allgemeinen muss ein Schlüssel nicht Korrektheit anzeigen, sondern kann auch Merkmalsausprägung in einem Persönlichkeitsinventar kodieren. Wir werden das im Narcissistic Personality Inventory kennenlernen.<a href="rohdaten.html#fnref27">↩</a></p></li>
-<li id="fn28"><p><a href="http://www.burns-stat.com/documents/tutorials/why-use-the-r-language/" class="uri">http://www.burns-stat.com/documents/tutorials/why-use-the-r-language/</a><a href="rohdaten.html#fnref28">↩</a></p></li>
-<li id="fn29"><p>Dieses wird gemeinsam mit den Daten des „Open Source Psychometrics Project“ <a href="https://openpsychometrics.org/_rawdata" class="uri">https://openpsychometrics.org/_rawdata</a> runtergeladen.<a href="rohdaten.html#fnref29">↩</a></p></li>
-<li id="fn30"><p>Beachtet, dass hier ein Zugriff auf <code>data.frames</code> mit eckigen Klammern stattfindet (siehe <a href="#fortgeschritten">Kapitel 3.5</a>). Der Befehl sieht recht harmlos aus, aber tatsächlich steckt hier etwas mehr dahinter, als wir bislang behandelt haben. Wir nehmen zunächst einmal einfach hin, dass die Umkodierung von Werten in <code>data.frames</code> ebenso funktioniert wie bei Vektoren. Wie wir schon bei Vektoren kennengelernt haben, sind viele Operationen in <code>R</code> so allgemein, dass sie auf allen Daten eines Objekts stattfinden.<a href="rohdaten.html#fnref30">↩</a></p></li>
+<ol start="28">
+<li id="fn28"><p><a href="http://www.burns-stat.com/documents/tutorials/why-use-the-r-language/" class="uri">http://www.burns-stat.com/documents/tutorials/why-use-the-r-language/</a><a href="rohdaten.html#fnref28" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -477,11 +703,13 @@ npi<span class="op">$</span>Q40_score &lt;-<span class="st"> </span><span class=
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -489,12 +717,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -506,6 +733,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -523,10 +754,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

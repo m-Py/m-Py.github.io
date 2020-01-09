@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de-DE" xml:lang="de-DE">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title></title>
-  <meta name="description" content="Testtheorie mit R" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <title>4 Erste psychometrische Auswertungen | Testtheorie mit R</title>
+  <meta name="description" content="4 Erste psychometrische Auswertungen | Testtheorie mit R" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="" />
+  <meta property="og:title" content="4 Erste psychometrische Auswertungen | Testtheorie mit R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,11 +16,12 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="" />
+  <meta name="twitter:title" content="4 Erste psychometrische Auswertungen | Testtheorie mit R" />
   
   
   
 
+<meta name="author" content="Martin Papenberg" />
 
 
 
@@ -29,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="dataframes.html">
-<link rel="next" href="rohdaten.html">
+<link rel="prev" href="dataframes.html"/>
+<link rel="next" href="rohdaten.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -38,6 +39,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -48,41 +52,66 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -99,7 +128,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="einstieg.html"><a href="einstieg.html"><i class="fa fa-check"></i><b>1</b> Einstieg</a><ul>
-<li class="chapter" data-level="1.1" data-path="einstieg.html"><a href="einstieg.html#uber-dieses-skript"><i class="fa fa-check"></i><b>1.1</b> Über dieses Skript</a><ul>
+<li class="chapter" data-level="1.1" data-path="einstieg.html"><a href="einstieg.html#über-dieses-skript"><i class="fa fa-check"></i><b>1.1</b> Über dieses Skript</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="einstieg.html"><a href="einstieg.html#feedback-und-fehlermeldungen"><i class="fa fa-check"></i><b>1.1.1</b> Feedback und Fehlermeldungen</a></li>
 <li class="chapter" data-level="1.1.2" data-path="einstieg.html"><a href="einstieg.html#danksagung"><i class="fa fa-check"></i><b>1.1.2</b> Danksagung</a></li>
 </ul></li>
@@ -122,7 +151,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.2.4" data-path="vektoren.html"><a href="vektoren.html#na"><i class="fa fa-check"></i><b>2.2.4</b> <code>NA</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="vektoren.html"><a href="vektoren.html#logischevergleiche"><i class="fa fa-check"></i><b>2.3</b> Logische Vergleiche</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-uberprufe-das-gesetz-der-groen-zahlen"><i class="fa fa-check"></i><b>2.3.1</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
+<li class="chapter" data-level="2.3.1" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen"><i class="fa fa-check"></i><b>2.3.1</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
 <li class="chapter" data-level="2.3.2" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.3.2</b> Der <code>%in%</code> Operator</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.4</b> Zugriff auf Vektorelemente</a><ul>
@@ -132,7 +161,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="vektoren.html"><a href="vektoren.html#praezedenz"><i class="fa fa-check"></i><b>2.5</b> Präzedenz</a></li>
 <li class="chapter" data-level="2.6" data-path="vektoren.html"><a href="vektoren.html#zusammenfassung"><i class="fa fa-check"></i><b>2.6</b> Zusammenfassung</a></li>
-<li class="chapter" data-level="2.7" data-path="vektoren.html"><a href="vektoren.html#fragen-zum-vertiefenden-verstandnis"><i class="fa fa-check"></i><b>2.7</b> Fragen zum vertiefenden Verständnis</a></li>
+<li class="chapter" data-level="2.7" data-path="vektoren.html"><a href="vektoren.html#fragen-zum-vertiefenden-verständnis"><i class="fa fa-check"></i><b>2.7</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="dataframes.html"><a href="dataframes.html"><i class="fa fa-check"></i><b>3</b> <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.1" data-path="dataframes.html"><a href="dataframes.html#die-funktion-data.frame"><i class="fa fa-check"></i><b>3.1</b> Die Funktion <code>data.frame</code></a></li>
@@ -155,7 +184,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.6.4" data-path="dataframes.html"><a href="dataframes.html#sortieren-dplyrarrange"><i class="fa fa-check"></i><b>3.6.4</b> Sortieren: <code>dplyr::arrange</code></a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-1"><i class="fa fa-check"></i><b>3.7</b> Zusammenfassung</a></li>
-<li class="chapter" data-level="3.8" data-path="dataframes.html"><a href="dataframes.html#fragen-zum-vertiefenden-verstandnis-1"><i class="fa fa-check"></i><b>3.8</b> Fragen zum vertiefenden Verständnis</a></li>
+<li class="chapter" data-level="3.8" data-path="dataframes.html"><a href="dataframes.html#fragen-zum-vertiefenden-verständnis-1"><i class="fa fa-check"></i><b>3.8</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="psychometrie.html"><a href="psychometrie.html"><i class="fa fa-check"></i><b>4</b> Erste psychometrische Auswertungen</a><ul>
 <li class="chapter" data-level="4.1" data-path="psychometrie.html"><a href="psychometrie.html#summenwerte"><i class="fa fa-check"></i><b>4.1</b> Summenwerte</a></li>
@@ -163,8 +192,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a></li>
 <li class="chapter" data-level="4.4" data-path="psychometrie.html"><a href="psychometrie.html#trennschaerfe"><i class="fa fa-check"></i><b>4.4</b> Item-Trennschärfen</a></li>
 <li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#cronbachs-alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
-<li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilitat"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
-<li class="chapter" data-level="4.7" data-path="psychometrie.html"><a href="psychometrie.html#fragen-zum-vertiefenden-verstandnis-2"><i class="fa fa-check"></i><b>4.7</b> Fragen zum vertiefenden Verständnis</a></li>
+<li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilität"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="rohdaten.html"><a href="rohdaten.html"><i class="fa fa-check"></i><b>5</b> Aufarbeitung von Fragebogendaten</a><ul>
 <li class="chapter" data-level="5.1" data-path="rohdaten.html"><a href="rohdaten.html#umkodierung"><i class="fa fa-check"></i><b>5.1</b> Umkodierung von Antworten</a><ul>
@@ -175,6 +203,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.3.1" data-path="rohdaten.html"><a href="rohdaten.html#identifikation-von-fehlenden-werten"><i class="fa fa-check"></i><b>5.3.1</b> Identifikation von fehlenden Werten</a></li>
 <li class="chapter" data-level="5.3.2" data-path="rohdaten.html"><a href="rohdaten.html#vergleiche-mit-na"><i class="fa fa-check"></i><b>5.3.2</b> Vergleiche mit <code>NA</code></a></li>
 </ul></li>
+<li class="chapter" data-level="5.4" data-path="rohdaten.html"><a href="rohdaten.html#fragen-zum-vertiefenden-verständnis-2"><i class="fa fa-check"></i><b>5.4</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="funktionen.html"><a href="funktionen.html"><i class="fa fa-check"></i><b>6</b> Funktionen</a><ul>
 <li class="chapter" data-level="6.1" data-path="funktionen.html"><a href="funktionen.html#das-black-box-modell"><i class="fa fa-check"></i><b>6.1</b> Das Black-Box-Modell</a></li>
@@ -182,7 +211,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.2.1" data-path="funktionen.html"><a href="funktionen.html#help"><i class="fa fa-check"></i><b>6.2.1</b> Die <code>R</code>-Hilfe</a></li>
 <li class="chapter" data-level="6.2.2" data-path="funktionen.html"><a href="funktionen.html#namenlose-argumente"><i class="fa fa-check"></i><b>6.2.2</b> Namenlose Argumente</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="funktionen.html"><a href="funktionen.html#ruckgabewerte"><i class="fa fa-check"></i><b>6.3</b> Rückgabewerte</a></li>
+<li class="chapter" data-level="6.3" data-path="funktionen.html"><a href="funktionen.html#rückgabewerte"><i class="fa fa-check"></i><b>6.3</b> Rückgabewerte</a></li>
 <li class="chapter" data-level="6.4" data-path="funktionen.html"><a href="funktionen.html#seiteneffekte"><i class="fa fa-check"></i><b>6.4</b> Seiteneffekte</a></li>
 <li class="chapter" data-level="6.5" data-path="funktionen.html"><a href="funktionen.html#selbst-geschriebene-funktionen"><i class="fa fa-check"></i><b>6.5</b> Selbst geschriebene Funktionen</a><ul>
 <li class="chapter" data-level="6.5.1" data-path="funktionen.html"><a href="funktionen.html#definition-der-eigenen-funktion"><i class="fa fa-check"></i><b>6.5.1</b> Definition der eigenen Funktion</a></li>
@@ -190,11 +219,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.5.3" data-path="funktionen.html"><a href="funktionen.html#optionale-argumente"><i class="fa fa-check"></i><b>6.5.3</b> Optionale Argumente</a></li>
 <li class="chapter" data-level="6.5.4" data-path="funktionen.html"><a href="funktionen.html#wann-schreibe-ich-meine-eigene-funktion"><i class="fa fa-check"></i><b>6.5.4</b> Wann schreibe ich meine eigene Funktion</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="funktionen.html"><a href="funktionen.html#fragen-zum-vertiefenden-verstandnis-3"><i class="fa fa-check"></i><b>6.6</b> Fragen zum vertiefenden Verständnis</a></li>
+<li class="chapter" data-level="6.6" data-path="funktionen.html"><a href="funktionen.html#fragen-zum-vertiefenden-verständnis-3"><i class="fa fa-check"></i><b>6.6</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="schleifen.html"><a href="schleifen.html"><i class="fa fa-check"></i><b>7</b> Schleifen</a><ul>
 <li class="chapter" data-level="7.1" data-path="schleifen.html"><a href="schleifen.html#sequentielle-bepunktung-von-testitems"><i class="fa fa-check"></i><b>7.1</b> Sequentielle Bepunktung von Testitems</a></li>
-<li class="chapter" data-level="7.2" data-path="schleifen.html"><a href="schleifen.html#berechnung-von-part-whole-korrigierten-trennscharfen"><i class="fa fa-check"></i><b>7.2</b> Berechnung von part-whole korrigierten Trennschärfen</a></li>
+<li class="chapter" data-level="7.2" data-path="schleifen.html"><a href="schleifen.html#berechnung-von-part-whole-korrigierten-trennschärfen"><i class="fa fa-check"></i><b>7.2</b> Berechnung von part-whole korrigierten Trennschärfen</a></li>
 <li class="chapter" data-level="7.3" data-path="schleifen.html"><a href="schleifen.html#datenspeicherung-in-einer-schleife"><i class="fa fa-check"></i><b>7.3</b> Datenspeicherung in einer Schleife</a><ul>
 <li class="chapter" data-level="7.3.1" data-path="schleifen.html"><a href="schleifen.html#adressierung-per-name"><i class="fa fa-check"></i><b>7.3.1</b> Adressierung per Name</a></li>
 <li class="chapter" data-level="7.3.2" data-path="schleifen.html"><a href="schleifen.html#vektorspeicherung-adressierung-per-index"><i class="fa fa-check"></i><b>7.3.2</b> Vektorspeicherung – Adressierung per Index</a></li>
@@ -204,7 +233,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8" data-path="anhang.html"><a href="anhang.html"><i class="fa fa-check"></i><b>8</b> Anhang</a><ul>
 <li class="chapter" data-level="8.1" data-path="anhang.html"><a href="anhang.html#datenEinlesen"><i class="fa fa-check"></i><b>8.1</b> Daten einlesen</a></li>
 <li class="chapter" data-level="8.2" data-path="anhang.html"><a href="anhang.html#das-environment-sauber-halten"><i class="fa fa-check"></i><b>8.2</b> Das Environment sauber halten</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="anhang.html"><a href="anhang.html#variablen-loschen"><i class="fa fa-check"></i><b>8.2.1</b> Variablen löschen</a></li>
+<li class="chapter" data-level="8.2.1" data-path="anhang.html"><a href="anhang.html#variablen-löschen"><i class="fa fa-check"></i><b>8.2.1</b> Variablen löschen</a></li>
 <li class="chapter" data-level="8.2.2" data-path="anhang.html"><a href="anhang.html#mit-einem-sauberen-environment-starten"><i class="fa fa-check"></i><b>8.2.2</b> Mit einem sauberen Environment starten</a></li>
 </ul></li>
 </ul></li>
@@ -218,7 +247,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><div style="white-space: pre-line;">Testtheorie mit R</div></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Testtheorie mit R</a>
           </h1>
         </div>
 
@@ -228,7 +257,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="psychometrie" class="section level1">
 <h1><span class="header-section-number">4</span> Erste psychometrische Auswertungen</h1>
-<p>Dieses Kapitel arbeitet einige Kennwerte der klassischen Testtheorie auf und bespricht wie wir diese in <code>R</code> berechnen können. Dabei werden die folgenden Konzepte behandelt:</p>
+<p>Dieses Kapitel arbeitet einige Kennwerte der klassischen Testtheorie auf
+und bespricht wie wir diese in <code>R</code> berechnen können. Dabei werden die
+folgenden Konzepte behandelt:</p>
 <ul>
 <li>Summenwerte</li>
 <li>Item-Schwierigkeit</li>
@@ -241,13 +272,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li>Spearman-Brown-Formel</li>
 </ul>
-<p>Angenommen, eine Datentabelle enthält die Punktzahlen von zehn Schulkindern in einer Klassenarbeit mit fünf Aufgaben. Diese kann man gut in einer <span class="math inline">\(10 \times 5\)</span> (Reihe <span class="math inline">\(\times\)</span> Spalten) Datentabelle darstellen. Ein Eintrag kodiert, ob das Kind (<em>Reihe</em>) die Aufgabe (<em>Spalte</em>) korrekt gelöst hat. Korrekte Antworten werden mit 1 kodiert, falsche Antworten mit 0 – ein typisches Datenformat in der psychologischen Diagnostik.</p>
-<p>Um das fortführende Beispiel selbst nachzuvollziehen, müsst ihr den folgenden <code>data.frame</code> erstellen:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Item_1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),
-                        <span class="dt">Item_2 =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),
-                        <span class="dt">Item_3 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>),
-                        <span class="dt">Item_4 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),
-                        <span class="dt">Item_5 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</code></pre></div>
+<p>Angenommen, eine Datentabelle enthält die Punktzahlen von zehn
+Schulkindern in einer Klassenarbeit mit fünf Aufgaben. Diese kann man gut
+in einer <span class="math inline">\(10 \times 5\)</span> (Reihe <span class="math inline">\(\times\)</span> Spalten) Datentabelle darstellen.
+Ein Eintrag kodiert, ob das Kind (<em>Reihe</em>) die Aufgabe (<em>Spalte</em>)
+korrekt gelöst hat. Korrekte Antworten werden mit 1 kodiert, falsche
+Antworten mit 0 – ein typisches Datenformat in der psychologischen
+Diagnostik.</p>
+<p>Um das fortführende Beispiel selbst nachzuvollziehen, müsst ihr den
+folgenden <code>data.frame</code> erstellen:</p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb337-1" title="1">test_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Item_1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb337-2" title="2">                        <span class="dt">Item_2 =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb337-3" title="3">                        <span class="dt">Item_3 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb337-4" title="4">                        <span class="dt">Item_4 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb337-5" title="5">                        <span class="dt">Item_5 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</a></code></pre></div>
 <p>Die Variable <code>test_data</code> enthält nun die folgende Tabelle:</p>
 <table>
 <thead>
@@ -343,7 +381,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 </tbody>
 </table>
-<p>Wenn uns Daten in diesem Format vorliegen, können wir auf viele Funktionen in <code>R</code> zurückgreifen, um grundlegende psychometrische Auswertungen durchzuführen. Dies sind etwa die Bestimmung der Schwierigkeit und der Trennschärfe von Items, sowie die Bestimmung einer Split-Half Reliabilität. Für fortgeschrittenere Auswertungen – wie etwa die Berechnung von Cronbachs Alpha oder einer Faktorenanalyse – werden wir auf Pakete zurückgreifen, die uns über die Basics in <code>R</code> hinaus weitere Funktionalitäten bieten. Aber auch für diese Analysen benötigen wir genau dieses Datenformat!</p>
+<p>Wenn uns Daten in diesem Format vorliegen, können wir auf viele
+Funktionen in <code>R</code> zurückgreifen, um grundlegende psychometrische
+Auswertungen durchzuführen. Dies sind etwa die Bestimmung der
+Schwierigkeit und der Trennschärfe von Items, sowie die Bestimmung einer
+Split-Half Reliabilität. Für fortgeschrittenere Auswertungen – wie etwa
+die Berechnung von Cronbachs Alpha oder einer Faktorenanalyse – werden
+wir auf Pakete zurückgreifen, die uns über die Basics in <code>R</code> hinaus
+weitere Funktionalitäten bieten. Aber auch für diese Analysen benötigen
+wir genau dieses Datenformat!</p>
 <div class="block">
 <p>
 <strong>Merke</strong>: Das ist das Standard-Datenformat für all unsere psychometrischen Berechnungen: (a) Zeilen sind Fälle; (b) Spalten sind Items bzw. Messvariablen; (c) Zellen enthalten Datenpunkte, etwa die Korrektheit von Antworten (kodiert mit 1/0). Datenpunkte müssen nicht unbedingt – wie es in diesem Beispiel der Fall ist – dichotom sein, sondern können beispielsweise auch die Antworten in einem Persönlichkeitsfragebogen auf einer Likert-Skala repräsentieren.
@@ -351,24 +397,45 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="summenwerte" class="section level2">
 <h2><span class="header-section-number">4.1</span> Summenwerte</h2>
-<p>Wir bestimmen zunächst die Testscores der 10 Kinder. Da jede Zeile ein Kind repräsentiert, ist der Gesamt-Testscore ist die Summe der Werte in jeder Reihe. Die Summe der Reihen eines <code>data.frames</code> (engl: <em>rows</em>) kann man mit der Funktion <code>rowSums</code> bestimmen:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rowSums</span>(test_data)</code></pre></div>
+<p>Wir bestimmen zunächst die Testscores der 10 Kinder. Da jede Zeile ein
+Kind repräsentiert, ist der Gesamt-Testscore die Summe der Werte in
+jeder Reihe. Die Summe der Reihen (engl: <em>rows</em>) eines <code>data.frames</code>
+kann man mit der Funktion <code>rowSums</code> bestimmen:</p>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb338-1" title="1"><span class="kw">rowSums</span>(test_data)</a></code></pre></div>
 <pre><code> [1] 4 1 5 0 3 1 2 1 2 0</code></pre>
-<p>Es ist manchmal praktisch Berechnungen, die pro Fall einen Wert ergeben, direkt an den ursprünglichen <code>data.frame</code> anzuhängen. Wie in Kapitel 3 erklärt, ist das mit der <code>$</code>-Notation möglich:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_data<span class="op">$</span>score &lt;-<span class="st"> </span><span class="kw">rowSums</span>(test_data)</code></pre></div>
+<p>Es ist manchmal praktisch Berechnungen, die pro Fall einen Wert ergeben,
+direkt an den ursprünglichen <code>data.frame</code> anzuhängen. Wie in Kapitel 3
+erklärt, ist das mit der <code>$</code>-Notation möglich:</p>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb340-1" title="1">test_data<span class="op">$</span>score &lt;-<span class="st"> </span><span class="kw">rowSums</span>(test_data)</a></code></pre></div>
 </div>
 <div id="item-schwierigkeiten" class="section level2">
 <h2><span class="header-section-number">4.2</span> Item-Schwierigkeiten</h2>
-<p>Die Schwierigkeit eines Items ist die mittlere Punktzahl aller Personen in diesem Item.<a href="#fn24" class="footnoteRef" id="fnref24"><sup>24</sup></a> Das ist somit also einfach der Mittelwert der Einträge in jeder Spalte (engl: <em>column</em>) in unserem Standardformat. Den Mittelwert pro Spalte kann ich mit der Funktion <code>colMeans</code> bestimmen (analog gibt es auch die Funktionen <code>colSums</code> und <code>rowMeans</code>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colMeans</span>(test_data)</code></pre></div>
+<p>Die Schwierigkeit eines Items ist die mittlere Punktzahl aller Personen
+in diesem Item.<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a> Das ist somit also einfach der
+Mittelwert der Einträge in jeder Spalte (engl: <em>column</em>) in unserem
+Standardformat. Den Mittelwert pro Spalte kann ich mit der Funktion
+<code>colMeans</code> bestimmen (analog gibt es auch die Funktionen <code>colSums</code> und
+<code>rowMeans</code>):</p>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb341-1" title="1"><span class="kw">colMeans</span>(test_data)</a></code></pre></div>
 <pre><code>Item_1 Item_2 Item_3 Item_4 Item_5  score 
    0.6    0.1    0.6    0.3    0.3    1.9 </code></pre>
-<p>Da ich gerade den Gesamtscore als Spalte an <code>test_data</code> angehängt habe, bekomme ich die mittlere Punktzahl der Schüler/innen in den fünf Testitems direkt mitgeliefert. Beachtet, dass ich hier mit <code>colMeans</code> eine numerische Funktion auf den ganzen <code>data.frame</code> angewendet habe. Würde der <code>data.frame</code> auch Spalten vom Typ <code>factor</code> oder <code>character</code> enthalten, wäre es nicht möglich, Funktionen wie <code>rowSums</code> und <code>colMeans</code> anzuwenden. In dem Fall könnte man mit der <code>[·,·]</code>-Notation oder der Funktion <code>subset</code> nur die gewünschten Spalten auswählen.</p>
+<p>Da ich gerade den Gesamtscore als Spalte an <code>test_data</code> angehängt habe,
+bekomme ich die mittlere Punktzahl der Schüler/innen in den fünf Testitems
+direkt mitgeliefert. Beachtet, dass ich hier mit <code>colMeans</code> eine
+numerische Funktion auf den ganzen <code>data.frame</code> angewendet habe. Würde
+der <code>data.frame</code> auch Spalten vom Typ <code>factor</code> oder <code>character</code>
+enthalten, wäre es nicht möglich, Funktionen wie <code>rowSums</code> und <code>colMeans</code>
+anzuwenden. In dem Fall könnte man mit der <code>[·,·]</code>-Notation oder der
+Funktion <code>subset</code> nur die gewünschten Spalten auswählen.</p>
 </div>
 <div id="item-interkorrelationen" class="section level2">
 <h2><span class="header-section-number">4.3</span> Item-Interkorrelationen</h2>
-<p>Als Nächstes geben wir die Korrelationen zwischen allen Items als Korrelationsmatrix aus. Dies funktioniert mit der Funktion <code>cor</code>. Wenn <code>cor</code> als Argument einen <code>data.frame</code> erhält, wird eine Tabelle ausgegeben, die die Korrelation zwischen allen Spalten – d.h. Items – des <code>data.frames</code> enthält.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">cor</span>(test_data), <span class="dv">2</span>)</code></pre></div>
+<p>Als Nächstes geben wir die Korrelationen zwischen allen Items als
+Korrelationsmatrix aus. Dies funktioniert mit der Funktion <code>cor</code>. Wenn
+<code>cor</code> als Argument einen <code>data.frame</code> erhält, wird eine Tabelle
+ausgegeben, die die Korrelation zwischen allen Spalten – d.h. Items –
+des <code>data.frames</code> enthält.</p>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb343-1" title="1"><span class="kw">round</span>(<span class="kw">cor</span>(test_data), <span class="dv">2</span>)</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -438,18 +505,39 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 </tbody>
 </table>
-<p>Die Korrelationen wurden aus Darstellungszwecken mit der Funktion <code>round</code> auf zwei Nachkommastellen gerundet.</p>
+<p>Die Korrelationen wurden aus Darstellungszwecken mit der Funktion
+<code>round</code> auf zwei Nachkommastellen gerundet.</p>
 </div>
 <div id="trennschaerfe" class="section level2">
 <h2><span class="header-section-number">4.4</span> Item-Trennschärfen</h2>
-<p>Interessant ist die letzte Spalte (bzw. genauso die letzte Zeile) der Tabelle der Item-Korrelationen. Diese gibt an, wie stark die Korrelation zwischen jedem Item und dem Testscore ausfällt. Dieser Kennwert ist die (unkorrigierte) Trennschärfe der Items; wir erhalten sie, da wir oben den Testscore als Spalte an unseren <code>data.frame</code> angehängt haben. Die Item-Trennschärfe macht eine Aussage darüber, wie stark das Abschneiden in einem Item mit dem Gesamt-Testscore zusammenhängt. Je höher die Trennschärfe, desto besser vermag das Item zwischen Schüler/innen mit viel und wenig Wissen (also einem hohen bzw. einem niedrigen Gesamt-Testscore) zu trennen. Die Trennschärfe ist ein Kennwert, der zur Beurteilung der Güte eines Items dienen kann.</p>
-<p>Oftmals wird die „part-whole“ korrigierte Trennschärfe berechnet, bei der zur Berechnung der Trennschärfe jedes Items der Itemscore dieses Items aus der Gesamtpunktzahl ausgelassen wird. Somit wird eine „Kriterienkontamination“ vermieden, die zu einer Erhöhung der Trennschärfe führt. Diese Kriterienkontamination ergibt sich bei der unkorrigierten Trennschärfe daraus, dass der Itemscore selbst in das „Kriterium“ – also den Gesamt-Testscore – eingeht.<a href="#fn25" class="footnoteRef" id="fnref25"><sup>25</sup></a> Im Folgenden berechnen wir eine part-whole korrigierte Trennschärfe für Item 2. Zunächst erstelle ich einen Vektor zur Auswahl der Items, die ich zur Berechnung des Testscores unter Ausschluss von Item 2 heranziehe:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Wähle Antworten auf Items 1, 3, 4, 5 aus:
-select_items   &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, (<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)[<span class="op">-</span><span class="dv">2</span>])
-responses_no_item2 &lt;-<span class="st"> </span>test_data[, select_items]
-
-## Betrachte die Tabelle:
-<span class="kw">head</span>(responses_no_item2)</code></pre></div>
+<p>Interessant ist die letzte Spalte (bzw. genauso die letzte Zeile) der
+Tabelle der Item-Korrelationen. Diese gibt an, wie stark die Korrelation
+zwischen jedem Item und dem Testscore ausfällt. Dieser Kennwert ist die
+(unkorrigierte) Trennschärfe der Items; wir erhalten sie, da wir oben
+den Testscore als Spalte an unseren <code>data.frame</code> angehängt haben. Die
+Item-Trennschärfe macht eine Aussage darüber, wie stark das Abschneiden
+in einem Item mit dem Gesamt-Testscore zusammenhängt. Je höher die
+Trennschärfe, desto besser vermag das Item zwischen Schüler/innen mit
+viel und wenig Wissen (also einem hohen bzw. einem niedrigen
+Gesamt-Testscore) zu trennen. Die Trennschärfe ist ein Kennwert, der zur
+Beurteilung der Güte eines Items dienen kann.</p>
+<p>Oftmals wird die „part-whole“ korrigierte Trennschärfe berechnet, bei
+der zur Berechnung der Trennschärfe jedes Items der Itemscore dieses
+Items aus der Gesamtpunktzahl ausgelassen wird. Somit wird eine
+„Kriterienkontamination“ vermieden, die zu einer Erhöhung der
+Trennschärfe führt. Diese Kriterienkontamination ergibt sich bei der
+unkorrigierten Trennschärfe daraus, dass der Itemscore selbst in das
+„Kriterium“ – also den Gesamt-Testscore – eingeht.<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a> Im
+Folgenden berechnen wir eine part-whole korrigierte Trennschärfe für
+Item 2. Zunächst erstelle ich einen Vektor zur Auswahl der Items, die
+ich zur Berechnung des Testscores unter Ausschluss von Item 2
+heranziehe:</p>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb344-1" title="1"><span class="co">## Wähle Antworten auf Items 1, 3, 4, 5 aus:</span></a>
+<a class="sourceLine" id="cb344-2" title="2">select_items   &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, (<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)[<span class="op">-</span><span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb344-3" title="3">responses_no_item2 &lt;-<span class="st"> </span>test_data[, select_items]</a>
+<a class="sourceLine" id="cb344-4" title="4"></a>
+<a class="sourceLine" id="cb344-5" title="5"><span class="co">## Betrachte die Tabelle:</span></a>
+<a class="sourceLine" id="cb344-6" title="6"><span class="kw">head</span>(responses_no_item2)</a></code></pre></div>
 <pre><code>  Item_1 Item_3 Item_4 Item_5
 1      1      1      1      1
 2      1      0      0      0
@@ -457,96 +545,200 @@ responses_no_item2 &lt;-<span class="st"> </span>test_data[, select_items]
 4      0      0      0      0
 5      0      1      1      1
 6      0      1      0      0</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Berechne den Testscore über Items 1, 3, 4 und 5:
-corrected_score &lt;-<span class="st"> </span><span class="kw">rowSums</span>(responses_no_item2)</code></pre></div>
-<p>Die Variable <code>corrected_score</code> enthält nun die Testscores, die unter Ausschluss des zweiten Items gebildet wurden. Das Vorgehen zur Berechnung der bereinigten Scores lässt sich mithilfe der <code>[·,·]</code>-Notation und den Funktionen <code>paste0</code> und <code>rowSums</code> auch auf beliebig viele Items erweitern. Da wir hier den Summenwert nur über vier Items gebildet haben, hätte auch der folgende Code funktioniert:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corrected_score &lt;-<span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">3</span> <span class="op">+</span>
-<span class="st">    </span>test_data<span class="op">$</span>Item_<span class="dv">4</span> <span class="op">+</span><span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">5</span></code></pre></div>
-<p>Wie folgt können wir nun mithilfe der Funktion <code>cor</code> die korrigierte Trennschärfe für Item 2 bestimmen:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(test_data<span class="op">$</span>Item_<span class="dv">2</span>, corrected_score)</code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb346-1" title="1"><span class="co">## Berechne den Testscore über Items 1, 3, 4 und 5:</span></a>
+<a class="sourceLine" id="cb346-2" title="2">corrected_score &lt;-<span class="st"> </span><span class="kw">rowSums</span>(responses_no_item2)</a></code></pre></div>
+<p>Die Variable <code>corrected_score</code> enthält nun die Testscores, die unter
+Ausschluss des zweiten Items gebildet wurden. Das Vorgehen zur
+Berechnung der bereinigten Scores lässt sich mithilfe der
+<code>[·,·]</code>-Notation und den Funktionen <code>paste0</code> und <code>rowSums</code> auch auf
+beliebig viele Items erweitern. Da wir hier den Summenwert nur über vier
+Items gebildet haben, hätte auch der folgende Code funktioniert:</p>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb347-1" title="1">corrected_score &lt;-<span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">3</span> <span class="op">+</span></a>
+<a class="sourceLine" id="cb347-2" title="2"><span class="st">    </span>test_data<span class="op">$</span>Item_<span class="dv">4</span> <span class="op">+</span><span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">5</span></a></code></pre></div>
+<p>Wie folgt können wir nun mithilfe der Funktion <code>cor</code> die korrigierte
+Trennschärfe für Item 2 bestimmen:</p>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb348-1" title="1"><span class="kw">cor</span>(test_data<span class="op">$</span>Item_<span class="dv">2</span>, corrected_score)</a></code></pre></div>
 <pre><code>[1] 0.5238095</code></pre>
-<p>Die korrigierte Trennschärfe von 0.52 liegt unter der unkorrigierten Trennschärfe von <code>r round(item_correlations[6,2], 2)</code>. Je weniger Items ein Test hat, desto mehr Gewicht hat das einzelne Item für den Testscore und umso stärker weichen korrigierte und unkorrigierte Trennschärfe voneinander ab. Bei nur fünf Items kann der Effekt substantiell sein.</p>
-<p>Es ist zu beachten, dass die Funktion <code>cor</code> an dieser Stelle anders verwendet wird als oben: Hier übergebe ich der Funktion <code>cor</code> mit dem Befehl <code>cor(test_data$Item_2, corrected_score)</code> zwei Vektoren gleicher Länge. Ein Vektor enthält die Korrektheiten der Antworten auf Item 2, der andere Vektor enthält den um Item 2 bereinigten Testscore. Oben habe ich der Funktion <code>cor</code> nur ein Argument übergeben, nämlich den <code>data.frame</code> <code>test_data</code>. In dem Fall wurde eine Tabelle ausgegeben – eine <em>Korrelationsmatrix</em> –, die die Korrelationen zwischen allen Spalten enthält.</p>
-<p>Ich empfehle den Code-Block zur Berechnung der korrigierten Trennschärfe genau zu studieren. Darin finden sich viele der Grundlagen aus Kapitel 2 und 3 wieder:</p>
+<p>Die korrigierte Trennschärfe von 0.52 liegt unter der unkorrigierten Trennschärfe von
+0.65. Je weniger Items ein Test hat,
+desto mehr Gewicht hat das einzelne Item für den Testscore und umso
+stärker weichen korrigierte und unkorrigierte Trennschärfe voneinander
+ab. Bei nur fünf Items kann der Effekt substantiell sein.</p>
+<p>Es ist zu beachten, dass die Funktion <code>cor</code> an dieser Stelle anders
+verwendet wird als oben: Hier übergebe ich der Funktion <code>cor</code> mit dem
+Befehl <code>cor(test_data$Item_2, corrected_score)</code> zwei Vektoren gleicher
+Länge. Ein Vektor enthält die Korrektheiten der Antworten auf Item 2,
+der andere Vektor enthält den um Item 2 bereinigten Testscore. Oben habe
+ich der Funktion <code>cor</code> nur ein Argument übergeben, nämlich den
+<code>data.frame</code> <code>test_data</code>. In dem Fall wurde eine Tabelle ausgegeben –
+eine <em>Korrelationsmatrix</em> –, die die Korrelationen zwischen allen
+Spalten enthält.</p>
+<p>Ich empfehle den Code-Block zur Berechnung der korrigierten Trennschärfe
+genau zu studieren. Darin finden sich viele der Grundlagen aus Kapitel 2
+und 3 wieder:</p>
 <ul>
 <li>Die Erstellung von Vektoren mit der <code>1:n</code>-Notation</li>
 <li>Die Negativ-Auswahl von Elementen aus Vektoren mit der <code>[·]</code>-Notation</li>
-<li>Die Generierung eines „character“-Vektors mithilfe der Funktion <code>paste0</code></li>
+<li>Die Generierung eines „character“-Vektors mithilfe der Funktion
+<code>paste0</code></li>
 <li>Die Auswahl von Spalten in einem <code>data.frame</code> mit der <code>[·,·]</code>-Notation</li>
 </ul>
-<p>Wir merken, dass es mühsamer ist, die korrigierte Trennschärfe zu berechnen als die unkorrigierte. Die unkorrigierte Trennschärfe erhalte ich einfach, indem ich einen <code>data.frame</code> an die Funktion <code>cor</code> übergebe. Ich muss nur einen einzigen Funktionsaufruf—oder eine Zeile Code—investieren. Um jedoch die korrigierte Trennschärfe zu bestimmen, muss ich bei <em>n</em> Items <em>n</em> Mal einen korrigierten Gesamtscore berechnen. Für jedes Item muss ich dann jeweils die Item-Antworten mit diesem korrigierten Score korrelieren. Wenn wir das für jedes Item „händisch“ machen, wäre das sehr aufwendig (beispielsweise könnten wir den Code oben <em>n</em> Mal kopieren und jeweils die Itemnummern anpassen – das wäre sehr fehleranfällig). Einer der Hauptgründe, aus denen wir <code>R</code> lernen, ist dass wir uns solche Arbeit nicht machen wollen. Stattdessen wollen wir lernen, wie wir repetitive Arbeiten automatisieren können. Im nächsten Kapitel werden wir Programmierelemente von <code>R</code> kennenlernen, die uns ermöglichen, ohne wesentlich mehr Aufwand für beliebig viele Items korrigierte Trennschärfen zu bestimmen. So sparen wir gleichzeitig Aufwand und arbeiten weniger fehleranfällig.</p>
+<p>Wir merken, dass es mühsamer ist, die korrigierte Trennschärfe zu
+berechnen als die unkorrigierte. Die unkorrigierte Trennschärfe erhielt
+ich oben einfach, indem ich einen ganzen <code>data.frame</code> an die Funktion
+<code>cor</code> übergeben habe. Ich musste nur einen einzigen
+Funktionsaufruf—oder eine Zeile Code—investieren. Um jedoch die
+korrigierte Trennschärfe zu bestimmen, muss ich bei <em>n</em> Items <em>n</em> Mal
+einen korrigierten Gesamtscore berechnen. Für jedes Item muss ich dann
+jeweils das Item mit diesem korrigierten Score korrelieren. Wenn wir das
+für jedes Item „händisch“ machen würden, wäre das sehr aufwendig
+(beispielsweise könnten wir den Code oben <em>n</em> Mal kopieren und jeweils
+die Itemnummern anpassen – das wäre sehr fehleranfällig). Einer der
+Hauptgründe aus denen wir <code>R</code> lernen ist, dass wir uns solche Arbeit
+nicht machen wollen. Stattdessen wollen wir lernen, wie wir repetitive
+Arbeiten automatisieren können. Im nächsten Kapitel werden wir
+Programmierelemente von <code>R</code> kennenlernen, die uns ermöglichen, ohne
+wesentlich mehr Aufwand für beliebig viele Items korrigierte
+Trennschärfen zu bestimmen. So sparen wir gleichzeitig Aufwand und
+arbeiten weniger fehleranfällig.</p>
 </div>
 <div id="cronbachs-alpha" class="section level2">
 <h2><span class="header-section-number">4.5</span> Cronbachs Alpha</h2>
-<p>Als Nächstes bestimmen wir „Cronbachs Alpha“ als Maß für die interne Konsistenz der Antworten der Schüler/innen. Cronbachs Alpha ist ein Schätzer für die Reliabilität eines Tests. Im Falle eines Leistungstest mit dichotomer Bepunktung gibt es eine Antwort auf die Frage: Haben Kinder, die ein Item richtig beantworten, auch eine erhöhte Wahrscheinlichkeit, andere Items richtig zu beantworten? (Ebenso: haben Kinder, die ein Item falsch beantworten, auch eine erhöhte Wahrscheinlichkeit, andere Items falsch zu beantworten?). Je näher Cronbachs Alpha an 1 ist, desto stärker ist das der Fall – desto stärker ist die interne Konsistenz der Punktwerte. Ein Wert von 0 spricht dafür, dass gar keine Systematik in den Punktzahlen liegt – ob ich viele oder wenig Punkte bekommen habe, ist gänzlich zufällig.</p>
-<p><code>R</code> bietet in der Grundversion keine Möglichkeit, Cronbachs Alpha zu bestimmen. Man könnte sich eine eigene Berechnung programmieren, die Cronbachs Alpha umsetzt.<a href="#fn26" class="footnoteRef" id="fnref26"><sup>26</sup></a> Wir machen uns aber zunutze, dass bereits andere <code>R</code>-Nutzer Cronbachs Alpha als Funktion umgesetzt haben, und diese in einem <em>Paket</em> zur Verfügung gestellt haben. Eine Umsetzung von Cronbachs Alpha findet sich im Paket <code>psychometric</code> <span class="citation">(Fletcher, 2010)</span>. Mit der Funktion <code>library</code> kann ich Pakete laden, die nicht zur Grundausstattung von <code>R</code> gehören. Voraussetzung ist, dass ich das Paket auf meinem Rechner installiert habe. Die Erweiterbarkeit durch Pakete ist eine der großen Stärken von <code>R</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Das Paket `psychometric` enthält eine Funktion, die Cronbachs Alpha
-## berechnet
-<span class="kw">library</span>(<span class="st">&quot;psychometric&quot;</span>)</code></pre></div>
-<p>Falls das Paket nicht installiert ist, kann ich es mit dem folgenden Befehl installieren:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;psychometric&quot;</span>)</code></pre></div>
-<p>Praktischerweise arbeitet die Funktion <code>alpha</code> aus dem <code>psychometric</code> Paket genau mit dem Standard-Datenformat, das uns vorliegt: Zeilen kennzeichnen Testteilnehmer, Spalten kennzeichnen Items. <strong>Wichtig ist aber nun</strong>: Wir haben soeben den Testscore als zusätzliche Spalte an die Testdatentabelle angehängt. Diese geht aber nicht in die Berechnung von Cronbachs Alpha ein, sondern nur die Punktzahlen für die Items. Deswegen entferne ich die Spalte <code>score</code> wie folgt wieder:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_data<span class="op">$</span>score &lt;-<span class="st"> </span><span class="ot">NULL</span>
-
-## Prüfe, dass die Spalte wirklich weg ist:
-<span class="kw">names</span>(test_data)</code></pre></div>
+<p>Als Nächstes bestimmen wir „Cronbachs Alpha“ als Maß für die interne
+Konsistenz der Antworten der Schüler/innen. Cronbachs Alpha ist ein
+Schätzer für die Reliabilität eines Tests. Im Falle eines Leistungstest
+mit dichotomer Bepunktung gibt es eine Antwort auf die Frage: Haben
+Kinder, die ein Item richtig beantworten, auch eine erhöhte
+Wahrscheinlichkeit, andere Items richtig zu beantworten? (Ebenso: haben
+Kinder, die ein Item falsch beantworten, auch eine erhöhte
+Wahrscheinlichkeit, andere Items falsch zu beantworten?). Je näher
+Cronbachs Alpha an 1 ist, desto stärker ist das der Fall – desto
+stärker ist die interne Konsistenz der Punktwerte. Ein Wert von 0
+spricht dafür, dass gar keine Systematik in den Punktzahlen liegt – ob
+ich viele oder wenig Punkte bekommen habe, ist gänzlich zufällig.</p>
+<p><code>R</code> bietet in der Grundversion keine Möglichkeit, Cronbachs Alpha zu
+bestimmen. Man könnte sich eine eigene Berechnung programmieren, die
+Cronbachs Alpha umsetzt.<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a> Wir machen uns aber zunutze, dass
+bereits andere <code>R</code>-Nutzer Cronbachs Alpha als Funktion umgesetzt haben,
+und diese in einem <em>Paket</em> zur Verfügung gestellt haben. Eine Umsetzung
+von Cronbachs Alpha findet sich im Paket <code>psychometric</code>
+<span class="citation">(Fletcher, 2010)</span>. Mit der Funktion <code>library</code> kann ich Pakete laden, die
+nicht zur Grundausstattung von <code>R</code> gehören. Voraussetzung ist, dass ich
+das Paket auf meinem Rechner installiert habe. Die Erweiterbarkeit durch
+Pakete ist eine der großen Stärken von <code>R</code>.</p>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb350-1" title="1"><span class="co">## Das Paket `psychometric` enthält eine Funktion, die Cronbachs Alpha</span></a>
+<a class="sourceLine" id="cb350-2" title="2"><span class="co">## berechnet</span></a>
+<a class="sourceLine" id="cb350-3" title="3"><span class="kw">library</span>(<span class="st">&quot;psychometric&quot;</span>)</a></code></pre></div>
+<p>Falls das Paket nicht installiert ist, kann ich es mit dem folgenden
+Befehl installieren:</p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb351-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;psychometric&quot;</span>)</a></code></pre></div>
+<p>Praktischerweise arbeitet die Funktion <code>alpha</code> aus dem <code>psychometric</code>
+Paket genau mit dem Standard-Datenformat, das uns vorliegt: Zeilen
+kennzeichnen Testteilnehmer, Spalten kennzeichnen Items. <strong>Wichtig ist
+aber nun</strong>: Wir haben soeben den Testscore als zusätzliche Spalte an die
+Testdatentabelle angehängt. Diese geht aber nicht in die Berechnung von
+Cronbachs Alpha ein, sondern nur die Punktzahlen für die Items. Deswegen
+entferne ich die Spalte <code>score</code> wie folgt wieder:</p>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb352-1" title="1">test_data<span class="op">$</span>score &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb352-2" title="2"></a>
+<a class="sourceLine" id="cb352-3" title="3"><span class="co">## Prüfe, dass die Spalte wirklich weg ist:</span></a>
+<a class="sourceLine" id="cb352-4" title="4"><span class="kw">names</span>(test_data)</a></code></pre></div>
 <pre><code>[1] &quot;Item_1&quot; &quot;Item_2&quot; &quot;Item_3&quot; &quot;Item_4&quot; &quot;Item_5&quot;</code></pre>
-<p>Wir haben gelernt, dass wir Variablen mit der Funktion <code>rm</code> löschen können. <code>rm</code> können wir aber nicht nutzen, wenn wir Spalten aus <code>data.frames</code> entfernen wollen. Das liegt daran, dass die Spalte selber keine Variable ist, sondern zu einem <code>data.frame</code> gehört. Deswegen muss man Spalten mit dem Befehl <code>data.frame$spalte &lt;- NULL</code> entfernen. <code>NULL</code> ist in <code>R</code> ein Wert, der für „Nicht-Existenz“ steht.</p>
-<p>Nachdem wir das Paket <code>psychometric</code> geladen und die Spalte <code>score</code> entfernt haben, können wir Cronbachs Alpha mit der Funktion <code>alpha</code> bestimmen:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">alpha</span>(test_data) <span class="co"># erfordert Laden des Pakets psychometric</span></code></pre></div>
+<p>Wir haben gelernt, dass wir Variablen mit der Funktion <code>rm</code> löschen
+können. <code>rm</code> können wir aber nicht nutzen, wenn wir Spalten aus
+<code>data.frames</code> entfernen wollen. Das liegt daran, dass die Spalte selber
+keine Variable ist, sondern zu einem <code>data.frame</code> gehört. Deswegen muss
+man Spalten mit dem Befehl <code>data.frame$spalte &lt;- NULL</code> entfernen. <code>NULL</code>
+ist in <code>R</code> ein Wert, der für „Nicht-Existenz“ steht.</p>
+<p>Nachdem wir das Paket <code>psychometric</code> geladen und die Spalte <code>score</code>
+entfernt haben, können wir Cronbachs Alpha mit der Funktion <code>alpha</code>
+bestimmen:</p>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb354-1" title="1"><span class="kw">alpha</span>(test_data) <span class="co"># erfordert Laden des Pakets psychometric</span></a></code></pre></div>
 <pre><code>[1] 0.753012</code></pre>
 </div>
-<div id="split-half-reliabilitat" class="section level2">
+<div id="split-half-reliabilität" class="section level2">
 <h2><span class="header-section-number">4.6</span> Split-Half-Reliabilität</h2>
-<p>Cronbachs Alpha ist ein Schätzer für die Reliabilität eines Tests. Andere mögliche Schätzer sind die Retest-Reliabilität und die Split-Half-Reliabilität. Diese basieren auf der Berechnung einer Korrelation zwischen zwei Punktwerten. Für die Bestimmung der Retest-Reliabilität lassen wir Testteilnehmer zweimal denselben Test bearbeiten und korrelieren die Punktwerte, die sich zu den zwei Testzeitpunkten ergeben.</p>
-<p>Noch leichter ist die Bestimmung der Split-Half-Reliabilität, welche nicht das mehrmalige Bearbeiten desselben Tests erfordert. Dabei teilen wir die Items des Tests in zwei Gruppen ein und bilden Summenwerte für die beiden Testhälften, welche wir dann miteinander korrelieren. Wir müssen dabei berücksichtigen, dass wir nur die Hälfte des Tests zur Schätzung der Reliabilität verwenden. Dies kann mithilfe der <em>Spearman-Brown-Formel</em> korrigiert werden.</p>
-<p>Die Spearman-Brown-Formel schätzt die Reliabilität eines Tests für den hypothetischen Fall, dass man diesen um einen bestimmten Faktor verlängern würde (d.h. man würde die bestehenden Items replizieren). Man kann sie verwenden, um den Reliabilitätsschätzer einer Split-Half-Korrelation zu korrigieren, da in diesen nur die Hälfte der Items eingehen. Die Spearman-Brown Formel ist diese:</p>
+<p>Cronbachs Alpha ist ein Schätzer für die Reliabilität eines Tests.
+Andere mögliche Schätzer sind die Retest-Reliabilität und die
+Split-Half-Reliabilität. Diese basieren auf der Berechnung einer
+Korrelation zwischen zwei Punktwerten. Für die Bestimmung der
+Retest-Reliabilität lassen wir Testteilnehmer zweimal denselben Test
+bearbeiten und korrelieren die Punktwerte, die sich zu den zwei
+Testzeitpunkten ergeben.</p>
+<p>Noch leichter ist die Bestimmung der Split-Half-Reliabilität, welche
+nicht das mehrmalige Bearbeiten desselben Tests erfordert. Dabei teilen
+wir die Items des Tests in zwei Gruppen ein und bilden Summenwerte für
+die beiden Testhälften, welche wir dann miteinander korrelieren. Wir
+müssen dabei berücksichtigen, dass wir nur die Hälfte des Tests zur
+Schätzung der Reliabilität verwenden. Dies kann mithilfe der
+<em>Spearman-Brown-Formel</em> korrigiert werden.</p>
+<p>Die Spearman-Brown-Formel schätzt die Reliabilität eines Tests für den
+hypothetischen Fall, dass man diesen um einen bestimmten Faktor
+verlängern würde (d.h. man würde die bestehenden Items replizieren). Man
+kann sie verwenden, um den Reliabilitätsschätzer einer
+Split-Half-Korrelation zu korrigieren, da in diesen nur die Hälfte der
+Items eingehen. Die Spearman-Brown Formel ist diese:</p>
 <p><span class="math display">\[r&#39; = \frac{r \, n}{1 + (n - 1) r}\]</span></p>
-<p>Hierbei ist <em>r’</em> die um die Testlänge korrigierte Reliabilität. <em>r</em> ist der derzeitige Reliabilitätsschätzer, also beispielsweise die Korrelation von zwei Testhälften. <em>n</em> ist der Faktor, um den der Test hypothetisch verlängert wird. Für die Schätzung der Split-Half-Reliabilität muss man einen Verlängerungsfaktor von 2 annehmen, da man die Reliabilität nur mit einem halbierten Test schätzt (im Vergleich dazu geht bei der Bestimmung der Retest-Reliabilität zweimal der gesamte Test in die Korrelation ein).</p>
-<p>Um die spearman-brown-korrigierte Split-Half-Reliabilität zu schätzen, teilen wir zunächst die Items in zwei Mengen auf; hier ist es nicht möglich gleich große Teile zu generieren, also wählen wir die ersten drei und die letzten zwei Items aus:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">first_half  &lt;-<span class="st"> </span>test_data[, <span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)]
-second_half &lt;-<span class="st"> </span>test_data[, <span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">5</span>)]</code></pre></div>
-<p>Als nächstes berechnen wir die Korrelation zwischen den beiden Testhälften:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cor_halfs &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="kw">rowSums</span>(first_half), <span class="kw">rowSums</span>(second_half))
-cor_halfs</code></pre></div>
+<p>Hierbei ist <em>r’</em> die um die Testlänge korrigierte Reliabilität. <em>r</em> ist
+der derzeitige Reliabilitätsschätzer, also beispielsweise die
+Korrelation von zwei Testhälften. <em>n</em> ist der Faktor, um den der Test
+hypothetisch verlängert wird. Für die Schätzung der
+Split-Half-Reliabilität muss man einen Verlängerungsfaktor von 2
+annehmen, da man die Reliabilität nur mit einem halbierten Test schätzt
+(im Vergleich dazu geht bei der Bestimmung der Retest-Reliabilität
+zweimal der gesamte Test in die Korrelation ein).</p>
+<p>Um die spearman-brown-korrigierte Split-Half-Reliabilität zu schätzen,
+teilen wir zunächst die Items in zwei Mengen auf; hier ist es nicht
+möglich gleich große Teile zu generieren, also wählen wir die ersten
+drei und die letzten zwei Items aus:</p>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb356-1" title="1">first_half  &lt;-<span class="st"> </span>test_data[, <span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)]</a>
+<a class="sourceLine" id="cb356-2" title="2">second_half &lt;-<span class="st"> </span>test_data[, <span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">5</span>)]</a></code></pre></div>
+<p>Als nächstes berechnen wir die Korrelation zwischen den beiden
+Testhälften:</p>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb357-1" title="1">cor_halfs &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="kw">rowSums</span>(first_half), <span class="kw">rowSums</span>(second_half))</a>
+<a class="sourceLine" id="cb357-2" title="2">cor_halfs</a></code></pre></div>
 <pre><code>[1] 0.5091751</code></pre>
-<p>Nun wollen wir diese Korrelation mit der Spearman-Brown-Formel korrigieren. Zu diesem Zweck definieren wir eine eigene Funktion, die die Spearman-Brown-Formel umsetzt. An dieser Stelle reicht es aus, das Konzept einer eigenen Funktion zur Kenntnis zu nehmen – es wird in Kapitel 6 wieder aufgegriffen:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Definiere eine SPEARMAN-BROWN Funktion. Sie nimmt zwei Argumente an: 
-## (a) einen Reliabilitäts-Schätzer
-## (b) einen Verlängerungsfaktor
-
-spearman_brown &lt;-<span class="st"> </span><span class="cf">function</span>(reliability, factor) {
-    numerator  &lt;-<span class="st"> </span>reliability <span class="op">*</span><span class="st"> </span>factor
-    denominator &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(factor<span class="op">-</span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>reliability
-    corrected_reliability &lt;-<span class="st"> </span>numerator <span class="op">/</span><span class="st"> </span>denominator
-    <span class="kw">return</span>(corrected_reliability)
-}</code></pre></div>
-<p>Wenn wir die Funktion definiert haben – das heißt: den Funktions-Code in der Konsole ausgeführt haben –, können wir sie wie andere bekannte Funktionen aufrufen. Wir müssen zwei Argumente angeben: (1) Unseren initialen Schätzer der Reliabilität, also die Korrelation zwischen den zwei Testhälften; (2) den Verlängerungsfaktor, hier 2, da wir die Reliabilität für die doppelte Testlänge schätzen wollen:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">split_half &lt;-<span class="st"> </span><span class="kw">spearman_brown</span>(cor_halfs, <span class="dv">2</span>)
-split_half</code></pre></div>
+<p>Nun wollen wir diese Korrelation mit der Spearman-Brown-Formel
+korrigieren. Zu diesem Zweck definieren wir eine eigene Funktion, die
+die Spearman-Brown-Formel umsetzt. An dieser Stelle reicht es aus, das
+Konzept einer eigenen Funktion zur Kenntnis zu nehmen – es wird in
+Kapitel 6 wieder aufgegriffen:</p>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb359-1" title="1"><span class="co">## Definiere eine SPEARMAN-BROWN Funktion. Sie nimmt zwei Argumente an: </span></a>
+<a class="sourceLine" id="cb359-2" title="2"><span class="co">## (a) einen Reliabilitäts-Schätzer</span></a>
+<a class="sourceLine" id="cb359-3" title="3"><span class="co">## (b) einen Verlängerungsfaktor</span></a>
+<a class="sourceLine" id="cb359-4" title="4"></a>
+<a class="sourceLine" id="cb359-5" title="5">spearman_brown &lt;-<span class="st"> </span><span class="cf">function</span>(reliability, factor) {</a>
+<a class="sourceLine" id="cb359-6" title="6">    numerator  &lt;-<span class="st"> </span>reliability <span class="op">*</span><span class="st"> </span>factor</a>
+<a class="sourceLine" id="cb359-7" title="7">    denominator &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(factor<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span>reliability</a>
+<a class="sourceLine" id="cb359-8" title="8">    corrected_reliability &lt;-<span class="st"> </span>numerator <span class="op">/</span><span class="st"> </span>denominator</a>
+<a class="sourceLine" id="cb359-9" title="9">    <span class="kw">return</span>(corrected_reliability)</a>
+<a class="sourceLine" id="cb359-10" title="10">}</a></code></pre></div>
+<p>Wenn wir die Funktion definiert haben – das heißt: den Funktions-Code
+in der Konsole ausgeführt haben –, können wir sie wie andere bekannte
+Funktionen aufrufen. Wir müssen zwei Argumente angeben: (1) Unseren
+initialen Schätzer der Reliabilität, also die Korrelation zwischen den
+zwei Testhälften; (2) den Verlängerungsfaktor, hier 2, da wir die
+Reliabilität für die doppelte Testlänge schätzen wollen:</p>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb360-1" title="1">split_half &lt;-<span class="st"> </span><span class="kw">spearman_brown</span>(cor_halfs, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb360-2" title="2">split_half</a></code></pre></div>
 <pre><code>[1] 0.6747727</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Vergleiche mit Cronbachs Alpha:
-<span class="kw">alpha</span>(test_data)</code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb362-1" title="1"><span class="co">## Vergleiche mit Cronbachs Alpha:</span></a>
+<a class="sourceLine" id="cb362-2" title="2"><span class="kw">alpha</span>(test_data)</a></code></pre></div>
 <pre><code>[1] 0.753012</code></pre>
-<p>Wie wir sehen, liegt die Spearman-Brown-korrigierte Split-Half-Reliabilität näher an Cronbachs Alpha als die unkorrigierte Korrelation der zwei Testhälften. Das liegt daran, dass die Korrelation der zwei Testhälften die Reliabilität systematisch unterschätzt, da dieser Schätzer nur auf der Hälfte der Items beruht. Es ist sogar so, dass Cronbachs Alpha genau der Mittelwert aller möglichen Spearman-Brown korrigierten Split-Half-Koeffizienten ist.</p>
-<p>Alternativ hätten wir auch die Odd-Even-Reliabilität berechnen können, die die Testitems in gerade und ungerade Items einteilt, also hier zwei Testscores einerseits für die Items 1, 3 und 5, und andererseits für die Items 2 und 4 berechnet. Diese lässt sich mit nur wenig Änderungen am Code oben umsetzen – ich schlage vor, dies als Übung zu machen.</p>
-</div>
-<div id="fragen-zum-vertiefenden-verstandnis-2" class="section level2">
-<h2><span class="header-section-number">4.7</span> Fragen zum vertiefenden Verständnis</h2>
-<ol style="list-style-type: decimal">
-<li><p>Gegeben ist der Antwortvektor <code>c(1, 2, 2, 1, 4, 5, 2, 2, 2, 3)</code> und der Schlüssel <code>2</code>. Wie kann ich die Item-Schwierigkeit ohne Anwendung der Funktion <code>ifelse()</code> bestimmen? Was ist die Item-Schwierigkeit?</p></li>
-<li><p>Gegeben ist der Antwortvektor <code>c(2, 3, 2, 4, 5, 6, 2, 3)</code>, der die Antworten auf das Item eines Persönlichkeitsinventars enthält. Die Antworten wurden auf einer Likertskala gegeben, die zwischen 1 und 6 kodiert war. Da das Item negativ gepolt ist, müssen die Antworten vor der Analyse invertiert werden. Was ist der Mittelwert der umgepolten Antworten (d.h. die Item-Schwierigkeit)?</p></li>
-</ol>
+<p>Wie wir sehen, liegt die Spearman-Brown-korrigierte
+Split-Half-Reliabilität näher an Cronbachs Alpha als die unkorrigierte
+Korrelation der zwei Testhälften. Das liegt daran, dass die Korrelation
+der zwei Testhälften die Reliabilität systematisch unterschätzt, da
+dieser Schätzer nur auf der Hälfte der Items beruht. Es ist sogar so,
+dass Cronbachs Alpha genau der Mittelwert aller möglichen Spearman-Brown
+korrigierten Split-Half-Koeffizienten ist.</p>
+<p>Alternativ hätten wir auch die Odd-Even-Reliabilität berechnen können,
+die die Testitems in gerade und ungerade Items einteilt, also hier zwei
+Testscores einerseits für die Items 1, 3 und 5, und andererseits für die
+Items 2 und 4 berechnet. Diese lässt sich mit nur wenig Änderungen am
+Code oben umsetzen – ich schlage vor, dies als Übung zu machen.</p>
 
 </div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="24">
-<li id="fn24"><p>Auch bei Items, die nicht Korrektheit kodieren, kann man von Item-Schwierigkeit sprechen. Beispielsweise wäre dann die Item-Schwierigkeit die mittlere Zustimmungsrate für ein Item in einem Persönlichkeitsinventar, in dem Antworten auf einer 5-stufigen Likert-Skala gegeben werden.<a href="psychometrie.html#fnref24">↩</a></p></li>
-<li id="fn25"><p>Praktisch gesehen werden unkorrigierte und korrigierte Trennschärfe dieselbe relative Rangreihe zwischen den Items hinsichtlich ihrer Diskriminationsgüte abbilden.<a href="psychometrie.html#fnref25">↩</a></p></li>
-<li id="fn26"><p>Das wäre sogar eine gute Übung. Die Formel findet sich unter <a href="https://de.wikipedia.org/wiki/Cronbachs_Alpha" class="uri">https://de.wikipedia.org/wiki/Cronbachs_Alpha</a><a href="psychometrie.html#fnref26">↩</a></p></li>
-</ol>
 </div>
             </section>
 
@@ -559,11 +751,13 @@ split_half</code></pre></div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -571,12 +765,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -588,6 +781,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -605,10 +802,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
