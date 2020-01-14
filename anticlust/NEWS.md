@@ -22,21 +22,6 @@ and the implementation; but feel free to check it out). The functions
 selection but also implements brand new algorithms that combine cluster 
 analyis and anticlustering.
 
-**Minor**
-
-- The function `mean_sd_obj()` no longer computes the discrepancy of 
-  medians, only in means and standard deviations (as the name would also 
-  suggest)
-- I wrote a new implementation of the "centroid nearest neighbour" 
-  clustering algorithm that was added in version 0.3.0. It is now 
-  available when calling the function `balanced_clustering()` with 
-  argument `method = "nn"`. It produces the same clusters as `method = 
-  "heuristic"` (the default), but is faster and applicable to larger
-  data sets. It uses the function [`nn2()`](https://www.rdocumentation.org/packages/RANN/versions/2.6.1/topics/nn2)
-  from the `RANN` package to search for nearest neighbours, for which 
-  reason the implementation does not require to compute a quadratic 
-  distance matrix. It cannot be used with a distance matrix as input.
-
 ---
 
 If you would like to check out the latest features, install the 
@@ -45,7 +30,21 @@ development version:
 ```R
 remotes::install_github("m-Py/anticlust@devel")
 ```
-  
+
+### anticlust 0.3.1
+
+**Major**
+
+- The argument `iv` was removed from the function `anticlustering()`; its 
+functionality will be available in other functions, as it does not fit
+the anticlustering semantic
+
+**Minor**
+
+- The function `mean_sd_obj()` no longer computes the discrepancy of 
+  medians, only in means and standard deviations (as the name would also 
+  suggest)
+
 ## anticlust 0.3.0
 
 2019-10-30
