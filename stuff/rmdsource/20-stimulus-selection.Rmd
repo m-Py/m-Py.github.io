@@ -105,48 +105,40 @@ functionality, see the vignette
 
 ```{r}
 
-stim <- lexops %>%
-  dplyr::filter(PK.Brysbaert >= 0.9) %>%
-  mutate(
-    CNC = case_when(
-      between(CNC.Brysbaert, 1, 2) ~ "CNC-low",
-      between(CNC.Brysbaert, 4, 5) ~ "CNC-high",
-      TRUE ~ NA_character_ # default case: exclude those
-    ),
-    BG = case_when(
-      between(BG.SUBTLEX_UK, 0, 0.003) ~ "BG-low",
-      between(BG.SUBTLEX_UK, 0.009, 0.013) ~ "BG-high",
-      TRUE ~ NA_character_ # default case: exclude those
-    )
-  ) %>% 
-  filter(!is.na(CNC), !is.na(BG), !is.na(Length), !is.na(Zipf.SUBTLEX_UK)) %>% 
-  mutate(condition = paste(CNC, BG, sep = " | "))
+# First, I subset the data and recode variables
+stim <- subset(lexops, PK.Brysbaert >= 0.9)
+# Code boundaries for the independent variables
+stim <- within(lexops, {
+  CNC <- ifelse(CNC.Brysbaert >= 1 & CNC.Brysbaert <= 2, "CNC-low", NA)
+  CNC <- ifelse(CNC.Brysbaert >= 4 & CNC.Brysbaert <= 5, "CNC-high", CNC)
+  BG  <- ifelse(BG.SUBTLEX_UK >= 0 & BG.SUBTLEX_UK <= 0.003, "BG-low", NA)
+  BG  <- ifelse(BG.SUBTLEX_UK >= 0.009 & BG.SUBTLEX_UK <= 0.013, "BG-high", BG)
+})
 
-stim$matches <- matching(stim[, c("Length", "Zipf.SUBTLEX_UK")], groups = stim$condition)
-full_matches <- which(table(stim$matches) == 4)
-subchoice <- stim[stim$matches %in% full_matches, ]
+# Remove NA values
+stim <- subset(stim, !is.na(CNC) & !is.na(BG) & !is.na(Length) & !is.na(Zipf.SUBTLEX_UK))
 
-objectives <- sapply(
-  unique(subchoice$matches), 
-  function(x) sum(dist(subchoice[subchoice$matches == x, c("Length", "Zipf.SUBTLEX_UK")]))
+# Match the conditions based on covariates
+stim$matches <- matching(
+  subset(stim, select = c(Length, Zipf.SUBTLEX_UK)), 
+  groups = subset(stim, select = c(BG, CNC))
 )
 
-obj <- data.frame(
-  match = unique(subchoice$matches),
-  objectives = objectives
-)
+# Only select full matches
+selection <- subset(stim, !is.na(matches))
 
-obj <- obj %>% arrange(objectives)
-best <- obj$match[1:25]
+# Matches are numbered by achieved similarity. Good matches:
+subset(selection, matches == 1, c(Length, Zipf.SUBTLEX_UK, BG, CNC, matches))
+subset(selection, matches == 2, c(Length, Zipf.SUBTLEX_UK, BG, CNC, matches))
 
-selected <- stim %>% 
-  filter(matches %in% !!best) %>% 
-  select(CNC.Brysbaert, BG.SUBTLEX_UK, Length, Zipf.SUBTLEX_UK, matches, condition) %>% 
-  arrange(matches, condition)
+# Select the 25 best matches:
+final_selection <- subset(selection, matches < 26)
 
+
+# Check quality of the selection:
 mean_sd_tab(
-  selected[, c("CNC.Brysbaert", "BG.SUBTLEX_UK", "Length", "Zipf.SUBTLEX_UK")], 
-  selected$condition
+  final_selection[, c("CNC.Brysbaert", "BG.SUBTLEX_UK", "Length", "Zipf.SUBTLEX_UK")], 
+  paste(final_selection$BG, final_selection$CNC)
 )
 
 ```
@@ -195,15 +187,16 @@ oasis$string <- paste0("item", 1:nrow(oasis)) # is needed for lexOPS
 
 stims <- oasis %>%
   split_random(3) %>%
-  control_for(Valence_mean, -1:1) %>%
-  control_for(Arousal_mean, -1:1) %>%
-  control_for(beauty_mean, -1:1) %>%
+  control_for(Valence_mean, -0.5:0.5) %>%
+  control_for(Arousal_mean, -0.5:0.5) %>%
+  control_for(beauty_mean, -0.5:0.5) %>%
   generate(40) %>%
   long_format()
 
 # Compare descriptive statistics by set:
+covariates <- c("Valence_mean", "Arousal_mean", "beauty_mean")
 mean_sd_tab(
-  stims[, c("Valence_mean", "Arousal_mean", "beauty_mean")], 
+  stims[, covariates], 
   stims$condition
 )
 ```
@@ -212,109 +205,31 @@ For this application, `anticlust` can do much better:
 
 ```{r}
 
-covariates <- c("Valence_mean", "Arousal_mean", "beauty_mean")
 oasis$matches <- matching(
   oasis[, covariates], 
   p = 3
 )
 
-full_matches <- which(table(oasis$matches) == 3)
-subchoice <- oasis[oasis$matches %in% full_matches, ]
+# Matches are numbered by achieved similarity. Good matches:
+subset(oasis, matches == 1, covariates)
+subset(oasis, matches == 2, covariates)
 
-objectives <- sapply(
-  unique(subchoice$matches), 
-  function(x) sum(dist(subchoice[subchoice$matches == x, covariates]))
-)
-
-obj <- data.frame(
-  match = unique(subchoice$matches),
-  objectives = objectives
-)
-
-obj <- obj %>% arrange(objectives)
-best <- obj$match[1:40]
-
-selected <- subchoice %>% 
-  filter(matches %in% !!best) %>% 
-  select(Valence_mean, Arousal_mean, beauty_mean, matches) %>% 
-  arrange(matches)
+# Select the 40 best matches:
+selection <- subset(oasis, matches <= 40)
 
 # do anticlustering for optimization
-selected$ac <- anticlustering(
-  selected[, 1:3],
+selection$ac <- anticlustering(
+  selection[, covariates],
   K = 3,
-  categories = selected$matches
+  categories = selection$matches
 )
 
 mean_sd_tab(
-  selected[, covariates], 
-  selected$ac
+  selection[, covariates], 
+  selection$ac
 )
 
 ```
-
-## Example 3: Small data set `schaper2019`
-
-In a last example, I use the data set built into the `anticlust` 
-package. It consists of 96 items that were partitioned into 3 sets in 
-experiments by Schaper et al. (2019).
-
-In this example, I wish to create two sets that are dissimular with 
-regard to frequency but similar with regard to three other covariates. 
-However, when trying to partition the entire item pool into sets, 
-`LexOPS` fails. It can be used with the option `generate("all")`, in 
-which case it tries to use as many stimuli as possible, but I have not 
-yet had the case were this worked for me: 
-
-```{r}
-
-nrow(schaper2019)
-schaper2019$string <- paste0("item", 1:nrow(schaper2019))
-
-stim <- schaper2019 %>%
-  split_by(frequency, 0:18 ~ 18.1:Inf) %>% # 18 is the median
-  control_for(rating_consistent, -0.3:0.3) %>%
-  control_for(rating_inconsistent, -0.3:0.3) %>%
-  control_for(syllables, -2:2) %>%
-  generate("all") %>%
-  long_format()
-
-```
-
-In this case, `r nrow(stim)` items were extracted. The descriptive 
-statistics by set are given as follows:
-
-```{r}
-# Compare descriptive statistics by set:
-mean_sd_tab(
-  stim[, c("frequency", "rating_consistent", "rating_inconsistent", "syllables")], 
-  stim$condition
-)
-```
-
-This looks quite good. How does `anticlust` perform?
-
-```{r}
-# I just leave out the `n` argument to select *all* items
-stimuli <- select_stimuli(
-  schaper2019,
-  split_by = "frequency",
-  equalize = c("rating_consistent", "rating_inconsistent", "syllables"),
-  design = 2, 
-)
-
-mean_sd_tab(
-  stimuli[, c("frequency", "rating_consistent", "rating_inconsistent", "syllables")], 
-  stimuli$SET
-)
-```
-
-The `anticlust` package did not discard any items---all 96 items are 
-part of the output. The difference with regard to frequency is smaller, 
-but the covariates are more similar. In general, `anticlust` will focus 
-on similarity in covariates more than dissimilarity with regard to the 
-independent variable. In my very personal opinion, this is more 
-important to avoid confounding.
 
 ## Limitations
 
