@@ -1,0 +1,52 @@
+---
+title: "Ifelse logic in base `R` and `dplyr`"
+date: January 15, 2020
+author: Martin Papenberg
+---
+
+How to add a column to a data frame using the `ifelse()` function from 
+base `R`, creating a categorical vector based on several logical 
+conditions:
+
+```{r}
+scores <- within(iris, {
+  investigate <- ifelse(Sepal.Width > 4, "too-wide", "ok")
+  investigate <- ifelse(Sepal.Length < 4.5, "too-short", investigate)
+})
+
+table(scores$investigate) # what we got
+```
+
+This is how to accomplish the same using the `dplyr` package from the 
+popular [tidyverse](https://www.tidyverse.org/):
+
+```{r, message = FALSE, warning = FALSE}
+library(dplyr)
+
+scores <- scores %>% 
+  mutate(
+    investigate = case_when(
+      Sepal.Width > 4 ~ "too-wide",
+      Sepal.Length < 4.5 ~ "too-short",
+      TRUE ~ "ok"
+    )
+  )
+
+table(scores$investigate)
+```
+
+A downside in base `R`: Multiple calls to `ifelse()` are necessary to 
+realize more than two categories ("too-wide", "too-short", "ok"). A 
+downside in `dplyr`, the default condition (the "else" branch) has to 
+use the rather awkward `TRUE ~ "ok"` construction. So: Just use whatever 
+pleases you :-)
+
+Inspired by [this blog post](https://thewoodpeckr.wordpress.com/2019/11/22/if-ifelse-had-more-ifs-and-an-else/). 
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
