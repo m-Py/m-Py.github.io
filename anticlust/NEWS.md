@@ -5,42 +5,64 @@ output:
     theme: united
 ---
 
-## development version
+## anticlust 0.4.0
 
-Expected changes in upcoming releases: 
-
-**Major**
-
-New easy-to-use interface for stimulus selection in psychology: The 
-function `select_stimuli()` (and also another function 
-`divide_and_select()`). These functions can be used to select stimuli 
-for a variety of research designs and to only select a subset of all 
-stimuli. See the [new vignette](stimulus-selection.html) for an overview 
-to the new functionality (currently, I am still working on the vignette 
-and the implementation; but feel free to check it out). The functions 
-`select_stimuli()` does not only provide a new interface for stimulus 
-selection but also implements brand new algorithms that combine cluster 
-analyis and anticlustering.
-
----
-
-If you would like to check out the latest features, install the 
-development version:
-
-```R
-remotes::install_github("m-Py/anticlust@devel")
-```
-
-### anticlust 0.3.1
+Major update. Many changes are due to the philosophy that future 
+maintainability should be maximized. This means simplifying the exported 
+functions, such as reducing the number of functions and the number of 
+arguments for each exported function. Other changes bring about new 
+possibilities for stimulus selection in experimental psychology (in 
+particular, the new function `matching()`).
 
 **Major**
 
-- The argument `iv` was removed from the function `anticlustering()`; its 
-functionality will be available in other functions, as it does not fit
-the anticlustering semantic
+- All clustering and anticlustering function now only take one data 
+argument (called `x`). Internally, `anticlust` tests if the input is a 
+distance matrix or not. This is a great improvement to the function 
+interfaces.
+- The argument `iv` was removed from the function `anticlustering()`; 
+its functionality will be available in other functions, as it does not 
+fit the anticlustering semantic
+- The random sampling method for anticlustering was removed. It was an 
+unnecessary burden for the `anticlust` code base as it is much less 
+performant than the exchange method. (This implies that the 
+`anticlustering()` function no longer has an argument `nrep`)
+- A new exported function: `matching()` finds groups of similar 
+elements. Internally, `matching()` calls the same clustering algorithm 
+as `balanced_clustering()`, but it differs with regard to the arguments: 
+In `matching()`, you specify the size of the groups rather than the 
+number of groups. Moreover, `matching()` offers some unique 
+functionality:
+  + Conduct K-partite matching, that is: include a grouping vector (via 
+  argument `match_between`) and matches are selected between elements of 
+  different groups
+  + Only match elements that are part of the same group (this categorical
+  constraint is induced through the argument `match_within`)
+  + The matches that are returned by `matching()` are numbered by 
+  similarity; the group identified by `1` has the least sum of distances
+  between matched elements etc.
+  + In `balanced_clustering()`, nearest neighbours are first sought 
+  for extreme elements that are far away from the cluster centroid. In 
+  `matching()`, it is possible to start searching for matches at the 
+  center (setting `match_extreme_first` to `FALSE`)
+  + When a grouping restriction via `match_between` is included, it is 
+possible to further specify how matches are selected through the option 
+`target_group` is included. When specifying `"none"`, matches are always 
+selected for extreme (or central elements first when 
+`match_extreme_first = FALSE`). With option `"smallest"` (default), 
+matches are selected from the smallest group specified in 
+`match_between`. With option `"diverse"`, matches are selected from the 
+group having the largest variance. 
 
 **Minor**
 
+- A new exported convenience function: `to_numeric()` converts any input 
+to integer;  it is really simple and just calls 
+`as.numeric(factor(x))` (usually used to convert categorical variables 
+to integers that start at 1)
+- A new exported convenience function: `plot_similarity()` plot the sum
+of pairwise distances by cluster to find out which clusters are highly 
+similar
 - The function `mean_sd_obj()` no longer computes the discrepancy of 
   medians, only in means and standard deviations (as the name would also 
   suggest)
