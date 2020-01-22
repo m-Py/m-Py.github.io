@@ -8,25 +8,17 @@ output:
 ## anticlust 0.4.0
 
 Major update. Many changes are due to the philosophy that future 
-maintainability should be maximized. This means simplifying the exported 
-functions, such as reducing the number of functions and the number of 
-arguments for each exported function. Other changes bring about new 
-possibilities for stimulus selection in experimental psychology (in 
-particular, the new function `matching()`).
+maintainability should be maximized. This mostly implies simplifying the 
+exported functions, such as reducing the number of functions and the 
+number of arguments for each exported function. I took the liberty to 
+introduce some major changes to the existing functions; this version 
+will be submitted to CRAN, after which such changes will most likely no 
+longer occur. Other changes bring about new possibilities for stimulus 
+selection in experimental psychology (in particular, the new function 
+`matching()`).
 
 **Major**
 
-- All clustering and anticlustering function now only take one data 
-argument (called `x`). Internally, `anticlust` tests if the input is a 
-distance matrix or not. This is a great improvement to the function 
-interfaces.
-- The argument `iv` was removed from the function `anticlustering()`; 
-its functionality will be available in other functions, as it does not 
-fit the anticlustering semantic
-- The random sampling method for anticlustering was removed. It was an 
-unnecessary burden for the `anticlust` code base as it is much less 
-performant than the exchange method. (This implies that the 
-`anticlustering()` function no longer has an argument `nrep`)
 - A new exported function: `matching()` finds groups of similar 
 elements. Internally, `matching()` calls the same clustering algorithm 
 as `balanced_clustering()`, but it differs with regard to the arguments: 
@@ -46,18 +38,32 @@ functionality:
   `matching()`, it is possible to start searching for matches at the 
   center (setting `match_extreme_first` to `FALSE`)
   + When a grouping restriction via `match_between` is included, it is 
-possible to further specify how matches are selected through the option 
-`target_group` is included. When specifying `"none"`, matches are always 
-selected for extreme (or central elements first when 
-`match_extreme_first = FALSE`). With option `"smallest"` (default), 
-matches are selected from the smallest group specified in 
-`match_between`. With option `"diverse"`, matches are selected from the 
-group having the largest variance. 
+  possible to further specify how matches are selected through the option 
+  `target_group` is included. When specifying `"none"`, matches are always 
+  selected for extreme (or central elements first when 
+  `match_extreme_first = FALSE`). With option `"smallest"` (default), 
+  matches are selected from the smallest group specified in 
+  `match_between`. With option `"diverse"`, matches are selected from the 
+  group having the largest variance. 
+- All clustering and anticlustering functions now only take one data 
+argument (called `x`). Internally, `anticlust` tests if the input is a 
+distance matrix or not. This is a major improvement for the function 
+interfaces.
+- The argument `iv` was removed from the function `anticlustering()`
+as it does not fit the anticlustering semantic. Its functionality is 
+available in other functions (in particular: `matching()`), 
+- The random sampling method for anticlustering was removed. It was an 
+unnecessary burden for the `anticlust` code base as it is much less 
+performant than the exchange method. (This implies that the 
+`anticlustering()` function no longer has an argument `nrep`)
 - The functions `initialize_K()` and `generate_exchange_partners()` were
 removed. They did not fit into the current design philosophy of the 
 project (as soon as `anticlust` hits CRAN I will no longer remove 
 exported functions)
-
+- It is no longer possible to pass a cluster assignment to 
+`anticlustering()` via argument `K` that contains some `NA`. This 
+functionality is now obsolete because the function `matching()` exists
+for subset selection (see the package vignette)
 
 **Minor**
 
@@ -71,7 +77,12 @@ similar
 - The function `mean_sd_obj()` no longer computes the discrepancy of 
   medians, only in means and standard deviations (as the name would also 
   suggest)
-
+- Function `plot_clusters()`
+  + removed arguments `col` and `pch` 
+  + renamed argument `clustering` to `clusters`
+- changed order of the arguments `N` and `K` in function 
+`generate_partitions()`
+  
 ## anticlust 0.3.0
 
 2019-10-30
