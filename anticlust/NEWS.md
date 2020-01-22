@@ -53,6 +53,11 @@ selected for extreme (or central elements first when
 matches are selected from the smallest group specified in 
 `match_between`. With option `"diverse"`, matches are selected from the 
 group having the largest variance. 
+- The functions `initialize_K()` and `generate_exchange_partners()` were
+removed. They did not fit into the current design philosophy of the 
+project (as soon as `anticlust` hits CRAN I will no longer remove 
+exported functions)
+
 
 **Minor**
 
