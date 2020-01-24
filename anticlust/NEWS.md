@@ -64,7 +64,13 @@ exported functions)
 `anticlustering()` via argument `K` that contains some `NA`. This 
 functionality is now obsolete because the function `matching()` exists
 for subset selection (see the package vignette)
-
+- Alas, dropped support for the commercial linear programming solvers 
+that are expected to hinder compatibility with CRAN checks
+  + Using the commericial solvers to solve anticluster editing 
+  or cluster editing is still be possible via version 0.3.0
+  that is tagged on Github
+  + install version 0.3.0 through `remotes::install_github("m-Py/anticlust", ref = "v0.3.0")`
+  
 **Minor**
 
 - A new exported convenience function: `to_numeric()` converts any input 
