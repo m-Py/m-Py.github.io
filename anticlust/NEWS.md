@@ -12,8 +12,8 @@ maintainability should be maximized. This mostly implies simplifying the
 exported functions, such as reducing the number of functions and the 
 number of arguments for each exported function. I took the liberty to 
 introduce some major changes to the existing functions; this version 
-will be submitted to CRAN, after which such changes will most likely no 
-longer occur. Other changes bring about new possibilities for stimulus 
+will be submitted to CRAN, after which such changes will no longer 
+occur. Other changes bring about new possibilities for stimulus 
 selection in experimental psychology (in particular, the new function 
 `matching()`).
 
@@ -65,7 +65,7 @@ exported functions)
 functionality is now obsolete because the function `matching()` exists
 for subset selection (see the package vignette)
 - Alas, dropped support for the commercial linear programming solvers 
-that are expected to hinder compatibility with CRAN checks
+that hinder compatibility with CRAN checks
   + Using the commericial solvers to solve anticluster editing 
   or cluster editing is still be possible via version 0.3.0
   that is tagged on Github
@@ -73,10 +73,6 @@ that are expected to hinder compatibility with CRAN checks
   
 **Minor**
 
-- A new exported convenience function: `to_numeric()` converts any input 
-to integer;  it is really simple and just calls 
-`as.numeric(factor(x))` (usually used to convert categorical variables 
-to integers that start at 1)
 - A new exported convenience function: `plot_similarity()` plot the sum
 of pairwise distances by cluster to find out which clusters are highly 
 similar
@@ -86,9 +82,12 @@ similar
 - Function `plot_clusters()`
   + removed arguments `col` and `pch` 
   + renamed argument `clustering` to `clusters`
-- changed order of the arguments `N` and `K` in function 
-`generate_partitions()`
-  
+- Funtion `generate_partitions()`
+  + changed order of the arguments `N` and `K` (is now consistent with 
+`n_partitions()`)
+- Function `balanced_clustering()`
+  + the default heuristic option is now called `"centroid"`
+
 ## anticlust 0.3.0
 
 2019-10-30
