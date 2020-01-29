@@ -99,7 +99,6 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#anticlust" class="anchor"></a>anticlust</h1></div>
 <p>Anticlustering partitions a pool of elements into subsets (i.e., anticlusters) in such a way that the subsets are as similar as possible. This is accomplished by maximizing instead of minimizing a clustering objective function, such as the intra-cluster variance (used in k-means clustering) or the sum of pairwise distances within clusters. Thus, anticlustering creates similar sets of elements by maximizing heterogeneity within anticlusters. The package <code>anticlust</code> implements anticlustering algorithms as described in Papenberg and Klau (2019). It was originally developed to assign items to experimental conditions in experimental psychology, but it can be applied whenever a user requires that a given set of elements has to be partitioned into similar subsets.</p>
-<p>Check out the <a href="https://m-py.github.io/anticlust/NEWS.html">NEWS file</a> for recent changes in <code>anticlust</code>.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -110,14 +109,11 @@
 <h2 class="hasAnchor">
 <a href="#how-do-i-learn-about-anticlust" class="anchor"></a>How do I learn about <code>anticlust</code>
 </h2>
-<p>This page contains some basic information the package <code>anticlust</code>. More information is available via the following sources:</p>
-<ol>
-<li>There is a preprint available (»Using anticlustering to partition a stimulus pool into equivalent parts«) describing the theoretical background of anticlustering and the <code>anticlust</code> package in detail. It can be retrieved from <a href="https://psyarxiv.com/3razc/" class="uri">https://psyarxiv.com/3razc/</a>
-</li>
-<li>A vignette detailing how to use the anticlust package for stimulus selection in experiments can be found <a href="https://m-py.github.io/anticlust/stimulus-selection.html">here</a>.</li>
-<li>Use the R help. The main function of the package is <code><a href="reference/anticlustering.html">anticlustering()</a></code> and the help page of the function (<code><a href="reference/anticlustering.html">?anticlustering</a></code>) is useful to learn more about anticlustering. It provides explanations of all function parameters and how they relate to the theoretical background of anticlustering.</li>
-<li>Other useful functions of the <code>anticlust</code> package are <code><a href="reference/balanced_clustering.html">balanced_clustering()</a></code> and <code><a href="reference/matching.html">matching()</a></code>. For more information on these functions, consult their respective help pages and see the examples below.</li>
-</ol>
+<p>This README contains some basic information the package <code>anticlust</code>. More information is available via the following sources:</p>
+<ul>
+<li><p>A preprint is available (»Using anticlustering to partition a stimulus pool into equivalent parts«) describing the theoretical background of anticlustering and the <code>anticlust</code> package in detail. It can be retrieved from <a href="https://psyarxiv.com/3razc/" class="uri">https://psyarxiv.com/3razc/</a>.</p></li>
+<li><p>The <a href="https://m-py.github.io/anticlust/">package website</a> contains all relevant documentation. This includes a <a href="https://m-py.github.io/anticlust/articles/stimulus-selection.html">vignette</a> detailing how to use the anticlust package for stimulus selection in experiments and documentation for the main <code>anticlust</code> functions <code><a href="reference/anticlustering.html">anticlustering()</a></code>, <code><a href="reference/balanced_clustering.html">balanced_clustering()</a></code> and <code><a href="reference/matching.html">matching()</a></code>.</p></li>
+</ul>
 </div>
 <div id="a-quick-start" class="section level2">
 <h2 class="hasAnchor">
@@ -201,7 +197,7 @@
 <a class="sourceLine" id="cb4-2" title="2">N &lt;-<span class="st"> </span><span class="dv">1000</span></a>
 <a class="sourceLine" id="cb4-3" title="3">lds &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">var1 =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(N), <span class="dt">var2 =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(N))</a>
 <a class="sourceLine" id="cb4-4" title="4">cl &lt;-<span class="st"> </span><span class="kw"><a href="reference/balanced_clustering.html">balanced_clustering</a></span>(lds, <span class="dt">K =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="kw"><a href="reference/plot_clusters.html">plot_clusters</a></span>(lds, <span class="dt">clusters =</span> cl)</a></code></pre></div>
+<a class="sourceLine" id="cb4-5" title="5"><span class="kw"><a href="reference/plot_clusters.html">plot_clusters</a></span>(lds, <span class="dt">clusters =</span> cl, <span class="dt">show_axes =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="reference/figures/clustering-1.png" style="display: block; margin: auto;"></p>
 <p>The function <code><a href="reference/matching.html">matching()</a></code> is very similar, but is usually used to find small groups of similar elements, e.g., triplets as in this example:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Generate random data and find triplets of similar elements:</span></a>
@@ -211,14 +207,15 @@
 <a class="sourceLine" id="cb5-5" title="5"><span class="kw"><a href="reference/plot_clusters.html">plot_clusters</a></span>(</a>
 <a class="sourceLine" id="cb5-6" title="6">  lds,</a>
 <a class="sourceLine" id="cb5-7" title="7">  <span class="dt">clusters =</span> triplets,</a>
-<a class="sourceLine" id="cb5-8" title="8">  <span class="dt">within_connection =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb5-9" title="9">)</a></code></pre></div>
+<a class="sourceLine" id="cb5-8" title="8">  <span class="dt">within_connection =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb5-9" title="9">  <span class="dt">show_axes =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb5-10" title="10">)</a></code></pre></div>
 <p><img src="reference/figures/matching-1.png" style="display: block; margin: auto;"></p>
 </div>
 <div id="questions-and-suggestions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#questions-and-suggestions" class="anchor"></a>Questions and suggestions</h2>
-<p>If you have any question on the <code>anticlust</code> package or any suggestions (which are greatly appreciated), I encourage you to contact me via email (<a href="mailto:martin.papenberg@hhu.de" class="email">martin.papenberg@hhu.de</a>) or <a href="https://twitter.com/MPapenberg">Twitter</a>, or to open an issue on this Github repository.</p>
+<p>If you have any question on the <code>anticlust</code> package or any suggestions (which are greatly appreciated), I encourage you to contact me via email (<a href="mailto:martin.papenberg@hhu.de" class="email">martin.papenberg@hhu.de</a>) or <a href="https://twitter.com/MPapenberg">Twitter</a>, or to open an <a href="https://github.com/m-Py/anticlust/issues">issue on the Github repository</a>.</p>
 </div>
 <div id="reference" class="section level2">
 <h2 class="hasAnchor">
