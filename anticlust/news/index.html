@@ -132,22 +132,18 @@
 <li><p><code><a href="../reference/matching.html">matching()</a></code> is a new function for unrestricted or K-partite matching to finds groups of similar elements.</p></li>
 <li><p><code><a href="../reference/plot_similarity.html">plot_similarity()</a></code>is a new function to plot similarity by cluster (according to the cluster editing criterion)</p></li>
 <li><p>All clustering and anticlustering functions now only take one data argument (called <code>x</code>) instead of either <code>features</code> or <code>distances</code>.</p></li>
-<li><p>The argument <code>iv</code> was removed from the function <code><a href="../reference/anticlustering.html">anticlustering()</a></code> as it does not fit the anticlustering semantic.</p></li>
-<li><p>The random sampling method for anticlustering was removed because it is much less performant than the exchange method. This implies that the <code><a href="../reference/anticlustering.html">anticlustering()</a></code> function no longer has an argument <code>nrep</code>.</p></li>
+<li><p>The argument <code>iv</code> was removed from <code><a href="../reference/anticlustering.html">anticlustering()</a></code> because it does not fit the anticlustering semantic (anticlustering should make sets «similar» and not dissimilar).</p></li>
+<li><p>The random sampling method for anticlustering was removed. This implies that the <code><a href="../reference/anticlustering.html">anticlustering()</a></code> function no longer has an argument <code>nrep</code>.</p></li>
 <li><p>The functions <code>initialize_K()</code> and <code>generate_exchange_partners()</code> were removed.</p></li>
-<li><p>Dropped support for the commercial integer linear programming solvers CPLEX and gurobi for exact (anti)cluster editing. If this functionality is needed, install version 0.3.0 from Github.</p></li>
+<li><p>Dropped support for the commercial integer linear programming solvers CPLEX and gurobi for exact (anti)cluster editing. If this functionality is needed, install version 0.3.0 from Github:</p></li>
 </ul>
 <pre><code><a href="https://rdrr.io/pkg/remotes/man/install_github.html">remotes::install_github("m-Py/anticlust", ref = "v0.3.0")</a></code></pre>
-</div>
-<div id="minor-changes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#minor-changes" class="anchor"></a>Minor changes</h2>
 <ul>
 <li><p><code><a href="../reference/mean_sd_obj.html">mean_sd_obj()</a></code> no longer computes the discrepancy of medians, only in means and standard deviations (as the name also suggests).</p></li>
 <li><p>In <code><a href="../reference/plot_clusters.html">plot_clusters()</a></code>, the arguments <code>col</code> and <code>pch</code> were removed.</p></li>
 <li><p>In <code><a href="../reference/plot_clusters.html">plot_clusters()</a></code>, the argument <code>clustering</code> was renamed to <code>clusters</code>.</p></li>
 <li><p>In <code><a href="../reference/generate_partitions.html">generate_partitions()</a></code>, the order of the arguments <code>N</code> and <code>K</code> was switched (the order is now consistent with <code><a href="../reference/n_partitions.html">n_partitions()</a></code>).</p></li>
-<li><p>In <code><a href="../reference/balanced_clustering.html">balanced_clustering()</a></code>, the default <code>method</code> is now called <code>"centroid"</code> (was <code>"heuristic"</code>) before.</p></li>
+<li><p>In <code><a href="../reference/balanced_clustering.html">balanced_clustering()</a></code>, the default <code>method</code> was renamed to <code>"centroid"</code> from <code>"heuristic"</code>.</p></li>
 </ul>
 </div>
 </div>
@@ -155,7 +151,7 @@
 <h1 class="page-header">
 <a href="#anticlust-030" class="anchor"></a>anticlust 0.3.0</h1>
 <ul>
-<li>Release of the package version used in the manuscript »Using anticlustering to partition a stimulus pool into equivalent parts« (Papenberg &amp; Klau, 2019; <a href="doi:10.31234/osf.io/3razc" class="uri">doi:10.31234/osf.io/3razc</a>)</li>
+<li>Release of the package version used in the manuscript »Using anticlustering to partition a stimulus pool into equivalent parts« (Papenberg &amp; Klau, 2019; <a href="https://doi.org/10.31234/osf.io/3razc" class="uri">https://doi.org/10.31234/osf.io/3razc</a>)</li>
 </ul>
 </div>
   </div>
