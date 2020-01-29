@@ -7,6 +7,8 @@ output:
 
 ## anticlust 0.4.0
 
+2020-01-28
+
 Major update. Many changes are due to the philosophy that future 
 maintainability should be maximized. This mostly implies simplifying the 
 exported functions, such as reducing the number of functions and the 
