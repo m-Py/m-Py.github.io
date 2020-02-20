@@ -172,6 +172,20 @@ default, as described [here](https://stackoverflow.com/questions/6089294/why-do-
 git push -u origin my_branch
 ```
 
+### Adding a tag
+
+Add the local tag:
+
+```
+git tag name
+```
+
+Push the tag:
+
+```
+git push origin --tags
+```
+
 ---
 
 Last updated: `r Sys.Date()`

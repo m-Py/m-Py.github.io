@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -338,6 +337,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -452,8 +452,15 @@ $ git remote -v
 &gt; origin  https://github.com/user/repo.git (push)</code></pre>
 <p>Then, make sure that pushing and pulling actually uses this remote by default, as described <a href="https://stackoverflow.com/questions/6089294/why-do-i-need-to-do-set-upstream-all-the-time">here</a>:</p>
 <pre><code>git push -u origin my_branch</code></pre>
+</div>
+<div id="adding-a-tag" class="section level3">
+<h3>Adding a tag</h3>
+<p>Add the local tag:</p>
+<pre><code>git tag name</code></pre>
+<p>Push the tag:</p>
+<pre><code>git push origin --tags</code></pre>
 <hr />
-<p>Last updated: 2019-11-22</p>
+<p>Last updated: 2020-01-28</p>
 </div>
 <div id="back-to-the-front-page" class="section level3">
 <h3><a href="index.html">Back to the front page</a></h3>
