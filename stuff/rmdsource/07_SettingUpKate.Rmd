@@ -5,21 +5,20 @@ author: Martin Papenberg
 ---
 
 After some time I returned to [KDE](https://kde.org/) (in particular, to 
-[Kubuntu](https://kubuntu.org/)) on my working computer. I had always 
-liked its style but unfortunately I always had some problems with 
-stability. With the most recent version 19.10, everything seems to be 
-running smoothly. 
+[Kubuntu](https://kubuntu.org/)). I had always liked its style, but 
+unfortunately I always had some problems with stability in previous 
+versions. With the most recent version 19.10, everything is running 
+smoothly. 
 
 Why is Kubuntu good for writing in R Markdown? First, by default it 
 ships the awesome text editor [Kate](https://kate-editor.org/) that has 
 nice R Markdown syntax highlighting,[^atom] spell checking (enabled by 
-default), and syntax highlighting for math equations. It even deals with 
-the stupid ambiguity of `$` being used as a column selector in inline 
-`R` code as well as an introducer of math mode. Second, KDE offers the 
-nice `R` IDE [RKward](https://rkward.kde.org) that includes Kate as its 
-code editor. Even better, RKward can be used from any operating system, 
-not just from Kubuntu or other Linux systems. I really encourage 
-everyone to try it out, if only to see an alternative to RStudio.
+default), and syntax highlighting for math equations. Second, KDE offers 
+the powerful `R` IDE [RKward](https://rkward.kde.org) that includes Kate 
+as its code editor. Even better, RKward can be used from any operating 
+system, not just from Kubuntu or other Linux systems. I really encourage 
+everyone to try it out, if just to see an alternative to RStudio once in 
+a while.
 
 [^atom]: In general, writing in R Markdown now seems to be much more 
 comfortable than some years back. The [atom editor](https://atom.io/) 
@@ -40,43 +39,31 @@ $ sudo apt install rkward
 ```
 
 Note that this version will be slightly outdated, and more recent 
-versions are available through the launchpad project (see the section 
-"Inofficial Ubuntu repositories" 
-[here](https://rkward.kde.org/Binaries_and_Build_Scripts)).
+versions are available through the launchpad project (see "Inofficial 
+Ubuntu repositories" 
+[here](https://rkward.kde.org/Binaries_and_Build_Scripts.html)).
 
 ### Document preview
 
-In the latest "daily-build" version of RKward, it is possible to 
-activate document preview for R Markdown documents. It will only preview 
-html documents, but I think for the purpose of editing the writing this 
-should be enough. (I heard that pdf preview is on the maybe-to-do list.)
-
-To download the most up-to-date version, add the daily build Launchpad 
-repository [as follows](https://launchpad.net/~rkward-devel/+archive/ubuntu/rkward-kf5-daily-r35):
-
-```
-sudo add-apt-repository ppa:rkward-devel/rkward-kf5-daily-r35
-sudo apt update
-```
-
-This may require that you use the CRAN R repository and not the Ubuntu 
-one; see [here](https://cran.r-project.org/bin/linux/ubuntu/) how to use 
-CRAN R on Ubuntu).
+In the latest version (v0.7.1) 1of RKward, it is possible to activate 
+document preview for R Markdown documents. This is actually a nice 
+advantage over RStudio. It will only preview html documents, but I think 
+for the purpose of editing the writing this should be enough. I even 
+heard that pdf preview is on the maybe-to-do list.
 
 To activate the Preview mode, click the Preview button in the tool bar. 
-To ensure that the Preview button appears in the tool bar, go to 
-`Settings -> Configure Toolbars -> mainToolBar <rkward_commandeditor>`. 
-In this menu, drag `Preview` to `Current Actions`. Now, if you click 
-`Preview` in the tool bar above the text editor, a html version of your 
-R Markdown document will be rendered whenever you save your file. It 
-looks like this:
+If this button does not appear by default, go to `Settings -> Configure 
+Toolbars -> mainToolBar <rkward_commandeditor>`. In this menu, drag 
+`Preview` to `Current Actions`. Now, if you click `Preview` in the tool 
+bar above the text editor, a html version of your R Markdown document 
+will be rendered whenever you save your file. It looks like this:
 
 <img src = "../img/rkward.png" width = 850 alt = "Live preview of R Markdown documents in RKward">
 
 ### Additional more notes on R Markdown and RKward 
 
 One minor problem with RKward is that it does not really "understand" 
-what R Markdown files are (that new stuff). When opening an Rmd file, it 
+what R Markdown files are (damn new stuff). When opening an Rmd file, it 
 is sometimes necessary to manually set the syntax highlighting to R 
 Markdown -- RKward thinks it is dealing with an R script when it 
 actually handles an Rmd file. This is easy, however. Just select the 
@@ -108,7 +95,7 @@ integrate git better in Kate in the future (see
 integration/))
 - Set the column limit for hard line breaks: 
   `Settings -> Configure Kate -> Editing -> Wrap Words at`
-- You can adjust the Kate setting from within RKward as well
+- You can adjust Kate settings from within RKward as well
 
 ---
 
