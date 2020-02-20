@@ -45,7 +45,7 @@ Ubuntu repositories"
 
 ### Document preview
 
-In the latest version (v0.7.1) 1of RKward, it is possible to activate 
+In the latest version (v0.7.1) of RKward, it is possible to activate 
 document preview for R Markdown documents. This is actually a nice 
 advantage over RStudio. It will only preview html documents, but I think 
 for the purpose of editing the writing this should be enough. I even 
