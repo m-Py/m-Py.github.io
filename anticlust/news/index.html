@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -122,6 +122,41 @@
       <small>Source: <a href='https://github.com/m-Py/anticlust/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="anticlust-041" class="section level1">
+<h1 class="page-header">
+<a href="#anticlust-041" class="anchor"></a>anticlust 0.4.1</h1>
+<div id="major" class="section level2">
+<h2 class="hasAnchor">
+<a href="#major" class="anchor"></a>Major</h2>
+<ul>
+<li>In <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, preclustering and categorical constraints can now be used at the same time. In this case, exchange partners are clustered within the same category, using a call to <code><a href="../reference/matching.html">matching()</a></code> passing <code>categories</code> to argument <code>match_within</code>.</li>
+<li>In <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, it is now possible to use <code>preclustering =  TRUE</code> for unbalanced data size (e.g., if N = 9 and K = 2).</li>
+<li>In <code><a href="../reference/matching.html">matching()</a></code>, it is now possible to prevent sorting the output by similarity using a new argument <code>sort_output</code>. Its default is <code>TRUE</code>, setting it to <code>FALSE</code> prevents sorting. This prevents some extra computation that is necessary to determine similarity for each cluster.</li>
+</ul>
+</div>
+<div id="minor" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor" class="anchor"></a>Minor</h2>
+<ul>
+<li>Some changes to documentation</li>
+<li>There is now a package website at <a href="https://m-py.github.io/anticlust/" class="uri">https://m-py.github.io/anticlust/</a>
+</li>
+<li>Additional error handling</li>
+</ul>
+</div>
+<div id="internal" class="section level2">
+<h2 class="hasAnchor">
+<a href="#internal" class="anchor"></a>Internal</h2>
+<ul>
+<li>Improvements to implementation of k-means anticlustering (i.e., in <code><a href="../reference/anticlustering.html">anticlustering()</a></code> with <code>objective == "variance"</code> or in <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>)
+<ul>
+<li>on each exchange iteration, only recomutes distances from clusters whose elements have been swapped (improves run time relevant for larger K).</li>
+<li>Previously, there were only as many exchange partners per element as members in the least frequent category if argument <code>categories</code> was passed). This was not documented behavior and is undesirable. Now, all members from a category may serve as exchange partners, even if the categories have different size.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
     <div id="anticlust-040" class="section level1">
 <h1 class="page-header">
 <a href="#anticlust-040" class="anchor"></a>anticlust 0.4.0</h1>
@@ -160,6 +195,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#anticlust-041">0.4.1</a></li>
         <li><a href="#anticlust-040">0.4.0</a></li>
         <li><a href="#anticlust-030">0.3.0</a></li>
       </ul>

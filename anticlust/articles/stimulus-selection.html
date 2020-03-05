@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -212,7 +212,7 @@
 <a class="sourceLine" id="cb10-2" title="2">  covariates, </a>
 <a class="sourceLine" id="cb10-3" title="3">  <span class="dt">groups =</span> selected<span class="op">$</span>matches</a>
 <a class="sourceLine" id="cb10-4" title="4">)</a></code></pre></div>
-<p><img src="stimulus-selection_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
+<p><img src="stimulus-selection_files/figure-html/similarity-plot-1.png" width="700"></p>
 <p>The figure depicts the sum of pairwise dissimilarities (based on the Euclidean distance) variance per match; the larger the value, the less homogenous the match. It seems indeed that the first eight matches are most similar; after the 8th match, there is already a notable decline in similarity.</p>
 </div>
 <div id="example-1b-two-factorial-design" class="section level2">
@@ -256,7 +256,7 @@
 <p>To decide how many matched groups we would like to keep, let’s check out the similarity plot:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># Plot covariate similarity by match:</span></a>
 <a class="sourceLine" id="cb16-2" title="2"><span class="kw"><a href="../reference/plot_similarity.html">plot_similarity</a></span>(covariates, schaper2019<span class="op">$</span>matches)</a></code></pre></div>
-<p><img src="stimulus-selection_files/figure-html/unnamed-chunk-18-1.png" width="700"></p>
+<p><img src="stimulus-selection_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
 <p>Based on the plot, we select the 10 best matches:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># Select the 5 best matches:</span></a>
 <a class="sourceLine" id="cb17-2" title="2">final_selection &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(schaper2019, matches <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>)</a></code></pre></div>
@@ -335,24 +335,24 @@
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td align="left">4.49 (0.23)</td>
-<td align="left">1.10 (0.06)</td>
-<td align="left">3.41 (0.91)</td>
-<td align="left">18.31 (2.48)</td>
+<td align="left">4.49 (0.25)</td>
+<td align="left">1.10 (0.08)</td>
+<td align="left">3.41 (0.84)</td>
+<td align="left">18.31 (2.60)</td>
 </tr>
 <tr class="even">
 <td>2</td>
-<td align="left">4.49 (0.26)</td>
+<td align="left">4.49 (0.25)</td>
 <td align="left">1.10 (0.07)</td>
-<td align="left">3.41 (1.01)</td>
-<td align="left">18.31 (2.25)</td>
+<td align="left">3.41 (0.87)</td>
+<td align="left">18.31 (2.51)</td>
 </tr>
 <tr class="odd">
 <td>3</td>
-<td align="left">4.49 (0.26)</td>
-<td align="left">1.10 (0.07)</td>
-<td align="left">3.44 (0.88)</td>
-<td align="left">18.31 (2.49)</td>
+<td align="left">4.49 (0.25)</td>
+<td align="left">1.11 (0.05)</td>
+<td align="left">3.44 (1.08)</td>
+<td align="left">18.31 (2.10)</td>
 </tr>
 </tbody>
 </table>
@@ -437,24 +437,24 @@
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td align="left">4.46 (0.23)</td>
-<td align="left">1.09 (0.06)</td>
-<td align="left">3.50 (0.97)</td>
-<td align="left">19.00 (2.36)</td>
+<td align="left">4.46 (0.27)</td>
+<td align="left">1.08 (0.06)</td>
+<td align="left">3.50 (1.18)</td>
+<td align="left">19.00 (2.71)</td>
 </tr>
 <tr class="even">
 <td>2</td>
-<td align="left">4.46 (0.27)</td>
-<td align="left">1.07 (0.04)</td>
+<td align="left">4.46 (0.23)</td>
+<td align="left">1.08 (0.06)</td>
 <td align="left">3.50 (0.97)</td>
 <td align="left">18.90 (2.92)</td>
 </tr>
 <tr class="odd">
 <td>3</td>
-<td align="left">4.47 (0.26)</td>
-<td align="left">1.07 (0.06)</td>
-<td align="left">3.50 (1.18)</td>
-<td align="left">19.00 (2.71)</td>
+<td align="left">4.46 (0.27)</td>
+<td align="left">1.08 (0.05)</td>
+<td align="left">3.50 (0.97)</td>
+<td align="left">19.00 (2.36)</td>
 </tr>
 </tbody>
 </table>

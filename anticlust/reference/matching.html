@@ -72,7 +72,7 @@ a custom dissimilarity measure can also be employed." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -141,7 +141,8 @@ a custom dissimilarity measure can also be employed.</p>
   <span class='kw'>match_between</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>match_within</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>match_extreme_first</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>target_group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>target_group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sort_output</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -187,6 +188,11 @@ elements. Defaults to <code>TRUE</code>.</p></td>
       <td><p>Currently, the options "none",
 smallest" and "diverse" are supported. See Details.</p></td>
     </tr>
+    <tr>
+      <th>sort_output</th>
+      <td><p>Boolean. If <code>TRUE</code> (default), the output clusters 
+are sorted by similarity. See Details.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -226,8 +232,10 @@ elements with the grouping number »1« have the highest intra-group
 similarity, followed by 2 etc (groups having the same similarity
 index are still assigned a different grouping number,
 though). Similarity is measured as the sum of pairwise (Euclidean)
-distances within groups (see <code><a href='distance_objective.html'>distance_objective</a></code>).
-Some unmatched elements may be <code>NA</code>. This happens if it is not
+distances within groups (see <code><a href='distance_objective.html'>distance_objective</a></code>). To 
+prevent sorting by similarity (this is some extra computational burden),
+set <code>sort_output = FALSE</code>. Some unmatched elements may be <code>NA</code>. 
+This happens if it is not
 possible to evenly split the item pool evenly into groups of size
 <code>p</code> or if the categories described by the argument
 <code>match_between</code> are of different size.</p>
