@@ -376,18 +376,6 @@ summary {
 </div>
 
 
-<div id="merging" class="section level3">
-<h3>Merging</h3>
-<p>Merging means: collect the commits from one branch and put them into the branch that I am currently working on – not the other way around.</p>
-<p>When working on a development branch that has to be merged into a master branch and – for some stupid reason – clean merging does not work, use git merge with the option <code>ours</code> (when merging master into devel) or <code>theirs</code> (when merging devel into master).</p>
-<pre><code>$ git merge branch -X theirs</code></pre>
-<p>This is better than the option suggested by Github if a pull request fails and they suggest to resort to the command line; when following their instructions, it may be necessary to resolve conflicts manually, which is error prone.</p>
-<p>See <a href="https://stackoverflow.com/questions/13594344/force-git-to-always-choose-the-newer-version-during-a-merge">here</a></p>
-</div>
-<div id="stashing" class="section level3">
-<h3>Stashing</h3>
-<p><a href="https://git-scm.com/book/en/v1/Git-Tools-Stashing">Stashing</a> is something different than staging; stashing can be done to not commit dirty changes, for example if we wish to switch to a different branch before we have finished our work. Staging is the more common process done via <code>git add</code>. Files can be stashed using <code>git stash</code> and retrieved using <code>git stash pop</code>.</p>
-</div>
 <div id="setting-up-a-new-branch" class="section level3">
 <h3>Setting up a new branch</h3>
 <p>Simply via:</p>
@@ -396,13 +384,38 @@ summary {
 <pre><code>$ git checkout newbranch</code></pre>
 <p>A shortcut for both is:</p>
 <pre><code>git checkout -b newbranch</code></pre>
-<p>See <a href="https://happygitwithr.com/git-branches.html">here</a></p>
+<p>See <a href="https://happygitwithr.com/git-branches.html">here</a>.</p>
+<p>To add the new branch to the upstream repository, use</p>
+<pre><code>git push --set-upstream origin newbranch</code></pre>
+<p>git will also tell you about this command when just doing <code>git push</code>.</p>
 <p>If you have made changes in one branch but would like to work in the other branch, one option is stashing:</p>
 <pre><code>$ git stash
 $ git checkout branch2
 $ git stash pop</code></pre>
+<p>However, you can just create the new branch and commit the changes there.</p>
 <p>See <a href="https://stackoverflow.com/questions/556923/how-do-i-merge-my-local-uncommitted-changes-into-another-git-branch">here</a></p>
 <p><a href="https://happygitwithr.com/git-branches.html#switching-branches">This source</a> discusses that a commit in the old branch resetting it later is a safer option and (see below).</p>
+</div>
+<div id="adding-a-tag" class="section level3">
+<h3>Adding a tag</h3>
+<p>Add the local tag:</p>
+<pre><code>git tag name</code></pre>
+<p>Push all tags:</p>
+<pre><code>git push origin --tags</code></pre>
+<p>To set up an annotated tag for a new version, use:</p>
+<pre><code>git tag -a v0.1 -m &quot;this is the new version of my software 0.1&quot;</code></pre>
+<p>Alternative to pushing this specific tag:</p>
+<pre><code>git push origin v0.1</code></pre>
+</div>
+<div id="merging" class="section level3">
+<h3>Merging</h3>
+<p>To merge two a branch into another branch, use:</p>
+<pre><code>git merge target_branch</code></pre>
+<p>In this case, the commits in branch <code>target_branch</code> is merged into the currently checked out branch (common example: check out to master, and merge a development branch).</p>
+<p>Merging means: collect the commits from one branch and put them into the branch that I am currently working on – not the other way around.</p>
+<p>When working on a development branch that has to be merged into a master branch and – for some stupid reason – clean merging does not work, use git merge with the option <code>ours</code> (when merging master into devel) or <code>theirs</code> (when merging devel into master).</p>
+<pre><code>$ git merge branch -X theirs</code></pre>
+<p>See <a href="https://stackoverflow.com/questions/13594344/force-git-to-always-choose-the-newer-version-during-a-merge">here</a></p>
 </div>
 <div id="undo-the-most-recent-commit" class="section level3">
 <h3>Undo the most recent commit</h3>
@@ -413,17 +426,12 @@ $ git stash pop</code></pre>
 <p>The following will undo the latest commit and remove all work done since the last commit (danger territory).</p>
 <pre><code>$ git reset --hard HEAD~</code></pre>
 </div>
-<div id="removing-an-obsolete-remote" class="section level3">
-<h3>Removing an obsolete remote</h3>
+<div id="removing-an-obsolete-remote-branch" class="section level3">
+<h3>Removing an obsolete remote branch</h3>
 <p>When performing a merge pull request on Github (and afterwards deleting the obsolete devel branch there), the local repository will still believe that the branch exists remotely. Use the following commands to first remove the branch locally and then the reference to the remote branch:</p>
 <pre><code>$ git branch -d devel
 $ git fetch --prune</code></pre>
 <p>The latter command removes the remote reference from the local repository.</p>
-</div>
-<div id="creating-a-feature-development-branch-from-devel" class="section level3">
-<h3>Creating a feature development branch from devel</h3>
-<pre><code>$ git checkout -b feature develop</code></pre>
-<p>See <a href="https://nvie.com/posts/a-successful-git-branching-model/">here</a></p>
 </div>
 <div id="using-git-diff-when-changes-are-already-staged" class="section level3">
 <h3>Using git diff when changes are already staged</h3>
@@ -431,13 +439,8 @@ $ git fetch --prune</code></pre>
 <pre><code>$ git diff HEAD myfile</code></pre>
 <p>HEAD is usually the most recent commit on the branch we are working on, the parent of our next commit (see <a href="https://stackoverflow.com/questions/2304087/what-is-head-in-git">here</a>).</p>
 </div>
-<div id="pull-fetch-and-merge" class="section level3">
-<h3>Pull, fetch, and merge</h3>
-<p><a href="https://longair.net/blog/2009/04/16/git-fetch-and-merge/">git: fetch and merge, don’t pull</a></p>
-<p>This post has a nice example of what to do when some commits go wrong and shoud be reverted.</p>
-</div>
-<div id="showing-commits" class="section level3">
-<h3>Showing commits</h3>
+<div id="showing-recent-commits" class="section level3">
+<h3>Showing recent commits</h3>
 <pre><code>$ git log --pretty=oneline</code></pre>
 </div>
 <div id="setting-an-upstream" class="section level3">
@@ -453,14 +456,15 @@ $ git remote -v
 <p>Then, make sure that pushing and pulling actually uses this remote by default, as described <a href="https://stackoverflow.com/questions/6089294/why-do-i-need-to-do-set-upstream-all-the-time">here</a>:</p>
 <pre><code>git push -u origin my_branch</code></pre>
 </div>
-<div id="adding-a-tag" class="section level3">
-<h3>Adding a tag</h3>
-<p>Add the local tag:</p>
-<pre><code>git tag name</code></pre>
-<p>Push the tag:</p>
-<pre><code>git push origin --tags</code></pre>
+<div id="stashing" class="section level3">
+<h3>Stashing</h3>
+<p><a href="https://git-scm.com/book/en/v1/Git-Tools-Stashing">Stashing</a> is something different than staging; stashing can be done to not commit dirty changes, for example if we wish to switch to a different branch before we have finished our work. Staging is the more common process done via <code>git add</code>. Files can be stashed using <code>git stash</code> and retrieved using <code>git stash pop</code>.</p>
+</div>
+<div id="pull-fetch-and-merge" class="section level3">
+<h3>Pull, fetch, and merge</h3>
+<p>This post has a nice example of what to do when some commits go wrong and should be reverted: <a href="https://longair.net/blog/2009/04/16/git-fetch-and-merge/">git: fetch and merge, don’t pull</a></p>
 <hr />
-<p>Last updated: 2020-01-28</p>
+<p>Last updated: 2020-03-24</p>
 </div>
 <div id="back-to-the-front-page" class="section level3">
 <h3><a href="index.html">Back to the front page</a></h3>

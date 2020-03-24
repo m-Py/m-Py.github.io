@@ -4,36 +4,6 @@ date: November 06, 2019
 author: Martin Papenberg
 ---
 
-### Merging
-
-Merging means: collect the commits from one branch and put them into
-the branch that I am currently working on -- not the other way around.
-
-When working on a development branch that has to be merged into a 
-master branch and -- for some stupid reason -- clean merging does not
-work, use git merge with the option `ours` (when merging master into 
-devel) or `theirs` (when merging devel into master).
-
-```
-$ git merge branch -X theirs
-```
-
-This is better than the option suggested by Github if a pull request 
-fails and they suggest to resort to the command line; when following
-their instructions, it may be necessary to resolve conflicts manually,
-which is error prone.
-
-See [here](https://stackoverflow.com/questions/13594344/force-git-to-always-choose-the-newer-version-during-a-merge)
-
-### Stashing
-
-[Stashing](https://git-scm.com/book/en/v1/Git-Tools-Stashing) is 
-something different than staging; stashing can be done to not commit 
-dirty changes, for example if we wish to switch to a different branch 
-before we have finished our work. Staging is the more common process 
-done via `git add`. Files can be stashed using `git stash` and retrieved
-using `git stash pop`.
-
 ### Setting up a new branch
 
 Simply via:
@@ -56,7 +26,15 @@ A shortcut for both is:
 git checkout -b newbranch
 ```
 
-See [here](https://happygitwithr.com/git-branches.html)
+See [here](https://happygitwithr.com/git-branches.html).
+
+To add the new branch to the upstream repository, use 
+
+```
+git push --set-upstream origin newbranch
+```
+
+git will also tell you about this command when just doing `git push`.
 
 If you have made changes in one branch but would like to work in the 
 other branch, one option is stashing:
@@ -67,12 +45,67 @@ $ git checkout branch2
 $ git stash pop
 ```
 
+However, you can just create the new branch and commit the changes 
+there.
+
 See [here](https://stackoverflow.com/questions/556923/how-do-i-merge-my-local-uncommitted-changes-into-another-git-branch)
 
 [This 
 source](https://happygitwithr.com/git-branches.html#switching-branches) 
 discusses that a commit in the old branch resetting it later is a safer
 option and (see below). 
+
+### Adding a tag
+
+Add the local tag:
+
+```
+git tag name
+```
+
+Push all tags:
+
+```
+git push origin --tags
+```
+
+To set up an annotated tag for a new version, use:
+
+```
+git tag -a v0.1 -m "this is the new version of my software 0.1"
+```
+
+Alternative to pushing this specific tag:
+
+```
+git push origin v0.1
+```
+
+### Merging
+
+To merge two a branch into another branch, use:
+
+```
+git merge target_branch
+```
+
+In this case, the commits in branch `target_branch` is merged into the 
+currently checked out branch (common example: check out to master, 
+and merge a development branch).
+
+Merging means: collect the commits from one branch and put them into
+the branch that I am currently working on -- not the other way around.
+
+When working on a development branch that has to be merged into a 
+master branch and -- for some stupid reason -- clean merging does not
+work, use git merge with the option `ours` (when merging master into 
+devel) or `theirs` (when merging devel into master).
+
+```
+$ git merge branch -X theirs
+```
+
+See [here](https://stackoverflow.com/questions/13594344/force-git-to-always-choose-the-newer-version-during-a-merge)
 
 ### Undo the most recent commit
 
@@ -96,7 +129,7 @@ the last commit (danger territory).
 $ git reset --hard HEAD~
 ```
 
-### Removing an obsolete remote
+### Removing an obsolete remote branch
 
 When performing a merge pull request on Github (and afterwards deleting 
 the obsolete devel branch there), the local repository will still 
@@ -112,14 +145,6 @@ $ git fetch --prune
 The latter command removes the remote reference from the local 
 repository.
 
-### Creating a feature development branch from devel
-
-```
-$ git checkout -b feature develop
-```
-
-See [here](https://nvie.com/posts/a-successful-git-branching-model/)
-
 ### Using git diff when changes are already staged
 
 Using `git diff myfile` does not work when the changes are already 
@@ -134,15 +159,7 @@ HEAD is usually the most recent commit on the branch we are working on,
 the parent of our next commit (see 
 [here](https://stackoverflow.com/questions/2304087/what-is-head-in-git)).
 
-### Pull, fetch, and merge
-
-[git: fetch and merge, don’t pull](https://longair.net/blog/2009/04/16/git-fetch-and-merge/)
-
-
-This post has a nice example of what to do when some commits go wrong 
-and shoud be reverted.
-
-### Showing commits
+### Showing recent commits
 
 ```
 $ git log --pretty=oneline
@@ -172,19 +189,19 @@ default, as described [here](https://stackoverflow.com/questions/6089294/why-do-
 git push -u origin my_branch
 ```
 
-### Adding a tag
+### Stashing
 
-Add the local tag:
+[Stashing](https://git-scm.com/book/en/v1/Git-Tools-Stashing) is 
+something different than staging; stashing can be done to not commit 
+dirty changes, for example if we wish to switch to a different branch 
+before we have finished our work. Staging is the more common process 
+done via `git add`. Files can be stashed using `git stash` and retrieved
+using `git stash pop`.
 
-```
-git tag name
-```
+### Pull, fetch, and merge
 
-Push the tag:
-
-```
-git push origin --tags
-```
+This post has a nice example of what to do when some commits go wrong 
+and should be reverted: [git: fetch and merge, don’t pull](https://longair.net/blog/2009/04/16/git-fetch-and-merge/)
 
 ---
 
