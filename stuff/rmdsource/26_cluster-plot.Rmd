@@ -1,0 +1,69 @@
+---
+title: "Visualizing a cluster analysis in Base `R`"
+date: November 29, 2019
+author: Martin Papenberg
+output:
+  html_document:
+    df_print: kable
+---
+
+```{r, include = FALSE}
+
+library(knitr)
+library(dplyr)
+knitr::opts_chunk$set(warning = FALSE) # echo = FALSE
+options(scipen = 999, digits = 2)
+
+knit_print.matrix = function(x, ...) {
+    res = paste(c("", "", kable(x)), collapse = "\n")
+    asis_output(res)
+}
+registerS3method("knit_print", "matrix", knit_print.matrix)
+
+```
+
+This post shows how Base `R` can be used to visualize a cluster analysis 
+in such a way that all clusters can be well distinguished. I use the 
+`iris` data set.
+
+```{r}
+
+# Load data
+data(iris)
+cluster_data <- iris[, 1:4]
+
+# Do k-means clustering, store the clustering vector
+clusters <- kmeans(cluster_data, 3)$cluster
+
+# define 3 colors, 3 cex values, and 3 pch values that differ between
+# clusters - for more clusters, define more values.
+colors <- c("#a9a9a9", "#df536b", "#61d04f")
+cex <-  c(0.7, 1.2, 1.5)
+pch <- c(19, 15, 17)
+
+# Plot the data while visualizing the different clusters
+plot(
+  cluster_data,
+  col = colors[clusters],
+  cex = cex[clusters],
+  pch = pch[clusters]
+)
+
+
+```
+
+This solution exploits the beautiful indexing capabilities of `R`, 
+seen by the call to the `col`, `cex` and `pch` arguments in `plot()`. 
+The solution requires that the clustering vector is integer and only 
+has values $1, ..., K$ where $K$ is the number of clusters. If a 
+clustering vector `x` has any other form (e.g., is of type `character`), 
+you can convert it to such an integer vector by calling 
+`as.numeric(factor(x))`.
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
