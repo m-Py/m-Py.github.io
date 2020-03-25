@@ -63,7 +63,7 @@ you can convert it to such an integer vector by calling
 ---
 
 As an addon, I also visualize the results of an anticlustering analysis,
-where instead of maximizing homogeneity withing cluster, we maximize 
+where instead of maximizing homogeneity within clusters, we maximize 
 heterogeneity within clusters (and equivalently: maximize homogeneity 
 between clusters, i.e., make the different clusters as similar as 
 possible). To this end, I make use of the package 
