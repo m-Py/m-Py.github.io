@@ -1,6 +1,6 @@
 ---
 title: "Visualizing a cluster analysis in Base `R`"
-date: November 29, 2019
+date: March 25, 2020
 author: Martin Papenberg
 output:
   html_document:
