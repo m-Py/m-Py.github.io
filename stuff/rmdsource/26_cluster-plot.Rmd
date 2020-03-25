@@ -62,6 +62,46 @@ you can convert it to such an integer vector by calling
 
 ---
 
+As an addon, I also visualize the results of an anticlustering analysis,
+where instead of maximizing homogeneity withing cluster, we maximize 
+heterogeneity within clusters (and equivalently: maximize homogeneity 
+between clusters, i.e., make the different clusters as similar as 
+possible). To this end, I make use of the package 
+[`anticlust`](https://github.com/m-Py/anticlust).
+
+```{r}
+
+library(anticlust)
+
+# generate some random data, N = 120
+data <- data.frame(
+  x = rnorm(120),
+  y = rnorm(120)
+)
+
+# Generate 6 anticlusters that are as similar as possible
+groups <- anticlustering(
+  data, 
+  K = 6
+)
+
+# define 6 colors, 6 cex values, and 6 pch values:
+colors <- c("#a9a9a9", "#df536b", "#61d04f", "#2297e6", "#28e2e5", "#eec12f")
+cex <-  c(0.7, 0.9, 1.2, 1.5, 1.7, 2)
+pch <- 15:20
+plot(
+  data,
+  col = colors[groups],
+  cex = cex[groups],
+  pch = pch[groups]
+)
+
+```
+
+As we can see, anticlustering is a lot more messy than clustering. 
+
+---
+
 Last updated: `r Sys.Date()`
 
 ### <a href="index.html">Back to the front page</a>
