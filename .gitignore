@@ -1,1 +1,4 @@
 *.rkward_preview.Rmd
+.Rproj.user
+.Rhistory
+
