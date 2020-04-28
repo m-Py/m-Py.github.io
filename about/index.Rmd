@@ -12,26 +12,23 @@ department of [Psychological Assessment and Differential
 Psychology](http://www.psychologie.hhu.de/en/research-teams/psychological-assessment-and-differential-psychology/arbeitsgruppe.html) 
 at [Heinrich Heine University 
 Düsseldorf](https://www.uni-duesseldorf.de/home/en/home.html). I am 
-interested in measurement, personality[^diss] and programming[^R].
+interested in measurement, personality[^diss] and programming.[^R]
 
 I am currently working on the `R` package 
 [`anticlust`](https://github.com/m-Py/anticlust) that enables 
 the automatic selection of stimuli for psychological experiments. Check 
-out my [latest preprint on the anticlustering 
-method](https://psyarxiv.com/3razc/) or [my 
-vignette](../anticlust/stimulus-selection.html) illustrating how to use 
-the `anticlust` package for stimulus selection. If you have any 
-questions and/or wishes with regard to the `anticlust` package, feel 
-free to <a href = "mailto:martin.papenberg@hhu.de?subject=Help with the 
-anticlust package">send me an email</a>.
-
-### Preprints
-
-Papenberg, M., & Klau, G. W. (2019, October 30). Using anticlustering to 
-partition a stimulus pool into equivalent parts. 
-https://doi.org/10.31234/osf.io/3razc. Submitted for publication.
+out my [preprint](https://psyarxiv.com/3razc/) on the anticlustering method 
+or [this vignette](https://m-py.github.io/anticlust/articles/stimulus-selection.html) illustrating how to use the `anticlust` package for stimulus 
+selection in experiments. If you have any questions regarding the 
+`anticlust` package, feel free to <a href = 
+"mailto:martin.papenberg@hhu.de?subject=Help with the anticlust 
+package">send me an email</a>.
 
 ### Journal publications
+
+Papenberg, M., & Klau, G. W. (in press). Using anticlustering to 
+partition data sets into equivalent parts. *Psychological Methods*.
+Preprint: https://doi.org/10.31234/osf.io/3razc
 
 Papenberg, M., Diedenhofen, B., & Musch, J. (2019). An experimental 
 validation of sequential multiple-choice tests. *Journal of Experimental 
@@ -77,13 +74,7 @@ from https://osf.io/nghyv/
 | 2013 | M.Sc., Psychology, Heinrich Heine University Düsseldorf |
 | 2011 | B.Sc., Psychology, Heinrich Heine University Düsseldorf |
 
-### Other
-
-[Some Things and some Stuff](../stuff/index.html)
-
 ### Contact
-
-I like hearing from people!
 
 - <a href = "mailto:martin.papenberg@hhu.de">Send me an email</a>
 - [Twitter](https://twitter.com/MPapenberg)
