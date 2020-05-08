@@ -152,9 +152,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.4" data-path="vektoren.html"><a href="vektoren.html#na"><i class="fa fa-check"></i><b>2.3.4</b> <code>NA</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="vektoren.html"><a href="vektoren.html#logischevergleiche"><i class="fa fa-check"></i><b>2.4</b> Logische Vergleiche</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="vektoren.html"><a href="vektoren.html#komponentenweise-vergleiche"><i class="fa fa-check"></i><b>2.4.1</b> Komponentenweise Vergleiche</a></li>
-<li class="chapter" data-level="2.4.2" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen"><i class="fa fa-check"></i><b>2.4.2</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
-<li class="chapter" data-level="2.4.3" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.4.3</b> Der <code>%in%</code>-Operator</a></li>
+<li class="chapter" data-level="2.4.1" data-path="vektoren.html"><a href="vektoren.html#logische-vergleiche-mit-vektoren-vom-typ-character"><i class="fa fa-check"></i><b>2.4.1</b> Logische Vergleiche mit Vektoren vom Typ <code>character</code></a></li>
+<li class="chapter" data-level="2.4.2" data-path="vektoren.html"><a href="vektoren.html#komponentenweise-vergleiche"><i class="fa fa-check"></i><b>2.4.2</b> Komponentenweise Vergleiche</a></li>
+<li class="chapter" data-level="2.4.3" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen"><i class="fa fa-check"></i><b>2.4.3</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
+<li class="chapter" data-level="2.4.4" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.4.4</b> Der <code>%in%</code>-Operator</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.5</b> Zugriff auf Vektorelemente</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="vektoren.html"><a href="vektoren.html#veczugriff"><i class="fa fa-check"></i><b>2.5.1</b> Der <code>[·]</code>-Zugriff</a></li>
@@ -332,7 +333,7 @@ geben uns das Ergebnis zurück</li>
 </ul>
 <p>Einfach gesagt nehmen also Funktionen Daten entgegen und geben wiederum
 Daten zurück. Der Großteil unserer Arbeit mit <code>R</code> ist die Anwendung von
-Funktionen. Es ist möglich Funktionsaufrufe zu verschachteln, wie dieses
+Funktionen. Es ist möglich, Funktionsaufrufe zu verschachteln, wie dieses
 Beispiel zeigte:</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">sqrt</span>(<span class="kw">var</span>(<span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>)))</a></code></pre></div>
 <p>Hier wertet die Funktion <code>sqrt()</code> (die Wurzel; engl. <em>square root</em>) das
@@ -537,7 +538,7 @@ enthält, können wir die folgende Befehlkette verwenden:</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1">bar &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">-3</span>)</a>
 <a class="sourceLine" id="cb64-2" title="2">bar &lt;-<span class="st"> </span><span class="kw">sort</span>(bar)</a></code></pre></div>
 <p>In diesem Fall geht der Ursprungsvektor verloren und wir behalten nur
-den sortieren Vektor. Generell gilt: wenn wir Daten in der Konsole
+den sortierten Vektor. Generell gilt: wenn wir Daten in der Konsole
 ausgeben lassen, verschwinden diese sozusagen im „Nirvana“. Wenn wir mit
 Daten weiterarbeiten wollen, müssen wir die Ausgabe einer Funktion in
 einer Variablen speichern. Beide Verwendungszwecke sind denkbar:
@@ -854,6 +855,8 @@ einer Fehlermeldung bemerkt, da der Befehl <em>syntaktisch</em> korrekt ist. Es
 ist jedoch problematisch, dass ich an dieser Stelle meine Daten mit
 einem irrelevanten Wert überschrieben habe, und das bei einem späteren
 Zugriff darauf vermutlich nicht beachten werde.</p>
+<div id="logische-vergleiche-mit-vektoren-vom-typ-character" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Logische Vergleiche mit Vektoren vom Typ <code>character</code></h3>
 <p>Welche logischen Vergleiche möglich sind, hängt vom Datentyp eines
 Vektors ab. Für Vektoren vom Typ <code>character</code> etwa macht eine
 Kleiner/Größer-Abfrage keinen Sinn, jedoch eine Abfrage auf Gleichheit:</p>
@@ -874,8 +877,9 @@ gesetzt:</p>
 <a class="sourceLine" id="cb136-6" title="6">)</a>
 <a class="sourceLine" id="cb136-7" title="7">geschlecht <span class="op">==</span><span class="st"> &quot;maennlich&quot;</span></a></code></pre></div>
 <pre><code>[1] FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE</code></pre>
+</div>
 <div id="komponentenweise-vergleiche" class="section level3">
-<h3><span class="header-section-number">2.4.1</span> Komponentenweise Vergleiche</h3>
+<h3><span class="header-section-number">2.4.2</span> Komponentenweise Vergleiche</h3>
 <p>Wenn zwei Vektoren gleicher Länge mit logischen Operatoren verglichen
 werden, werden die Elemente komponentenweise verglichen:</p>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" title="1">score_test1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">19</span>, <span class="dv">44</span>, <span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">22</span>)</a>
@@ -895,7 +899,7 @@ verbinden:</p>
 zustande kommt.</p>
 </div>
 <div id="anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen" class="section level3">
-<h3><span class="header-section-number">2.4.2</span> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</h3>
+<h3><span class="header-section-number">2.4.3</span> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</h3>
 <p>Häufig verwendet man die Vergleichsoperatoren, um zu prüfen, wie viele
 Daten eine bestimmte Eigenschaft erfüllen. Dafür können wir die
 Vergleichsoperatoren mit den Funktionen <code>sum()</code> oder <code>mean()</code>
@@ -1000,7 +1004,7 @@ in die <code>R</code>-Konsole eingebt und beobachtet, welcher Wert häufiger nä
 an 0.159 liegt.</p>
 </div>
 <div id="der-in-operator" class="section level3">
-<h3><span class="header-section-number">2.4.3</span> Der <code>%in%</code>-Operator</h3>
+<h3><span class="header-section-number">2.4.4</span> Der <code>%in%</code>-Operator</h3>
 <p>Um zu testen, ob ein oder mehrere Elemente in einem Vektor enthalten
 sind, kann man den <code>%in%</code>-Operator verwenden. Der sieht zwar
 gewöhnungsbedürftig aus, ist aber einfach zu verwenden und hat auch eine

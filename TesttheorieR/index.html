@@ -152,9 +152,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.4" data-path="vektoren.html"><a href="vektoren.html#na"><i class="fa fa-check"></i><b>2.3.4</b> <code>NA</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="vektoren.html"><a href="vektoren.html#logischevergleiche"><i class="fa fa-check"></i><b>2.4</b> Logische Vergleiche</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="vektoren.html"><a href="vektoren.html#komponentenweise-vergleiche"><i class="fa fa-check"></i><b>2.4.1</b> Komponentenweise Vergleiche</a></li>
-<li class="chapter" data-level="2.4.2" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen"><i class="fa fa-check"></i><b>2.4.2</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
-<li class="chapter" data-level="2.4.3" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.4.3</b> Der <code>%in%</code>-Operator</a></li>
+<li class="chapter" data-level="2.4.1" data-path="vektoren.html"><a href="vektoren.html#logische-vergleiche-mit-vektoren-vom-typ-character"><i class="fa fa-check"></i><b>2.4.1</b> Logische Vergleiche mit Vektoren vom Typ <code>character</code></a></li>
+<li class="chapter" data-level="2.4.2" data-path="vektoren.html"><a href="vektoren.html#komponentenweise-vergleiche"><i class="fa fa-check"></i><b>2.4.2</b> Komponentenweise Vergleiche</a></li>
+<li class="chapter" data-level="2.4.3" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen"><i class="fa fa-check"></i><b>2.4.3</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
+<li class="chapter" data-level="2.4.4" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.4.4</b> Der <code>%in%</code>-Operator</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.5</b> Zugriff auf Vektorelemente</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="vektoren.html"><a href="vektoren.html#veczugriff"><i class="fa fa-check"></i><b>2.5.1</b> Der <code>[·]</code>-Zugriff</a></li>
@@ -298,7 +299,7 @@ Erstellung des Skripts verwendet wurden, finden sich unter
 <a href="https://github.com/m-Py/Testtheorie-R" class="uri">https://github.com/m-Py/Testtheorie-R</a>.</p>
 <p>Wir lernen die Nutzung von <code>R</code> anhand von Beispielen der psychologischen
 Diagnostik beziehungsweise der Testtheorie kennen. Dabei werden auch
-echte Datensätze verwendet, beispielsweise einen Datensatz zum
+echte Datensätze verwendet, beispielsweise ein Datensatz zum
 <em>Narcissistic Personality Inventory</em>, der online frei über das „Open
 Source Psychometrics Project”
 (<a href="https://openpsychometrics.org/">https://openpsychometrics.org/</a>)
@@ -314,7 +315,7 @@ aktuelle Stand dieses Skripts – können unter
 <a href="https://osf.io/y4a6k/">https://osf.io/y4a6k/</a> abgerufen werden. Unter
 <a href="https://m-py.github.io/TesttheorieR/">https://m-py.github.io/TesttheorieR/</a>
 findet sich eine online lesbare Version des Skripts. Das
-Skript wird stetig aktualisiert; diese Version wurde am 06. April 2020 erstellt.</p>
+Skript wird stetig aktualisiert; diese Version wurde am 08. Mai 2020 erstellt.</p>
 <p>Wer <code>R</code> lernen möchte, muss sich klar machen, dass die reine
 Aufarbeitung einer oder mehrerer schriftlicher Lektüren zu diesem Zweck
 nicht ausreicht. Die praktische Anwendung – das Ausprobieren und
@@ -348,8 +349,8 @@ etc.) bin ich sehr dankbar! Meldungen können mir an
 <div id="danksagung" class="section level3">
 <h3><span class="header-section-number">1.1.2</span> Danksagung</h3>
 <p>Ich danke Juli Tkotz für ihre wertvollen Beiträge und ihr nützliches
-Feedback zum Skript. Hanna Siegers, Marlene Wettstein, Frank Calio und
-Ingo Weigel danke ich für Fehlermeldungen.</p>
+Feedback zum Skript. Hanna Siegers, Marlene Wettstein, Frank Calio, Ingo Weigel
+und Katharina Sophie Apenbrink danke ich für Fehlermeldungen.</p>
 <p>Zur Erstellung des Skripts wurden <code>R</code> <span class="citation">(R Core Team, 2018)</span> und die <code>R</code>-Pakete
 <em>bookdown</em> <span class="citation">(Xie, 2016)</span>, <em>knitr</em> <span class="citation">(Xie, 2015)</span>, <em>rmarkdown</em> <span class="citation">(Allaire u. a., 2017)</span>
 genutzt.</p>
@@ -358,7 +359,7 @@ genutzt.</p>
 <div id="erste-schritte-mit-r" class="section level2">
 <h2><span class="header-section-number">1.2</span> Erste Schritte mit <code>R</code></h2>
 <p>Im Seminar nutzen wir die „integrierte Entwicklungsumgebung“ (engl:
-integrated developement environment; <em>IDE</em>) RStudio, um mit <code>R</code> zu
+integrated development environment; <em>IDE</em>) RStudio, um mit <code>R</code> zu
 arbeiten. Zum Nachvollziehen des Skripts und der Übungen solltet ihr
 deswegen RStudio auf eurem eigenen Rechner/Laptop
 installieren.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Das geht über diesen Link:</p>
@@ -456,7 +457,7 @@ häufigsten Fall seid ihr selbst in zwei Wochen diese „andere” Person.</p>
 <div id="ausblick" class="section level2">
 <h2><span class="header-section-number">1.3</span> Ausblick</h2>
 <p>In den ersten zwei Kapiteln beschäftigen wir uns damit, wie <code>R</code> Daten
-darstellt. Dabei betrachten wir zunächst die grundlegenste
+darstellt. Dabei betrachten wir zunächst die grundlegendste
 Datenstruktur, den Vektor (<a href="vektoren.html#vektoren">Kapitel 2</a>). Danach lernen wir
 <code>data.frames</code> kennen (<a href="dataframes.html#dataframes">Kapitel 3</a>) – also Datentabellen,
 wie wir sie auch aus Excel oder SPSS kennen. In <a href="psychometrie.html#psychometrie">Kapitel
