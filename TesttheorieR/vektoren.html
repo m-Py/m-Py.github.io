@@ -155,7 +155,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4.1" data-path="vektoren.html"><a href="vektoren.html#logische-vergleiche-mit-vektoren-vom-typ-character"><i class="fa fa-check"></i><b>2.4.1</b> Logische Vergleiche mit Vektoren vom Typ <code>character</code></a></li>
 <li class="chapter" data-level="2.4.2" data-path="vektoren.html"><a href="vektoren.html#komponentenweise-vergleiche"><i class="fa fa-check"></i><b>2.4.2</b> Komponentenweise Vergleiche</a></li>
 <li class="chapter" data-level="2.4.3" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen"><i class="fa fa-check"></i><b>2.4.3</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
-<li class="chapter" data-level="2.4.4" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.4.4</b> Der <code>%in%</code>-Operator</a></li>
+<li class="chapter" data-level="2.4.4" data-path="vektoren.html"><a href="vektoren.html#logische-operationen-mit-na"><i class="fa fa-check"></i><b>2.4.4</b> Logische Operationen mit <code>NA</code></a></li>
+<li class="chapter" data-level="2.4.5" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.4.5</b> Der <code>%in%</code>-Operator</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.5</b> Zugriff auf Vektorelemente</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="vektoren.html"><a href="vektoren.html#veczugriff"><i class="fa fa-check"></i><b>2.5.1</b> Der <code>[·]</code>-Zugriff</a></li>
@@ -174,6 +175,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.1" data-path="dataframes.html"><a href="dataframes.html#zeileneinfach"><i class="fa fa-check"></i><b>3.4.1</b> Vereinfachte Zeilenauswahl</a></li>
 <li class="chapter" data-level="3.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>3.4.2</b> Funktionsargumente</a></li>
 <li class="chapter" data-level="3.4.3" data-path="dataframes.html"><a href="dataframes.html#spalteneinfach"><i class="fa fa-check"></i><b>3.4.3</b> Sonderregeln zur Auswahl von Spalten</a></li>
+<li class="chapter" data-level="3.4.4" data-path="dataframes.html"><a href="dataframes.html#umgang-mit-na-subset-bevorzugt-zur-zeilenauswahl"><i class="fa fa-check"></i><b>3.4.4</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="dataframes.html"><a href="dataframes.html#doppelteckig"><i class="fa fa-check"></i><b>3.5</b> Weitere Zugriffe auf <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.5.1" data-path="dataframes.html"><a href="dataframes.html#der--zugriff"><i class="fa fa-check"></i><b>3.5.1</b> Der <code>[[·]]</code>-Zugriff</a></li>
@@ -181,10 +183,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5.3" data-path="dataframes.html"><a href="dataframes.html#nameindex"><i class="fa fa-check"></i><b>3.5.3</b> Zugriff nach Name und Index</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="dataframes.html"><a href="dataframes.html#convenient"><i class="fa fa-check"></i><b>3.6</b> Nützliche Funktionen zum Arbeiten mit <code>data.frames</code></a><ul>
-<li class="chapter" data-level="3.6.1" data-path="dataframes.html"><a href="dataframes.html#tapply"><i class="fa fa-check"></i><b>3.6.1</b> <code>tapply()</code></a></li>
-<li class="chapter" data-level="3.6.2" data-path="dataframes.html"><a href="dataframes.html#nrow-und-ncol"><i class="fa fa-check"></i><b>3.6.2</b> <code>nrow()</code> und <code>ncol()</code></a></li>
-<li class="chapter" data-level="3.6.3" data-path="dataframes.html"><a href="dataframes.html#head-und-tail"><i class="fa fa-check"></i><b>3.6.3</b> <code>head()</code> und <code>tail()</code></a></li>
-<li class="chapter" data-level="3.6.4" data-path="dataframes.html"><a href="dataframes.html#sortieren-dplyrarrange"><i class="fa fa-check"></i><b>3.6.4</b> Sortieren: <code>dplyr::arrange</code></a></li>
+<li class="chapter" data-level="3.6.1" data-path="dataframes.html"><a href="dataframes.html#tapply"><i class="fa fa-check"></i><b>3.6.1</b> Gruppierte Statistiken: <code>tapply()</code></a></li>
+<li class="chapter" data-level="3.6.2" data-path="dataframes.html"><a href="dataframes.html#datenstruktur-nrow-und-ncol"><i class="fa fa-check"></i><b>3.6.2</b> Datenstruktur: <code>nrow()</code> und <code>ncol()</code></a></li>
+<li class="chapter" data-level="3.6.3" data-path="dataframes.html"><a href="dataframes.html#wie-sieht-die-tabelle-aus-head-und-tail"><i class="fa fa-check"></i><b>3.6.3</b> Wie sieht die Tabelle aus: <code>head()</code> und <code>tail()</code></a></li>
+<li class="chapter" data-level="3.6.4" data-path="dataframes.html"><a href="dataframes.html#sortieren-die-funktion-arrange-aus-dem-paket-dplyr"><i class="fa fa-check"></i><b>3.6.4</b> Sortieren: Die Funktion <code>arrange</code>() aus dem Paket <code>dplyr</code></a></li>
+<li class="chapter" data-level="3.6.5" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-aller-spalten"><i class="fa fa-check"></i><b>3.6.5</b> Zusammenfassung aller Spalten</a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-1"><i class="fa fa-check"></i><b>3.7</b> Zusammenfassung</a></li>
 <li class="chapter" data-level="3.8" data-path="dataframes.html"><a href="dataframes.html#fragen-zum-vertiefenden-verständnis-1"><i class="fa fa-check"></i><b>3.8</b> Fragen zum vertiefenden Verständnis</a></li>
@@ -207,7 +210,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="rohdaten.html"><a href="rohdaten.html#missingvalues"><i class="fa fa-check"></i><b>5.3</b> Umgang mit fehlenden Werten</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="rohdaten.html"><a href="rohdaten.html#identifikation-von-fehlenden-werten"><i class="fa fa-check"></i><b>5.3.1</b> Identifikation von fehlenden Werten</a></li>
-<li class="chapter" data-level="5.3.2" data-path="rohdaten.html"><a href="rohdaten.html#vergleiche-mit-na"><i class="fa fa-check"></i><b>5.3.2</b> Vergleiche mit <code>NA</code></a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="rohdaten.html"><a href="rohdaten.html#fragen-zum-vertiefenden-verständnis-2"><i class="fa fa-check"></i><b>5.4</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
@@ -1003,30 +1005,72 @@ wenn ihr mehrfach <code>mean(rnorm(1000) &gt; 1)</code> und <code>mean(rnorm(100
 in die <code>R</code>-Konsole eingebt und beobachtet, welcher Wert häufiger näher
 an 0.159 liegt.</p>
 </div>
+<div id="logische-operationen-mit-na" class="section level3">
+<h3><span class="header-section-number">2.4.4</span> Logische Operationen mit <code>NA</code></h3>
+<p>Oftmals will man herausfinden, ob in Vektoren fehlende Werte vorliegen (also ob
+einige Elemente darin <code>NA</code> sind). Die Funktion <code>is.na()</code> führt eine logische
+Abfrage durch, die für jedes Element in einem Vektor überprüft, ob es <code>NA</code> ist.</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1">mein_vektor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="ot">NA</span>, <span class="dv">4</span>, <span class="ot">NA</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb162-2" title="2"><span class="kw">is.na</span>(mein_vektor)</a></code></pre></div>
+<pre><code>[1] FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
+<p>Die Funktion <code>is.na()</code> prüft in einem Vektor, welche Werte <code>NA</code> sind und gibt an
+den entsprechenden Positionen <code>TRUE</code> zurück, ansonsten <code>FALSE</code>. Die Ausgabe von
+<code>is.na()</code> ist also ein logischer Vektor, der genauso lang ist wie der
+Eingabevektor.</p>
+<p>Oftmals kombiniert man <code>is.na()</code> mit der Funktion <code>sum()</code>, um die absolute
+Anzahl der fehlenden Werte zu erhalten:</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1"><span class="kw">sum</span>(<span class="kw">is.na</span>(mein_vektor))</a></code></pre></div>
+<pre><code>[1] 2</code></pre>
+<p>Die Funktion <code>mean()</code> gibt dementsprechend die relative Häufigkeit fehlender
+Werte aus – die ist im Idealfall nicht allzu hoch.</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1"><span class="kw">mean</span>(<span class="kw">is.na</span>(mein_vektor))</a></code></pre></div>
+<pre><code>[1] 0.2857143</code></pre>
+<p><strong>Wichtig</strong>: Man <strong>muss</strong> <code>is.na()</code> verwenden, um zu prüfen, ob Werte in
+einem Vektor <code>NA</code> sind. Folgender „naiver“ Vergleich mit <code>NA</code> geht
+schief:</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1">mein_vektor <span class="op">==</span><span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
+<pre><code>[1] NA NA NA NA NA NA NA</code></pre>
+<p>Ein logischer Vergleich mit <code>NA</code> ergibt immer <code>NA</code>, da beim fehlenden
+Wert keine Aussage darüber gemacht werden kann, ob er einem anderen Wert
+entspricht. Man kennt den fehlenden Wert zwar nicht, aber irgendeine
+Ausprägung hat er in der Realität.</p>
+<p>Interessant ist auch der Umgang der UND- und ODER-Operationen mit
+fehlenden Werten. Der Befehl <code>TRUE &amp; NA</code> gibt <code>NA</code> aus. Denn je nachdem,
+ob der fehlende Wert <code>TRUE</code> oder <code>FALSE</code> wäre, wäre das Ergebnis auch
+entweder <code>TRUE</code> oder <code>FALSE</code>. Wir können in diesem Fall nicht
+voraussagen, was das Ergebnis der UND-Operation wäre, da der fehlende
+Wert unbekannt, aber kritisch für das Ergebnis ist. Anders sieht es bei
+dem Befehl <code>TRUE | NA</code> aus. Dieser ergibt <code>TRUE</code>, da auf jeden Fall eine
+Bedingung erfüllt ist und nur eine Bedingung erfüllt sein muss, damit
+die ODER-Bedingung <code>TRUE</code> ergibt. Mit diesen Erklärungen im Hinterkopf
+können wir auch nachvollziehen, was passiert, wenn wir <code>FALSE</code> mit <code>NA</code>
+per UND und ODER verknüpfen: <code>FALSE | NA</code> ergibt <code>NA</code>, <code>FALSE &amp; NA</code>
+ergibt <code>FALSE</code>.</p>
+</div>
 <div id="der-in-operator" class="section level3">
-<h3><span class="header-section-number">2.4.4</span> Der <code>%in%</code>-Operator</h3>
+<h3><span class="header-section-number">2.4.5</span> Der <code>%in%</code>-Operator</h3>
 <p>Um zu testen, ob ein oder mehrere Elemente in einem Vektor enthalten
 sind, kann man den <code>%in%</code>-Operator verwenden. Der sieht zwar
 gewöhnungsbedürftig aus, ist aber einfach zu verwenden und hat auch eine
 einfache verbale Interpretation: Sind die Elemente aus Vektor A in
 Vektor B?</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1"><span class="dv">2</span> <span class="op">%in%</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></a></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1"><span class="dv">2</span> <span class="op">%in%</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></a></code></pre></div>
 <pre><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1"><span class="dv">4</span> <span class="op">%in%</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></a></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1"><span class="dv">4</span> <span class="op">%in%</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></a></code></pre></div>
 <pre><code>[1] FALSE</code></pre>
 <p>Wir können den <code>%in%</code>-Operator als eine Aneinanderreihung mehrerer
 ODER-Bedingungen verstehen. Folgendes ist äquivalent zu den obigen
 Aufrufen von <code>%in%</code>:</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1">zu_testen &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb166-2" title="2">zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">|</span><span class="st"> </span>zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">3</span></a></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1">zu_testen &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb174-2" title="2">zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">|</span><span class="st"> </span>zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">3</span></a></code></pre></div>
 <pre><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1">zu_testen &lt;-<span class="st"> </span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb168-2" title="2">zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">|</span><span class="st"> </span>zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">3</span></a></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1">zu_testen &lt;-<span class="st"> </span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb176-2" title="2">zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">|</span><span class="st"> </span>zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">3</span></a></code></pre></div>
 <pre><code>[1] FALSE</code></pre>
 <p>Der <code>%in%</code>-Operator ist wie so vieles in <code>R</code> „vektorisiert“, das heißt
 wir können für mehrere Elemente gleichzeitig testen, ob sie in einem
 Vektor enthalten sind:</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1"><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>) <span class="op">%in%</span><span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">5</span></a></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1"><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>) <span class="op">%in%</span><span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">5</span></a></code></pre></div>
 <pre><code>[1] FALSE  TRUE</code></pre>
 <p>In diesem Fall wird für jedes der Vektorelemente <em>vor</em> <code>%in%</code> geprüft,
 ob dieses im Vektor <em>nach</em> <code>%in%</code> enthalten ist. Die Ausgabe der
@@ -1049,24 +1093,24 @@ Excel kennen) auswählen können.</p>
 Vektoren ausgewählt werden. Jedes Element im Vektor hat einen <em>Index</em>,
 der seiner Position im Vektor entspricht. Im folgenden Vektor etwa hat
 <code>2</code> den Index <code>1</code>, <code>4</code> den Index <code>2</code> und <code>1</code> den Index <code>3</code>:</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1">daten &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1">daten &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">1</span>)</a></code></pre></div>
 <p>Ich kann mit dem <code>[·]</code>-Zugriff durch Angabe des Index auf einzelne
 Elemente im Vektor zugreifen:</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1">daten[<span class="dv">1</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" title="1">daten[<span class="dv">1</span>]</a></code></pre></div>
 <pre><code>[1] 2</code></pre>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1">xx &lt;-<span class="st"> </span>daten[<span class="dv">3</span>] <span class="co"># ein-elementiger Vektor</span></a>
-<a class="sourceLine" id="cb175-2" title="2">xx</a></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1">xx &lt;-<span class="st"> </span>daten[<span class="dv">3</span>] <span class="co"># ein-elementiger Vektor</span></a>
+<a class="sourceLine" id="cb183-2" title="2">xx</a></code></pre></div>
 <pre><code>[1] 1</code></pre>
 <p>Ebenso kann ich einen „Negativ“-Zugriff durchführen: Ich kann auswählen,
 welchen Index ich <em>nicht</em> in meinem Ergebnis haben will:</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" title="1">daten[<span class="op">-</span><span class="dv">1</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1">daten[<span class="op">-</span><span class="dv">1</span>]</a></code></pre></div>
 <pre><code>[1] 4 1</code></pre>
 <p>Interessant wird diese Art des Zugriffs, da der Index in den <code>[·]</code>
 Klammern auch ein mehr-elementiger numerischer Vektor sein kann – hier
 nutzen wir die Funktion <code>c()</code>:</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1">daten[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1">daten[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]</a></code></pre></div>
 <pre><code>[1] 2 4</code></pre>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" title="1">daten[<span class="op">-</span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1">daten[<span class="op">-</span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)]</a></code></pre></div>
 <pre><code>[1] 2</code></pre>
 </div>
 <div id="logischerZugriff" class="section level3">
@@ -1077,17 +1121,17 @@ Position aller einzelnen Datenpunkte behalten – möchten wir häufig
 Daten auswählen, die eine bestimmte Eigenschaft erfüllen. Hierbei machen
 wir uns die logischen Operationen zunutze, die wir oben kennengelernt
 haben:</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1">meinVektor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>)</a>
-<a class="sourceLine" id="cb183-2" title="2"></a>
-<a class="sourceLine" id="cb183-3" title="3">auswahl &lt;-<span class="st"> </span>meinVektor <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb183-4" title="4">auswahl</a></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" title="1">meinVektor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>)</a>
+<a class="sourceLine" id="cb191-2" title="2"></a>
+<a class="sourceLine" id="cb191-3" title="3">auswahl &lt;-<span class="st"> </span>meinVektor <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb191-4" title="4">auswahl</a></code></pre></div>
 <pre><code>[1] FALSE FALSE FALSE  TRUE  TRUE  TRUE</code></pre>
 <p>Der logische Vektor <code>auswahl</code> kodiert, welche Elemente des Vektors
 <code>meinVektor</code> größer sind als 5 (spezifisch: an welchen Positionen
 <code>meinVektor</code> ein Element enthält, das größer ist als 5). Ich kann nun
 <code>auswahl</code> in der <code>[·]</code>-Notation verwenden, um nur die Elemente
 auszuwählen, die größer sind als 5:</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1">meinVektor[auswahl]</a></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1">meinVektor[auswahl]</a></code></pre></div>
 <pre><code>[1] 7 8 9</code></pre>
 <p>Hierbei wurden die Werte 7, 8 und 9 ausgewählt, da für diese Werte der
 Vektor <code>auswahl</code> auf <code>TRUE</code> steht. Genauer gesagt: <code>auswahl</code> steht für
@@ -1095,19 +1139,19 @@ die Indexe 4, 5 und 6 auf <code>TRUE</code> und es gilt <code>meinVektor[4] == 7
 <code>meinVektor[5] == 8</code>, und <code>meinVektor[6] == 9</code>.</p>
 <p>Man kann dieses Vorgehen sogar mit den UND/ODER-Operationen verknüpfen,
 um Daten anhand verschiedener Kriterien auszuwählen:</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1">meinVektor &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">20</span></a>
-<a class="sourceLine" id="cb187-2" title="2"></a>
-<a class="sourceLine" id="cb187-3" title="3">auswahl &lt;-<span class="st"> </span>(meinVektor <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>) <span class="op">|</span><span class="st"> </span>(meinVektor <span class="op">&gt;</span><span class="st"> </span><span class="dv">17</span>)</a>
-<a class="sourceLine" id="cb187-4" title="4">auswahl</a></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1">meinVektor &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb195-2" title="2"></a>
+<a class="sourceLine" id="cb195-3" title="3">auswahl &lt;-<span class="st"> </span>(meinVektor <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>) <span class="op">|</span><span class="st"> </span>(meinVektor <span class="op">&gt;</span><span class="st"> </span><span class="dv">17</span>)</a>
+<a class="sourceLine" id="cb195-4" title="4">auswahl</a></code></pre></div>
 <pre><code> [1]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 [13] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE</code></pre>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1">meinVektor[auswahl]</a></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" title="1">meinVektor[auswahl]</a></code></pre></div>
 <pre><code>[1]  1  2  3  4 18 19 20</code></pre>
 <p>Hier ein weiteres Beispiel mit normalverteilten Zufallsdaten:</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" title="1"><span class="co">## Wähle alle Daten aus, die größer sind als 2 (das sollten im Schnitt</span></a>
-<a class="sourceLine" id="cb191-2" title="2"><span class="co">## etwa 2.5% der Daten sein)</span></a>
-<a class="sourceLine" id="cb191-3" title="3">daten &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">300</span>)</a>
-<a class="sourceLine" id="cb191-4" title="4">daten[daten <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" title="1"><span class="co">## Wähle alle Daten aus, die größer sind als 2 (das sollten im Schnitt</span></a>
+<a class="sourceLine" id="cb199-2" title="2"><span class="co">## etwa 2.5% der Daten sein)</span></a>
+<a class="sourceLine" id="cb199-3" title="3">daten &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">300</span>)</a>
+<a class="sourceLine" id="cb199-4" title="4">daten[daten <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>]</a></code></pre></div>
 <pre><code>[1] 3.196362 2.386513 2.791331 2.123950</code></pre>
 <p>An dieser Stelle sollte man sich klar machen, warum <code>daten</code> sowohl vor
 als auch innerhalb der <code>[·]</code> Klammern vorkommt. Das ist prinzipiell
@@ -1120,15 +1164,15 @@ Variablen – <code>auswahl</code> – zwischengespeichert habe.</p>
 <p>Wir sind mit dem <code>[·]</code>-Zugriff nicht darauf beschränkt Elemente aus
 Vektoren auszulesen, sondern wir können auf diese Weise auch einzelne
 Elemente im Vektor verändern:</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1">daten &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb193-2" title="2">daten[<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>)] &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb193-3" title="3">daten</a></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1">daten &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb201-2" title="2">daten[<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>)] &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb201-3" title="3">daten</a></code></pre></div>
 <pre><code>[1] 1 0 3 4 0</code></pre>
 <p>Dies geht wiederum auch mit einem logischen Vektor in den
 <code>[·]</code>-Klammern, wie das folgende Beispiel zeigt:</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1">daten &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb195-2" title="2">daten[<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)] &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb195-3" title="3">daten</a></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1">daten &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb203-2" title="2">daten[<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)] &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb203-3" title="3">daten</a></code></pre></div>
 <pre><code>[1] 0 2 0 4 5</code></pre>
 <p>Das würde man so “händisch” nicht machen, aber es soll zum Verständnis
 dessen dienen, was im folgenden – anwendungsnäheren – Beispiel
@@ -1136,17 +1180,17 @@ passiert. Angenommen, bei einer Dateneingabe wurden fehlende Werte in
 einem Fragebogen mit <code>-99</code> kodiert.<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a> Wir wollen <code>R</code>
 mitteilen, diesen Wert als fehlend zu interpretieren. Hier kommt uns
 wiederum eine logische Abfrage zugute:</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" title="1">daten &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">-99</span>, <span class="dv">5</span>, <span class="dv">-99</span>, <span class="dv">2</span>, <span class="dv">-99</span>, <span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb197-2" title="2">daten</a></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1">daten &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">-99</span>, <span class="dv">5</span>, <span class="dv">-99</span>, <span class="dv">2</span>, <span class="dv">-99</span>, <span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb205-2" title="2">daten</a></code></pre></div>
 <pre><code> [1]   1 -99   5 -99   2 -99   4   1   2   3</code></pre>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" title="1">missing_values &lt;-<span class="st"> </span>daten <span class="op">==</span><span class="st"> </span><span class="dv">-99</span></a>
-<a class="sourceLine" id="cb199-2" title="2">missing_values</a></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" title="1">missing_values &lt;-<span class="st"> </span>daten <span class="op">==</span><span class="st"> </span><span class="dv">-99</span></a>
+<a class="sourceLine" id="cb207-2" title="2">missing_values</a></code></pre></div>
 <pre><code> [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE</code></pre>
 <p>Die Variable <code>missing_values</code> kodiert jetzt, an welchen Positionen des
 Vektors <code>daten</code> sich eine <code>-99</code> befindet. Wir können diese Werte nun wie
 folgt durch <code>NA</code> ersetzen:</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1">daten[missing_values] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
-<a class="sourceLine" id="cb201-2" title="2">daten</a></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1">daten[missing_values] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb209-2" title="2">daten</a></code></pre></div>
 <pre><code> [1]  1 NA  5 NA  2 NA  4  1  2  3</code></pre>
 <p>Semantisch ist dieser Vorgang gut zu verstehen: Setze alle Werte, die
 einen fehlenden Wert enthalten – d.h. mit -99 kodiert wurden – auf
@@ -1172,7 +1216,7 @@ die Analyse startet, müssen fehlende Werte gekennzeichnet werden.</p>
 <p>Durch Klammerung können wir die <em>Präzedenz</em> von <code>R</code>-Befehlen steuern.
 Präzendenz bezieht sich auf die Reihenfolge, in der <code>R</code>-Befehle
 ausgeführt werden. Betrachten wir das folgende Beispiel:</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1"><span class="ot">TRUE</span> <span class="op">|</span><span class="st"> </span><span class="ot">TRUE</span> <span class="op">&amp;</span><span class="st"> </span><span class="ot">FALSE</span></a></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1"><span class="ot">TRUE</span> <span class="op">|</span><span class="st"> </span><span class="ot">TRUE</span> <span class="op">&amp;</span><span class="st"> </span><span class="ot">FALSE</span></a></code></pre></div>
 <pre><code>[1] TRUE</code></pre>
 <p>Die Ausgabe ist <code>TRUE</code>. Daraus können wir schlussfolgern, dass die
 Befehle ODER und UND <strong>nicht</strong> von links nach rechts ausgeführt wurden.
@@ -1187,14 +1231,14 @@ ausgeführt, unabhängig davon, in welcher Reihenfolge wir die Befehle
 aufschreiben. Möchten wir erzwingen, dass die ODER-Operation zuerst
 durchgeführt wird, können wir – ganz analog zu mathematischen
 Berechnungen – Klammern verwenden:</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1">(<span class="ot">TRUE</span> <span class="op">|</span><span class="st"> </span><span class="ot">TRUE</span>) <span class="op">&amp;</span><span class="st"> </span><span class="ot">FALSE</span></a></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1">(<span class="ot">TRUE</span> <span class="op">|</span><span class="st"> </span><span class="ot">TRUE</span>) <span class="op">&amp;</span><span class="st"> </span><span class="ot">FALSE</span></a></code></pre></div>
 <pre><code>[1] FALSE</code></pre>
 <p>Die Präzendenzregeln gelten ebenfalls, wenn die logischen Vektoren aus
 mehr als einem Element bestehen. Betrachten wir dazu die folgenden
 Beispiele:</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" title="1"><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>) <span class="op">|</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>) <span class="op">&amp;</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1"><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>) <span class="op">|</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>) <span class="op">&amp;</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>[1] FALSE  TRUE</code></pre>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1">(<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>) <span class="op">|</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>)) <span class="op">&amp;</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1">(<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>) <span class="op">|</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>)) <span class="op">&amp;</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>[1] FALSE FALSE</code></pre>
 <p>Wir werden logische Ausdrücke vor allem zur Fallauswahl in Datentabellen
 verwenden (siehe <a href="dataframes.html#datenzugriffe">Kapitel 3</a>). Dann kann es sehr wichtig
@@ -1204,7 +1248,7 @@ wollen.</p>
 <p>Betrachten wir ein weiteres Beispiel zur Steuerung von Präzedenz: Nehmen
 wir an, wir benötigen eine Sequenz aller Zahlen zwischen 1 und 10 –
 außer der 8.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> Ein naheliegender Befehl wäre folgender:</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>[<span class="op">-</span><span class="dv">8</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>[<span class="op">-</span><span class="dv">8</span>]</a></code></pre></div>
 <pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <p>Das hat aber nicht funktioniert, die Acht ist in der Ausgabe enthalten.
 Woran liegt das? <strong>Die Auswahl per eckiger Klammer hat eine höhere
@@ -1214,10 +1258,10 @@ auf den Vektor <code>10</code> angewendet (Erinnerung: Einzelne Zahlen sind
 Vektoren). Das heißt, in diesem Beispiel wurde als Erstes das achte
 Element aus dem Vektor <code>10</code> ausgeschlossen, das aber gar nicht
 existiert. Stattdessen erhalten wir einfach wieder <code>10</code>:</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1"><span class="dv">10</span>[<span class="op">-</span><span class="dv">8</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" title="1"><span class="dv">10</span>[<span class="op">-</span><span class="dv">8</span>]</a></code></pre></div>
 <pre><code>[1] 10</code></pre>
 <p>Durch Klammerung können wir das gewünschte Ergebnis erhalten:</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1">(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)[<span class="op">-</span><span class="dv">8</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" title="1">(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)[<span class="op">-</span><span class="dv">8</span>]</a></code></pre></div>
 <pre><code>[1]  1  2  3  4  5  6  7  9 10</code></pre>
 <div class="block">
 <p>
