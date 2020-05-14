@@ -155,7 +155,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4.1" data-path="vektoren.html"><a href="vektoren.html#logische-vergleiche-mit-vektoren-vom-typ-character"><i class="fa fa-check"></i><b>2.4.1</b> Logische Vergleiche mit Vektoren vom Typ <code>character</code></a></li>
 <li class="chapter" data-level="2.4.2" data-path="vektoren.html"><a href="vektoren.html#komponentenweise-vergleiche"><i class="fa fa-check"></i><b>2.4.2</b> Komponentenweise Vergleiche</a></li>
 <li class="chapter" data-level="2.4.3" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen"><i class="fa fa-check"></i><b>2.4.3</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
-<li class="chapter" data-level="2.4.4" data-path="vektoren.html"><a href="vektoren.html#logische-operationen-mit-na"><i class="fa fa-check"></i><b>2.4.4</b> Logische Operationen mit <code>NA</code></a></li>
+<li class="chapter" data-level="2.4.4" data-path="vektoren.html"><a href="vektoren.html#nalogik"><i class="fa fa-check"></i><b>2.4.4</b> Logische Operationen mit <code>NA</code></a></li>
 <li class="chapter" data-level="2.4.5" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.4.5</b> Der <code>%in%</code>-Operator</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.5</b> Zugriff auf Vektorelemente</a><ul>
@@ -186,8 +186,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6.1" data-path="dataframes.html"><a href="dataframes.html#tapply"><i class="fa fa-check"></i><b>3.6.1</b> Gruppierte Statistiken: <code>tapply()</code></a></li>
 <li class="chapter" data-level="3.6.2" data-path="dataframes.html"><a href="dataframes.html#datenstruktur-nrow-und-ncol"><i class="fa fa-check"></i><b>3.6.2</b> Datenstruktur: <code>nrow()</code> und <code>ncol()</code></a></li>
 <li class="chapter" data-level="3.6.3" data-path="dataframes.html"><a href="dataframes.html#wie-sieht-die-tabelle-aus-head-und-tail"><i class="fa fa-check"></i><b>3.6.3</b> Wie sieht die Tabelle aus: <code>head()</code> und <code>tail()</code></a></li>
-<li class="chapter" data-level="3.6.4" data-path="dataframes.html"><a href="dataframes.html#sortieren-die-funktion-arrange-aus-dem-paket-dplyr"><i class="fa fa-check"></i><b>3.6.4</b> Sortieren: Die Funktion <code>arrange</code>() aus dem Paket <code>dplyr</code></a></li>
-<li class="chapter" data-level="3.6.5" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-aller-spalten"><i class="fa fa-check"></i><b>3.6.5</b> Zusammenfassung aller Spalten</a></li>
+<li class="chapter" data-level="3.6.4" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-aller-spalten-hilfe-aus-zusatzpaketen"><i class="fa fa-check"></i><b>3.6.4</b> Zusammenfassung aller Spalten: Hilfe aus Zusatzpaketen</a></li>
+<li class="chapter" data-level="3.6.5" data-path="dataframes.html"><a href="dataframes.html#sortieren-die-funktion-arrange-aus-dem-paket-dplyr"><i class="fa fa-check"></i><b>3.6.5</b> Sortieren: Die Funktion <code>arrange</code>() aus dem Paket <code>dplyr</code></a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-1"><i class="fa fa-check"></i><b>3.7</b> Zusammenfassung</a></li>
 <li class="chapter" data-level="3.8" data-path="dataframes.html"><a href="dataframes.html#fragen-zum-vertiefenden-verständnis-1"><i class="fa fa-check"></i><b>3.8</b> Fragen zum vertiefenden Verständnis</a></li>
@@ -298,7 +298,13 @@ haben, können wir Daten einlesen, die in diesem Ordner liegen. Dafür
 werden wir Funktionen aufrufen, die den Datensatz mit Dateinamen
 ansteuern. Folgender Aufruf etwa könnte eine csv-Datei einlesen und die
 Tabelle als <code>data.frame</code> in der Variablen <code>tp</code> speichern.</p>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb484-1" title="1">tp &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;technophobie.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb495-1" title="1">tp &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;technophobie.csv&quot;</span>)</a></code></pre></div>
+<p>Falls das nicht funktioniert, führt folgenden Befehl aus:</p>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb496-1" title="1"><span class="kw">getwd</span>()</a></code></pre></div>
+<p>Dieser Befehl gibt euch euer „Working Directory“ aus; das ist der
+Ausgangspunkt, von dem aus <code>R</code> nach Dateien sucht. Die Ausgabe des Befehls sollte
+der Ordner sein, in dem ihr die Daten abgelegt habt, mit denen ihr arbeiten
+wollt.<a href="#fn49" class="footnote-ref" id="fnref49"><sup>49</sup></a></p>
 <p>Wenn wir schon einmal ein Projekt im Ordner mit unseren Daten angelegt
 haben, können wir das Projekt beim nächsten Mal wieder aufrufen. Dafür
 gehen wir über</p>
@@ -324,14 +330,14 @@ nützlich zu wissen, wie man einzelne oder alle Variablen wieder
 entfernen kann. Es kann schnell passieren, dass man sehr viele Variablen
 erstellt, über die man sonst die Übersicht verliert.</p>
 <p>Mit der Funktion <code>rm</code> kann man Variablen löschen, etwa:</p>
-<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb485-1" title="1">foo &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb485-2" title="2"><span class="kw">rm</span>(foo)</a></code></pre></div>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb497-1" title="1">foo &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb497-2" title="2"><span class="kw">rm</span>(foo)</a></code></pre></div>
 <p>Möchte man alle Variablen aus dem Environment löschen, kann man den
 Befehl <code>rm(list = ls())</code> verwenden, etwa:</p>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb486-1" title="1">foo &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb486-2" title="2">bar &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb486-3" title="3">gaz &lt;-<span class="st"> </span><span class="kw">mean</span>(bar)</a>
-<a class="sourceLine" id="cb486-4" title="4"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>()) <span class="co"># löscht alles, nur mit Vorsicht verwenden</span></a></code></pre></div>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb498-1" title="1">foo &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb498-2" title="2">bar &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb498-3" title="3">gaz &lt;-<span class="st"> </span><span class="kw">mean</span>(bar)</a>
+<a class="sourceLine" id="cb498-4" title="4"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>()) <span class="co"># löscht alles, nur mit Vorsicht verwenden</span></a></code></pre></div>
 </div>
 <div id="mit-einem-sauberen-environment-starten" class="section level3">
 <h3><span class="header-section-number">8.2.2</span> Mit einem sauberen Environment starten</h3>
@@ -346,7 +352,7 @@ Variablen, die sich derzeit in unserem Environment befinden. Also alle
 Variablen, die uns oben rechts im Panel auch angezeigt werden. Wenn wir
 zustimmen und das Projekt aus dem Ordner neu laden, werden beim nächsten
 Mal alle Variablen unserer Session neu geladen. Ich rate stark davon ab,
-so zu arbeiten. Ich würde bevorzugen, <strong>immer</strong><a href="#fn49" class="footnote-ref" id="fnref49"><sup>49</sup></a> mit
+so zu arbeiten. Ich würde bevorzugen, <strong>immer</strong><a href="#fn50" class="footnote-ref" id="fnref50"><sup>50</sup></a> mit
 einem leeren Environment zu starten. Der einfachste Weg, um dies zu
 bewerkstelligen, ist immer “Don’t save” auszuwählen, wenn man gefragt
 wird. Wenn man aus Versehen mal auf “Save” geklickt hat, kann man das

@@ -155,7 +155,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4.1" data-path="vektoren.html"><a href="vektoren.html#logische-vergleiche-mit-vektoren-vom-typ-character"><i class="fa fa-check"></i><b>2.4.1</b> Logische Vergleiche mit Vektoren vom Typ <code>character</code></a></li>
 <li class="chapter" data-level="2.4.2" data-path="vektoren.html"><a href="vektoren.html#komponentenweise-vergleiche"><i class="fa fa-check"></i><b>2.4.2</b> Komponentenweise Vergleiche</a></li>
 <li class="chapter" data-level="2.4.3" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen"><i class="fa fa-check"></i><b>2.4.3</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
-<li class="chapter" data-level="2.4.4" data-path="vektoren.html"><a href="vektoren.html#logische-operationen-mit-na"><i class="fa fa-check"></i><b>2.4.4</b> Logische Operationen mit <code>NA</code></a></li>
+<li class="chapter" data-level="2.4.4" data-path="vektoren.html"><a href="vektoren.html#nalogik"><i class="fa fa-check"></i><b>2.4.4</b> Logische Operationen mit <code>NA</code></a></li>
 <li class="chapter" data-level="2.4.5" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.4.5</b> Der <code>%in%</code>-Operator</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.5</b> Zugriff auf Vektorelemente</a><ul>
@@ -186,8 +186,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6.1" data-path="dataframes.html"><a href="dataframes.html#tapply"><i class="fa fa-check"></i><b>3.6.1</b> Gruppierte Statistiken: <code>tapply()</code></a></li>
 <li class="chapter" data-level="3.6.2" data-path="dataframes.html"><a href="dataframes.html#datenstruktur-nrow-und-ncol"><i class="fa fa-check"></i><b>3.6.2</b> Datenstruktur: <code>nrow()</code> und <code>ncol()</code></a></li>
 <li class="chapter" data-level="3.6.3" data-path="dataframes.html"><a href="dataframes.html#wie-sieht-die-tabelle-aus-head-und-tail"><i class="fa fa-check"></i><b>3.6.3</b> Wie sieht die Tabelle aus: <code>head()</code> und <code>tail()</code></a></li>
-<li class="chapter" data-level="3.6.4" data-path="dataframes.html"><a href="dataframes.html#sortieren-die-funktion-arrange-aus-dem-paket-dplyr"><i class="fa fa-check"></i><b>3.6.4</b> Sortieren: Die Funktion <code>arrange</code>() aus dem Paket <code>dplyr</code></a></li>
-<li class="chapter" data-level="3.6.5" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-aller-spalten"><i class="fa fa-check"></i><b>3.6.5</b> Zusammenfassung aller Spalten</a></li>
+<li class="chapter" data-level="3.6.4" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-aller-spalten-hilfe-aus-zusatzpaketen"><i class="fa fa-check"></i><b>3.6.4</b> Zusammenfassung aller Spalten: Hilfe aus Zusatzpaketen</a></li>
+<li class="chapter" data-level="3.6.5" data-path="dataframes.html"><a href="dataframes.html#sortieren-die-funktion-arrange-aus-dem-paket-dplyr"><i class="fa fa-check"></i><b>3.6.5</b> Sortieren: Die Funktion <code>arrange</code>() aus dem Paket <code>dplyr</code></a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-1"><i class="fa fa-check"></i><b>3.7</b> Zusammenfassung</a></li>
 <li class="chapter" data-level="3.8" data-path="dataframes.html"><a href="dataframes.html#fragen-zum-vertiefenden-verständnis-1"><i class="fa fa-check"></i><b>3.8</b> Fragen zum vertiefenden Verständnis</a></li>
@@ -304,8 +304,8 @@ Fall bedeutet das, dass die Elemente eines Vektors, den wir <code>mean()</code>
 übergeben, den ausgegebenen Mittelwert determinieren. Wenn wir gar
 keinen Vektor übergeben, erhalten wir kein Ergebnis, sondern eine
 Fehlermeldung:</p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb438-1" title="1"><span class="kw">mean</span>()</a>
-<a class="sourceLine" id="cb438-2" title="2">Fehler <span class="cf">in</span> <span class="kw">mean.default</span>() <span class="op">:</span><span class="st"> </span>Argument <span class="st">&quot;x&quot;</span> <span class="kw">fehlt</span> (ohne Standardwert)</a></code></pre></div>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb449-1" title="1"><span class="kw">mean</span>()</a>
+<a class="sourceLine" id="cb449-2" title="2">Fehler <span class="cf">in</span> <span class="kw">mean.default</span>() <span class="op">:</span><span class="st"> </span>Argument <span class="st">&quot;x&quot;</span> <span class="kw">fehlt</span> (ohne Standardwert)</a></code></pre></div>
 <p>Um zu verstehen, wie man mit Argumenten das Verhalten von Funktionen
 beeinflusst, ist ein Verständnis der folgenden Punkte wichtig:<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a></p>
 <ol style="list-style-type: decimal">
@@ -344,7 +344,7 @@ nicht unbedingt angeben müssen – das würden wir normalerweise nur dann
 machen, wenn wir wissen, dass unsere Daten fehlende Werte
 enthalten. Folgender Aufruf funktioniert nämlich, ohne dass wir dem
 Argument <code>na.rm</code> einen Wert übergeben:</p>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb439-1" title="1"><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb450-1" title="1"><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
 <pre><code>[1] 5.5</code></pre>
 <p>Doch was passiert mit <code>na.rm</code>, wenn wir es nicht explizit angeben?
 Hierbei nehmen wir folgende Regel zur Kenntnis: <strong>Optionale Argumente
@@ -354,8 +354,8 @@ wird, wenn wir das Argument nicht selbst übergeben</strong>. Das Argument
 Normalfall nicht von der Berechnung ausgeschlossen werden. Stattdessen
 wird uns <code>NA</code> zurückgegeben, wenn <code>x</code> mindestens einen fehlenden Wert
 enthält. Folgende Aufrufe sind demnach äquivalent:</p>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb441-1" title="1"><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb441-2" title="2"><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">na.rm =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb452-1" title="1"><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb452-2" title="2"><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">na.rm =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>Da wir nicht immer alle optionalen Argumente von Funktionen angeben
 wollen – stattdessen „vertrauen“ wir auf die Standardwerte –,
 ist es sehr hilfreich, dass wir Funktionsargumente per Namen ansprechen
@@ -366,9 +366,9 @@ die wir anpassen wollen; für die anderen belassen wir den Standardwert.</p>
 Argumente ja anhand ihres Namens <em>oder</em> ihrer Position ansprechen. Wenn
 <code>na.rm</code> das zweite Argument wäre, könnten wir auch folgenden Aufruf
 verwenden:</p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb442-1" title="1"><span class="kw">mean</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">NA</span>), <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb442-2" title="2">Fehler <span class="cf">in</span> <span class="kw">mean.default</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">NA</span>), <span class="ot">TRUE</span>) <span class="op">:</span></a>
-<a class="sourceLine" id="cb442-3" title="3"><span class="st">  &#39;trim&#39;</span> must be numeric of length one</a></code></pre></div>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb453-1" title="1"><span class="kw">mean</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">NA</span>), <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb453-2" title="2">Fehler <span class="cf">in</span> <span class="kw">mean.default</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">NA</span>), <span class="ot">TRUE</span>) <span class="op">:</span></a>
+<a class="sourceLine" id="cb453-3" title="3"><span class="st">  &#39;trim&#39;</span> must be numeric of length one</a></code></pre></div>
 <p>Das hat aber nicht funktioniert. Diese Fehlermeldung informiert uns
 darüber, dass <code>mean</code> an der zweiten Position ein Argument mit dem Namen
 „<code>trim</code>“ erwartet. Offensichtlich hat <code>mean</code> mit <code>trim</code> noch ein
@@ -378,21 +378,21 @@ keinen Wert angeben, müssen wir <code>na.rm</code> per Namen ansprechen.</p>
 <p>Wenn wir Argumente mit Namen ansteuern, brauchen wir uns über die
 Reihenfolge der Argumente keine Gedanken machen. Das ist oftmals sehr
 hilfreich. Deswegen funktioniert folgender Aufruf:</p>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb443-1" title="1"><span class="kw">mean</span>(<span class="dt">na.rm =</span> <span class="ot">FALSE</span>, <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb454-1" title="1"><span class="kw">mean</span>(<span class="dt">na.rm =</span> <span class="ot">FALSE</span>, <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
 <pre><code>[1] 5.5</code></pre>
 <p>Wir erweitern nun das Beispiel von oben unter Berücksichtigung unseres
 Wissens über die Vergabe von Namen bei Funktionsargumenten. Folgende
 Aufrufe sind alle äquivalent:</p>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb445-1" title="1"><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb445-2" title="2"><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">na.rm =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb445-3" title="3"><span class="kw">mean</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb445-4" title="4"><span class="kw">mean</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">na.rm =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb445-5" title="5"><span class="kw">mean</span>(<span class="dt">na.rm =</span> <span class="ot">FALSE</span>, <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb456-1" title="1"><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb456-2" title="2"><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">na.rm =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb456-3" title="3"><span class="kw">mean</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb456-4" title="4"><span class="kw">mean</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">na.rm =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb456-5" title="5"><span class="kw">mean</span>(<span class="dt">na.rm =</span> <span class="ot">FALSE</span>, <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
 <p>Nicht äquivalent zu den obigen Aufrufen sind jedoch folgende Befehle,
 die zu Fehlermeldungen führen, da <code>na.rm</code> nicht das zweite Argument von
 <code>mean()</code> ist:</p>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb446-1" title="1"><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb446-2" title="2"><span class="kw">mean</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb457-1" title="1"><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb457-2" title="2"><span class="kw">mean</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>Wir haben nun gelernt, wie wir Argumente an Funktionen übergeben
 können. Dieses Wissen hilft uns jedoch nur, wenn wir folgende Frage
 beantworten können:</p>
@@ -414,14 +414,14 @@ nur das folgende Wissen:</p>
 Wir lernen, wie wir uns mit der <code>R</code>-Hilfe einen Überblick über die
 Arbeitsweise von Funktionen verschaffen können. Probieren wir es
 exemplarisch für die Funktion <code>mean()</code> aus:</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb447-1" title="1">?mean</a></code></pre></div>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb458-1" title="1">?mean</a></code></pre></div>
 <p>Interessant ist für uns erst einmal der obere Abschnitt „Usage“:</p>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb448-1" title="1">Usage<span class="op">:</span></a>
-<a class="sourceLine" id="cb448-2" title="2"></a>
-<a class="sourceLine" id="cb448-3" title="3"><span class="st">    </span><span class="kw">mean</span>(x, ...)</a>
-<a class="sourceLine" id="cb448-4" title="4"></a>
-<a class="sourceLine" id="cb448-5" title="5">    <span class="co">## Default S3 method:</span></a>
-<a class="sourceLine" id="cb448-6" title="6">    <span class="kw">mean</span>(x, <span class="dt">trim =</span> <span class="dv">0</span>, <span class="dt">na.rm =</span> <span class="ot">FALSE</span>, ...)</a></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb459-1" title="1">Usage<span class="op">:</span></a>
+<a class="sourceLine" id="cb459-2" title="2"></a>
+<a class="sourceLine" id="cb459-3" title="3"><span class="st">    </span><span class="kw">mean</span>(x, ...)</a>
+<a class="sourceLine" id="cb459-4" title="4"></a>
+<a class="sourceLine" id="cb459-5" title="5">    <span class="co">## Default S3 method:</span></a>
+<a class="sourceLine" id="cb459-6" title="6">    <span class="kw">mean</span>(x, <span class="dt">trim =</span> <span class="dv">0</span>, <span class="dt">na.rm =</span> <span class="ot">FALSE</span>, ...)</a></code></pre></div>
 <p>Wir ignorieren an dieser Stelle, dass uns zwei Varianten angeboten
 werden, die Funktion <code>mean()</code> zu nutzen.<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a> Wenn in der Hilfe
 eine „Default S3 method“ angeboten wird, interessiert uns oftmals diese;
@@ -452,20 +452,20 @@ tapply</a>)</li>
 <p>Die Beschreibung der Argumente achtet sehr auf Prägnanz und technische
 Korrektheit, wie wir am Beispiel der Beschreibung der Argumente der
 Funktion <code>mean</code> erkennen können:</p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb449-1" title="1">Arguments<span class="op">:</span></a>
-<a class="sourceLine" id="cb449-2" title="2"></a>
-<a class="sourceLine" id="cb449-3" title="3"><span class="st">    </span>x<span class="op">:</span><span class="st"> </span>An R object.  Currently there are methods <span class="cf">for</span></a>
-<a class="sourceLine" id="cb449-4" title="4">       numeric<span class="op">/</span>logical vectors and date, date<span class="op">-</span>time and</a>
-<a class="sourceLine" id="cb449-5" title="5">       time interval objects. Complex vectors are allowed</a>
-<a class="sourceLine" id="cb449-6" title="6">       <span class="cf">for</span> ‘trim =<span class="st"> </span>0’, only.</a>
-<a class="sourceLine" id="cb449-7" title="7"></a>
-<a class="sourceLine" id="cb449-8" title="8">    trim<span class="op">:</span><span class="st"> </span>the <span class="kw">fraction</span> (<span class="dv">0</span> to <span class="fl">0.5</span>) of observations to</a>
-<a class="sourceLine" id="cb449-9" title="9">       be trimmed from each end of ‘x’ before the mean</a>
-<a class="sourceLine" id="cb449-10" title="10">       is computed.  Values of trim outside that range</a>
-<a class="sourceLine" id="cb449-11" title="11">       are taken as the nearest endpoint.</a>
-<a class="sourceLine" id="cb449-12" title="12"></a>
-<a class="sourceLine" id="cb449-13" title="13">    na.rm<span class="op">:</span><span class="st"> </span>a logical value indicating whether ‘NA’ values</a>
-<a class="sourceLine" id="cb449-14" title="14">       should be stripped before the computation proceeds.</a></code></pre></div>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb460-1" title="1">Arguments<span class="op">:</span></a>
+<a class="sourceLine" id="cb460-2" title="2"></a>
+<a class="sourceLine" id="cb460-3" title="3"><span class="st">    </span>x<span class="op">:</span><span class="st"> </span>An R object.  Currently there are methods <span class="cf">for</span></a>
+<a class="sourceLine" id="cb460-4" title="4">       numeric<span class="op">/</span>logical vectors and date, date<span class="op">-</span>time and</a>
+<a class="sourceLine" id="cb460-5" title="5">       time interval objects. Complex vectors are allowed</a>
+<a class="sourceLine" id="cb460-6" title="6">       <span class="cf">for</span> ‘trim =<span class="st"> </span>0’, only.</a>
+<a class="sourceLine" id="cb460-7" title="7"></a>
+<a class="sourceLine" id="cb460-8" title="8">    trim<span class="op">:</span><span class="st"> </span>the <span class="kw">fraction</span> (<span class="dv">0</span> to <span class="fl">0.5</span>) of observations to</a>
+<a class="sourceLine" id="cb460-9" title="9">       be trimmed from each end of ‘x’ before the mean</a>
+<a class="sourceLine" id="cb460-10" title="10">       is computed.  Values of trim outside that range</a>
+<a class="sourceLine" id="cb460-11" title="11">       are taken as the nearest endpoint.</a>
+<a class="sourceLine" id="cb460-12" title="12"></a>
+<a class="sourceLine" id="cb460-13" title="13">    na.rm<span class="op">:</span><span class="st"> </span>a logical value indicating whether ‘NA’ values</a>
+<a class="sourceLine" id="cb460-14" title="14">       should be stripped before the computation proceeds.</a></code></pre></div>
 <p>Die <code>R</code>-Hilfe ist also hilfreich, aber nicht immer ganz leicht zu
 nutzen. Oftmals ist eine weitere Google-Recherche oder das Nachfragen
 bei einer Freundin oder einem Freund sinnvoll, wenn man die Nutzung
@@ -476,10 +476,10 @@ Funktion angewendet werden kann. Wenn wir Glück haben, ist genau das
 dabei, was wir brauchen. Der Code ist dabei so gewählt, dass man ihn per
 Copy &amp; Paste einfach selbst in der Konsole ausführen kann. Bei <code>mean()</code>
 finden wir etwa den folgenden Beispiel-Code:</p>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb450-1" title="1">Examples<span class="op">:</span></a>
-<a class="sourceLine" id="cb450-2" title="2"><span class="st">     </span>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb450-3" title="3">     xm &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</a>
-<a class="sourceLine" id="cb450-4" title="4">     <span class="kw">c</span>(xm, <span class="kw">mean</span>(x, <span class="dt">trim =</span> <span class="fl">0.10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb461-1" title="1">Examples<span class="op">:</span></a>
+<a class="sourceLine" id="cb461-2" title="2"><span class="st">     </span>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb461-3" title="3">     xm &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</a>
+<a class="sourceLine" id="cb461-4" title="4">     <span class="kw">c</span>(xm, <span class="kw">mean</span>(x, <span class="dt">trim =</span> <span class="fl">0.10</span>))</a></code></pre></div>
 <div class="block">
 <p>
 <strong>Hinweis:</strong> Wenn die <code>R</code>-Hilfe nicht so hilfreich ist, schaut euch die Beispiele an.
@@ -502,19 +502,19 @@ Erstellung von Kreuztabellen annimmt – und <code>dplyr::arrange()</code> – d
 beliebig viele Kriterien zur Sortierung eines <code>data.frames</code> annimmt –
 haben unbenannte Argumente. In der <code>R</code>-Hilfe ist dies oftmals an dem
 Platzhalterargument „<code>...</code>“ (lies: <em>ellipsis</em>) zu erkennen, siehe:<a href="#fn39" class="footnote-ref" id="fnref39"><sup>39</sup></a></p>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb451-1" title="1">?c</a>
-<a class="sourceLine" id="cb451-2" title="2"></a>
-<a class="sourceLine" id="cb451-3" title="3">Usage<span class="op">:</span></a>
-<a class="sourceLine" id="cb451-4" title="4"></a>
-<a class="sourceLine" id="cb451-5" title="5"><span class="st">     </span><span class="co">## S3 Generic function</span></a>
-<a class="sourceLine" id="cb451-6" title="6"><span class="st">     </span><span class="kw">c</span>(...)</a>
-<a class="sourceLine" id="cb451-7" title="7"></a>
-<a class="sourceLine" id="cb451-8" title="8">     <span class="co">## Default S3 method:</span></a>
-<a class="sourceLine" id="cb451-9" title="9">     <span class="kw">c</span>(..., <span class="dt">recursive =</span> <span class="ot">FALSE</span>, <span class="dt">use.names =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb451-10" title="10"></a>
-<a class="sourceLine" id="cb451-11" title="11">Arguments<span class="op">:</span></a>
-<a class="sourceLine" id="cb451-12" title="12"></a>
-<a class="sourceLine" id="cb451-13" title="13"><span class="st">     </span>...<span class="op">:</span><span class="st"> </span>objects to be concatenated.</a></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb462-1" title="1">?c</a>
+<a class="sourceLine" id="cb462-2" title="2"></a>
+<a class="sourceLine" id="cb462-3" title="3">Usage<span class="op">:</span></a>
+<a class="sourceLine" id="cb462-4" title="4"></a>
+<a class="sourceLine" id="cb462-5" title="5"><span class="st">     </span><span class="co">## S3 Generic function</span></a>
+<a class="sourceLine" id="cb462-6" title="6"><span class="st">     </span><span class="kw">c</span>(...)</a>
+<a class="sourceLine" id="cb462-7" title="7"></a>
+<a class="sourceLine" id="cb462-8" title="8">     <span class="co">## Default S3 method:</span></a>
+<a class="sourceLine" id="cb462-9" title="9">     <span class="kw">c</span>(..., <span class="dt">recursive =</span> <span class="ot">FALSE</span>, <span class="dt">use.names =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb462-10" title="10"></a>
+<a class="sourceLine" id="cb462-11" title="11">Arguments<span class="op">:</span></a>
+<a class="sourceLine" id="cb462-12" title="12"></a>
+<a class="sourceLine" id="cb462-13" title="13"><span class="st">     </span>...<span class="op">:</span><span class="st"> </span>objects to be concatenated.</a></code></pre></div>
 </div>
 </div>
 <div id="rückgabewerte" class="section level2">
@@ -533,10 +533,10 @@ NPI-Datensatz aus Kapitel 5 und vergleiche den mittleren
 Narzissmus-Gesamtwert (Spalte <code>score</code>) zwischen weiblichen und
 männlichen Testnehmenden (Spalte <code>gender</code>; Kodierung: männlich = 1,
 weiblich = 2).<a href="#fn40" class="footnote-ref" id="fnref40"><sup>40</sup></a></p>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb452-1" title="1"><span class="kw">t.test</span>(</a>
-<a class="sourceLine" id="cb452-2" title="2">  npi<span class="op">$</span>score[npi<span class="op">$</span>gender <span class="op">==</span><span class="st"> </span><span class="dv">1</span>],</a>
-<a class="sourceLine" id="cb452-3" title="3">  npi<span class="op">$</span>score[npi<span class="op">$</span>gender <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb452-4" title="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb463-1" title="1"><span class="kw">t.test</span>(</a>
+<a class="sourceLine" id="cb463-2" title="2">  npi<span class="op">$</span>score[npi<span class="op">$</span>gender <span class="op">==</span><span class="st"> </span><span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb463-3" title="3">  npi<span class="op">$</span>score[npi<span class="op">$</span>gender <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb463-4" title="4">)</a></code></pre></div>
 <p>Wir erhalten folgende Ausgabe in der Konsole:</p>
 <pre><code>
     Welch Two Sample t-test
@@ -566,11 +566,11 @@ etwas lesefreundlichere Zusammenfassung des Tests. Um das tatsächlich
 ausgegebene Objekt zu inspizieren, kann ich die Funktion <code>str()</code>
 verwenden. Dazu speichere ich die Ausgabe des t-Tests zunächst in einer
 Variablen ab:</p>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb454-1" title="1">test &lt;-<span class="st"> </span><span class="kw">t.test</span>(</a>
-<a class="sourceLine" id="cb454-2" title="2">  npi<span class="op">$</span>score[npi<span class="op">$</span>gender <span class="op">==</span><span class="st"> </span><span class="dv">1</span>],</a>
-<a class="sourceLine" id="cb454-3" title="3">  npi<span class="op">$</span>score[npi<span class="op">$</span>gender <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb454-4" title="4">)</a>
-<a class="sourceLine" id="cb454-5" title="5"><span class="kw">str</span>(test)</a></code></pre></div>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb465-1" title="1">test &lt;-<span class="st"> </span><span class="kw">t.test</span>(</a>
+<a class="sourceLine" id="cb465-2" title="2">  npi<span class="op">$</span>score[npi<span class="op">$</span>gender <span class="op">==</span><span class="st"> </span><span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb465-3" title="3">  npi<span class="op">$</span>score[npi<span class="op">$</span>gender <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb465-4" title="4">)</a>
+<a class="sourceLine" id="cb465-5" title="5"><span class="kw">str</span>(test)</a></code></pre></div>
 <pre><code>List of 10
  $ statistic  : Named num 13.2
   ..- attr(*, &quot;names&quot;)= chr &quot;t&quot;
@@ -597,12 +597,12 @@ Vektor gleicher Länge ist. Die Elemente der Liste können benannt sein,
 wie es bei der Rückgabe von <code>t.test()</code> der Fall ist. In diesem Fall kann
 ich, wie wir es von der Spaltenauswahl in <code>data.frames</code> kennen, mit der
 <code>$</code>-Notation auf einzelne Elemente zugreifen:</p>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb456-1" title="1">test<span class="op">$</span>statistic <span class="co"># t-Wert als ein-elementiger Vektor</span></a></code></pre></div>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb467-1" title="1">test<span class="op">$</span>statistic <span class="co"># t-Wert als ein-elementiger Vektor</span></a></code></pre></div>
 <pre><code>       t 
 13.24906 </code></pre>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb458-1" title="1">test<span class="op">$</span>alternative <span class="co"># ein- oder zweiseitiger Test?</span></a></code></pre></div>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb469-1" title="1">test<span class="op">$</span>alternative <span class="co"># ein- oder zweiseitiger Test?</span></a></code></pre></div>
 <pre><code>[1] &quot;two.sided&quot;</code></pre>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb460-1" title="1">test<span class="op">$</span>parameter <span class="co"># Freiheitsgrade</span></a></code></pre></div>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb471-1" title="1">test<span class="op">$</span>parameter <span class="co"># Freiheitsgrade</span></a></code></pre></div>
 <pre><code>     df 
 10681.4 </code></pre>
 <p>Es ist nicht unüblich, dass komplexere statistische Berechnungen eine
@@ -645,13 +645,13 @@ und genau für solche Automatisierungen lernen wir das Programmieren.</p>
 Repertoire eines <code>R</code>-Nutzers gehören. Mit selbst geschriebenen
 Funktionen können wir häufig durchgeführte Berechnungen abstrahieren und
 beliebig oft durchführen. Betrachten wir den folgenden Code:</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb462-1" title="1">(<span class="fl">0.23</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.23</span>)</a>
-<a class="sourceLine" id="cb462-2" title="2">(<span class="fl">0.47</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.23</span>) <span class="co"># copy-paste Fehler</span></a>
-<a class="sourceLine" id="cb462-3" title="3">(<span class="fl">0.68</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">4</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.68</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb473-1" title="1">(<span class="fl">0.23</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.23</span>)</a>
+<a class="sourceLine" id="cb473-2" title="2">(<span class="fl">0.47</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.23</span>) <span class="co"># copy-paste Fehler</span></a>
+<a class="sourceLine" id="cb473-3" title="3">(<span class="fl">0.68</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">4</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.68</span>)</a></code></pre></div>
 <p>Erkennt ihr, was berechnet wird? Falls nicht, betrachtet diesen Code:</p>
-<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb463-1" title="1"><span class="kw">spearman_brown</span>(<span class="fl">0.23</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb463-2" title="2"><span class="kw">spearman_brown</span>(<span class="fl">0.37</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb463-3" title="3"><span class="kw">spearman_brown</span>(<span class="fl">0.68</span>, <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb474-1" title="1"><span class="kw">spearman_brown</span>(<span class="fl">0.23</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb474-2" title="2"><span class="kw">spearman_brown</span>(<span class="fl">0.37</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb474-3" title="3"><span class="kw">spearman_brown</span>(<span class="fl">0.68</span>, <span class="dv">4</span>)</a></code></pre></div>
 <p>In der ersten Variante sind nur ein paar Zahlen und arithmetische
 Operationen zu sehen, die Semantik der Berechnung ist jedoch vollkommen
 unklar. Durch das Copy-Pasten des Codes ist mir sogar ein Fehler
@@ -676,12 +676,12 @@ und Variablen.</p>
 <h3><span class="header-section-number">6.5.1</span> Definition der eigenen Funktion</h3>
 <p>Erinnern wir uns an die Spearman-Brown-Funktion, die ich in Kapitel 5
 definiert habe:</p>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb464-1" title="1"><span class="dv">1</span>   spearman_brown &lt;-<span class="st"> </span><span class="cf">function</span>(reliability, factor) {</a>
-<a class="sourceLine" id="cb464-2" title="2"><span class="dv">2</span>     numerator  &lt;-<span class="st"> </span>reliability <span class="op">*</span><span class="st"> </span>factor</a>
-<a class="sourceLine" id="cb464-3" title="3"><span class="dv">3</span>     denominator &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(factor<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span>reliability</a>
-<a class="sourceLine" id="cb464-4" title="4"><span class="dv">4</span>     corrected_reliability &lt;-<span class="st"> </span>numerator <span class="op">/</span><span class="st"> </span>denominator</a>
-<a class="sourceLine" id="cb464-5" title="5"><span class="dv">5</span>     <span class="kw">return</span>(corrected_reliability)</a>
-<a class="sourceLine" id="cb464-6" title="6"><span class="dv">6</span>   }</a></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb475-1" title="1"><span class="dv">1</span>   spearman_brown &lt;-<span class="st"> </span><span class="cf">function</span>(reliability, factor) {</a>
+<a class="sourceLine" id="cb475-2" title="2"><span class="dv">2</span>     numerator  &lt;-<span class="st"> </span>reliability <span class="op">*</span><span class="st"> </span>factor</a>
+<a class="sourceLine" id="cb475-3" title="3"><span class="dv">3</span>     denominator &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(factor<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span>reliability</a>
+<a class="sourceLine" id="cb475-4" title="4"><span class="dv">4</span>     corrected_reliability &lt;-<span class="st"> </span>numerator <span class="op">/</span><span class="st"> </span>denominator</a>
+<a class="sourceLine" id="cb475-5" title="5"><span class="dv">5</span>     <span class="kw">return</span>(corrected_reliability)</a>
+<a class="sourceLine" id="cb475-6" title="6"><span class="dv">6</span>   }</a></code></pre></div>
 <p>Um die Funktion zu definieren, führe ich diese sechs Zeilen Code einfach
 in der <code>R</code>-Konsole aus. In RStudio reicht es sogar, STRG-Enter zu
 drücken, wenn sich mein Cursor in Zeile 1 befindet. In dieser Zeile
@@ -733,7 +733,7 @@ als Zwischenergebnisse abspeichere, interessieren mich hingegen nicht.
 Wenn ich eine Funktion schreibe, bleiben solche Hilfsvariablen verborgen
 und nur der Rückgabewert dringt nach außen. Ich kann den Rückgabewert
 abfangen, indem ich ihn in einer Variablen abspeichere:</p>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb465-1" title="1">split_half_correct &lt;-<span class="st"> </span><span class="kw">spearman_brown</span>(<span class="fl">0.63</span>, <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb476-1" title="1">split_half_correct &lt;-<span class="st"> </span><span class="kw">spearman_brown</span>(<span class="fl">0.63</span>, <span class="dv">2</span>)</a></code></pre></div>
 <p>Durch diesen Befehl wird eine korrigierte Reliabilität in eine Variable
 mit dem Namen <code>split_half_correct</code> geschrieben; dass der Rückgabewert
 der Funktion innerhalb der Funktion in einer Variablen mit dem Namen
@@ -753,14 +753,14 @@ somit optionale Argumente definieren. Wenn wir beispielsweise davon
 ausgehen, dass wir die Spearman-Brown-Korrektur meistens verwenden, um
 eine Split-Half-Korrelation zu korrigieren, könnten wir das Argument
 <code>factor</code> per default auf 2 setzen. Das funktioniert wie folgt:</p>
-<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb466-1" title="1">spearman_brown &lt;-<span class="st"> </span><span class="cf">function</span>(reliability, <span class="dt">factor =</span> <span class="dv">2</span>) {</a>
-<a class="sourceLine" id="cb466-2" title="2">    ...</a>
-<a class="sourceLine" id="cb466-3" title="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb477-1" title="1">spearman_brown &lt;-<span class="st"> </span><span class="cf">function</span>(reliability, <span class="dt">factor =</span> <span class="dv">2</span>) {</a>
+<a class="sourceLine" id="cb477-2" title="2">    ...</a>
+<a class="sourceLine" id="cb477-3" title="3">}</a></code></pre></div>
 <p>Diese Schreibweise kennen wir schon vom Aufruf von Funktionen, wenn wir
 die Argumente mit Namen ansprechen. In diesem Fall können wir die
 Funktion <code>spearman_brown()</code> auch wie folgt äquivalent verwenden:</p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb467-1" title="1">split_half_correct &lt;-<span class="st"> </span><span class="kw">spearman_brown</span>(<span class="fl">0.63</span>)</a>
-<a class="sourceLine" id="cb467-2" title="2">split_half_correct &lt;-<span class="st"> </span><span class="kw">spearman_brown</span>(<span class="fl">0.63</span>, <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb478-1" title="1">split_half_correct &lt;-<span class="st"> </span><span class="kw">spearman_brown</span>(<span class="fl">0.63</span>)</a>
+<a class="sourceLine" id="cb478-2" title="2">split_half_correct &lt;-<span class="st"> </span><span class="kw">spearman_brown</span>(<span class="fl">0.63</span>, <span class="dv">2</span>)</a></code></pre></div>
 </div>
 <div id="wann-schreibe-ich-meine-eigene-funktion" class="section level3">
 <h3><span class="header-section-number">6.5.4</span> Wann schreibe ich meine eigene Funktion</h3>

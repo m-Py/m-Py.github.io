@@ -155,7 +155,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4.1" data-path="vektoren.html"><a href="vektoren.html#logische-vergleiche-mit-vektoren-vom-typ-character"><i class="fa fa-check"></i><b>2.4.1</b> Logische Vergleiche mit Vektoren vom Typ <code>character</code></a></li>
 <li class="chapter" data-level="2.4.2" data-path="vektoren.html"><a href="vektoren.html#komponentenweise-vergleiche"><i class="fa fa-check"></i><b>2.4.2</b> Komponentenweise Vergleiche</a></li>
 <li class="chapter" data-level="2.4.3" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen"><i class="fa fa-check"></i><b>2.4.3</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
-<li class="chapter" data-level="2.4.4" data-path="vektoren.html"><a href="vektoren.html#logische-operationen-mit-na"><i class="fa fa-check"></i><b>2.4.4</b> Logische Operationen mit <code>NA</code></a></li>
+<li class="chapter" data-level="2.4.4" data-path="vektoren.html"><a href="vektoren.html#nalogik"><i class="fa fa-check"></i><b>2.4.4</b> Logische Operationen mit <code>NA</code></a></li>
 <li class="chapter" data-level="2.4.5" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.4.5</b> Der <code>%in%</code>-Operator</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.5</b> Zugriff auf Vektorelemente</a><ul>
@@ -186,8 +186,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6.1" data-path="dataframes.html"><a href="dataframes.html#tapply"><i class="fa fa-check"></i><b>3.6.1</b> Gruppierte Statistiken: <code>tapply()</code></a></li>
 <li class="chapter" data-level="3.6.2" data-path="dataframes.html"><a href="dataframes.html#datenstruktur-nrow-und-ncol"><i class="fa fa-check"></i><b>3.6.2</b> Datenstruktur: <code>nrow()</code> und <code>ncol()</code></a></li>
 <li class="chapter" data-level="3.6.3" data-path="dataframes.html"><a href="dataframes.html#wie-sieht-die-tabelle-aus-head-und-tail"><i class="fa fa-check"></i><b>3.6.3</b> Wie sieht die Tabelle aus: <code>head()</code> und <code>tail()</code></a></li>
-<li class="chapter" data-level="3.6.4" data-path="dataframes.html"><a href="dataframes.html#sortieren-die-funktion-arrange-aus-dem-paket-dplyr"><i class="fa fa-check"></i><b>3.6.4</b> Sortieren: Die Funktion <code>arrange</code>() aus dem Paket <code>dplyr</code></a></li>
-<li class="chapter" data-level="3.6.5" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-aller-spalten"><i class="fa fa-check"></i><b>3.6.5</b> Zusammenfassung aller Spalten</a></li>
+<li class="chapter" data-level="3.6.4" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-aller-spalten-hilfe-aus-zusatzpaketen"><i class="fa fa-check"></i><b>3.6.4</b> Zusammenfassung aller Spalten: Hilfe aus Zusatzpaketen</a></li>
+<li class="chapter" data-level="3.6.5" data-path="dataframes.html"><a href="dataframes.html#sortieren-die-funktion-arrange-aus-dem-paket-dplyr"><i class="fa fa-check"></i><b>3.6.5</b> Sortieren: Die Funktion <code>arrange</code>() aus dem Paket <code>dplyr</code></a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-1"><i class="fa fa-check"></i><b>3.7</b> Zusammenfassung</a></li>
 <li class="chapter" data-level="3.8" data-path="dataframes.html"><a href="dataframes.html#fragen-zum-vertiefenden-verständnis-1"><i class="fa fa-check"></i><b>3.8</b> Fragen zum vertiefenden Verständnis</a></li>
@@ -275,6 +275,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Fletcher, T. D. (2010). <em>psychometric: Applied Psychometric Theory</em>. Abgerufen von <a href="https://CRAN.R-project.org/package=psychometric">https://CRAN.R-project.org/package=psychometric</a></p>
 </div>
 <div>
+<p>Harrell, F. E. (2020). <em>Hmisc: Harrell Miscellaneous</em>. Abgerufen von <a href="https://CRAN.R-project.org/package=Hmisc">https://CRAN.R-project.org/package=Hmisc</a></p>
+</div>
+<div>
 <p>Li, Z., Lu, S., Myagmar, S., &amp; Zhou, Y. (2006). CP-Miner: Finding copy-paste and related bugs in large-scale software code. <em>IEEE Transactions on software Engineering</em>, <em>32</em>(3), 176–192.</p>
 </div>
 <div>
@@ -282,6 +285,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div>
 <p>R Core Team. (2018). <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. Abgerufen von <a href="https://www.R-project.org/">https://www.R-project.org/</a></p>
+</div>
+<div>
+<p>Revelle, W. (2019). <em>psych: Procedures for Psychological, Psychometric, and Personality Research</em>. Evanston, Illinois: Northwestern University. Abgerufen von <a href="https://CRAN.R-project.org/package=psych">https://CRAN.R-project.org/package=psych</a></p>
+</div>
+<div>
+<p>Waring, E., Quinn, M., McNamara, A., Arino de la Rubia, E., Zhu, H., &amp; Ellis, S. (2020). <em>skimr: Compact and Flexible Summaries of Data</em>. Abgerufen von <a href="https://CRAN.R-project.org/package=skimr">https://CRAN.R-project.org/package=skimr</a></p>
+</div>
+<div>
+<p>Wickham, H. (2014). <em>Advanced R</em> (1st Aufl.). Chapman; Hall/CRC.</p>
+</div>
+<div>
+<p>Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., … Yutani, H. (2019). Welcome to the tidyverse. <em>Journal of Open Source Software</em>, <em>4</em>(43), 1686. <a href="http://doi.org/10.21105/joss.01686">http://doi.org/10.21105/joss.01686</a></p>
 </div>
 <div>
 <p>Wickham, H., François, R., Henry, L., &amp; Müller, K. (2018). <em>dplyr: A Grammar of Data Manipulation</em>. Abgerufen von <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a></p>

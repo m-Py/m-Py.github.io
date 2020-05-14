@@ -155,7 +155,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4.1" data-path="vektoren.html"><a href="vektoren.html#logische-vergleiche-mit-vektoren-vom-typ-character"><i class="fa fa-check"></i><b>2.4.1</b> Logische Vergleiche mit Vektoren vom Typ <code>character</code></a></li>
 <li class="chapter" data-level="2.4.2" data-path="vektoren.html"><a href="vektoren.html#komponentenweise-vergleiche"><i class="fa fa-check"></i><b>2.4.2</b> Komponentenweise Vergleiche</a></li>
 <li class="chapter" data-level="2.4.3" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen"><i class="fa fa-check"></i><b>2.4.3</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
-<li class="chapter" data-level="2.4.4" data-path="vektoren.html"><a href="vektoren.html#logische-operationen-mit-na"><i class="fa fa-check"></i><b>2.4.4</b> Logische Operationen mit <code>NA</code></a></li>
+<li class="chapter" data-level="2.4.4" data-path="vektoren.html"><a href="vektoren.html#nalogik"><i class="fa fa-check"></i><b>2.4.4</b> Logische Operationen mit <code>NA</code></a></li>
 <li class="chapter" data-level="2.4.5" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.4.5</b> Der <code>%in%</code>-Operator</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.5</b> Zugriff auf Vektorelemente</a><ul>
@@ -186,8 +186,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6.1" data-path="dataframes.html"><a href="dataframes.html#tapply"><i class="fa fa-check"></i><b>3.6.1</b> Gruppierte Statistiken: <code>tapply()</code></a></li>
 <li class="chapter" data-level="3.6.2" data-path="dataframes.html"><a href="dataframes.html#datenstruktur-nrow-und-ncol"><i class="fa fa-check"></i><b>3.6.2</b> Datenstruktur: <code>nrow()</code> und <code>ncol()</code></a></li>
 <li class="chapter" data-level="3.6.3" data-path="dataframes.html"><a href="dataframes.html#wie-sieht-die-tabelle-aus-head-und-tail"><i class="fa fa-check"></i><b>3.6.3</b> Wie sieht die Tabelle aus: <code>head()</code> und <code>tail()</code></a></li>
-<li class="chapter" data-level="3.6.4" data-path="dataframes.html"><a href="dataframes.html#sortieren-die-funktion-arrange-aus-dem-paket-dplyr"><i class="fa fa-check"></i><b>3.6.4</b> Sortieren: Die Funktion <code>arrange</code>() aus dem Paket <code>dplyr</code></a></li>
-<li class="chapter" data-level="3.6.5" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-aller-spalten"><i class="fa fa-check"></i><b>3.6.5</b> Zusammenfassung aller Spalten</a></li>
+<li class="chapter" data-level="3.6.4" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-aller-spalten-hilfe-aus-zusatzpaketen"><i class="fa fa-check"></i><b>3.6.4</b> Zusammenfassung aller Spalten: Hilfe aus Zusatzpaketen</a></li>
+<li class="chapter" data-level="3.6.5" data-path="dataframes.html"><a href="dataframes.html#sortieren-die-funktion-arrange-aus-dem-paket-dplyr"><i class="fa fa-check"></i><b>3.6.5</b> Sortieren: Die Funktion <code>arrange</code>() aus dem Paket <code>dplyr</code></a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-1"><i class="fa fa-check"></i><b>3.7</b> Zusammenfassung</a></li>
 <li class="chapter" data-level="3.8" data-path="dataframes.html"><a href="dataframes.html#fragen-zum-vertiefenden-verständnis-1"><i class="fa fa-check"></i><b>3.8</b> Fragen zum vertiefenden Verständnis</a></li>
@@ -289,13 +289,13 @@ Antworten mit 0 – ein typisches Datenformat in der psychologischen
 Diagnostik.</p>
 <p>Um das fortführende Beispiel selbst nachzuvollziehen, müsst ihr den
 folgenden <code>data.frame</code> erstellen:</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb366-1" title="1">test_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb366-2" title="2">  <span class="dt">Item_1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb366-3" title="3">  <span class="dt">Item_2 =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb366-4" title="4">  <span class="dt">Item_3 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb366-5" title="5">  <span class="dt">Item_4 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb366-6" title="6">  <span class="dt">Item_5 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb366-7" title="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb377-1" title="1">test_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb377-2" title="2">  <span class="dt">Item_1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb377-3" title="3">  <span class="dt">Item_2 =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb377-4" title="4">  <span class="dt">Item_3 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb377-5" title="5">  <span class="dt">Item_4 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb377-6" title="6">  <span class="dt">Item_5 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb377-7" title="7">)</a></code></pre></div>
 <p>Wenn uns Daten in diesem Format vorliegen, können wir auf viele
 Funktionen in <code>R</code> zurückgreifen, um grundlegende psychometrische
 Auswertungen durchzuführen. Dies sind etwa die Bestimmung der
@@ -316,12 +316,12 @@ wir genau dieses Datenformat!</p>
 Kind repräsentiert, ist der Gesamt-Testscore die Summe der Werte in
 jeder Reihe. Die Summe der Reihen (engl: <em>rows</em>) eines <code>data.frames</code>
 können wir mit der Funktion <code>rowSums()</code> bestimmen:</p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb367-1" title="1"><span class="kw">rowSums</span>(test_data)</a></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb378-1" title="1"><span class="kw">rowSums</span>(test_data)</a></code></pre></div>
 <pre><code> [1] 4 1 5 0 3 1 2 1 3 0</code></pre>
 <p>Es ist manchmal praktisch Berechnungen, die pro Fall einen Wert ergeben,
 direkt an den ursprünglichen <code>data.frame</code> anzuhängen. Wie in Kapitel 3
 erklärt, ist das mit der <code>$</code>-Notation möglich:</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb369-1" title="1">test_data<span class="op">$</span>score &lt;-<span class="st"> </span><span class="kw">rowSums</span>(test_data)</a></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb380-1" title="1">test_data<span class="op">$</span>score &lt;-<span class="st"> </span><span class="kw">rowSums</span>(test_data)</a></code></pre></div>
 </div>
 <div id="item-schwierigkeiten" class="section level2">
 <h2><span class="header-section-number">4.2</span> Item-Schwierigkeiten</h2>
@@ -331,7 +331,7 @@ Mittelwert der Einträge in jeder Spalte (engl: <em>column</em>) in unserem
 Standardformat. Den Mittelwert pro Spalte kann ich mit der Funktion
 <code>colMeans()</code> bestimmen (analog gibt es auch die Funktionen <code>colSums()</code> und
 <code>rowMeans()</code>):</p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb370-1" title="1"><span class="kw">colMeans</span>(test_data)</a></code></pre></div>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb381-1" title="1"><span class="kw">colMeans</span>(test_data)</a></code></pre></div>
 <pre><code>Item_1 Item_2 Item_3 Item_4 Item_5  score 
    0.6    0.1    0.6    0.4    0.3    2.0 </code></pre>
 <p>Da ich gerade den Gesamtscore als Spalte an <code>test_data</code> angehängt habe,
@@ -350,7 +350,7 @@ zwischen allen Items als Korrelationsmatrix aus. Wenn <code>cor()</code> als
 Argument einen <code>data.frame</code> erhält, wird eine Tabelle ausgegeben, die
 die Korrelation zwischen allen Spalten – d.h. Items – des
 <code>data.frames</code> enthält.</p>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb372-1" title="1"><span class="kw">round</span>(<span class="kw">cor</span>(test_data), <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb383-1" title="1"><span class="kw">round</span>(<span class="kw">cor</span>(test_data), <span class="dv">2</span>)</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -447,12 +447,12 @@ Folgenden berechnen wir eine part-whole korrigierte Trennschärfe für
 Item 2. Zunächst erstelle ich einen Vektor zur Auswahl der Items, die
 ich zur Berechnung des Testscores unter Ausschluss von Item 2
 heranziehe:</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb373-1" title="1"><span class="co">## Wähle Antworten auf Items 1, 3, 4, 5 aus:</span></a>
-<a class="sourceLine" id="cb373-2" title="2">select_items   &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, (<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)[<span class="op">-</span><span class="dv">2</span>])</a>
-<a class="sourceLine" id="cb373-3" title="3">responses_no_item2 &lt;-<span class="st"> </span>test_data[, select_items]</a>
-<a class="sourceLine" id="cb373-4" title="4"></a>
-<a class="sourceLine" id="cb373-5" title="5"><span class="co">## Betrachte die Tabelle:</span></a>
-<a class="sourceLine" id="cb373-6" title="6"><span class="kw">head</span>(responses_no_item2)</a></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb384-1" title="1"><span class="co">## Wähle Antworten auf Items 1, 3, 4, 5 aus:</span></a>
+<a class="sourceLine" id="cb384-2" title="2">select_items   &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, (<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)[<span class="op">-</span><span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb384-3" title="3">responses_no_item2 &lt;-<span class="st"> </span>test_data[, select_items]</a>
+<a class="sourceLine" id="cb384-4" title="4"></a>
+<a class="sourceLine" id="cb384-5" title="5"><span class="co">## Betrachte die Tabelle:</span></a>
+<a class="sourceLine" id="cb384-6" title="6"><span class="kw">head</span>(responses_no_item2)</a></code></pre></div>
 <pre><code>  Item_1 Item_3 Item_4 Item_5
 1      1      1      1      1
 2      1      0      0      0
@@ -460,19 +460,19 @@ heranziehe:</p>
 4      0      0      0      0
 5      0      1      1      1
 6      0      1      0      0</code></pre>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb375-1" title="1"><span class="co">## Berechne den Testscore über Items 1, 3, 4 und 5:</span></a>
-<a class="sourceLine" id="cb375-2" title="2">corrected_score &lt;-<span class="st"> </span><span class="kw">rowSums</span>(responses_no_item2)</a></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb386-1" title="1"><span class="co">## Berechne den Testscore über Items 1, 3, 4 und 5:</span></a>
+<a class="sourceLine" id="cb386-2" title="2">corrected_score &lt;-<span class="st"> </span><span class="kw">rowSums</span>(responses_no_item2)</a></code></pre></div>
 <p>Die Variable <code>corrected_score</code> enthält nun die Testscores, die unter
 Ausschluss des zweiten Items gebildet wurden. Das Vorgehen zur
 Berechnung der bereinigten Scores lässt sich mithilfe der
 <code>[·,·]</code>-Notation und den Funktionen <code>paste0()</code> und <code>rowSums()</code> auch auf
 beliebig viele Items erweitern. Da wir hier den Summenwert nur über vier
 Items gebildet haben, hätte auch der folgende Code funktioniert:</p>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb376-1" title="1">corrected_score &lt;-<span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">3</span> <span class="op">+</span></a>
-<a class="sourceLine" id="cb376-2" title="2"><span class="st">    </span>test_data<span class="op">$</span>Item_<span class="dv">4</span> <span class="op">+</span><span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">5</span></a></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb387-1" title="1">corrected_score &lt;-<span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">3</span> <span class="op">+</span></a>
+<a class="sourceLine" id="cb387-2" title="2"><span class="st">    </span>test_data<span class="op">$</span>Item_<span class="dv">4</span> <span class="op">+</span><span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">5</span></a></code></pre></div>
 <p>Wie folgt können wir nun mithilfe der Funktion <code>cor()</code> die korrigierte
 Trennschärfe für Item 2 bestimmen:</p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb377-1" title="1"><span class="kw">cor</span>(test_data<span class="op">$</span>Item_<span class="dv">2</span>, corrected_score)</a></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" title="1"><span class="kw">cor</span>(test_data<span class="op">$</span>Item_<span class="dv">2</span>, corrected_score)</a></code></pre></div>
 <pre><code>[1] 0.4842001</code></pre>
 <p>Die korrigierte Trennschärfe von 0.48 liegt unter der unkorrigierten Trennschärfe von
 0.62. Je weniger Items ein Test hat,
@@ -539,12 +539,12 @@ von Cronbachs Alpha findet sich im Paket <code>psychometric</code>
 die nicht zur Grundausstattung von <code>R</code> gehören. Voraussetzung ist, dass
 ich das Paket auf meinem Rechner installiert habe. Die Erweiterbarkeit
 durch Pakete ist eine der großen Stärken von <code>R</code>.</p>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb379-1" title="1"><span class="co"># Das Paket `psychometric` enthält eine Funktion, die Cronbachs Alpha</span></a>
-<a class="sourceLine" id="cb379-2" title="2"><span class="co"># berechnet</span></a>
-<a class="sourceLine" id="cb379-3" title="3"><span class="kw">library</span>(<span class="st">&quot;psychometric&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb390-1" title="1"><span class="co"># Das Paket `psychometric` enthält eine Funktion, die Cronbachs Alpha</span></a>
+<a class="sourceLine" id="cb390-2" title="2"><span class="co"># berechnet</span></a>
+<a class="sourceLine" id="cb390-3" title="3"><span class="kw">library</span>(<span class="st">&quot;psychometric&quot;</span>)</a></code></pre></div>
 <p>Falls das Paket nicht installiert ist, kann ich es mit dem folgenden
 Befehl installieren:</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb380-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;psychometric&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb391-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;psychometric&quot;</span>)</a></code></pre></div>
 <p>Praktischerweise arbeitet die Funktion <code>alpha()</code> aus dem <code>psychometric</code>
 Paket genau mit dem Standard-Datenformat, das uns vorliegt: Zeilen
 kennzeichnen Testteilnehmer, Spalten kennzeichnen Items. <strong>Wichtig ist
@@ -552,10 +552,10 @@ aber nun</strong>: Wir haben soeben den Testscore als zusätzliche Spalte an die
 Testdatentabelle angehängt. Diese geht aber nicht in die Berechnung von
 Cronbachs Alpha ein, sondern nur die Punktzahlen für die Items. Deswegen
 entferne ich die Spalte <code>score</code> wie folgt wieder:</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb381-1" title="1">test_data<span class="op">$</span>score &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb381-2" title="2"></a>
-<a class="sourceLine" id="cb381-3" title="3"><span class="co">## Prüfe, dass die Spalte wirklich weg ist:</span></a>
-<a class="sourceLine" id="cb381-4" title="4"><span class="kw">names</span>(test_data)</a></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb392-1" title="1">test_data<span class="op">$</span>score &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb392-2" title="2"></a>
+<a class="sourceLine" id="cb392-3" title="3"><span class="co">## Prüfe, dass die Spalte wirklich weg ist:</span></a>
+<a class="sourceLine" id="cb392-4" title="4"><span class="kw">names</span>(test_data)</a></code></pre></div>
 <pre><code>[1] &quot;Item_1&quot; &quot;Item_2&quot; &quot;Item_3&quot; &quot;Item_4&quot; &quot;Item_5&quot;</code></pre>
 <p>Wir haben gelernt, dass wir Variablen mit der Funktion <code>rm()</code> löschen
 können. Wir können sie aber nicht nutzen, wenn wir Spalten aus
@@ -566,7 +566,7 @@ ist in <code>R</code> ein Wert, der für „Nicht-Existenz“ steht.</p>
 <p>Nachdem wir das Paket <code>psychometric</code> geladen und die Spalte <code>score</code>
 entfernt haben, können wir Cronbachs Alpha mit der Funktion <code>alpha()</code>
 bestimmen:</p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb383-1" title="1"><span class="kw">alpha</span>(test_data) <span class="co"># erfordert Laden des Pakets psychometric</span></a></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb394-1" title="1"><span class="kw">alpha</span>(test_data) <span class="co"># erfordert Laden des Pakets psychometric</span></a></code></pre></div>
 <pre><code>[1] 0.7596154</code></pre>
 </div>
 <div id="split-half-reliabilität" class="section level2">
@@ -604,39 +604,39 @@ zweimal der gesamte Test in die Korrelation ein).</p>
 teilen wir zunächst die Items in zwei Mengen auf; hier ist es nicht
 möglich gleich große Teile zu generieren, also wählen wir die ersten
 drei und die letzten zwei Items aus:</p>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb385-1" title="1">first_half  &lt;-<span class="st"> </span>test_data[, <span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)]</a>
-<a class="sourceLine" id="cb385-2" title="2">second_half &lt;-<span class="st"> </span>test_data[, <span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">5</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb396-1" title="1">first_half  &lt;-<span class="st"> </span>test_data[, <span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)]</a>
+<a class="sourceLine" id="cb396-2" title="2">second_half &lt;-<span class="st"> </span>test_data[, <span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">5</span>)]</a></code></pre></div>
 <p>Als nächstes berechnen wir die Korrelation zwischen den beiden
 Testhälften:</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb386-1" title="1">cor_halfs &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="kw">rowSums</span>(first_half), <span class="kw">rowSums</span>(second_half))</a>
-<a class="sourceLine" id="cb386-2" title="2">cor_halfs</a></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb397-1" title="1">cor_halfs &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="kw">rowSums</span>(first_half), <span class="kw">rowSums</span>(second_half))</a>
+<a class="sourceLine" id="cb397-2" title="2">cor_halfs</a></code></pre></div>
 <pre><code>[1] 0.6049383</code></pre>
 <p>Nun wollen wir diese Korrelation mit der Spearman-Brown-Formel
 korrigieren. Zu diesem Zweck definieren wir eine eigene Funktion, die
 die Spearman-Brown-Formel umsetzt. An dieser Stelle reicht es aus, das
 Konzept einer eigenen Funktion zur Kenntnis zu nehmen – es wird in
 Kapitel 6 wieder aufgegriffen:</p>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" title="1"><span class="co">## Definiere eine SPEARMAN-BROWN Funktion. Sie nimmt zwei Argumente an: </span></a>
-<a class="sourceLine" id="cb388-2" title="2"><span class="co">## (a) einen Reliabilitäts-Schätzer</span></a>
-<a class="sourceLine" id="cb388-3" title="3"><span class="co">## (b) einen Verlängerungsfaktor</span></a>
-<a class="sourceLine" id="cb388-4" title="4"></a>
-<a class="sourceLine" id="cb388-5" title="5">spearman_brown &lt;-<span class="st"> </span><span class="cf">function</span>(reliability, factor) {</a>
-<a class="sourceLine" id="cb388-6" title="6">    numerator  &lt;-<span class="st"> </span>reliability <span class="op">*</span><span class="st"> </span>factor</a>
-<a class="sourceLine" id="cb388-7" title="7">    denominator &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(factor<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span>reliability</a>
-<a class="sourceLine" id="cb388-8" title="8">    corrected_reliability &lt;-<span class="st"> </span>numerator <span class="op">/</span><span class="st"> </span>denominator</a>
-<a class="sourceLine" id="cb388-9" title="9">    <span class="kw">return</span>(corrected_reliability)</a>
-<a class="sourceLine" id="cb388-10" title="10">}</a></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb399-1" title="1"><span class="co">## Definiere eine SPEARMAN-BROWN Funktion. Sie nimmt zwei Argumente an: </span></a>
+<a class="sourceLine" id="cb399-2" title="2"><span class="co">## (a) einen Reliabilitäts-Schätzer</span></a>
+<a class="sourceLine" id="cb399-3" title="3"><span class="co">## (b) einen Verlängerungsfaktor</span></a>
+<a class="sourceLine" id="cb399-4" title="4"></a>
+<a class="sourceLine" id="cb399-5" title="5">spearman_brown &lt;-<span class="st"> </span><span class="cf">function</span>(reliability, factor) {</a>
+<a class="sourceLine" id="cb399-6" title="6">    numerator  &lt;-<span class="st"> </span>reliability <span class="op">*</span><span class="st"> </span>factor</a>
+<a class="sourceLine" id="cb399-7" title="7">    denominator &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(factor<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span>reliability</a>
+<a class="sourceLine" id="cb399-8" title="8">    corrected_reliability &lt;-<span class="st"> </span>numerator <span class="op">/</span><span class="st"> </span>denominator</a>
+<a class="sourceLine" id="cb399-9" title="9">    <span class="kw">return</span>(corrected_reliability)</a>
+<a class="sourceLine" id="cb399-10" title="10">}</a></code></pre></div>
 <p>Wenn wir die Funktion definiert haben – das heißt: den Funktions-Code
 in der Konsole ausgeführt haben –, können wir sie wie andere bekannte
 Funktionen aufrufen. Wir müssen zwei Argumente angeben: (1) Unseren
 initialen Schätzer der Reliabilität, also die Korrelation zwischen den
 zwei Testhälften; (2) den Verlängerungsfaktor, hier 2, da wir die
 Reliabilität für die doppelte Testlänge schätzen wollen:</p>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb389-1" title="1">split_half &lt;-<span class="st"> </span><span class="kw">spearman_brown</span>(cor_halfs, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb389-2" title="2">split_half</a></code></pre></div>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb400-1" title="1">split_half &lt;-<span class="st"> </span><span class="kw">spearman_brown</span>(cor_halfs, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb400-2" title="2">split_half</a></code></pre></div>
 <pre><code>[1] 0.7538462</code></pre>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb391-1" title="1"><span class="co">## Vergleiche mit Cronbachs Alpha:</span></a>
-<a class="sourceLine" id="cb391-2" title="2"><span class="kw">alpha</span>(test_data)</a></code></pre></div>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb402-1" title="1"><span class="co">## Vergleiche mit Cronbachs Alpha:</span></a>
+<a class="sourceLine" id="cb402-2" title="2"><span class="kw">alpha</span>(test_data)</a></code></pre></div>
 <pre><code>[1] 0.7596154</code></pre>
 <p>Wie wir sehen, liegt die Spearman-Brown-korrigierte
 Split-Half-Reliabilität näher an Cronbachs Alpha als die unkorrigierte
