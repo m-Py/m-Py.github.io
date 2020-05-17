@@ -11,6 +11,7 @@ href="https://www.r-project.org/" target="_blank">R</a>-related stuff.
 [About me](../about/index.html).
 
 ### Posts:
+- <a href="28-columns-matrices.html">2020/05: Selecting columns from matrices and data frames in `R`
 - <a href="26_cluster-plot.html">2020/03: Visualizing a cluster analysis in Base `R`
 - <a href="25_ifelse.html">2020/01: Ifelse logic in base `R` and `dplyr`
 - <a href="24_germanRmd.html">2020/01: A better option for German language support in R Markdown

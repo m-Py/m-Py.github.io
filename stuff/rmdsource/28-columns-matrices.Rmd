@@ -1,0 +1,78 @@
+---
+title: "Selecting columns from matrices and data frames in `R`"
+date: May 17, 2020
+author: Martin Papenberg
+---
+
+```{r, include = FALSE}
+
+library(knitr)
+knitr::opts_chunk$set(message=FALSE, warning = FALSE) # echo = FALSE
+options(scipen = 999, digits = 2)
+
+```
+
+<a href="19-columns.html" target="_blank">In a previous post</a>, I 
+compared the speed of different data frame column selection operations 
+in `R` (the `$` operation performed fastest). In this post, I compare 
+the speed of column selection in data frames and matrices.
+
+Using the package `microbenchmark`, I compare the speed of selecting 
+single columns. First, I generate some random data and store it as 
+matrix and data frame. 
+
+```{r}
+N <- 100
+mat <- matrix(rnorm(N * 2), ncol = 2)
+colnames(mat) <- c("c1", "c2")
+df <- data.frame(mat)
+```
+
+Now, let's compare how fast columns are selected:
+
+```{r}
+
+library(microbenchmark)
+microbenchmark(
+  mat[, 1],
+  df$c1
+)
+```
+
+Interestingly, selecting a column from a data frame is a little bit 
+faster than from a matrix. However, most interestingly, the discrepancy 
+grows with increasing number of elements in the data frame:
+
+```{r}
+N <- 10000
+mat <- matrix(rnorm(N * 2), ncol = 2)
+colnames(mat) <- c("c1", "c2")
+df <- data.frame(mat)
+microbenchmark(
+  mat[, 1],
+  df$c1
+)
+```
+
+```{r}
+N <- 100000
+mat <- matrix(rnorm(N * 2), ncol = 2)
+colnames(mat) <- c("c1", "c2")
+df <- data.frame(mat)
+microbenchmark(
+  mat[, 1],
+  df$c1
+)
+```
+
+Whereas the speed of column selection is hardly affected for data 
+frames, column selection gets considerably slower with matrices. I was 
+quite surprised by this finding.
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
