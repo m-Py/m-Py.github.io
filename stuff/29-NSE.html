@@ -380,20 +380,20 @@ summary {
 <blockquote>
 <p>An <code>R</code> function performs non-standard evaluation if (at least) one of its arguments does not by itself evaluate to an <code>R</code> object.</p>
 </blockquote>
-<p>This definition is incomplete and does not capture the “technical” essence of non-standard evaluation, but I guess it is useful from the viewpoint of an <code>R</code> user. For example, in the following example, the function <code>subset()</code> performs non-standard evaluation to select rows in the <code>sleep</code> data set, because the code <code>ID == 1</code>, passed as the second argument, does not evaluate to an <code>R</code> object.</p>
+<p>This definition is incomplete and does not capture the “technical” essence of non-standard evaluation, but I guess it is useful from the viewpoint of an <code>R</code> user. In the following example, the function <code>subset()</code> performs non-standard evaluation to select rows in the built-in <code>sleep</code> data set, because the code <code>ID  == 1</code>, passed as the second argument, does not evaluate to an <code>R</code> object.</p>
 <pre class="r"><code>subset(sleep, ID == 1)</code></pre>
 <pre><code>##    extra group ID
 ## 1    0.7     1  1
 ## 11   1.9     2  1</code></pre>
-<p><code>ID</code> is not itself a variable, but only a column in the data frame <code>sleep</code>; therefore, <code>ID == 1</code> most likely throws an error if evaluated by itself in the <code>R</code> console. However, when passed as an argument to <code>subset()</code>, <code>ID == 1</code> is valid <code>R</code> code because the function internally deals with it; <code>subset()</code> knows that <code>ID</code> has to be a column of the data frame <code>sleep</code> that is passed as the first argument.</p>
-<p>Using the above definition, we can investigate whether the <code>$</code> notation for selecting columns in a data frame corresponds to non-standard evaluation. For starters, we note that in <code>R</code> every operation is a function call, including special syntax for data selection (such as <code>$</code>, or <code>[·]</code>). Moreover, every operation can also be expressed in “standard” function notation using round brackets. In the case of the <code>$</code> notation, the two following calls are equivalent:</p>
+<p><code>ID</code> is not itself a variable, but only a column in the data frame <code>sleep</code>; therefore, <code>ID == 1</code> most likely throws if we were to type it in the <code>R</code> console. However, when passed as an argument to <code>subset()</code>, <code>ID == 1</code> is valid <code>R</code> code because the function internally deals with it; <code>subset()</code> knows that <code>ID</code> has to be a column of the data frame <code>sleep</code> that is passed as the first argument.</p>
+<p>Using the above definition, we can investigate whether the <code>$</code> notation for selecting columns in a data frame corresponds to non-standard evaluation. For starters, we note that in <code>R</code> every operation is a function call, including special syntax for data selection such as <code>$</code>, or <code>[·]</code>. Moreover, every operation can be expressed in “standard” function notation that uses round brackets. In the case of the <code>$</code> notation, the two following calls are equivalent:</p>
 <pre class="r"><code>sleep$ID</code></pre>
 <pre><code>##  [1] 1  2  3  4  5  6  7  8  9  10 1  2  3  4  5  6  7  8  9  10
 ## Levels: 1 2 3 4 5 6 7 8 9 10</code></pre>
 <pre class="r"><code>`$`(sleep, ID)</code></pre>
 <pre><code>##  [1] 1  2  3  4  5  6  7  8  9  10 1  2  3  4  5  6  7  8  9  10
 ## Levels: 1 2 3 4 5 6 7 8 9 10</code></pre>
-<p>This already answers the original question: The selection of columns via <code>$</code> is non-standard evaluation because the second argument – <code>ID</code>, the name of the column that is selected – is passed as a name that by itself does not evaluate to an <code>R</code> object.</p>
+<p>This code already answers the original question: The selection of columns via <code>$</code> is non-standard evaluation because the second argument – <code>ID</code>, the name of the column that is selected – is passed as a name that by itself does not evaluate to an <code>R</code> object.</p>
 <p>In contrast, column selection by <code>[[·]]</code> – which is equivalent to the <code>$</code> notation – performs standard evaluation:</p>
 <pre class="r"><code>sleep[[&quot;ID&quot;]]</code></pre>
 <pre><code>##  [1] 1  2  3  4  5  6  7  8  9  10 1  2  3  4  5  6  7  8  9  10
@@ -401,7 +401,7 @@ summary {
 <pre class="r"><code>`[[`(sleep, &quot;ID&quot;)</code></pre>
 <pre><code>##  [1] 1  2  3  4  5  6  7  8  9  10 1  2  3  4  5  6  7  8  9  10
 ## Levels: 1 2 3 4 5 6 7 8 9 10</code></pre>
-<p>This function call performs standard evaluation because <code>&quot;ID&quot;</code> is an <code>R</code> object – a character vector of length 1. Interestingly enough, <a href="19-columns.html" target="_blank">column selection via <code>$</code> is faster than column selection via <code>[[·]]</code></a>; in terms of speed, non-standard evaluation beats its standard counterpart.</p>
+<p>This function call performs standard evaluation because <code>&quot;ID&quot;</code> is an <code>R</code> object – a character vector of length 1. Interestingly, <a href="19-columns.html" target="_blank">column selection via <code>$</code> is faster than column selection via <code>[[·]]</code></a>; in terms of speed, non-standard evaluation beats its standard counterpart in this case.</p>
 <hr />
 <p>Last updated: 2020-05-22</p>
 <div id="back-to-the-front-page" class="section level3">

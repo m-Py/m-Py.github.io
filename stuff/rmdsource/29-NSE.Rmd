@@ -23,17 +23,17 @@ arguments does not by itself evaluate to an `R` object.
 
 This definition is incomplete and does not capture the "technical" essence of 
 non-standard evaluation, but I guess it is useful from the viewpoint of an `R` 
-user. For example, in the following example, the function `subset()` performs 
-non-standard evaluation to select rows in the `sleep` data set, because the code 
-`ID == 1`, passed as the second argument, does not evaluate to an `R` object.
+user. In the following example, the function `subset()` performs non-standard 
+evaluation to select rows in the built-in `sleep` data set, because the code `ID 
+== 1`, passed as the second argument, does not evaluate to an `R` object.
 
 ```{r}
 subset(sleep, ID == 1)
 ```
 
 `ID` is not itself a variable, but only a column in the data frame `sleep`;
-therefore, `ID == 1` most likely throws an error if evaluated by itself in the 
-`R` console. However, when passed as an argument to `subset()`, `ID == 1` is 
+therefore, `ID == 1` most likely throws if we were to type it in the `R` 
+console. However, when passed as an argument to `subset()`, `ID == 1` is 
 valid `R` code because the function internally deals with it; `subset()` knows 
 that `ID` has to be a column of the data frame `sleep` that is passed as the 
 first argument.
@@ -41,8 +41,8 @@ first argument.
 Using the above definition, we can investigate whether the `$` notation for 
 selecting columns in a data frame corresponds to non-standard evaluation. For 
 starters, we note that in `R` every operation is a function call, including 
-special syntax for data selection (such as `$`, or `[·]`). Moreover, every 
-operation can also be expressed in "standard" function notation using round 
+special syntax for data selection such as `$`, or `[·]`. Moreover, every 
+operation can be expressed in "standard" function notation that uses round 
 brackets. In the case of the `$` notation, the two following calls are 
 equivalent:
 
@@ -51,10 +51,10 @@ sleep$ID
 `$`(sleep, ID)
 ```
 
-This already answers the original question: The selection of columns via `$` is 
-non-standard evaluation because the second argument -- `ID`, the name of the 
-column that is selected -- is passed as a name that by itself does not evaluate 
-to an `R` object.
+This code already answers the original question: The selection of columns via 
+`$` is non-standard evaluation because the second argument -- `ID`, the name of 
+the column that is selected -- is passed as a name that by itself does not 
+evaluate to an `R` object.
 
 In contrast, column selection by `[[·]]` -- which is equivalent to the `$` 
 notation -- performs standard evaluation:
@@ -65,10 +65,10 @@ sleep[["ID"]]
 ```
 
 This function call performs standard evaluation because `"ID"` is an `R` object 
--- a character vector of length 1. Interestingly enough, <a 
-href="19-columns.html" target="_blank">column selection via `$` is faster than 
-column selection via `[[·]]`</a>; in terms of speed, non-standard evaluation 
-beats its standard counterpart.
+-- a character vector of length 1. Interestingly, <a href="19-columns.html" 
+target="_blank">column selection via `$` is faster than column selection via 
+`[[·]]`</a>; in terms of speed, non-standard evaluation beats its standard 
+counterpart in this case.
 
 ---
 
