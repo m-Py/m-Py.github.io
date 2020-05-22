@@ -1,6 +1,6 @@
 ---
 title: "Is the selection of columns via `$` non-standard evaluation?"
-date: May 17, 2020
+date: May 22, 2020
 author: Martin Papenberg
 ---
 
@@ -13,15 +13,19 @@ options(scipen = 999, digits = 2)
 ```
 
 `R` has this magical thing called [non-standard 
-evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html). In this
-post, I use my following personal definition of non-standard evaluation:
+evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html). In this 
+post, I investigate whether selecting columns in a data frame via `$` 
+corresponds to non-standard evaluation. Note that I use the following personal 
+working definition of non-standard evaluation:
 
 > An `R` function performs non-standard evaluation if (at least) one of its 
 arguments does not by itself evaluate to an `R` object.
 
-For example, in the following example, the function `subset()` performs 
-non-standard evaluation to select rows in the `sleep` data set, because 
-the code `ID == 1` does not evaluate to an `R` object.
+This definition is incomplete and does not capture the "technical" essence of 
+non-standard evaluation, but I guess it is useful from the viewpoint of an `R` 
+user. For example, in the following example, the function `subset()` performs 
+non-standard evaluation to select rows in the `sleep` data set, because the code 
+`ID == 1`, passed as the second argument, does not evaluate to an `R` object.
 
 ```{r}
 subset(sleep, ID == 1)
@@ -34,23 +38,26 @@ valid `R` code because the function internally deals with it; `subset()` knows
 that `ID` has to be a column of the data frame `sleep` that is passed as the 
 first argument.
 
-I was asking myself: Is the selection of columns via `$` non-standard 
-evaluation? Using the above definition, we can tackle this question. In `R` 
-every operation is a function call. Hence, every bit of `R` syntax can also be 
-expressed in standard function notation using round brackets. In the case of the 
-`$` notation, the two following calls are equivalent:
+Using the above definition, we can investigate whether the `$` notation for 
+selecting columns in a data frame corresponds to non-standard evaluation. For 
+starters, we note that in `R` every operation is a function call, including 
+special syntax for data selection (such as `$`, or `[·]`). Moreover, every 
+operation can also be expressed in "standard" function notation using round 
+brackets. In the case of the `$` notation, the two following calls are 
+equivalent:
 
 ```{r}
 sleep$ID
 `$`(sleep, ID)
 ```
 
-This already answers the original question: The selection of columns via `$` 
-is non-standard evaluation because the second argument -- the name of the column 
--- is passed as a name that by itself does not evaluate to an `R` object.
+This already answers the original question: The selection of columns via `$` is 
+non-standard evaluation because the second argument -- `ID`, the name of the 
+column that is selected -- is passed as a name that by itself does not evaluate 
+to an `R` object.
 
-Column selection by `[[·]]` -- which is equivalent to the `$` notation -- 
-performs standard evaluation:
+In contrast, column selection by `[[·]]` -- which is equivalent to the `$` 
+notation -- performs standard evaluation:
 
 ```{r}
 sleep[["ID"]]
@@ -60,8 +67,8 @@ sleep[["ID"]]
 This function call performs standard evaluation because `"ID"` is an `R` object 
 -- a character vector of length 1. Interestingly enough, <a 
 href="19-columns.html" target="_blank">column selection via `$` is faster than 
-column selection via `[[·]]`</a>; here, non-standard evaluation beats its 
-standard counterpart.
+column selection via `[[·]]`</a>; in terms of speed, non-standard evaluation 
+beats its standard counterpart.
 
 ---
 
