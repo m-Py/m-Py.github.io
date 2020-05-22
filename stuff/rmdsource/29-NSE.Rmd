@@ -1,0 +1,72 @@
+---
+title: "Is the selection of columns via `$` non-standard evaluation?"
+date: May 17, 2020
+author: Martin Papenberg
+---
+
+```{r, include = FALSE}
+
+library(knitr)
+knitr::opts_chunk$set(message=FALSE, warning = FALSE) # echo = FALSE
+options(scipen = 999, digits = 2)
+
+```
+
+`R` has this magical thing called [non-standard 
+evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html). In this
+post, I use my following personal definition of non-standard evaluation:
+
+> An `R` function performs non-standard evaluation if (at least) one of its 
+arguments does not by itself evaluate to an `R` object.
+
+For example, in the following example, the function `subset()` performs 
+non-standard evaluation to select rows in the `sleep` data set, because 
+the code `ID == 1` does not evaluate to an `R` object.
+
+```{r}
+subset(sleep, ID == 1)
+```
+
+`ID` is not itself a variable, but only a column in the data frame `sleep`;
+therefore, `ID == 1` most likely throws an error if evaluated by itself in the 
+`R` console. However, when passed as an argument to `subset()`, `ID == 1` is 
+valid `R` code because the function internally deals with it; `subset()` knows 
+that `ID` has to be a column of the data frame `sleep` that is passed as the 
+first argument.
+
+I was asking myself: Is the selection of columns via `$` non-standard 
+evaluation? Using the above definition, we can tackle this question. In `R` 
+every operation is a function call. Hence, every bit of `R` syntax can also be 
+expressed in standard function notation using round brackets. In the case of the 
+`$` notation, the two following calls are equivalent:
+
+```{r}
+sleep$ID
+`$`(sleep, ID)
+```
+
+This already answers the original question: The selection of columns via `$` 
+is non-standard evaluation because the second argument -- the name of the column 
+-- is passed as a name that by itself does not evaluate to an `R` object.
+
+Column selection by `[[·]]` -- which is equivalent to the `$` notation -- 
+performs standard evaluation:
+
+```{r}
+sleep[["ID"]]
+`[[`(sleep, "ID")
+```
+
+This function call performs standard evaluation because `"ID"` is an `R` object 
+-- a character vector of length 1. Interestingly enough, <a 
+href="19-columns.html" target="_blank">column selection via `$` is faster than 
+column selection via `[[·]]`</a>; here, non-standard evaluation beats its 
+standard counterpart.
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
