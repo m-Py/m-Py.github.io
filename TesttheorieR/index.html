@@ -175,7 +175,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.1" data-path="dataframes.html"><a href="dataframes.html#zeileneinfach"><i class="fa fa-check"></i><b>3.4.1</b> Vereinfachte Zeilenauswahl</a></li>
 <li class="chapter" data-level="3.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>3.4.2</b> Funktionsargumente</a></li>
 <li class="chapter" data-level="3.4.3" data-path="dataframes.html"><a href="dataframes.html#spalteneinfach"><i class="fa fa-check"></i><b>3.4.3</b> Sonderregeln zur Auswahl von Spalten</a></li>
-<li class="chapter" data-level="3.4.4" data-path="dataframes.html"><a href="dataframes.html#umgang-mit-na-subset-bevorzugt-zur-zeilenauswahl"><i class="fa fa-check"></i><b>3.4.4</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
+<li class="chapter" data-level="3.4.4" data-path="dataframes.html"><a href="dataframes.html#non-standard-evaluation"><i class="fa fa-check"></i><b>3.4.4</b> Non-Standard-Evaluation</a></li>
+<li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#umgang-mit-na-subset-bevorzugt-zur-zeilenauswahl"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="dataframes.html"><a href="dataframes.html#doppelteckig"><i class="fa fa-check"></i><b>3.5</b> Weitere Zugriffe auf <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.5.1" data-path="dataframes.html"><a href="dataframes.html#der--zugriff"><i class="fa fa-check"></i><b>3.5.1</b> Der <code>[[·]]</code>-Zugriff</a></li>
@@ -238,25 +239,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.2" data-path="schleifen.html"><a href="schleifen.html#indexadressierung"><i class="fa fa-check"></i><b>7.3.2</b> Vektorspeicherung – Adressierung per Index</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html"><i class="fa fa-check"></i><b>8</b> Eigene Funktion: Bepunktung von Items</a><ul>
-<li class="chapter" data-level="8.1" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#problemspezifischer-code-vs.-abstrahierter-code"><i class="fa fa-check"></i><b>8.1</b> Problemspezifischer Code vs. abstrahierter Code</a></li>
-<li class="chapter" data-level="8.2" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#funktionsargumente"><i class="fa fa-check"></i><b>8.2</b> Funktionsargumente</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#schlechte-praxis-bei-funktionsargumenten"><i class="fa fa-check"></i><b>8.2.1</b> Schlechte Praxis bei Funktionsargumenten</a></li>
-</ul></li>
-<li class="chapter" data-level="8.3" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#funktionsausgabe-data.frame-oder-matrix"><i class="fa fa-check"></i><b>8.3</b> Funktionsausgabe: <code>data.frame</code> oder <code>matrix</code>?</a></li>
-<li class="chapter" data-level="8.4" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#vektorisierung-und-matritzen"><i class="fa fa-check"></i><b>8.4</b> Vektorisierung und Matritzen</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#weitere-vektorisierte-operationen-auf-matritzen"><i class="fa fa-check"></i><b>8.4.1</b> Weitere vektorisierte Operationen auf Matritzen</a></li>
-<li class="chapter" data-level="8.4.2" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#was-ist-schneller-for-schleife-oder-vektorisierte-variante"><i class="fa fa-check"></i><b>8.4.2</b> Was ist schneller: <code>for</code>-Schleife oder vektorisierte Variante</a></li>
+<li class="chapter" data-level="8" data-path="anhang.html"><a href="anhang.html"><i class="fa fa-check"></i><b>8</b> Anhang</a><ul>
+<li class="chapter" data-level="8.1" data-path="anhang.html"><a href="anhang.html#datenEinlesen"><i class="fa fa-check"></i><b>8.1</b> Daten einlesen</a></li>
+<li class="chapter" data-level="8.2" data-path="anhang.html"><a href="anhang.html#das-environment-sauber-halten"><i class="fa fa-check"></i><b>8.2</b> Das Environment sauber halten</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="anhang.html"><a href="anhang.html#variablen-löschen"><i class="fa fa-check"></i><b>8.2.1</b> Variablen löschen</a></li>
+<li class="chapter" data-level="8.2.2" data-path="anhang.html"><a href="anhang.html#mit-einem-sauberen-environment-starten"><i class="fa fa-check"></i><b>8.2.2</b> Mit einem sauberen Environment starten</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="anhang.html"><a href="anhang.html"><i class="fa fa-check"></i><b>9</b> Anhang</a><ul>
-<li class="chapter" data-level="9.1" data-path="anhang.html"><a href="anhang.html#datenEinlesen"><i class="fa fa-check"></i><b>9.1</b> Daten einlesen</a></li>
-<li class="chapter" data-level="9.2" data-path="anhang.html"><a href="anhang.html#das-environment-sauber-halten"><i class="fa fa-check"></i><b>9.2</b> Das Environment sauber halten</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="anhang.html"><a href="anhang.html#variablen-löschen"><i class="fa fa-check"></i><b>9.2.1</b> Variablen löschen</a></li>
-<li class="chapter" data-level="9.2.2" data-path="anhang.html"><a href="anhang.html#mit-einem-sauberen-environment-starten"><i class="fa fa-check"></i><b>9.2.2</b> Mit einem sauberen Environment starten</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="referenzen.html"><a href="referenzen.html"><i class="fa fa-check"></i><b>10</b> Referenzen</a></li>
+<li class="chapter" data-level="9" data-path="referenzen.html"><a href="referenzen.html"><i class="fa fa-check"></i><b>9</b> Referenzen</a></li>
 </ul>
 
       </nav>
@@ -328,7 +318,7 @@ aktuelle Stand dieses Skripts – können unter
 <a href="https://osf.io/y4a6k/">https://osf.io/y4a6k/</a> abgerufen werden. Unter
 <a href="https://m-py.github.io/TesttheorieR/">https://m-py.github.io/TesttheorieR/</a>
 findet sich eine online lesbare Version des Skripts. Das
-Skript wird stetig aktualisiert; diese Version wurde am 16. Mai 2020 erstellt.</p>
+Skript wird stetig aktualisiert; diese Version wurde am 27. Mai 2020 erstellt.</p>
 <p>Wer <code>R</code> lernen möchte, muss sich klar machen, dass die reine
 Aufarbeitung einer oder mehrerer schriftlicher Lektüren zu diesem Zweck
 nicht ausreicht. Die praktische Anwendung – das Ausprobieren und

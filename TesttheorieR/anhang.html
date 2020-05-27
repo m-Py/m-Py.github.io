@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9 Anhang | Testtheorie mit R</title>
-  <meta name="description" content="9 Anhang | Testtheorie mit R" />
+  <title>8 Anhang | Testtheorie mit R</title>
+  <meta name="description" content="8 Anhang | Testtheorie mit R" />
   <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9 Anhang | Testtheorie mit R" />
+  <meta property="og:title" content="8 Anhang | Testtheorie mit R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9 Anhang | Testtheorie mit R" />
+  <meta name="twitter:title" content="8 Anhang | Testtheorie mit R" />
   
   
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="eigene-funktion-bepunktung-von-items.html"/>
+<link rel="prev" href="schleifen.html"/>
 <link rel="next" href="referenzen.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -175,7 +175,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.1" data-path="dataframes.html"><a href="dataframes.html#zeileneinfach"><i class="fa fa-check"></i><b>3.4.1</b> Vereinfachte Zeilenauswahl</a></li>
 <li class="chapter" data-level="3.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>3.4.2</b> Funktionsargumente</a></li>
 <li class="chapter" data-level="3.4.3" data-path="dataframes.html"><a href="dataframes.html#spalteneinfach"><i class="fa fa-check"></i><b>3.4.3</b> Sonderregeln zur Auswahl von Spalten</a></li>
-<li class="chapter" data-level="3.4.4" data-path="dataframes.html"><a href="dataframes.html#umgang-mit-na-subset-bevorzugt-zur-zeilenauswahl"><i class="fa fa-check"></i><b>3.4.4</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
+<li class="chapter" data-level="3.4.4" data-path="dataframes.html"><a href="dataframes.html#non-standard-evaluation"><i class="fa fa-check"></i><b>3.4.4</b> Non-Standard-Evaluation</a></li>
+<li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#umgang-mit-na-subset-bevorzugt-zur-zeilenauswahl"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="dataframes.html"><a href="dataframes.html#doppelteckig"><i class="fa fa-check"></i><b>3.5</b> Weitere Zugriffe auf <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.5.1" data-path="dataframes.html"><a href="dataframes.html#der--zugriff"><i class="fa fa-check"></i><b>3.5.1</b> Der <code>[[·]]</code>-Zugriff</a></li>
@@ -238,25 +239,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.2" data-path="schleifen.html"><a href="schleifen.html#indexadressierung"><i class="fa fa-check"></i><b>7.3.2</b> Vektorspeicherung – Adressierung per Index</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html"><i class="fa fa-check"></i><b>8</b> Eigene Funktion: Bepunktung von Items</a><ul>
-<li class="chapter" data-level="8.1" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#problemspezifischer-code-vs.-abstrahierter-code"><i class="fa fa-check"></i><b>8.1</b> Problemspezifischer Code vs. abstrahierter Code</a></li>
-<li class="chapter" data-level="8.2" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#funktionsargumente"><i class="fa fa-check"></i><b>8.2</b> Funktionsargumente</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#schlechte-praxis-bei-funktionsargumenten"><i class="fa fa-check"></i><b>8.2.1</b> Schlechte Praxis bei Funktionsargumenten</a></li>
-</ul></li>
-<li class="chapter" data-level="8.3" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#funktionsausgabe-data.frame-oder-matrix"><i class="fa fa-check"></i><b>8.3</b> Funktionsausgabe: <code>data.frame</code> oder <code>matrix</code>?</a></li>
-<li class="chapter" data-level="8.4" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#vektorisierung-und-matritzen"><i class="fa fa-check"></i><b>8.4</b> Vektorisierung und Matritzen</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#weitere-vektorisierte-operationen-auf-matritzen"><i class="fa fa-check"></i><b>8.4.1</b> Weitere vektorisierte Operationen auf Matritzen</a></li>
-<li class="chapter" data-level="8.4.2" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#was-ist-schneller-for-schleife-oder-vektorisierte-variante"><i class="fa fa-check"></i><b>8.4.2</b> Was ist schneller: <code>for</code>-Schleife oder vektorisierte Variante</a></li>
+<li class="chapter" data-level="8" data-path="anhang.html"><a href="anhang.html"><i class="fa fa-check"></i><b>8</b> Anhang</a><ul>
+<li class="chapter" data-level="8.1" data-path="anhang.html"><a href="anhang.html#datenEinlesen"><i class="fa fa-check"></i><b>8.1</b> Daten einlesen</a></li>
+<li class="chapter" data-level="8.2" data-path="anhang.html"><a href="anhang.html#das-environment-sauber-halten"><i class="fa fa-check"></i><b>8.2</b> Das Environment sauber halten</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="anhang.html"><a href="anhang.html#variablen-löschen"><i class="fa fa-check"></i><b>8.2.1</b> Variablen löschen</a></li>
+<li class="chapter" data-level="8.2.2" data-path="anhang.html"><a href="anhang.html#mit-einem-sauberen-environment-starten"><i class="fa fa-check"></i><b>8.2.2</b> Mit einem sauberen Environment starten</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="anhang.html"><a href="anhang.html"><i class="fa fa-check"></i><b>9</b> Anhang</a><ul>
-<li class="chapter" data-level="9.1" data-path="anhang.html"><a href="anhang.html#datenEinlesen"><i class="fa fa-check"></i><b>9.1</b> Daten einlesen</a></li>
-<li class="chapter" data-level="9.2" data-path="anhang.html"><a href="anhang.html#das-environment-sauber-halten"><i class="fa fa-check"></i><b>9.2</b> Das Environment sauber halten</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="anhang.html"><a href="anhang.html#variablen-löschen"><i class="fa fa-check"></i><b>9.2.1</b> Variablen löschen</a></li>
-<li class="chapter" data-level="9.2.2" data-path="anhang.html"><a href="anhang.html#mit-einem-sauberen-environment-starten"><i class="fa fa-check"></i><b>9.2.2</b> Mit einem sauberen Environment starten</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="referenzen.html"><a href="referenzen.html"><i class="fa fa-check"></i><b>10</b> Referenzen</a></li>
+<li class="chapter" data-level="9" data-path="referenzen.html"><a href="referenzen.html"><i class="fa fa-check"></i><b>9</b> Referenzen</a></li>
 </ul>
 
       </nav>
@@ -275,11 +265,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="anhang" class="section level1">
-<h1><span class="header-section-number">9</span> Anhang</h1>
+<h1><span class="header-section-number">8</span> Anhang</h1>
 <p>Dieser Abschnitt arbeitet einige Schwierigkeiten auf, die sich in den
 praktischen Übungen des Seminars ergeben haben.</p>
 <div id="datenEinlesen" class="section level2">
-<h2><span class="header-section-number">9.1</span> Daten einlesen</h2>
+<h2><span class="header-section-number">8.1</span> Daten einlesen</h2>
 <p>Das Einlesen von Daten in <code>R</code> stellt uns vor verschiedene Probleme. Ich
 gehe an dieser Stelle auf ein grundlegendes Problem ein, das sich bei
 dem Einlesen jeglicher Daten stellt (egal ob man SPSS, Excel, csv, oder
@@ -309,13 +299,13 @@ haben, können wir Daten einlesen, die in diesem Ordner liegen. Dafür
 werden wir Funktionen aufrufen, die den Datensatz mit Dateinamen
 ansteuern. Folgender Aufruf etwa könnte eine csv-Datei einlesen und die
 Tabelle als <code>data.frame</code> in der Variablen <code>tp</code> speichern.</p>
-<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb515-1" title="1">tp &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;technophobie.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb507-1" title="1">tp &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;technophobie.csv&quot;</span>)</a></code></pre></div>
 <p>Falls das nicht funktioniert, führt folgenden Befehl aus:</p>
-<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb516-1" title="1"><span class="kw">getwd</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb508-1" title="1"><span class="kw">getwd</span>()</a></code></pre></div>
 <p>Dieser Befehl gibt euch euer „Working Directory“ aus; das ist der
 Ausgangspunkt, von dem aus <code>R</code> nach Dateien sucht. Die Ausgabe des Befehls sollte
 der Ordner sein, in dem ihr die Daten abgelegt habt, mit denen ihr arbeiten
-wollt.<a href="#fn50" class="footnote-ref" id="fnref50"><sup>50</sup></a></p>
+wollt.<a href="#fn48" class="footnote-ref" id="fnref48"><sup>48</sup></a></p>
 <p>Wenn wir schon einmal ein Projekt im Ordner mit unseren Daten angelegt
 haben, können wir das Projekt beim nächsten Mal wieder aufrufen. Dafür
 gehen wir über</p>
@@ -326,13 +316,13 @@ gehen wir über</p>
 <span class="math inline">\(\to\)</span> <em>Öffnen</em></p>
 </div>
 <div id="das-environment-sauber-halten" class="section level2">
-<h2><span class="header-section-number">9.2</span> Das Environment sauber halten</h2>
+<h2><span class="header-section-number">8.2</span> Das Environment sauber halten</h2>
 <p>Wenn wir in <code>R</code> arbeiten, ist es wichtig, dass wir einen Überblick über
 die Variablen haben, die gerade existieren. Im Folgenden beschreibe ich
 ein paar grundlegende Strategien, um unsere <code>R</code>-Arbeitsumgebung
 einigermaßen sauber zu halten.</p>
 <div id="variablen-löschen" class="section level3">
-<h3><span class="header-section-number">9.2.1</span> Variablen löschen</h3>
+<h3><span class="header-section-number">8.2.1</span> Variablen löschen</h3>
 <p>RStudio gibt uns in einem Panel oben rechts darüber Auskunft, welche
 Variablen sich in unserem sogenannten <em>Environment</em> befinden. Darin
 kommen alle Variablen vor, die wir irgendwann mit einer Zuweisung
@@ -341,17 +331,17 @@ nützlich zu wissen, wie man einzelne oder alle Variablen wieder
 entfernen kann. Es kann schnell passieren, dass man sehr viele Variablen
 erstellt, über die man sonst die Übersicht verliert.</p>
 <p>Mit der Funktion <code>rm</code> kann man Variablen löschen, etwa:</p>
-<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb517-1" title="1">foo &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb517-2" title="2"><span class="kw">rm</span>(foo)</a></code></pre></div>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb509-1" title="1">foo &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb509-2" title="2"><span class="kw">rm</span>(foo)</a></code></pre></div>
 <p>Möchte man alle Variablen aus dem Environment löschen, kann man den
 Befehl <code>rm(list = ls())</code> verwenden, etwa:</p>
-<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb518-1" title="1">foo &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb518-2" title="2">bar &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb518-3" title="3">gaz &lt;-<span class="st"> </span><span class="kw">mean</span>(bar)</a>
-<a class="sourceLine" id="cb518-4" title="4"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>()) <span class="co"># löscht alles, nur mit Vorsicht verwenden</span></a></code></pre></div>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb510-1" title="1">foo &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb510-2" title="2">bar &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb510-3" title="3">gaz &lt;-<span class="st"> </span><span class="kw">mean</span>(bar)</a>
+<a class="sourceLine" id="cb510-4" title="4"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>()) <span class="co"># löscht alles, nur mit Vorsicht verwenden</span></a></code></pre></div>
 </div>
 <div id="mit-einem-sauberen-environment-starten" class="section level3">
-<h3><span class="header-section-number">9.2.2</span> Mit einem sauberen Environment starten</h3>
+<h3><span class="header-section-number">8.2.2</span> Mit einem sauberen Environment starten</h3>
 <p>Wenn man RStudio beendet, wird einem von RStudio die Frage gestellt, ob
 man seinen “workspace” abspeichern will. Das kann etwa so aussehen, bei
 euch sieht es gegebenenfalls ein wenig anders aus:</p>
@@ -363,7 +353,7 @@ Variablen, die sich derzeit in unserem Environment befinden. Also alle
 Variablen, die uns oben rechts im Panel auch angezeigt werden. Wenn wir
 zustimmen und das Projekt aus dem Ordner neu laden, werden beim nächsten
 Mal alle Variablen unserer Session neu geladen. Ich rate stark davon ab,
-so zu arbeiten. Ich würde bevorzugen, <strong>immer</strong><a href="#fn51" class="footnote-ref" id="fnref51"><sup>51</sup></a> mit
+so zu arbeiten. Ich würde bevorzugen, <strong>immer</strong><a href="#fn49" class="footnote-ref" id="fnref49"><sup>49</sup></a> mit
 einem leeren Environment zu starten. Der einfachste Weg, um dies zu
 bewerkstelligen, ist immer “Don’t save” auszuwählen, wenn man gefragt
 wird. Wenn man aus Versehen mal auf “Save” geklickt hat, kann man das
@@ -379,7 +369,7 @@ heißen).</p>
           </div>
         </div>
       </div>
-<a href="eigene-funktion-bepunktung-von-items.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="schleifen.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="referenzen.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

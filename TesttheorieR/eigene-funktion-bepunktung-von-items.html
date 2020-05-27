@@ -175,7 +175,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.1" data-path="dataframes.html"><a href="dataframes.html#zeileneinfach"><i class="fa fa-check"></i><b>3.4.1</b> Vereinfachte Zeilenauswahl</a></li>
 <li class="chapter" data-level="3.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>3.4.2</b> Funktionsargumente</a></li>
 <li class="chapter" data-level="3.4.3" data-path="dataframes.html"><a href="dataframes.html#spalteneinfach"><i class="fa fa-check"></i><b>3.4.3</b> Sonderregeln zur Auswahl von Spalten</a></li>
-<li class="chapter" data-level="3.4.4" data-path="dataframes.html"><a href="dataframes.html#umgang-mit-na-subset-bevorzugt-zur-zeilenauswahl"><i class="fa fa-check"></i><b>3.4.4</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
+<li class="chapter" data-level="3.4.4" data-path="dataframes.html"><a href="dataframes.html#non-standard-evaluation"><i class="fa fa-check"></i><b>3.4.4</b> Non-Standard-Evaluation</a></li>
+<li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#umgang-mit-na-subset-bevorzugt-zur-zeilenauswahl"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="dataframes.html"><a href="dataframes.html#doppelteckig"><i class="fa fa-check"></i><b>3.5</b> Weitere Zugriffe auf <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.5.1" data-path="dataframes.html"><a href="dataframes.html#der--zugriff"><i class="fa fa-check"></i><b>3.5.1</b> Der <code>[[·]]</code>-Zugriff</a></li>
@@ -288,25 +289,25 @@ Funktion in ganz vielen unterschiedlichen Datenauswertungen gebrauchen.</p>
 <p>In diesem Kapitel kombinieren wir unsere erworbenen Kenntnisse aus den letzten
 beiden Kapiteln zu Funktionen und zu <code>for</code>-Schleifen. Außerdem führt das Kapitel
 noch in weitere, bislang nicht betrachtete Grundlagen von <code>R</code> ein, insbesondere
-wird die Datenstruktur der Matrix betrachtet.</p>
+die Datenstruktur der Matrix.</p>
 <div id="problemspezifischer-code-vs.-abstrahierter-code" class="section level2">
 <h2><span class="header-section-number">8.1</span> Problemspezifischer Code vs. abstrahierter Code</h2>
 <p>Betrachten wir noch einmal die Schleifen zur Bepunktung der NPI-Items
 aus dem letzten Kapitel und überlegen, welche Bestandteile des Codes
 problemspezifisch sind; diese müssen in einer Funktion entfernt werden, aber
 die Funktionalität des Codes muss natürlich erhalten bleiben.</p>
-<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb499-1" title="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>) {</a>
-<a class="sourceLine" id="cb499-2" title="2">    <span class="co"># 1. Wähle Spaltenname des i-ten Items aus:</span></a>
-<a class="sourceLine" id="cb499-3" title="3">    colname &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Q&quot;</span>, i)</a>
-<a class="sourceLine" id="cb499-4" title="4">    <span class="co"># 2. Wähle aus Spalte die Antworten aus:</span></a>
-<a class="sourceLine" id="cb499-5" title="5">    ith_item &lt;-<span class="st"> </span>npi_clean[[colname]]</a>
-<a class="sourceLine" id="cb499-6" title="6">    <span class="co"># 3. Führe Umkodierung durch:</span></a>
-<a class="sourceLine" id="cb499-7" title="7">    narcissistic_response &lt;-<span class="st"> </span><span class="kw">ifelse</span>(ith_item <span class="op">==</span><span class="st"> </span>keys[i], <span class="dv">1</span>, <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb499-8" title="8">    <span class="co"># 4. Erstelle Namen für neue Spalte:</span></a>
-<a class="sourceLine" id="cb499-9" title="9">    new_colname  &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;coded&quot;</span>, colname)</a>
-<a class="sourceLine" id="cb499-10" title="10">    <span class="co"># 5. Hänge kodierte Werte an data.frame an:</span></a>
-<a class="sourceLine" id="cb499-11" title="11">    npi_clean[[new_colname]] &lt;-<span class="st"> </span>narcissistic_response</a>
-<a class="sourceLine" id="cb499-12" title="12">}</a></code></pre></div>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb507-1" title="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>) {</a>
+<a class="sourceLine" id="cb507-2" title="2">    <span class="co"># 1. Wähle Spaltenname des i-ten Items aus:</span></a>
+<a class="sourceLine" id="cb507-3" title="3">    colname &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Q&quot;</span>, i)</a>
+<a class="sourceLine" id="cb507-4" title="4">    <span class="co"># 2. Wähle aus Spalte die Antworten aus:</span></a>
+<a class="sourceLine" id="cb507-5" title="5">    ith_item &lt;-<span class="st"> </span>npi_clean[[colname]]</a>
+<a class="sourceLine" id="cb507-6" title="6">    <span class="co"># 3. Führe Umkodierung durch:</span></a>
+<a class="sourceLine" id="cb507-7" title="7">    narcissistic_response &lt;-<span class="st"> </span><span class="kw">ifelse</span>(ith_item <span class="op">==</span><span class="st"> </span>keys[i], <span class="dv">1</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb507-8" title="8">    <span class="co"># 4. Erstelle Namen für neue Spalte:</span></a>
+<a class="sourceLine" id="cb507-9" title="9">    new_colname  &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;coded&quot;</span>, colname)</a>
+<a class="sourceLine" id="cb507-10" title="10">    <span class="co"># 5. Hänge kodierte Werte an data.frame an:</span></a>
+<a class="sourceLine" id="cb507-11" title="11">    npi_clean[[new_colname]] &lt;-<span class="st"> </span>narcissistic_response</a>
+<a class="sourceLine" id="cb507-12" title="12">}</a></code></pre></div>
 <p>Welche Bestandteile dieses Codes sind problemspezifisch?</p>
 <ol style="list-style-type: decimal">
 <li>Die Zahl der Schleifendurchläufe ist “hart kodiert” und nicht dynamisch; hier
@@ -314,7 +315,7 @@ wird angenommen, dass die Schleife 40 Mal laufen muss, was daran liegt, dass das
 NPI aus 40 Items besteht und wir deswegen 40 Spalten bearbeiten. In einer
 Funktion sollten wir <code>ncol()</code> nutzen, um die Zahl der zu bearbeitenden Spalten
 dynamisch auszulesen.</li>
-<li>Schritt 1 der Schleife greift auf die Spaltennamen des konkreten <code>data.frame</code>
+<li>Schritt 1 der Schleife greift auf die Spaltennamen des konkreten <code>data.frame</code>s
 zu, der hier bearbeitet wurde. Eine allgemein nutzbare Funktion sollte natürlich
 nicht davon ausgehen, dass die Namen in einem eingegebenen <code>data.frame</code> einem
 bestimmten Schema folgen. Die Spaltennamen sollten entweder per <code>colnames()</code>
@@ -331,25 +332,25 @@ Was für Argumente soll unsere Funktion annehmen?</p>
 <p>Ich entscheide mich in diesem Fall für die folgenden Argumente:</p>
 <ol style="list-style-type: decimal">
 <li><code>data.frame</code> aus den Testitems – nicht die gesamte Datentabelle, die vorliegt</li>
-<li>Vektor mit Schlüssel (Länge dieses Vektors = Zahl der Spalten im <code>data.frame</code></li>
-<li>Optional: Spaltennamen (sind oft problemspezifisch, wir sollten eine
-Möglichkeit anbieten, die Spaltennamen festzulegen; wollen wir dafür einen
-Standardwert vergeben</li>
+<li>Vektor mit Schlüssel (Länge dieses Vektors = Zahl der Spalten im <code>data.frame</code>)</li>
+<li>Optional: Spaltennamen (Diese sind oft problemspezifisch; wir sollten eine
+Möglichkeit anbieten, die Spaltennamen festzulegen. Wir können überlegen, ob wir
+dafür einen Standardwert vergeben.)</li>
 </ol>
 <p>Diese Variante halte ich für gute Praxis; darin steckt natürlich meine
 subjektive Einschätzung.</p>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb500-1" title="1"><span class="co"># Parameter `items`: Datenmatrix im psychometrischen Standardformat</span></a>
-<a class="sourceLine" id="cb500-2" title="2"><span class="co"># Parameter `keys`: Vektor, der pro Item den Schlüssel enthält</span></a>
-<a class="sourceLine" id="cb500-3" title="3"><span class="co"># Hinweis: Bei der Nutzung der Funktion muss gelten: </span></a>
-<a class="sourceLine" id="cb500-4" title="4"><span class="co">#  `ncol(items) == length(keys)`</span></a>
-<a class="sourceLine" id="cb500-5" title="5"><span class="co"># Gibt eine Tabelle zurück, die dieselben Ausmaße hat wie `items` und pro Person</span></a>
-<a class="sourceLine" id="cb500-6" title="6"><span class="co"># die Scores pro Item enthält.</span></a>
-<a class="sourceLine" id="cb500-7" title="7">score_items2 &lt;-<span class="st"> </span><span class="cf">function</span>(items, keys) {</a>
-<a class="sourceLine" id="cb500-8" title="8">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(items)) {</a>
-<a class="sourceLine" id="cb500-9" title="9">    items[, i] &lt;-<span class="st"> </span><span class="kw">ifelse</span>(items[, i] <span class="op">==</span><span class="st"> </span>keys[i], <span class="dv">1</span>, <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb500-10" title="10">  }</a>
-<a class="sourceLine" id="cb500-11" title="11">  items <span class="co"># hier return() gar nicht nötig</span></a>
-<a class="sourceLine" id="cb500-12" title="12">}</a></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb508-1" title="1"><span class="co"># Parameter `items`: Datenmatrix im psychometrischen Standardformat</span></a>
+<a class="sourceLine" id="cb508-2" title="2"><span class="co"># Parameter `keys`: Vektor, der pro Item den Schlüssel enthält</span></a>
+<a class="sourceLine" id="cb508-3" title="3"><span class="co"># Hinweis: Bei der Nutzung der Funktion muss gelten: </span></a>
+<a class="sourceLine" id="cb508-4" title="4"><span class="co">#  `ncol(items) == length(keys)`</span></a>
+<a class="sourceLine" id="cb508-5" title="5"><span class="co"># Gibt eine Tabelle zurück, die dieselben Ausmaße hat wie `items` und pro Person</span></a>
+<a class="sourceLine" id="cb508-6" title="6"><span class="co"># die Scores pro Item enthält.</span></a>
+<a class="sourceLine" id="cb508-7" title="7">score_items2 &lt;-<span class="st"> </span><span class="cf">function</span>(items, keys) {</a>
+<a class="sourceLine" id="cb508-8" title="8">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(items)) {</a>
+<a class="sourceLine" id="cb508-9" title="9">    items[, i] &lt;-<span class="st"> </span><span class="kw">ifelse</span>(items[, i] <span class="op">==</span><span class="st"> </span>keys[i], <span class="dv">1</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb508-10" title="10">  }</a>
+<a class="sourceLine" id="cb508-11" title="11">  items <span class="co"># hier return() gar nicht nötig</span></a>
+<a class="sourceLine" id="cb508-12" title="12">}</a></code></pre></div>
 <div id="schlechte-praxis-bei-funktionsargumenten" class="section level3">
 <h3><span class="header-section-number">8.2.1</span> Schlechte Praxis bei Funktionsargumenten</h3>
 <ul>
@@ -358,9 +359,9 @@ subjektive Einschätzung.</p>
 mit den bepunkteten Items)</li>
 <li>Gesamte Datentabelle übergeben, kein Rückgabewert, Spalten werden direkt</li>
 </ul>
-<p>All diese Praktiken machen die Funktion weniger abstrakt und mehr
-problemspezifisch. Die Funktion, die wir oben geschrieben haben, mit den
-Argumenten und der Rückgabe ist allgemein nutzbar und auch</p>
+<p>All diese Praktiken sorgen dafür, dass die Funktion weniger abstrakt und
+stattdessen problemspezifischer wird. Die Funktion, die wir oben geschrieben
+haben, mit den Argumenten und der Rückgabe ist allgemein nutzbar und auch</p>
 </div>
 </div>
 <div id="funktionsausgabe-data.frame-oder-matrix" class="section level2">
@@ -375,7 +376,7 @@ denselben Datentyp haben (wie im Vektor; prinzipiell ist eine Matrix auch ein
 Vektor)</li>
 <li>In Matrix: Auswahl per <code>[·,·]</code>-Notation; <code>$</code> geht nicht; <code>[[·]]</code> und <code>[·]</code>
 können verwendet werden, wählen aber nicht Spalten aus, wie man das aus einem
-data.frame gewöhnt wäre (<strong>was passiert hier stattdessen?</strong><a href="#fn49" class="footnote-ref" id="fnref49"><sup>49</sup></a>)</li>
+data.frame gewöhnt wäre (<strong>was passiert hier stattdessen?</strong><a href="#fn48" class="footnote-ref" id="fnref48"><sup>48</sup></a>)</li>
 <li><code>data.frame</code> ist sowohl Matrix (von der Struktur her -&gt; daher wird die
 <code>[·,·]</code>-Notation geerbt) als auch Liste; daher werden die <code>[[·]]</code>- und
 <code>[·]</code>-Notationen geerbt</li>
@@ -388,17 +389,17 @@ wurden. Um die bepunkteten Spalten auch noch an den <code>data.frame</code> anzu
 müssten wir die von <code>score_items()</code> Tabelle und unseren ursprünglichen
 <code>data.frame</code> zusammenfügen; glücklicherweise ist das sehr leicht möglich mit der
 Funktion <code>data.frame()</code></p>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb501-1" title="1">npi &lt;-<span class="st"> </span><span class="kw">data.frame</span>(npi, scores)</a></code></pre></div>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb509-1" title="1">npi &lt;-<span class="st"> </span><span class="kw">data.frame</span>(npi, scores)</a></code></pre></div>
 </div>
 <div id="vektorisierung-und-matritzen" class="section level2">
 <h2><span class="header-section-number">8.4</span> Vektorisierung und Matritzen</h2>
 <p>Ich denke, wir können mit unserer eigenen Funktion zur Berechnung von
 Item-Scores ziemlich zufrieden sein. Was jedoch, wenn ich euch mitteile, dass
 folgende Funktion auch schon dasselbe macht—ganz ohne <code>for</code>-Schleife:</p>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb502-1" title="1">score_items &lt;-<span class="st"> </span><span class="cf">function</span>(items, keys) {</a>
-<a class="sourceLine" id="cb502-2" title="2">  scores &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">t</span>(items) <span class="op">==</span><span class="st"> </span>keys) </a>
-<a class="sourceLine" id="cb502-3" title="3">  scores <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb502-4" title="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb510-1" title="1">score_items &lt;-<span class="st"> </span><span class="cf">function</span>(items, keys) {</a>
+<a class="sourceLine" id="cb510-2" title="2">  scores &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">t</span>(items) <span class="op">==</span><span class="st"> </span>keys) </a>
+<a class="sourceLine" id="cb510-3" title="3">  scores <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb510-4" title="4">}</a></code></pre></div>
 <p>Hier führe ich die komplette Bepunktung mit nur einer einzigen logischen Abfrage
 durch. Warum geht das? Der Grund liegt darin, dass die Vektorisierung in <code>R</code> so
 mächtig ist, dass sie nicht bei dem eindimensionalen eigentlichen Vektor stoppt,
@@ -414,23 +415,23 @@ Grundlagen von <code>R</code> erklären. Habt also etwas Geduld.</p>
 Matrix durchführen. Dieser Vergleich verknüpft jede Spalte Matrix vektorisiert
 mit dem Vektor durch die angegebene logische Operation.</li>
 </ul>
-<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb503-1" title="1">mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb503-2" title="2">mat</a></code></pre></div>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb511-1" title="1">mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb511-2" title="2">mat</a></code></pre></div>
 <pre><code>     [,1] [,2] [,3]
 [1,]    1    4    7
 [2,]    2    5    8
 [3,]    3    6    9</code></pre>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb505-1" title="1">mat <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></a></code></pre></div>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb513-1" title="1">mat <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></a></code></pre></div>
 <pre><code>     [,1]  [,2]  [,3]
 [1,] TRUE FALSE FALSE
 [2,] TRUE FALSE FALSE
 [3,] TRUE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb507-1" title="1">mat <span class="op">==</span><span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span></a></code></pre></div>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb515-1" title="1">mat <span class="op">==</span><span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span></a></code></pre></div>
 <pre><code>      [,1]  [,2]  [,3]
 [1,] FALSE FALSE FALSE
 [2,]  TRUE FALSE FALSE
 [3,] FALSE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb509-1" title="1">mat <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">9</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb517-1" title="1">mat <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">9</span>)</a></code></pre></div>
 <pre><code>      [,1]  [,2]  [,3]
 [1,]  TRUE FALSE FALSE
 [2,] FALSE  TRUE FALSE
@@ -452,58 +453,58 @@ Wegen des direkten Zusammenhangs dieser Datentypen kann man das aber auch
 schneller machen als per <code>ifelse()</code>; hier ändere ich einfach mit der Funktion
 <code>mode()</code> vor der Rückgabe den Datentyp, was keine zusätzlichen Berechnungen
 erfordert und deswegen die Laufzeit verbessert.</p>
-<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb511-1" title="1">score_items_for &lt;-<span class="st"> </span><span class="cf">function</span>(items, keys) {</a>
-<a class="sourceLine" id="cb511-2" title="2">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(items)) {</a>
-<a class="sourceLine" id="cb511-3" title="3">    items[, i] &lt;-<span class="st"> </span>items[, i] <span class="op">==</span><span class="st"> </span>keys[i]</a>
-<a class="sourceLine" id="cb511-4" title="4">  }</a>
-<a class="sourceLine" id="cb511-5" title="5">  <span class="kw">mode</span>(items) &lt;-<span class="st"> &quot;numeric&quot;</span></a>
-<a class="sourceLine" id="cb511-6" title="6">  items</a>
-<a class="sourceLine" id="cb511-7" title="7">}</a>
-<a class="sourceLine" id="cb511-8" title="8"></a>
-<a class="sourceLine" id="cb511-9" title="9">score_items_vectorized &lt;-<span class="st"> </span><span class="cf">function</span>(items, keys) {</a>
-<a class="sourceLine" id="cb511-10" title="10">  scores &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">t</span>(items) <span class="op">==</span><span class="st"> </span>keys) </a>
-<a class="sourceLine" id="cb511-11" title="11">  <span class="kw">mode</span>(scores) &lt;-<span class="st"> &quot;numeric&quot;</span></a>
-<a class="sourceLine" id="cb511-12" title="12">  scores</a>
-<a class="sourceLine" id="cb511-13" title="13">}</a>
-<a class="sourceLine" id="cb511-14" title="14"></a>
-<a class="sourceLine" id="cb511-15" title="15"><span class="co"># Variante mit vielen Personen, wenig Items (wie in der Psychologie üblich)</span></a>
-<a class="sourceLine" id="cb511-16" title="16">N &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb511-17" title="17">M &lt;-<span class="st"> </span><span class="dv">40</span></a>
-<a class="sourceLine" id="cb511-18" title="18"></a>
-<a class="sourceLine" id="cb511-19" title="19"><span class="co"># Simuliere Itemantworten mit Werten = 1 und 2 und Schlüssel </span></a>
-<a class="sourceLine" id="cb511-20" title="20"><span class="co"># mit Werten 1 und 2</span></a>
-<a class="sourceLine" id="cb511-21" title="21">items &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">size =</span> N <span class="op">*</span><span class="st"> </span>M, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">ncol =</span> M)</a>
-<a class="sourceLine" id="cb511-22" title="22">keys  &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">size =</span> M, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb511-23" title="23"></a>
-<a class="sourceLine" id="cb511-24" title="24"><span class="kw">library</span>(microbenchmark)</a>
-<a class="sourceLine" id="cb511-25" title="25"><span class="kw">microbenchmark</span>(</a>
-<a class="sourceLine" id="cb511-26" title="26">  <span class="kw">score_items_vectorized</span>(items, keys),</a>
-<a class="sourceLine" id="cb511-27" title="27">  <span class="kw">score_items_for</span>(items, keys)</a>
-<a class="sourceLine" id="cb511-28" title="28">)</a></code></pre></div>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb519-1" title="1">score_items_for &lt;-<span class="st"> </span><span class="cf">function</span>(items, keys) {</a>
+<a class="sourceLine" id="cb519-2" title="2">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(items)) {</a>
+<a class="sourceLine" id="cb519-3" title="3">    items[, i] &lt;-<span class="st"> </span>items[, i] <span class="op">==</span><span class="st"> </span>keys[i]</a>
+<a class="sourceLine" id="cb519-4" title="4">  }</a>
+<a class="sourceLine" id="cb519-5" title="5">  <span class="kw">mode</span>(items) &lt;-<span class="st"> &quot;numeric&quot;</span></a>
+<a class="sourceLine" id="cb519-6" title="6">  items</a>
+<a class="sourceLine" id="cb519-7" title="7">}</a>
+<a class="sourceLine" id="cb519-8" title="8"></a>
+<a class="sourceLine" id="cb519-9" title="9">score_items_vectorized &lt;-<span class="st"> </span><span class="cf">function</span>(items, keys) {</a>
+<a class="sourceLine" id="cb519-10" title="10">  scores &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">t</span>(items) <span class="op">==</span><span class="st"> </span>keys) </a>
+<a class="sourceLine" id="cb519-11" title="11">  <span class="kw">mode</span>(scores) &lt;-<span class="st"> &quot;numeric&quot;</span></a>
+<a class="sourceLine" id="cb519-12" title="12">  scores</a>
+<a class="sourceLine" id="cb519-13" title="13">}</a>
+<a class="sourceLine" id="cb519-14" title="14"></a>
+<a class="sourceLine" id="cb519-15" title="15"><span class="co"># Variante mit vielen Personen, wenig Items (wie in der Psychologie üblich)</span></a>
+<a class="sourceLine" id="cb519-16" title="16">N &lt;-<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb519-17" title="17">M &lt;-<span class="st"> </span><span class="dv">40</span></a>
+<a class="sourceLine" id="cb519-18" title="18"></a>
+<a class="sourceLine" id="cb519-19" title="19"><span class="co"># Simuliere Itemantworten mit Werten = 1 und 2 und Schlüssel </span></a>
+<a class="sourceLine" id="cb519-20" title="20"><span class="co"># mit Werten 1 und 2</span></a>
+<a class="sourceLine" id="cb519-21" title="21">items &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">size =</span> N <span class="op">*</span><span class="st"> </span>M, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">ncol =</span> M)</a>
+<a class="sourceLine" id="cb519-22" title="22">keys  &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">size =</span> M, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb519-23" title="23"></a>
+<a class="sourceLine" id="cb519-24" title="24"><span class="kw">library</span>(microbenchmark)</a>
+<a class="sourceLine" id="cb519-25" title="25"><span class="kw">microbenchmark</span>(</a>
+<a class="sourceLine" id="cb519-26" title="26">  <span class="kw">score_items_vectorized</span>(items, keys),</a>
+<a class="sourceLine" id="cb519-27" title="27">  <span class="kw">score_items_for</span>(items, keys)</a>
+<a class="sourceLine" id="cb519-28" title="28">)</a></code></pre></div>
 <pre><code>Unit: milliseconds
                                 expr      min       lq     mean   median
- score_items_vectorized(items, keys) 2.467322 2.513307 3.772244 2.585350
-        score_items_for(items, keys) 2.553964 2.621730 5.306000 2.663773
+ score_items_vectorized(items, keys) 2.479126 2.518707 3.724266 2.560201
+        score_items_for(items, keys) 2.605073 2.663849 4.176423 2.736379
        uq      max neval
- 4.487551 54.79798   100
- 4.693829 52.24681   100</code></pre>
+ 4.464652 51.49546   100
+ 4.958270 50.13714   100</code></pre>
 <p>Es macht hier quasi keinen Unterschied. Wie sieht es bei vielen Items und wenig
 Personen aus?</p>
-<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb513-1" title="1">items &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">size =</span> N <span class="op">*</span><span class="st"> </span>M, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">ncol =</span> N)</a>
-<a class="sourceLine" id="cb513-2" title="2">keys  &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">size =</span> N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb513-3" title="3"></a>
-<a class="sourceLine" id="cb513-4" title="4"><span class="kw">library</span>(microbenchmark)</a>
-<a class="sourceLine" id="cb513-5" title="5"><span class="kw">microbenchmark</span>(</a>
-<a class="sourceLine" id="cb513-6" title="6">  <span class="kw">score_items_vectorized</span>(items, keys),</a>
-<a class="sourceLine" id="cb513-7" title="7">  <span class="kw">score_items_for</span>(items, keys)</a>
-<a class="sourceLine" id="cb513-8" title="8">)</a></code></pre></div>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb521-1" title="1">items &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">size =</span> N <span class="op">*</span><span class="st"> </span>M, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">ncol =</span> N)</a>
+<a class="sourceLine" id="cb521-2" title="2">keys  &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">size =</span> N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb521-3" title="3"></a>
+<a class="sourceLine" id="cb521-4" title="4"><span class="kw">library</span>(microbenchmark)</a>
+<a class="sourceLine" id="cb521-5" title="5"><span class="kw">microbenchmark</span>(</a>
+<a class="sourceLine" id="cb521-6" title="6">  <span class="kw">score_items_vectorized</span>(items, keys),</a>
+<a class="sourceLine" id="cb521-7" title="7">  <span class="kw">score_items_for</span>(items, keys)</a>
+<a class="sourceLine" id="cb521-8" title="8">)</a></code></pre></div>
 <pre><code>Unit: milliseconds
-                                expr      min       lq      mean    median
- score_items_vectorized(items, keys) 2.343657 3.172839  4.910982  3.561837
-        score_items_for(items, keys) 9.258493 9.697411 14.575847 10.489383
-        uq      max neval
-  4.384274 55.54362   100
- 14.779505 82.22227   100</code></pre>
+                                expr      min       lq      mean   median
+ score_items_vectorized(items, keys) 2.340871 2.415464  3.244148 2.473943
+        score_items_for(items, keys) 9.297393 9.517083 15.245170 9.805637
+        uq       max neval
+  2.787194  9.187708   100
+ 14.807150 62.576466   100</code></pre>
 <p>Hier ist der Unterschied größer, aber praktisch auch komplett zu
 vernachlässigen.</p>
 
