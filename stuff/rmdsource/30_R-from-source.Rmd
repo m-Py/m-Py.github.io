@@ -7,21 +7,6 @@ output:
     df_print: kable
 ---
 
-```{r, include = FALSE}
-
-library(knitr)
-library(dplyr)
-knitr::opts_chunk$set(warning = FALSE) # echo = FALSE
-options(scipen = 999, digits = 2)
-
-knit_print.matrix = function(x, ...) {
-    res = paste(c("", "", kable(x)), collapse = "\n")
-    asis_output(res)
-}
-registerS3method("knit_print", "matrix", knit_print.matrix)
-
-```
-
 Before uploading a package to CRAN, it has to be tested using a recent
 development version of `R` that has to be installed from source:
 
