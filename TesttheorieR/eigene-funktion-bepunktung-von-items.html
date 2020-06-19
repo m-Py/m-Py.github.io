@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="de-DE" xml:lang="de-DE">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 Eigene Funktion: Bepunktung von Items | Testtheorie mit R</title>
+  <meta name="description" content="8 Eigene Funktion: Bepunktung von Items | Testtheorie mit R" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8 Eigene Funktion: Bepunktung von Items | Testtheorie mit R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 Eigene Funktion: Bepunktung von Items | Testtheorie mit R" />
+  
+  
+  
+
+<meta name="author" content="Martin Papenberg" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="schleifen.html"/>
+<link rel="next" href="anhang.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="einstieg.html"><a href="einstieg.html"><i class="fa fa-check"></i><b>1</b> Einstieg</a><ul>
+<li class="chapter" data-level="1.1" data-path="einstieg.html"><a href="einstieg.html#über-dieses-skript"><i class="fa fa-check"></i><b>1.1</b> Über dieses Skript</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="einstieg.html"><a href="einstieg.html#feedback-und-fehlermeldungen"><i class="fa fa-check"></i><b>1.1.1</b> Feedback und Fehlermeldungen</a></li>
+<li class="chapter" data-level="1.1.2" data-path="einstieg.html"><a href="einstieg.html#danksagung"><i class="fa fa-check"></i><b>1.1.2</b> Danksagung</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="einstieg.html"><a href="einstieg.html#erste-schritte-mit-r"><i class="fa fa-check"></i><b>1.2</b> Erste Schritte mit <code>R</code></a><ul>
+<li class="chapter" data-level="1.2.1" data-path="einstieg.html"><a href="einstieg.html#die-r-konsole"><i class="fa fa-check"></i><b>1.2.1</b> Die <code>R</code>-Konsole</a></li>
+<li class="chapter" data-level="1.2.2" data-path="einstieg.html"><a href="einstieg.html#der-skript-editor"><i class="fa fa-check"></i><b>1.2.2</b> Der Skript-Editor</a></li>
+<li class="chapter" data-level="1.2.3" data-path="einstieg.html"><a href="einstieg.html#kommentare"><i class="fa fa-check"></i><b>1.2.3</b> Kommentare</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="einstieg.html"><a href="einstieg.html#ausblick"><i class="fa fa-check"></i><b>1.3</b> Ausblick</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="vektoren.html"><a href="vektoren.html"><i class="fa fa-check"></i><b>2</b> Vektoren</a><ul>
+<li class="chapter" data-level="2.1" data-path="vektoren.html"><a href="vektoren.html#vektorisierung"><i class="fa fa-check"></i><b>2.1</b> Vektorisierung</a></li>
+<li class="chapter" data-level="2.2" data-path="vektoren.html"><a href="vektoren.html#variablen"><i class="fa fa-check"></i><b>2.2</b> Variablen</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="vektoren.html"><a href="vektoren.html#ausgabevsabspeichern"><i class="fa fa-check"></i><b>2.2.1</b> Ausgabe versus Abspeichern</a></li>
+<li class="chapter" data-level="2.2.2" data-path="vektoren.html"><a href="vektoren.html#variablennamen"><i class="fa fa-check"></i><b>2.2.2</b> Variablennamen</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="vektoren.html"><a href="vektoren.html#datentypen-von-vektoren"><i class="fa fa-check"></i><b>2.3</b> Datentypen von Vektoren</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="vektoren.html"><a href="vektoren.html#character"><i class="fa fa-check"></i><b>2.3.1</b> <code>character</code></a></li>
+<li class="chapter" data-level="2.3.2" data-path="vektoren.html"><a href="vektoren.html#logical"><i class="fa fa-check"></i><b>2.3.2</b> <code>logical</code></a></li>
+<li class="chapter" data-level="2.3.3" data-path="vektoren.html"><a href="vektoren.html#factor"><i class="fa fa-check"></i><b>2.3.3</b> <code>factor</code></a></li>
+<li class="chapter" data-level="2.3.4" data-path="vektoren.html"><a href="vektoren.html#na"><i class="fa fa-check"></i><b>2.3.4</b> <code>NA</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="vektoren.html"><a href="vektoren.html#logischevergleiche"><i class="fa fa-check"></i><b>2.4</b> Logische Vergleiche</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="vektoren.html"><a href="vektoren.html#logische-vergleiche-mit-vektoren-vom-typ-character"><i class="fa fa-check"></i><b>2.4.1</b> Logische Vergleiche mit Vektoren vom Typ <code>character</code></a></li>
+<li class="chapter" data-level="2.4.2" data-path="vektoren.html"><a href="vektoren.html#komponentenweise-vergleiche"><i class="fa fa-check"></i><b>2.4.2</b> Komponentenweise Vergleiche</a></li>
+<li class="chapter" data-level="2.4.3" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen"><i class="fa fa-check"></i><b>2.4.3</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
+<li class="chapter" data-level="2.4.4" data-path="vektoren.html"><a href="vektoren.html#nalogik"><i class="fa fa-check"></i><b>2.4.4</b> Logische Operationen mit <code>NA</code></a></li>
+<li class="chapter" data-level="2.4.5" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.4.5</b> Der <code>%in%</code>-Operator</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.5</b> Zugriff auf Vektorelemente</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="vektoren.html"><a href="vektoren.html#veczugriff"><i class="fa fa-check"></i><b>2.5.1</b> Der <code>[·]</code>-Zugriff</a></li>
+<li class="chapter" data-level="2.5.2" data-path="vektoren.html"><a href="vektoren.html#logischerZugriff"><i class="fa fa-check"></i><b>2.5.2</b> <code>[·]</code>-Zugriff mit einem logischen Vektor</a></li>
+<li class="chapter" data-level="2.5.3" data-path="vektoren.html"><a href="vektoren.html#vektorAendern"><i class="fa fa-check"></i><b>2.5.3</b> <code>[·]</code>-Zugriff zum Ändern von Daten</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="vektoren.html"><a href="vektoren.html#praezedenz"><i class="fa fa-check"></i><b>2.6</b> Präzedenz</a></li>
+<li class="chapter" data-level="2.7" data-path="vektoren.html"><a href="vektoren.html#zusammenfassung"><i class="fa fa-check"></i><b>2.7</b> Zusammenfassung</a></li>
+<li class="chapter" data-level="2.8" data-path="vektoren.html"><a href="vektoren.html#fragen-zum-vertiefenden-verständnis"><i class="fa fa-check"></i><b>2.8</b> Fragen zum vertiefenden Verständnis</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="dataframes.html"><a href="dataframes.html"><i class="fa fa-check"></i><b>3</b> <code>data.frames</code></a><ul>
+<li class="chapter" data-level="3.1" data-path="dataframes.html"><a href="dataframes.html#die-funktion-data.frame"><i class="fa fa-check"></i><b>3.1</b> Die Funktion <code>data.frame()</code></a></li>
+<li class="chapter" data-level="3.2" data-path="dataframes.html"><a href="dataframes.html#zugriff-auf-eine-einzelne-spalte-die--notation"><i class="fa fa-check"></i><b>3.2</b> Zugriff auf eine einzelne Spalte: die <code>$</code>-Notation</a></li>
+<li class="chapter" data-level="3.3" data-path="dataframes.html"><a href="dataframes.html#datenzugriffe"><i class="fa fa-check"></i><b>3.3</b> Zugriff auf Spalten und Zeilen: die <code>[·,·]</code>-Notation</a></li>
+<li class="chapter" data-level="3.4" data-path="dataframes.html"><a href="dataframes.html#subset"><i class="fa fa-check"></i><b>3.4</b> Die Funktion <code>subset()</code></a><ul>
+<li class="chapter" data-level="3.4.1" data-path="dataframes.html"><a href="dataframes.html#zeileneinfach"><i class="fa fa-check"></i><b>3.4.1</b> Vereinfachte Zeilenauswahl</a></li>
+<li class="chapter" data-level="3.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>3.4.2</b> Funktionsargumente</a></li>
+<li class="chapter" data-level="3.4.3" data-path="dataframes.html"><a href="dataframes.html#spalteneinfach"><i class="fa fa-check"></i><b>3.4.3</b> Sonderregeln zur Auswahl von Spalten</a></li>
+<li class="chapter" data-level="3.4.4" data-path="dataframes.html"><a href="dataframes.html#non-standard-evaluation"><i class="fa fa-check"></i><b>3.4.4</b> Non-Standard-Evaluation</a></li>
+<li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#umgang-mit-na-subset-bevorzugt-zur-zeilenauswahl"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="dataframes.html"><a href="dataframes.html#doppelteckig"><i class="fa fa-check"></i><b>3.5</b> Weitere Zugriffe auf <code>data.frames</code></a><ul>
+<li class="chapter" data-level="3.5.1" data-path="dataframes.html"><a href="dataframes.html#der--zugriff"><i class="fa fa-check"></i><b>3.5.1</b> Der <code>[[·]]</code>-Zugriff</a></li>
+<li class="chapter" data-level="3.5.2" data-path="dataframes.html"><a href="dataframes.html#der--zugriff-1"><i class="fa fa-check"></i><b>3.5.2</b> Der <code>[·]</code>-Zugriff</a></li>
+<li class="chapter" data-level="3.5.3" data-path="dataframes.html"><a href="dataframes.html#nameindex"><i class="fa fa-check"></i><b>3.5.3</b> Zugriff nach Name und Index</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="dataframes.html"><a href="dataframes.html#convenient"><i class="fa fa-check"></i><b>3.6</b> Nützliche Funktionen zum Arbeiten mit <code>data.frames</code></a><ul>
+<li class="chapter" data-level="3.6.1" data-path="dataframes.html"><a href="dataframes.html#tapply"><i class="fa fa-check"></i><b>3.6.1</b> Gruppierte Statistiken: <code>tapply()</code></a></li>
+<li class="chapter" data-level="3.6.2" data-path="dataframes.html"><a href="dataframes.html#datenstruktur-nrow-und-ncol"><i class="fa fa-check"></i><b>3.6.2</b> Datenstruktur: <code>nrow()</code> und <code>ncol()</code></a></li>
+<li class="chapter" data-level="3.6.3" data-path="dataframes.html"><a href="dataframes.html#wie-sieht-die-tabelle-aus-head-und-tail"><i class="fa fa-check"></i><b>3.6.3</b> Wie sieht die Tabelle aus: <code>head()</code> und <code>tail()</code></a></li>
+<li class="chapter" data-level="3.6.4" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-aller-spalten-hilfe-aus-zusatzpaketen"><i class="fa fa-check"></i><b>3.6.4</b> Zusammenfassung aller Spalten: Hilfe aus Zusatzpaketen</a></li>
+<li class="chapter" data-level="3.6.5" data-path="dataframes.html"><a href="dataframes.html#sortieren-die-funktion-arrange-aus-dem-paket-dplyr"><i class="fa fa-check"></i><b>3.6.5</b> Sortieren: Die Funktion <code>arrange</code>() aus dem Paket <code>dplyr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-1"><i class="fa fa-check"></i><b>3.7</b> Zusammenfassung</a></li>
+<li class="chapter" data-level="3.8" data-path="dataframes.html"><a href="dataframes.html#fragen-zum-vertiefenden-verständnis-1"><i class="fa fa-check"></i><b>3.8</b> Fragen zum vertiefenden Verständnis</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="psychometrie.html"><a href="psychometrie.html"><i class="fa fa-check"></i><b>4</b> Erste psychometrische Auswertungen</a><ul>
+<li class="chapter" data-level="4.1" data-path="psychometrie.html"><a href="psychometrie.html#summenwerte"><i class="fa fa-check"></i><b>4.1</b> Summenwerte</a></li>
+<li class="chapter" data-level="4.2" data-path="psychometrie.html"><a href="psychometrie.html#item-schwierigkeiten"><i class="fa fa-check"></i><b>4.2</b> Item-Schwierigkeiten</a></li>
+<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a></li>
+<li class="chapter" data-level="4.4" data-path="psychometrie.html"><a href="psychometrie.html#trennschaerfe"><i class="fa fa-check"></i><b>4.4</b> Item-Trennschärfen</a></li>
+<li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#cronbachs-alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
+<li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilität"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
+<li class="chapter" data-level="4.7" data-path="psychometrie.html"><a href="psychometrie.html#in-der-praxis-nutzung-von-zusatzpaketen"><i class="fa fa-check"></i><b>4.7</b> In der Praxis: Nutzung von Zusatzpaketen</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rohdaten.html"><a href="rohdaten.html"><i class="fa fa-check"></i><b>5</b> Aufarbeitung von Fragebogendaten</a><ul>
+<li class="chapter" data-level="5.1" data-path="rohdaten.html"><a href="rohdaten.html#umkodierung"><i class="fa fa-check"></i><b>5.1</b> Umkodierung von Antworten</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="rohdaten.html"><a href="rohdaten.html#die-funktion-ifelse"><i class="fa fa-check"></i><b>5.1.1</b> Die Funktion <code>ifelse()</code></a></li>
+<li class="chapter" data-level="5.1.2" data-path="rohdaten.html"><a href="rohdaten.html#ifelsevektor"><i class="fa fa-check"></i><b>5.1.2</b> Vektorisierung der Funktion <code>ifelse()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="rohdaten.html"><a href="rohdaten.html#invertierung-von-antworten"><i class="fa fa-check"></i><b>5.2</b> Invertierung von Antworten</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="rohdaten.html"><a href="rohdaten.html#invertierung-mit-ifelse"><i class="fa fa-check"></i><b>5.2.1</b> Invertierung mit <code>ifelse()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="rohdaten.html"><a href="rohdaten.html#missingvalues"><i class="fa fa-check"></i><b>5.3</b> Umgang mit fehlenden Werten</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="rohdaten.html"><a href="rohdaten.html#identifikation-von-fehlenden-werten"><i class="fa fa-check"></i><b>5.3.1</b> Identifikation von fehlenden Werten</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="rohdaten.html"><a href="rohdaten.html#fragen-zum-vertiefenden-verständnis-2"><i class="fa fa-check"></i><b>5.4</b> Fragen zum vertiefenden Verständnis</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="funktionen.html"><a href="funktionen.html"><i class="fa fa-check"></i><b>6</b> Funktionen</a><ul>
+<li class="chapter" data-level="6.1" data-path="funktionen.html"><a href="funktionen.html#das-black-box-modell"><i class="fa fa-check"></i><b>6.1</b> Das Black-Box-Modell</a></li>
+<li class="chapter" data-level="6.2" data-path="funktionen.html"><a href="funktionen.html#argumente"><i class="fa fa-check"></i><b>6.2</b> Argumente</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="funktionen.html"><a href="funktionen.html#help"><i class="fa fa-check"></i><b>6.2.1</b> Die <code>R</code>-Hilfe</a></li>
+<li class="chapter" data-level="6.2.2" data-path="funktionen.html"><a href="funktionen.html#namenlose-argumente"><i class="fa fa-check"></i><b>6.2.2</b> Namenlose Argumente</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="funktionen.html"><a href="funktionen.html#rückgabewerte"><i class="fa fa-check"></i><b>6.3</b> Rückgabewerte</a></li>
+<li class="chapter" data-level="6.4" data-path="funktionen.html"><a href="funktionen.html#seiteneffekte"><i class="fa fa-check"></i><b>6.4</b> Seiteneffekte</a></li>
+<li class="chapter" data-level="6.5" data-path="funktionen.html"><a href="funktionen.html#selbst-geschriebene-funktionen"><i class="fa fa-check"></i><b>6.5</b> Selbst geschriebene Funktionen</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="funktionen.html"><a href="funktionen.html#definition-der-eigenen-funktion"><i class="fa fa-check"></i><b>6.5.1</b> Definition der eigenen Funktion</a></li>
+<li class="chapter" data-level="6.5.2" data-path="funktionen.html"><a href="funktionen.html#lokale-variablen"><i class="fa fa-check"></i><b>6.5.2</b> Lokale Variablen</a></li>
+<li class="chapter" data-level="6.5.3" data-path="funktionen.html"><a href="funktionen.html#optionale-argumente"><i class="fa fa-check"></i><b>6.5.3</b> Optionale Argumente</a></li>
+<li class="chapter" data-level="6.5.4" data-path="funktionen.html"><a href="funktionen.html#wann-schreibe-ich-meine-eigene-funktion"><i class="fa fa-check"></i><b>6.5.4</b> Wann schreibe ich meine eigene Funktion</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="funktionen.html"><a href="funktionen.html#fragen-zum-vertiefenden-verständnis-3"><i class="fa fa-check"></i><b>6.6</b> Fragen zum vertiefenden Verständnis</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="schleifen.html"><a href="schleifen.html"><i class="fa fa-check"></i><b>7</b> Schleifen</a><ul>
+<li class="chapter" data-level="7.1" data-path="schleifen.html"><a href="schleifen.html#sequentielle-bepunktung-von-testitems"><i class="fa fa-check"></i><b>7.1</b> Sequentielle Bepunktung von Testitems</a></li>
+<li class="chapter" data-level="7.2" data-path="schleifen.html"><a href="schleifen.html#berechnung-von-part-whole-korrigierten-trennschärfen"><i class="fa fa-check"></i><b>7.2</b> Berechnung von part-whole korrigierten Trennschärfen</a></li>
+<li class="chapter" data-level="7.3" data-path="schleifen.html"><a href="schleifen.html#datenspeicherung-in-einer-schleife"><i class="fa fa-check"></i><b>7.3</b> Datenspeicherung in einer Schleife</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="schleifen.html"><a href="schleifen.html#adressierung-per-name"><i class="fa fa-check"></i><b>7.3.1</b> Adressierung per Name</a></li>
+<li class="chapter" data-level="7.3.2" data-path="schleifen.html"><a href="schleifen.html#indexadressierung"><i class="fa fa-check"></i><b>7.3.2</b> Vektorspeicherung – Adressierung per Index</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html"><i class="fa fa-check"></i><b>8</b> Eigene Funktion: Bepunktung von Items</a><ul>
+<li class="chapter" data-level="8.1" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#problemspezifischer-code-vs.-abstrahierter-code"><i class="fa fa-check"></i><b>8.1</b> Problemspezifischer Code vs. abstrahierter Code</a></li>
+<li class="chapter" data-level="8.2" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#funktionsargumente"><i class="fa fa-check"></i><b>8.2</b> Funktionsargumente</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#schlechte-praxis-bei-funktionsargumenten"><i class="fa fa-check"></i><b>8.2.1</b> Schlechte Praxis bei Funktionsargumenten</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#funktionsausgabe-data.frame-oder-matrix"><i class="fa fa-check"></i><b>8.3</b> Funktionsausgabe: <code>data.frame</code> oder <code>matrix</code>?</a></li>
+<li class="chapter" data-level="8.4" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#vektorisierung-und-matritzen"><i class="fa fa-check"></i><b>8.4</b> Vektorisierung und Matritzen</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#weitere-vektorisierte-operationen-auf-matritzen"><i class="fa fa-check"></i><b>8.4.1</b> Weitere vektorisierte Operationen auf Matritzen</a></li>
+<li class="chapter" data-level="8.4.2" data-path="eigene-funktion-bepunktung-von-items.html"><a href="eigene-funktion-bepunktung-von-items.html#was-ist-schneller-for-schleife-oder-vektorisierte-variante"><i class="fa fa-check"></i><b>8.4.2</b> Was ist schneller: <code>for</code>-Schleife oder vektorisierte Variante</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="anhang.html"><a href="anhang.html"><i class="fa fa-check"></i><b>9</b> Anhang</a><ul>
+<li class="chapter" data-level="9.1" data-path="anhang.html"><a href="anhang.html#datenEinlesen"><i class="fa fa-check"></i><b>9.1</b> Daten einlesen</a></li>
+<li class="chapter" data-level="9.2" data-path="anhang.html"><a href="anhang.html#das-environment-sauber-halten"><i class="fa fa-check"></i><b>9.2</b> Das Environment sauber halten</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="anhang.html"><a href="anhang.html#variablen-löschen"><i class="fa fa-check"></i><b>9.2.1</b> Variablen löschen</a></li>
+<li class="chapter" data-level="9.2.2" data-path="anhang.html"><a href="anhang.html#mit-einem-sauberen-environment-starten"><i class="fa fa-check"></i><b>9.2.2</b> Mit einem sauberen Environment starten</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="referenzen.html"><a href="referenzen.html"><i class="fa fa-check"></i><b>10</b> Referenzen</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Testtheorie mit <code>R</code></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="eigene-funktion-bepunktung-von-items" class="section level1">
+<h1><span class="header-section-number">8</span> Eigene Funktion: Bepunktung von Items</h1>
+<p>In diesem Kapitel stelle ich eine Anwendung unserer bisher erworbenen
+Programmierkenntnisse vor: Wir schreiben eine eigene Funktion, die für beliebige
+Datensätze eine Bepunktung von Testitems umsetzt. Funktionen zu schreiben
+bedeutet immer, das gegebene Problem zu abstrahieren; man geht weg von der
+konkreten Problematik (etwa, dem einzelnen Datensatz) und versucht die Essenz
+des Problems zu begreifen und zu lösen. Die Bepunktung von Items bietet sich
+sehr gut als Beispiel für die “Extraktion” einer Funktion an, da das Problem bei
+beliebigen Testinventaren auftreten kann; wir könnten eine generalisierte
+Funktion in ganz vielen unterschiedlichen Datenauswertungen gebrauchen.</p>
+<p>In diesem Kapitel kombinieren wir unsere erworbenen Kenntnisse aus den letzten
+beiden Kapiteln zu Funktionen und zu <code>for</code>-Schleifen. Außerdem führt das Kapitel
+noch in weitere, bislang nicht betrachtete Grundlagen von <code>R</code> ein, insbesondere
+die Datenstruktur der Matrix.</p>
+<div id="problemspezifischer-code-vs.-abstrahierter-code" class="section level2">
+<h2><span class="header-section-number">8.1</span> Problemspezifischer Code vs. abstrahierter Code</h2>
+<p>Betrachten wir noch einmal die Schleifen zur Bepunktung der NPI-Items
+aus dem letzten Kapitel und überlegen, welche Bestandteile des Codes
+problemspezifisch sind; diese müssen in einer Funktion entfernt werden, aber
+die Funktionalität des Codes muss natürlich erhalten bleiben.</p>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb507-1" title="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>) {</a>
+<a class="sourceLine" id="cb507-2" title="2">    <span class="co"># 1. Wähle Spaltenname des i-ten Items aus:</span></a>
+<a class="sourceLine" id="cb507-3" title="3">    colname &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Q&quot;</span>, i)</a>
+<a class="sourceLine" id="cb507-4" title="4">    <span class="co"># 2. Wähle aus Spalte die Antworten aus:</span></a>
+<a class="sourceLine" id="cb507-5" title="5">    ith_item &lt;-<span class="st"> </span>npi_clean[[colname]]</a>
+<a class="sourceLine" id="cb507-6" title="6">    <span class="co"># 3. Führe Umkodierung durch:</span></a>
+<a class="sourceLine" id="cb507-7" title="7">    narcissistic_response &lt;-<span class="st"> </span><span class="kw">ifelse</span>(ith_item <span class="op">==</span><span class="st"> </span>keys[i], <span class="dv">1</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb507-8" title="8">    <span class="co"># 4. Erstelle Namen für neue Spalte:</span></a>
+<a class="sourceLine" id="cb507-9" title="9">    new_colname  &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;coded&quot;</span>, colname)</a>
+<a class="sourceLine" id="cb507-10" title="10">    <span class="co"># 5. Hänge kodierte Werte an data.frame an:</span></a>
+<a class="sourceLine" id="cb507-11" title="11">    npi_clean[[new_colname]] &lt;-<span class="st"> </span>narcissistic_response</a>
+<a class="sourceLine" id="cb507-12" title="12">}</a></code></pre></div>
+<p>Welche Bestandteile dieses Codes sind problemspezifisch?</p>
+<ol style="list-style-type: decimal">
+<li>Die Zahl der Schleifendurchläufe ist “hart kodiert” und nicht dynamisch; hier
+wird angenommen, dass die Schleife 40 Mal laufen muss, was daran liegt, dass das
+NPI aus 40 Items besteht und wir deswegen 40 Spalten bearbeiten. In einer
+Funktion sollten wir <code>ncol()</code> nutzen, um die Zahl der zu bearbeitenden Spalten
+dynamisch auszulesen.</li>
+<li>Schritt 1 der Schleife greift auf die Spaltennamen des konkreten <code>data.frame</code>s
+zu, der hier bearbeitet wurde. Eine allgemein nutzbare Funktion sollte natürlich
+nicht davon ausgehen, dass die Namen in einem eingegebenen <code>data.frame</code> einem
+bestimmten Schema folgen. Die Spaltennamen sollten entweder per <code>colnames()</code>
+(bei <code>data.frames</code> ist dieser Befehl äquivalent zu <code>names()</code>) ausgelesen werden,
+oder wir adressieren die Spalten gleich mit einem <a href="schleifen.html#indexadressierung">numerischen
+Index</a>.</li>
+</ol>
+<p>Diese Erkenntnisse sind wichtig, um den problemspezifischen Code in eine
+Funktion umzuwandeln. Die allerwichtigste Frage jedoch ist noch eine weitere:
+Was für Argumente soll unsere Funktion annehmen?</p>
+</div>
+<div id="funktionsargumente" class="section level2">
+<h2><span class="header-section-number">8.2</span> Funktionsargumente</h2>
+<p>Ich entscheide mich in diesem Fall für die folgenden Argumente:</p>
+<ol style="list-style-type: decimal">
+<li><code>data.frame</code> aus den Testitems – nicht die gesamte Datentabelle, die vorliegt</li>
+<li>Vektor mit Schlüssel (Länge dieses Vektors = Zahl der Spalten im <code>data.frame</code>)</li>
+<li>Optional: Spaltennamen (Diese sind oft problemspezifisch; wir sollten eine
+Möglichkeit anbieten, die Spaltennamen festzulegen. Wir können überlegen, ob wir
+dafür einen Standardwert vergeben.)</li>
+</ol>
+<p>Diese Variante halte ich für gute Praxis; darin steckt natürlich meine
+subjektive Einschätzung.</p>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb508-1" title="1"><span class="co"># Parameter `items`: Datenmatrix im psychometrischen Standardformat</span></a>
+<a class="sourceLine" id="cb508-2" title="2"><span class="co"># Parameter `keys`: Vektor, der pro Item den Schlüssel enthält</span></a>
+<a class="sourceLine" id="cb508-3" title="3"><span class="co"># Hinweis: Bei der Nutzung der Funktion muss gelten: </span></a>
+<a class="sourceLine" id="cb508-4" title="4"><span class="co">#  `ncol(items) == length(keys)`</span></a>
+<a class="sourceLine" id="cb508-5" title="5"><span class="co"># Gibt eine Tabelle zurück, die dieselben Ausmaße hat wie `items` und pro Person</span></a>
+<a class="sourceLine" id="cb508-6" title="6"><span class="co"># die Scores pro Item enthält.</span></a>
+<a class="sourceLine" id="cb508-7" title="7">score_items2 &lt;-<span class="st"> </span><span class="cf">function</span>(items, keys) {</a>
+<a class="sourceLine" id="cb508-8" title="8">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(items)) {</a>
+<a class="sourceLine" id="cb508-9" title="9">    items[, i] &lt;-<span class="st"> </span><span class="kw">ifelse</span>(items[, i] <span class="op">==</span><span class="st"> </span>keys[i], <span class="dv">1</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb508-10" title="10">  }</a>
+<a class="sourceLine" id="cb508-11" title="11">  items <span class="co"># hier return() gar nicht nötig</span></a>
+<a class="sourceLine" id="cb508-12" title="12">}</a></code></pre></div>
+<div id="schlechte-praxis-bei-funktionsargumenten" class="section level3">
+<h3><span class="header-section-number">8.2.1</span> Schlechte Praxis bei Funktionsargumenten</h3>
+<ul>
+<li>Vorannahme über die Spaltennamen</li>
+<li>Gesamte Datentabelle übergeben (dann: Rückgabe ist diese Tabelle + die Spalten
+mit den bepunkteten Items)</li>
+<li>Gesamte Datentabelle übergeben, kein Rückgabewert, Spalten werden direkt</li>
+</ul>
+<p>All diese Praktiken sorgen dafür, dass die Funktion weniger abstrakt und
+stattdessen problemspezifischer wird. Die Funktion, die wir oben geschrieben
+haben, mit den Argumenten und der Rückgabe ist allgemein nutzbar und auch</p>
+</div>
+</div>
+<div id="funktionsausgabe-data.frame-oder-matrix" class="section level2">
+<h2><span class="header-section-number">8.3</span> Funktionsausgabe: <code>data.frame</code> oder <code>matrix</code>?</h2>
+<p>Des Weiteren werden wir uns fragen müssen, was für ein <code>R</code>-Objekt die Funktion
+zurückgeben soll. Wie wir sehen werden, wird sich diese Frage aber quasi von
+selbst beantworten; generell ist die Frage nach den Funktionsargumenten oft
+kritischer – in diesem Fall aber tatsächlich auch nicht schwierig zu klären.</p>
+<ul>
+<li>Matrix: “reduzierter” <code>data.frame</code>, in dem alle Elemente
+denselben Datentyp haben (wie im Vektor; prinzipiell ist eine Matrix auch ein
+Vektor)</li>
+<li>In Matrix: Auswahl per <code>[·,·]</code>-Notation; <code>$</code> geht nicht; <code>[[·]]</code> und <code>[·]</code>
+können verwendet werden, wählen aber nicht Spalten aus, wie man das aus einem
+data.frame gewöhnt wäre (<strong>was passiert hier stattdessen?</strong><a href="#fn48" class="footnote-ref" id="fnref48"><sup>48</sup></a>)</li>
+<li><code>data.frame</code> ist sowohl Matrix (von der Struktur her -&gt; daher wird die
+<code>[·,·]</code>-Notation geerbt) als auch Liste; daher werden die <code>[[·]]</code>- und
+<code>[·]</code>-Notationen geerbt</li>
+<li>Konstruktion Matrix: <code>matrix()</code>; Argumente <code>nrow()</code> und <code>ncol()</code> wichtig</li>
+</ul>
+<p>Die Ausgabe der Funktion ist also ein neuer <code>data.frame</code>; in der
+problemspezifischen Schleife, die ohne eigene Funktion auskam, hatten wir den
+Luxus, dass die bepunkteten Items direkt an unseren Haupt-<code>data.frame</code> angehängt
+wurden. Um die bepunkteten Spalten auch noch an den <code>data.frame</code> anzuhängen,
+müssten wir die von <code>score_items()</code> Tabelle und unseren ursprünglichen
+<code>data.frame</code> zusammenfügen; glücklicherweise ist das sehr leicht möglich mit der
+Funktion <code>data.frame()</code></p>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb509-1" title="1">npi &lt;-<span class="st"> </span><span class="kw">data.frame</span>(npi, scores)</a></code></pre></div>
+</div>
+<div id="vektorisierung-und-matritzen" class="section level2">
+<h2><span class="header-section-number">8.4</span> Vektorisierung und Matritzen</h2>
+<p>Ich denke, wir können mit unserer eigenen Funktion zur Berechnung von
+Item-Scores ziemlich zufrieden sein. Was jedoch, wenn ich euch mitteile, dass
+folgende Funktion auch schon dasselbe macht—ganz ohne <code>for</code>-Schleife:</p>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb510-1" title="1">score_items &lt;-<span class="st"> </span><span class="cf">function</span>(items, keys) {</a>
+<a class="sourceLine" id="cb510-2" title="2">  scores &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">t</span>(items) <span class="op">==</span><span class="st"> </span>keys) </a>
+<a class="sourceLine" id="cb510-3" title="3">  scores <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb510-4" title="4">}</a></code></pre></div>
+<p>Hier führe ich die komplette Bepunktung mit nur einer einzigen logischen Abfrage
+durch. Warum geht das? Der Grund liegt darin, dass die Vektorisierung in <code>R</code> so
+mächtig ist, dass sie nicht bei dem eindimensionalen eigentlichen Vektor stoppt,
+sondern auch auf komplexeren Datenstrukturen wirkt, wie zweidimensionalen
+<code>data.frames</code>. Um das vektorisierte Verhalten auszunutzen, war hier jedoch die
+Funktion <code>t()</code> nötig, die wir im Folgenden betrachten, um zu verstehen, wie die
+Funktion oben funktioniert. Ich werde etwas ausholen und dabei noch einige
+Grundlagen von <code>R</code> erklären. Habt also etwas Geduld.</p>
+<ul>
+<li><code>t()</code> vertauscht Spalten und Zeilen in einer Datenmatrix (Matrixtransponierung)</li>
+<li><code>t()</code> ergibt Matrix;</li>
+<li>In Matrix können wir einen logischen Vergleich durchführen zwischen Vektor und
+Matrix durchführen. Dieser Vergleich verknüpft jede Spalte Matrix vektorisiert
+mit dem Vektor durch die angegebene logische Operation.</li>
+</ul>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb511-1" title="1">mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb511-2" title="2">mat</a></code></pre></div>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9</code></pre>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb513-1" title="1">mat <span class="op">==</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></a></code></pre></div>
+<pre><code>     [,1]  [,2]  [,3]
+[1,] TRUE FALSE FALSE
+[2,] TRUE FALSE FALSE
+[3,] TRUE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb515-1" title="1">mat <span class="op">==</span><span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span></a></code></pre></div>
+<pre><code>      [,1]  [,2]  [,3]
+[1,] FALSE FALSE FALSE
+[2,]  TRUE FALSE FALSE
+[3,] FALSE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb517-1" title="1">mat <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">9</span>)</a></code></pre></div>
+<pre><code>      [,1]  [,2]  [,3]
+[1,]  TRUE FALSE FALSE
+[2,] FALSE  TRUE FALSE
+[3,] FALSE FALSE  TRUE</code></pre>
+<p>Hierbei wird jede Spalte in der Matrix als Vektor interpretiert und</p>
+<div id="weitere-vektorisierte-operationen-auf-matritzen" class="section level3">
+<h3><span class="header-section-number">8.4.1</span> Weitere vektorisierte Operationen auf Matritzen</h3>
+<ul>
+<li>Maximum einer Korrelationsmatrix</li>
+<li><code>which(arr.ind = TRUE)</code> -&gt; wo ist das Maximum der Korrelationsmatrix</li>
+</ul>
+</div>
+<div id="was-ist-schneller-for-schleife-oder-vektorisierte-variante" class="section level3">
+<h3><span class="header-section-number">8.4.2</span> Was ist schneller: <code>for</code>-Schleife oder vektorisierte Variante</h3>
+<p>Hier sind Geschwindigkeits-optimierte Varianten der Funktion mit Vektorisierung
+und <code>for</code>-Schleife. Insbesondere habe ich darin die Aufrufe der Funktion
+<code>ifelse()</code> entfernt, die hier ja nur <code>TRUE</code>/<code>FALSE</code> in 1/0 umgewandelt hat.
+Wegen des direkten Zusammenhangs dieser Datentypen kann man das aber auch
+schneller machen als per <code>ifelse()</code>; hier ändere ich einfach mit der Funktion
+<code>mode()</code> vor der Rückgabe den Datentyp, was keine zusätzlichen Berechnungen
+erfordert und deswegen die Laufzeit verbessert.</p>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb519-1" title="1">score_items_for &lt;-<span class="st"> </span><span class="cf">function</span>(items, keys) {</a>
+<a class="sourceLine" id="cb519-2" title="2">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(items)) {</a>
+<a class="sourceLine" id="cb519-3" title="3">    items[, i] &lt;-<span class="st"> </span>items[, i] <span class="op">==</span><span class="st"> </span>keys[i]</a>
+<a class="sourceLine" id="cb519-4" title="4">  }</a>
+<a class="sourceLine" id="cb519-5" title="5">  <span class="kw">mode</span>(items) &lt;-<span class="st"> &quot;numeric&quot;</span></a>
+<a class="sourceLine" id="cb519-6" title="6">  items</a>
+<a class="sourceLine" id="cb519-7" title="7">}</a>
+<a class="sourceLine" id="cb519-8" title="8"></a>
+<a class="sourceLine" id="cb519-9" title="9">score_items_vectorized &lt;-<span class="st"> </span><span class="cf">function</span>(items, keys) {</a>
+<a class="sourceLine" id="cb519-10" title="10">  scores &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">t</span>(items) <span class="op">==</span><span class="st"> </span>keys) </a>
+<a class="sourceLine" id="cb519-11" title="11">  <span class="kw">mode</span>(scores) &lt;-<span class="st"> &quot;numeric&quot;</span></a>
+<a class="sourceLine" id="cb519-12" title="12">  scores</a>
+<a class="sourceLine" id="cb519-13" title="13">}</a>
+<a class="sourceLine" id="cb519-14" title="14"></a>
+<a class="sourceLine" id="cb519-15" title="15"><span class="co"># Variante mit vielen Personen, wenig Items (wie in der Psychologie üblich)</span></a>
+<a class="sourceLine" id="cb519-16" title="16">N &lt;-<span class="st"> </span><span class="dv">10000</span></a>
+<a class="sourceLine" id="cb519-17" title="17">M &lt;-<span class="st"> </span><span class="dv">40</span></a>
+<a class="sourceLine" id="cb519-18" title="18"></a>
+<a class="sourceLine" id="cb519-19" title="19"><span class="co"># Simuliere Itemantworten mit Werten = 1 und 2 und Schlüssel </span></a>
+<a class="sourceLine" id="cb519-20" title="20"><span class="co"># mit Werten 1 und 2</span></a>
+<a class="sourceLine" id="cb519-21" title="21">items &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">size =</span> N <span class="op">*</span><span class="st"> </span>M, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">ncol =</span> M)</a>
+<a class="sourceLine" id="cb519-22" title="22">keys  &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">size =</span> M, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb519-23" title="23"></a>
+<a class="sourceLine" id="cb519-24" title="24"><span class="kw">library</span>(microbenchmark)</a>
+<a class="sourceLine" id="cb519-25" title="25"><span class="kw">microbenchmark</span>(</a>
+<a class="sourceLine" id="cb519-26" title="26">  <span class="kw">score_items_vectorized</span>(items, keys),</a>
+<a class="sourceLine" id="cb519-27" title="27">  <span class="kw">score_items_for</span>(items, keys)</a>
+<a class="sourceLine" id="cb519-28" title="28">)</a></code></pre></div>
+<pre><code>Unit: milliseconds
+                                expr      min       lq     mean   median
+ score_items_vectorized(items, keys) 2.479126 2.518707 3.724266 2.560201
+        score_items_for(items, keys) 2.605073 2.663849 4.176423 2.736379
+       uq      max neval
+ 4.464652 51.49546   100
+ 4.958270 50.13714   100</code></pre>
+<p>Es macht hier quasi keinen Unterschied. Wie sieht es bei vielen Items und wenig
+Personen aus?</p>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb521-1" title="1">items &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">size =</span> N <span class="op">*</span><span class="st"> </span>M, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">ncol =</span> N)</a>
+<a class="sourceLine" id="cb521-2" title="2">keys  &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">size =</span> N, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb521-3" title="3"></a>
+<a class="sourceLine" id="cb521-4" title="4"><span class="kw">library</span>(microbenchmark)</a>
+<a class="sourceLine" id="cb521-5" title="5"><span class="kw">microbenchmark</span>(</a>
+<a class="sourceLine" id="cb521-6" title="6">  <span class="kw">score_items_vectorized</span>(items, keys),</a>
+<a class="sourceLine" id="cb521-7" title="7">  <span class="kw">score_items_for</span>(items, keys)</a>
+<a class="sourceLine" id="cb521-8" title="8">)</a></code></pre></div>
+<pre><code>Unit: milliseconds
+                                expr      min       lq      mean   median
+ score_items_vectorized(items, keys) 2.340871 2.415464  3.244148 2.473943
+        score_items_for(items, keys) 9.297393 9.517083 15.245170 9.805637
+        uq       max neval
+  2.787194  9.187708   100
+ 14.807150 62.576466   100</code></pre>
+<p>Hier ist der Unterschied größer, aber praktisch auch komplett zu
+vernachlässigen.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="schleifen.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="anhang.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

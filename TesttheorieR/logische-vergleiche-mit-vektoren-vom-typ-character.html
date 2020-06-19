@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="de-DE" xml:lang="de-DE">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Logische Vergleiche mit Vektoren vom Typ character | Testtheorie mit R</title>
+  <meta name="description" content="3 Logische Vergleiche mit Vektoren vom Typ character | Testtheorie mit R" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Logische Vergleiche mit Vektoren vom Typ character | Testtheorie mit R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Logische Vergleiche mit Vektoren vom Typ character | Testtheorie mit R" />
+  
+  
+  
+
+<meta name="author" content="Martin Papenberg" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="vektoren.html"/>
+<link rel="next" href="dataframes.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="einstieg.html"><a href="einstieg.html"><i class="fa fa-check"></i><b>1</b> Einstieg</a><ul>
+<li class="chapter" data-level="1.1" data-path="einstieg.html"><a href="einstieg.html#über-dieses-skript"><i class="fa fa-check"></i><b>1.1</b> Über dieses Skript</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="einstieg.html"><a href="einstieg.html#feedback-und-fehlermeldungen"><i class="fa fa-check"></i><b>1.1.1</b> Feedback und Fehlermeldungen</a></li>
+<li class="chapter" data-level="1.1.2" data-path="einstieg.html"><a href="einstieg.html#danksagung"><i class="fa fa-check"></i><b>1.1.2</b> Danksagung</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="einstieg.html"><a href="einstieg.html#erste-schritte-mit-r"><i class="fa fa-check"></i><b>1.2</b> Erste Schritte mit <code>R</code></a><ul>
+<li class="chapter" data-level="1.2.1" data-path="einstieg.html"><a href="einstieg.html#die-r-konsole"><i class="fa fa-check"></i><b>1.2.1</b> Die <code>R</code>-Konsole</a></li>
+<li class="chapter" data-level="1.2.2" data-path="einstieg.html"><a href="einstieg.html#der-skript-editor"><i class="fa fa-check"></i><b>1.2.2</b> Der Skript-Editor</a></li>
+<li class="chapter" data-level="1.2.3" data-path="einstieg.html"><a href="einstieg.html#kommentare"><i class="fa fa-check"></i><b>1.2.3</b> Kommentare</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="einstieg.html"><a href="einstieg.html#ausblick"><i class="fa fa-check"></i><b>1.3</b> Ausblick</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="vektoren.html"><a href="vektoren.html"><i class="fa fa-check"></i><b>2</b> Vektoren</a><ul>
+<li class="chapter" data-level="2.1" data-path="vektoren.html"><a href="vektoren.html#vektorisierung"><i class="fa fa-check"></i><b>2.1</b> Vektorisierung</a></li>
+<li class="chapter" data-level="2.2" data-path="vektoren.html"><a href="vektoren.html#variablen"><i class="fa fa-check"></i><b>2.2</b> Variablen</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="vektoren.html"><a href="vektoren.html#ausgabevsabspeichern"><i class="fa fa-check"></i><b>2.2.1</b> Ausgabe versus Abspeichern</a></li>
+<li class="chapter" data-level="2.2.2" data-path="vektoren.html"><a href="vektoren.html#variablennamen"><i class="fa fa-check"></i><b>2.2.2</b> Variablennamen</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="vektoren.html"><a href="vektoren.html#datentypen-von-vektoren"><i class="fa fa-check"></i><b>2.3</b> Datentypen von Vektoren</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="vektoren.html"><a href="vektoren.html#character"><i class="fa fa-check"></i><b>2.3.1</b> <code>character</code></a></li>
+<li class="chapter" data-level="2.3.2" data-path="vektoren.html"><a href="vektoren.html#logical"><i class="fa fa-check"></i><b>2.3.2</b> <code>logical</code></a></li>
+<li class="chapter" data-level="2.3.3" data-path="vektoren.html"><a href="vektoren.html#factor"><i class="fa fa-check"></i><b>2.3.3</b> <code>factor</code></a></li>
+<li class="chapter" data-level="2.3.4" data-path="vektoren.html"><a href="vektoren.html#na"><i class="fa fa-check"></i><b>2.3.4</b> <code>NA</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="vektoren.html"><a href="vektoren.html#logischevergleiche"><i class="fa fa-check"></i><b>2.4</b> Logische Vergleiche</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="logische-vergleiche-mit-vektoren-vom-typ-character.html"><a href="logische-vergleiche-mit-vektoren-vom-typ-character.html"><i class="fa fa-check"></i><b>3</b> Logische Vergleiche mit Vektoren vom Typ <code>character</code></a><ul>
+<li class="chapter" data-level="3.0.1" data-path="logische-vergleiche-mit-vektoren-vom-typ-character.html"><a href="logische-vergleiche-mit-vektoren-vom-typ-character.html#komponentenweise-vergleiche"><i class="fa fa-check"></i><b>3.0.1</b> Komponentenweise Vergleiche</a></li>
+<li class="chapter" data-level="3.0.2" data-path="logische-vergleiche-mit-vektoren-vom-typ-character.html"><a href="logische-vergleiche-mit-vektoren-vom-typ-character.html#anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen"><i class="fa fa-check"></i><b>3.0.2</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
+<li class="chapter" data-level="3.0.3" data-path="logische-vergleiche-mit-vektoren-vom-typ-character.html"><a href="logische-vergleiche-mit-vektoren-vom-typ-character.html#der-in-operator"><i class="fa fa-check"></i><b>3.0.3</b> Der <code>%in%</code>-Operator</a></li>
+<li class="chapter" data-level="3.1" data-path="logische-vergleiche-mit-vektoren-vom-typ-character.html"><a href="logische-vergleiche-mit-vektoren-vom-typ-character.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>3.1</b> Zugriff auf Vektorelemente</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="logische-vergleiche-mit-vektoren-vom-typ-character.html"><a href="logische-vergleiche-mit-vektoren-vom-typ-character.html#veczugriff"><i class="fa fa-check"></i><b>3.1.1</b> Der <code>[·]</code>-Zugriff</a></li>
+<li class="chapter" data-level="3.1.2" data-path="logische-vergleiche-mit-vektoren-vom-typ-character.html"><a href="logische-vergleiche-mit-vektoren-vom-typ-character.html#logischerZugriff"><i class="fa fa-check"></i><b>3.1.2</b> <code>[·]</code>-Zugriff mit einem logischen Vektor</a></li>
+<li class="chapter" data-level="3.1.3" data-path="logische-vergleiche-mit-vektoren-vom-typ-character.html"><a href="logische-vergleiche-mit-vektoren-vom-typ-character.html#vektorAendern"><i class="fa fa-check"></i><b>3.1.3</b> <code>[·]</code>-Zugriff zum Ändern von Daten</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="logische-vergleiche-mit-vektoren-vom-typ-character.html"><a href="logische-vergleiche-mit-vektoren-vom-typ-character.html#praezedenz"><i class="fa fa-check"></i><b>3.2</b> Präzedenz</a></li>
+<li class="chapter" data-level="3.3" data-path="logische-vergleiche-mit-vektoren-vom-typ-character.html"><a href="logische-vergleiche-mit-vektoren-vom-typ-character.html#zusammenfassung"><i class="fa fa-check"></i><b>3.3</b> Zusammenfassung</a></li>
+<li class="chapter" data-level="3.4" data-path="logische-vergleiche-mit-vektoren-vom-typ-character.html"><a href="logische-vergleiche-mit-vektoren-vom-typ-character.html#fragen-zum-vertiefenden-verständnis"><i class="fa fa-check"></i><b>3.4</b> Fragen zum vertiefenden Verständnis</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="dataframes.html"><a href="dataframes.html"><i class="fa fa-check"></i><b>4</b> <code>data.frames</code></a><ul>
+<li class="chapter" data-level="4.1" data-path="dataframes.html"><a href="dataframes.html#die-funktion-data.frame"><i class="fa fa-check"></i><b>4.1</b> Die Funktion <code>data.frame()</code></a></li>
+<li class="chapter" data-level="4.2" data-path="dataframes.html"><a href="dataframes.html#zugriff-auf-eine-einzelne-spalte-die--notation"><i class="fa fa-check"></i><b>4.2</b> Zugriff auf eine einzelne Spalte: die <code>$</code>-Notation</a></li>
+<li class="chapter" data-level="4.3" data-path="dataframes.html"><a href="dataframes.html#datenzugriffe"><i class="fa fa-check"></i><b>4.3</b> Zugriff auf Spalten und Zeilen: die <code>[·,·]</code>-Notation</a></li>
+<li class="chapter" data-level="4.4" data-path="dataframes.html"><a href="dataframes.html#subset"><i class="fa fa-check"></i><b>4.4</b> Die Funktion <code>subset()</code></a><ul>
+<li class="chapter" data-level="4.4.1" data-path="dataframes.html"><a href="dataframes.html#zeileneinfach"><i class="fa fa-check"></i><b>4.4.1</b> Vereinfachte Zeilenauswahl</a></li>
+<li class="chapter" data-level="4.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>4.4.2</b> Funktionsargumente</a></li>
+<li class="chapter" data-level="4.4.3" data-path="dataframes.html"><a href="dataframes.html#spalteneinfach"><i class="fa fa-check"></i><b>4.4.3</b> Sonderregeln zur Auswahl von Spalten</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="dataframes.html"><a href="dataframes.html#doppelteckig"><i class="fa fa-check"></i><b>4.5</b> Weitere Zugriffe auf <code>data.frames</code></a><ul>
+<li class="chapter" data-level="4.5.1" data-path="dataframes.html"><a href="dataframes.html#der--zugriff"><i class="fa fa-check"></i><b>4.5.1</b> Der <code>[[·]]</code>-Zugriff</a></li>
+<li class="chapter" data-level="4.5.2" data-path="dataframes.html"><a href="dataframes.html#der--zugriff-1"><i class="fa fa-check"></i><b>4.5.2</b> Der <code>[·]</code>-Zugriff</a></li>
+<li class="chapter" data-level="4.5.3" data-path="dataframes.html"><a href="dataframes.html#nameindex"><i class="fa fa-check"></i><b>4.5.3</b> Zugriff nach Name und Index</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="dataframes.html"><a href="dataframes.html#convenient"><i class="fa fa-check"></i><b>4.6</b> Nützliche Funktionen zum Arbeiten mit <code>data.frames</code></a><ul>
+<li class="chapter" data-level="4.6.1" data-path="dataframes.html"><a href="dataframes.html#tapply"><i class="fa fa-check"></i><b>4.6.1</b> <code>tapply()</code></a></li>
+<li class="chapter" data-level="4.6.2" data-path="dataframes.html"><a href="dataframes.html#nrow-und-ncol"><i class="fa fa-check"></i><b>4.6.2</b> <code>nrow()</code> und <code>ncol()</code></a></li>
+<li class="chapter" data-level="4.6.3" data-path="dataframes.html"><a href="dataframes.html#head-und-tail"><i class="fa fa-check"></i><b>4.6.3</b> <code>head()</code> und <code>tail()</code></a></li>
+<li class="chapter" data-level="4.6.4" data-path="dataframes.html"><a href="dataframes.html#sortieren-dplyrarrange"><i class="fa fa-check"></i><b>4.6.4</b> Sortieren: <code>dplyr::arrange</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-1"><i class="fa fa-check"></i><b>4.7</b> Zusammenfassung</a></li>
+<li class="chapter" data-level="4.8" data-path="dataframes.html"><a href="dataframes.html#fragen-zum-vertiefenden-verständnis-1"><i class="fa fa-check"></i><b>4.8</b> Fragen zum vertiefenden Verständnis</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="psychometrie.html"><a href="psychometrie.html"><i class="fa fa-check"></i><b>5</b> Erste psychometrische Auswertungen</a><ul>
+<li class="chapter" data-level="5.1" data-path="psychometrie.html"><a href="psychometrie.html#summenwerte"><i class="fa fa-check"></i><b>5.1</b> Summenwerte</a></li>
+<li class="chapter" data-level="5.2" data-path="psychometrie.html"><a href="psychometrie.html#item-schwierigkeiten"><i class="fa fa-check"></i><b>5.2</b> Item-Schwierigkeiten</a></li>
+<li class="chapter" data-level="5.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>5.3</b> Item-Interkorrelationen</a></li>
+<li class="chapter" data-level="5.4" data-path="psychometrie.html"><a href="psychometrie.html#trennschaerfe"><i class="fa fa-check"></i><b>5.4</b> Item-Trennschärfen</a></li>
+<li class="chapter" data-level="5.5" data-path="psychometrie.html"><a href="psychometrie.html#cronbachs-alpha"><i class="fa fa-check"></i><b>5.5</b> Cronbachs Alpha</a></li>
+<li class="chapter" data-level="5.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilität"><i class="fa fa-check"></i><b>5.6</b> Split-Half-Reliabilität</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="rohdaten.html"><a href="rohdaten.html"><i class="fa fa-check"></i><b>6</b> Aufarbeitung von Fragebogendaten</a><ul>
+<li class="chapter" data-level="6.1" data-path="rohdaten.html"><a href="rohdaten.html#umkodierung"><i class="fa fa-check"></i><b>6.1</b> Umkodierung von Antworten</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="rohdaten.html"><a href="rohdaten.html#die-funktion-ifelse"><i class="fa fa-check"></i><b>6.1.1</b> Die Funktion <code>ifelse()</code></a></li>
+<li class="chapter" data-level="6.1.2" data-path="rohdaten.html"><a href="rohdaten.html#ifelsevektor"><i class="fa fa-check"></i><b>6.1.2</b> Vektorisierung der Funktion <code>ifelse()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="rohdaten.html"><a href="rohdaten.html#invertierung-von-antworten"><i class="fa fa-check"></i><b>6.2</b> Invertierung von Antworten</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="rohdaten.html"><a href="rohdaten.html#invertierung-mit-ifelse"><i class="fa fa-check"></i><b>6.2.1</b> Invertierung mit <code>ifelse()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="rohdaten.html"><a href="rohdaten.html#missingvalues"><i class="fa fa-check"></i><b>6.3</b> Umgang mit fehlenden Werten</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="rohdaten.html"><a href="rohdaten.html#identifikation-von-fehlenden-werten"><i class="fa fa-check"></i><b>6.3.1</b> Identifikation von fehlenden Werten</a></li>
+<li class="chapter" data-level="6.3.2" data-path="rohdaten.html"><a href="rohdaten.html#vergleiche-mit-na"><i class="fa fa-check"></i><b>6.3.2</b> Vergleiche mit <code>NA</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="rohdaten.html"><a href="rohdaten.html#fragen-zum-vertiefenden-verständnis-2"><i class="fa fa-check"></i><b>6.4</b> Fragen zum vertiefenden Verständnis</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="funktionen.html"><a href="funktionen.html"><i class="fa fa-check"></i><b>7</b> Funktionen</a><ul>
+<li class="chapter" data-level="7.1" data-path="funktionen.html"><a href="funktionen.html#das-black-box-modell"><i class="fa fa-check"></i><b>7.1</b> Das Black-Box-Modell</a></li>
+<li class="chapter" data-level="7.2" data-path="funktionen.html"><a href="funktionen.html#argumente"><i class="fa fa-check"></i><b>7.2</b> Argumente</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="funktionen.html"><a href="funktionen.html#help"><i class="fa fa-check"></i><b>7.2.1</b> Die <code>R</code>-Hilfe</a></li>
+<li class="chapter" data-level="7.2.2" data-path="funktionen.html"><a href="funktionen.html#namenlose-argumente"><i class="fa fa-check"></i><b>7.2.2</b> Namenlose Argumente</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="funktionen.html"><a href="funktionen.html#rückgabewerte"><i class="fa fa-check"></i><b>7.3</b> Rückgabewerte</a></li>
+<li class="chapter" data-level="7.4" data-path="funktionen.html"><a href="funktionen.html#seiteneffekte"><i class="fa fa-check"></i><b>7.4</b> Seiteneffekte</a></li>
+<li class="chapter" data-level="7.5" data-path="funktionen.html"><a href="funktionen.html#selbst-geschriebene-funktionen"><i class="fa fa-check"></i><b>7.5</b> Selbst geschriebene Funktionen</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="funktionen.html"><a href="funktionen.html#definition-der-eigenen-funktion"><i class="fa fa-check"></i><b>7.5.1</b> Definition der eigenen Funktion</a></li>
+<li class="chapter" data-level="7.5.2" data-path="funktionen.html"><a href="funktionen.html#lokale-variablen"><i class="fa fa-check"></i><b>7.5.2</b> Lokale Variablen</a></li>
+<li class="chapter" data-level="7.5.3" data-path="funktionen.html"><a href="funktionen.html#optionale-argumente"><i class="fa fa-check"></i><b>7.5.3</b> Optionale Argumente</a></li>
+<li class="chapter" data-level="7.5.4" data-path="funktionen.html"><a href="funktionen.html#wann-schreibe-ich-meine-eigene-funktion"><i class="fa fa-check"></i><b>7.5.4</b> Wann schreibe ich meine eigene Funktion</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="funktionen.html"><a href="funktionen.html#fragen-zum-vertiefenden-verständnis-3"><i class="fa fa-check"></i><b>7.6</b> Fragen zum vertiefenden Verständnis</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="schleifen.html"><a href="schleifen.html"><i class="fa fa-check"></i><b>8</b> Schleifen</a><ul>
+<li class="chapter" data-level="8.1" data-path="schleifen.html"><a href="schleifen.html#sequentielle-bepunktung-von-testitems"><i class="fa fa-check"></i><b>8.1</b> Sequentielle Bepunktung von Testitems</a></li>
+<li class="chapter" data-level="8.2" data-path="schleifen.html"><a href="schleifen.html#berechnung-von-part-whole-korrigierten-trennschärfen"><i class="fa fa-check"></i><b>8.2</b> Berechnung von part-whole korrigierten Trennschärfen</a></li>
+<li class="chapter" data-level="8.3" data-path="schleifen.html"><a href="schleifen.html#datenspeicherung-in-einer-schleife"><i class="fa fa-check"></i><b>8.3</b> Datenspeicherung in einer Schleife</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="schleifen.html"><a href="schleifen.html#adressierung-per-name"><i class="fa fa-check"></i><b>8.3.1</b> Adressierung per Name</a></li>
+<li class="chapter" data-level="8.3.2" data-path="schleifen.html"><a href="schleifen.html#vektorspeicherung-adressierung-per-index"><i class="fa fa-check"></i><b>8.3.2</b> Vektorspeicherung – Adressierung per Index</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="schleifen.html"><a href="schleifen.html#for-loops-are-evil-oder-nicht"><i class="fa fa-check"></i><b>8.4</b> for-loops are evil – oder nicht?</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="anhang.html"><a href="anhang.html"><i class="fa fa-check"></i><b>9</b> Anhang</a><ul>
+<li class="chapter" data-level="9.1" data-path="anhang.html"><a href="anhang.html#datenEinlesen"><i class="fa fa-check"></i><b>9.1</b> Daten einlesen</a></li>
+<li class="chapter" data-level="9.2" data-path="anhang.html"><a href="anhang.html#das-environment-sauber-halten"><i class="fa fa-check"></i><b>9.2</b> Das Environment sauber halten</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="anhang.html"><a href="anhang.html#variablen-löschen"><i class="fa fa-check"></i><b>9.2.1</b> Variablen löschen</a></li>
+<li class="chapter" data-level="9.2.2" data-path="anhang.html"><a href="anhang.html#mit-einem-sauberen-environment-starten"><i class="fa fa-check"></i><b>9.2.2</b> Mit einem sauberen Environment starten</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="referenzen.html"><a href="referenzen.html"><i class="fa fa-check"></i><b>10</b> Referenzen</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Testtheorie mit <code>R</code></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="logische-vergleiche-mit-vektoren-vom-typ-character" class="section level1">
+<h1><span class="header-section-number">3</span> Logische Vergleiche mit Vektoren vom Typ <code>character</code></h1>
+<p>Welche logischen Vergleiche möglich sind, hängt vom Datentyp eines
+Vektors ab. Für Vektoren vom Typ <code>character</code> etwa macht eine
+Kleiner/Größer-Abfrage keinen Sinn, jedoch eine Abfrage auf Gleichheit:</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" title="1">text1 &lt;-<span class="st"> &quot;Hallo Welt&quot;</span></a>
+<a class="sourceLine" id="cb132-2" title="2">text1 <span class="op">==</span><span class="st"> &quot;Hallo Welt&quot;</span></a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" title="1">text1 <span class="op">==</span><span class="st"> &quot;Hallo Welt!&quot;</span></a></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<p>Das funktioniert auch mit Vektoren vom Typ <code>factor</code>, die sich ja
+größtenteils wie Vektoren vom Typ <code>character</code> verhalten. Hier wird beim
+Test auf Gleichheit das überprüfte <code>factor</code>-Label in Anführungszeichen
+gesetzt:</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" title="1">geschlecht &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb136-2" title="2">geschlecht &lt;-<span class="st"> </span><span class="kw">factor</span>(</a>
+<a class="sourceLine" id="cb136-3" title="3">  geschlecht, </a>
+<a class="sourceLine" id="cb136-4" title="4">  <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb136-5" title="5">  <span class="kw">c</span>(<span class="st">&quot;weiblich&quot;</span>, <span class="st">&quot;maennlich&quot;</span>, <span class="st">&quot;divers&quot;</span>)</a>
+<a class="sourceLine" id="cb136-6" title="6">)</a>
+<a class="sourceLine" id="cb136-7" title="7">geschlecht <span class="op">==</span><span class="st"> &quot;maennlich&quot;</span></a></code></pre></div>
+<pre><code>[1] FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE</code></pre>
+<div id="komponentenweise-vergleiche" class="section level3">
+<h3><span class="header-section-number">3.0.1</span> Komponentenweise Vergleiche</h3>
+<p>Wenn zwei Vektoren gleicher Länge mit logischen Operatoren verglichen
+werden, werden die Elemente komponentenweise verglichen:</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" title="1">score_test1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">19</span>, <span class="dv">44</span>, <span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">22</span>)</a>
+<a class="sourceLine" id="cb138-2" title="2">score_test2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">26</span>, <span class="dv">23</span>, <span class="dv">29</span>, <span class="dv">18</span>, <span class="dv">32</span>, <span class="dv">19</span>)</a>
+<a class="sourceLine" id="cb138-3" title="3"></a>
+<a class="sourceLine" id="cb138-4" title="4">score_test1 <span class="op">&gt;</span><span class="st"> </span>score_test2</a></code></pre></div>
+<pre><code>[1] FALSE FALSE  TRUE FALSE FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" title="1">score_test1 <span class="op">==</span><span class="st"> </span>score_test2</a></code></pre></div>
+<pre><code>[1] FALSE FALSE FALSE  TRUE FALSE FALSE</code></pre>
+<p>Erneut treffen wir auf dieses komponentenweise Verhalten. Wir
+können noch eine Schippe drauf legen, indem wir vektorisierte
+logische Vergleiche mit vektorisierten UND- oder ODER-Operationen
+verbinden:</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1">(score_test1 <span class="op">&gt;</span><span class="st"> </span>score_test2) <span class="op">|</span><span class="st"> </span>(score_test1 <span class="op">&gt;</span><span class="st"> </span><span class="dv">23</span>)</a></code></pre></div>
+<pre><code>[1] FALSE FALSE  TRUE FALSE  TRUE  TRUE</code></pre>
+<p>Es macht an dieser Stelle Sinn, darüber nachzudenken, wie diese Ausgabe
+zustande kommt.</p>
+</div>
+<div id="anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen" class="section level3">
+<h3><span class="header-section-number">3.0.2</span> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</h3>
+<p>Häufig verwendet man die Vergleichsoperatoren, um zu prüfen, wie viele
+Daten eine bestimmte Eigenschaft erfüllen. Dafür können wir die
+Vergleichsoperatoren mit den Funktionen <code>sum()</code> oder <code>mean()</code>
+verknüpfen.</p>
+<p>Dafür bietet sich ein Beispiel aus der Statistik an: Wie viele von 1,000
+Zufallsdaten aus einer Standardnormalverteilung sind größer als 1? <code>R</code>
+hat zahlreiche Funktionen, um Zufallszahlen aus verschiedenen
+Verteilungen zu generieren. Mit <code>rnorm()</code> lassen sich Zufallszahlen
+generieren, die einer Normalverteilung folgen; wenn man keine weiteren
+Argumente angibt, ist die Standardnormalverteilung gemeint, die einen
+Mittelwert von <code>0</code> und eine Standardabweichung von <code>1</code> hat:</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" title="1"><span class="co"># Erstelle 1,000 Zufallsdaten:</span></a>
+<a class="sourceLine" id="cb144-2" title="2">zufallsdaten &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>)</a></code></pre></div>
+<p>Zur Verdeutlichung: Der Vektor <code>zufallsdaten</code> enthält jetzt 1,000
+Elemente, wie wir mit der Funktion <code>length</code> leicht überprüfen können:</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" title="1"><span class="kw">length</span>(zufallsdaten)</a></code></pre></div>
+<pre><code>[1] 1000</code></pre>
+<p>Die Funktion <code>head()</code> zeigt uns die ersten sechs Werte des Vektors an;
+sie ist sehr praktisch, um sich schnell einen Überblick über Daten zu
+verschaffen. Das machen wir hier auch, da wir nicht alle 1,000 Werte in
+die Konsole schreiben wollen:</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" title="1"><span class="kw">head</span>(zufallsdaten)</a></code></pre></div>
+<pre><code>[1]  1.3709584 -0.5646982  0.3631284  0.6328626  0.4042683 -0.1061245</code></pre>
+<p>Wir können die Daten mithilfe eines Histogramms betrachten, um uns davon
+zu überzeugen, dass sie tatsächlich normalverteilt sind – sich also der
+Großteil der Daten um die <code>0</code> tummelt und extreme Werte in beide
+Richtungen seltener werden (dieser Code muss nicht verstanden werden):</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" title="1"><span class="co"># Male Histogram</span></a>
+<a class="sourceLine" id="cb149-2" title="2"><span class="kw">hist</span>(</a>
+<a class="sourceLine" id="cb149-3" title="3">  zufallsdaten, </a>
+<a class="sourceLine" id="cb149-4" title="4">  <span class="dt">freq =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb149-5" title="5">  <span class="dt">main =</span> <span class="st">&quot;Schöne normalverteilte Daten&quot;</span>,</a>
+<a class="sourceLine" id="cb149-6" title="6">  <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, </a>
+<a class="sourceLine" id="cb149-7" title="7">  <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, </a>
+<a class="sourceLine" id="cb149-8" title="8">  <span class="dt">las =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb149-9" title="9">  <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>), </a>
+<a class="sourceLine" id="cb149-10" title="10">  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>),</a>
+<a class="sourceLine" id="cb149-11" title="11">)</a>
+<a class="sourceLine" id="cb149-12" title="12"><span class="co"># Lege eine Normalverteilungskurve über die Daten</span></a>
+<a class="sourceLine" id="cb149-13" title="13"><span class="kw">curve</span>(dnorm, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">lwd =</span> <span class="fl">1.5</span>)</a>
+<a class="sourceLine" id="cb149-14" title="14"><span class="co"># Zeichne eine blue Linie beim x-Wert `1` ein:</span></a>
+<a class="sourceLine" id="cb149-15" title="15"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">1</span>, <span class="dt">lwd =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
+<p><img src="00_Setup_files/figure-html/unnamed-chunk-55-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Nach visueller Inspektion der Verteilung der Zufallszahlen können wir
+mit <code>sum</code> testen, wie viele der 1,000 Zufallsdaten größer als 1 sind:</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" title="1"><span class="kw">sum</span>(zufallsdaten <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre><code>[1] 153</code></pre>
+<p>Zur Erinnerung: Der Befehl “<code>zufallsdaten &gt; 1</code>” ergibt einen Vektor aus
+<code>TRUE</code> und <code>FALSE</code> Werten, der genauso viele Elemente enthält wie der
+Vektor <code>zufallsdaten</code>; wann immer ein Eintrag in <code>zufallsdaten</code> größer
+ist als 1, erhalten wir <code>TRUE</code>, andernfalls <code>FALSE</code>. Die Funktion
+<code>sum()</code> gibt die Zahl der <code>TRUE</code> Einträge aus. <strong>Das funktioniert, da
+<code>TRUE</code> und <code>FALSE</code> eine numerische Interpretation haben: <code>TRUE</code> wird als
+<code>1</code> interpretiert und <code>FALSE</code> als <code>0</code></strong>.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
+<p>Analog können wir mit <code>mean()</code> den relativen Anteil der Daten bestimmen,
+die größer als 1 sind:</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" title="1"><span class="kw">mean</span>(zufallsdaten <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre><code>[1] 0.153</code></pre>
+<p>Der Aufruf <code>mean(zufallsdaten &gt; 1)</code> ergibt also den relativen Anteil der
+Datenpunkte, die größer sind als 1. Es lohnt sich ein wenig darüber
+nachzudenken, warum wir <code>mean()</code> hier verwenden können, um den relativen
+Anteil zu bestimmen. Normalerweise sind wir es eher gewohnt, dass
+Mittelwerte und relative Anteile etwas Unterschiedliches sind. Der Grund
+dafür ist folgender: Für eine Variable, bei der die Werte nur 1 oder 0
+annehmen können (analog in R: <code>TRUE</code>/<code>FALSE</code>), entspricht der Mittelwert
+dieser Variablen dem relativen Anteil der Werte, die 1 bzw. <code>TRUE</code> sind.
+Als Beispiel betrachten wir den folgenden Vektor:</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" title="1">beispiel_<span class="dv">01</span> &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb154-2" title="2"><span class="kw">mean</span>(beispiel_<span class="dv">01</span>)</a></code></pre></div>
+<pre><code>[1] 0.75</code></pre>
+<p>Der Mittelwert des Vektors ist <code>(1 + 0 + 1 + 1) / 4</code>, also 0.75 – und
+damit genau der relative Anteil der 1-Elemente. Dies ist eine praktische
+Eigenschaft der 1/0- bzw. <code>TRUE</code>/<code>FALSE</code>-Kodierung und macht logische
+Abfragen in <code>R</code> so mächtig.</p>
+<p>Wenn wir einen relativen Anteil in eine Prozentzahl umwandeln wollen,
+können wir ihn einfach mit 100 multiplizieren:</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1"><span class="kw">mean</span>(zufallsdaten <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></a></code></pre></div>
+<pre><code>[1] 15.3</code></pre>
+<p>Der Erwartungswert, dass eine zufällige Zahl aus einer
+Standardnormalverteilung größer ist als <code>1</code> – also mehr als eine
+Standardabweichung vom Mittelwert entfernt liegt – liegt bei etwa
+15.9%. Den exakten Erwartungswert könnte ich in <code>R</code> mit der Funktion
+<code>pnorm()</code> herausfinden:</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" title="1"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="dv">1</span>)</a></code></pre></div>
+<pre><code>[1] 0.1586553</code></pre>
+<p>Die Funktion <code>pnorm()</code> ist die kumulative Verteilungsfunktion der
+Normalverteilung. Sie sagt aus, wie viel Prozent der Werte in einer
+Normalverteilung kleiner sind als der übergebene Wert. Um heraus zu
+finden, wie viele Werte <strong>größer</strong> als 1 sind, wird hier das Komplement,
+also <code>1 - pnorm(1)</code>, gebildet. Das funktioniert, da die Gesamtdichte
+einer Wahrscheinlichkeitsverteilung immer 1 ist.</p>
+<p>Nach dem Gesetz der großen Zahlen liegt der folgende Wert wahrscheinlich
+näher am “wahren Wert” von 15.9% als der Schätzer, der auf 1,000
+Zufallszahlen basiert:</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1"><span class="co"># 100,000 Zufallsdaten sind für R kein Problem</span></a>
+<a class="sourceLine" id="cb160-2" title="2">zufallsdaten &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100000</span>) </a>
+<a class="sourceLine" id="cb160-3" title="3"><span class="kw">mean</span>(zufallsdaten <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre><code>[1] 0.15838</code></pre>
+<p>Ihr könnt für das Gesetz der großen Zahlen selber ein Gefühl entwickeln,
+wenn ihr mehrfach <code>mean(rnorm(1000) &gt; 1)</code> und <code>mean(rnorm(100000) &gt; 1)</code>
+in die <code>R</code>-Konsole eingebt und beobachtet, welcher Wert häufiger näher
+an 0.159 liegt.</p>
+</div>
+<div id="der-in-operator" class="section level3">
+<h3><span class="header-section-number">3.0.3</span> Der <code>%in%</code>-Operator</h3>
+<p>Um zu testen, ob ein oder mehrere Elemente in einem Vektor enthalten
+sind, kann man den <code>%in%</code>-Operator verwenden. Der sieht zwar
+gewöhnungsbedürftig aus, ist aber einfach zu verwenden und hat auch eine
+einfache verbale Interpretation: Sind die Elemente aus Vektor A in
+Vektor B?</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1"><span class="dv">2</span> <span class="op">%in%</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1"><span class="dv">4</span> <span class="op">%in%</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></a></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<p>Wir können den <code>%in%</code>-Operator als eine Aneinanderreihung mehrerer
+ODER-Bedingungen verstehen. Folgendes ist äquivalent zu den obigen
+Aufrufen von <code>%in%</code>:</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1">zu_testen &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb166-2" title="2">zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">|</span><span class="st"> </span>zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">3</span></a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1">zu_testen &lt;-<span class="st"> </span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb168-2" title="2">zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">|</span><span class="st"> </span>zu_testen <span class="op">==</span><span class="st"> </span><span class="dv">3</span></a></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<p>Der <code>%in%</code>-Operator ist wie so vieles in <code>R</code> „vektorisiert“, das heißt
+wir können für mehrere Elemente gleichzeitig testen, ob sie in einem
+Vektor enthalten sind:</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1"><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>) <span class="op">%in%</span><span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">5</span></a></code></pre></div>
+<pre><code>[1] FALSE  TRUE</code></pre>
+<p>In diesem Fall wird für jedes der Vektorelemente <em>vor</em> <code>%in%</code> geprüft,
+ob dieses im Vektor <em>nach</em> <code>%in%</code> enthalten ist. Die Ausgabe der
+<code>%in%</code>-Operation ist immer ein logischer Vektor; die Länge des
+Ausgabevektors entspricht der Länge des Vektors auf der linken Seite von
+<code>%in%</code>.</p>
+</div>
+<div id="zugriff-auf-vektorelemente" class="section level2">
+<h2><span class="header-section-number">3.1</span> Zugriff auf Vektorelemente</h2>
+<p>Der Zugriff auf Daten ist ein wichtiger Abschnitt unserer Einleitung in
+die Grundlagen von <code>R</code>. In diesem Abschnitt lernen wir, wie wir Elemente
+aus Vektoren „herausgreifen“ können und wie wir einzelne Elemente in
+einem Vektor ändern können. In <a href="dataframes.html#datenzugriffe">Kapitel 3</a> wird als
+Fortführung behandelt, wie wir Daten aus Tabellen (wie wir sie etwa aus
+Excel kennen) auswählen können.</p>
+<div id="veczugriff" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Der <code>[·]</code>-Zugriff</h3>
+<p>Daten können mit dem <code>[·]</code>-Zugriff<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> <em>indexbasiert</em> aus
+Vektoren ausgewählt werden. Jedes Element im Vektor hat einen <em>Index</em>,
+der seiner Position im Vektor entspricht. Im folgenden Vektor etwa hat
+<code>2</code> den Index <code>1</code>, <code>4</code> den Index <code>2</code> und <code>1</code> den Index <code>3</code>:</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1">daten &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">1</span>)</a></code></pre></div>
+<p>Ich kann mit dem <code>[·]</code>-Zugriff durch Angabe des Index auf einzelne
+Elemente im Vektor zugreifen:</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1">daten[<span class="dv">1</span>]</a></code></pre></div>
+<pre><code>[1] 2</code></pre>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1">xx &lt;-<span class="st"> </span>daten[<span class="dv">3</span>] <span class="co"># ein-elementiger Vektor</span></a>
+<a class="sourceLine" id="cb175-2" title="2">xx</a></code></pre></div>
+<pre><code>[1] 1</code></pre>
+<p>Ebenso kann ich einen „Negativ“-Zugriff durchführen: Ich kann auswählen,
+welchen Index ich <em>nicht</em> in meinem Ergebnis haben will:</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" title="1">daten[<span class="op">-</span><span class="dv">1</span>]</a></code></pre></div>
+<pre><code>[1] 4 1</code></pre>
+<p>Interessant wird diese Art des Zugriffs, da der Index in den <code>[·]</code>
+Klammern auch ein mehr-elementiger numerischer Vektor sein kann – hier
+nutzen wir die Funktion <code>c()</code>:</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1">daten[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]</a></code></pre></div>
+<pre><code>[1] 2 4</code></pre>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" title="1">daten[<span class="op">-</span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)]</a></code></pre></div>
+<pre><code>[1] 2</code></pre>
+</div>
+<div id="logischerZugriff" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> <code>[·]</code>-Zugriff mit einem logischen Vektor</h3>
+<p>Anstatt direkt den Index eines Elements zu übergeben – den wir häufig
+nicht wissen, da wir bei vielen Daten nicht den Überblick über die
+Position aller einzelnen Datenpunkte behalten – möchten wir häufig
+Daten auswählen, die eine bestimmte Eigenschaft erfüllen. Hierbei machen
+wir uns die logischen Operationen zunutze, die wir oben kennengelernt
+haben:</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1">meinVektor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>)</a>
+<a class="sourceLine" id="cb183-2" title="2"></a>
+<a class="sourceLine" id="cb183-3" title="3">auswahl &lt;-<span class="st"> </span>meinVektor <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb183-4" title="4">auswahl</a></code></pre></div>
+<pre><code>[1] FALSE FALSE FALSE  TRUE  TRUE  TRUE</code></pre>
+<p>Der logische Vektor <code>auswahl</code> kodiert, welche Elemente des Vektors
+<code>meinVektor</code> größer sind als 5 (spezifisch: an welchen Positionen
+<code>meinVektor</code> ein Element enthält, das größer ist als 5). Ich kann nun
+<code>auswahl</code> in der <code>[·]</code>-Notation verwenden, um nur die Elemente
+auszuwählen, die größer sind als 5:</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1">meinVektor[auswahl]</a></code></pre></div>
+<pre><code>[1] 7 8 9</code></pre>
+<p>Hierbei wurden die Werte 7, 8 und 9 ausgewählt, da für diese Werte der
+Vektor <code>auswahl</code> auf <code>TRUE</code> steht. Genauer gesagt: <code>auswahl</code> steht für
+die Indexe 4, 5 und 6 auf <code>TRUE</code> und es gilt <code>meinVektor[4] == 7</code>,
+<code>meinVektor[5] == 8</code>, und <code>meinVektor[6] == 9</code>.</p>
+<p>Man kann dieses Vorgehen sogar mit den UND/ODER-Operationen verknüpfen,
+um Daten anhand verschiedener Kriterien auszuwählen:</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1">meinVektor &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb187-2" title="2"></a>
+<a class="sourceLine" id="cb187-3" title="3">auswahl &lt;-<span class="st"> </span>(meinVektor <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>) <span class="op">|</span><span class="st"> </span>(meinVektor <span class="op">&gt;</span><span class="st"> </span><span class="dv">17</span>)</a>
+<a class="sourceLine" id="cb187-4" title="4">auswahl</a></code></pre></div>
+<pre><code> [1]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[13] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE</code></pre>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1">meinVektor[auswahl]</a></code></pre></div>
+<pre><code>[1]  1  2  3  4 18 19 20</code></pre>
+<p>Hier ein weiteres Beispiel mit normalverteilten Zufallsdaten:</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" title="1"><span class="co">## Wähle alle Daten aus, die größer sind als 2 (das sollten im Schnitt</span></a>
+<a class="sourceLine" id="cb191-2" title="2"><span class="co">## etwa 2.5% der Daten sein)</span></a>
+<a class="sourceLine" id="cb191-3" title="3">daten &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">300</span>)</a>
+<a class="sourceLine" id="cb191-4" title="4">daten[daten <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>]</a></code></pre></div>
+<pre><code>[1] 3.196362 2.386513 2.791331 2.123950</code></pre>
+<p>An dieser Stelle sollte man sich klar machen, warum <code>daten</code> sowohl vor
+als auch innerhalb der <code>[·]</code> Klammern vorkommt. Das ist prinzipiell
+dasselbe wie im Beispiel <code>meinVektor[auswahl]</code> oben, nur das ich dort
+den <code>TRUE/FALSE</code> Vektor, der die Daten ausgewählt hat, in einer
+Variablen – <code>auswahl</code> – zwischengespeichert habe.</p>
+</div>
+<div id="vektorAendern" class="section level3">
+<h3><span class="header-section-number">3.1.3</span> <code>[·]</code>-Zugriff zum Ändern von Daten</h3>
+<p>Wir sind mit dem <code>[·]</code>-Zugriff nicht darauf beschränkt Elemente aus
+Vektoren auszulesen, sondern wir können auf diese Weise auch einzelne
+Elemente im Vektor verändern:</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1">daten &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb193-2" title="2">daten[<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>)] &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb193-3" title="3">daten</a></code></pre></div>
+<pre><code>[1] 1 0 3 4 0</code></pre>
+<p>Dies geht wiederum auch mit einem logischen Vektor in den
+<code>[·]</code>-Klammern, wie das folgende Beispiel zeigt:</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1">daten &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb195-2" title="2">daten[<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)] &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb195-3" title="3">daten</a></code></pre></div>
+<pre><code>[1] 0 2 0 4 5</code></pre>
+<p>Das würde man so “händisch” nicht machen, aber es soll zum Verständnis
+dessen dienen, was im folgenden – anwendungsnäheren – Beispiel
+passiert. Angenommen, bei einer Dateneingabe wurden fehlende Werte in
+einem Fragebogen mit <code>-99</code> kodiert.<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a> Wir wollen <code>R</code>
+mitteilen, diesen Wert als fehlend zu interpretieren. Hier kommt uns
+wiederum eine logische Abfrage zugute:</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" title="1">daten &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">-99</span>, <span class="dv">5</span>, <span class="dv">-99</span>, <span class="dv">2</span>, <span class="dv">-99</span>, <span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb197-2" title="2">daten</a></code></pre></div>
+<pre><code> [1]   1 -99   5 -99   2 -99   4   1   2   3</code></pre>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" title="1">missing_values &lt;-<span class="st"> </span>daten <span class="op">==</span><span class="st"> </span><span class="dv">-99</span></a>
+<a class="sourceLine" id="cb199-2" title="2">missing_values</a></code></pre></div>
+<pre><code> [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE</code></pre>
+<p>Die Variable <code>missing_values</code> kodiert jetzt, an welchen Positionen des
+Vektors <code>daten</code> sich eine <code>-99</code> befindet. Wir können diese Werte nun wie
+folgt durch <code>NA</code> ersetzen:</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1">daten[missing_values] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb201-2" title="2">daten</a></code></pre></div>
+<pre><code> [1]  1 NA  5 NA  2 NA  4  1  2  3</code></pre>
+<p>Semantisch ist dieser Vorgang gut zu verstehen: Setze alle Werte, die
+einen fehlenden Wert enthalten – d.h. mit -99 kodiert wurden – auf
+<code>NA</code>, damit <code>R</code> für weitere Berechnungen weiß, dass diese Werte als
+fehlend zu verstehen sind. Technisch umgesetzt wird dies mit einem
+<code>TRUE</code>/<code>FALSE</code> Vektor, den wir mithilfe der Anweisung <code>daten == -99</code>
+erstellt haben.</p>
+<p>Wir werden wohl selten “händisch” per Index oder logischem
+<code>TRUE</code>/<code>FALSE</code> Vektor eine Auswahl/Änderung von Daten durchführen. Aber
+in Zusammenarbeit mit den logischen Operatoren (<code>&gt;</code>, <code>&lt;</code>, <code>==</code>, <code>&amp;</code>, <code>|</code>
+etc.) ist die Auswahl von Elementen aus Vektoren – und auch die Auswahl
+von Daten aus Tabellen – eine häufige Anwendung. Diese werden wir bei
+der gezielten Auswahl von Zeilen aus Datentabellen (siehe Kapitel 3)
+wiederfinden und uns zunutze machen. Das gegebene Beispiel zur
+Umkodierung von fehlenden Werten werden wir in einer sehr ähnlichen
+Form in <a href="rohdaten.html#missingvalues">Kapitel 5</a> nutzen, da wir sonst Daten aus
+dem Narcissistic Personality Inventory nicht auswerten können. Bevor
+die Analyse startet, müssen fehlende Werte gekennzeichnet werden.</p>
+</div>
+</div>
+<div id="praezedenz" class="section level2">
+<h2><span class="header-section-number">3.2</span> Präzedenz</h2>
+<p>Durch Klammerung können wir die <em>Präzedenz</em> von <code>R</code>-Befehlen steuern.
+Präzendenz bezieht sich auf die Reihenfolge, in der <code>R</code>-Befehle
+ausgeführt werden. Betrachten wir das folgende Beispiel:</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1"><span class="ot">TRUE</span> <span class="op">|</span><span class="st"> </span><span class="ot">TRUE</span> <span class="op">&amp;</span><span class="st"> </span><span class="ot">FALSE</span></a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<p>Die Ausgabe ist <code>TRUE</code>. Daraus können wir schlussfolgern, dass die
+Befehle ODER und UND <strong>nicht</strong> von links nach rechts ausgeführt wurden.
+In dem Fall wäre nämlich zunächst <code>TRUE | TRUE</code> ausgeführt worden, was
+<code>TRUE</code> ergibt. Dieses Ergebnis (also <code>TRUE</code>) wäre dann per UND mit
+<code>FALSE</code> verknüpft worden, was insgesamt <code>FALSE</code> ausgegeben hätte. Wir
+haben aber <code>TRUE</code> bekommen. Warum?</p>
+<p>Der Grund: <strong>Die UND-Operation hat eine höhere Präzedenz als die
+ODER-Operation</strong>. Wenn UND und ODER in einem logischen Ausdruck
+verbunden werden, wird zunächst die UND und dann die ODER-Operation
+ausgeführt, unabhängig davon, in welcher Reihenfolge wir die Befehle
+aufschreiben. Möchten wir erzwingen, dass die ODER-Operation zuerst
+durchgeführt wird, können wir – ganz analog zu mathematischen
+Berechnungen – Klammern verwenden:</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1">(<span class="ot">TRUE</span> <span class="op">|</span><span class="st"> </span><span class="ot">TRUE</span>) <span class="op">&amp;</span><span class="st"> </span><span class="ot">FALSE</span></a></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<p>Die Präzendenzregeln gelten ebenfalls, wenn die logischen Vektoren aus
+mehr als einem Element bestehen. Betrachten wir dazu die folgenden
+Beispiele:</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" title="1"><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>) <span class="op">|</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>) <span class="op">&amp;</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>[1] FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1">(<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>) <span class="op">|</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>)) <span class="op">&amp;</span><span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>[1] FALSE FALSE</code></pre>
+<p>Wir werden logische Ausdrücke vor allem zur Fallauswahl in Datentabellen
+verwenden (siehe <a href="dataframes.html#datenzugriffe">Kapitel 3</a>). Dann kann es sehr wichtig
+sein, auf korrekte Klammerung zu achten. Andernfalls besteht die Gefahr,
+dass wir nicht genau die Fälle auswählen, die wir eigentlich auswählen
+wollen.</p>
+<p>Betrachten wir ein weiteres Beispiel zur Steuerung von Präzedenz: Nehmen
+wir an, wir benötigen eine Sequenz aller Zahlen zwischen 1 und 10 –
+außer der 8.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> Ein naheliegender Befehl wäre folgender:</p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>[<span class="op">-</span><span class="dv">8</span>]</a></code></pre></div>
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<p>Das hat aber nicht funktioniert, die Acht ist in der Ausgabe enthalten.
+Woran liegt das? <strong>Die Auswahl per eckiger Klammer hat eine höhere
+Präzedenz als der Doppelpunktoperator.</strong> Die Klammerungsoperation zur
+Auswahl aus einem Vektor wurde also nicht auf den Vektor <code>1:10</code>, sondern
+auf den Vektor <code>10</code> angewendet (Erinnerung: Einzelne Zahlen sind
+Vektoren). Das heißt, in diesem Beispiel wurde als Erstes das achte
+Element aus dem Vektor <code>10</code> ausgeschlossen, das aber gar nicht
+existiert. Stattdessen erhalten wir einfach wieder <code>10</code>:</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1"><span class="dv">10</span>[<span class="op">-</span><span class="dv">8</span>]</a></code></pre></div>
+<pre><code>[1] 10</code></pre>
+<p>Durch Klammerung können wir das gewünschte Ergebnis erhalten:</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1">(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)[<span class="op">-</span><span class="dv">8</span>]</a></code></pre></div>
+<pre><code>[1]  1  2  3  4  5  6  7  9 10</code></pre>
+<div class="block">
+<p>
+<strong>Merke</strong>: Im Zweifel verwenden wir Klammern lieber einmal zu viel als einmal zu wenig.
+</p>
+</div>
+
+</div>
+<div id="zusammenfassung" class="section level2">
+<h2><span class="header-section-number">3.3</span> Zusammenfassung</h2>
+<ul>
+<li>Wir haben die grundlegendste Datenstruktur von <code>R</code>, den Vektor, kennengelernt</li>
+<li>Vektoren enthalten beliebig viele Elemente gleichartiger Daten, etwa
+<ul>
+<li>Zahlen (“numeric”)</li>
+<li>Texte (“character”)</li>
+<li>Kategorielle Daten (“factor”)</li>
+<li><code>TRUE</code>/<code>FALSE</code> (“logical”)</li>
+</ul></li>
+<li>Mit dem <code>[·]</code>-Zugriff kann man Elemente aus Vektoren auswählen
+<ol style="list-style-type: lower-alpha">
+<li>indem man die Position der Elemente angibt, die man auswählen
+will (“Positivauswahl”)</li>
+<li>indem man die Position der Elemente angibt, die man <strong>nicht</strong>
+auswählen will (“Negativauswahl”)</li>
+<li>indem man einen <code>TRUE</code>/<code>FALSE</code> Vektor angibt</li>
+</ol></li>
+<li>Man kann mit logischen Vergleichen die Eigenschaften von Vektoren
+überprüfen
+<ul>
+<li>diese Operation lässt sich gut mit der <code>[·]</code>-Auswahl verbinden</li>
+</ul></li>
+</ul>
+</div>
+<div id="fragen-zum-vertiefenden-verständnis" class="section level2">
+<h2><span class="header-section-number">3.4</span> Fragen zum vertiefenden Verständnis</h2>
+<ol style="list-style-type: decimal">
+<li>Wie berechnet man den Standardfehler von <code>1:10</code>?</li>
+<li>Was für Objekte nimmt die Funktion <code>c()</code> entgegen, und was gibt sie
+zurück?</li>
+<li>Was ergibt <code>1:6 + 1:2</code>? Was passiert? Warum gibt <code>1:4 + 1:3</code> eine
+Warnmeldung aus?</li>
+<li>Nutzt <code>paste0()</code>, den <code>:</code>-Operator und den <code>[·]</code>-Negativ-Zugriff, um
+den folgenden Vektor zu erstellen:</li>
+</ol>
+<pre><code>[1] &quot;item_2&quot;  &quot;item_4&quot;  &quot;item_5&quot;  &quot;item_6&quot;  &quot;item_7&quot;  &quot;item_8&quot;  &quot;item_10&quot;</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>In <code>R</code> haben Elemente eines Vektors nur einen
+Datentyp. Der Befehl
+<code>c(1, 'moep')</code> vermischt eine Zahl und einen Text miteinander, aber
+ergibt keinen Fehler – was ist passiert?</li>
+<li>Was sind plausible Ergebnisse von <code>sum(rnorm(100) &gt; 1.645)</code>? (Erst
+überlegen, dann mehrfach in der <code>R</code>-Konsole ausführen!)</li>
+<li>Was sind die Ausgaben von <code>mode(2)</code> und <code>mode(mode(2))</code>. Warum?</li>
+<li>Was ist der Unterschied zwischen <code>sum(c(TRUE, FALSE, TRUE))</code> und
+<code>length(c(TRUE, FALSE, TRUE))</code>?</li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="vektoren.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dataframes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
