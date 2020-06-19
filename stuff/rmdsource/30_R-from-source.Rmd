@@ -10,8 +10,8 @@ output:
 Before uploading a package to CRAN, it has to be tested using a recent
 development version of `R` that has to be installed from source:
 
-> Please ensure that R CMD check --as-cran has been run on the tarball to 
-be uploaded before submission. This should be done with the current 
+> Please ensure that R CMD check --as-cran has been run on the tarball 
+to be uploaded before submission. This should be done with the current 
 version of R-devel (or if that is not possible and explained in the 
 submission, current R-patched or the current release of R.) -- CRAN 
 Repository Policy
@@ -98,6 +98,41 @@ on your system.
 ```
 ./R CMD check tar-ball.tar.gz
 ```
+
+# On Windows
+
+Some extra work may be required to check your package on a Windows 
+system. Fortunately, at least, we can use `R CMD build` and `R CMD 
+check` in the RStudio terminal. I had to get latex running so that `R 
+CMD check` can build the pdf manuals. First, we have to install 
+[Miktex](miktex.org). After installing Miktex, a restart is required so 
+`R` finds the path to Latex.
+
+Before `R CMD check` worked properly, however, I had to enable some 
+fonts as described 
+[here](https://tex.stackexchange.com/questions/125274/error-font-ts1-zi4r-at-540-not-found):
+
+```
+initexmf --update-fndb
+initexmf --edit-config-file updmap
+```
+
+The second command opens the text editor where we put:
+
+```
+Map zi4.map
+```
+
+Last, we type
+
+```
+initexmf --mkmaps
+```
+
+into the console. Then, `R CMD check` should work.
+
+I did not try to install R devel from source though on Windows, but 
+used the released version.
 
 ---
 
