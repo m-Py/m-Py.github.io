@@ -1,0 +1,123 @@
+---
+title: Installing `R` devel from source on 64-Bit Ubuntu & checking a package
+date: June 18, 2020
+author: Martin Papenberg
+output:
+  html_document:
+    df_print: kable
+---
+
+```{r, include = FALSE}
+
+library(knitr)
+library(dplyr)
+knitr::opts_chunk$set(warning = FALSE) # echo = FALSE
+options(scipen = 999, digits = 2)
+
+knit_print.matrix = function(x, ...) {
+    res = paste(c("", "", kable(x)), collapse = "\n")
+    asis_output(res)
+}
+registerS3method("knit_print", "matrix", knit_print.matrix)
+
+```
+
+Before uploading a package to CRAN, it has to be tested using a recent
+development version of `R` that has to be installed from source:
+
+> Please ensure that R CMD check --as-cran has been run on the tarball to 
+be uploaded before submission. This should be done with the current 
+version of R-devel (or if that is not possible and explained in the 
+submission, current R-patched or the current release of R.) -- CRAN 
+Repository Policy
+
+# Installing `R` from source
+
+0. Appendix A1 "Essential programs and libraries" in "R Installation and 
+Administration" contains requisite packages for installation from source.
+1. Download the development version from https://cran.r-project.org/ 
+$\to$ R Sources
+2. Unpack the sources: `tar -xf R-devel.tar.gz`
+3. Go to directory (`cd R-devel`) and check out the file INSTALL and 
+doc/html/R-admin.html $\to$ "R Installation and Administration"
+3. `Configure`:
+
+```
+./configure 
+```
+
+[However, just using `./configure` may not work](https://stackoverflow.com/questions/17473547/error-with-readline-yes-default-and-headers-libs-are-not-available):
+
+> Unless you do not want to view graphs on-screen (or use macOS) you need 
+‘X11’ installed, including its headers and client libraries. For recent 
+Fedora/RedHat distributions it means (at least) RPMs ‘libX11’, 
+‘libX11-devel’, ‘libXt’ and ‘libXt-devel’. On Debian/Ubuntu we recommend 
+the meta-package ‘xorg-dev’. If you really do not want these you will 
+need to explicitly configure R without X11, using --with-x=no. -- 
+Appendix A1 in "R Installation and Administration"
+
+Then, we need: 
+
+```
+./configure --with-x=no
+```
+
+Or: 
+
+```
+./configure --with-readline=no --with-x=no
+```
+
+4. `make`
+
+```
+make
+```
+
+5. `make check` to test if the installation was successful.
+6. `make pdf` and `make info` to create manuals
+7. `R` can now be started using the script `R` in directory `bin`:
+
+```
+cd bin
+./R
+```
+
+8. It is also possible to install `R` devel on the system by using `make 
+install` but I guess this is not recommended (I suppose this replaces 
+the current stable installation of `R`)
+
+# Installing dependency packages
+
+To test your package using `R CMD check`, you need to make the 
+dependencies of your packages available to `R` devel. That is, install 
+all of the packages in `Imports`, `Depends`, and `Suggests`.
+
+Installing packages is actually accomplished by just using 
+`install.packages()`. Packages will be installed into the directory in 
+the `R` variable `.Library`, which was `R-devel/library` in my case.
+Thus, these packages do not mess with your normal package libraries.
+
+# Building the package using `R` devel
+
+```
+cd bin
+./R CMD build "path/to/package"
+```
+
+Be sure to replace `path/to/package` by the actual path to the package 
+on your system.
+
+# Checking the package
+
+```
+./R CMD check tar-ball.tar.gz
+```
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
