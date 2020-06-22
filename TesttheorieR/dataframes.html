@@ -695,7 +695,7 @@ höchstwahrscheinlich<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</
 sie sind bloß Spalten von <code>mdf</code>.</p>
 <p>Die Auswahl von Spalten ohne Anführungszeichen ist noch keine allzu
 große Arbeitserleichterung im Vergleich zur <code>[·,·]</code>-Notation. Die
-Funktion <code>subset</code> lässt aber noch einen weiteren Sonderfall bei der
+Funktion <code>subset()</code> lässt aber noch einen weiteren Sonderfall bei der
 Spaltenauswahl zu, der einiges an Schreibarbeit ersparen kann: Wir
 können den Doppelpunktoperator verwenden, um mehrere Spalten
 auszuwählen.</p>
@@ -709,7 +709,7 @@ auszuwählen.</p>
 <p>Von „links nach rechts“ wählt der Doppelpunktperator alle Spalten
 zwischen einschließlich <code>Item1</code> und <code>Geschlecht</code> aus. Auch hier
 verzichten wir auf die Angabe von Anführungszeichen.</p>
-<p>Es gibt noch eine weitere Vereinfachung, die uns die Funktion <code>subset</code>
+<p>Es gibt noch eine weitere Vereinfachung, die uns die Funktion <code>subset()</code>
 bietet. Wir können angeben, welche Spalten wir <strong>nicht</strong> ausgeben
 wollen:</p>
 <div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" title="1"><span class="kw">subset</span>(mdf, <span class="dt">select =</span> <span class="op">-</span><span class="kw">c</span>(Geschlecht, Alter))</a></code></pre></div>
@@ -722,38 +722,39 @@ wollen:</p>
 </div>
 <div id="non-standard-evaluation" class="section level3">
 <h3><span class="header-section-number">3.4.4</span> Non-Standard-Evaluation</h3>
-<p>Wie schafft es die Funktion <code>subset()</code>, dass wir wie folgt Spalten in
-einem <code>data.frame</code> ohne Anführungszeichen und ohne die <code>$</code>-Notation angesteuern
+<p>Wie schafft es die Funktion <code>subset()</code>, dass wir etwa wie folgt Spalten in einem
+<code>data.frame</code> – ohne Anführungszeichen und ohne die <code>$</code>-Notation – ansteuern
 können:</p>
 <div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb301-1" title="1"><span class="kw">subset</span>(mdf, Testscore <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 2          2     0     1    14          m       blau         1
 4          4     1     0    12          w      braun         1</code></pre>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" title="1"><span class="kw">subset</span>(mdf, <span class="dt">select =</span> Testscore)</a></code></pre></div>
-<pre><code>  Testscore
-1         2
-2         1
-3         0
-4         1
-5         2</code></pre>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" title="1"><span class="kw">subset</span>(mdf, <span class="dt">select =</span> Item1<span class="op">:</span>Alter)</a></code></pre></div>
+<pre><code>  Item1 Item2 Alter
+1     1     1    13
+2     0     1    14
+3     0     0    13
+4     1     0    12
+5     1     1    15</code></pre>
 <p>Dass das funktioniert, ist gewiss nicht selbstverständlich. Normalerweise würden
 wir ja erwarten, dass ein Name ohne Anführungszeichen eine eigenständige
-Variable sein muss, nicht bloß eine Spalte in einem <code>data.frame</code>. Dass es bei
-<code>subset()</code> – und vielen anderen <code>R</code>-Funktionen – trotzdem funktioniert, ist
-einer mächtigen Eigenart von <code>R</code> zu verdanken, die unter dem Namen
-„Non-Standard-Evaluation“ (NSE) bekannt ist. NSE ist ein tiefes und sogar
-kontroverses Thema. Ohne in die Tiefe zu gehen, können wir uns NSE wie folgt
-klar machen: Wann immer eine Funktion ein Argument annimmt, das für sich gesehen
-kein legales <code>R</code>-Objekt ist, muss sie intern so damit umgehen, dass daraus
-korrekter <code>R</code>-Code wird. Dieses Verhalten nennt man “non-standard”; die
-Funktion wendet NSE an.</p>
+Variable sein muss, nicht bloß eine Spalte in einem <code>data.frame</code>. Auch der
+Doppelpunktoperator kann außerhalb von <code>subset()</code> nicht zur Generierung von
+Spaltennamen, sondern nur zur Erstellung ganzer Zahlen genutzt werden. Dass
+solche Sonderregeln bei <code>subset()</code> trotzdem funktionieren, ist einer mächtigen
+Eigenart von <code>R</code> zu verdanken, die unter dem Namen „Non-Standard-Evaluation“
+(NSE) bekannt ist. NSE ist ein tiefes und sogar kontroverses Thema. Ohne in die
+Tiefe zu gehen, können wir uns NSE wie folgt klar machen: Wann immer eine
+Funktion ein Argument annimmt, das für sich gesehen kein legales <code>R</code>-Objekt ist,
+muss sie intern so damit umgehen, dass daraus korrekter <code>R</code>-Code wird. Dieses
+Verhalten nennt man “non-standard”; die Funktion wendet NSE an.</p>
 <p>Dass <code>subset()</code> NSE anwendet, können wir uns klar machen, da die oben
 übergebenen Argumente für sich gesehen keine <code>R</code>-Objekte, sondern bloß
-kryptische Fehlermeldungen ausgeben:</p>
+Fehlermeldungen ausgeben:</p>
 <div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" title="1">Testscore <span class="op">==</span><span class="st"> </span><span class="dv">1</span></a></code></pre></div>
 <pre><code>Error in eval(expr, envir, enclos): Objekt &#39;Testscore&#39; nicht gefunden</code></pre>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb307-1" title="1">select =<span class="st"> </span>Testscore</a></code></pre></div>
-<pre><code>Error in eval(expr, envir, enclos): Objekt &#39;Testscore&#39; nicht gefunden</code></pre>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb307-1" title="1">Item1<span class="op">:</span>Alter</a></code></pre></div>
+<pre><code>Error in eval(expr, envir, enclos): Objekt &#39;Item1&#39; nicht gefunden</code></pre>
 <p>Weitere Ausführungen zu NSE spare ich mir an dieser Stelle; für Interessierte
 sei das <a href="http://adv-r.had.co.nz/Computing-on-the-language.html">Kapitel zu NSE</a>
 in Hadley Wickhams Buch „Advanced R“ <span class="citation">(2014)</span> als Standardreferenz

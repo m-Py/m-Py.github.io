@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -169,8 +169,9 @@ returned. To solve balanced anticlustering exactly, it is sufficient
 to inspect all partitions while ignoring duplicated permutations.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Papenberg, M., &amp; Klau, G. W. (2019, October 30). Using anticlustering to partition 
-data sets into equivalent parts https://doi.org/10.31234/osf.io/3razc</p>
+    <p>Papenberg, M., &amp; Klau, G. W. (2020). Using anticlustering to partition 
+data sets into equivalent parts. Psychological Methods. Advance Online 
+Publication. https://doi.org/10.1037/met0000301.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -199,16 +200,16 @@ data sets into equivalent parts https://doi.org/10.31234/osf.io/3razc</p>
 <span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='no'>all_objectives</span>) <span class='co'># many large, few low objectives</span></div><div class='img'><img src='generate_partitions-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## Get best k-means anticlustering objective:</span>
 <span class='no'>best_obj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>all_objectives</span>)
 <span class='co'>## It is possible that there are multiple best solutions:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='no'>all_objectives</span> <span class='kw'>==</span> <span class='no'>best_obj</span>)</div><div class='output co'>#&gt; [1] 4</div><div class='input'><span class='co'>## Select one best partition:</span>
+<span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='no'>all_objectives</span> <span class='kw'>==</span> <span class='no'>best_obj</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='co'>## Select one best partition:</span>
 <span class='no'>best_anticlustering</span> <span class='kw'>&lt;-</span> <span class='no'>partitions</span>[<span class='no'>all_objectives</span> <span class='kw'>==</span> <span class='no'>best_obj</span>]<span class='kw'>[[</span><span class='fl'>1</span>]]
 <span class='co'>## Look at mean for each partition:</span>
 <span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='no'>features</span>, <span class='no'>best_anticlustering</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>(<span class='no'>x</span>), <span class='fl'>2</span>))</div><div class='output co'>#&gt; INDICES: 1
 #&gt;    V1    V2 
-#&gt; 15.86 13.57 
+#&gt; 12.43 15.57 
 #&gt; ------------------------------------------------------------ 
 #&gt; INDICES: 2
 #&gt;    V1    V2 
-#&gt; 15.71 13.71 </div><div class='input'>
+#&gt; 12.43 15.57 </div><div class='input'>
 
 <span class='co'>## Get best k-means clustering objective:</span>
 <span class='no'>min_obj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='no'>all_objectives</span>)
