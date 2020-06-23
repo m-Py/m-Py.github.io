@@ -22,10 +22,20 @@ Repository Policy
 Administration" contains requisite packages for installation from source.
 1. Download the development version from https://cran.r-project.org/ 
 $\to$ R Sources
-2. Unpack the sources: `tar -xf R-devel.tar.gz`
-3. Go to directory (`cd R-devel`) and check out the file INSTALL and 
+2. Unpack the sources: 
+
+```
+tar -xf R-devel.tar.gz
+```
+
+3. Go to directory and check out the file INSTALL and 
 doc/html/R-admin.html $\to$ "R Installation and Administration"
-3. `Configure`:
+
+```
+cd R-devel
+```
+
+4. 
 
 ```
 ./configure 
@@ -53,24 +63,46 @@ Or:
 ./configure --with-readline=no --with-x=no
 ```
 
-4. `make`
+5. 
 
 ```
 make
 ```
 
-5. `make check` to test if the installation was successful.
-6. `make pdf` and `make info` to create manuals
-7. `R` can now be started using the script `R` in directory `bin`:
+6. 
+
+```
+make check
+```
+
+Tests if the installation was successful.
+
+7. 
+
+```
+make pdf
+make info
+```
+
+Creates the manuals.
+
+8. `R` can now be started using the script `R` in directory `bin`:
 
 ```
 cd bin
 ./R
 ```
 
-8. It is also possible to install `R` devel on the system by using `make 
-install` but I guess this is not recommended (I suppose this replaces 
-the current stable installation of `R`)
+9. It is also possible to install `R` devel on the system by using 
+
+```
+make install
+```
+
+but I guess this is not recommended because this replaces 
+the current stable installation of `R`. [However, it is also possible 
+to have multiple `R` versions at the same 
+time.](https://docs.rstudio.com/resources/install-r-source/)
 
 # Installing dependency packages
 
