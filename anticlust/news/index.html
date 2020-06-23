@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -122,26 +122,62 @@
       <small>Source: <a href='https://github.com/m-Py/anticlust/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="anticlust-050" class="section level1">
+<h1 class="page-header">
+<a href="#anticlust-050" class="anchor"></a>anticlust 0.5.0</h1>
+<div id="user-visible-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#user-visible-changes" class="anchor"></a>User-visible changes</h2>
+<div id="major" class="section level3">
+<h3 class="hasAnchor">
+<a href="#major" class="anchor"></a>Major</h3>
+<ul>
+<li><p>A new exported function: <code><a href="../reference/categorical_sampling.html">categorical_sampling()</a></code>. Categorical sampling can be used to obtain a stratified split of a data set. Using this function is like calling <code><a href="../reference/anticlustering.html">anticlustering()</a></code> with argument <code>categories</code>, but no clustering objective is maximized. The categories are just evenly split between samples, which is very fast (in contrast to the exchange optimization that may take some time for large data sets). Apart from the categorical restriction that balances the frequency of categories between samples, the split is random.</p></li>
+<li><p>The function <code>distance_objective()</code> was renamed into <code><a href="../reference/diversity_objective.html">diversity_objective()</a></code> because there are several clustering objectives based on pairwise distances, e.g. see the new function <code><a href="../reference/dispersion_objective.html">dispersion_objective()</a></code>.</p></li>
+<li><p><code><a href="../reference/dispersion_objective.html">dispersion_objective()</a></code> is a new function to compute the dispersion of a given clustering, i.e., the minimum distance between two elements within the same group. Maximizing the dispersion is an anticlustering task, see the help page of <code><a href="../reference/dispersion_objective.html">dispersion_objective()</a></code> for an example.</p></li>
+</ul>
+</div>
+<div id="minor" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minor" class="anchor"></a>Minor</h3>
+<ul>
+<li><p>Several changes to the documentation, in particular now highlighting the publication of the paper “Using Anticlustering to Partition Data Sets Into Equivalent Parts” (<a href="https://doi.org/10.1037/met0000301" class="uri">https://doi.org/10.1037/met0000301</a>) describing the algorithms and criteria used in the package <code>anticlust</code></p></li>
+<li><p>In <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, anticluster editing is now by default requested using <code>objective = "diversity"</code> (but <code>objective = "distance"</code> is still supported and leads to the same behaviour). This change was done because there are several anticlustering objectives based on pairwise distances.</p></li>
+<li><p><code><a href="../reference/anticlustering.html">anticlustering()</a></code> can no longer use an argument <code>K</code> of length &gt; 1 with <code>preclustering = TRUE</code> because this resulted in undocumented behaviour (this is a good change because it does not make sense to specify an initial assignment of elements to groups via <code>K</code> and at the same time request that preclustering handles the initial assignment)</p></li>
+<li><p>When using a custom objective function, the order of the required arguments is now reversed: The data comes first, the clustering second.</p></li>
+<li><p>Because the order of arguments in custom objective functions was reversed, the function <code><a href="../reference/mean_sd_obj.html">mean_sd_obj()</a></code> now has reversed arguments as well.</p></li>
+<li><p>The package vignettes are no longer distributed with the package itself because rendering R Markdown resulted in an error with the development version of R. This may change again in the future when R Markdown no longer throws an error with R devel. The vignette is currently available via the package website (<a href="https://m-py.github.io/anticlust/" class="uri">https://m-py.github.io/anticlust/</a>).</p></li>
+</ul>
+</div>
+</div>
+<div id="internal-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#internal-changes" class="anchor"></a>Internal changes</h2>
+<ul>
+<li>Improved running speed of generating constraints in integer linear programming variant of (anti)clustering, via <a href="https://github.com/m-Py/anticlust/commit/0a870240f8264f0e74f4cbf0b20d789cfa0d6469">0a870240f8</a>
+</li>
+</ul>
+</div>
+</div>
     <div id="anticlust-041" class="section level1">
 <h1 class="page-header">
 <a href="#anticlust-041" class="anchor"></a>anticlust 0.4.1</h1>
-<div id="major" class="section level2">
+<div id="user-visible-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#major" class="anchor"></a>Major</h2>
+<a href="#user-visible-changes-1" class="anchor"></a>User-visible changes</h2>
 <ul>
-<li>In <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, preclustering and categorical constraints can now be used at the same time. In this case, exchange partners are clustered within the same category, using a call to <code><a href="../reference/matching.html">matching()</a></code> passing <code>categories</code> to argument <code>match_within</code>.</li>
-<li>In <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, it is now possible to use <code>preclustering =  TRUE</code> for unbalanced data size (e.g., if N = 9 and K = 2).</li>
-<li>In <code><a href="../reference/matching.html">matching()</a></code>, it is now possible to prevent sorting the output by similarity using a new argument <code>sort_output</code>. Its default is <code>TRUE</code>, setting it to <code>FALSE</code> prevents sorting. This prevents some extra computation that is necessary to determine similarity for each cluster.</li>
+<li><p>In <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, preclustering and categorical constraints can now be used at the same time. In this case, exchange partners are clustered within the same category, using a call to <code><a href="../reference/matching.html">matching()</a></code> passing <code>categories</code> to argument <code>match_within</code>.</p></li>
+<li><p>In <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, it is now possible to use <code>preclustering =  TRUE</code> for unbalanced data size (e.g., if N = 9 and K = 2).</p></li>
+<li><p>In <code><a href="../reference/matching.html">matching()</a></code>, it is now possible to prevent sorting the output by similarity using a new argument <code>sort_output</code>. Its default is <code>TRUE</code>, setting it to <code>FALSE</code> prevents sorting. This prevents some extra computation that is necessary to determine similarity for each cluster.</p></li>
 </ul>
 </div>
-<div id="minor" class="section level2">
+<div id="minor-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor" class="anchor"></a>Minor</h2>
+<a href="#minor-1" class="anchor"></a>Minor</h2>
 <ul>
-<li>Some changes to documentation</li>
-<li>There is now a package website at <a href="https://m-py.github.io/anticlust/" class="uri">https://m-py.github.io/anticlust/</a>
-</li>
-<li>Additional error handling</li>
+<li><p>Some changes to documentation</p></li>
+<li><p>There is now a package website at <a href="https://m-py.github.io/anticlust/" class="uri">https://m-py.github.io/anticlust/</a></p></li>
+<li><p>Additional error handling</p></li>
 </ul>
 </div>
 <div id="internal" class="section level2">
@@ -150,7 +186,7 @@
 <ul>
 <li>Improvements to implementation of k-means anticlustering (i.e., in <code><a href="../reference/anticlustering.html">anticlustering()</a></code> with <code>objective == "variance"</code> or in <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>)
 <ul>
-<li>on each exchange iteration, only recomutes distances from clusters whose elements have been swapped (improves run time relevant for larger K).</li>
+<li>on each exchange iteration, only recomputes distances from clusters whose elements have been swapped (improves run time relevant for larger K).</li>
 <li>Previously, there were only as many exchange partners per element as members in the least frequent category if argument <code>categories</code> was passed). This was not documented behavior and is undesirable. Now, all members from a category may serve as exchange partners, even if the categories have different size.</li>
 </ul>
 </li>
@@ -195,6 +231,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#anticlust-050">0.5.0</a></li>
         <li><a href="#anticlust-041">0.4.1</a></li>
         <li><a href="#anticlust-040">0.4.0</a></li>
         <li><a href="#anticlust-030">0.3.0</a></li>

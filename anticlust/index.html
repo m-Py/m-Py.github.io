@@ -12,20 +12,27 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Subset Partitioning via Anticlustering">
 <meta property="og:description" content="Anticlustering partitions a pool of elements into
-    subsets (i.e., anticlusters) in such a way that the subsets are as
-    similar as possible. This is accomplished by maximizing instead of
-    minimizing a clustering objective function, such as the intra-cluster
-    variance (used in k-means clustering) or the sum of pairwise distances
-    within clusters. Thus, anticlustering creates similar sets of elements
-    by maximizing heterogeneity within anticlusters. This package
-    implements exact and heuristic anticlustering algorithms as described
-    in Papenberg and Klau (2019; &lt;doi:10.31234/osf.io/3razc&gt;). The exact
-    approach requires that the GNU linear programming kit
-    (https://www.gnu.org/software/glpk/glpk.html) and the R package
-    `Rglpk` (https://cran.R-project.org/package=Rglpk) are installed.
-    Also includes methods for classical clustering problems under size
-    constraints (i.e., creating equal-sized clusters), as well as methods
-    for (unrestricted or K-partite) matching.">
+    groups (i.e., anticlusters) in such a way that the between-group
+    similarity is maximized and -- at the same time -- the within-group
+    heterogeneity is maximized. This reverses the logic of cluster
+    analysis that strives for high within-group homogeneity and low
+    similarity of the different groups. Computationally, anticlustering is
+    accomplished by maximizing instead of minimizing a clustering
+    objective function, such as the intra-cluster variance (used in
+    k-means clustering) or the sum of pairwise distances within clusters.
+    The function anticlustering() implements exact and heuristic
+    anticlustering algorithms as described in Papenberg and Klau (2020;
+    &lt;doi:10.1037/met0000301&gt;). The exact approach requires that the GNU
+    linear programming kit (&lt;https://www.gnu.org/software/glpk/glpk.html&gt;)
+    is available and the R package Rglpk
+    (&lt;https://cran.R-project.org/package=Rglpk&gt;) is installed. Some other
+    functions are available to solve classical clustering problems. The
+    function balanced_clustering() applies a cluster analysis under size
+    constraints, i.e., creates equal-sized clusters. The function
+    matching() can be used for (unrestricted, bipartite, or K-partite)
+    matching. The function wce() can be used optimally solve the
+    (weighted) cluster editing problem, also known as correlation
+    clustering, clique partitioning problem or transitivity clustering.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -45,7 +52,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -99,12 +106,18 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#anticlust-" class="anchor"></a>anticlust <a href="https://m-py.github.io/anticlust/"><img src="reference/figures/anticlustStickerV1-0.svg" align="right" height="160"></a>
 </h1></div>
-<p>Anticlustering partitions a pool of elements into subsets (i.e., anticlusters) in such a way that the subsets are as similar as possible. This is accomplished by maximizing instead of minimizing a clustering objective function, such as the intra-cluster variance (used in k-means clustering) or the sum of pairwise distances within clusters. Thus, anticlustering creates similar sets of elements by maximizing heterogeneity within anticlusters. The package <code>anticlust</code> implements anticlustering algorithms as described in Papenberg and Klau (2019). It was originally developed to assign items to experimental conditions in experimental psychology, but it can be applied whenever a user requires that a given set of elements has to be partitioned into similar subsets.</p>
+<p>Anticlustering partitions a pool of elements into subsets (i.e., anticlusters) in such a way that the subsets are as similar as possible. This is accomplished by maximizing instead of minimizing a clustering objective function, such as the intra-cluster variance (used in k-means clustering) or the sum of pairwise distances within clusters. Thus, anticlustering creates similar sets of elements by maximizing heterogeneity within anticlusters. The package <code>anticlust</code> implements anticlustering algorithms as described in Papenberg and Klau (2020; <a href="https://doi.org/10.1037/met0000301" class="uri">https://doi.org/10.1037/met0000301</a>). It was originally developed to assign items to experimental conditions in experimental psychology, but it can be applied whenever a user requires that a given set of elements has to be partitioned into similar subsets, or when the within-group heterogeneity should be high.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"remotes"</span>) <span class="co"># if not available: install.packages("remotes")</span></a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"m-Py/anticlust"</span>)</a></code></pre></div>
+</div>
+<div id="citation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#citation" class="anchor"></a>Citation</h2>
+<p>If you use <code>anticlust</code> in your research, it would be courteous if you cite the following reference:</p>
+<p>Papenberg, M., &amp; Klau, G. W. (2020). Using anticlustering to partition data sets into equivalent parts. <em>Psychological Methods</em>. Advance Online Publication. <a href="https://doi.org/10.1037/met0000301" class="uri">https://doi.org/10.1037/met0000301</a>.</p>
 </div>
 <div id="how-do-i-learn-about-anticlust" class="section level2">
 <h2 class="hasAnchor">
@@ -112,7 +125,7 @@
 </h2>
 <p>This README contains some basic information on the <code>R</code> package <code>anticlust</code>. More information is available via the following sources:</p>
 <ul>
-<li><p>A preprint is available describing the theoretical background of anticlustering and the <code>anticlust</code> package in detail. It can be retrieved from <a href="https://psyarxiv.com/3razc/" class="uri">https://psyarxiv.com/3razc/</a>.</p></li>
+<li><p>A paper is available describing the theoretical background of anticlustering and the <code>anticlust</code> package in detail (<a href="https://doi.org/10.1037/met0000301" class="uri">https://doi.org/10.1037/met0000301</a>). The freely available preprint can be retrieved from <a href="https://psyarxiv.com/3razc/" class="uri">https://psyarxiv.com/3razc/</a>.</p></li>
 <li><p>The <a href="https://m-py.github.io/anticlust/">package website</a> contains all relevant documentation. This includes a <a href="https://m-py.github.io/anticlust/articles/stimulus-selection.html">vignette</a> detailing how to use the anticlust package for stimulus selection in experiments and documentation for the main <code>anticlust</code> functions <code><a href="reference/anticlustering.html">anticlustering()</a></code>, <code><a href="reference/balanced_clustering.html">balanced_clustering()</a></code> and <code><a href="reference/matching.html">matching()</a></code>.</p></li>
 </ul>
 </div>
@@ -162,13 +175,13 @@
 <p>To quantify set similarity, <code>anticlust</code> may employ one of two measures that have been developed in the context of cluster analysis:</p>
 <ul>
 <li>the k-means “variance” objective</li>
-<li>the cluster editing “distance” objective</li>
+<li>the cluster editing “diversity” objective</li>
 </ul>
 <p>The k-means objective is given by the sum of the squared distances between cluster centers and individual data points. The cluster editing objective is the sum of pairwise distances within each anticluster. The following plot illustrates both objectives for 12 elements that have been assigned to three sets. Each element is described by two numeric features, displayed as the <em>x</em> and <em>y</em> axis:</p>
 <p><img src="reference/figures/objectives-1.png" style="display: block; margin: auto;"></p>
-<p>The lines connecting the dots illustrate the values that enter the objective functions. For (anti)cluster editing (“distance objective”, plots on the right side), lines are drawn between pairs of elements within the same cluster, because the objective is the sum of the pairwise distances between elements that are part of the same cluster. For k-means (anticlustering) (“variance objective”, plots on the left side ), lines are drawn connecting eech element and the centroid of the cluster to which the element is assigned, because the objective is the sum of the squared distances between cluster centers and elements.</p>
-<p>Minimizing either the distance or the variance objective creates three distinct clusters of elements (as shown in the lower plots), whereas maximization leads to a strong overlap of the three sets, i.e., three anticlusters (as shown in the upper plots).</p>
-<p>To vary the objective function in the <code>anticlust</code> package, we can change the parameter <code>objective</code>. To use anticluster editing, use <code>objective = "distance"</code> (this is also the default). To maximize the k-means variance objective, set <code>objective = "variance"</code>.</p>
+<p>The lines connecting the dots illustrate the values that enter the objective functions. For (anti)cluster editing (“diversity objective”, plots on the right side), lines are drawn between pairs of elements within the same cluster, because the objective is the sum of the pairwise distances between elements that are part of the same cluster. For k-means (anticlustering) (“variance objective”, plots on the left side ), lines are drawn connecting eech element and the centroid of the cluster to which the element is assigned, because the objective is the sum of the squared distances between cluster centers and elements.</p>
+<p>Minimizing either the diversity or the variance objective creates three distinct clusters of elements (as shown in the lower plots), whereas maximization leads to a strong overlap of the three sets, i.e., three anticlusters (as shown in the upper plots).</p>
+<p>To vary the objective function in the <code>anticlust</code> package, we can change the parameter <code>objective</code>. To use anticluster editing, use <code>objective = "diversity"</code> (this is also the default). To maximize the k-means variance objective, set <code>objective = "variance"</code>.</p>
 </div>
 <div id="categorical-constraints" class="section level2">
 <h2 class="hasAnchor">
@@ -217,11 +230,6 @@
 <h2 class="hasAnchor">
 <a href="#questions-and-suggestions" class="anchor"></a>Questions and suggestions</h2>
 <p>If you have any question on the <code>anticlust</code> package or any suggestions (which are greatly appreciated), I encourage you to contact me via email (<a href="mailto:martin.papenberg@hhu.de" class="email">martin.papenberg@hhu.de</a>) or <a href="https://twitter.com/MPapenberg">Twitter</a>, or to open an <a href="https://github.com/m-Py/anticlust/issues">issue on the Github repository</a>.</p>
-</div>
-<div id="reference" class="section level2">
-<h2 class="hasAnchor">
-<a href="#reference" class="anchor"></a>Reference</h2>
-<p>Papenberg, M., &amp; Klau, G. W. (2019, October 30). Using anticlustering to partition a stimulus pool into equivalent parts. <a href="https://doi.org/10.31234/osf.io/3razc" class="uri">https://doi.org/10.31234/osf.io/3razc</a></p>
 </div>
 </div>
   </div>
