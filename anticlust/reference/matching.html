@@ -293,6 +293,7 @@ possible to evenly split the item pool evenly into groups of size
   <span class='kw'>match_extreme_first</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )
 <span class='co'># Plot the matching results</span>
+<span class='no'>user_par</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='st'>"mfrow"</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
 <span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
   <span class='kw'>Species</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>iris</span>[<span class='no'>species</span>, <span class='fl'>5</span>]),
@@ -309,7 +310,7 @@ possible to evenly split the item pool evenly into groups of size
   <span class='kw'>clusters</span> <span class='kw'>=</span> <span class='no'>matched2</span>,
   <span class='kw'>within_connection</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Central elements matched first"</span>
-)</div><div class='img'><img src='matching-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>))</div></pre>
+)</div><div class='img'><img src='matching-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='no'>user_par</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

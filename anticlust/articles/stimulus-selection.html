@@ -311,7 +311,7 @@
 <a href="#example-2-anticlustering" class="anchor"></a>Example 2: Anticlustering</h2>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="co"># Reload the data for next example</span></a>
 <a class="sourceLine" id="cb19-2" title="2"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"schaper2019"</span>)</a></code></pre></div>
-<p>In the next example, we wish to partition the entire pool of 96 items into 3 sets that are as similar as possible on all variables. That means that there is no independent variable that varies between conditions; the experimental manipulation is independent of the intrinsic stimulus properties. Creating stimulus sets that are overall similar to each other can be done using anticlustering (Papenberg &amp; Klau, 2019):</p>
+<p>In the next example, we wish to partition the entire pool of 96 items into 3 sets that are as similar as possible on all variables. That means that there is no independent variable that varies between conditions; the experimental manipulation is independent of the intrinsic stimulus properties. Creating stimulus sets that are overall similar to each other can be done using anticlustering (Papenberg &amp; Klau, 2020):</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co">## Conduct anticlustering (assign all items to three similar groups)</span></a>
 <a class="sourceLine" id="cb20-2" title="2">schaper2019<span class="op">$</span>anticluster &lt;-<span class="st"> </span><span class="kw"><a href="../reference/anticlustering.html">anticlustering</a></span>(</a>
 <a class="sourceLine" id="cb20-3" title="3">  schaper2019[, <span class="dv">3</span><span class="op">:</span><span class="dv">6</span>], </a>
@@ -335,24 +335,24 @@
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td align="left">4.49 (0.27)</td>
-<td align="left">1.10 (0.06)</td>
-<td align="left">3.44 (0.80)</td>
-<td align="left">18.31 (2.28)</td>
+<td align="left">4.49 (0.25)</td>
+<td align="left">1.10 (0.07)</td>
+<td align="left">3.41 (0.84)</td>
+<td align="left">18.31 (2.61)</td>
 </tr>
 <tr class="even">
 <td>2</td>
-<td align="left">4.49 (0.24)</td>
+<td align="left">4.49 (0.25)</td>
 <td align="left">1.10 (0.06)</td>
-<td align="left">3.41 (1.19)</td>
-<td align="left">18.31 (2.40)</td>
+<td align="left">3.44 (0.98)</td>
+<td align="left">18.31 (2.28)</td>
 </tr>
 <tr class="odd">
 <td>3</td>
-<td align="left">4.49 (0.23)</td>
+<td align="left">4.49 (0.25)</td>
 <td align="left">1.10 (0.07)</td>
-<td align="left">3.41 (0.76)</td>
-<td align="left">18.31 (2.55)</td>
+<td align="left">3.41 (0.98)</td>
+<td align="left">18.31 (2.33)</td>
 </tr>
 </tbody>
 </table>
@@ -437,24 +437,24 @@
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td align="left">4.46 (0.27)</td>
-<td align="left">1.08 (0.06)</td>
-<td align="left">3.50 (1.18)</td>
-<td align="left">19.00 (2.71)</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td align="left">4.46 (0.24)</td>
+<td align="left">4.47 (0.21)</td>
 <td align="left">1.07 (0.05)</td>
 <td align="left">3.50 (0.97)</td>
 <td align="left">19.00 (2.36)</td>
 </tr>
+<tr class="even">
+<td>2</td>
+<td align="left">4.46 (0.29)</td>
+<td align="left">1.07 (0.06)</td>
+<td align="left">3.50 (1.18)</td>
+<td align="left">19.00 (2.67)</td>
+</tr>
 <tr class="odd">
 <td>3</td>
-<td align="left">4.47 (0.26)</td>
-<td align="left">1.08 (0.06)</td>
+<td align="left">4.46 (0.26)</td>
+<td align="left">1.09 (0.06)</td>
 <td align="left">3.50 (0.97)</td>
-<td align="left">18.90 (2.92)</td>
+<td align="left">18.90 (2.96)</td>
 </tr>
 </tbody>
 </table>
@@ -462,9 +462,9 @@
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
-<p>Papenberg, M., &amp; Klau, G. W. (2020). Using anticlustering to partition data sets into equivalent parts. <em>Psychological Methods</em>. Advance Online Publication. <a href="https://doi.org/10.1037/met0000301" class="uri">https://doi.org/10.1037/met0000301</a></p>
-<p>Schaper, M. L., Kuhlmann, B. G., &amp; Bayen, U. J. (2019a). Metacognitive expectancy effects in source monitoring: Beliefs, in-the-moment experiences, or both? <em>Journal of Memory and Language, 107</em>, 95–110. <a href="https://doi.org/10.1016/j.jml.2019.03.009" class="uri">https://doi.org/10.1016/j.jml.2019.03.009</a></p>
-<p>Schaper, M. L., Kuhlmann, B. G., &amp; Bayen, U. J. (2019b). Metamemory expectancy illusion and schema-consistent guessing in source monitoring. <em>Journal of Experimental Psychology: Learning, Memory, and Cognition, 45</em>, 470. <a href="https://doi.org/10.1037/xlm0000602" class="uri">https://doi.org/10.1037/xlm0000602</a></p>
+<p>Papenberg, M., &amp; Klau, G. W. (2020). Using anticlustering to partition data sets into equivalent parts. <em>Psychological Methods</em>. Advance Online Publication. <a href="https://doi.org/10.1037/met0000301" class="uri">https://doi.org/10.1037/met0000301</a>.</p>
+<p>Schaper, M. L., Kuhlmann, B. G., &amp; Bayen, U. J. (2019a). Metacognitive expectancy effects in source monitoring: Beliefs, in-the-moment experiences, or both? Journal of Memory and Language, 107, 95–110. <a href="https://doi.org/10.1016/j.jml.2019.03.009" class="uri">https://doi.org/10.1016/j.jml.2019.03.009</a></p>
+<p>Schaper, M. L., Kuhlmann, B. G., &amp; Bayen, U. J. (2019b). Metamemory expectancy illusion and schema-consistent guessing in source monitoring. Journal of Experimental Psychology: Learning, Memory, and Cognition, 45, 470. <a href="https://doi.org/10.1037/xlm0000602" class="uri">https://doi.org/10.1037/xlm0000602</a></p>
 </div>
   </div>
 
