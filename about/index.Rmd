@@ -57,7 +57,7 @@ from https://osf.io/nghyv/
 
 ### Software
 
-- [anticlust: Subset partitioning via anticlustering](https://github.com/m-Py/anticlust)
+- [anticlust: Subset Partitioning via Anticlustering](../anticlust/index.html)
 - [propint: An R package to compute interactions in proportions](https://github.com/m-Py/propint)
 - [cower: An R package for power analyses of the comparison of correlations](https://github.com/m-Py/cower)
 - [prmisc: An R package to print statistical results in R markdown](https://github.com/m-Py/prmisc)
