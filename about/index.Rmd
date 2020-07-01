@@ -26,24 +26,24 @@ package">send me an email</a>.
 
 ### Journal publications
 
-Papenberg, M., & Klau, G. W. (in press). Using anticlustering to 
-partition data sets into equivalent parts. *Psychological Methods*.
-Preprint: https://doi.org/10.31234/osf.io/3razc
+Papenberg, M., & Klau, G. W. (2020). Using anticlustering to partition 
+data sets into equivalent parts. *Psychological Methods*. Advance Online 
+Publication. https://doi.org/10.1037/met0000301 ([Preprint](https://doi.org/10.31234/osf.io/3razc))
 
 Papenberg, M., Diedenhofen, B., & Musch, J. (2019). An experimental 
 validation of sequential multiple-choice tests. *Journal of Experimental 
 Education*. Advance Online Publication. 
-https://doi.org/10.1080/00220973.2019.1671299
+https://doi.org/10.1080/00220973.2019.1671299 ([Preprint](https://osf.io/x8753/))
 
 Papenberg, M., & Musch, J. (2017). Of Small Beauties and Large Beasts: 
 The Quality of Distractors on Multiple-Choice Tests Is More Important 
 Than Their Quantity. *Applied Measurement in Education, 30*(4), 273--286.
-https://doi.org/10.1080/08957347.2017.1353987
+https://doi.org/10.1080/08957347.2017.1353987 ([Preprint](https://osf.io/xytfw/))
 
 Papenberg, M., Willing, S., & Musch, J. (2017). Sequentially Presented 
 Response Options Prevent The Use Of Testwiseness Cues In Multiple-Choice 
 Testing. *Psychological Test and Assessment Modeling, 59*(2), 245--266.
-Retrieved from http://www.psychologie-aktuell.com/fileadmin/download/ptam/2-2017_20170627/06_Papenberg_.pdf
+([Paper](http://www.psychologie-aktuell.com/fileadmin/download/ptam/2-2017_20170627/06_Papenberg_.pdf))
 
 ### Other publications
 
