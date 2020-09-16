@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -53,7 +57,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -67,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -100,7 +104,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/m-Py/anticlust">
+  <a href="https://github.com/m-Py/anticlust/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -118,12 +122,26 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
+      <h1 data-toc-skip>Changelog <small></small></h1>
       <small>Source: <a href='https://github.com/m-Py/anticlust/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="anticlust-052" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.2">
+<a href="#anticlust-052" class="anchor"></a>anticlust 0.5.2<small> Unreleased </small>
+</h1>
+<div id="user-visible-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#user-visible-changes" class="anchor"></a>User-visible changes</h2>
+<ul>
+<li><p>In <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, there is a new option for the argument <code>method</code>: “local-maximum”. When using <code>method = "local-maximum"</code>, the exchange method is repeated until an local maximum is reached. That means after the exchange process has been conducted for each data point, the algorithm restarts with the first element and proceeds to conduct exchanges until the objective cannot be improved. This procedure is more in line with classical neighbourhood search that only terminates when a local optimum is reached.</p></li>
+<li><p>In <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, there is now a new argument <code>repetitions</code>. It can be used to specify the number of times the exchange procedure (either <code>method =  "exchange"</code> or <code>method = "local-maximum"</code>) is called. <code><a href="../reference/anticlustering.html">anticlustering()</a></code> returns the best partitioning found across all repetitions.</p></li>
+<li><p><code><a href="../reference/anticlustering.html">anticlustering()</a></code> now implements a new objective function, extending the classical k-means criterion, given by <code>objective = "kplus"</code>. Using <code>objective =  "kplus"</code> will minimize differences with regard to both means and standard deviations of the input variables, whereas k-means only focuses on the means. Details on this objective will follow.</p></li>
+</ul>
+</div>
+</div>
     <div id="anticlust-051" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.1">
 <a href="#anticlust-051" class="anchor"></a>anticlust 0.5.1<small> Unreleased </small>
 </h1>
 <ul>
@@ -132,12 +150,12 @@
 </ul>
 </div>
     <div id="anticlust-050" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.5.0">
 <a href="#anticlust-050" class="anchor"></a>anticlust 0.5.0<small> 2020-06-29 </small>
 </h1>
-<div id="user-visible-changes" class="section level2">
+<div id="user-visible-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#user-visible-changes" class="anchor"></a>User-visible changes</h2>
+<a href="#user-visible-changes-1" class="anchor"></a>User-visible changes</h2>
 <div id="major" class="section level3">
 <h3 class="hasAnchor">
 <a href="#major" class="anchor"></a>Major</h3>
@@ -170,12 +188,12 @@
 </div>
 </div>
     <div id="anticlust-041" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.1">
 <a href="#anticlust-041" class="anchor"></a>anticlust 0.4.1<small> Unreleased </small>
 </h1>
-<div id="user-visible-changes-1" class="section level2">
+<div id="user-visible-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#user-visible-changes-1" class="anchor"></a>User-visible changes</h2>
+<a href="#user-visible-changes-2" class="anchor"></a>User-visible changes</h2>
 <ul>
 <li><p>In <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, preclustering and categorical constraints can now be used at the same time. In this case, exchange partners are clustered within the same category, using a call to <code><a href="../reference/matching.html">matching()</a></code> passing <code>categories</code> to argument <code>match_within</code>.</p></li>
 <li><p>In <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, it is now possible to use <code>preclustering =  TRUE</code> for unbalanced data size (e.g., if N = 9 and K = 2).</p></li>
@@ -205,7 +223,7 @@
 </div>
 </div>
     <div id="anticlust-040" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.4.0">
 <a href="#anticlust-040" class="anchor"></a>anticlust 0.4.0<small> Unreleased </small>
 </h1>
 <div id="major-changes" class="section level2">
@@ -220,7 +238,7 @@
 <li><p>The functions <code>initialize_K()</code> and <code>generate_exchange_partners()</code> were removed.</p></li>
 <li><p>Dropped support for the commercial integer linear programming solvers CPLEX and gurobi for exact (anti)cluster editing. If this functionality is needed, install version 0.3.0 from Github:</p></li>
 </ul>
-<pre><code><a href="https://rdrr.io/pkg/remotes/man/install_github.html">remotes::install_github("m-Py/anticlust", ref = "v0.3.0")</a></code></pre>
+<pre><code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github("m-Py/anticlust", ref = "v0.3.0")</a></code></pre>
 <ul>
 <li><p><code><a href="../reference/mean_sd_obj.html">mean_sd_obj()</a></code> no longer computes the discrepancy of medians, only in means and standard deviations (as the name also suggests).</p></li>
 <li><p>In <code><a href="../reference/plot_clusters.html">plot_clusters()</a></code>, the arguments <code>col</code> and <code>pch</code> were removed.</p></li>
@@ -231,7 +249,7 @@
 </div>
 </div>
     <div id="anticlust-030" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.0">
 <a href="#anticlust-030" class="anchor"></a>anticlust 0.3.0<small> Unreleased </small>
 </h1>
 <ul>
@@ -240,17 +258,10 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#anticlust-051">0.5.1</a></li>
-        <li><a href="#anticlust-050">0.5.0</a></li>
-        <li><a href="#anticlust-041">0.4.1</a></li>
-        <li><a href="#anticlust-040">0.4.0</a></li>
-        <li><a href="#anticlust-030">0.3.0</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -262,7 +273,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

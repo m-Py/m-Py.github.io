@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -40,7 +44,6 @@
 possible to each other, by maximizing the heterogeneity within
 groups. Implements anticlustering algorithms as described in
 Papenberg and Klau (2020; &amp;lt;doi:10.1037/met0000301&amp;gt;)." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -58,7 +61,7 @@ Papenberg and Klau (2020; &amp;lt;doi:10.1037/met0000301&amp;gt;)." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -72,7 +75,7 @@ Papenberg and Klau (2020; &amp;lt;doi:10.1037/met0000301&amp;gt;)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -105,7 +108,7 @@ Papenberg and Klau (2020; &amp;lt;doi:10.1037/met0000301&amp;gt;)." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/m-Py/anticlust">
+  <a href="https://github.com/m-Py/anticlust/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -141,7 +144,8 @@ Papenberg and Klau (2020; &lt;doi:10.1037/met0000301&gt;).</p>
   <span class='kw'>objective</span> <span class='kw'>=</span> <span class='st'>"diversity"</span>,
   <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"exchange"</span>,
   <span class='kw'>preclustering</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>categories</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>categories</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>repetitions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -149,11 +153,11 @@ Papenberg and Klau (2020; &lt;doi:10.1037/met0000301&gt;).</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>The data input. Can be one of two structures: (1) A feature
-matrix where rows correspond to elements and columns correspond
-to variables (a single numeric variable can be passed as a
-vector). (2) An N x N matrix dissimilarity matrix; can be an
-object of class <code>dist</code> (e.g., returned by
+      <td><p>The data input. Can be one of two structures: (1) A
+feature matrix where rows correspond to elements and columns
+correspond to variables (a single numeric variable can be
+passed as a vector). (2) An N x N matrix dissimilarity matrix;
+can be an object of class <code>dist</code> (e.g., returned by
 <code><a href='https://rdrr.io/r/stats/dist.html'>dist</a></code> or <code><a href='https://rdrr.io/r/stats/dist.html'>as.dist</a></code>) or a <code>matrix</code>
 where the entries of the upper and lower triangular matrix
 represent pairwise dissimilarities.</p></td>
@@ -167,13 +171,16 @@ assigned to anticlusters before the optimization starts.</p></td>
     <tr>
       <th>objective</th>
       <td><p>The objective to be maximized. The option
-"diversity" (default) maximizes the cluster editing objective
+"diversity" (default; previously called "distance", which is
+still supported) maximizes the cluster editing objective
 function; the option "variance" maximizes the k-means objective
-function. See Details.</p></td>
+function; "kplus" is an extension of k-means
+anticlustering. See Details.</p></td>
     </tr>
     <tr>
       <th>method</th>
-      <td><p>One of "exchange" (default) or "ilp". See Details.</p></td>
+      <td><p>One of "exchange" (default) , "local-maximum", or
+"ilp".  See Details.</p></td>
     </tr>
     <tr>
       <th>preclustering</th>
@@ -186,6 +193,14 @@ Details.</p></td>
       <td><p>A vector, data.frame or matrix representing one
 or several categorical constraints. See Details.</p></td>
     </tr>
+    <tr>
+      <th>repetitions</th>
+      <td><p>The number of times a new exchange procedure is
+initiated when <code>method = "exchange"</code> or <code>method =
+"local-maximum"</code>.  In the end, the best objective found across
+the repetitions is returned. If this argument is not passed,
+only one repetitition is conducted.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -196,31 +211,36 @@ or several categorical constraints. See Details.</p></td>
 
     <p>This function is used to solve anticlustering. That is, <code>K</code>
 groups are created in such a way that all groups are as similar as
-possible. This is accomplished by maximizing instead of minimizing
-a clustering objective function. This function natively supports
-the maximization of two clustering objective functions:</p>
+possible (this usually corresponds to creating groups with high
+within-group heterogeneity). This is accomplished by maximizing
+instead of minimizing a clustering objective function. The
+maximization of three clustering objective functions is natively
+supported, while other functions can also defined by the user:</p>
 <ul>
 <li><p>cluster editing `diversity` objective, setting <code>objective = "diversity"</code> (default)</p></li>
 <li><p>k-means `variance` objective, setting <code>objective = "variance"</code></p></li>
+<li><p>`kplus` anticlustering, an extension of k-means anticlustering</p></li>
 </ul>
 
 <p>The k-means objective is the variance within groups---that is, the
 sum of the squared distances between each element and its cluster
-center (see <code><a href='variance_objective.html'>variance_objective</a></code>). The cluster editing
-objective is the sum of pairwise distances within groups (see
-<code><a href='diversity_objective.html'>diversity_objective</a></code>). Maximizing either of these
-clustering objectives (i.e., anticlustering) will partition the
-data set into similar groups, whereas traditional cluster analysis
-is used to obtain a low between-group similarity.</p>
-<p>Anticluster editing is also known as the »maximum diverse grouping
-problem« because it maximizes group diversity as measured by the
-sum of pairwise distances. Hence, anticlustering maximizes
-between-group similarity by maximizing within-group
-heterogeneity. In previous versions of this package, <code>method =
-"distance"</code> was used (and is still supported) to request
-anticluster editing, but now <code>method = "diversity"</code> is
-preferred because there are several clustering objectives based on
-pairwise distances (e.g., see
+center (see <code><a href='variance_objective.html'>variance_objective</a></code>). K-means
+anticlustering focuses on minimizing differences with regard to the
+means of the input variables <code>x</code>; <code>objective = "kplus"</code>
+anticlustering is an extension of this criterion that also tries to
+minimize differences with regard to the standard deviations between
+groups.</p>
+<p>The cluster editing "diversity" objective is the sum of pairwise
+distances within groups (see
+<code><a href='diversity_objective.html'>diversity_objective</a></code>). Anticluster editing is also
+known as the »maximum diverse grouping problem« because it
+maximizes group diversity as measured by the sum of pairwise
+distances. Hence, anticlustering maximizes between-group similarity
+by maximizing within-group heterogeneity. In previous versions of
+this package, <code>method = "distance"</code> was used (and is still
+supported) to request anticluster editing, but now <code>method =
+"diversity"</code> is preferred because there are several clustering
+objectives based on pairwise distances (e.g., see
 <code><a href='dispersion_objective.html'>dispersion_objective</a></code>).</p>
 <p>If the data input <code>x</code> is a feature matrix (that is: each row
 is a "case" and each column is a "variable") and the option
@@ -243,12 +263,17 @@ the argument <code>K</code> (in this case, <code>K</code> has length
 <code><a href='https://rdrr.io/r/base/nrow.html'>nrow(x)</a></code>). The exchange procedure is repeated for each
 element. Because each possible swap is investigated for each
 element, the total number of exchanges grows quadratically with
-input size, rendering the exchange method unsuitable for large N.</p>
-<p>When setting <code>preclustering = TRUE</code>, only the <code>K - 1</code> most
-similar elements serve as exchange partners, which can dramatically
-speed up the optimization (more information on the preclustering
-option is included below). This option is recommended for larger
-N. For very large N, check out the function
+input size, rendering the exchange method unsuitable for large N.
+When using <code>method = "local-maximum"</code>, the exchange method is
+repeated until an local maximum is reached. That means after the
+exchange process has been conducted once for each data point, the
+algorithm restarts with the first element and proceeds to conduct
+exchanges until the objective cannot be improved.</p>
+<p>When setting <code>preclustering = TRUE</code>, only the <code>K - 1</code>
+most similar elements serve as exchange partners, which can
+dramatically speed up the optimization (more information on the
+preclustering option is included below). This option is recommended
+for larger N. For very large N, check out the function
 <code><a href='fast_anticlustering.html'>fast_anticlustering</a></code> that was specifically implemented
 to process very large data sets.</p>
 <p><strong>Exact anticlustering</strong></p>
@@ -294,8 +319,8 @@ described in Papenberg and Klau (2020; (8) - (10), (12) - (13)).</p>
 <p>The argument <code>categories</code> may induce categorical constraints.
 The grouping variables indicated by <code>categories</code> will be
 balanced out across anticlusters. Currently, this functionality is
-only available in combination with the exchange method, but not
-with the integer linear programming approach.</p>
+only available in combination with the heuristic methods, but not
+with the exact integer linear programming approach.</p>
 <p><strong>Optimize a custom objective function</strong></p>
 <p>It is possible to pass a <code>function</code> to the argument
 <code>objective</code>. See <code><a href='dispersion_objective.html'>dispersion_objective</a></code> for an
@@ -363,14 +388,38 @@ Control and Cybernetics, 15, 213-218.</p>
 #&gt;            1       16      16
 #&gt;            2       16      16
 #&gt;            3       16      16</div><div class='input'>
-<span class='co'># You can try to improve the solution using the old output as </span>
-<span class='co'># the new K argument:</span>
-<span class='no'>new_anticlusters</span> <span class='kw'>&lt;-</span> <span class='fu'>anticlustering</span>(
+<span class='co'># Use multiple starts of the algorithm to improve the objective and</span>
+<span class='co'># optimize the extended k-means criterion ("kplus")</span>
+<span class='no'>anticlusters</span> <span class='kw'>&lt;-</span> <span class='fu'>anticlustering</span>(
   <span class='no'>schaper2019</span>[, <span class='fl'>3</span>:<span class='fl'>6</span>],
-  <span class='kw'>K</span> <span class='kw'>=</span> <span class='no'>anticlusters</span>,
-  <span class='kw'>categories</span> <span class='kw'>=</span> <span class='no'>schaper2019</span>$<span class='no'>room</span>
+  <span class='kw'>objective</span> <span class='kw'>=</span> <span class='st'>"kplus"</span>,
+  <span class='kw'>K</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>categories</span> <span class='kw'>=</span> <span class='no'>schaper2019</span>$<span class='no'>room</span>,
+  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"local-maximum"</span>,
+  <span class='kw'>repetitions</span> <span class='kw'>=</span> <span class='fl'>2</span>
 )
-
+<span class='co'># Compare means and standard deviations by anticluster</span>
+<span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='no'>schaper2019</span>[, <span class='fl'>3</span>:<span class='fl'>6</span>], <span class='no'>anticlusters</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>(<span class='no'>x</span>), <span class='fl'>2</span>))</div><div class='output co'>#&gt; anticlusters: 1
+#&gt;   rating_consistent rating_inconsistent           syllables           frequency 
+#&gt;                4.49                1.10                3.41               18.31 
+#&gt; ------------------------------------------------------------ 
+#&gt; anticlusters: 2
+#&gt;   rating_consistent rating_inconsistent           syllables           frequency 
+#&gt;                4.49                1.10                3.44               18.31 
+#&gt; ------------------------------------------------------------ 
+#&gt; anticlusters: 3
+#&gt;   rating_consistent rating_inconsistent           syllables           frequency 
+#&gt;                4.49                1.11                3.41               18.31 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='no'>schaper2019</span>[, <span class='fl'>3</span>:<span class='fl'>6</span>], <span class='no'>anticlusters</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='no'>sd</span>), <span class='fl'>2</span>))</div><div class='output co'>#&gt; anticlusters: 1
+#&gt;   rating_consistent rating_inconsistent           syllables           frequency 
+#&gt;                0.25                0.08                0.95                2.40 
+#&gt; ------------------------------------------------------------ 
+#&gt; anticlusters: 2
+#&gt;   rating_consistent rating_inconsistent           syllables           frequency 
+#&gt;                0.25                0.06                0.91                2.42 
+#&gt; ------------------------------------------------------------ 
+#&gt; anticlusters: 3
+#&gt;   rating_consistent rating_inconsistent           syllables           frequency 
+#&gt;                0.25                0.06                0.95                2.42 </div><div class='input'>
 
 <span class='co'>## Use preclustering and variance (k-means) criterion on large data set</span>
 <span class='no'>N</span> <span class='kw'>&lt;-</span> <span class='fl'>1000</span>
@@ -392,19 +441,10 @@ Control and Cybernetics, 15, 213-218.</p>
   <span class='kw'>categories</span> <span class='kw'>=</span> <span class='no'>cl</span>
 )</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Martin Papenberg <a href='mailto:martin.papenberg@hhu.de'>martin.papenberg@hhu.de</a></p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -415,7 +455,7 @@ Control and Cybernetics, 15, 213-218.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
