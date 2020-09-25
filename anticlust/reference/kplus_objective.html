@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Objective value for the variance criterion — variance_objective • anticlust</title>
+<title>Objective value for the k-plus criterion — kplus_objective • anticlust</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Objective value for the variance criterion — variance_objective" />
-<meta property="og:description" content="Compute the k-means variance objective for a given clustering." />
+<meta property="og:title" content="Objective value for the k-plus criterion — kplus_objective" />
+<meta property="og:description" content="Objective value for the k-plus criterion" />
 
 
 
@@ -123,16 +123,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Objective value for the variance criterion</h1>
-    <small class="dont-index">Source: <a href='https://github.com/m-Py/anticlust/blob/master/R/objective-variance.R'><code>R/objective-variance.R</code></a></small>
-    <div class="hidden name"><code>variance_objective.Rd</code></div>
+    <h1>Objective value for the k-plus criterion</h1>
+    <small class="dont-index">Source: <a href='https://github.com/m-Py/anticlust/blob/master/R/objective-kplus.R'><code>R/objective-kplus.R</code></a></small>
+    <div class="hidden name"><code>kplus_objective.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Compute the k-means variance objective for a given clustering.</p>
+    <p>Objective value for the k-plus criterion</p>
     </div>
 
-    <pre class="usage"><span class='fu'>variance_objective</span>(<span class='kw'>x</span>, <span class='kw'>clusters</span>)</pre>
+    <pre class="usage"><span class='fu'>kplus_objective</span>(<span class='kw'>x</span>, <span class='kw'>clusters</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -145,65 +145,105 @@ vector represents a single feature.</p></td>
     </tr>
     <tr>
       <th>clusters</th>
-      <td><p>A vector representing (anti)clusters (e.g., returned
-by <code><a href='anticlustering.html'>anticlustering</a></code> or
+      <td><p>A vector representing (anti)clusters (e.g.,
+returned by <code><a href='anticlustering.html'>anticlustering</a></code> or
 <code><a href='balanced_clustering.html'>balanced_clustering</a></code>)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The total within-cluster variance</p>
+    <p>The value of the k-plus criterion.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The variance objective is given by the sum of the squared
-errors between cluster centers and individual data points. It is the
-objective function used in k-means clustering, see
-<code><a href='https://rdrr.io/r/stats/kmeans.html'>kmeans</a></code>.</p>
+    <p>The k-plus criterion is an extension of the k-means criterion
+(i.e., the "variance", see <code><a href='variance_objective.html'>variance_objective</a></code>). The
+standard k-means objective is high if the means of the input
+variables are similar between clusters, but there is no guarantee
+that the standard deviations will also be similar (in fact,
+maximizing the k-means objective tends to decrease similarity in
+standard deviations in comparison to a completely random
+assignment). However, to achieve overall between-group similarity,
+it is desirable that the spread of the data is also similar between
+groups---and not just the means. This is accomplished by maximizing
+the k-plus criterion that also incorporates the standard deviations
+of the input variables.</p>
+<p>Equalizing means and standard deviations simultaneously is
+accomplished by internally appending new variables to the data
+input <code>x</code>, one new variable for each column in <code>x</code>. These
+new variables contain the squared difference of each data point to
+the mean of the respective column, and are then included---in
+addition to the original data---in standard k-means
+anticlustering. This way, the average squared deviation of the data
+points to the means becomes similar between groups, which is the
+variance. Hence, the k-plus criterion simultaneously represents
+similarity in means and variance (and thus, the standard
+deviation), and can be used to simultaneously equalize the mean and
+the spread of the data.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>K-plus anticlustering has newly been implemented in the package
+anticlust (available since version 0.5.2). The author is currently
+working on a paper detailing the objective's background, but has
+already made the methodology available as its results have been
+very convincing thus far (e.g., check out the examples below). When
+using k-plus anticlustering in your research, it would be courteous
+to cite Papenberg and Klau (2020) as the primary <code>anticlust</code>
+reference, even though the criterion has not been described in that
+paper. In doubt, contact the author to inquire whether a new
+reference is available, or check out the package website
+(https://github.com/m-Py/anticlust).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Jain, A. K. (2010). Data clustering: 50 years beyond k-means.
-Pattern Recognition Letters, 31, 651–666.</p>
-<p>Papenberg, M., &amp; Klau, G. W. (2020). Using anticlustering to partition 
+    <p>Papenberg, M., &amp; Klau, G. W. (2020). Using anticlustering to partition 
 data sets into equivalent parts. Psychological Methods. Advance Online 
 Publication. https://doi.org/10.1037/met0000301.</p>
-<p>Späth, H. (1986). Anticlustering: Maximizing the variance criterion.
-Control and Cybernetics, 15, 213–218.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Martin Papenberg <a href='mailto:martin.papenberg@hhu.de'>martin.papenberg@hhu.de</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>iris</span>)
-<span class='co'>## Clustering</span>
-<span class='kw'>clusters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='balanced_clustering.html'>balanced_clustering</a></span>(
-  <span class='kw'>iris</span>[, <span class='op'>-</span><span class='fl'>5</span>],
-  K = <span class='fl'>3</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>schaper2019</span>)
+<span class='kw'>features</span> <span class='op'>&lt;-</span> <span class='kw'>schaper2019</span>[, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>6</span>]
+
+<span class='co'># Optimize k-plus criterion</span>
+<span class='kw'>kplus_groups</span> <span class='op'>&lt;-</span> <span class='fu'><a href='anticlustering.html'>anticlustering</a></span>(
+  <span class='kw'>features</span>,
+  K = <span class='fl'>3</span>,
+  objective = <span class='st'>"kplus"</span>
 )
-<span class='co'># This is low:</span>
-<span class='fu'>variance_objective</span>(
-  <span class='kw'>iris</span>[, <span class='op'>-</span><span class='fl'>5</span>],
-  <span class='kw'>clusters</span>
-)
-</div><div class='output co'>#&gt; [1] 81.6306</div><div class='input'><span class='co'>## Anticlustering</span>
-<span class='kw'>anticlusters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='anticlustering.html'>anticlustering</a></span>(
-  <span class='kw'>iris</span>[, <span class='op'>-</span><span class='fl'>5</span>],
+<span class='co'># Optimize normal k-means criterion</span>
+<span class='kw'>kmeans_groups</span> <span class='op'>&lt;-</span> <span class='fu'><a href='anticlustering.html'>anticlustering</a></span>(
+  <span class='kw'>features</span>,
   K = <span class='fl'>3</span>,
   objective = <span class='st'>"variance"</span>
 )
-<span class='co'># This is higher:</span>
-<span class='fu'>variance_objective</span>(
-  <span class='kw'>iris</span>[, <span class='op'>-</span><span class='fl'>5</span>],
-  <span class='kw'>anticlusters</span>
-)
-</div><div class='output co'>#&gt; [1] 681.3682</div><div class='input'>
-<span class='co'># Illustrate variance objective</span>
-<span class='kw'>N</span> <span class='op'>&lt;-</span> <span class='fl'>18</span>
-<span class='kw'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>N</span> <span class='op'>*</span> <span class='fl'>2</span>), ncol = <span class='fl'>2</span>)
-<span class='kw'>cl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='balanced_clustering.html'>balanced_clustering</a></span>(<span class='kw'>data</span>, K = <span class='fl'>3</span>)
-<span class='fu'><a href='plot_clusters.html'>plot_clusters</a></span>(<span class='kw'>data</span>, <span class='kw'>cl</span>, illustrate_variance = <span class='fl'>TRUE</span>)
-</div><div class='img'><img src='variance_objective-1.png' alt='' width='700' height='433' /></div></pre>
+
+<span class='co'># Compute k-plus criterion (k-plus is much better here)</span>
+<span class='fu'>kplus_objective</span>(<span class='kw'>features</span>, <span class='kw'>kplus_groups</span>)
+</div><div class='output co'>#&gt; [1] 5433.657</div><div class='input'><span class='fu'>kplus_objective</span>(<span class='kw'>features</span>, <span class='kw'>kmeans_groups</span>)
+</div><div class='output co'>#&gt; [1] 5313.694</div><div class='input'>
+<span class='co'># Compare to k-means criterion (k-plus not much worse here)</span>
+<span class='fu'><a href='variance_objective.html'>variance_objective</a></span>(<span class='kw'>features</span>, <span class='kw'>kplus_groups</span>)
+</div><div class='output co'>#&gt; [1] 628.1556</div><div class='input'><span class='fu'><a href='variance_objective.html'>variance_objective</a></span>(<span class='kw'>features</span>, <span class='kw'>kmeans_groups</span>)
+</div><div class='output co'>#&gt; [1] 628.1559</div><div class='input'>
+<span class='co'># Compare means and standard deviations after k-means and k-plus</span>
+<span class='co'># anticlustering (the standard deviations are usually much closer</span>
+<span class='co'># after k-plus anticlustering, but there is only little to no</span>
+<span class='co'># difference with regard to the means)</span>
+<span class='fu'><a href='mean_sd_tab.html'>mean_sd_tab</a></span>(<span class='kw'>features</span>, <span class='kw'>kplus_groups</span>)
+</div><div class='output co'>#&gt;   rating_consistent rating_inconsistent syllables     frequency     
+#&gt; 1 "4.49 (0.25)"     "1.10 (0.07)"       "3.44 (0.91)" "18.31 (2.42)"
+#&gt; 2 "4.49 (0.24)"     "1.10 (0.07)"       "3.41 (0.95)" "18.31 (2.40)"
+#&gt; 3 "4.49 (0.25)"     "1.10 (0.06)"       "3.41 (0.95)" "18.31 (2.42)"</div><div class='input'><span class='fu'><a href='mean_sd_tab.html'>mean_sd_tab</a></span>(<span class='kw'>features</span>, <span class='kw'>kmeans_groups</span>)
+</div><div class='output co'>#&gt;   rating_consistent rating_inconsistent syllables     frequency     
+#&gt; 1 "4.49 (0.25)"     "1.10 (0.06)"       "3.41 (0.87)" "18.31 (2.09)"
+#&gt; 2 "4.49 (0.23)"     "1.10 (0.07)"       "3.41 (1.07)" "18.31 (2.67)"
+#&gt; 3 "4.49 (0.27)"     "1.10 (0.07)"       "3.44 (0.84)" "18.31 (2.44)"</div><div class='input'>
+
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

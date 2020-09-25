@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
       </span>
     </div>
 
@@ -79,7 +79,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="stimulus-selection_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using the R package anticlust for stimulus selection in experiments</h1>
@@ -100,11 +100,14 @@
 <li>Balance the occurrence of a categorical variable between stimulus sets</li>
 </ul>
 <p>To follow the code in this tutorial, load the <code>anticlust</code> package first:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">anticlust</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/m-Py/anticlust">anticlust</a></span>)
+</pre></div>
 <p>For the examples in this document, we use norming data for a stimulus set provided by Schaper, Kuhlmann and Bayen (2019a, 2019b). It is available when the package <code>anticlust</code> is loaded:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"schaper2019"</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"schaper2019"</span>)
 <span class="co"># look at the data</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">schaper2019</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">schaper2019</span>)
 <span class="co">#&gt;                 item     room rating_consistent rating_inconsistent syllables</span>
 <span class="co">#&gt; 1 Feuchtigkeitsmaske bathroom              4.10                1.04         5</span>
 <span class="co">#&gt; 2        Damenbinden bathroom              4.22                1.12         4</span>
@@ -118,18 +121,22 @@
 <span class="co">#&gt; 3        17    1</span>
 <span class="co">#&gt; 4        17    1</span>
 <span class="co">#&gt; 5        13    1</span>
-<span class="co">#&gt; 6        21    1</span></pre></body></html></div>
+<span class="co">#&gt; 6        21    1</span>
+</pre></div>
 <p>The item pool consists of 96 German words, given in the column <code>item</code>. Each word represents an object that is either typically found in a bathroom or in a kitchen. For their experiments, Schaper et al.  partitioned the pool into 3 word lists that should be as similar as possible with regard to four numeric criteria (that is: <code>rating_consistent</code>, <code>rating_inconsistent</code>, <code>syllables</code>, <code>frequency</code>). Typically, stimulus sets may contain more than 96 elements (and the selection usually becomes more effective when the pool is larger), but the logic for stimulus selection that is applied in this tutorial can be transfered to arbitrarily large stimulus sets.</p>
 <div id="example-1a-maximize-differences-in-frequency" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-1a-maximize-differences-in-frequency" class="anchor"></a>Example 1a: Maximize differences in frequency</h2>
 <p>In the first example, I select two word lists that differ on frequency but are as similar as possible with regard to consistency ratings and the number of syllables. First, I need to define the boundaries that define “high” and “low” frequency. Note that <code>frequency</code> is reverse-coded such that low values actually indicate high frequency. Here, I arbitrarily define values below 18 as “high” frequency and above 19 as “low” frequency, but any user-defined splits are possible.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">schaper2019</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span>(<span class="no">schaper2019</span>, {
-  <span class="no">freq</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">frequency</span> <span class="kw">&lt;</span> <span class="fl">18</span>, <span class="st">"high"</span>, <span class="fl">NA</span>)
-  <span class="no">freq</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">frequency</span> <span class="kw">&gt;</span> <span class="fl">19</span>, <span class="st">"low"</span>, <span class="no">freq</span>)
-})</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">schaper2019</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span>(<span class="kw">schaper2019</span>, {
+  <span class="kw">freq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="kw">frequency</span> <span class="op">&lt;</span> <span class="fl">18</span>, <span class="st">"high"</span>, <span class="fl">NA</span>)
+  <span class="kw">freq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="kw">frequency</span> <span class="op">&gt;</span> <span class="fl">19</span>, <span class="st">"low"</span>, <span class="kw">freq</span>)
+})
+</pre></div>
 <p>This code defined a new column <code>freq</code> for the data set <code>schaper2019</code> that is either “low”, “high” or missing (<code>NA</code>). Let’s check it out:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">schaper2019</span>$<span class="no">freq</span>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">schaper2019</span><span class="op">$</span><span class="kw">freq</span>
 <span class="co">#&gt;  [1] "low"  NA     "high" "high" "high" "low"  NA     "high" "high" "low" </span>
 <span class="co">#&gt; [11] NA     "low"  "high" "high" NA     "high" "high" "high" "low"  "low" </span>
 <span class="co">#&gt; [21] "high" "low"  "high" "high" "low"  NA     "low"  "high" "low"  "high"</span>
@@ -139,48 +146,59 @@
 <span class="co">#&gt; [61] "low"  NA     "high" "high" NA     "low"  NA     "low"  NA     NA    </span>
 <span class="co">#&gt; [71] "low"  NA     NA     "low"  "low"  NA     NA     "high" "high" NA    </span>
 <span class="co">#&gt; [81] "low"  "low"  NA     "low"  "high" "high" NA     "high" "low"  "high"</span>
-<span class="co">#&gt; [91] NA     NA     "high" NA     NA     "high"</span></pre></body></html></div>
+<span class="co">#&gt; [91] NA     NA     "high" NA     NA     "high"</span>
+</pre></div>
 <p>Before matching high and low frequency words, it is necessary to remove cases that are not selected, i.e. where the entry in <code>freq</code> is <code>NA</code>:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">selected</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">schaper2019</span>, !<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">freq</span>))
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">selected</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">schaper2019</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="kw">freq</span>))
 <span class="co"># see how many cases were selected:</span>
-<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">selected</span>$<span class="no">freq</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw">selected</span><span class="op">$</span><span class="kw">freq</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; high  low </span>
-<span class="co">#&gt;   33   31</span></pre></body></html></div>
+<span class="co">#&gt;   33   31</span>
+</pre></div>
 <p>Now, I use the <code>anticlust</code> function <code><a href="../reference/matching.html">matching()</a></code> to find paired words of high and low frequency that are as similar as possible on consistency and the number of syllables:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># Match the conditions based on covariates</span>
-<span class="no">covariates</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span>(<span class="no">selected</span>[, <span class="fl">3</span>:<span class="fl">5</span>])
-<span class="no">selected</span>$<span class="no">matches</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/matching.html">matching</a></span>(
-  <span class="no">covariates</span>,
-  <span class="kw">match_between</span> <span class="kw">=</span> <span class="no">selected</span>$<span class="no">freq</span>,
-  <span class="kw">match_within</span> <span class="kw">=</span> <span class="no">selected</span>$<span class="no">room</span>,
-  <span class="kw">match_extreme_first</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="co"># Match the conditions based on covariates</span>
+<span class="kw">covariates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span>(<span class="kw">selected</span>[, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>])
+<span class="kw">selected</span><span class="op">$</span><span class="kw">matches</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matching.html">matching</a></span>(
+  <span class="kw">covariates</span>, 
+  match_between = <span class="kw">selected</span><span class="op">$</span><span class="kw">freq</span>,
+  match_within = <span class="kw">selected</span><span class="op">$</span><span class="kw">room</span>,
+  match_extreme_first = <span class="fl">FALSE</span>
+)
+</pre></div>
 <p>The first argument defines the covariates that should be similar in both sets. I used the function <code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code> before passing the covariates to the matching function to standardize the variables. This way, each variable has the same weight in the matching process, which is usually desirable. The argument <code>match_between</code> is the grouping variable based on <code>frequency</code> that I just defined. The argument <code>match_within</code> is used to ensure that matches are selected between words belonging to the same room. The argument <code>match_extreme_first</code> is used to guide the behaviour of the matching algorithm, but its precise meaning is not important for now (for more information, see <code><a href="../reference/matching.html">?matching</a></code>). Generally, if we plan to only keep a subset of all matches – as we do in the current application –, we set <code>match_extreme_first</code> to <code>FALSE</code>. If we want to keep all elements, <code>match_extreme_first = TRUE</code> is usually better.</p>
 <p>Next, let us check out some of the matches we created:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">selected</span>, <span class="no">matches</span> <span class="kw">==</span> <span class="fl">1</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">selected</span>, <span class="kw">matches</span> <span class="op">==</span> <span class="fl">1</span>)
 <span class="co">#&gt;            item     room rating_consistent rating_inconsistent syllables</span>
 <span class="co">#&gt; 12     Wattepad bathroom              4.39                1.14         3</span>
 <span class="co">#&gt; 44 Rasierschaum bathroom              4.39                1.16         3</span>
 <span class="co">#&gt;    frequency list freq matches</span>
 <span class="co">#&gt; 12        21    1  low       1</span>
 <span class="co">#&gt; 44        17    2 high       1</span>
-<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">selected</span>, <span class="no">matches</span> <span class="kw">==</span> <span class="fl">2</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">selected</span>, <span class="kw">matches</span> <span class="op">==</span> <span class="fl">2</span>)
 <span class="co">#&gt;             item    room rating_consistent rating_inconsistent syllables</span>
 <span class="co">#&gt; 29 Zuckerstreuer kitchen              4.48                1.04         4</span>
 <span class="co">#&gt; 86    Mikrowelle kitchen              4.58                1.04         4</span>
 <span class="co">#&gt;    frequency list freq matches</span>
 <span class="co">#&gt; 29        21    1  low       2</span>
-<span class="co">#&gt; 86        15    3 high       2</span></pre></body></html></div>
+<span class="co">#&gt; 86        15    3 high       2</span>
+</pre></div>
 <p>The matches are numbered by similarity, meaning that matches with grouping number 1 are most similar. Therefore, we can easily select the 8 best-matched groups of words that we would like include in our experiment:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co"># Select the 8 best matches:</span>
-<span class="no">final_selection</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">selected</span>, <span class="no">matches</span> <span class="kw">&lt;=</span> <span class="fl">8</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="co"># Select the 8 best matches:</span>
+<span class="kw">final_selection</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">selected</span>, <span class="kw">matches</span> <span class="op">&lt;=</span> <span class="fl">8</span>)
+</pre></div>
 <p>Last, we check the quality of the results by investigating the descriptive statistics – means and standard deviations (in brackets) – by condition:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co"># Check quality of the selection:</span>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="co"># Check quality of the selection:</span>
 <span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span>(
-  <span class="no">final_selection</span>[, <span class="fl">3</span>:<span class="fl">6</span>],
-  <span class="no">final_selection</span>$<span class="no">freq</span>
-)</pre></body></html></div>
+  <span class="kw">final_selection</span>[, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span>], 
+  <span class="kw">final_selection</span><span class="op">$</span><span class="kw">freq</span>
+)
+</pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left"></th>
@@ -208,41 +226,52 @@
 </table>
 <p>The descriptive statistics are similar across the sets for the consistency ratings and the number of syllables, and dissimilar for frequency, which is good. In general, the results can even be improved if we can select from a larger item pool (then, more matches are possible).</p>
 <p>If we are not sure how many items should be part of our experiment, the function <code><a href="../reference/plot_similarity.html">plot_similarity()</a></code> may help. It plots an index of similarity (see <code><a href="../reference/plot_similarity.html">?plot_similarity</a></code>) for each match:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="../reference/plot_similarity.html">plot_similarity</a></span>(
-  <span class="no">covariates</span>,
-  <span class="kw">groups</span> <span class="kw">=</span> <span class="no">selected</span>$<span class="no">matches</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="fu"><a href="../reference/plot_similarity.html">plot_similarity</a></span>(
+  <span class="kw">covariates</span>, 
+  groups = <span class="kw">selected</span><span class="op">$</span><span class="kw">matches</span>
+)
+</pre></div>
 <p><img src="stimulus-selection_files/figure-html/similarity-plot-1.png" width="700"></p>
 <p>The figure depicts the sum of pairwise dissimilarities (based on the Euclidean distance) variance per match; the larger the value, the less homogenous the match. It seems indeed that the first eight matches are most similar; after the 8th match, there is already a notable decline in similarity.</p>
 </div>
 <div id="example-1b-two-factorial-design" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-1b-two-factorial-design" class="anchor"></a>Example 1b: Two-factorial design</h2>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="co"># Reload the data for next example</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"schaper2019"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="co"># Reload the data for next example</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"schaper2019"</span>)
+</pre></div>
 <p>In another example, we construct a two-factorial design: we create groups that differ on <code>rating_consistent</code> and <code>rating_inconsistent</code> (these properties are orthogonally crossed) but are similar on frequency and the number of syllables. First, we categorize the variables frequency and syllables into two levels, respectively. This time, I just use median splits, which means that I do not exclude any data in this first step:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">schaper2019</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span>(<span class="no">schaper2019</span>, {
-  <span class="no">incon</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">rating_inconsistent</span> <span class="kw">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span>(<span class="no">rating_inconsistent</span>), <span class="st">"low incon"</span>, <span class="fl">NA</span>)
-  <span class="no">incon</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">rating_inconsistent</span> <span class="kw">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span>(<span class="no">rating_inconsistent</span>), <span class="st">"high incon"</span>, <span class="no">incon</span>)
-  <span class="no">con</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">rating_consistent</span> <span class="kw">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span>(<span class="no">rating_consistent</span>), <span class="st">"low con"</span>, <span class="fl">NA</span>)
-  <span class="no">con</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">rating_consistent</span> <span class="kw">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span>(<span class="no">rating_consistent</span>), <span class="st">"high con"</span>, <span class="no">con</span>)
-})</pre></body></html></div>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="kw">schaper2019</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">within</a></span>(<span class="kw">schaper2019</span>, {
+  <span class="kw">incon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="kw">rating_inconsistent</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span>(<span class="kw">rating_inconsistent</span>), <span class="st">"low incon"</span>, <span class="fl">NA</span>)
+  <span class="kw">incon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="kw">rating_inconsistent</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span>(<span class="kw">rating_inconsistent</span>), <span class="st">"high incon"</span>, <span class="kw">incon</span>)
+  <span class="kw">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="kw">rating_consistent</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span>(<span class="kw">rating_consistent</span>), <span class="st">"low con"</span>, <span class="fl">NA</span>)
+  <span class="kw">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="kw">rating_consistent</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span>(<span class="kw">rating_consistent</span>), <span class="st">"high con"</span>, <span class="kw">con</span>)
+})
+</pre></div>
 <p>Let us check how many words are left per condition:</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">schaper2019</span>$<span class="no">con</span>, <span class="no">schaper2019</span>$<span class="no">incon</span>)
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw">schaper2019</span><span class="op">$</span><span class="kw">con</span>, <span class="kw">schaper2019</span><span class="op">$</span><span class="kw">incon</span>)
 <span class="co">#&gt;           </span>
 <span class="co">#&gt;            high incon low incon</span>
 <span class="co">#&gt;   high con         26        22</span>
-<span class="co">#&gt;   low con          27        21</span></pre></body></html></div>
+<span class="co">#&gt;   low con          27        21</span>
+</pre></div>
 <p>Next, we conduct a matching between the four groups that resulted from crossing frequency and syllables:</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="co"># Match the conditions based on covariates</span>
-<span class="no">covariates</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span>(<span class="no">schaper2019</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"frequency"</span>, <span class="st">"syllables"</span>)])
-<span class="no">schaper2019</span>$<span class="no">matches</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/matching.html">matching</a></span>(
-  <span class="no">covariates</span>,
-  <span class="kw">match_between</span> <span class="kw">=</span> <span class="no">schaper2019</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"con"</span>, <span class="st">"incon"</span>)],
-  <span class="kw">match_extreme_first</span> <span class="kw">=</span> <span class="fl">FALSE</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="co"># Match the conditions based on covariates</span>
+<span class="kw">covariates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span>(<span class="kw">schaper2019</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"frequency"</span>, <span class="st">"syllables"</span>)])
+<span class="kw">schaper2019</span><span class="op">$</span><span class="kw">matches</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matching.html">matching</a></span>(
+  <span class="kw">covariates</span>, 
+  match_between = <span class="kw">schaper2019</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"con"</span>, <span class="st">"incon"</span>)],
+  match_extreme_first = <span class="fl">FALSE</span>
+)
+</pre></div>
 <p>In this application, each match consists of 4 words because we have 4 conditions, e.g.:</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">schaper2019</span>, <span class="no">matches</span> <span class="kw">==</span> <span class="fl">1</span>)
+<div class="sourceCode" id="cb15"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">schaper2019</span>, <span class="kw">matches</span> <span class="op">==</span> <span class="fl">1</span>)
 <span class="co">#&gt;            item     room rating_consistent rating_inconsistent syllables</span>
 <span class="co">#&gt; 7    Klobuerste bathroom              4.82                1.04         3</span>
 <span class="co">#&gt; 47 Kloschuessel bathroom              4.84                1.13         3</span>
@@ -252,19 +281,26 @@
 <span class="co">#&gt; 7         18    1 high con  low incon       1</span>
 <span class="co">#&gt; 47        18    2 high con high incon       1</span>
 <span class="co">#&gt; 51        18    2  low con  low incon       1</span>
-<span class="co">#&gt; 57        17    2  low con high incon       1</span></pre></body></html></div>
+<span class="co">#&gt; 57        17    2  low con high incon       1</span>
+</pre></div>
 <p>To decide how many matched groups we would like to keep, let’s check out the similarity plot:</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="co"># Plot covariate similarity by match:</span>
-<span class="fu"><a href="../reference/plot_similarity.html">plot_similarity</a></span>(<span class="no">covariates</span>, <span class="no">schaper2019</span>$<span class="no">matches</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb16"><pre class="downlit">
+<span class="co"># Plot covariate similarity by match:</span>
+<span class="fu"><a href="../reference/plot_similarity.html">plot_similarity</a></span>(<span class="kw">covariates</span>, <span class="kw">schaper2019</span><span class="op">$</span><span class="kw">matches</span>)
+</pre></div>
 <p><img src="stimulus-selection_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
 <p>Based on the plot, we select the 10 best matches:</p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="co"># Select the 5 best matches:</span>
-<span class="no">final_selection</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">schaper2019</span>, <span class="no">matches</span> <span class="kw">&lt;=</span> <span class="fl">10</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb17"><pre class="downlit">
+<span class="co"># Select the 5 best matches:</span>
+<span class="kw">final_selection</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">schaper2019</span>, <span class="kw">matches</span> <span class="op">&lt;=</span> <span class="fl">10</span>)
+</pre></div>
 <p>Last, we check quality of the selection by printing the descriptive statistics by condition:</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span>(
-  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">final_selection</span>, <span class="kw">select</span> <span class="kw">=</span> <span class="fl">3</span>:<span class="fl">6</span>),
-  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="no">final_selection</span>$<span class="no">con</span>, <span class="no">final_selection</span>$<span class="no">incon</span>)
-)</pre></body></html></div>
+<div class="sourceCode" id="cb18"><pre class="downlit">
+<span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span>(
+  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">final_selection</span>, select = <span class="fl">3</span><span class="op">:</span><span class="fl">6</span>), 
+  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="kw">final_selection</span><span class="op">$</span><span class="kw">con</span>, <span class="kw">final_selection</span><span class="op">$</span><span class="kw">incon</span>)
+)
+</pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left"></th>
@@ -309,21 +345,25 @@
 <div id="example-2-anticlustering" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-2-anticlustering" class="anchor"></a>Example 2: Anticlustering</h2>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="co"># Reload the data for next example</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"schaper2019"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb19"><pre class="downlit">
+<span class="co"># Reload the data for next example</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"schaper2019"</span>)
+</pre></div>
 <p>In the next example, we wish to partition the entire pool of 96 items into 3 sets that are as similar as possible on all variables. That means that there is no independent variable that varies between conditions; the experimental manipulation is independent of the intrinsic stimulus properties. Creating stimulus sets that are overall similar to each other can be done using anticlustering (Papenberg &amp; Klau, 2020):</p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="co">## Conduct anticlustering (assign all items to three similar groups)</span>
-<span class="no">schaper2019</span>$<span class="no">anticluster</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span>(
-  <span class="no">schaper2019</span>[, <span class="fl">3</span>:<span class="fl">6</span>],
-  <span class="kw">K</span> <span class="kw">=</span> <span class="fl">3</span>,
-  <span class="kw">objective</span> <span class="kw">=</span> <span class="st">"variance"</span>
+<div class="sourceCode" id="cb20"><pre class="downlit">
+<span class="co">## Conduct anticlustering (assign all items to three similar groups)</span>
+<span class="kw">schaper2019</span><span class="op">$</span><span class="kw">anticluster</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span>(
+  <span class="kw">schaper2019</span>[, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span>], 
+  K = <span class="fl">3</span>,
+  objective = <span class="st">"variance"</span>
 )
 
 <span class="co">## check out quality of the solution</span>
 <span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span>(
-  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">schaper2019</span>, <span class="kw">select</span> <span class="kw">=</span> <span class="fl">3</span>:<span class="fl">6</span>),
-  <span class="no">schaper2019</span>$<span class="no">anticluster</span>
-)</pre></body></html></div>
+  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">schaper2019</span>, select = <span class="fl">3</span><span class="op">:</span><span class="fl">6</span>), 
+  <span class="kw">schaper2019</span><span class="op">$</span><span class="kw">anticluster</span>
+)
+</pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left"></th>
@@ -335,24 +375,24 @@
 <tbody>
 <tr class="odd">
 <td align="left">1</td>
-<td align="left">4.49 (0.24)</td>
-<td align="left">1.10 (0.07)</td>
-<td align="left">3.44 (1.05)</td>
-<td align="left">18.31 (2.72)</td>
+<td align="left">4.49 (0.26)</td>
+<td align="left">1.10 (0.06)</td>
+<td align="left">3.41 (1.10)</td>
+<td align="left">18.31 (2.44)</td>
 </tr>
 <tr class="even">
 <td align="left">2</td>
-<td align="left">4.49 (0.24)</td>
-<td align="left">1.10 (0.05)</td>
-<td align="left">3.41 (0.91)</td>
-<td align="left">18.31 (2.36)</td>
+<td align="left">4.49 (0.25)</td>
+<td align="left">1.10 (0.08)</td>
+<td align="left">3.44 (0.88)</td>
+<td align="left">18.31 (2.46)</td>
 </tr>
 <tr class="odd">
 <td align="left">3</td>
-<td align="left">4.49 (0.26)</td>
-<td align="left">1.10 (0.07)</td>
-<td align="left">3.41 (0.84)</td>
-<td align="left">18.31 (2.12)</td>
+<td align="left">4.49 (0.24)</td>
+<td align="left">1.10 (0.06)</td>
+<td align="left">3.41 (0.80)</td>
+<td align="left">18.31 (2.33)</td>
 </tr>
 </tbody>
 </table>
@@ -360,19 +400,22 @@
 <div id="example-2b-anticlustering-on-subset-selection" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-2b-anticlustering-on-subset-selection" class="anchor"></a>Example 2b: Anticlustering on subset selection</h2>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="co"># Reload the data for next example</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"schaper2019"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb21"><pre class="downlit">
+<span class="co"># Reload the data for next example</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"schaper2019"</span>)
+</pre></div>
 <p>If we do not want to include all 96 words in our experiment, we can again use the <code><a href="../reference/matching.html">matching()</a></code> function to select a subset of similar stimuli that we employ. Again, we wish the select three groups that are as similar as possible on all variables, but we only use a subset of all 96 items. To achieve this goal, we create triplets of similar stimuli using <code><a href="../reference/matching.html">matching()</a></code>; afterwards, the items belonging to the same triplet will be assigned to different experimental sets. We use the argument <code>match_within</code> to ensure that all triplets consist of items belonging to the same room:</p>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="co"># First, identify triplets of similar word, within room</span>
-<span class="no">covariates</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span>(<span class="no">schaper2019</span>[, <span class="fl">3</span>:<span class="fl">6</span>])
-<span class="no">schaper2019</span>$<span class="no">triplet</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/matching.html">matching</a></span>(
-  <span class="no">covariates</span>,
-  <span class="kw">p</span> <span class="kw">=</span> <span class="fl">3</span>,
-  <span class="kw">match_within</span> <span class="kw">=</span> <span class="no">schaper2019</span>$<span class="no">room</span>
+<div class="sourceCode" id="cb22"><pre class="downlit">
+<span class="co"># First, identify triplets of similar word, within room</span>
+<span class="kw">covariates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span>(<span class="kw">schaper2019</span>[, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span>])
+<span class="kw">schaper2019</span><span class="op">$</span><span class="kw">triplet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matching.html">matching</a></span>(
+  <span class="kw">covariates</span>,
+  p = <span class="fl">3</span>,
+  match_within = <span class="kw">schaper2019</span><span class="op">$</span><span class="kw">room</span>
 )
 
 <span class="co"># check out the two most similar triplets:</span>
-<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">schaper2019</span>, <span class="no">triplet</span> <span class="kw">==</span> <span class="fl">1</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">schaper2019</span>, <span class="kw">triplet</span> <span class="op">==</span> <span class="fl">1</span>)
 <span class="co">#&gt;             item    room rating_consistent rating_inconsistent syllables</span>
 <span class="co">#&gt; 19  Kaffeebeutel kitchen              4.31                1.04         4</span>
 <span class="co">#&gt; 58   Kaesemesser kitchen              4.28                1.04         4</span>
@@ -381,7 +424,7 @@
 <span class="co">#&gt; 19        22    1       1</span>
 <span class="co">#&gt; 58        21    2       1</span>
 <span class="co">#&gt; 59        21    2       1</span>
-<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">schaper2019</span>, <span class="no">triplet</span> <span class="kw">==</span> <span class="fl">2</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">schaper2019</span>, <span class="kw">triplet</span> <span class="op">==</span> <span class="fl">2</span>)
 <span class="co">#&gt;             item    room rating_consistent rating_inconsistent syllables</span>
 <span class="co">#&gt; 27  Buttermesser kitchen              4.40                1.00         4</span>
 <span class="co">#&gt; 29 Zuckerstreuer kitchen              4.48                1.04         4</span>
@@ -392,16 +435,20 @@
 <span class="co">#&gt; 53        20    2       2</span>
 
 <span class="co"># Select the 10 best triplets</span>
-<span class="no">best</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">schaper2019</span>, <span class="no">triplet</span> <span class="kw">&lt;=</span> <span class="fl">10</span>)</pre></body></html></div>
+<span class="kw">best</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">schaper2019</span>, <span class="kw">triplet</span> <span class="op">&lt;=</span> <span class="fl">10</span>)
+</pre></div>
 <p>Now, we use <code><a href="../reference/anticlustering.html">anticlustering()</a></code> to assign the matched words to different sets:</p>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="no">best</span>$<span class="no">anticluster</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span>(
-  <span class="no">best</span>[, <span class="fl">3</span>:<span class="fl">6</span>],
-  <span class="kw">K</span> <span class="kw">=</span> <span class="fl">3</span>,
-  <span class="kw">categories</span> <span class="kw">=</span> <span class="no">best</span>$<span class="no">triplet</span>,
-  <span class="kw">objective</span> <span class="kw">=</span> <span class="st">"variance"</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb23"><pre class="downlit">
+<span class="kw">best</span><span class="op">$</span><span class="kw">anticluster</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span>(
+  <span class="kw">best</span>[, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span>], 
+  K = <span class="fl">3</span>,
+  categories = <span class="kw">best</span><span class="op">$</span><span class="kw">triplet</span>,
+  objective = <span class="st">"variance"</span>
+)
+</pre></div>
 <p>In this function call, we pass the <code>triplets</code> to the argument <code>categories</code>, thus ensuring that the matched items are assigned to different sets. We can confirm this worked by looking at the cross table of <code>triplet</code> and <code>anticluster</code>:</p>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">best</span>$<span class="no">triplet</span>, <span class="no">best</span>$<span class="no">anticluster</span>)
+<div class="sourceCode" id="cb24"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw">best</span><span class="op">$</span><span class="kw">triplet</span>, <span class="kw">best</span><span class="op">$</span><span class="kw">anticluster</span>)
 <span class="co">#&gt;     </span>
 <span class="co">#&gt;      1 2 3</span>
 <span class="co">#&gt;   1  1 1 1</span>
@@ -413,19 +460,24 @@
 <span class="co">#&gt;   7  1 1 1</span>
 <span class="co">#&gt;   8  1 1 1</span>
 <span class="co">#&gt;   9  1 1 1</span>
-<span class="co">#&gt;   10 1 1 1</span></pre></body></html></div>
+<span class="co">#&gt;   10 1 1 1</span>
+</pre></div>
 <p>Anticlustering strives to assign the matched triplets to the different sets in such a way that all sets are as similar as possible. Note that by ensuring that the triplets only consisted of items from the same room, the room was also balanced across anticlusters:</p>
-<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">best</span>$<span class="no">room</span>, <span class="no">best</span>$<span class="no">anticluster</span>)
+<div class="sourceCode" id="cb25"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw">best</span><span class="op">$</span><span class="kw">room</span>, <span class="kw">best</span><span class="op">$</span><span class="kw">anticluster</span>)
 <span class="co">#&gt;           </span>
 <span class="co">#&gt;            1 2 3</span>
 <span class="co">#&gt;   bathroom 5 5 5</span>
-<span class="co">#&gt;   kitchen  5 5 5</span></pre></body></html></div>
+<span class="co">#&gt;   kitchen  5 5 5</span>
+</pre></div>
 <p>Last, we check out the descriptive statistics by anticluster, confirming that the sets are indeed quite similar on all numeric attributes:</p>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="co">## check out quality of the solution</span>
+<div class="sourceCode" id="cb26"><pre class="downlit">
+<span class="co">## check out quality of the solution</span>
 <span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span>(
-  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">best</span>, <span class="kw">select</span> <span class="kw">=</span> <span class="fl">3</span>:<span class="fl">6</span>),
-  <span class="no">best</span>$<span class="no">anticluster</span>
-)</pre></body></html></div>
+  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">best</span>, select = <span class="fl">3</span><span class="op">:</span><span class="fl">6</span>), 
+  <span class="kw">best</span><span class="op">$</span><span class="kw">anticluster</span>
+)
+</pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left"></th>
@@ -437,24 +489,24 @@
 <tbody>
 <tr class="odd">
 <td align="left">1</td>
-<td align="left">4.46 (0.25)</td>
-<td align="left">1.08 (0.05)</td>
+<td align="left">4.47 (0.27)</td>
+<td align="left">1.07 (0.05)</td>
 <td align="left">3.50 (0.97)</td>
-<td align="left">19.00 (2.67)</td>
+<td align="left">18.90 (2.92)</td>
 </tr>
 <tr class="even">
 <td align="left">2</td>
-<td align="left">4.46 (0.27)</td>
+<td align="left">4.46 (0.26)</td>
 <td align="left">1.08 (0.06)</td>
 <td align="left">3.50 (1.18)</td>
-<td align="left">18.90 (2.96)</td>
+<td align="left">19.00 (2.36)</td>
 </tr>
 <tr class="odd">
 <td align="left">3</td>
-<td align="left">4.47 (0.25)</td>
-<td align="left">1.07 (0.06)</td>
+<td align="left">4.46 (0.24)</td>
+<td align="left">1.08 (0.06)</td>
 <td align="left">3.50 (0.97)</td>
-<td align="left">19.00 (2.36)</td>
+<td align="left">19.00 (2.71)</td>
 </tr>
 </tbody>
 </table>
@@ -483,7 +535,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

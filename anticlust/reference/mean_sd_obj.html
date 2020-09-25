@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
       </span>
     </div>
 
@@ -132,7 +132,7 @@
     <p>Compute the discrepancy in means and standard deviations between clusters.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mean_sd_obj</span>(<span class='no'>features</span>, <span class='no'>clusters</span>)</pre>
+    <pre class="usage"><span class='fu'>mean_sd_obj</span>(<span class='kw'>features</span>, <span class='kw'>clusters</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,37 +158,42 @@ correspond to elements and columns correspond to features.</p></td>
     <p>This function can be passed as the argument <code>objective</code> to the 
 function <code><a href='anticlustering.html'>anticlustering</a></code> to minimize differences in means 
 and standard deviations between anticlusters.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Martin Papenberg <a href='mailto:martin.papenberg@hhu.de'>martin.papenberg@hhu.de</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>schaper2019</span>)
-<span class='no'>features</span> <span class='kw'>&lt;-</span> <span class='no'>schaper2019</span>[<span class='fl'>1</span>:<span class='fl'>48</span>, <span class='fl'>3</span>:<span class='fl'>6</span>]
-<span class='no'>ac</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='anticlustering.html'>anticlustering</a></span>(
-  <span class='no'>features</span>,
-  <span class='kw'>K</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>categories</span> <span class='kw'>=</span> <span class='no'>schaper2019</span>$<span class='no'>room</span>[<span class='fl'>1</span>:<span class='fl'>48</span>],
-  <span class='kw'>objective</span> <span class='kw'>=</span> <span class='no'>mean_sd_obj</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>schaper2019</span>)
+<span class='kw'>features</span> <span class='op'>&lt;-</span> <span class='kw'>schaper2019</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>48</span>, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>6</span>]
+<span class='kw'>ac</span> <span class='op'>&lt;-</span> <span class='fu'><a href='anticlustering.html'>anticlustering</a></span>(
+  <span class='kw'>features</span>,
+  K = <span class='fl'>3</span>,
+  categories = <span class='kw'>schaper2019</span><span class='op'>$</span><span class='kw'>room</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>48</span>],
+  objective = <span class='kw'>mean_sd_obj</span>
 )
-<span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='no'>features</span>, <span class='no'>ac</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>(<span class='no'>x</span>), <span class='fl'>2</span>))</div><div class='output co'>#&gt; ac: 1
+<span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='kw'>features</span>, <span class='kw'>ac</span>, <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>(<span class='kw'>x</span>), <span class='fl'>2</span>))
+</div><div class='output co'>#&gt; ac: 1
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                4.53                1.10                3.38               18.12 
+#&gt;                4.50                1.09                3.38               18.06 
 #&gt; ------------------------------------------------------------ 
 #&gt; ac: 2
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                4.50                1.11                3.31               18.06 
+#&gt;                4.50                1.10                3.38               18.25 
 #&gt; ------------------------------------------------------------ 
 #&gt; ac: 3
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                4.45                1.11                3.38               18.19 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='no'>features</span>, <span class='no'>ac</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='no'>sd</span>), <span class='fl'>2</span>))</div><div class='output co'>#&gt; ac: 1
+#&gt;                4.47                1.13                3.31               18.06 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='kw'>features</span>, <span class='kw'>ac</span>, <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>, <span class='kw'>sd</span>), <span class='fl'>2</span>))
+</div><div class='output co'>#&gt; ac: 1
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                0.27                0.05                0.89                2.42 
+#&gt;                0.29                0.06                0.81                2.43 
 #&gt; ------------------------------------------------------------ 
 #&gt; ac: 2
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                0.28                0.06                0.79                2.43 
+#&gt;                0.28                0.06                0.89                2.44 
 #&gt; ------------------------------------------------------------ 
 #&gt; ac: 3
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                0.21                0.08                0.89                2.43 </div><div class='input'>
+#&gt;                0.18                0.07                0.87                2.41 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -205,7 +210,7 @@ and standard deviations between anticlusters.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

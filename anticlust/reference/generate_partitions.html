@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
       </span>
     </div>
 
@@ -132,7 +132,7 @@
     <p>Generate all partitions of same cardinality</p>
     </div>
 
-    <pre class="usage"><span class='fu'>generate_partitions</span>(<span class='no'>N</span>, <span class='no'>K</span>, <span class='kw'>generate_permutations</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>generate_partitions</span>(<span class='kw'>N</span>, <span class='kw'>K</span>, generate_permutations = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,65 +175,76 @@ to inspect all partitions while ignoring duplicated permutations.</p>
     <p>Papenberg, M., &amp; Klau, G. W. (2020). Using anticlustering to partition 
 data sets into equivalent parts. Psychological Methods. Advance Online 
 Publication. https://doi.org/10.1037/met0000301.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Martin Papenberg <a href='mailto:martin.papenberg@hhu.de'>martin.papenberg@hhu.de</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'>## Generate all partitions to solve k-means anticlustering</span>
 <span class='co'>## to optimality.</span>
 
-<span class='no'>N</span> <span class='kw'>&lt;-</span> <span class='fl'>14</span>
-<span class='no'>K</span> <span class='kw'>&lt;-</span> <span class='fl'>2</span>
-<span class='no'>features</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='no'>N</span> * <span class='fl'>2</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-<span class='no'>partitions</span> <span class='kw'>&lt;-</span> <span class='fu'>generate_partitions</span>(<span class='no'>N</span>, <span class='no'>K</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>partitions</span>) <span class='co'># number of possible partitions</span></div><div class='output co'>#&gt; [1] 1716</div><div class='input'>
+<span class='kw'>N</span> <span class='op'>&lt;-</span> <span class='fl'>14</span>
+<span class='kw'>K</span> <span class='op'>&lt;-</span> <span class='fl'>2</span>
+<span class='kw'>features</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='kw'>N</span> <span class='op'>*</span> <span class='fl'>2</span>, replace = <span class='fl'>TRUE</span>), ncol = <span class='fl'>2</span>)
+<span class='kw'>partitions</span> <span class='op'>&lt;-</span> <span class='fu'>generate_partitions</span>(<span class='kw'>N</span>, <span class='kw'>K</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='kw'>partitions</span>) <span class='co'># number of possible partitions</span>
+</div><div class='output co'>#&gt; [1] 1716</div><div class='input'>
 <span class='co'>## Create an objective function that takes the partition</span>
 <span class='co'>## as first argument (then, we can use sapply to compute</span>
 <span class='co'>## the objective for each partition)</span>
-<span class='no'>var_obj</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>clusters</span>, <span class='no'>features</span>) {
-  <span class='fu'><a href='variance_objective.html'>variance_objective</a></span>(<span class='no'>features</span>, <span class='no'>clusters</span>)
+<span class='kw'>var_obj</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>clusters</span>, <span class='kw'>features</span>) {
+  <span class='fu'><a href='variance_objective.html'>variance_objective</a></span>(<span class='kw'>features</span>, <span class='kw'>clusters</span>)
 }
 
-<span class='no'>all_objectives</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(
-  <span class='no'>partitions</span>,
-  <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='no'>var_obj</span>,
-  <span class='kw'>features</span> <span class='kw'>=</span> <span class='no'>features</span>
+<span class='kw'>all_objectives</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span>(
+  <span class='kw'>partitions</span>,
+  FUN = <span class='kw'>var_obj</span>,
+  features = <span class='kw'>features</span>
 )
 
 <span class='co'>## Check out distribution of the objective over all partitions:</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='no'>all_objectives</span>) <span class='co'># many large, few low objectives</span></div><div class='img'><img src='generate_partitions-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## Get best k-means anticlustering objective:</span>
-<span class='no'>best_obj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>all_objectives</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span>(<span class='kw'>all_objectives</span>) <span class='co'># many large, few low objectives</span>
+</div><div class='img'><img src='generate_partitions-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>## Get best k-means anticlustering objective:</span>
+<span class='kw'>best_obj</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='kw'>all_objectives</span>)
 <span class='co'>## It is possible that there are multiple best solutions:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='no'>all_objectives</span> <span class='kw'>==</span> <span class='no'>best_obj</span>)</div><div class='output co'>#&gt; [1] 2</div><div class='input'><span class='co'>## Select one best partition:</span>
-<span class='no'>best_anticlustering</span> <span class='kw'>&lt;-</span> <span class='no'>partitions</span>[<span class='no'>all_objectives</span> <span class='kw'>==</span> <span class='no'>best_obj</span>]<span class='kw'>[[</span><span class='fl'>1</span>]]
+<span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='kw'>all_objectives</span> <span class='op'>==</span> <span class='kw'>best_obj</span>)
+</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='co'>## Select one best partition:</span>
+<span class='kw'>best_anticlustering</span> <span class='op'>&lt;-</span> <span class='kw'>partitions</span>[<span class='kw'>all_objectives</span> <span class='op'>==</span> <span class='kw'>best_obj</span>][[<span class='fl'>1</span>]]
 <span class='co'>## Look at mean for each partition:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='no'>features</span>, <span class='no'>best_anticlustering</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>(<span class='no'>x</span>), <span class='fl'>2</span>))</div><div class='output co'>#&gt; INDICES: 1
+<span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='kw'>features</span>, <span class='kw'>best_anticlustering</span>, <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>(<span class='kw'>x</span>), <span class='fl'>2</span>))
+</div><div class='output co'>#&gt; INDICES: 1
 #&gt;    V1    V2 
-#&gt; 14.29 11.29 
+#&gt; 12.43 15.43 
 #&gt; ------------------------------------------------------------ 
 #&gt; INDICES: 2
 #&gt;    V1    V2 
-#&gt; 14.29 11.14 </div><div class='input'>
+#&gt; 11.43 15.43 </div><div class='input'>
 
 <span class='co'>## Get best k-means clustering objective:</span>
-<span class='no'>min_obj</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='no'>all_objectives</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='no'>all_objectives</span> <span class='kw'>==</span> <span class='no'>min_obj</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='co'>## Select one best partition:</span>
-<span class='no'>best_clustering</span> <span class='kw'>&lt;-</span> <span class='no'>partitions</span>[<span class='no'>all_objectives</span> <span class='kw'>==</span> <span class='no'>min_obj</span>]<span class='kw'>[[</span><span class='fl'>1</span>]]
+<span class='kw'>min_obj</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='kw'>all_objectives</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='kw'>all_objectives</span> <span class='op'>==</span> <span class='kw'>min_obj</span>)
+</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='co'>## Select one best partition:</span>
+<span class='kw'>best_clustering</span> <span class='op'>&lt;-</span> <span class='kw'>partitions</span>[<span class='kw'>all_objectives</span> <span class='op'>==</span> <span class='kw'>min_obj</span>][[<span class='fl'>1</span>]]
 
 <span class='co'>## Plot minimum and maximum objectives:</span>
-<span class='no'>user_par</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='st'>"mfrow"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
+<span class='kw'>user_par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='st'>"mfrow"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(mfrow = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
 <span class='fu'><a href='plot_clusters.html'>plot_clusters</a></span>(
-  <span class='no'>features</span>,
-  <span class='no'>best_anticlustering</span>,
-  <span class='kw'>illustrate_variance</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Maximum variance"</span>
+  <span class='kw'>features</span>,
+  <span class='kw'>best_anticlustering</span>,
+  illustrate_variance = <span class='fl'>TRUE</span>,
+  main = <span class='st'>"Maximum variance"</span>
 )
 <span class='fu'><a href='plot_clusters.html'>plot_clusters</a></span>(
-  <span class='no'>features</span>,
-  <span class='no'>best_clustering</span>,
-  <span class='kw'>illustrate_variance</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Minimum variance"</span>
-)</div><div class='img'><img src='generate_partitions-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='no'>user_par</span>)</div></pre>
+  <span class='kw'>features</span>,
+  <span class='kw'>best_clustering</span>,
+  illustrate_variance = <span class='fl'>TRUE</span>,
+  main = <span class='st'>"Minimum variance"</span>
+)
+</div><div class='img'><img src='generate_partitions-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(mfrow = <span class='kw'>user_par</span>)
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -249,7 +260,7 @@ Publication. https://doi.org/10.1037/met0000301.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

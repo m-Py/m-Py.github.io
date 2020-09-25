@@ -73,7 +73,7 @@ minimum distance between two elements within the same cluster)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
       </span>
     </div>
 
@@ -134,7 +134,7 @@ minimum distance between two elements within the same cluster)." />
 minimum distance between two elements within the same cluster).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dispersion_objective</span>(<span class='no'>x</span>, <span class='no'>clusters</span>)</pre>
+    <pre class="usage"><span class='fu'>dispersion_objective</span>(<span class='kw'>x</span>, <span class='kw'>clusters</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,19 +173,21 @@ Psychology. https://doi.org/10.1111/bmsp.12186</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>N</span> <span class='kw'>&lt;-</span> <span class='fl'>50</span> <span class='co'># number of elements</span>
-<span class='no'>M</span> <span class='kw'>&lt;-</span> <span class='fl'>2</span>  <span class='co'># number of variables per element</span>
-<span class='no'>K</span> <span class='kw'>&lt;-</span> <span class='fl'>5</span>  <span class='co'># number of clusters</span>
-<span class='no'>random_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>N</span> * <span class='no'>M</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='no'>M</span>)
-<span class='no'>random_clusters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep_len</a></span>(<span class='fl'>1</span>:<span class='no'>K</span>, <span class='no'>N</span>))
-<span class='fu'>dispersion_objective</span>(<span class='no'>random_data</span>, <span class='no'>random_clusters</span>)</div><div class='output co'>#&gt; [1] 0.04468831</div><div class='input'>
+<span class='kw'>N</span> <span class='op'>&lt;-</span> <span class='fl'>50</span> <span class='co'># number of elements</span>
+<span class='kw'>M</span> <span class='op'>&lt;-</span> <span class='fl'>2</span>  <span class='co'># number of variables per element</span>
+<span class='kw'>K</span> <span class='op'>&lt;-</span> <span class='fl'>5</span>  <span class='co'># number of clusters</span>
+<span class='kw'>random_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>N</span> <span class='op'>*</span> <span class='kw'>M</span>), ncol = <span class='kw'>M</span>)
+<span class='kw'>random_clusters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep_len</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='kw'>K</span>, <span class='kw'>N</span>))
+<span class='fu'>dispersion_objective</span>(<span class='kw'>random_data</span>, <span class='kw'>random_clusters</span>)
+</div><div class='output co'>#&gt; [1] 0.1673317</div><div class='input'>
 <span class='co'># Maximize the dispersion </span>
-<span class='no'>optimized_clusters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='anticlustering.html'>anticlustering</a></span>(
-  <span class='no'>random_data</span>,
-  <span class='kw'>K</span> <span class='kw'>=</span> <span class='no'>random_clusters</span>,
-  <span class='kw'>objective</span> <span class='kw'>=</span> <span class='no'>dispersion_objective</span>
+<span class='kw'>optimized_clusters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='anticlustering.html'>anticlustering</a></span>(
+  <span class='kw'>random_data</span>,
+  K = <span class='kw'>random_clusters</span>, 
+  objective = <span class='kw'>dispersion_objective</span>
 )
-<span class='fu'>dispersion_objective</span>(<span class='no'>random_data</span>, <span class='no'>optimized_clusters</span>)</div><div class='output co'>#&gt; [1] 0.2835477</div><div class='input'>
+<span class='fu'>dispersion_objective</span>(<span class='kw'>random_data</span>, <span class='kw'>optimized_clusters</span>)
+</div><div class='output co'>#&gt; [1] 0.6142498</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -202,7 +204,7 @@ Psychology. https://doi.org/10.1111/bmsp.12186</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

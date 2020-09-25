@@ -75,7 +75,7 @@ a custom dissimilarity measure can also be employed." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
       </span>
     </div>
 
@@ -139,13 +139,13 @@ a custom dissimilarity measure can also be employed.</p>
     </div>
 
     <pre class="usage"><span class='fu'>matching</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>match_between</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>match_within</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>match_extreme_first</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>target_group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sort_output</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>x</span>,
+  p = <span class='fl'>2</span>,
+  match_between = <span class='kw'>NULL</span>,
+  match_within = <span class='kw'>NULL</span>,
+  match_extreme_first = <span class='fl'>TRUE</span>,
+  target_group = <span class='kw'>NULL</span>,
+  sort_output = <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -246,36 +246,42 @@ possible to evenly split the item pool evenly into groups of size
 
     <p>It is possible to specify grouping restrictions via
     <code>match_between</code> and <code>match_within</code> at the same time.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Martin Papenberg <a href='mailto:martin.papenberg@hhu.de'>martin.papenberg@hhu.de</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># Find triplets</span>
-<span class='no'>N</span> <span class='kw'>&lt;-</span> <span class='fl'>120</span>
-<span class='no'>lds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>f1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>N</span>), <span class='kw'>f2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>N</span>))
-<span class='no'>triplets</span> <span class='kw'>&lt;-</span> <span class='fu'>matching</span>(<span class='no'>lds</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+<span class='kw'>N</span> <span class='op'>&lt;-</span> <span class='fl'>120</span>
+<span class='kw'>lds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(f1 = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>N</span>), f2 = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>N</span>))
+<span class='kw'>triplets</span> <span class='op'>&lt;-</span> <span class='fu'>matching</span>(<span class='kw'>lds</span>, p = <span class='fl'>3</span>)
 <span class='fu'><a href='plot_clusters.html'>plot_clusters</a></span>(
-  <span class='no'>lds</span>,
-  <span class='kw'>clusters</span> <span class='kw'>=</span> <span class='no'>triplets</span>,
-  <span class='kw'>within_connection</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div><div class='img'><img src='matching-1.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='kw'>lds</span>,
+  clusters = <span class='kw'>triplets</span>,
+  within_connection = <span class='fl'>TRUE</span>
+)
+</div><div class='img'><img src='matching-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Bipartite matching with unequal-sized groups:</span>
 <span class='co'># Only selects matches for some elements</span>
-<span class='no'>N</span> <span class='kw'>&lt;-</span> <span class='fl'>100</span>
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>N</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='no'>groups</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>N</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.8</span>, <span class='fl'>0.2</span>))
-<span class='no'>matched</span> <span class='kw'>&lt;-</span> <span class='fu'>matching</span>(<span class='no'>data</span>[, <span class='fl'>1</span>], <span class='kw'>match_between</span> <span class='kw'>=</span> <span class='no'>groups</span>)
+<span class='kw'>N</span> <span class='op'>&lt;-</span> <span class='fl'>100</span>
+<span class='kw'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>N</span>), ncol = <span class='fl'>1</span>)
+<span class='kw'>groups</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, size = <span class='kw'>N</span>, replace = <span class='fl'>TRUE</span>, prob = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.8</span>, <span class='fl'>0.2</span>))
+<span class='kw'>matched</span> <span class='op'>&lt;-</span> <span class='fu'>matching</span>(<span class='kw'>data</span>[, <span class='fl'>1</span>], match_between = <span class='kw'>groups</span>)
 <span class='fu'><a href='plot_clusters.html'>plot_clusters</a></span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>groups</span>, <span class='no'>data</span>),
-  <span class='kw'>clusters</span> <span class='kw'>=</span> <span class='no'>matched</span>,
-  <span class='kw'>within_connection</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div><div class='img'><img src='matching-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'># Match objects from the same category only</span>
-<span class='no'>matched</span> <span class='kw'>&lt;-</span> <span class='fu'>matching</span>(
-  <span class='no'>schaper2019</span>[, <span class='fl'>3</span>:<span class='fl'>6</span>],
-  <span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>match_within</span> <span class='kw'>=</span> <span class='no'>schaper2019</span>$<span class='no'>room</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='kw'>groups</span>, <span class='kw'>data</span>), 
+  clusters = <span class='kw'>matched</span>, 
+  within_connection = <span class='fl'>TRUE</span>
 )
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='no'>matched</span>, <span class='no'>schaper2019</span>$<span class='no'>room</span>))</div><div class='output co'>#&gt;        
+</div><div class='img'><img src='matching-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Match objects from the same category only</span>
+<span class='kw'>matched</span> <span class='op'>&lt;-</span> <span class='fu'>matching</span>(
+  <span class='kw'>schaper2019</span>[, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>6</span>], 
+  p = <span class='fl'>3</span>, 
+  match_within = <span class='kw'>schaper2019</span><span class='op'>$</span><span class='kw'>room</span>
+)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='kw'>matched</span>, <span class='kw'>schaper2019</span><span class='op'>$</span><span class='kw'>room</span>))
+</div><div class='output co'>#&gt;        
 #&gt; matched bathroom kitchen
 #&gt;       1        0       3
 #&gt;       2        3       0
@@ -284,36 +290,40 @@ possible to evenly split the item pool evenly into groups of size
 #&gt;       5        3       0
 #&gt;       6        3       0</div><div class='input'>
 <span class='co'># Match between different plant species in the »iris« data set</span>
-<span class='no'>species</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>$<span class='no'>Species</span> <span class='kw'>!=</span> <span class='st'>"versicolor"</span>
-<span class='no'>matched</span> <span class='kw'>&lt;-</span> <span class='fu'>matching</span>(
-  <span class='no'>iris</span>[<span class='no'>species</span>, <span class='fl'>1</span>],
-  <span class='kw'>match_between</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='no'>species</span>, <span class='fl'>5</span>]
+<span class='kw'>species</span> <span class='op'>&lt;-</span> <span class='kw'>iris</span><span class='op'>$</span><span class='kw'>Species</span> != <span class='st'>"versicolor"</span>
+<span class='kw'>matched</span> <span class='op'>&lt;-</span> <span class='fu'>matching</span>(
+  <span class='kw'>iris</span>[<span class='kw'>species</span>, <span class='fl'>1</span>], 
+  match_between = <span class='kw'>iris</span>[<span class='kw'>species</span>, <span class='fl'>5</span>]
 )
 <span class='co'># Adjust `match_extreme_first` argument</span>
-<span class='no'>matched2</span> <span class='kw'>&lt;-</span> <span class='fu'>matching</span>(
-  <span class='no'>iris</span>[<span class='no'>species</span>, <span class='fl'>1</span>],
-  <span class='kw'>match_between</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='no'>species</span>, <span class='fl'>5</span>],
-  <span class='kw'>match_extreme_first</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+<span class='kw'>matched2</span> <span class='op'>&lt;-</span> <span class='fu'>matching</span>(
+  <span class='kw'>iris</span>[<span class='kw'>species</span>, <span class='fl'>1</span>], 
+  match_between = <span class='kw'>iris</span>[<span class='kw'>species</span>, <span class='fl'>5</span>],
+  match_extreme_first = <span class='fl'>FALSE</span>
 )
 <span class='co'># Plot the matching results</span>
-<span class='no'>user_par</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='st'>"mfrow"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-  <span class='kw'>Species</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='no'>iris</span>[<span class='no'>species</span>, <span class='fl'>5</span>]),
-  <span class='kw'>Sepal.Length</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='no'>species</span>, <span class='fl'>1</span>]
+<span class='kw'>user_par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='st'>"mfrow"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(mfrow = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
+<span class='kw'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+  Species = <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='kw'>iris</span>[<span class='kw'>species</span>, <span class='fl'>5</span>]),
+  Sepal.Length = <span class='kw'>iris</span>[<span class='kw'>species</span>, <span class='fl'>1</span>]
 )
 <span class='fu'><a href='plot_clusters.html'>plot_clusters</a></span>(
-  <span class='no'>data</span>,
-  <span class='kw'>clusters</span> <span class='kw'>=</span> <span class='no'>matched</span>,
-  <span class='kw'>within_connection</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Extreme elements matched first"</span>
+  <span class='kw'>data</span>,
+  clusters = <span class='kw'>matched</span>,
+  within_connection = <span class='fl'>TRUE</span>,
+  main = <span class='st'>"Extreme elements matched first"</span>
 )
 <span class='fu'><a href='plot_clusters.html'>plot_clusters</a></span>(
-  <span class='no'>data</span>,
-  <span class='kw'>clusters</span> <span class='kw'>=</span> <span class='no'>matched2</span>,
-  <span class='kw'>within_connection</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Central elements matched first"</span>
-)</div><div class='img'><img src='matching-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='no'>user_par</span>)</div></pre>
+  <span class='kw'>data</span>,
+  clusters = <span class='kw'>matched2</span>,
+  within_connection = <span class='fl'>TRUE</span>,
+  main = <span class='st'>"Central elements matched first"</span>
+)
+</div><div class='img'><img src='matching-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(mfrow = <span class='kw'>user_par</span>)
+
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -329,7 +339,7 @@ possible to evenly split the item pool evenly into groups of size
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

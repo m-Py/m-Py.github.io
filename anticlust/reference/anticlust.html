@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Number of equal sized partitions — n_partitions • anticlust</title>
+<title>anticlust: Subset Partitioning via Anticlustering — anticlust • anticlust</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,30 @@
 
 
 
-<meta property="og:title" content="Number of equal sized partitions — n_partitions" />
-<meta property="og:description" content="Number of equal sized partitions" />
+<meta property="og:title" content="anticlust: Subset Partitioning via Anticlustering — anticlust" />
+<meta property="og:description" content="The method of anticlustering partitions a pool of elements into
+groups (i.e., anticlusters) in such a way that the between-group
+similarity is maximized and -- at the same time -- the within-group
+heterogeneity is maximized. This reverses the logic of cluster
+analysis that strives for high within-group homogeneity and low
+similarity of the different groups. Computationally, anticlustering
+is accomplished by maximizing instead of minimizing a clustering
+objective function, such as the intra-cluster variance (used in
+k-means clustering) or the sum of pairwise distances within
+clusters.  The function anticlustering() implements exact and
+heuristic anticlustering algorithms as described in Papenberg and
+Klau (2020; &amp;lt;doi:10.1037/met0000301&amp;gt;). The exact approach requires
+that the GNU linear programming kit
+(&amp;lt;https://www.gnu.org/software/glpk/glpk.html&amp;gt;) is available and
+the R package 'Rglpk' (&amp;lt;https://cran.R-project.org/package=Rglpk&amp;gt;)
+is installed. Some other functions are available to solve classical
+clustering problems. The function balanced_clustering() applies a
+cluster analysis under size constraints, i.e., creates equal-sized
+clusters. The function matching() can be used for (unrestricted,
+bipartite, or K-partite) matching. The function wce() can be used
+optimally solve the (weighted) cluster editing problem, also known
+as correlation clustering, clique partitioning problem or
+transitivity clustering." />
 
 
 
@@ -72,7 +94,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3.9000</span>
       </span>
     </div>
 
@@ -123,38 +145,49 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Number of equal sized partitions</h1>
-    <small class="dont-index">Source: <a href='https://github.com/m-Py/anticlust/blob/master/R/number-of-partitions.R'><code>R/number-of-partitions.R</code></a></small>
-    <div class="hidden name"><code>n_partitions.Rd</code></div>
+    <h1>anticlust: Subset Partitioning via Anticlustering</h1>
+    <small class="dont-index">Source: <a href='https://github.com/m-Py/anticlust/blob/master/R/anticlust.R'><code>R/anticlust.R</code></a></small>
+    <div class="hidden name"><code>anticlust.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Number of equal sized partitions</p>
+    <p>The method of anticlustering partitions a pool of elements into
+groups (i.e., anticlusters) in such a way that the between-group
+similarity is maximized and -- at the same time -- the within-group
+heterogeneity is maximized. This reverses the logic of cluster
+analysis that strives for high within-group homogeneity and low
+similarity of the different groups. Computationally, anticlustering
+is accomplished by maximizing instead of minimizing a clustering
+objective function, such as the intra-cluster variance (used in
+k-means clustering) or the sum of pairwise distances within
+clusters.  The function anticlustering() implements exact and
+heuristic anticlustering algorithms as described in Papenberg and
+Klau (2020; &lt;doi:10.1037/met0000301&gt;). The exact approach requires
+that the GNU linear programming kit
+(&lt;https://www.gnu.org/software/glpk/glpk.html&gt;) is available and
+the R package 'Rglpk' (&lt;https://cran.R-project.org/package=Rglpk&gt;)
+is installed. Some other functions are available to solve classical
+clustering problems. The function balanced_clustering() applies a
+cluster analysis under size constraints, i.e., creates equal-sized
+clusters. The function matching() can be used for (unrestricted,
+bipartite, or K-partite) matching. The function wce() can be used
+optimally solve the (weighted) cluster editing problem, also known
+as correlation clustering, clique partitioning problem or
+transitivity clustering.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>n_partitions</span>(<span class='kw'>N</span>, <span class='kw'>K</span>)</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>N</th>
-      <td><p>How many elements</p></td>
-    </tr>
-    <tr>
-      <th>K</th>
-      <td><p>How many partitions</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="primary-functions"><a class="anchor" href="#primary-functions"></a>Primary functions</h2>
 
-    <p>The number of partitions</p>
+    
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>n_partitions</span>(<span class='fl'>20</span>, <span class='fl'>2</span>)
-</div><div class='output co'>#&gt; [1] 92378</div><div class='input'>
-</div></pre>
+<p><code><a href='anticlustering.html'>anticlustering</a></code> 
+<code><a href='balanced_clustering.html'>balanced_clustering</a></code> 
+<code><a href='matching.html'>matching</a></code> 
+<code><a href='categorical_sampling.html'>categorical_sampling</a></code> 
+<code><a href='wce.html'>wce</a></code></p>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

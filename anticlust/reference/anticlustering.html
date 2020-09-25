@@ -75,7 +75,7 @@ Papenberg and Klau (2020; &amp;lt;doi:10.1037/met0000301&amp;gt;)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
       </span>
     </div>
 
@@ -139,13 +139,13 @@ Papenberg and Klau (2020; &lt;doi:10.1037/met0000301&gt;).</p>
     </div>
 
     <pre class="usage"><span class='fu'>anticlustering</span>(
-  <span class='no'>x</span>,
-  <span class='no'>K</span>,
-  <span class='kw'>objective</span> <span class='kw'>=</span> <span class='st'>"diversity"</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"exchange"</span>,
-  <span class='kw'>preclustering</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>categories</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>repetitions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>x</span>,
+  <span class='kw'>K</span>,
+  objective = <span class='st'>"diversity"</span>,
+  method = <span class='st'>"exchange"</span>,
+  preclustering = <span class='fl'>FALSE</span>,
+  categories = <span class='kw'>NULL</span>,
+  repetitions = <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -164,7 +164,8 @@ represent pairwise dissimilarities.</p></td>
     </tr>
     <tr>
       <th>K</th>
-      <td><p>How many anticlusters should be created. Alternatively: A
+      <td><p>How many anticlusters should be created. Alternatively: (a) 
+A vector describing the size of each group, or (b) a
 vector of length <code><a href='https://rdrr.io/r/base/nrow.html'>nrow(x)</a></code> describing how elements are
 assigned to anticlusters before the optimization starts.</p></td>
     </tr>
@@ -215,21 +216,23 @@ possible (this usually corresponds to creating groups with high
 within-group heterogeneity). This is accomplished by maximizing
 instead of minimizing a clustering objective function. The
 maximization of three clustering objective functions is natively
-supported, while other functions can also defined by the user:</p>
+supported (other functions can also defined by the user as
+described below):</p>
 <ul>
 <li><p>cluster editing `diversity` objective, setting <code>objective = "diversity"</code> (default)</p></li>
 <li><p>k-means `variance` objective, setting <code>objective = "variance"</code></p></li>
-<li><p>`kplus` anticlustering, an extension of k-means anticlustering</p></li>
+<li><p>k-plus objective, an extension of the k-means variance criterion,
+        setting <code>objective = "kplus"</code></p></li>
 </ul>
 
-<p>The k-means objective is the variance within groups---that is, the
+<p>The k-means objective is the within-group variance---that is, the
 sum of the squared distances between each element and its cluster
 center (see <code><a href='variance_objective.html'>variance_objective</a></code>). K-means
 anticlustering focuses on minimizing differences with regard to the
-means of the input variables <code>x</code>; <code>objective = "kplus"</code>
+means of the input variables <code>x</code>; k-plus <code>objective = "kplus"</code>
 anticlustering is an extension of this criterion that also tries to
 minimize differences with regard to the standard deviations between
-groups.</p>
+groups (see <code><a href='kplus_objective.html'>kplus_objective</a></code>).</p>
 <p>The cluster editing "diversity" objective is the sum of pairwise
 distances within groups (see
 <code><a href='diversity_objective.html'>diversity_objective</a></code>). Anticluster editing is also
@@ -249,7 +252,8 @@ computed as the basic unit of the anticluster editing objective. If
 a different measure of dissimilarity is preferred, you may pass a
 self-generated dissimiliarity matrix via the argument <code>x</code>.</p>
 <p>In the standard case, groups of equal size are generated. Adjust
-the argument <code>K</code> to create groups of different size.</p>
+the argument <code>K</code> to create groups of different size (see
+examples).</p>
 <p><strong>Heuristic anticlustering</strong></p>
 <p>By default, a heuristic method is employed for anticlustering: the
 exchange method (<code>method = "exchange"</code>). Building on an
@@ -335,7 +339,7 @@ function as first argument. <strong>However, only after</strong>
 <code><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></code> has been called on <code>x</code>. This implies
 that in the function body, columns of the data set cannot be
 accessed using <code>data.frame</code> operations such as
-<code>$</code>. Objects of class <code>dist</code> will be converted to matrix
+<code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code>. Objects of class <code>dist</code> will be converted to matrix
 as well.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -351,95 +355,145 @@ Control and Cybernetics, 15, 213-218.</p>
     <div class='dont-index'><p><code><a href='fast_anticlustering.html'>fast_anticlustering</a></code></p>
 <p><code><a href='variance_objective.html'>variance_objective</a></code></p>
 <p><code><a href='diversity_objective.html'>diversity_objective</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Martin Papenberg <a href='mailto:martin.papenberg@hhu.de'>martin.papenberg@hhu.de</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># Optimize the cluster editing (diversity) criterion</span>
-<span class='no'>anticlusters</span> <span class='kw'>&lt;-</span> <span class='fu'>anticlustering</span>(
-  <span class='no'>schaper2019</span>[, <span class='fl'>3</span>:<span class='fl'>6</span>],
-  <span class='kw'>K</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>categories</span> <span class='kw'>=</span> <span class='no'>schaper2019</span>$<span class='no'>room</span>
+<span class='kw'>anticlusters</span> <span class='op'>&lt;-</span> <span class='fu'>anticlustering</span>(
+  <span class='kw'>schaper2019</span>[, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>6</span>],
+  K = <span class='fl'>3</span>,
+  categories = <span class='kw'>schaper2019</span><span class='op'>$</span><span class='kw'>room</span>
 )
 <span class='co'># Compare feature means by anticluster</span>
-<span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='no'>schaper2019</span>[, <span class='fl'>3</span>:<span class='fl'>6</span>], <span class='no'>anticlusters</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>(<span class='no'>x</span>), <span class='fl'>2</span>))</div><div class='output co'>#&gt; anticlusters: 1
+<span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='kw'>schaper2019</span>[, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>6</span>], <span class='kw'>anticlusters</span>, <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>(<span class='kw'>x</span>), <span class='fl'>2</span>))
+</div><div class='output co'>#&gt; anticlusters: 1
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                4.50                1.10                3.38               18.38 
+#&gt;                4.48                1.10                3.44               18.31 
 #&gt; ------------------------------------------------------------ 
 #&gt; anticlusters: 2
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                4.49                1.11                3.41               18.31 
+#&gt;                4.50                1.10                3.41               18.31 
 #&gt; ------------------------------------------------------------ 
 #&gt; anticlusters: 3
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                4.48                1.10                3.47               18.25 </div><div class='input'><span class='co'># Compare standard deviations by anticluster</span>
-<span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='no'>schaper2019</span>[, <span class='fl'>3</span>:<span class='fl'>6</span>], <span class='no'>anticlusters</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='no'>sd</span>), <span class='fl'>2</span>))</div><div class='output co'>#&gt; anticlusters: 1
+#&gt;                4.50                1.11                3.41               18.31 </div><div class='input'><span class='co'># Compare standard deviations by anticluster</span>
+<span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='kw'>schaper2019</span>[, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>6</span>], <span class='kw'>anticlusters</span>, <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>, <span class='kw'>sd</span>), <span class='fl'>2</span>))
+</div><div class='output co'>#&gt; anticlusters: 1
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                0.24                0.06                0.94                2.35 
+#&gt;                0.27                0.05                1.01                2.29 
 #&gt; ------------------------------------------------------------ 
 #&gt; anticlusters: 2
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                0.25                0.07                0.87                2.48 
+#&gt;                0.23                0.06                0.91                2.46 
 #&gt; ------------------------------------------------------------ 
 #&gt; anticlusters: 3
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                0.26                0.06                0.98                2.40 </div><div class='input'><span class='co'># check that the "room" is balanced across anticlusters:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='no'>anticlusters</span>, <span class='no'>schaper2019</span>$<span class='no'>room</span>)</div><div class='output co'>#&gt;             
+#&gt;                0.25                0.08                0.87                2.48 </div><div class='input'><span class='co'># check that the "room" is balanced across anticlusters:</span>
+<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='kw'>anticlusters</span>, <span class='kw'>schaper2019</span><span class='op'>$</span><span class='kw'>room</span>)
+</div><div class='output co'>#&gt;             
 #&gt; anticlusters bathroom kitchen
 #&gt;            1       16      16
 #&gt;            2       16      16
 #&gt;            3       16      16</div><div class='input'>
 <span class='co'># Use multiple starts of the algorithm to improve the objective and</span>
-<span class='co'># optimize the extended k-means criterion ("kplus")</span>
-<span class='no'>anticlusters</span> <span class='kw'>&lt;-</span> <span class='fu'>anticlustering</span>(
-  <span class='no'>schaper2019</span>[, <span class='fl'>3</span>:<span class='fl'>6</span>],
-  <span class='kw'>objective</span> <span class='kw'>=</span> <span class='st'>"kplus"</span>,
-  <span class='kw'>K</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>categories</span> <span class='kw'>=</span> <span class='no'>schaper2019</span>$<span class='no'>room</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"local-maximum"</span>,
-  <span class='kw'>repetitions</span> <span class='kw'>=</span> <span class='fl'>2</span>
+<span class='co'># optimize the k-means criterion ("variance")</span>
+<span class='kw'>anticlusters</span> <span class='op'>&lt;-</span> <span class='fu'>anticlustering</span>(
+  <span class='kw'>schaper2019</span>[, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>6</span>],
+  objective = <span class='st'>"variance"</span>,
+  K = <span class='fl'>3</span>,
+  categories = <span class='kw'>schaper2019</span><span class='op'>$</span><span class='kw'>room</span>,
+  method = <span class='st'>"local-maximum"</span>,
+  repetitions = <span class='fl'>2</span>
 )
 <span class='co'># Compare means and standard deviations by anticluster</span>
-<span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='no'>schaper2019</span>[, <span class='fl'>3</span>:<span class='fl'>6</span>], <span class='no'>anticlusters</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>(<span class='no'>x</span>), <span class='fl'>2</span>))</div><div class='output co'>#&gt; anticlusters: 1
-#&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                4.49                1.10                3.41               18.31 
-#&gt; ------------------------------------------------------------ 
-#&gt; anticlusters: 2
+<span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='kw'>schaper2019</span>[, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>6</span>], <span class='kw'>anticlusters</span>, <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>(<span class='kw'>x</span>), <span class='fl'>2</span>))
+</div><div class='output co'>#&gt; anticlusters: 1
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
 #&gt;                4.49                1.10                3.44               18.31 
 #&gt; ------------------------------------------------------------ 
+#&gt; anticlusters: 2
+#&gt;   rating_consistent rating_inconsistent           syllables           frequency 
+#&gt;                4.49                1.10                3.41               18.31 
+#&gt; ------------------------------------------------------------ 
 #&gt; anticlusters: 3
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                4.49                1.11                3.41               18.31 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='no'>schaper2019</span>[, <span class='fl'>3</span>:<span class='fl'>6</span>], <span class='no'>anticlusters</span>, <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>x</span>, <span class='fl'>2</span>, <span class='no'>sd</span>), <span class='fl'>2</span>))</div><div class='output co'>#&gt; anticlusters: 1
+#&gt;                4.49                1.10                3.41               18.31 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='kw'>schaper2019</span>[, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>6</span>], <span class='kw'>anticlusters</span>, <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>, <span class='kw'>sd</span>), <span class='fl'>2</span>))
+</div><div class='output co'>#&gt; anticlusters: 1
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                0.25                0.08                0.95                2.40 
+#&gt;                0.25                0.07                1.01                2.64 
 #&gt; ------------------------------------------------------------ 
 #&gt; anticlusters: 2
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                0.25                0.06                0.91                2.42 
+#&gt;                0.26                0.06                0.95                2.16 
 #&gt; ------------------------------------------------------------ 
 #&gt; anticlusters: 3
 #&gt;   rating_consistent rating_inconsistent           syllables           frequency 
-#&gt;                0.25                0.06                0.95                2.42 </div><div class='input'>
+#&gt;                0.24                0.07                0.84                2.40 </div><div class='input'>
+<span class='co'># Use different group sizes and optimize the extended k-means</span>
+<span class='co'># criterion ("kplus")</span>
+<span class='kw'>anticlusters</span> <span class='op'>&lt;-</span> <span class='fu'>anticlustering</span>(
+  <span class='kw'>schaper2019</span>[, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>6</span>],
+  objective = <span class='st'>"kplus"</span>,
+  K = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>24</span>, <span class='fl'>24</span>, <span class='fl'>48</span>),
+  categories = <span class='kw'>schaper2019</span><span class='op'>$</span><span class='kw'>room</span>,
+  repetitions = <span class='fl'>2</span>,
+  method = <span class='st'>"local-maximum"</span>
+)
+
+<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='kw'>anticlusters</span>, <span class='kw'>schaper2019</span><span class='op'>$</span><span class='kw'>room</span>)
+</div><div class='output co'>#&gt;             
+#&gt; anticlusters bathroom kitchen
+#&gt;            1       12      12
+#&gt;            2       12      12
+#&gt;            3       24      24</div><div class='input'><span class='co'># Compare means and standard deviations by anticluster</span>
+<span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='kw'>schaper2019</span>[, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>6</span>], <span class='kw'>anticlusters</span>, <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>(<span class='kw'>x</span>), <span class='fl'>2</span>))
+</div><div class='output co'>#&gt; anticlusters: 1
+#&gt;   rating_consistent rating_inconsistent           syllables           frequency 
+#&gt;                4.49                1.10                3.42               18.33 
+#&gt; ------------------------------------------------------------ 
+#&gt; anticlusters: 2
+#&gt;   rating_consistent rating_inconsistent           syllables           frequency 
+#&gt;                4.49                1.10                3.42               18.29 
+#&gt; ------------------------------------------------------------ 
+#&gt; anticlusters: 3
+#&gt;   rating_consistent rating_inconsistent           syllables           frequency 
+#&gt;                4.49                1.10                3.42               18.31 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='kw'>schaper2019</span>[, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>6</span>], <span class='kw'>anticlusters</span>, <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='kw'>x</span>, <span class='fl'>2</span>, <span class='kw'>sd</span>), <span class='fl'>2</span>))
+</div><div class='output co'>#&gt; anticlusters: 1
+#&gt;   rating_consistent rating_inconsistent           syllables           frequency 
+#&gt;                0.24                0.08                0.93                2.43 
+#&gt; ------------------------------------------------------------ 
+#&gt; anticlusters: 2
+#&gt;   rating_consistent rating_inconsistent           syllables           frequency 
+#&gt;                0.26                0.06                0.93                2.42 
+#&gt; ------------------------------------------------------------ 
+#&gt; anticlusters: 3
+#&gt;   rating_consistent rating_inconsistent           syllables           frequency 
+#&gt;                0.25                0.07                0.94                2.40 </div><div class='input'>
 
 <span class='co'>## Use preclustering and variance (k-means) criterion on large data set</span>
-<span class='no'>N</span> <span class='kw'>&lt;-</span> <span class='fl'>1000</span>
-<span class='no'>K</span> <span class='kw'>=</span> <span class='fl'>2</span>
-<span class='no'>lds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>f1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>N</span>), <span class='kw'>f2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>N</span>))
-<span class='no'>ac</span> <span class='kw'>&lt;-</span> <span class='fu'>anticlustering</span>(
-  <span class='no'>lds</span>,
-  <span class='kw'>K</span> <span class='kw'>=</span> <span class='no'>K</span>,
-  <span class='kw'>objective</span> <span class='kw'>=</span> <span class='st'>"variance"</span>,
-  <span class='kw'>preclustering</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+<span class='kw'>N</span> <span class='op'>&lt;-</span> <span class='fl'>1000</span>
+<span class='kw'>K</span> <span class='op'>=</span> <span class='fl'>2</span>
+<span class='kw'>lds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(f1 = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>N</span>), f2 = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>N</span>))
+<span class='kw'>ac</span> <span class='op'>&lt;-</span> <span class='fu'>anticlustering</span>(
+  <span class='kw'>lds</span>, 
+  K = <span class='kw'>K</span>,
+  objective = <span class='st'>"variance"</span>,
+  preclustering = <span class='fl'>TRUE</span>
 )
 
 <span class='co'># The following is equivalent to setting `preclustering = TRUE`:</span>
-<span class='no'>cl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='balanced_clustering.html'>balanced_clustering</a></span>(<span class='no'>lds</span>, <span class='kw'>K</span> <span class='kw'>=</span> <span class='no'>N</span> / <span class='no'>K</span>)
-<span class='no'>ac</span> <span class='kw'>&lt;-</span> <span class='fu'>anticlustering</span>(
-  <span class='no'>lds</span>,
-  <span class='kw'>K</span> <span class='kw'>=</span> <span class='no'>K</span>,
-  <span class='kw'>objective</span> <span class='kw'>=</span> <span class='st'>"variance"</span>,
-  <span class='kw'>categories</span> <span class='kw'>=</span> <span class='no'>cl</span>
-)</div></pre>
+<span class='kw'>cl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='balanced_clustering.html'>balanced_clustering</a></span>(<span class='kw'>lds</span>, K = <span class='kw'>N</span> <span class='op'>/</span> <span class='kw'>K</span>)
+<span class='kw'>ac</span> <span class='op'>&lt;-</span> <span class='fu'>anticlustering</span>(
+  <span class='kw'>lds</span>, 
+  K = <span class='kw'>K</span>,
+  objective = <span class='st'>"variance"</span>,
+  categories = <span class='kw'>cl</span>
+)
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -455,7 +509,7 @@ Control and Cybernetics, 15, 213-218.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
