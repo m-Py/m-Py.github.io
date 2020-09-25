@@ -20,6 +20,12 @@ Repository Policy
 
 0. Appendix A1 "Essential programs and libraries" in "R Installation and 
 Administration" contains requisite packages for installation from source.
+Interestingly, Java is also necessary to build R from source:
+
+```
+sudo apt install openjdk-11-jdk
+```
+
 1. Download the development version from https://cran.r-project.org/ 
 $\to$ R Sources
 2. Unpack the sources: 
@@ -129,6 +135,23 @@ on your system.
 
 ```
 ./R CMD check tar-ball.tar.gz
+```
+
+# Unexpected dependencies for checking packages 
+
+Most occur when R CMD check tries to build the documentation in pdf format using 
+Latex. The following packages are for example needed:
+
+- `texi2dvi`, available via
+
+```
+sudo apt install texinfo
+```
+
+`qpdf`, available via
+
+```
+sudo apt install qpdf
 ```
 
 # On Windows
