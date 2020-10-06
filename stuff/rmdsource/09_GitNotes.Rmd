@@ -203,6 +203,23 @@ using `git stash pop`.
 This post has a nice example of what to do when some commits go wrong 
 and should be reverted: [git: fetch and merge, don’t pull](https://longair.net/blog/2009/04/16/git-fetch-and-merge/)
 
+### Go back to a tag (or commit)
+
+If you want to browse the code at a certain commit, do:
+
+```
+git checkout -b tmpbranch # use throw-away branch
+git reset --hard tag # remove all changes since tag/commit
+git clean -f -d # remove all untracked files / directories
+```
+
+After checking out the code, switch back from the branch and remove it.
+
+```
+git checkout master
+git branch -d tmpbranch
+```
+
 ---
 
 Last updated: `r Sys.Date()`

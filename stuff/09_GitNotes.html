@@ -463,8 +463,18 @@ $ git remote -v
 <div id="pull-fetch-and-merge" class="section level3">
 <h3>Pull, fetch, and merge</h3>
 <p>This post has a nice example of what to do when some commits go wrong and should be reverted: <a href="https://longair.net/blog/2009/04/16/git-fetch-and-merge/">git: fetch and merge, don’t pull</a></p>
+</div>
+<div id="go-back-to-a-tag-or-commit" class="section level3">
+<h3>Go back to a tag (or commit)</h3>
+<p>If you want to browse the code at a certain commit, do:</p>
+<pre><code>git checkout -b tmpbranch # use throw-away branch
+git reset --hard tag # remove all changes since tag/commit
+git clean -f -d # remove all untracked files / directories</code></pre>
+<p>After checking out the code, switch back from the branch and remove it.</p>
+<pre><code>git checkout master
+git branch -d tmpbranch</code></pre>
 <hr />
-<p>Last updated: 2020-03-24</p>
+<p>Last updated: 2020-10-06</p>
 </div>
 <div id="back-to-the-front-page" class="section level3">
 <h3><a href="index.html">Back to the front page</a></h3>
