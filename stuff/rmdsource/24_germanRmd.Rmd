@@ -12,6 +12,10 @@ header-includes:
     - \usepackage{csquotes}
 ```
 
+**Update**: As of October 2020, this option for German language support threw an 
+error, but the option described <a href = "08_SpellChecking.html">here</a> still 
+worked.
+
 ---
 
 Last updated: `r Sys.Date()`
