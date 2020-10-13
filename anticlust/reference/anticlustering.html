@@ -75,7 +75,7 @@ Papenberg and Klau (2020; &amp;lt;doi:10.1037/met0000301&amp;gt;)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
       </span>
     </div>
 
@@ -171,12 +171,11 @@ assigned to anticlusters before the optimization starts.</p></td>
     </tr>
     <tr>
       <th>objective</th>
-      <td><p>The objective to be maximized. The option
+      <td><p>The objective to be maximized. The options
 "diversity" (default; previously called "distance", which is
-still supported) maximizes the cluster editing objective
-function; the option "variance" maximizes the k-means objective
-function; "kplus" is an extension of k-means
-anticlustering. See Details.</p></td>
+still supported), "variance", "kplus" and "dispersion" are natively
+supported. May also be a user-defined function object that computes
+an objective value given a clustering. See Details.</p></td>
     </tr>
     <tr>
       <th>method</th>
@@ -200,7 +199,7 @@ or several categorical constraints. See Details.</p></td>
 initiated when <code>method = "exchange"</code> or <code>method =
 "local-maximum"</code>.  In the end, the best objective found across
 the repetitions is returned. If this argument is not passed,
-only one repetitition is conducted.</p></td>
+only one repetition is conducted.</p></td>
     </tr>
     </table>
 
@@ -215,7 +214,7 @@ groups are created in such a way that all groups are as similar as
 possible (this usually corresponds to creating groups with high
 within-group heterogeneity). This is accomplished by maximizing
 instead of minimizing a clustering objective function. The
-maximization of three clustering objective functions is natively
+maximization of four clustering objective functions is natively
 supported (other functions can also defined by the user as
 described below):</p>
 <ul>
@@ -223,6 +222,8 @@ described below):</p>
 <li><p>k-means `variance` objective, setting <code>objective = "variance"</code></p></li>
 <li><p>k-plus objective, an extension of the k-means variance criterion,
         setting <code>objective = "kplus"</code></p></li>
+<li><p>`dispersion` objective, the minimum distance between any two 
+        elements within the same cluster.</p></li>
 </ul>
 
 <p>The k-means objective is the within-group variance---that is, the
@@ -245,6 +246,9 @@ supported) to request anticluster editing, but now <code>method =
 "diversity"</code> is preferred because there are several clustering
 objectives based on pairwise distances (e.g., see
 <code><a href='dispersion_objective.html'>dispersion_objective</a></code>).</p>
+<p>The "dispersion" is the minimum distance between any two elements within 
+the same cluster; applications that require high within-group heterogeneity
+often require to maximize the dispersion.</p>
 <p>If the data input <code>x</code> is a feature matrix (that is: each row
 is a "case" and each column is a "variable") and the option
 <code>objective = "diversity"</code> is used, the Euclidean distance is

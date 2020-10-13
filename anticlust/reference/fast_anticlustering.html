@@ -74,7 +74,7 @@ very large data sets." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
       </span>
     </div>
 
@@ -203,17 +203,17 @@ treated as a distinct category by the exchange method.</p>
 <span class='kw'>start</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>()
 <span class='kw'>ac_exchange</span> <span class='op'>&lt;-</span> <span class='fu'>fast_anticlustering</span>(<span class='kw'>features</span>, K = <span class='fl'>3</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>() <span class='op'>-</span> <span class='kw'>start</span>
-</div><div class='output co'>#&gt; Time difference of 0.7819407 secs</div><div class='input'>
+</div><div class='output co'>#&gt; Time difference of 0.5948999 secs</div><div class='input'>
 <span class='co'>## The following call is equivalent to the call above:</span>
 <span class='kw'>start</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>()
 <span class='kw'>ac_exchange</span> <span class='op'>&lt;-</span> <span class='fu'><a href='anticlustering.html'>anticlustering</a></span>(<span class='kw'>features</span>, K = <span class='fl'>3</span>, objective = <span class='st'>"variance"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>() <span class='op'>-</span> <span class='kw'>start</span>
-</div><div class='output co'>#&gt; Time difference of 0.706476 secs</div><div class='input'>
+</div><div class='output co'>#&gt; Time difference of 0.00836134 secs</div><div class='input'>
 <span class='co'>## Improve run time by using fewer exchange partners:</span>
 <span class='kw'>start</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>()
 <span class='kw'>ac_fast</span> <span class='op'>&lt;-</span> <span class='fu'>fast_anticlustering</span>(<span class='kw'>features</span>, K = <span class='fl'>3</span>, k_neighbours = <span class='fl'>10</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>() <span class='op'>-</span> <span class='kw'>start</span>
-</div><div class='output co'>#&gt; Time difference of 0.06714344 secs</div><div class='input'>
+</div><div class='output co'>#&gt; Time difference of 0.0561316 secs</div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='kw'>features</span>, <span class='kw'>ac_exchange</span>, <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>(<span class='kw'>x</span>), <span class='fl'>2</span>))
 </div><div class='output co'>#&gt; ac_exchange: 1
 #&gt; Sepal.Length  Sepal.Width Petal.Length  Petal.Width 

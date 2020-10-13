@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
       </span>
     </div>
 
@@ -126,6 +126,26 @@
       <small>Source: <a href='https://github.com/m-Py/anticlust/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="anticlust-054" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.4">
+<a href="#anticlust-054" class="anchor"></a>anticlust 0.5.4<small> Unreleased </small>
+</h1>
+<div id="user-visible-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#user-visible-changes" class="anchor"></a>User-visible changes</h2>
+<ul>
+<li>
+<code><a href="../reference/anticlustering.html">anticlustering()</a></code> now has native support for the maximizing the dispersion objective, setting <code>objective = "dispersion"</code>. The dispersion is the minimum distance between any two elements within the same cluster, see <code><a href="../reference/dispersion_objective.html">?dispersion_objective</a></code>.</li>
+</ul>
+</div>
+<div id="internal-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#internal-changes" class="anchor"></a>Internal changes</h2>
+<ul>
+<li>The exchange optimization algorithm for anticlustering has been reimplemented in C, leading to a substantial boost in performance when using one of the supported objectives “diversity”, “variance”, “dispersion”, or “kplus”. (Optimizing user-defined objective functions still has to be done in plain R and therefore has not been sped up.)</li>
+</ul>
+</div>
+</div>
     <div id="anticlust-053" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.3">
 <a href="#anticlust-053" class="anchor"></a>anticlust 0.5.3<small> 2020-09-25 </small>
@@ -147,9 +167,9 @@
 <h1 class="page-header" data-toc-text="0.5.2">
 <a href="#anticlust-052" class="anchor"></a>anticlust 0.5.2<small> Unreleased </small>
 </h1>
-<div id="user-visible-changes" class="section level2">
+<div id="user-visible-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#user-visible-changes" class="anchor"></a>User-visible changes</h2>
+<a href="#user-visible-changes-1" class="anchor"></a>User-visible changes</h2>
 <ul>
 <li><p>In <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, there is a new option for the argument <code>method</code>: “local-maximum”. When using <code>method = "local-maximum"</code>, the exchange method is repeated until an local maximum is reached. That means after the exchange process has been conducted for each data point, the algorithm restarts with the first element and proceeds to conduct exchanges until the objective cannot be improved. This procedure is more in line with classical neighbourhood search that only terminates when a local optimum is reached.</p></li>
 <li><p>In <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, there is now a new argument <code>repetitions</code>. It can be used to specify the number of times the exchange procedure (either <code>method =  "exchange"</code> or <code>method = "local-maximum"</code>) is called. <code><a href="../reference/anticlustering.html">anticlustering()</a></code> returns the best partitioning found across all repetitions.</p></li>
@@ -170,9 +190,9 @@
 <h1 class="page-header" data-toc-text="0.5.0">
 <a href="#anticlust-050" class="anchor"></a>anticlust 0.5.0<small> 2020-06-29 </small>
 </h1>
-<div id="user-visible-changes-1" class="section level2">
+<div id="user-visible-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#user-visible-changes-1" class="anchor"></a>User-visible changes</h2>
+<a href="#user-visible-changes-2" class="anchor"></a>User-visible changes</h2>
 <div id="major" class="section level3">
 <h3 class="hasAnchor">
 <a href="#major" class="anchor"></a>Major</h3>
@@ -195,9 +215,9 @@
 </ul>
 </div>
 </div>
-<div id="internal-changes" class="section level2">
+<div id="internal-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#internal-changes" class="anchor"></a>Internal changes</h2>
+<a href="#internal-changes-1" class="anchor"></a>Internal changes</h2>
 <ul>
 <li>Improved running speed of generating constraints in integer linear programming variant of (anti)clustering, via <a href="https://github.com/m-Py/anticlust/commit/0a870240f8264f0e74f4cbf0b20d789cfa0d6469">0a870240f8</a>
 </li>
@@ -208,9 +228,9 @@
 <h1 class="page-header" data-toc-text="0.4.1">
 <a href="#anticlust-041" class="anchor"></a>anticlust 0.4.1<small> Unreleased </small>
 </h1>
-<div id="user-visible-changes-2" class="section level2">
+<div id="user-visible-changes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#user-visible-changes-2" class="anchor"></a>User-visible changes</h2>
+<a href="#user-visible-changes-3" class="anchor"></a>User-visible changes</h2>
 <ul>
 <li><p>In <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, preclustering and categorical constraints can now be used at the same time. In this case, exchange partners are clustered within the same category, using a call to <code><a href="../reference/matching.html">matching()</a></code> passing <code>categories</code> to argument <code>match_within</code>.</p></li>
 <li><p>In <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, it is now possible to use <code>preclustering =  TRUE</code> for unbalanced data size (e.g., if N = 9 and K = 2).</p></li>
