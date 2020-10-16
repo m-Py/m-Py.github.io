@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
       </span>
     </div>
 
@@ -219,11 +219,11 @@ Publication. https://doi.org/10.1037/met0000301.</p>
 <span class='kw'>lds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(f1 = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>N</span>), f2 = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>N</span>))
 <span class='kw'>cl</span> <span class='op'>&lt;-</span> <span class='fu'>balanced_clustering</span>(<span class='kw'>lds</span>, K = <span class='fl'>10</span>)
 <span class='fu'><a href='plot_clusters.html'>plot_clusters</a></span>(<span class='kw'>lds</span>, clusters = <span class='kw'>cl</span>)
-</div><div class='input'>
+</div><div class='img'><img src='balanced_clustering-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Repeat using a distance matrix as input</span>
 <span class='kw'>cl2</span> <span class='op'>&lt;-</span> <span class='fu'>balanced_clustering</span>(<span class='fu'><a href='https://rdrr.io/r/stats/dist.html'>dist</a></span>(<span class='kw'>lds</span>), K = <span class='fl'>10</span>)
 <span class='fu'><a href='plot_clusters.html'>plot_clusters</a></span>(<span class='kw'>lds</span>, clusters = <span class='kw'>cl2</span>)
-</div><div class='img'><img src='balanced_clustering-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div><div class='img'><img src='balanced_clustering-2.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

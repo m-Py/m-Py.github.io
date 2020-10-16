@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
       </span>
     </div>
 
@@ -126,6 +126,27 @@
       <small>Source: <a href='https://github.com/m-Py/anticlust/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="anticlust-055" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.5">
+<a href="#anticlust-055" class="anchor"></a>anticlust 0.5.5<small> Unreleased </small>
+</h1>
+<div id="new-feature" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-feature" class="anchor"></a>New feature</h2>
+<ul>
+<li>
+<code><a href="../reference/anticlustering.html">anticlustering()</a></code> has a new argument <code>standardize</code> to standardize the data input before the optimization starts. This is useful to give all variables the same weight in the anticlustering process, irregardless of the scaling of the variables. Especially useful for <code>objective = "kplus"</code> to ensure that both minimizing differences with regard to means and variance is equally important.</li>
+</ul>
+</div>
+<div id="bug-fix" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fix" class="anchor"></a>Bug fix</h2>
+<ul>
+<li>Fixes a memory leak in the C code base, via <a href="https://github.com/m-Py/anticlust/commit/2c4fe6d4c272b10717158e639a76103ef574cc41">2c4fe6d</a>
+</li>
+</ul>
+</div>
+</div>
     <div id="anticlust-054-1" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.4-1">
 <a href="#anticlust-054-1" class="anchor"></a>anticlust 0.5.4-1<small> Unreleased </small>
