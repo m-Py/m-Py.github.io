@@ -1,7 +1,7 @@
 
 library(anticlust)
 
-source("./rsource/27_Slow_Kmeans.R")
+source("27_Slow_Kmeans.R")
 
 N <- 100
 M <- 2
@@ -11,8 +11,7 @@ clusters <- sample(rep_len(1:K, N))
 
 methods <- c(
   "non-vectorized", 
-  "vectorized-1", 
-  "vectorized-2", 
+  "vectorized", 
   "local-update",
   "C"
 )
@@ -22,55 +21,47 @@ names(times) <- methods
 cluster_solutions <- matrix(NA, ncol = length(methods), nrow = N)
 colnames(cluster_solutions) <- methods
 
+get_seconds <- function(t1, t2) {
+  as.numeric(difftime(t2, t1, units = "secs"))
+}
+
 ## 1. Using non-vectorized code
 start <- Sys.time()
-cluster_solutions[, 1]  <- anticlustering(
+cluster_solutions[, "non-vectorized"]  <- anticlustering(
   data,
   K = clusters,
   objective = variance_objective_slow
 )
-times[1] <- difftime(Sys.time(), start, units = "secs")
+times["non-vectorized"] <- get_seconds(start, Sys.time())
 
-## 2. Using vectorized code, each iteration includes input validation
-vectorized1 <- function(clusters, data) {
-  variance_objective(data, clusters)
-}
+## 2. Using vectorized code
 
 start <- Sys.time()
-cluster_solutions[, 2] <- anticlustering(
+cluster_solutions[, "vectorized"] <- anticlustering(
   data,
   K = clusters,
-  objective = vectorized1
+  objective = variance_objective
 )
-times[2] <- difftime(Sys.time(), start, units = "secs")
+times["vectorized"] <- get_seconds(start, Sys.time())
 
-## 3. Vectorized code, no input validation in objective function
-vectorized2 <- anticlust:::variance_objective_
+## 3. Vectorized code, local update on cluster centers
 
 start <- Sys.time()
-cluster_solutions[, 3] <- anticlustering(
+cluster_solutions[, "local-update"] <- fast_anticlustering(
   data,
-  K = clusters,
-  objective = vectorized2
+  K = clusters
 )
-times[3] <- difftime(Sys.time(), start, units = "secs")
+times["local-update"] <- get_seconds(start, Sys.time())
 
 
-## 4. Vectorized code, local update on cluster centers
-
+## 4. C implementation
 start <- Sys.time()
-cluster_solutions[, 4] <- anticlustering(
+cluster_solutions[, "C"] <- anticlustering(
   data,
   K = clusters,
   objective = "variance"
 )
-times[4] <- difftime(Sys.time(), start, units = "secs")
-
-
-## 5. C implementation
-start <- Sys.time()
-cluster_solutions[, 5] <- fanticlust(data, clusters)
-times[5] <- difftime(Sys.time(), start, units = "secs")
+times["C"] <- get_seconds(start, Sys.time())
 
 # Sekunden pro Methode:
 round(times, 2)

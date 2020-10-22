@@ -1,0 +1,165 @@
+---
+title: "Speeding up the `R` package anticlust"
+date: April 19, 2020
+author: Martin Papenberg
+output:
+  html_document:
+    df_print: kable
+---
+
+```{r, include = FALSE}
+
+library(knitr)
+library(dplyr)
+knitr::opts_chunk$set(warning = FALSE) # echo = FALSE
+options(scipen = 999, digits = 2)
+
+knit_print.matrix = function(x, ...) {
+    res = paste(c("", "", kable(x)), collapse = "\n")
+    asis_output(res)
+}
+registerS3method("knit_print", "matrix", knit_print.matrix)
+
+library(anticlust)
+
+```
+
+In this post I explore how (across the time span of 1,5 years) I sped up the 
+`anticlustering()` function in my package R package 
+[`anticlust`](https://github.com/m-Py/anticlust). Depending the size of the 
+input data and your computer, the code is now somewhere between the order 
+of 50 or several 1000 times as fast, as teased by the following 
+output:
+
+```{r, eval = FALSE}
+round(times / times["C"], 2)
+#> non-vectorized     vectorized   local-update              C 
+#>          62.34          45.66           4.14           1.00 
+
+round(times / times["C"], 2)
+#> non-vectorized     vectorized   local-update              C 
+#>        1295.13         402.65          22.76           1.00 
+
+round(times / times["C"], 2)
+#> non-vectorized     vectorized   local-update              C 
+#>        6615.63        1612.33         100.17           1.00 
+```
+
+### Background
+
+Anticlustering is the lesser known twin brother of cluster analysis. While 
+cluster analysis seeks groups of things that are different and that usually 
+occur somewhere in the real world, anticlustering artificially divides a set of 
+things into groups that are as similar as possible. 
+
+The following code generates two plots that illustrate the difference between 
+cluster analysis and anticlustering using the classical data set of iris plants. 
+
+```{r}
+# Load data
+data(iris)
+cluster_data <- iris[, 1:2]
+
+# K-means clustering
+clusters <- kmeans(cluster_data, 3)$cluster
+
+# K-means anticlustering (i.e., objective = "variance")
+anticlusters <- anticlustering(
+  cluster_data,
+  K = 3,
+  objective = "variance"
+)
+
+# Plot the data while visualizing the different clusters
+par(mfrow = c(1, 2))
+plot_clusters(
+  cluster_data,
+  clusters,
+  main = "Cluster analysis (k-means)",
+  illustrate_variance = TRUE,
+  show_axes = TRUE,
+  frame.plot = FALSE
+)
+plot_clusters(
+  cluster_data,
+  anticlusters,
+  main = "K-means anticlustering",
+  illustrate_variance = TRUE,
+  show_axes = TRUE,
+  frame.plot = FALSE
+)
+```
+
+In the left panel, the popular k-means clustering method (performed using the 
+function `stats::kmeans()`) was used to divide the `iris` data set into 3 
+clusters; in the right panel, k-means anticlustering (performed using the 
+function `anticlust::anticlustering()`) was used to divide the data set into 3 
+»anticlusters«. As we can see, k-means clustering built three well-separated 
+groups; anticlustering on the other hand led to a substantial overlap between 
+the three groups it created. This is because anticlustering is supposed to make 
+groups that are as similar as possible. The triangular symbols represent the 
+cluster centers; they are the basis of the k-means objective function and are 
+discussed in detail the following section.
+
+### The k-means objective function
+
+In general, clustering (or anticlustering) works by assigning elements to groups 
+in such a way that a mathematical function is either maximized or minimized. To 
+understand how the speedup of the `anticlustering()` function was achieved, we 
+have to understand a little bit about the objective function that has to be 
+computed. That is because the majority of the time spent in this function is 
+actually concerned with recomputing this objective again and again. 
+
+Clustering objective functions usually represent how similar the elements within 
+a group are, or how dissimilar the elements from the different clusters are. In 
+the case of k-means, the objective function simultaneously represents both 
+within-group homogeneity and between-group heterogeneity. In particular, the 
+k-means objective is given by the sum of the squared Euclidean distances between 
+each data point and its cluster center. 
+
+The plot illustrates the k-means objective function. The triangular symbols 
+represent the the cluster centers; each plant is connected through a line with 
+the center of the cluster it belongs to. The k-means objective is computed by 
+summing the distance values associated with each of these lines, the squared 
+Euclidean distances between cluster centers and data points.
+
+When minimizing the k-means objective, the data points within a cluster tend to 
+be very similar and the distance to the center is low. Moreover, the cluster 
+centers tend to be far away from each other. When maximizing the k-means 
+objective, the data points within a cluster become dissimilar and the distance 
+to the center is higher. Moreover, the cluster centers tend to be very close to 
+each other. In this case, they even completely overlay each other.
+
+### Computing the objective
+
+As I said, in anticlustering, computing the k-means objective function again and 
+again is an important part of the process of finding a partitioning that 
+maximizes the objective. 
+
+---
+
+- Clever vectorization to compute many Euclidean distances "at the same time" 
+(using a Base R function I accidentally found in a paper)
+- Avoiding unnecessary repetitions of code (no input validation in each exchange 
+iteration)
+- Employing a local update rather than re-evaluating the objective function 
+entirely for each exchange
+- Rewriting it in C
+
+Note that all of these steps did not change the asymptotic run time of the 
+algorithm; the algorithm was the same all along. In R, I early implemented 
+other speed optimization schemes that changed the algorithm's behaviour by 
+employing fewer exchanges, which did not impair the solution quality by a lot.
+
+In total, this took about 1,5 years to get to the current point
+Takehome message: Writing fast code in R is really hard, and some things can 
+hardly be sped up. E.g., it is not really possible to avoid repeated memory 
+allocations across optimization iterations. In C, you have more control about 
+this process. 
+
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;

@@ -4,7 +4,7 @@
 # in the `anticlust` package. `variance_objective_slow` can then be passed
 # to the `objective` argument in the `anticlustering()` function.
 
-variance_objective_slow <- function(clusters, data) {
+variance_objective_slow <- function(data, clusters) {
   ## 1. Compute cluster centers
   centers <- cluster_centers(data, clusters)
   ## 2. For each item, compute distance to each cluster center
