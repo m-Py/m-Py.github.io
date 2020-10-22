@@ -10,29 +10,33 @@ href="https://www.r-project.org/" target="_blank">R</a>-related stuff.
 
 [About me](../about/index.html).
 
-### Posts:
-- <a href="31_Data-Science-CL.html">2020/10: Learning about data handling on the command line
-- <a href="30_R-from-source.html">2020/06: Installing `R` devel from source on 64-Bit Ubuntu & checking a package
-- <a href="29-NSE.html">2020/05: Is the selection of columns via `$` non-standard evaluation?
-- <a href="28-columns-matrices.html">2020/05: Selecting columns from matrices and data frames in `R`
-- <a href="26_cluster-plot.html">2020/03: Visualizing a cluster analysis in Base `R`
-- <a href="25_ifelse.html">2020/01: Ifelse logic in base `R` and `dplyr`
-- <a href="24_germanRmd.html">2020/01: A better option for German language support in R Markdown
-- <a href="23_pdftk.html">2019/12: Some useful pdf manipulations using pdftk
-- <a href="22_permut-tests.html">2019/12: Number of permutations in permutation tests
-- <a href="21_nsmallest.html">2019/12: Find the $n$ smallest or largest elements in `R`
-- <a href="19-columns.html">2019/11: Selecting columns from data frames in `R`
-- <a href="17_why-program.html">2019/11: Another reason to learn programming as a researcher
-- <a href="16_knitr-options.html">2019/11: Useful `knitr` options
-- <a href="15_SimBFpack.html">2019/11: Comparing the Bartlett-Mulder and Levene-Anderson Bayes factors
-- <a href="14_BFpack.html">2019/11: `BFpack`: A new `R` package to compute Bayes factors
-- <a href="13_varBF_Simulation.html">2019/11: Evaluating a Bayes factor for the comparison of dependent variances
-- <a href="12_BF_Dependent_SD.html">2019/11: Bayes factors for the comparison of variances
-- <a href="10_AlwaysKable.html">2019/11: How to always use kable for data frame output
-- <a href="09_GitNotes.html">2019/11: Some notes on git
-- <a href="08_SpellChecking.html">2019/11: German dictionaries for Ubuntu
-- <a href="07_SettingUpKate.html">2019/11: Setting up R Markdown on Kubuntu
-- <a href="06_BFSize.html">2017/12: What Bayes factor should you expect?
+### Posts
+
+- <a href="29-NSE.html">2020/05: Is the selection of columns via `$` non-standard evaluation?</a>
+- <a href="28-columns-matrices.html">2020/05: Selecting columns from matrices and data frames in `R`</a>
+- <a href="26_cluster-plot.html">2020/03: Visualizing a cluster analysis in Base `R`</a>
+- <a href="19-columns.html">2019/11: Selecting columns from data frames in `R`</a>
+- <a href="22_permut-tests.html">2019/12: Number of permutations in permutation tests</a>
+- <a href="17_why-program.html">2019/11: Another reason to learn programming as a researcher</a>
+- <a href="15_SimBFpack.html">2019/11: Comparing the Bartlett-Mulder and Levene-Anderson Bayes factors</a>
+- <a href="14_BFpack.html">2019/11: `BFpack`: A new `R` package to compute Bayes factors</a>
+- <a href="13_varBF_Simulation.html">2019/11: Evaluating a Bayes factor for the comparison of dependent variances</a>
+- <a href="12_BF_Dependent_SD.html">2019/11: Bayes factors for the comparison of variances</a>
+- <a href="06_BFSize.html">2017/12: What Bayes factor should you expect?</a>
+
+### Short notes
+
+- <a href="31_Data-Science-CL.html">2020/10: Learning about data handling on the command line</a>
+- <a href="30_R-from-source.html">2020/06: Installing `R` devel from source on 64-Bit Ubuntu & checking a package</a>
+- <a href="25_ifelse.html">2020/01: Ifelse logic in base `R` and `dplyr`</a>
+- <a href="24_germanRmd.html">2020/01: A better option for German language support in R Markdown</a>
+- <a href="23_pdftk.html">2019/12: Some useful pdf manipulations using `pdftk`</a>
+- <a href="21_nsmallest.html">2019/12: Find the $n$ smallest or largest elements in `R`</a>
+- <a href="16_knitr-options.html">2019/11: Useful `knitr` options</a>
+- <a href="10_AlwaysKable.html">2019/11: How to always use kable for data frame output</a>
+- <a href="09_GitNotes.html">2019/11: Some notes on git</a>
+- <a href="08_SpellChecking.html">2019/11: German dictionaries for Ubuntu</a>
+- <a href="07_SettingUpKate.html">2019/11: Setting up R Markdown on Kubuntu</a>
 - <a href="05_setUpRMDemacs.html">2017/12: Setting up emacs for R Markdown on Ubuntu</a>
 - <a href="04_framebreaks.html">2016/11: Use {.allowframebreaks} to show the complete reference list in R Markdown Beamer slides</a>
 - <a href="03_positionbeamer.html">2016/09: Positioning content at the top of a R Markdown Beamer slide</a>
