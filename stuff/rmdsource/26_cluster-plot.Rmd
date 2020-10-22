@@ -24,7 +24,7 @@ registerS3method("knit_print", "matrix", knit_print.matrix)
 
 This post shows how Base `R` can be used to visualize a cluster analysis 
 in such a way that all clusters can be well distinguished. I use the 
-`iris` data set.
+classical `iris` data set.
 
 ```{r}
 
@@ -60,7 +60,7 @@ clustering vector `x` has any other form (e.g., is of type `character`),
 you can convert it to such an integer vector by calling 
 `as.numeric(factor(x))`.
 
----
+### Anticlustering 
 
 As an addon, I also visualize the results of an anticlustering analysis,
 where instead of maximizing homogeneity within clusters, we maximize 
@@ -98,7 +98,10 @@ plot(
 
 ```
 
-As we can see, anticlustering is a lot more messy than clustering. 
+As we can see, anticlustering is a lot more messy than clustering. All 6 
+groups overlap to a large degree. This is what anticlustering does: the groups 
+should be similar to each other, as opposed to cluster analysis that seeks 
+groups that are dissimilar from each other.
 
 ---
 
