@@ -15,8 +15,8 @@ href="https://www.r-project.org/" target="_blank">R</a>-related stuff.
 - <a href="29-NSE.html">2020/05: Is the selection of columns via `$` non-standard evaluation?</a>
 - <a href="28-columns-matrices.html">2020/05: Selecting columns from matrices and data frames in `R`</a>
 - <a href="26_cluster-plot.html">2020/03: Visualizing a cluster analysis in Base `R`</a>
-- <a href="19-columns.html">2019/11: Selecting columns from data frames in `R`</a>
 - <a href="22_permut-tests.html">2019/12: Number of permutations in permutation tests</a>
+- <a href="19-columns.html">2019/11: Selecting columns from data frames in `R`</a>
 - <a href="17_why-program.html">2019/11: Another reason to learn programming as a researcher</a>
 - <a href="15_SimBFpack.html">2019/11: Comparing the Bartlett-Mulder and Levene-Anderson Bayes factors</a>
 - <a href="14_BFpack.html">2019/11: `BFpack`: A new `R` package to compute Bayes factors</a>
