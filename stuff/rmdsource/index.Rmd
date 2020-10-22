@@ -4,9 +4,9 @@ author: "by Martin Papenberg"
 ---
 
 Here I share some thoughts and write up things that interest me. It is 
-usually about statistics, <a href="http://rmarkdown.rstudio.com/" 
+usually about data analysis, <a href="http://rmarkdown.rstudio.com/" 
 target="_blank"> R Markdown </a>or other <a 
-href="https://www.r-project.org/" target="_blank">R</a>-related stuff. 
+href="https://www.r-project.org/" target="_blank">R</a>-related stuff.
 
 [About me](../about/index.html).
 
