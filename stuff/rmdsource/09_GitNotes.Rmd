@@ -107,6 +107,24 @@ $ git merge branch -X theirs
 
 See [here](https://stackoverflow.com/questions/13594344/force-git-to-always-choose-the-newer-version-during-a-merge)
 
+### Removing untracked files 
+
+Show the untracked files that would be removed:
+
+```
+$ git clean -d -n 
+```
+
+The `-n` option shows the to-be-removed files.
+
+Then, delete all untracked files:
+
+```
+$ git clean -d -f
+```
+
+The `-f` option is usually needed to force the action. 
+
 ### Undo the most recent commit
 
 This command undoes the most recent commit but keeps the changes (that

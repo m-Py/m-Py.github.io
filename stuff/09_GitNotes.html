@@ -417,6 +417,15 @@ $ git stash pop</code></pre>
 <pre><code>$ git merge branch -X theirs</code></pre>
 <p>See <a href="https://stackoverflow.com/questions/13594344/force-git-to-always-choose-the-newer-version-during-a-merge">here</a></p>
 </div>
+<div id="removing-untracked-files" class="section level3">
+<h3>Removing untracked files</h3>
+<p>Show the untracked files that would be removed:</p>
+<pre><code>$ git clean -d -n </code></pre>
+<p>The <code>-n</code> option shows the to-be-removed files.</p>
+<p>Then, delete all untracked files:</p>
+<pre><code>$ git clean -d -f</code></pre>
+<p>The <code>-f</code> option is usually needed to force the action.</p>
+</div>
 <div id="undo-the-most-recent-commit" class="section level3">
 <h3>Undo the most recent commit</h3>
 <p>This command undoes the most recent commit but keeps the changes (that are unstaged then):</p>
@@ -474,7 +483,7 @@ git clean -f -d # remove all untracked files / directories</code></pre>
 <pre><code>git checkout master
 git branch -d tmpbranch</code></pre>
 <hr />
-<p>Last updated: 2020-10-06</p>
+<p>Last updated: 2020-10-22</p>
 </div>
 <div id="back-to-the-front-page" class="section level3">
 <h3><a href="index.html">Back to the front page</a></h3>
