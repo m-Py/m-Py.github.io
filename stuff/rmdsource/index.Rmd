@@ -11,6 +11,7 @@ href="https://www.r-project.org/" target="_blank">R</a>-related stuff.
 [About me](../about/index.html).
 
 ### Posts:
+- <a href="31_Data-Science-CL.html">2020/10: Learning about data handling on the command line
 - <a href="30_R-from-source.html">2020/06: Installing `R` devel from source on 64-Bit Ubuntu & checking a package
 - <a href="29-NSE.html">2020/05: Is the selection of columns via `$` non-standard evaluation?
 - <a href="28-columns-matrices.html">2020/05: Selecting columns from matrices and data frames in `R`

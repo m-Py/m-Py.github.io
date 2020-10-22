@@ -1,0 +1,51 @@
+---
+title: "Learning about data handling on the command line"
+date: October 22, 2020
+author: Martin Papenberg
+---
+
+```{r, include = FALSE}
+
+library(knitr)
+knitr::opts_chunk$set(message=FALSE, warning = FALSE) # echo = FALSE
+options(scipen = 999, digits = 2)
+
+```
+
+### Links to open materials
+
+- [Five Command Line Tools for Data Science](https://towardsdatascience.com/five-command-line-tools-for-data-science-29f04e5b9c16)
+- [Data science at the command line](https://www.datascienceatthecommandline.com/1e/)
+  * The [2nd edition](https://www.datascienceatthecommandline.com/1e/) is being 
+  developed, which seems to include promising updates once it is finished
+- [An AWK primer](https://en.wikibooks.org/wiki/An_Awk_Primer/Awk_Command-Line_Examples)
+- [Introduction to grep and regular expressions](https://linuxconfig.org/introduction-to-grep-and-regular-expressions)
+
+
+### Tools
+
+- [grep](https://informatics.fas.harvard.edu/short-introduction-to-grep.html): Pattern matching (in files)
+- [xsv](https://github.com/BurntSushi/xsv): Working with (large) csv files on the command line
+- [sed](https://www.howtogeek.com/666395/how-to-use-the-sed-command-on-linux/): Also string finding
+
+### Useful commands
+
+- Count the number of *Rmd files in directory
+
+```
+$ ls | grep Rmd | wc -l
+```
+
+- Remove all files of type *html in directory 
+
+```
+$ find . -name "*.html" -type f | xargs rm -f
+```
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
