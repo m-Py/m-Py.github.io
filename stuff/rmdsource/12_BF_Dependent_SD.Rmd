@@ -34,8 +34,8 @@ dependent variable being the absolute value of the difference between a
 score and the mean of the group to which the score belongs [...]." Thus, 
 the Levene test is an ANOVA, and there are known methods to compute 
 Bayes factors for ANOVA designs. Because I think this functionality is 
-needed, I implemented it in `R`. You can install my small package 
-`varBF` as follows: 
+needed, I implemented it in `R`. You can install [my small package 
+`varBF`](https://github.com/m-Py/varBF) as follows: 
 
 ```{r, eval = FALSE}
 # if the package `remotes` is not available, type:
@@ -210,6 +210,12 @@ really not that much) for the two functions `depvarBF()` and
 [here](https://github.com/m-Py/varBF/blob/master/R/depvarBF.R) and 
 [here](https://github.com/m-Py/varBF/blob/master/R/indepvarBF.R).
 
+*Update*: As discussed in my [later](14_BFpack.html) [posts](15_SimBFpack.html), 
+there is now the [`R` package 
+`BFpack`](https://CRAN.R-project.org/package=BFpack ) that enables the 
+computation of Bayes factors for the comparison of independent variances. As far 
+as I know, however, an option for dependent variances is still lacking.
+
 ## References
 
 Morey, R. D., & Rouder, J. N. (2015). BayesFactor: Computation of Bayes 
@@ -248,9 +254,10 @@ and Province (2012) and the `R` help page for the `BayesFactor` function
 option `"medium"`, which can however be adjusted using the argument 
 `rscale`.
 
-[^4]: To evaluate the method, I think of preparing a more systematic 
-simulation assessing the performance under varying circumstances (such 
-as sample size, effect size, different distributions etc).
+[^4]: To evaluate the method, a more systematic simulation assessing the 
+performance under varying circumstances (such as sample size, effect size, 
+different distributions etc) is needed. I conducted two such simulations 
+[here](13_varBF_Simulation.html) and [here](15_SimBFpack.html).
 
 [^5]: In this case, I thought of the approach myself, but the 
 ["Schöpfunghöhe"](https://www.dict.cc/?s=Sch%C3%B6pfungsh%C3%B6he) of 

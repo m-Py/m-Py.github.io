@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -338,6 +337,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -380,7 +380,7 @@ summary {
 <div id="independent-variances" class="section level2">
 <h2>Independent variances</h2>
 <p>The Levene test is a well-known test to compare several variances because it is commonly used to test the assumption of “homogeneity” in variances before conducting an ANOVA. However, the logic of significance tests forbids that the output of the test can be interpreted as evidence of variance equality; we may only conclude the absence of variance homogeneity if the <em>p</em> value is small. Wouldn’t it be nice to actually have a test that can yield direct evidence in favor of variance homogeneity. This is what a Bayes factor can do.</p>
-<p>Apparently, the output of a Levene test can conveniently be converted to a Bayes factor.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> <a href="https://en.wikipedia.org/wiki/Levene%27s_test">According to Wikipedia</a>, the “Levene test is equivalent to a 1-way between-groups […] (ANOVA) with the dependent variable being the absolute value of the difference between a score and the mean of the group to which the score belongs […].” Thus, the Levene test is an ANOVA, and there are known methods to compute Bayes factors for ANOVA designs. Because I think this functionality is needed, I implemented it in <code>R</code>. You can install my small package <code>varBF</code> as follows:</p>
+<p>Apparently, the output of a Levene test can conveniently be converted to a Bayes factor.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> <a href="https://en.wikipedia.org/wiki/Levene%27s_test">According to Wikipedia</a>, the “Levene test is equivalent to a 1-way between-groups […] (ANOVA) with the dependent variable being the absolute value of the difference between a score and the mean of the group to which the score belongs […].” Thus, the Levene test is an ANOVA, and there are known methods to compute Bayes factors for ANOVA designs. Because I think this functionality is needed, I implemented it in <code>R</code>. You can install <a href="https://github.com/m-Py/varBF">my small package <code>varBF</code></a> as follows:</p>
 <pre class="r"><code># if the package `remotes` is not available, type:
 # install.packages(&quot;remotes&quot;)
 remotes::install_github(&quot;m-Py/varBF&quot;)</code></pre>
@@ -391,27 +391,27 @@ remotes::install_github(&quot;m-Py/varBF&quot;)</code></pre>
 group1 &lt;- rnorm(1000, mean = 100, sd = 15)
 group2 &lt;- rnorm(1000, mean = 100, sd = 15)
 sd(group1)</code></pre>
-<pre><code>## [1] 15.03278</code></pre>
+<pre><code>## [1] 15.61635</code></pre>
 <pre class="r"><code>sd(group2)</code></pre>
-<pre><code>## [1] 15.19047</code></pre>
+<pre><code>## [1] 14.82636</code></pre>
 <p>Here, the true variances (i.e., standard deviations) are the same, and the standard deviations observed in the two samples are also quite similar to each other. Let’s test if we also obtain convincing statistical evidence favoring the null hypothesis by computing a Bayes factor:</p>
 <pre class="r"><code>library(varBF)
 indepvarBF(group1, group2)</code></pre>
-<pre><code>## [1] 0.05035018</code></pre>
+<pre><code>## [1] 0.07301679</code></pre>
 <p>The result is the Bayes factor <span class="math inline">\(BF_{10}\)</span>. That is, the probability of the data (i.e., the dissimilarity of the variances) under an alternative hypothesis—assuming there is a difference—as compared to the probability of the data under the null hypothesis of equal variances.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> To assess the degree to which the data favor the null hypothesis, we compute the inverse Bayes factor <span class="math inline">\(BF_{01}\)</span> as follows:</p>
 <pre class="r"><code>1 / indepvarBF(group1, group2)</code></pre>
-<pre><code>## [1] 19.8609</code></pre>
-<p>Ergo, the data favors the null hypothesis by a factor of approximately 20 as compared to the alternative hypothesis. The data yield evidence that the variances are equal; the classical Levene test could not have given this output.</p>
+<pre><code>## [1] 13.69548</code></pre>
+<p>Ergo, the data favors the null hypothesis by a factor of approximately 14 as compared to the alternative hypothesis. The data yield evidence that the variances are equal; the classical Levene test could not have given this output.</p>
 <p>Next, let’s check out an example of how the function behaves when the true variances are different:<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
 <pre class="r"><code>group1 &lt;- rnorm(200, mean = 100, sd = 15)
 group2 &lt;- rnorm(200, mean = 100, sd = 20)
 sd(group1)</code></pre>
-<pre><code>## [1] 14.29685</code></pre>
+<pre><code>## [1] 15.06566</code></pre>
 <pre class="r"><code>sd(group2)</code></pre>
-<pre><code>## [1] 19.46575</code></pre>
+<pre><code>## [1] 21.60039</code></pre>
 <pre class="r"><code>indepvarBF(group1, group2)</code></pre>
-<pre><code>## [1] 96.74348</code></pre>
-<p>Here, the true standard deviations are 15 and 20, and I generated 200 data points from each distribution. The Bayes factor <span class="math inline">\(BF_{10}\)</span> favoring the alternative hypothesis is approximately 97. Note that the Bayes factor may vary considerably when repeating the process.</p>
+<pre><code>## [1] 2351.344</code></pre>
+<p>Here, the true standard deviations are 15 and 20, and I generated 200 data points from each distribution. The Bayes factor <span class="math inline">\(BF_{10}\)</span> favoring the alternative hypothesis is approximately 2351. Note that the Bayes factor may vary considerably when repeating the process.</p>
 <p>I found this approach to testing the equality in variances interesting and useful. There is (at least) one catch, however, as the conversion from <em>F</em> value to Bayes factor is only expected to work safely for balanced designs having the same group size for each sample, according to the <code>BayesFactor</code> documentation.</p>
 </div>
 <div id="dependent-variances" class="section level2">
@@ -447,11 +447,11 @@ paired_data &lt;- function(n, m1, m2, sd1, sd2, r) {
 )
 # check out the observed correlation (true correlation is .3)
 cor(pairs[, 1], pairs[, 2])</code></pre>
-<pre><code>## [1] 0.3850809</code></pre>
+<pre><code>## [1] 0.3537796</code></pre>
 <pre class="r"><code># check out the Bayes factor: 
 depvarBF(pairs[, 1], pairs[, 2])</code></pre>
-<pre><code>## [1] 3155.235</code></pre>
-<p>The data favors the alternative hypothesis by a factor of approximately 3155 as compared to the null hypothesis. Let’s repeat the procedure, but this time we assume that the true variances are equal; we then check out the inverse Bayes factor <span class="math inline">\(BF_{01}\)</span>:</p>
+<pre><code>## [1] 49.74107</code></pre>
+<p>The data favors the alternative hypothesis by a factor of approximately 50 as compared to the null hypothesis. Let’s repeat the procedure, but this time we assume that the true variances are equal; we then check out the inverse Bayes factor <span class="math inline">\(BF_{01}\)</span>:</p>
 <pre class="r"><code>pairs &lt;- paired_data(
   n = 200, 
   m1 = 100, 
@@ -461,12 +461,13 @@ depvarBF(pairs[, 1], pairs[, 2])</code></pre>
   r = 0.3
 )
 1 / depvarBF(pairs[, 1], pairs[, 2])</code></pre>
-<pre><code>## [1] 4.958562</code></pre>
-<p>The data favors the null hypothesis by a factor of approximately 5 as compared to the alternative hypothesis. It is often more difficult to obtain evidence in favor of a null hypothesis.</p>
+<pre><code>## [1] 4.046134</code></pre>
+<p>The data favors the null hypothesis by a factor of approximately 4 as compared to the alternative hypothesis. It is often more difficult to obtain evidence in favor of a null hypothesis.</p>
 </div>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
 <p>I believe that there is a need for Bayes factors comparing variances, but so far no accessible solution seems to exist. I discussed two “non-standard” Bayes factors for the comparison of variances. As I am not an expert in coming up with Bayes factors, this approach should be assessed by other people before we all start using it. The code (it is really not that much) for the two functions <code>depvarBF()</code> and <code>indepvarBF()</code> is available from <a href="https://github.com/m-Py/varBF/blob/master/R/depvarBF.R">here</a> and <a href="https://github.com/m-Py/varBF/blob/master/R/indepvarBF.R">here</a>.</p>
+<p><em>Update</em>: As discussed in my <a href="14_BFpack.html">later</a> <a href="15_SimBFpack.html">posts</a>, there is now the <a href="https://CRAN.R-project.org/package=BFpack"><code>R</code> package <code>BFpack</code></a> that enables the computation of Bayes factors for the comparison of independent variances. As far as I know, however, an option for dependent variances is still lacking.</p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
@@ -474,7 +475,7 @@ depvarBF(pairs[, 1], pairs[, 2])</code></pre>
 <p>Rouder, J. N., Morey, R. D., Speckman, P. L., Province, J. M., (2012) Default Bayes Factors for ANOVA Designs. <em>Journal of Mathematical Psychology. 56</em>, 356–374.</p>
 <p>Wilcox, R. (2015). Comparing the variances of two dependent variables. <em>Journal of Statistical Distributions and Applications, 2</em>, 1–8.</p>
 <hr />
-<p>Last updated: 2019-11-26</p>
+<p>Last updated: 2020-10-22</p>
 <div id="back-to-the-front-page" class="section level3">
 <h3><a href="index.html">Back to the front page</a></h3>
 <p> </p>
@@ -486,7 +487,7 @@ depvarBF(pairs[, 1], pairs[, 2])</code></pre>
 <li id="fn1"><p>According to <a href="https://ejwagenmakers.com/papers.html">E.J. Wagenmakers</a> who commented <a href="http://forum.cogsci.nl/discussion/2115/f-test-of-equality-of-variances">here</a>, earlier this year, the Bayesian flagship software JASP does not yet have an option for testing the equality of variances, but apparently their group is on it.<a href="#fnref1" class="footnote-back">↩</a></p></li>
 <li id="fn2"><p>I did come up with this myself, but I stole the idea from <a href="http://forum.cogsci.nl/discussion/2115/f-test-of-equality-of-variances">this forum thread</a><a href="#fnref2" class="footnote-back">↩</a></p></li>
 <li id="fn3"><p>Note that I do not talk about the nature of the competing alternative hypothesis that is being used. See Rouder, Morey, Speckman and Province (2012) and the <code>R</code> help page for the <code>BayesFactor</code> function <code>anovaBF()</code> for more information. My function uses the default prior option <code>&quot;medium&quot;</code>, which can however be adjusted using the argument <code>rscale</code>.<a href="#fnref3" class="footnote-back">↩</a></p></li>
-<li id="fn4"><p>To evaluate the method, I think of preparing a more systematic simulation assessing the performance under varying circumstances (such as sample size, effect size, different distributions etc).<a href="#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>To evaluate the method, a more systematic simulation assessing the performance under varying circumstances (such as sample size, effect size, different distributions etc) is needed. I conducted two such simulations <a href="13_varBF_Simulation.html">here</a> and <a href="15_SimBFpack.html">here</a>.<a href="#fnref4" class="footnote-back">↩</a></p></li>
 <li id="fn5"><p>In this case, I thought of the approach myself, but the <a href="https://www.dict.cc/?s=Sch%C3%B6pfungsh%C3%B6he">“Schöpfunghöhe”</a> of the idea is not that great, I guess.<a href="#fnref5" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
