@@ -13,13 +13,6 @@ library(knitr)
 library(dplyr)
 knitr::opts_chunk$set(warning = FALSE) # echo = FALSE
 options(scipen = 999, digits = 2)
-
-knit_print.matrix = function(x, ...) {
-    res = paste(c("", "", kable(x)), collapse = "\n")
-    asis_output(res)
-}
-registerS3method("knit_print", "matrix", knit_print.matrix)
-
 library(anticlust)
 
 ```
@@ -48,9 +41,10 @@ round(times / times["C"], 2)
 ### Background
 
 Anticlustering is the lesser known twin brother of cluster analysis. While 
-cluster analysis seeks groups of things that are different and that usually 
-occur somewhere in the real world, anticlustering artificially divides a set of 
-things into groups that are as similar as possible. 
+cluster analysis seeks groups of things that usually occur somewhere in the real 
+world and can be well separated according to the characteristics (e.g., 
+species), anticlustering artificially divides a set of things into groups that 
+are as similar as possible. 
 
 The following code generates two plots that illustrate the difference between 
 cluster analysis and anticlustering using the classical data set of iris plants. 
@@ -91,50 +85,113 @@ plot_clusters(
 ```
 
 In the left panel, the popular k-means clustering method (performed using the 
-function `stats::kmeans()`) was used to divide the `iris` data set into 3 
-clusters; in the right panel, k-means anticlustering (performed using the 
+function `stats::kmeans()`) was used to divide the iris plants data set into 3 
+clusters. As we can see, theses clusters of plants are well separated based on 
+the variables sepal length and sepal width, describing the magnitude of their 
+blossoms. In the right panel, k-means anticlustering (performed using the 
 function `anticlust::anticlustering()`) was used to divide the data set into 3 
-»anticlusters«. As we can see, k-means clustering built three well-separated 
-groups; anticlustering on the other hand led to a substantial overlap between 
-the three groups it created. This is because anticlustering is supposed to make 
-groups that are as similar as possible. The triangular symbols represent the 
-cluster centers; they are the basis of the k-means objective function and are 
-discussed in detail the following section.
+»anticlusters«. As we can see, anticlustering has led to a substantial overlap 
+of the three groups it created. This is the intended behaviour: anticlustering 
+creates groups that should be similar according to some numeric criteria, in 
+this case according to the length and width of the sepals.
 
-### The k-means objective function
+## The k-means objective function
 
-In general, clustering (or anticlustering) works by assigning elements to groups 
-in such a way that a mathematical function is either maximized or minimized. To 
-understand how the speedup of the `anticlustering()` function was achieved, we 
-have to understand a little bit about the objective function that has to be 
-computed. That is because the majority of the time spent in this function is 
-actually concerned with recomputing this objective again and again. 
+Generally, clustering (or anticlustering) works by assigning elements to groups 
+in such a way that a mathematical objective function is either minimized or 
+maximized. Clustering objective functions usually represent how similar the 
+elements within a group are, or how dissimilar the elements from the different 
+clusters are. In the case of k-means, the objective function simultaneously 
+represents both within-group homogeneity and between-group heterogeneity. 
 
-Clustering objective functions usually represent how similar the elements within 
-a group are, or how dissimilar the elements from the different clusters are. In 
-the case of k-means, the objective function simultaneously represents both 
-within-group homogeneity and between-group heterogeneity. In particular, the 
-k-means objective is given by the sum of the squared Euclidean distances between 
-each data point and its cluster center. 
-
-The plot illustrates the k-means objective function. The triangular symbols 
-represent the the cluster centers; each plant is connected through a line with 
-the center of the cluster it belongs to. The k-means objective is computed by 
-summing the distance values associated with each of these lines, the squared 
-Euclidean distances between cluster centers and data points.
+The k-means objective is computed by summing the squared Euclidean distances 
+data points and cluster centers. In the plots above, the triangular symbols 
+represent the cluster centers, i.e., the average values of the variables sepal 
+length and sepal width for each group. A naive visual approach would be to 
+measure each line connecting elements with their cluster center, and sum up the 
+squared lengths of all lines. With clustering, the objective functions has a low 
+value; the lines connecting elements and cluster centers should be as short as 
+possible. With anticlustering, the objective functions has a short value; the 
+lines connecting elements and cluster centers should be as short as possible.
 
 When minimizing the k-means objective, the data points within a cluster tend to 
 be very similar and the distance to the center is low. Moreover, the cluster 
 centers tend to be far away from each other. When maximizing the k-means 
 objective, the data points within a cluster become dissimilar and the distance 
 to the center is higher. Moreover, the cluster centers tend to be very close to 
-each other. In this case, they even completely overlay each other.
+each other. Visually, they are even completely overlapping in the above plot.
 
-### Computing the objective
+### Computing the objective 
 
-As I said, in anticlustering, computing the k-means objective function again and 
-again is an important part of the process of finding a partitioning that 
-maximizes the objective. 
+Maximizing or minimizing a clustering objective means to find a cluster 
+partitioning---that is, an assignment of the elements to groups---in such a way 
+that the objective is low (for clustering) or high (for anticlustering). 
+Therefore, we usually need to try out different partitionings, compute the 
+objective for each partitioning, and then select the partitioning with the best 
+objective. In anticlustering in particular, computing the k-means objective 
+function many times is an important part of the process of finding a 
+partitioning that maximizes the objective. Hence, speeding up the process of 
+computing the objective has been a major part in speed-optimizing the 
+`anticlustering()` function. Note that the standard k-means *clustering* 
+algorithm usually requires fewer computations of the objective.
+
+The two steps in determining the k-means objective are:
+
+- computing the cluster centers, i.e., the average values of the input 
+variables for each cluster
+- computing the squared Euclidean distances between each data point and its 
+cluster center
+
+In the following, I describe how I initially implemented these steps and then 
+proceed to explain how the computation could be sped up enormously.
+
+### Computing the cluster centers
+
+A cluster center is conceptually is very simple thing. It is just a vector of 
+averages. In `R`, this means we have to compute the average for each of the 
+variables that are used in the clustering process. As the variables are usually 
+available as a data frame or matrix, the function `colMeans()` can be used, e.g.:
+
+```{r}
+colMeans(iris[, 1:2])
+```
+
+However, this average needs to be computed per cluster. Usually a vector is used 
+that contains clustering informations for each element. To repeat the 
+computation of `colMeans()` for each different cluster described in this vector, 
+we for example use the function `by()`. To illustrate, we may compute the group 
+averages of sepal length and width by iris species: 
+
+```{r}
+by(iris[, 1:2], iris$Species, colMeans)
+```
+
+Usually, the cluster centers are represented as a matrix, so the `list` that 
+`by()` returns may be converted to matrix via:
+
+```{r}
+do.call(rbind, by(iris[, 1:2], iris$Species, colMeans))
+```
+
+Here, each row represents a cluster and each column represents a variable, which 
+is also the format that `stats::kmeans()` returns for the computed cluster 
+centers.
+
+In `anticlust`, I use the following function to compute cluster centers, 
+ensuring that it always outputs the correct data format by calls to 
+`as.matrix()` and `as.list()`
+
+```{r}
+cluster_centers <- function(features, clusters) {
+  features <- as.matrix(features) #  as.matrix if `features` is a vector
+  centers <- by(features, clusters, colMeans)
+  do.call(rbind, as.list(centers)) # `as.list` if there is only one feature
+}
+```
+
+### Computing the squared Euclidean distances
+
+
 
 ---
 
