@@ -509,7 +509,7 @@ print(data)</code></pre>
   K = 3
 )</code></pre>
 <pre><code>## [1] 925166131890</code></pre>
-<p>The number of ways to divide 30 elements into three groups of 10 is 925,166,131,890 (~ 900 billion) and not over over 5.5 trillion (approx. 5.5 trillion divided by <span class="math inline">\(6\)</span>). The general formula to compute the number of ways to partition <span class="math inline">\(N\)</span> elements into <span class="math inline">\(K\)</span> equal-sized groups is given as follows (see Papenberg &amp; Klau, 2020):</p>
+<p>The number of ways to divide 30 elements into three groups of 10 is 925,166,131,890 (~ 900 billion) and not over over 5.5 trillion (approx. 5.5 trillion divided by <span class="math inline">\(6\)</span>). The equation to compute the number of ways to partition <span class="math inline">\(N\)</span> elements into <span class="math inline">\(K\)</span> equal-sized groups can be formulated as follows (see Papenberg &amp; Klau, 2020):</p>
 <p><span class="math display">\[
 P(N, K) = \frac{1}{K!} \cdot \prod\limits_{i=0}^{K - 1} \binom{N - \frac{iN}{K}}{\frac{N}{K}}
 \]</span></p>
@@ -518,7 +518,7 @@ P(N, K) = \frac{1}{K!} \cdot \prod\limits_{i=0}^{K - 1} \binom{N - \frac{iN}{K}}
 <div id="conclusions" class="section level2">
 <h2>Conclusions</h2>
 <p>In this post, I discussed the general logic of permutation tests and illustrated that exact permutation tests are usually not feasible. The main point of my post was to show how to compute the number of required iterations for an exact permutation test when experimental groups are of equal size. This number has not been presented correctly in some of the statistical literature on permutation tests.</p>
-<p>*Update on December 17, 2019: I now found out that the special case of equal sample sizes has indeed been recognized in the statistical literature (Phipson &amp; Smyth, 2010), but since it seems that the issue still has not been appreciated everywhere (e.g., Craig &amp; Fisher, 2019).</p>
+<p><em>Update</em> on December 17, 2019: I found out that the special case of equal sample sizes has indeed been recognized in the statistical literature (Phipson &amp; Smyth, 2010), but since it seems that the issue has not been appreciated everywhere since then (e.g., Craig &amp; Fisher, 2019).</p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
