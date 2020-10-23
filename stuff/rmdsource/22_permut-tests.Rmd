@@ -256,7 +256,7 @@ format(n_partitions(N = 30, K = 3), big.mark = ",")` (~ 900 billion) and
 not over over 5.5 trillion (approx. 5.5 trillion divided by $6$). The 
 general formula to compute the number of ways to partition $N$ elements 
 into $K$ equal-sized groups is given as follows (see Papenberg & Klau, 
-2019): 
+2020): 
 
 $$
 P(N, K) = \frac{1}{K!} \cdot \prod\limits_{i=0}^{K - 1} \binom{N - \frac{iN}{K}}{\frac{N}{K}}
@@ -282,10 +282,10 @@ iterations for an exact permutation test when experimental groups are of
 equal size. This number has not been presented correctly in some of the 
 statistical literature on permutation tests. 
 
-EDIT 2019-12-17: I now found out that the special case of equal sample 
-sizes has indeed been treated in the statistical literature (Phipson & 
-Smyth, 2010), but since it seems that the issue still has not been 
-considered widely (e.g., Craig & Fisher, 2019).
+*Update on December 17, 2019: I now found out that the special case of equal 
+sample sizes has indeed been recognized in the statistical literature (Phipson & 
+Smyth, 2010), but since it seems that the issue still has not been appreciated 
+everywhere (e.g., Craig & Fisher, 2019).
 
 ## References 
 
@@ -296,10 +296,9 @@ Experimental Analysis of Behavior, 111*, 309–328.
 Ernst, M. D. (2004). Permutation methods: a basis for exact inference. 
 *Statistical Science, 19*, 676-685.
 
-Papenberg, M., & Klau, G. W. (2019, October 30). Using anticlustering to 
-partition a stimulus pool into equivalent parts. 
-https://doi.org/10.31234/osf.io/3razc. Manuscript submitted for 
-publication. 
+Papenberg, M., & Klau, G. W. (2020). Using anticlustering to partition data sets 
+into equivalent parts. *Psychological Methods*. Advance Online Publication. 
+https://doi.org/10.1037/met0000301.
 
 Phipson, B., and Smyth, G. K. (2010). Permutation p-values should never 
 be zero: calculating exact p-values when permutations are randomly 
