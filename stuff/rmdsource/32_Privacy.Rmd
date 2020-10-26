@@ -1,0 +1,61 @@
+---
+title: "Taking data privacy serious again"
+date: October 22, 2020
+author: Martin Papenberg
+---
+
+```{r, include = FALSE}
+
+library(knitr)
+knitr::opts_chunk$set(message=FALSE, warning = FALSE) # echo = FALSE
+options(scipen = 999, digits = 2)
+
+```
+
+I guess there is a lot of reason to be pessimistic about the current state of 
+the internet, mostly being dominated by large corporations that trade 
+convenience and functionality for data. Let's not give up just yet, though!
+
+### Use a different browser
+
+- Apparently, [vanilla Firefox](http://unixsheikh.com/articles/choose-your-browser-carefully.html) 
+is no longer the best option for privacy. 
+- I recently started using 
+[Falkon](https://www.falkon.org/), which I have enjoyed using (and which [is 
+being maintained](https://invent.kde.org/network/falkon) by the KDE folk)
+- [Badwolf](https://hacktivis.me/projects/badwolf) looks interesting, however 
+is too hardcore minimal for my taste for now (also I did not get ad blocking running)
+
+### Adjust Firefox
+
+- [The firefox privacy guide for dummies](https://12bytes.org/articles/tech/firefox/the-firefox-privacy-guide-for-dummies/)
+- [User.js](https://github.com/arkenfox/user.js)
+
+### Alternatives to Github
+
+- [Codeberg](https://blog.codeberg.org/codebergorg-launched.html) seems to be interesting
+- Those Github stars though ... 
+- This page is currently hosted via Github ...
+
+### Alternatives to WhatsApp
+
+- Get new friends who don't use WhatsApp
+
+### Using a different social network
+
+- What about [mastodon](https://joinmastodon.org/) (similar problem to WhatsApp though)
+
+### Never use Windows
+
+- Excellent idea, but for my printer and gaming, this is not an option =(
+
+### Reading 
+
+- [Choose your browser carefully](http://unixsheikh.com/articles/choose-your-browser-carefully.html)
+- [Mozilla is broken](https://hacktivis.me/articles/Mozilla%20is%20Broken)
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
