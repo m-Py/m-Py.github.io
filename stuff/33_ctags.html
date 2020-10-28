@@ -377,7 +377,7 @@ summary {
 
 
 <p>CTags is a tool that can make your text editor “understand” code. Most importantly (at least for me), I can use it to jump to function definitions, a feature that is enabled by default in more “advanced” programming IDEs.</p>
-<p>This is how to use Ctags in the awesome KDE text editor <a href="https://kate-editor.org/">Kate</a>:</p>
+<p>This is how to use Ctags in the KDE text editor <a href="https://kate-editor.org/">Kate</a>:</p>
 <ul>
 <li><a href="https://askubuntu.com/questions/383762/how-to-configure-ctags-in-kate?newreg=8d72ea3598cf4f44b023303500500bed">Install Ctags</a>, on Ubuntu using:</li>
 </ul>
@@ -395,13 +395,13 @@ summary {
 </ul>
 <div id="adding-support-for-the-r-language" class="section level3">
 <h3>Adding support for the R language</h3>
-<p>By default, Ctags does not support the R language. It is however rather easily added, as described by <a href="https://tinyheero.github.io/about/">Fong Chun Chan</a> <a href="https://tinyheero.github.io/2017/05/13/r-vim-ctags.html">here</a>. Just add the following lines to a file <code>.ctags</code> is your home directory.</p>
+<p>By default, Ctags does not support the R language. It is however rather easily added, as described by <a href="https://tinyheero.github.io/about/">Fong Chun Chan</a> <a href="https://tinyheero.github.io/2017/05/13/r-vim-ctags.html">here</a>. That is, just add the following lines to a file <code>.ctags</code> in your home directory.</p>
 <pre><code>--langdef=R
 --langmap=r:.R.r
 --regex-R=/^[ \t]*&quot;?([.A-Za-z][.A-Za-z0-9_]*)&quot;?[ \t]*(&lt;-|=)[ \t]function/\1/f,Functions/
 --regex-R=/^&quot;?([.A-Za-z][.A-Za-z0-9_]*)&quot;?[ \t]*(&lt;-|=)[ \t][^f][^u][^n][^c][^t][^i][^o][^n]/\1/g,GlobalVars/
 --regex-R=/[ \t]&quot;?([.A-Za-z][.A-Za-z0-9_]*)&quot;?[ \t]*(&lt;-|=)[ \t][^f][^u][^n][^c][^t][^i][^o][^n]/\1/v,FunctionVariables/</code></pre>
-<p>Then, you can jump to function definitions within a project; neat for working on R packages. However, I still have to find out if Ctags can be enabled in the R environment <a href="https://rkward.kde.org">rkward</a>, that uses kate as its editor.</p>
+<p>Then, you can jump to function definitions within a project; neat for working on R packages. I am not sure if Ctags can also be enabled in the R environment <a href="https://rkward.kde.org">rkward</a> that uses kate as its editor. It is possible to go via <code>Settings</code> to <code>Configure rkward</code> to <code>Kate Plugins</code>. There, Ctags can be activated. However, I did not find out if you can define custom key bindings again for easy access to Ctags functionality (or any way to access Ctags functionality within the code editor).</p>
 <hr />
 <p>Last updated: 2020-10-28</p>
 </div>
