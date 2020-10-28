@@ -1,0 +1,41 @@
+---
+title: "Using Ctags in kate on Kubuntu"
+date: October 28, 2020
+author: Martin Papenberg
+---
+
+```{r, include = FALSE}
+
+library(knitr)
+knitr::opts_chunk$set(message=FALSE, warning = FALSE) # echo = FALSE
+options(scipen = 999, digits = 2)
+
+```
+
+CTags is a tool that can make your text editor "understand" code. Most 
+importantly, for me, I can use it to jump to function definitions, a feature 
+enabled by default in programming IDEs. This is how to use Ctags in Kate: 
+
+- [Install Ctags](https://askubuntu.com/questions/383762/how-to-configure-ctags-in-kate?newreg=8d72ea3598cf4f44b023303500500bed)
+
+```
+$ sudo apt-get install exuberant-ctags 
+```
+
+- Activate Ctags
+  * Settings 
+  * Configure Kate
+  * Plugins 
+  * *Click the Ctags button*
+
+- In the Ctags button on the bottom, go to 'Index targets', select your project directory
+- Define custom key bindings for `katectags` to go to functions definitions and declarations
+(including a mouse click does not seem to work for custom key binding, unfortunately)
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
