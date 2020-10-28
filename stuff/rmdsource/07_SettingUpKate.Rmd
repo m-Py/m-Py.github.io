@@ -1,29 +1,33 @@
 ---
-title: "Setting up R Markdown on Kubuntu"
+title: "Setting up R and R Markdown on Kubuntu"
 date: November 06, 2019
 author: Martin Papenberg
 ---
 
+*This post was updated on October 28, 2020.*
+
 After some time I returned to [KDE](https://kde.org/) (in particular, to 
 [Kubuntu](https://kubuntu.org/)). I had always liked its style, but 
-unfortunately I always had some problems with stability in previous 
-versions. With the most recent version 19.10, everything is running 
-smoothly. 
+unfortunately I always had some problems with stability in previous versions. 
+With version 19.10 -- and now the long term stable 20.04 -- everything is 
+running smoothly. 
 
-Why is Kubuntu good for writing in R Markdown? First, by default it 
-ships the awesome text editor [Kate](https://kate-editor.org/) that has 
-nice R Markdown syntax highlighting,[^atom] spell checking (enabled by 
-default), and syntax highlighting for math equations. Second, KDE offers 
-the powerful `R` IDE [RKward](https://rkward.kde.org) that includes Kate 
-as its code editor. Even better, RKward can be used from any operating 
-system, not just from Kubuntu or other Linux systems. I really encourage 
-everyone to try it out, if just to see an alternative to RStudio once in 
-a while.
+Why is Kubuntu good for writing in R Markdown? First, by default it ships the 
+awesome text editor [Kate](https://kate-editor.org/) that has nice R Markdown 
+syntax highlighting,[^atom] spell checking, and syntax highlighting for math 
+equations. Second, KDE offers the powerful `R` IDE 
+[RKward](https://rkward.kde.org) that includes Kate as its code editor. Even 
+better, RKward can be used from any operating system, not just from Kubuntu or 
+other Linux systems. I really encourage everyone to try it out, if just to see 
+an alternative to RStudio once in a while. Moreover, while rkward has been 
+around for a long time, its code base [is still being maintained and 
+extended](https://invent.kde.org/education/rkward). As it uses Kate as its 
+editor, it also profits freely whenever kate is improved.
 
 [^atom]: In general, writing in R Markdown now seems to be much more 
 comfortable than some years back. The [atom editor](https://atom.io/) 
 also includes a nice mode for R Markdown documents. However, for now I 
-prefer Kate. 
+prefer Kate and rkward.
 
 As said, Kate should be included by default in the Kubuntu repository.
 If you are using a different Ubuntu flavor, the following works:
@@ -43,9 +47,14 @@ versions are available through the launchpad project (see "Inofficial
 Ubuntu repositories" 
 [here](https://rkward.kde.org/Binaries_and_Build_Scripts.html)).
 
+[Building from source](https://rkward.kde.org/Building_RKWard_From_Source.html) 
+is also easier than one may think (provided the required build tools are 
+available -- that is actually the main problem). The most recent sources are 
+available from https://invent.kde.org/education/rkward.
+
 ### Document preview
 
-In the latest version (v0.7.1) of RKward, it is possible to activate 
+In the latest versions (v0.7.1 upwards) of RKward, it is possible to activate 
 document preview for R Markdown documents. This is actually a nice 
 advantage over RStudio. It will only preview html documents, but I think 
 for the purpose of editing the writing this should be enough. I even 
@@ -60,23 +69,6 @@ will be rendered whenever you save your file. It looks like this:
 
 <img src = "../img/rkward.png" width = 850 alt = "Live preview of R Markdown documents in RKward">
 
-### Additional more notes on R Markdown and RKward 
-
-One minor problem with RKward is that it does not really "understand" 
-what R Markdown files are (damn new stuff). When opening an Rmd file, it 
-is sometimes necessary to manually set the syntax highlighting to R 
-Markdown -- RKward thinks it is dealing with an R script when it 
-actually handles an Rmd file. This is easy, however. Just select the 
-button in the bottom right of the screen where syntax highlighting can 
-be changed to "R Markdown".
-
-To ensure that RKward shows Rmd files when you use the file browser when 
-opening a file, define the file extensions ".rmd" and ".Rmd" as R script 
-file extensions (RKward does not yet "understand" that Rmd files are 
-actually valid R files). To this end, go via `Settings -> Configure 
-RKward -> Script editor`. Here, add `*.rmd *.Rmd` to `R script file 
-filters`.
-
 ### Setting hard line breaks in Kate
 
 As discussed [here](05_setUpRMDemacs.html), I prefer hard line breaks as 
@@ -84,7 +76,17 @@ opposed to soft breaks. Any text editor I use for writing R Markdown
 should include functionality for hard line breaks. Fortunately, Kate 
 (and hence, RKward) does. However, we first have to define a custom 
 shortcut for this functionality. This is done via `Settings -> Configure 
-Shortcuts -> Apply Word Wrap`. I use `Alt-Q` to insert hard line wraps.
+Shortcuts -> Apply Word Wrap`. I use `Alt-Q` to insert hard line wraps, as
+emacs does.
+
+### Useful adjustments in rkward settings
+
+Go to `Settings -> configure script editor`
+
+- Prevent automcompletion to `[[·]]` when typing `$` by changing the option 
+'Operator for access to members of list() and data.frame() objects'
+- 'Keyboard navigation of completion items: Up/Down cursors'
+- 'Tab key invokes code completion'
 
 ### Useful Kate features
 
@@ -92,7 +94,8 @@ Shortcuts -> Apply Word Wrap`. I use `Alt-Q` to insert hard line wraps.
 - Recognizes git repositories as project, the developers even plan to 
 integrate git better in Kate in the future (see 
 [here](https://kate-editor.org/post/2019/2019-10-20-git-client-
-integration/))
+integration/)). This feature is now also available in rkward, which is really 
+awesome for package development.
 - Set the column limit for hard line breaks: 
   `Settings -> Configure Kate -> Editing -> Wrap Words at`
 - You can adjust Kate settings from within RKward as well
