@@ -1,5 +1,5 @@
 ---
-title: "Using Ctags in kate on Kubuntu"
+title: "Using Ctags in the text editor Kate"
 date: October 28, 2020
 author: Martin Papenberg
 ---
@@ -13,10 +13,14 @@ options(scipen = 999, digits = 2)
 ```
 
 CTags is a tool that can make your text editor "understand" code. Most 
-importantly, for me, I can use it to jump to function definitions, a feature 
-enabled by default in programming IDEs. This is how to use Ctags in Kate: 
+importantly (at least for me), I can use it to jump to function definitions, a 
+feature that is enabled by default in more "advanced" programming IDEs. 
 
-- [Install Ctags](https://askubuntu.com/questions/383762/how-to-configure-ctags-in-kate?newreg=8d72ea3598cf4f44b023303500500bed)
+This is how to use Ctags in the awesome KDE text editor 
+[Kate](https://kate-editor.org/): 
+
+- [Install Ctags](https://askubuntu.com/questions/383762/how-to-configure-ctags-in-kate?newreg=8d72ea3598cf4f44b023303500500bed), 
+on Ubuntu using:
 
 ```
 $ sudo apt-get install exuberant-ctags 
@@ -31,6 +35,25 @@ $ sudo apt-get install exuberant-ctags
 - In the Ctags button on the bottom, go to 'Index targets', select your project directory
 - Define custom key bindings for `katectags` to go to functions definitions and declarations
 (including a mouse click does not seem to work for custom key binding, unfortunately)
+
+### Adding support for the R language
+
+By default, Ctags does not support the R language. It is however rather easily 
+added, as described by [Fong Chun Chan](https://tinyheero.github.io/about/) 
+[here](https://tinyheero.github.io/2017/05/13/r-vim-ctags.html).
+Just add the following lines to a file `.ctags` is your home directory. 
+
+```
+--langdef=R
+--langmap=r:.R.r
+--regex-R=/^[ \t]*"?([.A-Za-z][.A-Za-z0-9_]*)"?[ \t]*(<-|=)[ \t]function/\1/f,Functions/
+--regex-R=/^"?([.A-Za-z][.A-Za-z0-9_]*)"?[ \t]*(<-|=)[ \t][^f][^u][^n][^c][^t][^i][^o][^n]/\1/g,GlobalVars/
+--regex-R=/[ \t]"?([.A-Za-z][.A-Za-z0-9_]*)"?[ \t]*(<-|=)[ \t][^f][^u][^n][^c][^t][^i][^o][^n]/\1/v,FunctionVariables/
+```
+
+Then, you can jump to function definitions within a project; neat for working on 
+R packages. However, I still have to find out if Ctags can be enabled in the R 
+environment [rkward](https://rkward.kde.org), that uses kate as its editor.
 
 ---
 
