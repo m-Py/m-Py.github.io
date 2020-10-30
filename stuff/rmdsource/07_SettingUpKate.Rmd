@@ -81,12 +81,19 @@ emacs does.
 
 ### Useful adjustments in rkward settings
 
-Go to `Settings -> configure script editor`
+Go to `Settings -> configure script editor / console`
 
 - Prevent automcompletion to `[[·]]` when typing `$` by changing the option 
 'Operator for access to members of list() and data.frame() objects'
 - 'Keyboard navigation of completion items: Up/Down cursors'
 - 'Tab key invokes code completion'
+- increase time for auto-completion suggestions a little
+
+Go to `Settings -> Onscreen graphics`
+
+- Increase the 'Maximum size of single recorded plot to >9999Kb (otherwise, 
+'large' plots will throw a warning which is off-putting and occurs for 
+most ggplots)
 
 ### Useful Kate features
 
