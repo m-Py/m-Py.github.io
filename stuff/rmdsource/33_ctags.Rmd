@@ -51,12 +51,28 @@ just add the following lines to a file `.ctags` in your home directory.
 ```
 
 Then, you can jump to function definitions within a project; neat for working on 
-R packages. I am not sure if Ctags can also be enabled in the R environment 
-[rkward](https://rkward.kde.org) that uses kate as its editor. It is possible to 
-go via `Settings` to `Configure rkward` to `Kate Plugins`. There, Ctags can be 
-activated. However, I did not find out if you can define custom key bindings 
-again for easy access to Ctags functionality (or any way to access Ctags 
-functionality within the code editor). 
+R packages. 
+
+### Using Ctags in rkward
+
+Ideally, we would like to have Ctags support in in the R environment 
+[rkward](https://rkward.kde.org) that uses kate as its editor, rather than just 
+in "vanilla" kate. In rkward, it is indeed possible to go via `Settings` to 
+`Configure rkward -> Kate Plugins`, where Ctags seemingly can be activated. 
+However, it is then not possible then to use your key bindings for Ctags (or any 
+other way to access Ctags functionality within the code editor). 
+
+After inquiring on the rkward users mailing list, the rkward maintainer Thomas 
+Friedrichsmeier confirmed that the usage of Ctags is not possible at the moment. 
+However, he pointed me to a line in the source code that could be "commented 
+out" to enable Ctags. I tried this out and it works perfectly for me; I am 
+however not sure what the downsides of this change are. It [is implemented in my 
+fork from the rkward 
+project](https://invent.kde.org/mpapenberg/rkward/-/tree/enable-ctags). 
+
+Hopefully, there will be native support for Ctags or anything enabling 
+the same functionality in the future. I guess however, that just enabling Ctags 
+is the best option. 
 
 ---
 

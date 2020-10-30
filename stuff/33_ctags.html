@@ -401,9 +401,15 @@ summary {
 --regex-R=/^[ \t]*&quot;?([.A-Za-z][.A-Za-z0-9_]*)&quot;?[ \t]*(&lt;-|=)[ \t]function/\1/f,Functions/
 --regex-R=/^&quot;?([.A-Za-z][.A-Za-z0-9_]*)&quot;?[ \t]*(&lt;-|=)[ \t][^f][^u][^n][^c][^t][^i][^o][^n]/\1/g,GlobalVars/
 --regex-R=/[ \t]&quot;?([.A-Za-z][.A-Za-z0-9_]*)&quot;?[ \t]*(&lt;-|=)[ \t][^f][^u][^n][^c][^t][^i][^o][^n]/\1/v,FunctionVariables/</code></pre>
-<p>Then, you can jump to function definitions within a project; neat for working on R packages. I am not sure if Ctags can also be enabled in the R environment <a href="https://rkward.kde.org">rkward</a> that uses kate as its editor. It is possible to go via <code>Settings</code> to <code>Configure rkward</code> to <code>Kate Plugins</code>. There, Ctags can be activated. However, I did not find out if you can define custom key bindings again for easy access to Ctags functionality (or any way to access Ctags functionality within the code editor).</p>
+<p>Then, you can jump to function definitions within a project; neat for working on R packages.</p>
+</div>
+<div id="using-ctags-in-rkward" class="section level3">
+<h3>Using Ctags in rkward</h3>
+<p>Ideally, we would like to have Ctags support in in the R environment <a href="https://rkward.kde.org">rkward</a> that uses kate as its editor, rather than just in “vanilla” kate. In rkward, it is indeed possible to go via <code>Settings</code> to <code>Configure rkward -&gt; Kate Plugins</code>, where Ctags seemingly can be activated. However, it is then not possible then to use your key bindings for Ctags (or any other way to access Ctags functionality within the code editor).</p>
+<p>After inquiring on the rkward users mailing list, the rkward maintainer Thomas Friedrichsmeier confirmed that the usage of Ctags is not possible at the moment. However, he pointed me to a line in the source code that could be “commented out” to enable Ctags. I tried this out and it works perfectly for me; I am however not sure what the downsides of this change are. It <a href="https://invent.kde.org/mpapenberg/rkward/-/tree/enable-ctags">is implemented in my fork from the rkward project</a>.</p>
+<p>Hopefully, there will be native support for Ctags or anything enabling the same functionality in the future. I guess however, that just enabling Ctags is the best option.</p>
 <hr />
-<p>Last updated: 2020-10-28</p>
+<p>Last updated: 2020-10-30</p>
 </div>
 <div id="back-to-the-front-page" class="section level3">
 <h3><a href="index.html">Back to the front page</a></h3>
