@@ -1,10 +1,8 @@
 ---
-title: "Setting up R and R Markdown on Kubuntu"
+title: "Setting up R and R Markdown on rkward on Kubuntu"
 date: November 06, 2019
 author: Martin Papenberg
 ---
-
-*This post was updated on October 28, 2020.*
 
 After some time I returned to [KDE](https://kde.org/) (in particular, to 
 [Kubuntu](https://kubuntu.org/)). I had always liked its style, but 
@@ -63,7 +61,8 @@ heard that pdf preview is on the maybe-to-do list.
 To activate the Preview mode, click the Preview button in the tool bar. 
 If this button does not appear by default, go to `Settings -> Configure 
 Toolbars -> mainToolBar <rkward_commandeditor>`. In this menu, drag 
-`Preview` to `Current Actions`. Now, if you click `Preview` in the tool 
+`Preview` to `Current Actions`. (*Update: In the current version of rkward, this 
+should not be necessary.*) Now, if you click `Preview` in the tool 
 bar above the text editor, a html version of your R Markdown document 
 will be rendered whenever you save your file. It looks like this:
 
@@ -88,6 +87,8 @@ Go to `Settings -> configure script editor / console`
 - 'Keyboard navigation of completion items: Up/Down cursors'
 - 'Tab key invokes code completion'
 - increase time for auto-completion suggestions a little
+- Disable "Function call tip"; instead, use CTRL-Space to show the arguments of 
+a function, navigate through them and use code complete via TAB
 
 Go to `Settings -> Onscreen graphics`
 
