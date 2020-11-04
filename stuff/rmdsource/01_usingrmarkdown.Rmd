@@ -44,10 +44,7 @@ If these libraries are not available on your system, install them. They are requ
 to install the `devtools` package that we need to install papaja:
 
 ```
-$ sudo apt install libcurl4-openssl-dev
-$ sudo apt install libxml2-dev
-$ sudo apt install libgsl0-dev
-$ sudo apt install libssl-dev
+$ sudo apt install libcurl4-openssl-dev libxml2-dev libgsl0-dev libssl-dev
 ```
 
 ### 3) Install the required R packages
@@ -55,7 +52,8 @@ $ sudo apt install libssl-dev
 - Make sure you have a recent version of R
     + the version in the standard Ubuntu repository is too old, which will cause some
     package dependencies installations to fail
-    + update R as described here: https://cran.r-project.org/bin/linux/ubuntu/; also see http://sites.psu.edu/theubunturblog/installing-r-in-ubuntu/
+    + update R as described here: https://cran.r-project.org/bin/linux/ubuntu/; 
+    also see http://sites.psu.edu/theubunturblog/installing-r-in-ubuntu/
 - Install the `devtools` package (`> install.packages("devtools")`)
 - Get the papaja package:
 
@@ -69,10 +67,7 @@ $ sudo apt install libssl-dev
 
 ### 4) Install pandoc
 - rmarkdown makes use of pandoc library to do its conversions between file formats
-- We need a recent version of pandoc which is not included in all available
-  installation packages (now the standard Ubuntu repository should work)
-- If you are using a 64-Bit system, check this link and install the debian package
-- Update: Now, the standard Ubuntu repo should be enough, so just do
+- The standard Ubuntu repo should be enough for 64 Bit installations:
 
 ```
 $ sudo apt install pandoc pandoc-citeproc
@@ -154,7 +149,9 @@ These are some sources on writing in R Markdown and / or papaja that might be us
 - http://yihui.name/en/2012/06/enjoyable-reproducible-research/
 - http://nicercode.github.io/guides/reports/
 
-&nbsp;
+---
+
+Last updated: `r Sys.Date()`
 
 ### <a href="index.html">Back to the front page</a>
 
