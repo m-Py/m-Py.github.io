@@ -46,9 +46,12 @@ Ubuntu repositories"
 [here](https://rkward.kde.org/Binaries_and_Build_Scripts.html)).
 
 [Building from source](https://rkward.kde.org/Building_RKWard_From_Source.html) 
-is also easier than one may think (provided the required build tools are 
-available -- that is actually the main problem). The most recent sources are 
+is also easier than one may think.[^deps] The most recent sources are 
 available from https://invent.kde.org/education/rkward.
+
+[^deps]: Provided the required build tools are available, which is actually the 
+main problem; in addition to the dependencies listed on the rkward page, I also 
+needed `Gettext`.
 
 ### Document preview
 
@@ -62,7 +65,7 @@ To activate the Preview mode, click the Preview button in the tool bar.
 If this button does not appear by default, go to `Settings -> Configure 
 Toolbars -> mainToolBar <rkward_commandeditor>`. In this menu, drag 
 `Preview` to `Current Actions`. (*Update: In the current version of rkward, this 
-should not be necessary.*) Now, if you click `Preview` in the tool 
+should no longer be necessary.*) Now, if you click `Preview` in the tool 
 bar above the text editor, a html version of your R Markdown document 
 will be rendered whenever you save your file. It looks like this:
 
