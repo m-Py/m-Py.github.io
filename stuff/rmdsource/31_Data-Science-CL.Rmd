@@ -42,6 +42,14 @@ $ ls | grep Rmd | wc -l
 $ find . -name "*.html" -type f | xargs rm -f
 ```
 
+- Search through all files in a directory
+
+```
+$ grep -r "search-string"
+$ grep "search-string" *
+```
+
+
 ---
 
 Last updated: `r Sys.Date()`
