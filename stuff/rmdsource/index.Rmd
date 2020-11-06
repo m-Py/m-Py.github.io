@@ -26,7 +26,8 @@ href="https://www.r-project.org/" target="_blank">R</a>-related stuff.
 
 ### Short notes
 
-- <a href="33_ctags.html">2020/10: Using Ctags in kate on Kubuntu</a>
+- <a href="34_ctags-2.html">2020/11: Using CTags for writing R code in rkward</a>
+- <a href="33_ctags.html">2020/10: Make your text editor understand code: How to use CTags in Kate</a>
 - <a href="32_Privacy.html">2020/10: Taking data privacy serious again</a>
 - <a href="31_Data-Science-CL.html">2020/10: Learning about data handling on the command line</a>
 - <a href="30_R-from-source.html">2020/06: Installing `R` devel from source on 64-Bit Ubuntu & checking a package</a>

@@ -1,0 +1,80 @@
+---
+title: "Using CTags for writing R code in rkward"
+date: November 6, 2020
+author: Martin Papenberg
+---
+
+In a [recent post](33_ctags.html) I explored how to enable CTags support for the 
+[Kate](https://kate-editor.org/) text editor. This post contains a 
+self-contained explanation of how to also enable CTags for writing [R 
+code](https://cran.r-project.org/). When developing R code, we would like to 
+have Ctags support in in the R environment [rkward](https://rkward.kde.org) that 
+uses kate as its editor, rather than just in "vanilla" kate. Note that by the 
+time of writing this post, this functionality is only included in the 
+development version of rkward, not the official latest release.[^devel]
+
+[^devel]: The development version can be installed on Ubuntu by adding an 
+inofficial repository as described 
+[here](https://rkward.kde.org/Binaries_and_Build_Scripts.html), or by 
+[installing from source](https://rkward.kde.org/Building_RKWard_From_Source.html),
+using the latest code from the [KDE Gitlab](https://invent.kde.org/education/rkward).
+
+### Install CTags 
+
+CTags has to be installed on the local machine, on Ubuntu for example as follows:
+
+```
+$ sudo apt install exuberant-ctags
+```
+
+### Adding CTags support for the R language
+
+By default, CTags does not include support for the R language, which can however 
+can be added by the user. To enable R support, we can add the following lines to 
+a file ".ctags" in the home directory (if it does not exist, create it):
+
+```
+--langdef=R
+--langmap=r:.R.r
+--regex-R=/^[ \t]*"?([.A-Za-z][.A-Za-z0-9_]*)"?[ \t]*(<-|=)[ \t]function/\1/f,Functions/
+```
+
+
+(I got this from [Fong Chun Chan's](https://tinyheero.github.io/about/) blog 
+[here](https://tinyheero.github.io/2017/05/13/r-vim-ctags.html).
+
+### Activate the CTags plugin in rkward
+
+* Settings -> configure rkward -> Kate Plugins -> check "CTags"
+
+Now, there should be a CTags button at the botton of the main rkward window 
+(next to "R Console", "Help Search" etc.). Click the button and go to "Index 
+targets". Here, you can click "+ Add" to add the directory that should be 
+indexed by CTags. This has to be done for each directory where we work with R 
+files. However, I think this works recursively, so if you index the upper most 
+directory, all of the directories within are indexed as well. Do not forget to 
+"update index" when you have added a new function.
+
+### Define keybindings 
+
+* Settings -> Configure Keyboard Shortcuts -> Action CTags
+
+I think in R, the important actions are "Go To Definition" to jump to a function 
+definition (I use CTRL-Y) and "Jump back one step" (I use CTRL-Q).
+
+### Last words
+
+When using CTags in rkward, one of the main advantages of 
+[RStudio](https://rstudio.com/) over rkward (*for me*) disappears, because I can 
+now also use rkward to jump between functions across files. CTags even seems to 
+be faster than RStudio function hoppingw. Moreover, in rkward I profit from the 
+excellent Kate editor and the awesome [document preview](07_SettingUpKate.html) 
+for R Markdown documents.
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
