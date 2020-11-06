@@ -67,7 +67,7 @@ definition (I use CTRL-Y) and "Jump back one step" (I use CTRL-Q).
 When using CTags in rkward, one of the main advantages of 
 [RStudio](https://rstudio.com/) over rkward (*for me*) disappears, because I can 
 now also use rkward to jump between functions across files. CTags even seems to 
-be faster than RStudio function hoppingw. Moreover, in rkward I profit from the 
+be faster than RStudio function hopping. Moreover, in rkward I profit from the 
 excellent Kate editor and the awesome [document preview](07_SettingUpKate.html) 
 for R Markdown documents.
 
