@@ -1,0 +1,87 @@
+---
+title: "Improving R syntax highlighting in rkward and Kate"
+date: November 6, 2020
+author: Martin Papenberg
+---
+
+### Get the original syntax highlighting file
+
+- https://invent.kde.org/frameworks/syntax-highlighting/-/tree/master/data/syntax
+
+### Store the custom syntax highlighting file
+
+This is where rkward looks for syntax highlighting definition files:
+
+```
+~/.local/share/katepart5/syntax
+```
+
+This directory may not exist, so it has to be created. [Other sources](https://unix.stackexchange.com/questions/107957/change-directory-for-kate-syntax-highlighting-files) say that 
+
+```
+~/.local/share/org.kde.syntax-highlighting/syntax
+```
+
+is also an option for Kate. 
+
+- Another option: clone the 
+[syntax highlighting git repository](https://invent.kde.org/frameworks/syntax-highlighting)
+and create a symbolic link from the r.xml file (in `data -> syntax`) to these 
+directories, e.g.:
+
+```
+ln -s ~/git/syntax-highlighting/data/syntax/r.xml ~/.local/share/katepart5/syntax/r.xml
+ln -s ~/git/syntax-highlighting/data/syntax/r.xml ~/.local/share/org.kde.syntax-highlighting/syntax/r.xml
+
+```
+
+Then, you can just stick to working with the r.xml file in the git repository.
+
+### Adjust the XML syntax highlighting file
+
+- Documentation of the Kate syntax highlighting xlm declarations
+  * https://docs.kde.org/stable5/en/applications/katepart/highlight.html
+
+- In the xml file, change "version" in the language field to a higher number, 
+so this custom file is used by Kate.
+
+- Useful examples for adjusting *r.xml*:
+  * *doxygen.xml* (for roxygen syntax)
+
+### Example 1: Make `NA` different from `NULL` and `Inf`
+
+- Create a new `list` below the others at the top of the document:
+
+```
+<list name="NA">
+  <item>NA</item>
+  <item>NA_integer_</item>
+  <item>NA_real_</item>
+  <item>NA_complex_</item>
+  <item>NA_character_</item>
+  <item>is.na</item>
+</list>
+```
+
+In the context "Common rules", add:
+
+```
+<keyword attribute="Missing Values" context="#stay" String="NA"/>
+```
+
+In the `<itemDatas>`, add a new `<itemData>` for "Missing values":
+
+```
+<itemData name="Missing Values" defStyleNum="dsDataType" spellChecking="false" bold="1"/>
+```
+
+See the [documentation](https://docs.kde.org/stable5/en/applications/katepart/highlight.html) 
+which unique `defStyleNum`s are available.
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
