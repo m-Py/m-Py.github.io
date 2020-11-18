@@ -69,14 +69,6 @@ console.
 appearance of the terminal to your liking. In the terminal, we will start the R 
 or python consoles, as explained below.
 
-### Hard line breaks
-
-As discussed [here](05_setUpRMDemacs.html), I prefer hard line breaks as opposed 
-to soft breaks. Any text editor I use for writing R Markdown should include 
-functionality for hard line breaks. Fortunately, Kate does. However, we first 
-have to define a custom shortcut for this functionality. o insert 
-hard line wraps, as emacs does.
-
 ## Using Kate as Data Science IDE
 
 In this section, I describe the functionalities of Kate making it useful as a 
