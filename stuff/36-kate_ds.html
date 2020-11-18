@@ -442,8 +442,11 @@ summary {
 <ul>
 <li><code>Settings -&gt; Configure Shortcuts -&gt; Apply Word Wrap</code>. Use anything exotic, as you will mostly not use this short cut, I assume you use <code>CTRL-ALT-Q</code></li>
 <li>Add a new key binding for VI in <code>Configure Kate -&gt; Editing -&gt; VI editing</code></li>
-<li>Normal mode: <code>&lt;a-q&gt;</code> mz { j V } k <c-a-q> V <code>z. This adds the fill paragraph  option to</code>ALT-Q` key binding in VI normal mode</li>
-<li>In Insert mode (most importantly, I guess), use <esc> mz { j V } k <c-a-q> V <code>z i. That is, wrap ESC and</code>i` around the command to leave and re-enter visual mode.</li>
+<li>In normal mode, add the following key binding:
+<ul>
+<li><code>&lt;a-q&gt;</code>: mz { j V } k &lt;c-a-q&gt; V `z. This adds the fill paragraph option to <code>ALT-Q</code> key binding in VI normal mode</li>
+</ul></li>
+<li>In Insert mode (most importantly, I guess), use <esc> mz { j V } k <c-a-q> V `z i. That is, wrap ESC and <code>i</code> around the command to leave and re-enter visual mode.</li>
 <li><code>CTRL-ALT-Q</code> can still be used if just one line needs to be “broken”</li>
 </ul>
 </div>
@@ -498,6 +501,11 @@ summary {
 <ul>
 <li><code>&lt;s-c-c&gt;</code>: <code>y &lt;f4&gt; &lt;s-c-v&gt; &lt;cr&gt; &lt;f4&gt; &lt;esc&gt;</code></li>
 </ul></li>
+</ul>
+<p>This way, CTRL-Shift-C will execute either the current (or following) code block or, when in visual mode, the code selection.</p>
+<p>To send the entire document to the console via CTRL-Shift-Z, add this keybinding:</p>
+<ul>
+<li><code>&lt;s-c-z&gt;</code>: mz ggVG y &lt;f4&gt; &lt;s-c-v&gt; &lt;cr&gt; &lt;f4&gt; &lt;esc&gt; `z</li>
 </ul>
 </div>
 <div id="problems-with-r-radian-in-the-kate-terminal" class="section level3">

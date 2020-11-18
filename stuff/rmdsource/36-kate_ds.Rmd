@@ -34,10 +34,11 @@ found out how to emulate this functionality in Kate:
 - `Settings -> Configure Shortcuts -> Apply Word Wrap`. Use anything exotic, as 
 you will mostly not use this short cut, I assume you use `CTRL-ALT-Q` 
 - Add a new key binding for VI in `Configure Kate -> Editing -> VI editing` 
-- Normal mode: `<a-q>` mz { j V } k <c-a-q> V `z. This adds the fill paragraph 
+- In normal mode, add the following key binding: 
+  * `<a-q>`: mz { j V } k \<c-a-q\> V \`z. This adds the fill paragraph 
 option to `ALT-Q` key binding in VI normal mode
 - In Insert mode (most importantly, I guess), use <esc> mz { j V } k <c-a-q> V 
-`z i. That is, wrap ESC and `i` around the command to leave and re-enter visual 
+\`z i. That is, wrap ESC and `i` around the command to leave and re-enter visual 
 mode.
 - `CTRL-ALT-Q` can still be used if just one line needs to be "broken"
 
@@ -122,6 +123,14 @@ keybindings:
 - visual mode:
   * `<s-c-c>`: `y <f4> <s-c-v> <cr> <f4> <esc>`
 
+This way, CTRL-Shift-C will execute either the current (or following) code block 
+or, when in visual mode, the code selection.
+
+To send the entire document to the console via CTRL-Shift-Z, add this 
+keybinding: 
+
+- `<s-c-z>`: mz ggVG y \<f4\> \<s-c-v\> \<cr\> \<f4\> \<esc\> \`z
+  
 ### Problems with R / radian in the Kate terminal
 
 In the current version of Kate that I use, the konsole terminal does not play 
