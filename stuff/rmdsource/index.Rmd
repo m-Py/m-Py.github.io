@@ -26,7 +26,7 @@ href="https://www.r-project.org/" target="_blank">R</a>-related stuff.
 
 ### Short notes
 
-
+- <a href="36-kate_ds.html">2020/11: Using Kate as a Data Science Environment</a>
 - <a href="35_rsyntax.html">2020/11: Improving R syntax highlighting in rkward and Kate</a>
 - <a href="34_ctags-2.html">2020/11: Using CTags for writing R code in rkward</a>
 - <a href="33_ctags.html">2020/10: Make your text editor understand code: How to use CTags in Kate</a>
