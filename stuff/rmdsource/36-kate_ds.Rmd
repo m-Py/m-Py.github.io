@@ -41,6 +41,23 @@ around the command to leave and re-enter visual mode.
 "Apply word wrap" (`Settings -> Configure Shortcuts -> Apply Word Wrap`), e.g. 
 use `CTRL-ALT-Q` 
 
+One problem is that this keybinding sets a vim mark, [which in turn converts to 
+a Kate bookmark](https://kate-editor.org/2011/07/26/vimode-gsoc2011/). So I 
+added a Kate keybinding for clearing all bookmarks (CRTL-ALT-M), which is 
+appended to the above command. This implies that the fill paragraph command 
+removes all of your marks, but I guess this is not terribly important.
+
+- For insert mode, this leaves:
+  * \<esc\> mz { j V } k gq\`z\<c-a-m\>i
+
+- For normal mode, this leaves:
+  * mz { j V } k gq \`z\<c-a-m\>
+
+This way, I can mostly reproduce the emacs fill paragraph command. There is one 
+caveat however: If I use fill paragraph in insert mode and the cursor is at the 
+end of the current line, the cursor sometimes moves back one character. Maybe 
+this can be fixed somehow, not sure. 
+
 ### Fonts
 
 1. Create a new scheme for fonts that can be adapted 
@@ -52,7 +69,7 @@ grey comment font)
 ### Konsole
 
 Kate requires that the KDE terminal `konsole` is available. On non-KDE desktops 
-this may need to be installed, on Ubuntu for example with 
+this may need to be installed, on Ubuntu for example with. 
 
 ```
 $ sudo apt install konsole

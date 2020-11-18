@@ -448,6 +448,18 @@ summary {
 <li>In Insert mode use &lt;esc&gt; mz { j V } k gq `z i. That is, wrap ESC and <code>i</code> around the command to leave and re-enter visual mode.</li>
 <li>If only one line needs to be “broken”, you can use the Kate keybinding for “Apply word wrap” (<code>Settings -&gt; Configure Shortcuts -&gt; Apply Word Wrap</code>), e.g.  use <code>CTRL-ALT-Q</code></li>
 </ul>
+<p>One problem is that this keybinding sets a vim mark, <a href="https://kate-editor.org/2011/07/26/vimode-gsoc2011/">which in turn converts to a Kate bookmark</a>. So I added a Kate keybinding for clearing all bookmarks (CRTL-ALT-M), which is appended to the above command. This implies that the fill paragraph command removes all of your marks, but I guess this is not terribly important.</p>
+<ul>
+<li>For insert mode, this leaves:
+<ul>
+<li>&lt;esc&gt; mz { j V } k gq`z&lt;c-a-m&gt;i</li>
+</ul></li>
+<li>For normal mode, this leaves:
+<ul>
+<li>mz { j V } k gq `z&lt;c-a-m&gt;</li>
+</ul></li>
+</ul>
+<p>This way, I can mostly reproduce the emacs fill paragraph command. There is one caveat however: If I use fill paragraph in insert mode and the cursor is at the end of the current line, the cursor sometimes moves back one character. Maybe this can be fixed somehow, not sure.</p>
 </div>
 <div id="fonts" class="section level3">
 <h3>Fonts</h3>
@@ -459,7 +471,7 @@ summary {
 </div>
 <div id="konsole" class="section level3">
 <h3>Konsole</h3>
-<p>Kate requires that the KDE terminal <code>konsole</code> is available. On non-KDE desktops this may need to be installed, on Ubuntu for example with</p>
+<p>Kate requires that the KDE terminal <code>konsole</code> is available. On non-KDE desktops this may need to be installed, on Ubuntu for example with.</p>
 <pre><code>$ sudo apt install konsole</code></pre>
 <p>Next, some configurations for the terminal.</p>
 <ul>
