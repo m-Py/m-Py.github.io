@@ -138,8 +138,7 @@ The standard syntax highlighting scheme for R code ist rather old. Use my
 improved syntax highlighting, instead, which for example includes syntax 
 highlighting for [roxygen](https://roxygen2.r-lib.org/) documentation in R 
 packages. Get the syntax highlighting file 
-[here](https://invent.kde.org/mpapenberg/syntax-highlighting/-/raw/master/data/
-syntax/r.xml). and add it to 
+[here](https://invent.kde.org/mpapenberg/syntax-highlighting/-/raw/master/data/syntax/r.xml). and add it to 
 
 ```
 ~/.local/share/katepart5/syntax
