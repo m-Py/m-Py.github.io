@@ -141,6 +141,14 @@ that this problem will vanish in future releases. For now, I had to add a
 `.radian_profile` file that adds my user R library to the search path 
 `.libPaths()`.
 
+Another option I use in my .radian_profile file is for changing the color mode:
+
+```r
+options(radian.color_scheme = "colorful")
+```
+
+Otherwise the text in the console is not very readable on my machine.
+
 ### Improved syntax highlighting for R code
 
 The standard syntax highlighting scheme for R code ist rather old. Use my 

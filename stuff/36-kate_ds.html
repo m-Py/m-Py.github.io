@@ -511,6 +511,9 @@ summary {
 <div id="problems-with-r-radian-in-the-kate-terminal" class="section level3">
 <h3>Problems with R / radian in the Kate terminal</h3>
 <p>In the current version of Kate that I use, the konsole terminal does not play entirely flawlessly with R or radian; it has to be started using <code>sudo radian</code> and then, the user R library is not found, meaning that depending on how the R packages were installed, these cannot be found when using R in Kate. I expect that this problem will vanish in future releases. For now, I had to add a <code>.radian_profile</code> file that adds my user R library to the search path <code>.libPaths()</code>.</p>
+<p>Another option I use in my .radian_profile file is for changing the color mode:</p>
+<pre class="r"><code>options(radian.color_scheme = &quot;colorful&quot;)</code></pre>
+<p>Otherwise the text in the console is not very readable on my machine.</p>
 </div>
 <div id="improved-syntax-highlighting-for-r-code" class="section level3">
 <h3>Improved syntax highlighting for R code</h3>
