@@ -440,14 +440,13 @@ summary {
 <h3>Hard line breaks</h3>
 <p>As I prefer hard versus soft linebreaks when writing, for example R Markdown documents, I need some functionality for hard line breaks. In my opinion, <a href="https://www.gnu.org/software/emacs/">emacs</a> has the best option for hard line breaks with the <a href="https://www.emacswiki.org/emacs/FillParagraph">fill paragraph</a> option. I have not seen this option in any other text editor so far. However, I found out how to emulate this functionality in Kate:</p>
 <ul>
-<li><code>Settings -&gt; Configure Shortcuts -&gt; Apply Word Wrap</code>. Use anything exotic, as you will mostly not use this short cut, I assume you use <code>CTRL-ALT-Q</code></li>
-<li>Add a new key binding for VI in <code>Configure Kate -&gt; Editing -&gt; VI editing</code></li>
+<li>Add key bindings for VI in <code>Configure Kate -&gt; Editing -&gt; VI editing</code></li>
 <li>In normal mode, add the following key binding:
 <ul>
-<li><code>&lt;a-q&gt;</code>: mz { j V } k &lt;c-a-q&gt; V `z. This adds the fill paragraph option to <code>ALT-Q</code> key binding in VI normal mode</li>
+<li><code>&lt;a-q&gt;</code>: mz { j V } k gq `z. This adds the fill paragraph option to <code>ALT-Q</code> key binding in VI normal mode</li>
 </ul></li>
-<li>In Insert mode (most importantly, I guess), use <esc> mz { j V } k <c-a-q> V `z i. That is, wrap ESC and <code>i</code> around the command to leave and re-enter visual mode.</li>
-<li><code>CTRL-ALT-Q</code> can still be used if just one line needs to be “broken”</li>
+<li>In Insert mode use &lt;esc&gt; mz { j V } k gq `z i. That is, wrap ESC and <code>i</code> around the command to leave and re-enter visual mode.</li>
+<li>If only one line needs to be “broken”, you can use the Kate keybinding for “Apply word wrap” (<code>Settings -&gt; Configure Shortcuts -&gt; Apply Word Wrap</code>), e.g.  use <code>CTRL-ALT-Q</code></li>
 </ul>
 </div>
 <div id="fonts" class="section level3">

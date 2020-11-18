@@ -31,16 +31,15 @@ breaks with the [fill paragraph](https://www.emacswiki.org/emacs/FillParagraph)
 option. I have not seen this option in any other text editor so far. However, I 
 found out how to emulate this functionality in Kate: 
 
-- `Settings -> Configure Shortcuts -> Apply Word Wrap`. Use anything exotic, as 
-you will mostly not use this short cut, I assume you use `CTRL-ALT-Q` 
-- Add a new key binding for VI in `Configure Kate -> Editing -> VI editing` 
+- Add key bindings for VI in `Configure Kate -> Editing -> VI editing`
 - In normal mode, add the following key binding: 
-  * `<a-q>`: mz { j V } k \<c-a-q\> V \`z. This adds the fill paragraph 
+  * `<a-q>`: mz { j V } k gq \`z. This adds the fill paragraph 
 option to `ALT-Q` key binding in VI normal mode
-- In Insert mode (most importantly, I guess), use <esc> mz { j V } k <c-a-q> V 
-\`z i. That is, wrap ESC and `i` around the command to leave and re-enter visual 
-mode.
-- `CTRL-ALT-Q` can still be used if just one line needs to be "broken"
+- In Insert mode use \<esc\> mz { j V } k gq \`z i. That is, wrap ESC and `i` 
+around the command to leave and re-enter visual mode.
+- If only one line needs to be "broken", you can use the Kate keybinding for 
+"Apply word wrap" (`Settings -> Configure Shortcuts -> Apply Word Wrap`), e.g. 
+use `CTRL-ALT-Q` 
 
 ### Fonts
 
