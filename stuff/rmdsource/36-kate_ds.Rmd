@@ -11,6 +11,8 @@ everyone (however, I am a VI noob myself). I explain some optimizations for
 writing in Kate (e.g., filling paragraphs) and how to submit code to the (R or 
 Python) console. 
 
+![](../img/screen_kate.jpg)
+
 ## General settings
 
 These are my (non-data-science) related configurations. 
