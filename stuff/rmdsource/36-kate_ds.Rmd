@@ -139,9 +139,9 @@ To submit code to the console via CRTL-Shift-C, add the following VI
 keybindings:
 
 - normal mode:
-  * `<s-c-c>`: `V } y <f4> <s-c-v> <cr> <f4> <esc> }`
+  * `<s-c-c>`: `} V { y <f4> <s-c-v> <cr> <f4> <esc> }`
 - insert mode:
-  * `<s-c-c>`: `<esc> V } y <f4> <s-c-v> <cr> <f4> <esc> } i`
+  * `<s-c-c>`: `<esc> } V { y <f4> <s-c-v> <cr> <f4> <esc> } i`
 - visual mode:
   * `<s-c-c>`: `y <f4> <s-c-v> <cr> <f4> <esc>`
 
