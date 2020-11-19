@@ -151,7 +151,10 @@ or, when in visual mode, the code selection.
 To send the entire document to the console via CTRL-Shift-Z, add this 
 keybinding: 
 
-- `<s-c-z>`: mz ggVG y \<f4\> \<s-c-v\> \<cr\> \<f4\> \<esc\> \`z
+- Normal mode:
+  * `<s-c-z>`: mz ggVG y \<f4\> \<s-c-v\> \<cr\> \<f4\> \<esc\> \`z\<c-a-m\>
+- Insert mode:
+  * `<s-c-z>`: \<esc\> mz ggVG y \<f4\> \<s-c-v\> \<cr\> \<f4\> \<esc\> \`z\<c-a-m\>i
   
 ### Problems with R / radian in the Kate terminal
 

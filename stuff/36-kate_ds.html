@@ -469,7 +469,14 @@ summary {
 <p>This way, CTRL-Shift-C will execute either the current (or following) code block or, when in visual mode, the code selection.</p>
 <p>To send the entire document to the console via CTRL-Shift-Z, add this keybinding:</p>
 <ul>
-<li><code>&lt;s-c-z&gt;</code>: mz ggVG y &lt;f4&gt; &lt;s-c-v&gt; &lt;cr&gt; &lt;f4&gt; &lt;esc&gt; `z</li>
+<li>Normal mode:
+<ul>
+<li><code>&lt;s-c-z&gt;</code>: mz ggVG y &lt;f4&gt; &lt;s-c-v&gt; &lt;cr&gt; &lt;f4&gt; &lt;esc&gt; `z&lt;c-a-m&gt;</li>
+</ul></li>
+<li>Insert mode:
+<ul>
+<li><code>&lt;s-c-z&gt;</code>: &lt;esc&gt; mz ggVG y &lt;f4&gt; &lt;s-c-v&gt; &lt;cr&gt; &lt;f4&gt; &lt;esc&gt; `z&lt;c-a-m&gt;i</li>
+</ul></li>
 </ul>
 </div>
 <div id="problems-with-r-radian-in-the-kate-terminal" class="section level3">
