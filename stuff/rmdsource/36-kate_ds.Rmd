@@ -21,6 +21,11 @@ These are my (non-data-science) related configurations.
 
 - Activate VI mode in `Configure Kate -> Editing`
 - Activates the feature that VI commands replace Kate commands
+- Unfortunately, the search mode no longer fulfills my needs with VI mode 
+activated, because only the next occurrence of a pattern can be searched. So I 
+bound `CTRL-f` to "Search and Replace" rather than ordinary Search. This even 
+has some advantages, as this search option directly shows all matches and can 
+also be used to search in multiple files.
 
 ### Hard line breaks  
 
@@ -43,15 +48,16 @@ use `CTRL-ALT-Q`
 
 One problem is that this keybinding sets a vim mark, [which in turn converts to 
 a Kate bookmark](https://kate-editor.org/2011/07/26/vimode-gsoc2011/). So I 
-added a Kate keybinding for clearing all bookmarks (CRTL-ALT-M), which is 
+added a Kate keybinding for clearing all bookmarks (CRTL-ALT-M), which can be 
 appended to the above command. This implies that the fill paragraph command 
-removes all of your marks, but I guess this is not terribly important.
-
-- For insert mode, this leaves:
-  * \<esc\> mz { j V } k gq\`z\<c-a-m\>i
+removes all of your marks, but I guess this is not terribly important (for me, 
+at least).
 
 - For normal mode, this leaves:
   * mz { j V } k gq \`z\<c-a-m\>
+
+- For insert mode, this leaves:
+  * \<esc\> mz { j V } k gq\`z\<c-a-m\>i
 
 This way, I can mostly reproduce the emacs fill paragraph command. There is one 
 caveat however: If I use fill paragraph in insert mode and the cursor is at the 
