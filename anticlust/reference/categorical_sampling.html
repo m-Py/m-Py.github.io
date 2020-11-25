@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -180,6 +180,14 @@ that categories are balanced between samples, the split is random.</p>
 #&gt;      1       12      12
 #&gt;      2       12      12
 #&gt;      3       24      24</div><div class='input'>
+<span class='co'># Heavily unequal sized groups, is harder to balance the groups</span>
+<span class='kw'>groups</span> <span class='op'>&lt;-</span> <span class='fu'>categorical_sampling</span>(<span class='kw'>categories</span>, K = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>51</span>, <span class='fl'>19</span>, <span class='fl'>26</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='kw'>groups</span>, <span class='kw'>categories</span>)
+</div><div class='output co'>#&gt;       categories
+#&gt; groups bathroom kitchen
+#&gt;      1       24      27
+#&gt;      2        9      10
+#&gt;      3       15      11</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

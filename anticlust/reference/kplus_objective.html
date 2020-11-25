@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -223,11 +223,11 @@ Publication. https://doi.org/10.1037/met0000301.</p>
 <span class='co'># Compute k-plus criterion (k-plus is much better here)</span>
 <span class='fu'>kplus_objective</span>(<span class='kw'>features</span>, <span class='kw'>kplus_groups</span>)
 </div><div class='output co'>#&gt; [1] 5433.656</div><div class='input'><span class='fu'>kplus_objective</span>(<span class='kw'>features</span>, <span class='kw'>kmeans_groups</span>)
-</div><div class='output co'>#&gt; [1] 5314.605</div><div class='input'>
+</div><div class='output co'>#&gt; [1] 5203.045</div><div class='input'>
 <span class='co'># Compare to k-means criterion (k-plus not much worse here)</span>
 <span class='fu'><a href='variance_objective.html'>variance_objective</a></span>(<span class='kw'>features</span>, <span class='kw'>kplus_groups</span>)
 </div><div class='output co'>#&gt; [1] 628.1554</div><div class='input'><span class='fu'><a href='variance_objective.html'>variance_objective</a></span>(<span class='kw'>features</span>, <span class='kw'>kmeans_groups</span>)
-</div><div class='output co'>#&gt; [1] 628.1557</div><div class='input'>
+</div><div class='output co'>#&gt; [1] 628.1559</div><div class='input'>
 <span class='co'># Compare means and standard deviations after k-means and k-plus</span>
 <span class='co'># anticlustering (the standard deviations are usually much closer</span>
 <span class='co'># after k-plus anticlustering, but there is only little to no</span>
@@ -235,12 +235,12 @@ Publication. https://doi.org/10.1037/met0000301.</p>
 <span class='fu'><a href='mean_sd_tab.html'>mean_sd_tab</a></span>(<span class='kw'>features</span>, <span class='kw'>kplus_groups</span>)
 </div><div class='output co'>#&gt;   rating_consistent rating_inconsistent syllables     frequency     
 #&gt; 1 "4.49 (0.25)"     "1.10 (0.06)"       "3.44 (0.91)" "18.31 (2.42)"
-#&gt; 2 "4.49 (0.24)"     "1.10 (0.07)"       "3.41 (0.95)" "18.31 (2.40)"
-#&gt; 3 "4.49 (0.26)"     "1.11 (0.07)"       "3.41 (0.95)" "18.31 (2.42)"</div><div class='input'><span class='fu'><a href='mean_sd_tab.html'>mean_sd_tab</a></span>(<span class='kw'>features</span>, <span class='kw'>kmeans_groups</span>)
+#&gt; 2 "4.49 (0.24)"     "1.10 (0.06)"       "3.41 (0.95)" "18.31 (2.42)"
+#&gt; 3 "4.49 (0.25)"     "1.11 (0.07)"       "3.41 (0.95)" "18.31 (2.40)"</div><div class='input'><span class='fu'><a href='mean_sd_tab.html'>mean_sd_tab</a></span>(<span class='kw'>features</span>, <span class='kw'>kmeans_groups</span>)
 </div><div class='output co'>#&gt;   rating_consistent rating_inconsistent syllables     frequency     
-#&gt; 1 "4.49 (0.23)"     "1.10 (0.07)"       "3.44 (0.98)" "18.31 (2.32)"
-#&gt; 2 "4.49 (0.24)"     "1.10 (0.07)"       "3.41 (0.87)" "18.31 (2.72)"
-#&gt; 3 "4.49 (0.28)"     "1.10 (0.07)"       "3.41 (0.95)" "18.31 (2.16)"</div><div class='input'>
+#&gt; 1 "4.49 (0.26)"     "1.10 (0.07)"       "3.41 (0.87)" "18.31 (2.46)"
+#&gt; 2 "4.49 (0.22)"     "1.10 (0.07)"       "3.44 (1.08)" "18.31 (2.76)"
+#&gt; 3 "4.49 (0.26)"     "1.10 (0.06)"       "3.41 (0.84)" "18.31 (1.94)"</div><div class='input'>
 
 
 </div></pre>

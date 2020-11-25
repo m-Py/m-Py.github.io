@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
       </span>
     </div>
 
@@ -209,17 +209,17 @@ Publication. https://doi.org/10.1037/met0000301.</p>
 <span class='kw'>best_obj</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='kw'>all_objectives</span>)
 <span class='co'>## It is possible that there are multiple best solutions:</span>
 <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='kw'>all_objectives</span> <span class='op'>==</span> <span class='kw'>best_obj</span>)
-</div><div class='output co'>#&gt; [1] 5</div><div class='input'><span class='co'>## Select one best partition:</span>
+</div><div class='output co'>#&gt; [1] 2</div><div class='input'><span class='co'>## Select one best partition:</span>
 <span class='kw'>best_anticlustering</span> <span class='op'>&lt;-</span> <span class='kw'>partitions</span>[<span class='kw'>all_objectives</span> <span class='op'>==</span> <span class='kw'>best_obj</span>][[<span class='fl'>1</span>]]
 <span class='co'>## Look at mean for each partition:</span>
 <span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='kw'>features</span>, <span class='kw'>best_anticlustering</span>, <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>(<span class='kw'>x</span>), <span class='fl'>2</span>))
 </div><div class='output co'>#&gt; INDICES: 1
 #&gt;    V1    V2 
-#&gt; 12.71  9.86 
+#&gt; 12.29 11.86 
 #&gt; ------------------------------------------------------------ 
 #&gt; INDICES: 2
 #&gt;    V1    V2 
-#&gt; 12.86 10.00 </div><div class='input'>
+#&gt; 12.14 11.86 </div><div class='input'>
 
 <span class='co'>## Get best k-means clustering objective:</span>
 <span class='kw'>min_obj</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='kw'>all_objectives</span>)
