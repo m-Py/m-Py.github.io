@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7 Schleifen | Testtheorie mit R</title>
   <meta name="description" content="7 Schleifen | Testtheorie mit R" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7 Schleifen | Testtheorie mit R" />
   <meta property="og:type" content="book" />
@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>3.4.2</b> Funktionsargumente</a></li>
 <li class="chapter" data-level="3.4.3" data-path="dataframes.html"><a href="dataframes.html#spalteneinfach"><i class="fa fa-check"></i><b>3.4.3</b> Sonderregeln zur Auswahl von Spalten</a></li>
 <li class="chapter" data-level="3.4.4" data-path="dataframes.html"><a href="dataframes.html#non-standard-evaluation"><i class="fa fa-check"></i><b>3.4.4</b> Non-Standard-Evaluation</a></li>
-<li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#umgang-mit-na-subset-bevorzugt-zur-zeilenauswahl"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
+<li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#subsettoll"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="dataframes.html"><a href="dataframes.html#doppelteckig"><i class="fa fa-check"></i><b>3.5</b> Weitere Zugriffe auf <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.5.1" data-path="dataframes.html"><a href="dataframes.html#der--zugriff"><i class="fa fa-check"></i><b>3.5.1</b> Der <code>[[·]]</code>-Zugriff</a></li>
@@ -196,7 +196,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="psychometrie.html"><a href="psychometrie.html"><i class="fa fa-check"></i><b>4</b> Erste psychometrische Auswertungen</a><ul>
 <li class="chapter" data-level="4.1" data-path="psychometrie.html"><a href="psychometrie.html#summenwerte"><i class="fa fa-check"></i><b>4.1</b> Summenwerte</a></li>
 <li class="chapter" data-level="4.2" data-path="psychometrie.html"><a href="psychometrie.html#item-schwierigkeiten"><i class="fa fa-check"></i><b>4.2</b> Item-Schwierigkeiten</a></li>
-<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a></li>
+<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="psychometrie.html"><a href="psychometrie.html#exkurs-programmatische-untersuchung-der-korrelationsmatrix"><i class="fa fa-check"></i><b>4.3.1</b> Exkurs: Programmatische Untersuchung der Korrelationsmatrix</a></li>
+</ul></li>
 <li class="chapter" data-level="4.4" data-path="psychometrie.html"><a href="psychometrie.html#trennschaerfe"><i class="fa fa-check"></i><b>4.4</b> Item-Trennschärfen</a></li>
 <li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#cronbachs-alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
 <li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilität"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
@@ -287,9 +289,9 @@ wird in den verschiedenen Durchläufen der Schleife variiert, auf welche
 Daten – also etwa auf welche Items eines Tests – zugegriffen wird,
 damit nicht in jedem Durchgang einfach dasselbe passiert. Dies ist die
 Syntax einer <code>for</code>-Schleife:</p>
-<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb491-1" title="1"><span class="cf">for</span> (Schleifenvariable <span class="cf">in</span> vector) {</a>
-<a class="sourceLine" id="cb491-2" title="2">  <span class="co"># hier steht beliebiger R-Code</span></a>
-<a class="sourceLine" id="cb491-3" title="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb512-1" title="1"><span class="cf">for</span> (Schleifenvariable <span class="cf">in</span> vector) {</a>
+<a class="sourceLine" id="cb512-2" title="2">  <span class="co"># hier steht beliebiger R-Code</span></a>
+<a class="sourceLine" id="cb512-3" title="3">}</a></code></pre></div>
 <p>Das sieht erst einmal etwas beunruhigend aus. Gehen wir die einzelnen
 Bestandteile der Schleife einmal durch und schauen uns danach eine
 <code>for</code>-Schleife in Aktion an.</p>
@@ -300,10 +302,10 @@ eigentliche Musik spielt in der darauf folgenden Klammer
 Körper der Schleife – eingeschlossen in den geschwungenen Klammern
 <code>{·}</code> – ausgeführt wird. Wir könnten der <code>for</code>-Schleife beispielsweise
 einen der folgenden Vektoren übergeben:</p>
-<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb492-1" title="1"><span class="kw">c</span>(<span class="dv">83</span>, <span class="dv">45</span>, <span class="dv">12</span>, <span class="dv">-99</span>) <span class="co"># Die Schleife würde 4x laufen</span></a>
-<a class="sourceLine" id="cb492-2" title="2"><span class="kw">c</span>(<span class="st">&quot;Cronbach&quot;</span>, <span class="st">&quot;Spearman&quot;</span>, <span class="st">&quot;Brown&quot;</span>)  <span class="co"># 3x</span></a>
-<a class="sourceLine" id="cb492-3" title="3"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="co"># 10x</span></a>
-<a class="sourceLine" id="cb492-4" title="4"><span class="kw">paste0</span>(<span class="st">&quot;item&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>) <span class="co"># 50x</span></a></code></pre></div>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb513-1" title="1"><span class="kw">c</span>(<span class="dv">83</span>, <span class="dv">45</span>, <span class="dv">12</span>, <span class="dv">-99</span>) <span class="co"># Die Schleife würde 4x laufen</span></a>
+<a class="sourceLine" id="cb513-2" title="2"><span class="kw">c</span>(<span class="st">&quot;Cronbach&quot;</span>, <span class="st">&quot;Spearman&quot;</span>, <span class="st">&quot;Brown&quot;</span>)  <span class="co"># 3x</span></a>
+<a class="sourceLine" id="cb513-3" title="3"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="co"># 10x</span></a>
+<a class="sourceLine" id="cb513-4" title="4"><span class="kw">paste0</span>(<span class="st">&quot;item&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>) <span class="co"># 50x</span></a></code></pre></div>
 <p>Wäre <code>vector</code> einer dieser vier Vektoren, würde die Schleife viermal,
 dreimal, zehnmal, oder 50 Mal durchgeführt werden. Um zu verstehen,
 warum es überhaupt Sinn macht, denselben Code-Block mehrfach
@@ -314,9 +316,9 @@ nächste Element von <code>vector</code> zugeordnet.</strong> Auf die <code>Schl
 können wir also im Körper der Schleife zugreifen und ihr Inhalt ändert
 sich in jedem Durchlauf der Schleife. Betrachten wir folgendes
 Spielzeug-Beispiel, das das Konzept der <code>for</code>-Schleife verdeutlicht:</p>
-<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb493-1" title="1"><span class="cf">for</span> (name <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&#39;Cronbach&#39;</span>, <span class="st">&#39;Spearman&#39;</span>, <span class="st">&#39;Brown&#39;</span>)) {</a>
-<a class="sourceLine" id="cb493-2" title="2">  <span class="kw">print</span>(name)</a>
-<a class="sourceLine" id="cb493-3" title="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb514-1" title="1"><span class="cf">for</span> (name <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&#39;Cronbach&#39;</span>, <span class="st">&#39;Spearman&#39;</span>, <span class="st">&#39;Brown&#39;</span>)) {</a>
+<a class="sourceLine" id="cb514-2" title="2">  <span class="kw">print</span>(name)</a>
+<a class="sourceLine" id="cb514-3" title="3">}</a></code></pre></div>
 <pre><code>[1] &quot;Cronbach&quot;
 [1] &quot;Spearman&quot;
 [1] &quot;Brown&quot;</code></pre>
@@ -349,30 +351,30 @@ automatisieren, das heißt auf einmal für alle 40 Items des NPI
 durchführen. Dafür benötige ich für jedes Item des NPI den Schlüssel,
 den ich dem Codebuch entnehmen kann. Wir übertragen die 40 Schlüssel
 zunächst manuell in einen Vektor:</p>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb495-1" title="1"><span class="co">## Schlüssel aller 40 Items in einen Vektor</span></a>
-<a class="sourceLine" id="cb495-2" title="2">keys &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb495-3" title="3">          <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb516-1" title="1"><span class="co">## Schlüssel aller 40 Items in einen Vektor</span></a>
+<a class="sourceLine" id="cb516-2" title="2">keys &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb516-3" title="3">          <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)</a></code></pre></div>
 <p>Als Nächstes führe ich mit einer <code>for</code>-Schleife die Bepunktung aller
 Items durch. In diesem Code nehme ich an, dass die NPI-Antwortdaten
 schon eingelesen wurden und die Datenbereinigung aus Kapitel 5
 durchgeführt wurde, mir also ein <code>data.frame</code> mit Namen <code>npi_clean</code>
 vorliegt, der alle Fälle ohne fehlende Antworten enthält.</p>
-<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb496-1" title="1"><span class="co">## Die Variable `npi_clean` enthält die Antworten für das NPI, siehe</span></a>
-<a class="sourceLine" id="cb496-2" title="2"><span class="co">## Kapitel 6</span></a>
-<a class="sourceLine" id="cb496-3" title="3"></a>
-<a class="sourceLine" id="cb496-4" title="4"><span class="co"># for-Schleife für die Kodierung:</span></a>
-<a class="sourceLine" id="cb496-5" title="5"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>) {</a>
-<a class="sourceLine" id="cb496-6" title="6">    <span class="co"># 1. Wähle Spaltenname des i-ten Items aus:</span></a>
-<a class="sourceLine" id="cb496-7" title="7">    colname &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Q&quot;</span>, i)</a>
-<a class="sourceLine" id="cb496-8" title="8">    <span class="co"># 2. Wähle aus Spalte die Antworten aus:</span></a>
-<a class="sourceLine" id="cb496-9" title="9">    ith_item &lt;-<span class="st"> </span>npi_clean[[colname]]</a>
-<a class="sourceLine" id="cb496-10" title="10">    <span class="co"># 3. Führe Umkodierung durch:</span></a>
-<a class="sourceLine" id="cb496-11" title="11">    narcissistic_response &lt;-<span class="st"> </span><span class="kw">ifelse</span>(ith_item <span class="op">==</span><span class="st"> </span>keys[i], <span class="dv">1</span>, <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb496-12" title="12">    <span class="co"># 4. Erstelle Namen für neue Spalte:</span></a>
-<a class="sourceLine" id="cb496-13" title="13">    new_colname  &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;coded&quot;</span>, colname)</a>
-<a class="sourceLine" id="cb496-14" title="14">    <span class="co"># 5. Hänge kodierte Werte an data.frame an:</span></a>
-<a class="sourceLine" id="cb496-15" title="15">    npi_clean[[new_colname]] &lt;-<span class="st"> </span>narcissistic_response</a>
-<a class="sourceLine" id="cb496-16" title="16">}</a></code></pre></div>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb517-1" title="1"><span class="co">## Die Variable `npi_clean` enthält die Antworten für das NPI, siehe</span></a>
+<a class="sourceLine" id="cb517-2" title="2"><span class="co">## Kapitel 6</span></a>
+<a class="sourceLine" id="cb517-3" title="3"></a>
+<a class="sourceLine" id="cb517-4" title="4"><span class="co"># for-Schleife für die Kodierung:</span></a>
+<a class="sourceLine" id="cb517-5" title="5"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>) {</a>
+<a class="sourceLine" id="cb517-6" title="6">    <span class="co"># 1. Wähle Spaltenname des i-ten Items aus:</span></a>
+<a class="sourceLine" id="cb517-7" title="7">    colname &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Q&quot;</span>, i)</a>
+<a class="sourceLine" id="cb517-8" title="8">    <span class="co"># 2. Wähle aus Spalte die Antworten aus:</span></a>
+<a class="sourceLine" id="cb517-9" title="9">    ith_item &lt;-<span class="st"> </span>npi_clean[[colname]]</a>
+<a class="sourceLine" id="cb517-10" title="10">    <span class="co"># 3. Führe Umkodierung durch:</span></a>
+<a class="sourceLine" id="cb517-11" title="11">    narcissistic_response &lt;-<span class="st"> </span><span class="kw">ifelse</span>(ith_item <span class="op">==</span><span class="st"> </span>keys[i], <span class="dv">1</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb517-12" title="12">    <span class="co"># 4. Erstelle Namen für neue Spalte:</span></a>
+<a class="sourceLine" id="cb517-13" title="13">    new_colname  &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;coded&quot;</span>, colname)</a>
+<a class="sourceLine" id="cb517-14" title="14">    <span class="co"># 5. Hänge kodierte Werte an data.frame an:</span></a>
+<a class="sourceLine" id="cb517-15" title="15">    npi_clean[[new_colname]] &lt;-<span class="st"> </span>narcissistic_response</a>
+<a class="sourceLine" id="cb517-16" title="16">}</a></code></pre></div>
 <p>Der erste Befehl im Körper der Schleife generiert mit der Funktion
 <code>paste0()</code> den Namen der Spalte, der adressiert werden soll. Im ersten
 Durchgang der <code>for</code>-Schleife wird also die Spalte <code>Q1</code> adressiert, da
@@ -406,11 +408,11 @@ alle Items oder Item-Trennschärfen zu bestimmen.</p>
 <p>Beachtet, dass ich die <code>for</code>-Schleife auch mit weniger
 Zwischenschritten hätte umsetzen können; folgender Code würde in
 weniger Zeilen dasselbe Ergebnis erzielen:</p>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb497-1" title="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>) {</a>
-<a class="sourceLine" id="cb497-2" title="2">    colname &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Q&quot;</span>, i)</a>
-<a class="sourceLine" id="cb497-3" title="3">    npi_clean[[<span class="kw">paste0</span>(<span class="st">&quot;coded&quot;</span>, colname)]] &lt;-</a>
-<a class="sourceLine" id="cb497-4" title="4"><span class="st">        </span><span class="kw">ifelse</span>(npi_clean[[colname]] <span class="op">==</span><span class="st"> </span>keys[i], <span class="dv">1</span>, <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb497-5" title="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb518-1" title="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>) {</a>
+<a class="sourceLine" id="cb518-2" title="2">    colname &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Q&quot;</span>, i)</a>
+<a class="sourceLine" id="cb518-3" title="3">    npi_clean[[<span class="kw">paste0</span>(<span class="st">&quot;coded&quot;</span>, colname)]] &lt;-</a>
+<a class="sourceLine" id="cb518-4" title="4"><span class="st">        </span><span class="kw">ifelse</span>(npi_clean[[colname]] <span class="op">==</span><span class="st"> </span>keys[i], <span class="dv">1</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb518-5" title="5">}</a></code></pre></div>
 <p>Im ersten Beispiel habe ich jedoch jeden Zwischenschritt in einer
 eigenen Variablen abgespeichert, um den Code besser verständlich zu
 machen und alle Schritte zu erklären. Aus meiner Sicht ist das
@@ -426,20 +428,20 @@ Ein wichtiger Teil einer Item-Analyse ist die Berechnung von
 Frage, wie wir mithilfe einer <code>for</code>-Schleife korrigierte
 Item-Trennschärfen für alle 40 Items des NPI berechnen können. Wir
 nutzen diesen Code:</p>
-<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb498-1" title="1"><span class="co">## Wir nutzen die umkodierten NPI-Werte: speichere diese</span></a>
-<a class="sourceLine" id="cb498-2" title="2"><span class="co">## zunächst in einem separaten data.frame ab:</span></a>
-<a class="sourceLine" id="cb498-3" title="3">columns &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;codedQ&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>)</a>
-<a class="sourceLine" id="cb498-4" title="4">items &lt;-<span class="st"> </span>npi_clean[, columns]</a>
-<a class="sourceLine" id="cb498-5" title="5"></a>
-<a class="sourceLine" id="cb498-6" title="6"><span class="co">## Berechne die Trennschärfen in Schleife</span></a>
-<a class="sourceLine" id="cb498-7" title="7"><span class="cf">for</span> (column <span class="cf">in</span> columns) {</a>
-<a class="sourceLine" id="cb498-8" title="8">    <span class="co"># 1. Summenwert unter Ausschluss eines Items</span></a>
-<a class="sourceLine" id="cb498-9" title="9">    scores &lt;-<span class="st"> </span><span class="kw">rowSums</span>(items[, column <span class="op">!=</span><span class="st"> </span><span class="kw">colnames</span>(items)])</a>
-<a class="sourceLine" id="cb498-10" title="10">    <span class="co"># 2. Korreliere damit den Item-Score</span></a>
-<a class="sourceLine" id="cb498-11" title="11">    part_whole &lt;-<span class="st"> </span><span class="kw">cor</span>(items[[column]], scores)</a>
-<a class="sourceLine" id="cb498-12" title="12">    <span class="co"># 3. Gib die Trennschärfe aus</span></a>
-<a class="sourceLine" id="cb498-13" title="13">    <span class="kw">print</span>(part_whole)</a>
-<a class="sourceLine" id="cb498-14" title="14">}</a></code></pre></div>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb519-1" title="1"><span class="co">## Wir nutzen die umkodierten NPI-Werte: speichere diese</span></a>
+<a class="sourceLine" id="cb519-2" title="2"><span class="co">## zunächst in einem separaten data.frame ab:</span></a>
+<a class="sourceLine" id="cb519-3" title="3">columns &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;codedQ&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb519-4" title="4">items &lt;-<span class="st"> </span>npi_clean[, columns]</a>
+<a class="sourceLine" id="cb519-5" title="5"></a>
+<a class="sourceLine" id="cb519-6" title="6"><span class="co">## Berechne die Trennschärfen in Schleife</span></a>
+<a class="sourceLine" id="cb519-7" title="7"><span class="cf">for</span> (column <span class="cf">in</span> columns) {</a>
+<a class="sourceLine" id="cb519-8" title="8">    <span class="co"># 1. Summenwert unter Ausschluss eines Items</span></a>
+<a class="sourceLine" id="cb519-9" title="9">    scores &lt;-<span class="st"> </span><span class="kw">rowSums</span>(items[, column <span class="op">!=</span><span class="st"> </span><span class="kw">colnames</span>(items)])</a>
+<a class="sourceLine" id="cb519-10" title="10">    <span class="co"># 2. Korreliere damit den Item-Score</span></a>
+<a class="sourceLine" id="cb519-11" title="11">    part_whole &lt;-<span class="st"> </span><span class="kw">cor</span>(items[[column]], scores)</a>
+<a class="sourceLine" id="cb519-12" title="12">    <span class="co"># 3. Gib die Trennschärfe aus</span></a>
+<a class="sourceLine" id="cb519-13" title="13">    <span class="kw">print</span>(part_whole)</a>
+<a class="sourceLine" id="cb519-14" title="14">}</a></code></pre></div>
 <pre><code>[1] 0.3558674
 [1] 0.4201535
 [1] 0.3321716
@@ -453,7 +455,7 @@ explizit auf das auszugebende Objekt aufrufen; das Objekt ohne <code>print()</co
 anzusteuern würde in keiner Reaktion resultieren.</p>
 <p>Nun aber zur Logik des Codes: Vor dem Durchlauf der Schleife wähle ich
 genau die Spalten aus <code>npi_clean</code> aus, die die zuvor erstellten
-Item-Scores enthalten und speichere sie in der Variable <code>items</code> ab.
+Item-Scores enthalten, und speichere sie in der Variable <code>items</code> ab.
 Danach startet die Schleife. In diesem Beispiel habe ich die
 Schleifenvariable <code>column</code> genannt. Das war recht willkürlich – ich
 kann der Schleifenvariable jeden Namen geben, den ich möchte. Hier habe
@@ -499,15 +501,15 @@ beinhaltet per Name und einmal per Index (siehe <a href="dataframes.html#nameind
 <h3><span class="header-section-number">7.3.1</span> Adressierung per Name</h3>
 <p>Zunächst erstelle ich wie folgt einen leeren<a href="#fn46" class="footnote-ref" id="fnref46"><sup>46</sup></a> Vektor der
 Länge 40:</p>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb500-1" title="1">discriminations &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length =</span> <span class="dv">40</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb521-1" title="1">discriminations &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length =</span> <span class="dv">40</span>)</a></code></pre></div>
 <p>Mithilfe der Funktion <code>vector()</code><a href="#fn47" class="footnote-ref" id="fnref47"><sup>47</sup></a> erstelle ich einen
 Vektor; das Argument <code>length</code> bestimmt dabei die Länge des Vektors.
 Darin möchte ich im Verlauf der 40 Durchläufe der Schleife die
 Trennschärfen der 40 Items abspeichern. Um eine Adressierung per Name zu
 ermöglichen, gebe ich den Elementen des Vektors wie folgt Namen:</p>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb501-1" title="1"><span class="kw">names</span>(discriminations) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;codedQ&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>)</a>
-<a class="sourceLine" id="cb501-2" title="2"><span class="co">## Teste:</span></a>
-<a class="sourceLine" id="cb501-3" title="3">discriminations[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb522-1" title="1"><span class="kw">names</span>(discriminations) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;codedQ&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb522-2" title="2"><span class="co">## Teste:</span></a>
+<a class="sourceLine" id="cb522-3" title="3">discriminations[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</a></code></pre></div>
 <pre><code>codedQ1 codedQ2 codedQ3 
   FALSE   FALSE   FALSE </code></pre>
 <p>So haben die Elemente meines leeren Vektors dieselben Namen wie die
@@ -516,24 +518,24 @@ Trennschärfen verwendet habe. Dass ich ausgerechnet diese Namen vergeben
 habe, hat zur Folge, dass ich recht einfach den obigen Code zur
 Berechnung der Trennschärfen umwandeln kann, um die Trennschärfen auch
 noch abzuspeichern. Dies ist der leicht angepasste Code:</p>
-<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb503-1" title="1"><span class="co">## Wähle Items aus:</span></a>
-<a class="sourceLine" id="cb503-2" title="2">columns &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;codedQ&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>)</a>
-<a class="sourceLine" id="cb503-3" title="3">items &lt;-<span class="st"> </span>npi_clean[, columns]</a>
-<a class="sourceLine" id="cb503-4" title="4"></a>
-<a class="sourceLine" id="cb503-5" title="5"><span class="co">## Erstelle leeren Vektor-Container und benenne ihn:</span></a>
-<a class="sourceLine" id="cb503-6" title="6">discriminations &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length =</span> <span class="dv">40</span>)</a>
-<a class="sourceLine" id="cb503-7" title="7"><span class="kw">names</span>(discriminations) &lt;-<span class="st"> </span>columns</a>
-<a class="sourceLine" id="cb503-8" title="8"></a>
-<a class="sourceLine" id="cb503-9" title="9"><span class="cf">for</span> (column <span class="cf">in</span> columns) {</a>
-<a class="sourceLine" id="cb503-10" title="10">    <span class="co"># 1. Summenwert unter Ausschluss eines Items</span></a>
-<a class="sourceLine" id="cb503-11" title="11">    scores &lt;-<span class="st"> </span><span class="kw">rowSums</span>(items[, column <span class="op">!=</span><span class="st"> </span><span class="kw">colnames</span>(items)])</a>
-<a class="sourceLine" id="cb503-12" title="12">    <span class="co"># 2. Korreliere damit den Item-Score</span></a>
-<a class="sourceLine" id="cb503-13" title="13">    part_whole &lt;-<span class="st"> </span><span class="kw">cor</span>(items[[column]], scores)</a>
-<a class="sourceLine" id="cb503-14" title="14">    <span class="co"># 3. Speichere Trennschärfe ab</span></a>
-<a class="sourceLine" id="cb503-15" title="15">    discriminations[column] &lt;-<span class="st"> </span>part_whole</a>
-<a class="sourceLine" id="cb503-16" title="16">}</a>
-<a class="sourceLine" id="cb503-17" title="17"><span class="co">## Voilá:</span></a>
-<a class="sourceLine" id="cb503-18" title="18"><span class="kw">head</span>(discriminations)</a></code></pre></div>
+<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb524-1" title="1"><span class="co">## Wähle Items aus:</span></a>
+<a class="sourceLine" id="cb524-2" title="2">columns &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;codedQ&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb524-3" title="3">items &lt;-<span class="st"> </span>npi_clean[, columns]</a>
+<a class="sourceLine" id="cb524-4" title="4"></a>
+<a class="sourceLine" id="cb524-5" title="5"><span class="co">## Erstelle leeren Vektor-Container und benenne ihn:</span></a>
+<a class="sourceLine" id="cb524-6" title="6">discriminations &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length =</span> <span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb524-7" title="7"><span class="kw">names</span>(discriminations) &lt;-<span class="st"> </span>columns</a>
+<a class="sourceLine" id="cb524-8" title="8"></a>
+<a class="sourceLine" id="cb524-9" title="9"><span class="cf">for</span> (column <span class="cf">in</span> columns) {</a>
+<a class="sourceLine" id="cb524-10" title="10">    <span class="co"># 1. Summenwert unter Ausschluss eines Items</span></a>
+<a class="sourceLine" id="cb524-11" title="11">    scores &lt;-<span class="st"> </span><span class="kw">rowSums</span>(items[, column <span class="op">!=</span><span class="st"> </span><span class="kw">colnames</span>(items)])</a>
+<a class="sourceLine" id="cb524-12" title="12">    <span class="co"># 2. Korreliere damit den Item-Score</span></a>
+<a class="sourceLine" id="cb524-13" title="13">    part_whole &lt;-<span class="st"> </span><span class="kw">cor</span>(items[[column]], scores)</a>
+<a class="sourceLine" id="cb524-14" title="14">    <span class="co"># 3. Speichere Trennschärfe ab</span></a>
+<a class="sourceLine" id="cb524-15" title="15">    discriminations[column] &lt;-<span class="st"> </span>part_whole</a>
+<a class="sourceLine" id="cb524-16" title="16">}</a>
+<a class="sourceLine" id="cb524-17" title="17"><span class="co">## Voilá:</span></a>
+<a class="sourceLine" id="cb524-18" title="18"><span class="kw">head</span>(discriminations)</a></code></pre></div>
 <pre><code>  codedQ1   codedQ2   codedQ3   codedQ4   codedQ5   codedQ6 
 0.3561849 0.4202523 0.3322548 0.5014695 0.4411108 0.4795097 </code></pre>
 </div>
@@ -549,26 +551,26 @@ Antworten enthält, und einen Vektor, der Schlüssel enthält. Da dieser
 Spezialfall wichtig ist, zeige ich auch für die Berechnung der
 Item-Trennschärfen, wie man die <code>for</code>-Schleife mit einer
 Index-Schleifenvariablen umsetzen kann:</p>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb505-1" title="1"><span class="co">## Wähle Items aus:</span></a>
-<a class="sourceLine" id="cb505-2" title="2">columns &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;codedQ&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>)</a>
-<a class="sourceLine" id="cb505-3" title="3">items &lt;-<span class="st"> </span>npi_clean[, columns]</a>
-<a class="sourceLine" id="cb505-4" title="4"></a>
-<a class="sourceLine" id="cb505-5" title="5"><span class="co">## Erstelle leeren Vektor-Container:</span></a>
-<a class="sourceLine" id="cb505-6" title="6">discriminations &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length =</span> <span class="dv">40</span>)</a>
-<a class="sourceLine" id="cb505-7" title="7"></a>
-<a class="sourceLine" id="cb505-8" title="8"><span class="co">## Erstelle Index-Vektor:</span></a>
-<a class="sourceLine" id="cb505-9" title="9">indices &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">40</span></a>
-<a class="sourceLine" id="cb505-10" title="10"><span class="co">## Berechne Trennschärfen in Schleife</span></a>
-<a class="sourceLine" id="cb505-11" title="11"><span class="cf">for</span> (i <span class="cf">in</span> indices) {</a>
-<a class="sourceLine" id="cb505-12" title="12">    <span class="co"># 1. Summenwert unter Ausschluss eines Items</span></a>
-<a class="sourceLine" id="cb505-13" title="13">    scores &lt;-<span class="st"> </span><span class="kw">rowSums</span>(items[, indices[<span class="op">-</span>i]])</a>
-<a class="sourceLine" id="cb505-14" title="14">    <span class="co"># 2. Korreliere damit den Item-Score</span></a>
-<a class="sourceLine" id="cb505-15" title="15">    part_whole &lt;-<span class="st"> </span><span class="kw">cor</span>(items[[i]], scores)</a>
-<a class="sourceLine" id="cb505-16" title="16">    <span class="co"># 3. Speichere Trennschärfe ab</span></a>
-<a class="sourceLine" id="cb505-17" title="17">    discriminations[i] &lt;-<span class="st"> </span>part_whole</a>
-<a class="sourceLine" id="cb505-18" title="18">}</a>
-<a class="sourceLine" id="cb505-19" title="19"><span class="co">## Voilá:</span></a>
-<a class="sourceLine" id="cb505-20" title="20"><span class="kw">head</span>(discriminations)</a></code></pre></div>
+<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb526-1" title="1"><span class="co">## Wähle Items aus:</span></a>
+<a class="sourceLine" id="cb526-2" title="2">columns &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;codedQ&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb526-3" title="3">items &lt;-<span class="st"> </span>npi_clean[, columns]</a>
+<a class="sourceLine" id="cb526-4" title="4"></a>
+<a class="sourceLine" id="cb526-5" title="5"><span class="co">## Erstelle leeren Vektor-Container:</span></a>
+<a class="sourceLine" id="cb526-6" title="6">discriminations &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length =</span> <span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb526-7" title="7"></a>
+<a class="sourceLine" id="cb526-8" title="8"><span class="co">## Erstelle Index-Vektor:</span></a>
+<a class="sourceLine" id="cb526-9" title="9">indices &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">40</span></a>
+<a class="sourceLine" id="cb526-10" title="10"><span class="co">## Berechne Trennschärfen in Schleife</span></a>
+<a class="sourceLine" id="cb526-11" title="11"><span class="cf">for</span> (i <span class="cf">in</span> indices) {</a>
+<a class="sourceLine" id="cb526-12" title="12">    <span class="co"># 1. Summenwert unter Ausschluss eines Items</span></a>
+<a class="sourceLine" id="cb526-13" title="13">    scores &lt;-<span class="st"> </span><span class="kw">rowSums</span>(items[, indices[<span class="op">-</span>i]])</a>
+<a class="sourceLine" id="cb526-14" title="14">    <span class="co"># 2. Korreliere damit den Item-Score</span></a>
+<a class="sourceLine" id="cb526-15" title="15">    part_whole &lt;-<span class="st"> </span><span class="kw">cor</span>(items[[i]], scores)</a>
+<a class="sourceLine" id="cb526-16" title="16">    <span class="co"># 3. Speichere Trennschärfe ab</span></a>
+<a class="sourceLine" id="cb526-17" title="17">    discriminations[i] &lt;-<span class="st"> </span>part_whole</a>
+<a class="sourceLine" id="cb526-18" title="18">}</a>
+<a class="sourceLine" id="cb526-19" title="19"><span class="co">## Voilá:</span></a>
+<a class="sourceLine" id="cb526-20" title="20"><span class="kw">head</span>(discriminations)</a></code></pre></div>
 <pre><code>[1] 0.3561849 0.4202523 0.3322548 0.5014695 0.4411108 0.4795097</code></pre>
 <p>Hier wird die Index-Variable <code>i</code> gleich mehrfach verwendet: (1) zur
 Auswahl der Spalten, die den jeweiligen Testwert berechnen; (2) zur
@@ -577,6 +579,23 @@ Auswahl der Spalte des Items, für das die Trennschärfe bestimmt wird;
 
 </div>
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="45">
+<li id="fn45"><p>Wer nach dem Durcharbeiten des Kapitels noch nicht genug von
+Schleifen hat, kann sich mithilfe einer Google-Suche mit der
+<code>while</code>-Schleife vertraut machen.<a href="schleifen.html#fnref45" class="footnote-back">↩</a></p></li>
+<li id="fn46"><p>Tatsächlich ist der Vektor nicht wirklich leer. Schaut
+ihn euch einmal nach der Erstellung an (d.h., gebt ihn in der Konsole
+aus).<a href="schleifen.html#fnref46" class="footnote-back">↩</a></p></li>
+<li id="fn47"><p>Es ist allgemein so, dass Funktionen mit dem
+Namen einer Datenstruktur besagte Datenstruktur erstellen. Erinnern wir
+uns an die Funktion <code>data.frame()</code>. Ebenso gibt es die Funktion <code>list()</code>,
+die eine Liste erstellt, oder die Funktion <code>matrix()</code>, die eine Matrix
+erstellt. Diese Funktionen sind oft nützlich, um leere Datencontainer zu
+erstellen, die im Verlaufe einer <code>for</code>-Schleife gefüllt werden.<a href="schleifen.html#fnref47" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 

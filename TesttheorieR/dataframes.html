@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 data.frames | Testtheorie mit R</title>
   <meta name="description" content="3 data.frames | Testtheorie mit R" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 data.frames | Testtheorie mit R" />
   <meta property="og:type" content="book" />
@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>3.4.2</b> Funktionsargumente</a></li>
 <li class="chapter" data-level="3.4.3" data-path="dataframes.html"><a href="dataframes.html#spalteneinfach"><i class="fa fa-check"></i><b>3.4.3</b> Sonderregeln zur Auswahl von Spalten</a></li>
 <li class="chapter" data-level="3.4.4" data-path="dataframes.html"><a href="dataframes.html#non-standard-evaluation"><i class="fa fa-check"></i><b>3.4.4</b> Non-Standard-Evaluation</a></li>
-<li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#umgang-mit-na-subset-bevorzugt-zur-zeilenauswahl"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
+<li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#subsettoll"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="dataframes.html"><a href="dataframes.html#doppelteckig"><i class="fa fa-check"></i><b>3.5</b> Weitere Zugriffe auf <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.5.1" data-path="dataframes.html"><a href="dataframes.html#der--zugriff"><i class="fa fa-check"></i><b>3.5.1</b> Der <code>[[·]]</code>-Zugriff</a></li>
@@ -196,7 +196,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="psychometrie.html"><a href="psychometrie.html"><i class="fa fa-check"></i><b>4</b> Erste psychometrische Auswertungen</a><ul>
 <li class="chapter" data-level="4.1" data-path="psychometrie.html"><a href="psychometrie.html#summenwerte"><i class="fa fa-check"></i><b>4.1</b> Summenwerte</a></li>
 <li class="chapter" data-level="4.2" data-path="psychometrie.html"><a href="psychometrie.html#item-schwierigkeiten"><i class="fa fa-check"></i><b>4.2</b> Item-Schwierigkeiten</a></li>
-<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a></li>
+<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="psychometrie.html"><a href="psychometrie.html#exkurs-programmatische-untersuchung-der-korrelationsmatrix"><i class="fa fa-check"></i><b>4.3.1</b> Exkurs: Programmatische Untersuchung der Korrelationsmatrix</a></li>
+</ul></li>
 <li class="chapter" data-level="4.4" data-path="psychometrie.html"><a href="psychometrie.html#trennschaerfe"><i class="fa fa-check"></i><b>4.4</b> Item-Trennschärfen</a></li>
 <li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#cronbachs-alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
 <li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilität"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
@@ -743,12 +745,12 @@ Doppelpunktoperator kann außerhalb von <code>subset()</code> nicht zur Generier
 Spaltennamen, sondern nur zur Erstellung ganzer Zahlen genutzt werden. Dass
 solche Sonderregeln bei <code>subset()</code> trotzdem funktionieren, ist einer mächtigen
 Eigenart von <code>R</code> zu verdanken, die unter dem Namen „Non-Standard-Evaluation“
-(NSE) bekannt ist. NSE ist ein tiefes und sogar kontroverses Thema. Ohne in die
+(NSE) bekannt ist. NSE ist ein komplexes und sogar kontroverses Thema. Ohne in die
 Tiefe zu gehen, können wir uns NSE wie folgt klar machen: Wann immer eine
 Funktion ein Argument annimmt, das für sich gesehen kein legales <code>R</code>-Objekt ist,
 muss sie intern so damit umgehen, dass daraus korrekter <code>R</code>-Code wird. Dieses
 Verhalten nennt man “non-standard”; die Funktion wendet NSE an.</p>
-<p>Dass <code>subset()</code> NSE anwendet, können wir uns klar machen, da die oben
+<p>Dass <code>subset()</code> NSE anwendet, können wir daran sehen, dass die oben
 übergebenen Argumente für sich gesehen keine <code>R</code>-Objekte, sondern bloß
 Fehlermeldungen ausgeben:</p>
 <div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" title="1">Testscore <span class="op">==</span><span class="st"> </span><span class="dv">1</span></a></code></pre></div>
@@ -766,7 +768,7 @@ Thema liefern.</p>
 </p>
 </div>
 </div>
-<div id="umgang-mit-na-subset-bevorzugt-zur-zeilenauswahl" class="section level3">
+<div id="subsettoll" class="section level3">
 <h3><span class="header-section-number">3.4.5</span> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</h3>
 <p>Die Funktion <code>subset()</code> bietet uns nicht nur syntaktische Vereinfachungen zur
 Auswahl von Zeilen und Spalten. Darüber hinaus ist auch das Verhalten von
@@ -1025,12 +1027,12 @@ Standardabweichung des Alters zu erfragen:</p>
 1.0000000 0.7071068 </code></pre>
 <p>Wie <code>table()</code> kann auch <code>tapply()</code> deskriptive Statistiken anhand
 mehrerer Gruppierungsvariablen anfordern. Um mehrere
-Gruppierungsvariablen anzufordern, klammern wir <code>list(...)</code> um die
-Gruppierungsvektoren im zweiten Argument:</p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb354-1" title="1"><span class="kw">tapply</span>(mdf<span class="op">$</span>Alter, <span class="kw">list</span>(mdf<span class="op">$</span>Geschlecht, mdf<span class="op">$</span>Augenfarbe), mean)</a></code></pre></div>
-<pre><code>  blau braun gruen
-m 13.5    NA    15
-w   NA  12.5    NA</code></pre>
+Gruppierungsvariablen zu nutzen, lesen wir diese als <code>data.frame</code> aus:</p>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb354-1" title="1"><span class="kw">tapply</span>(mdf<span class="op">$</span>Alter, mdf[, <span class="kw">c</span>(<span class="st">&quot;Geschlecht&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>)], mean)</a></code></pre></div>
+<pre><code>          Augenfarbe
+Geschlecht blau braun gruen
+         m 13.5    NA    15
+         w   NA  12.5    NA</code></pre>
 <p>Mit nur fünf Datenpunkten macht diese Anfrage hier nur wenig Sinn, da
 jeder ausgegebene Mittelwert nur anhand eines einzelnen Wertes gebildet
 wurde,<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a> was die Idee des Mittelwerts eher ad absurdum
@@ -1179,7 +1181,7 @@ können adressiert werden, ohne dass sie explizit aus dem zugehörigen
 Sammlung von Paketen, dem <a href="https://www.tidyverse.org/"><code>Tidyverse</code></a> <span class="citation">(Wickham et
 al., 2019)</span>, das stark von Non-Standard-Evaluation Gebrauch macht.
 Die Pakete aus dem Tidyverse folgen einem zugrundeliegenden Entwurfsprinzip
-folgen und sollen viele Aufgaben der statistischen Datenanalyse vereinfachen.</p>
+und sollen viele Aufgaben der statistischen Datenanalyse vereinfachen.</p>
 </div>
 </div>
 <div id="zusammenfassung-1" class="section level2">
@@ -1228,6 +1230,51 @@ Funktionsaufrufe funktionieren, obwohl Argumente unbenannt an der
 <div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb384-1" title="1"><span class="kw">subset</span>(<span class="st">&quot;Item1&quot;</span>, mdf, Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>)</a></code></pre></div>
 
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="15">
+<li id="fn15"><p>In der Praxis werden wir selten händisch einen ganzen
+<code>data.frame</code> aufschreiben, sondern stattdessen Daten aus einer externen
+Datei einlesen. Beispielsweise können die Daten in einem
+<em>Spreadsheet-Editor</em> wie Excel eingegeben worden sein und wir
+importieren diese dann in <code>R</code>.<a href="dataframes.html#fnref15" class="footnote-back">↩</a></p></li>
+<li id="fn16"><p>Technisch korrekt müsste ich sagen: Der
+<code>data.frame</code>, der in der Variablen <code>mdf</code> abgespeichert ist, hat nun eine
+zusätzliche Spalte.<a href="dataframes.html#fnref16" class="footnote-back">↩</a></p></li>
+<li id="fn17"><p>Es ist etwas unglücklich, dass der Begriff “Variable”
+doppeldeutig ist: (1) In <code>R</code> sind Variablen die Speicherorte von
+Objekten; ich erstelle sie mit der “<code>&lt;-</code>”-Zuweisung. (2) Andererseits
+werden auch Messwerte – etwa die Punktzahlen in einem Testitem – als
+Variablen bezeichnet. In diesem Sinne würde der Begriff Variable in <code>R</code>
+auf die Spalte in einem <code>data.frame</code> verweisen, da Spalten Messvariablen
+beinhalten. Diese Doppeldeutigkeit ist deswegen unglücklich, da eine
+Spalte in einem <code>data.frame</code> keine <code>R</code>-Variable ist. Stattdessen ist der
+gesamte <code>data.frame</code> in <strong>einer</strong> Variablen abgespeichert.<a href="dataframes.html#fnref17" class="footnote-back">↩</a></p></li>
+<li id="fn18"><p>Auch Zeilen können benannt sein. Den Fall hatten wir
+bislang aber nicht und es kommt auch nicht oft vor, dass Zeilen explizit
+benannt sind. Häufiger ist der Fall, in dem wir Spalten nach Namen
+auswählen.<a href="dataframes.html#fnref18" class="footnote-back">↩</a></p></li>
+<li id="fn19"><p>Es macht an dieser Stelle Sinn, einen Moment inne zu
+halten und zu überlegen, warum es eigentlich außergewöhnlich ist, dass
+der Befehl <code>Augenfarbe == "blau"</code> innerhalb der Funktion <code>subset()</code>
+funktioniert.<a href="dataframes.html#fnref19" class="footnote-back">↩</a></p></li>
+<li id="fn20"><p>Unter welchen Umständen würde <code>R</code> keinen Fehler
+ausgeben, wenn wir <code>c(Augenfarbe, Alter)</code> in die Konsole eingeben? Es
+ist nützlich, diesen Punkt zu verstehen.<a href="dataframes.html#fnref20" class="footnote-back">↩</a></p></li>
+<li id="fn21"><p>Beachtet, dass sowohl Messwerte als auch
+Gruppierungsvariable als <strong>Vektoren</strong> übergeben werden. Ich behandle die
+Funktion <code>tapply()</code> jedoch im Kapitel zu <code>data.frames</code>, da es zumeist so
+sein wird, dass wir beide Vektoren aus <strong>einem</strong> <code>data.frame</code> mit der
+<code>$</code>-Notation auslesen werden.<a href="dataframes.html#fnref21" class="footnote-back">↩</a></p></li>
+<li id="fn22"><p>Wie viele Datenpunkte in die Berechnung jedes
+Mittelwerts eingehen, können wir in diesem Fall prüfen mit
+<code>table(mdf$Geschlecht, mdf$Augenfarbe)</code>.<a href="dataframes.html#fnref22" class="footnote-back">↩</a></p></li>
+<li id="fn23"><p>Das Paket <code>psych</code> ist in der psychometrischen Arbeit übrigens
+äußerst wichtig; beispielsweise enthält es viel genutzten Funktionen für
+Faktorenanalysen (etwa eine Standardimplementierung der Parallelanalyse), eine
+Funktion, die Cronbachs Alpha berechnet, und viele mehr.<a href="dataframes.html#fnref23" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 

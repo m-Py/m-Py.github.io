@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 Anhang | Testtheorie mit R</title>
   <meta name="description" content="8 Anhang | Testtheorie mit R" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 Anhang | Testtheorie mit R" />
   <meta property="og:type" content="book" />
@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>3.4.2</b> Funktionsargumente</a></li>
 <li class="chapter" data-level="3.4.3" data-path="dataframes.html"><a href="dataframes.html#spalteneinfach"><i class="fa fa-check"></i><b>3.4.3</b> Sonderregeln zur Auswahl von Spalten</a></li>
 <li class="chapter" data-level="3.4.4" data-path="dataframes.html"><a href="dataframes.html#non-standard-evaluation"><i class="fa fa-check"></i><b>3.4.4</b> Non-Standard-Evaluation</a></li>
-<li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#umgang-mit-na-subset-bevorzugt-zur-zeilenauswahl"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
+<li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#subsettoll"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="dataframes.html"><a href="dataframes.html#doppelteckig"><i class="fa fa-check"></i><b>3.5</b> Weitere Zugriffe auf <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.5.1" data-path="dataframes.html"><a href="dataframes.html#der--zugriff"><i class="fa fa-check"></i><b>3.5.1</b> Der <code>[[·]]</code>-Zugriff</a></li>
@@ -196,7 +196,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="psychometrie.html"><a href="psychometrie.html"><i class="fa fa-check"></i><b>4</b> Erste psychometrische Auswertungen</a><ul>
 <li class="chapter" data-level="4.1" data-path="psychometrie.html"><a href="psychometrie.html#summenwerte"><i class="fa fa-check"></i><b>4.1</b> Summenwerte</a></li>
 <li class="chapter" data-level="4.2" data-path="psychometrie.html"><a href="psychometrie.html#item-schwierigkeiten"><i class="fa fa-check"></i><b>4.2</b> Item-Schwierigkeiten</a></li>
-<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a></li>
+<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="psychometrie.html"><a href="psychometrie.html#exkurs-programmatische-untersuchung-der-korrelationsmatrix"><i class="fa fa-check"></i><b>4.3.1</b> Exkurs: Programmatische Untersuchung der Korrelationsmatrix</a></li>
+</ul></li>
 <li class="chapter" data-level="4.4" data-path="psychometrie.html"><a href="psychometrie.html#trennschaerfe"><i class="fa fa-check"></i><b>4.4</b> Item-Trennschärfen</a></li>
 <li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#cronbachs-alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
 <li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilität"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
@@ -299,9 +301,9 @@ haben, können wir Daten einlesen, die in diesem Ordner liegen. Dafür
 werden wir Funktionen aufrufen, die den Datensatz mit Dateinamen
 ansteuern. Folgender Aufruf etwa könnte eine csv-Datei einlesen und die
 Tabelle als <code>data.frame</code> in der Variablen <code>tp</code> speichern.</p>
-<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb507-1" title="1">tp &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;technophobie.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb528-1" title="1">tp &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;technophobie.csv&quot;</span>)</a></code></pre></div>
 <p>Falls das nicht funktioniert, führt folgenden Befehl aus:</p>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb508-1" title="1"><span class="kw">getwd</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb529-1" title="1"><span class="kw">getwd</span>()</a></code></pre></div>
 <p>Dieser Befehl gibt euch euer „Working Directory“ aus; das ist der
 Ausgangspunkt, von dem aus <code>R</code> nach Dateien sucht. Die Ausgabe des Befehls sollte
 der Ordner sein, in dem ihr die Daten abgelegt habt, mit denen ihr arbeiten
@@ -331,14 +333,14 @@ nützlich zu wissen, wie man einzelne oder alle Variablen wieder
 entfernen kann. Es kann schnell passieren, dass man sehr viele Variablen
 erstellt, über die man sonst die Übersicht verliert.</p>
 <p>Mit der Funktion <code>rm</code> kann man Variablen löschen, etwa:</p>
-<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb509-1" title="1">foo &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb509-2" title="2"><span class="kw">rm</span>(foo)</a></code></pre></div>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb530-1" title="1">foo &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb530-2" title="2"><span class="kw">rm</span>(foo)</a></code></pre></div>
 <p>Möchte man alle Variablen aus dem Environment löschen, kann man den
 Befehl <code>rm(list = ls())</code> verwenden, etwa:</p>
-<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb510-1" title="1">foo &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb510-2" title="2">bar &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb510-3" title="3">gaz &lt;-<span class="st"> </span><span class="kw">mean</span>(bar)</a>
-<a class="sourceLine" id="cb510-4" title="4"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>()) <span class="co"># löscht alles, nur mit Vorsicht verwenden</span></a></code></pre></div>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb531-1" title="1">foo &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb531-2" title="2">bar &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb531-3" title="3">gaz &lt;-<span class="st"> </span><span class="kw">mean</span>(bar)</a>
+<a class="sourceLine" id="cb531-4" title="4"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>()) <span class="co"># löscht alles, nur mit Vorsicht verwenden</span></a></code></pre></div>
 </div>
 <div id="mit-einem-sauberen-environment-starten" class="section level3">
 <h3><span class="header-section-number">8.2.2</span> Mit einem sauberen Environment starten</h3>
@@ -363,6 +365,18 @@ heißen).</p>
 
 </div>
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="48">
+<li id="fn48"><p>Zumindest gilt das, wenn ihr im Befehl, der die Daten einliest
+(oben etwa <code>read.csv()</code>) nur den Dateinamen annimmt und keine weiteren Angaben
+zum Ordner, in dem die Daten liegen.<a href="anhang.html#fnref48" class="footnote-back">↩</a></p></li>
+<li id="fn49"><p>Natürlich gibt es auch hier Ausnahmen. Wenn ihr
+selber einen Grund findet, aus dem es für euch doch gut ist, die
+Variablen abzuspeichern – etwa weil das Dateneinlesen sonst sehr lange
+dauert –, dann macht bitte das, was für euch sinnvoll ist.<a href="anhang.html#fnref49" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 

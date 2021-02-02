@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Erste psychometrische Auswertungen | Testtheorie mit R</title>
   <meta name="description" content="4 Erste psychometrische Auswertungen | Testtheorie mit R" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Erste psychometrische Auswertungen | Testtheorie mit R" />
   <meta property="og:type" content="book" />
@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>3.4.2</b> Funktionsargumente</a></li>
 <li class="chapter" data-level="3.4.3" data-path="dataframes.html"><a href="dataframes.html#spalteneinfach"><i class="fa fa-check"></i><b>3.4.3</b> Sonderregeln zur Auswahl von Spalten</a></li>
 <li class="chapter" data-level="3.4.4" data-path="dataframes.html"><a href="dataframes.html#non-standard-evaluation"><i class="fa fa-check"></i><b>3.4.4</b> Non-Standard-Evaluation</a></li>
-<li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#umgang-mit-na-subset-bevorzugt-zur-zeilenauswahl"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
+<li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#subsettoll"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="dataframes.html"><a href="dataframes.html#doppelteckig"><i class="fa fa-check"></i><b>3.5</b> Weitere Zugriffe auf <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.5.1" data-path="dataframes.html"><a href="dataframes.html#der--zugriff"><i class="fa fa-check"></i><b>3.5.1</b> Der <code>[[·]]</code>-Zugriff</a></li>
@@ -196,7 +196,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="psychometrie.html"><a href="psychometrie.html"><i class="fa fa-check"></i><b>4</b> Erste psychometrische Auswertungen</a><ul>
 <li class="chapter" data-level="4.1" data-path="psychometrie.html"><a href="psychometrie.html#summenwerte"><i class="fa fa-check"></i><b>4.1</b> Summenwerte</a></li>
 <li class="chapter" data-level="4.2" data-path="psychometrie.html"><a href="psychometrie.html#item-schwierigkeiten"><i class="fa fa-check"></i><b>4.2</b> Item-Schwierigkeiten</a></li>
-<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a></li>
+<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="psychometrie.html"><a href="psychometrie.html#exkurs-programmatische-untersuchung-der-korrelationsmatrix"><i class="fa fa-check"></i><b>4.3.1</b> Exkurs: Programmatische Untersuchung der Korrelationsmatrix</a></li>
+</ul></li>
 <li class="chapter" data-level="4.4" data-path="psychometrie.html"><a href="psychometrie.html#trennschaerfe"><i class="fa fa-check"></i><b>4.4</b> Item-Trennschärfen</a></li>
 <li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#cronbachs-alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
 <li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilität"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
@@ -282,14 +284,22 @@ folgenden Konzepte behandelt:</p>
 <li>Spearman-Brown-Formel</li>
 </ul>
 <p>Angenommen, eine Datentabelle enthält die Punktzahlen von zehn
-Schulkindern in einer Klassenarbeit mit fünf Aufgaben. Diese kann man gut
-in einer <span class="math inline">\(10 \times 5\)</span> (Reihe <span class="math inline">\(\times\)</span> Spalten) Datentabelle darstellen.
-Ein Eintrag kodiert, ob das Kind (<em>Reihe</em>) die Aufgabe (<em>Spalte</em>)
-korrekt gelöst hat. Korrekte Antworten werden mit 1 kodiert, falsche
-Antworten mit 0 – ein typisches Datenformat in der psychologischen
-Diagnostik.</p>
-<p>Um das fortführende Beispiel selbst nachzuvollziehen, müsst ihr den
-folgenden <code>data.frame</code> erstellen:</p>
+Schulkindern in einer Klassenarbeit mit fünf Aufgaben. Diese kann man
+gut in einer <span class="math inline">\(10 \times 5\)</span> (Reihe <span class="math inline">\(\times\)</span> Spalten) Datentabelle
+darstellen. Ein Eintrag kodiert, ob das Kind (<em>Reihe</em>) die Aufgabe
+(<em>Spalte</em>) korrekt gelöst hat. Korrekte Antworten werden mit 1 kodiert,
+falsche Antworten mit 0 – ein typisches Datenformat in der
+psychologischen Diagnostik. Wenn uns Daten in diesem Format vorliegen,
+können wir auf viele Funktionen in <code>R</code> zurückgreifen, um grundlegende
+psychometrische Auswertungen durchzuführen. Dies sind etwa die
+Bestimmung der Schwierigkeit und der Trennschärfe von Items, sowie die
+Bestimmung einer Split-Half Reliabilität. Für fortgeschrittenere
+Auswertungen – wie etwa die Berechnung von Cronbachs Alpha oder einer
+Faktorenanalyse – werden wir auf Pakete zurückgreifen, die uns über die
+Basics in <code>R</code> hinaus weitere Funktionalitäten bieten. Aber auch für
+diese Analysen benötigen wir genau dieses Datenformat!</p>
+<p>Um das fortführende Beispiel selbst nachzuvollziehen, muss der folgende
+<code>data.frame</code> eingelesen werden:</p>
 <div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb385-1" title="1">test_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
 <a class="sourceLine" id="cb385-2" title="2">  <span class="dt">Item_1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
 <a class="sourceLine" id="cb385-3" title="3">  <span class="dt">Item_2 =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</a>
@@ -297,15 +307,6 @@ folgenden <code>data.frame</code> erstellen:</p>
 <a class="sourceLine" id="cb385-5" title="5">  <span class="dt">Item_4 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>),</a>
 <a class="sourceLine" id="cb385-6" title="6">  <span class="dt">Item_5 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</a>
 <a class="sourceLine" id="cb385-7" title="7">)</a></code></pre></div>
-<p>Wenn uns Daten in diesem Format vorliegen, können wir auf viele
-Funktionen in <code>R</code> zurückgreifen, um grundlegende psychometrische
-Auswertungen durchzuführen. Dies sind etwa die Bestimmung der
-Schwierigkeit und der Trennschärfe von Items, sowie die Bestimmung einer
-Split-Half Reliabilität. Für fortgeschrittenere Auswertungen – wie etwa
-die Berechnung von Cronbachs Alpha oder einer Faktorenanalyse – werden
-wir auf Pakete zurückgreifen, die uns über die Basics in <code>R</code> hinaus
-weitere Funktionalitäten bieten. Aber auch für diese Analysen benötigen
-wir genau dieses Datenformat!</p>
 <div class="block">
 <p>
 <strong>Merke</strong>: Das ist das Standard-Datenformat für all unsere psychometrischen Berechnungen: (a) Zeilen sind Fälle; (b) Spalten sind Items bzw. Messvariablen; (c) Zellen enthalten Datenpunkte, etwa die Korrektheit von Antworten (kodiert mit 1/0). Datenpunkte müssen nicht unbedingt – wie es in diesem Beispiel der Fall ist – dichotom sein, sondern können beispielsweise auch die Antworten in einem Persönlichkeitsfragebogen auf einer Likert-Skala repräsentieren.
@@ -322,27 +323,51 @@ können wir mit der Funktion <code>rowSums()</code> bestimmen:</p>
 <p>Es ist manchmal praktisch Berechnungen, die pro Fall einen Wert ergeben,
 direkt an den ursprünglichen <code>data.frame</code> anzuhängen. Wie in Kapitel 3
 erklärt, ist das mit der <code>$</code>-Notation möglich:</p>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" title="1">test_data<span class="op">$</span>score &lt;-<span class="st"> </span><span class="kw">rowSums</span>(test_data)</a></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" title="1">test_data<span class="op">$</span>score &lt;-<span class="st"> </span><span class="kw">rowSums</span>(test_data)</a>
+<a class="sourceLine" id="cb388-2" title="2">test_data</a></code></pre></div>
+<pre><code>   Item_1 Item_2 Item_3 Item_4 Item_5 score
+1       1      0      1      1      1     4
+2       1      0      0      0      0     1
+3       1      1      1      1      1     5
+4       0      0      0      0      0     0
+5       0      0      1      1      1     3
+6       0      0      1      0      0     1
+7       1      0      1      0      0     2
+8       1      0      0      0      0     1
+9       1      0      1      1      0     3
+10      0      0      0      0      0     0</code></pre>
+<p>Da viele viele Analysen aber nur einen <code>data.frame</code> mit den Item-Spalten
+benötigt (<span class="math inline">\(\to\)</span> psychometrisches Standardformat), ist hier Vorsicht bei
+der Weiterverwendung geboten!</p>
 </div>
 <div id="item-schwierigkeiten" class="section level2">
 <h2><span class="header-section-number">4.2</span> Item-Schwierigkeiten</h2>
 <p>Die Schwierigkeit eines Items ist die mittlere Punktzahl aller Personen
-in diesem Item.<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a> Das ist somit also einfach der
-Mittelwert der Einträge in jeder Spalte (engl: <em>column</em>) in unserem
-Standardformat. Den Mittelwert pro Spalte kann ich mit der Funktion
-<code>colMeans()</code> bestimmen (analog gibt es auch die Funktionen <code>colSums()</code> und
-<code>rowMeans()</code>):</p>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb389-1" title="1"><span class="kw">colMeans</span>(test_data)</a></code></pre></div>
+in diesem Item. Auch bei Items, die nicht Korrektheit kodieren, kann man
+von Item-Schwierigkeit sprechen. Beispielsweise wäre dann die
+Item-Schwierigkeit die mittlere Zustimmungsrate für ein Item in einem
+Persönlichkeitsinventar, in dem Antworten auf einer 5-stufigen
+Likert-Skala gegeben werden. Hierbei macht die Einteilung in hohe vs. 
+niedrige Schwierigkeit wenig Sinn; technisch gesehen bedeuten immer
+niedrigere Werte eine höhere Schwierigkeit (also etwa eine niedrige
+Zustimmungsrate).</p>
+<p>Technisch gesehen ist die Schwierigkeit eines Items der Mittelwert der
+Itemwerte in einer Spalte (engl: <em>column</em>) eines <code>data.frames</code> im
+psychometrischen Standardformat. Den Mittelwert pro Spalte kann ich mit
+der Funktion <code>colMeans()</code> bestimmen (analog gibt es auch die Funktionen
+<code>colSums()</code> und <code>rowMeans()</code>):</p>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb390-1" title="1"><span class="kw">colMeans</span>(test_data)</a></code></pre></div>
 <pre><code>Item_1 Item_2 Item_3 Item_4 Item_5  score 
    0.6    0.1    0.6    0.4    0.3    2.0 </code></pre>
 <p>Da ich gerade den Gesamtscore als Spalte an <code>test_data</code> angehängt habe,
 bekomme ich die mittlere Punktzahl der Schüler/innen in den fünf
-Testitems direkt mitgeliefert. Beachtet, dass ich hier mit <code>colMeans()</code>
-eine numerische Funktion auf den ganzen <code>data.frame</code> angewendet habe.
-Würde der <code>data.frame</code> auch Spalten vom Typ <code>factor</code> oder <code>character</code>
+Testitems direkt mitgeliefert.</p>
+<p>Die Funktion <code>colMeans()</code> generalisiert die Funktion <code>mean()</code> von einem
+einzelnen Vektor auf alle Spalten in einem <code>data.frame</code>. Beachtet: Würde
+der <code>data.frame</code> auch Spalten vom Typ <code>factor</code> oder <code>character</code>
 enthalten, wäre es nicht möglich, Funktionen wie <code>rowSums()</code> und
-<code>colMeans()</code> anzuwenden. In dem Fall könnte man mit der <code>[·,·]</code>-Notation
-oder der Funktion <code>subset()</code> nur die gewünschten Spalten auswählen.</p>
+<code>colMeans()</code> darauf anzuwenden. Hier muss jede Spalte einen numerischen
+Vektor enthalten.</p>
 </div>
 <div id="item-interkorrelationen" class="section level2">
 <h2><span class="header-section-number">4.3</span> Item-Interkorrelationen</h2>
@@ -351,92 +376,166 @@ zwischen allen Items als Korrelationsmatrix aus. Wenn <code>cor()</code> als
 Argument einen <code>data.frame</code> erhält, wird eine Tabelle ausgegeben, die
 die Korrelation zwischen allen Spalten – d.h. Items – des
 <code>data.frames</code> enthält.</p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb391-1" title="1"><span class="kw">round</span>(<span class="kw">cor</span>(test_data), <span class="dv">2</span>)</a></code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th align="right">Item_1</th>
-<th align="right">Item_2</th>
-<th align="right">Item_3</th>
-<th align="right">Item_4</th>
-<th align="right">Item_5</th>
-<th align="right">score</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Item_1</td>
-<td align="right">1.00</td>
-<td align="right">0.27</td>
-<td align="right">0.17</td>
-<td align="right">0.25</td>
-<td align="right">0.09</td>
-<td align="right">0.51</td>
-</tr>
-<tr class="even">
-<td>Item_2</td>
-<td align="right">0.27</td>
-<td align="right">1.00</td>
-<td align="right">0.27</td>
-<td align="right">0.41</td>
-<td align="right">0.51</td>
-<td align="right">0.62</td>
-</tr>
-<tr class="odd">
-<td>Item_3</td>
-<td align="right">0.17</td>
-<td align="right">0.27</td>
-<td align="right">1.00</td>
-<td align="right">0.67</td>
-<td align="right">0.53</td>
-<td align="right">0.76</td>
-</tr>
-<tr class="even">
-<td>Item_4</td>
-<td align="right">0.25</td>
-<td align="right">0.41</td>
-<td align="right">0.67</td>
-<td align="right">1.00</td>
-<td align="right">0.80</td>
-<td align="right">0.89</td>
-</tr>
-<tr class="odd">
-<td>Item_5</td>
-<td align="right">0.09</td>
-<td align="right">0.51</td>
-<td align="right">0.53</td>
-<td align="right">0.80</td>
-<td align="right">1.00</td>
-<td align="right">0.81</td>
-</tr>
-<tr class="even">
-<td>score</td>
-<td align="right">0.51</td>
-<td align="right">0.62</td>
-<td align="right">0.76</td>
-<td align="right">0.89</td>
-<td align="right">0.81</td>
-<td align="right">1.00</td>
-</tr>
-</tbody>
-</table>
-<p>Die Korrelationen wurden aus Darstellungszwecken mit der Funktion
-<code>round()</code> auf zwei Nachkommastellen gerundet.</p>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb392-1" title="1"><span class="kw">round</span>(<span class="kw">cor</span>(test_data), <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>       Item_1 Item_2 Item_3 Item_4 Item_5 score
+Item_1   1.00   0.27   0.17   0.25   0.09  0.51
+Item_2   0.27   1.00   0.27   0.41   0.51  0.62
+Item_3   0.17   0.27   1.00   0.67   0.53  0.76
+Item_4   0.25   0.41   0.67   1.00   0.80  0.89
+Item_5   0.09   0.51   0.53   0.80   1.00  0.81
+score    0.51   0.62   0.76   0.89   0.81  1.00</code></pre>
+<p>Die Korrelationen wurden aus Darstellungszwecken mit der Funktion <code>round()</code> auf
+zwei Nachkommastellen gerundet. Die Ausgabe der Funktion <code>cor()</code> ist eine
+Tabelle, die alle Korrelationen zwischen den Items (und auch mit dem
+Gesamtscore) abbildet. Beachtet, dass die Matrix symmetrisch ist, also die
+Korrelation zwischen Item 1 und Item 2 natürlich der Korrelation zwischen Item 2
+und Item 1 entspricht. Auf der Diagonalen befindet sich immer eine 1, da jedes
+Item perfekt mit sich selbst korreliert. Die ausgegebene Tabelle erinnert an
+einen <code>data.frame</code>, ist aber technisch gesehen eine andere Datenstruktur,
+nämlich eine Matrix. Der Unterschied zwischen Matritzen und <code>data.frames</code> soll
+uns jedoch zunächst nicht kümmern.</p>
+<div id="exkurs-programmatische-untersuchung-der-korrelationsmatrix" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Exkurs: Programmatische Untersuchung der Korrelationsmatrix</h3>
+<p>Große Item-Korrelationsmatritzen sind oftmals unübersichtlich und erschweren den
+Überblick darüber, welche Items stärker oder weniger stark miteinander
+korrelieren. Eine visuelle Inspektion ist demnach mühsam und fehleranfällig.
+Stattdessen würden wir lieber programmatisch die Eigenschaften der
+Korrelationsmatrix erforschen. Glücklicherweise ist dies mit R möglich, da die
+Korrelationsmatrix selbst nur ein R-Objekt ist und wir beliebig damit arbeiten
+können.</p>
+<p>Typischerweise weiß man beispielsweise gerne, welche zwei Items am stärksten
+miteinander korrelieren. Um dieser Frage nachzugehen, lernen wir in diesem
+Abschnitt, dass vektorisierte R-Funktionen im Normalfall nicht nur auf einfachen
+Vektoren agieren (siehe <a href="vektoren.html#vektorisierung">Kapitel 2</a>), sondern sich auch auf
+komplexere Strukturen wie eine Korrelationsmatrix übertragen lassen.</p>
+<p>Speichern wir zunächst die Item-Korrelationsmatrix in einer Variablen ab. Dabei
+achten wir darauf, die Korrelation zum Summenscore aus der Korrelationsmatrix zu
+entfernen; es interessieren uns nur die Korrelationen zwischen den einzelnen
+Items (der nächste Abschnitt behandelt die Bedeutung der Korrelationen zwischen
+Items und Summenscore):</p>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb394-1" title="1">item_cors &lt;-<span class="st"> </span><span class="kw">cor</span>(test_data[, <span class="dv">-6</span>]) <span class="co"># 6. Spalte = Summenscore über die Items</span></a></code></pre></div>
+<p>Zunächst stellen wir fest, dass logische Operationen auf Korrelationsmatritzen
+anwendbar sind. Wir können so etwa feststellen, welche Items stärker als zu <em>r</em>
+= .50 miteinander korrelieren:</p>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb395-1" title="1">item_cors <span class="op">&gt;</span><span class="st"> </span><span class="fl">.50</span></a></code></pre></div>
+<pre><code>       Item_1 Item_2 Item_3 Item_4 Item_5
+Item_1   TRUE  FALSE  FALSE  FALSE  FALSE
+Item_2  FALSE   TRUE  FALSE  FALSE   TRUE
+Item_3  FALSE  FALSE   TRUE   TRUE   TRUE
+Item_4  FALSE  FALSE   TRUE   TRUE   TRUE
+Item_5  FALSE   TRUE   TRUE   TRUE   TRUE</code></pre>
+<p>Die Ausgabe ist eine logische Matrix, die für jedes Itempaar kodiert, ob die
+Korrelation zwischen diesen Items größer ist als <em>r</em> = .50. Bei Item 5 und Item
+2 ist dies beispielsweise der Fall. Eine solche logische Matrix kann jedoch
+gerade bei vielen Items unübersichtlich werden. Wir können mit der Funktion
+<a href="dataframes.html#subsettoll"><code>which()</code></a> herausfinden, welche Items mit mehr als <em>r</em> = .50
+miteinander korrelieren:</p>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb397-1" title="1"><span class="kw">which</span>(item_cors <span class="op">&gt;</span><span class="st"> </span><span class="fl">.50</span>, <span class="dt">arr.ind =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>       row col
+Item_1   1   1
+Item_2   2   2
+Item_5   5   2
+Item_3   3   3
+Item_4   4   3
+Item_5   5   3
+Item_3   3   4
+Item_4   4   4
+Item_5   5   4
+Item_2   2   5
+Item_3   3   5
+Item_4   4   5
+Item_5   5   5</code></pre>
+<p>Da wir hier eine Matrix und nicht einen Vektor untersuchen, müssen wir das
+Argument <code>arr.ind = TRUE</code> setzen, um eine sinnvolle Ausgabe zu erhalten.
+Besonders übersichtlich ist diese Ausgabe jedoch immer noch nicht, da sie auch
+alle “Autokorrelationen” markiert – also die Diagonale der Korrelationsmatrix,
+die die Korrelation jedes Items mit sich selbst abbildet. Dies wollen wir
+vermeiden. Eine Möglichkeit ist es, die Diagonale der Korrelationsmatrix
+anzupassen. Auch hier verwenden wir eine Operation, die wir im Kapitel zu
+Vektoren kennengelernt haben und die auch auf Matritzen generalisiert:</p>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb399-1" title="1">item_cors[item_cors <span class="op">==</span><span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb399-2" title="2"><span class="kw">round</span>(item_cors, <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>       Item_1 Item_2 Item_3 Item_4 Item_5
+Item_1     NA   0.27   0.17   0.25   0.09
+Item_2   0.27     NA   0.27   0.41   0.51
+Item_3   0.17   0.27     NA   0.67   0.53
+Item_4   0.25   0.41   0.67     NA   0.80
+Item_5   0.09   0.51   0.53   0.80     NA</code></pre>
+<p>Wir ersetzen auf diese Weise alle Einsen der Korrelationsmatrix durch einen
+fehlenden Wert; danach können wir per <code>which()</code> einfacher erfragen, welche
+Korrelationen größer als <em>r</em> = .50 sind:</p>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb401-1" title="1"><span class="kw">which</span>(item_cors <span class="op">&gt;</span><span class="st"> </span><span class="fl">.50</span>, <span class="dt">arr.ind =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>       row col
+Item_5   5   2
+Item_4   4   3
+Item_5   5   3
+Item_3   3   4
+Item_5   5   4
+Item_2   2   5
+Item_3   3   5
+Item_4   4   5</code></pre>
+<p>Noch besser wird die Ausgabe, wenn wir die Redundanz aus der Korrelationsmatrix
+entfernen; schließlich befinden sich im oberen und unteren Dreieck der Matrix
+dieselben Informationen. Wir können die Korrelationen oben rechts durch
+Verwendung der Funktion <code>upper.tri()</code><a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a> durch <code>NA</code> ersetzen:</p>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb403-1" title="1">item_cors[<span class="kw">upper.tri</span>(item_cors)] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb403-2" title="2"><span class="kw">round</span>(item_cors, <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>       Item_1 Item_2 Item_3 Item_4 Item_5
+Item_1     NA     NA     NA     NA     NA
+Item_2   0.27     NA     NA     NA     NA
+Item_3   0.17   0.27     NA     NA     NA
+Item_4   0.25   0.41   0.67     NA     NA
+Item_5   0.09   0.51   0.53    0.8     NA</code></pre>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb405-1" title="1"><span class="kw">which</span>(item_cors <span class="op">&gt;</span><span class="st"> </span><span class="fl">.50</span>, <span class="dt">arr.ind =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>       row col
+Item_5   5   2
+Item_4   4   3
+Item_5   5   3
+Item_5   5   4</code></pre>
+<p>Item 5 korreliert also stark mit den Items 2, 3 und 4, und Item 3 korreliert
+noch stark mit Item 4.</p>
+<p>Mit einem ähnlichen Vorgehen können wir programmatisch – ohne visuelle
+Inspektion – bestimmen, zwischen welchen Items die stärkste Korrelation
+besteht. Hier wenden wir zunächst die Funktion <code>max()</code> auf die
+Korrelationsmatrix an:</p>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb407-1" title="1">maximum_cor &lt;-<span class="st"> </span><span class="kw">max</span>(item_cors, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb407-2" title="2">maximum_cor</a></code></pre></div>
+<pre><code>[1] 0.8017837</code></pre>
+<p>Beachtet, dass diese Operation nicht sinnvoll gewesen wäre, wenn die
+Autokorrelationen auf der Diagonalen noch enthalten gewesen wären. Nun können
+wir durch eine logische Abfrage und die Funktion <code>which()</code> bestimmen, zwischen
+welchen Items die stärkste Korrelation besteht:</p>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb409-1" title="1"><span class="kw">which</span>(item_cors <span class="op">==</span><span class="st"> </span>maximum_cor, <span class="dt">arr.ind =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>       row col
+Item_5   5   4</code></pre>
+<p>Am stärksten korrelieren also die Items 4 und 5 miteinander. Zugegeben, das
+hätten wir im Falle von 5 Items auch einfach durch Betrachten der
+Korrelationsmatrix erfassen können, aber gerade bei sehr großen Test-Inventaren
+ist die programmatische Untersuchung einer Korrelationsmatrix einer visuellen
+Inspektion gegenüber deutlich zu bevorzugen.</p>
+</div>
 </div>
 <div id="trennschaerfe" class="section level2">
 <h2><span class="header-section-number">4.4</span> Item-Trennschärfen</h2>
-<p>Interessant ist die letzte Spalte (bzw. genauso die letzte Zeile) der
-Tabelle der Item-Korrelationen. Diese gibt an, wie stark die Korrelation
-zwischen jedem Item und dem Testscore ausfällt. Dieser Kennwert ist die
-(unkorrigierte) Trennschärfe der Items; wir erhalten sie, da wir oben
-den Testscore als Spalte an unseren <code>data.frame</code> angehängt haben. Die
-Item-Trennschärfe macht eine Aussage darüber, wie stark das Abschneiden
-in einem Item mit dem Gesamt-Testscore zusammenhängt. Je höher die
-Trennschärfe, desto besser vermag das Item zwischen Schüler/innen mit
-viel und wenig Wissen (also einem hohen bzw. einem niedrigen
-Gesamt-Testscore) zu trennen. Die Trennschärfe ist ein Kennwert, der zur
-Beurteilung der Güte eines Items dienen kann.</p>
+<p>Interessant ist die letzte Spalte (bzw. genauso die letzte Zeile) der obigen
+Korrelationsmatrix:</p>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb411-1" title="1"><span class="kw">round</span>(<span class="kw">cor</span>(test_data), <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>       Item_1 Item_2 Item_3 Item_4 Item_5 score
+Item_1   1.00   0.27   0.17   0.25   0.09  0.51
+Item_2   0.27   1.00   0.27   0.41   0.51  0.62
+Item_3   0.17   0.27   1.00   0.67   0.53  0.76
+Item_4   0.25   0.41   0.67   1.00   0.80  0.89
+Item_5   0.09   0.51   0.53   0.80   1.00  0.81
+score    0.51   0.62   0.76   0.89   0.81  1.00</code></pre>
+<p>Diese gibt an, wie stark die Korrelation zwischen jedem Item und dem Testscore
+ausfällt. Dieser Kennwert ist die (unkorrigierte) Trennschärfe der Items; wir
+erhalten sie, da wir oben den Testscore als Spalte an unseren <code>data.frame</code>
+angehängt haben. Die Item-Trennschärfe macht eine Aussage darüber, wie stark das
+Abschneiden in einem Item mit dem Gesamt-Testscore zusammenhängt. Je höher die
+Trennschärfe, desto besser vermag das Item zwischen Schüler/innen mit viel und
+wenig Wissen (also einem hohen bzw. einem niedrigen Gesamt-Testscore) zu
+trennen. Die Trennschärfe ist ein Kennwert, der zur Beurteilung der Güte eines
+Items dienen kann.</p>
 <p>Oftmals wird die „part-whole“ korrigierte Trennschärfe berechnet, bei
 der zur Berechnung der Trennschärfe jedes Items der Itemscore dieses
 Items aus der Gesamtpunktzahl ausgelassen wird. Somit wird eine
@@ -448,12 +547,12 @@ Folgenden berechnen wir eine part-whole korrigierte Trennschärfe für
 Item 2. Zunächst erstelle ich einen Vektor zur Auswahl der Items, die
 ich zur Berechnung des Testscores unter Ausschluss von Item 2
 heranziehe:</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb392-1" title="1"><span class="co">## Wähle Antworten auf Items 1, 3, 4, 5 aus:</span></a>
-<a class="sourceLine" id="cb392-2" title="2">select_items   &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, (<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)[<span class="op">-</span><span class="dv">2</span>])</a>
-<a class="sourceLine" id="cb392-3" title="3">responses_no_item2 &lt;-<span class="st"> </span>test_data[, select_items]</a>
-<a class="sourceLine" id="cb392-4" title="4"></a>
-<a class="sourceLine" id="cb392-5" title="5"><span class="co">## Betrachte die Tabelle:</span></a>
-<a class="sourceLine" id="cb392-6" title="6"><span class="kw">head</span>(responses_no_item2)</a></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb413-1" title="1"><span class="co">## Wähle Antworten auf Items 1, 3, 4, 5 aus:</span></a>
+<a class="sourceLine" id="cb413-2" title="2">select_items   &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, (<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)[<span class="op">-</span><span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb413-3" title="3">responses_no_item2 &lt;-<span class="st"> </span>test_data[, select_items]</a>
+<a class="sourceLine" id="cb413-4" title="4"></a>
+<a class="sourceLine" id="cb413-5" title="5"><span class="co">## Betrachte die Tabelle:</span></a>
+<a class="sourceLine" id="cb413-6" title="6"><span class="kw">head</span>(responses_no_item2)</a></code></pre></div>
 <pre><code>  Item_1 Item_3 Item_4 Item_5
 1      1      1      1      1
 2      1      0      0      0
@@ -461,19 +560,19 @@ heranziehe:</p>
 4      0      0      0      0
 5      0      1      1      1
 6      0      1      0      0</code></pre>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb394-1" title="1"><span class="co">## Berechne den Testscore über Items 1, 3, 4 und 5:</span></a>
-<a class="sourceLine" id="cb394-2" title="2">corrected_score &lt;-<span class="st"> </span><span class="kw">rowSums</span>(responses_no_item2)</a></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb415-1" title="1"><span class="co">## Berechne den Testscore über Items 1, 3, 4 und 5:</span></a>
+<a class="sourceLine" id="cb415-2" title="2">corrected_score &lt;-<span class="st"> </span><span class="kw">rowSums</span>(responses_no_item2)</a></code></pre></div>
 <p>Die Variable <code>corrected_score</code> enthält nun die Testscores, die unter
 Ausschluss des zweiten Items gebildet wurden. Das Vorgehen zur
 Berechnung der bereinigten Scores lässt sich mithilfe der
 <code>[·,·]</code>-Notation und den Funktionen <code>paste0()</code> und <code>rowSums()</code> auch auf
 beliebig viele Items erweitern. Da wir hier den Summenwert nur über vier
 Items gebildet haben, hätte auch der folgende Code funktioniert:</p>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb395-1" title="1">corrected_score &lt;-<span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">3</span> <span class="op">+</span></a>
-<a class="sourceLine" id="cb395-2" title="2"><span class="st">    </span>test_data<span class="op">$</span>Item_<span class="dv">4</span> <span class="op">+</span><span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">5</span></a></code></pre></div>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb416-1" title="1">corrected_score &lt;-<span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">3</span> <span class="op">+</span></a>
+<a class="sourceLine" id="cb416-2" title="2"><span class="st">    </span>test_data<span class="op">$</span>Item_<span class="dv">4</span> <span class="op">+</span><span class="st"> </span>test_data<span class="op">$</span>Item_<span class="dv">5</span></a></code></pre></div>
 <p>Wie folgt können wir nun mithilfe der Funktion <code>cor()</code> die korrigierte
 Trennschärfe für Item 2 bestimmen:</p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb396-1" title="1"><span class="kw">cor</span>(test_data<span class="op">$</span>Item_<span class="dv">2</span>, corrected_score)</a></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb417-1" title="1"><span class="kw">cor</span>(test_data<span class="op">$</span>Item_<span class="dv">2</span>, corrected_score)</a></code></pre></div>
 <pre><code>[1] 0.4842001</code></pre>
 <p>Die korrigierte Trennschärfe von 0.48 liegt unter der unkorrigierten Trennschärfe von
 0.62. Je weniger Items ein Test hat,
@@ -540,12 +639,12 @@ von Cronbachs Alpha findet sich im Paket <code>psychometric</code>
 die nicht zur Grundausstattung von <code>R</code> gehören. Voraussetzung ist, dass
 ich das Paket auf meinem Rechner installiert habe. Die Erweiterbarkeit
 durch Pakete ist eine der großen Stärken von <code>R</code>.</p>
-<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb398-1" title="1"><span class="co"># Das Paket `psychometric` enthält eine Funktion, die Cronbachs Alpha</span></a>
-<a class="sourceLine" id="cb398-2" title="2"><span class="co"># berechnet</span></a>
-<a class="sourceLine" id="cb398-3" title="3"><span class="kw">library</span>(<span class="st">&quot;psychometric&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb419-1" title="1"><span class="co"># Das Paket `psychometric` enthält eine Funktion, die Cronbachs Alpha</span></a>
+<a class="sourceLine" id="cb419-2" title="2"><span class="co"># berechnet</span></a>
+<a class="sourceLine" id="cb419-3" title="3"><span class="kw">library</span>(<span class="st">&quot;psychometric&quot;</span>)</a></code></pre></div>
 <p>Falls das Paket nicht installiert ist, kann ich es mit dem folgenden
 Befehl installieren:</p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb399-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;psychometric&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb420-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;psychometric&quot;</span>)</a></code></pre></div>
 <p>Praktischerweise arbeitet die Funktion <code>alpha()</code> aus dem <code>psychometric</code>
 Paket genau mit dem Standard-Datenformat, das uns vorliegt: Zeilen
 kennzeichnen Testteilnehmer, Spalten kennzeichnen Items. <strong>Wichtig ist
@@ -553,10 +652,10 @@ aber nun</strong>: Wir haben soeben den Testscore als zusätzliche Spalte an die
 Testdatentabelle angehängt. Diese geht aber nicht in die Berechnung von
 Cronbachs Alpha ein, sondern nur die Punktzahlen für die Items. Deswegen
 entferne ich die Spalte <code>score</code> wie folgt wieder:</p>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb400-1" title="1">test_data<span class="op">$</span>score &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb400-2" title="2"></a>
-<a class="sourceLine" id="cb400-3" title="3"><span class="co">## Prüfe, dass die Spalte wirklich weg ist:</span></a>
-<a class="sourceLine" id="cb400-4" title="4"><span class="kw">names</span>(test_data)</a></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb421-1" title="1">test_data<span class="op">$</span>score &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb421-2" title="2"></a>
+<a class="sourceLine" id="cb421-3" title="3"><span class="co">## Prüfe, dass die Spalte wirklich weg ist:</span></a>
+<a class="sourceLine" id="cb421-4" title="4"><span class="kw">names</span>(test_data)</a></code></pre></div>
 <pre><code>[1] &quot;Item_1&quot; &quot;Item_2&quot; &quot;Item_3&quot; &quot;Item_4&quot; &quot;Item_5&quot;</code></pre>
 <p>Wir haben gelernt, dass wir Variablen mit der Funktion <code>rm()</code> löschen
 können. Wir können sie aber nicht nutzen, wenn wir Spalten aus
@@ -567,7 +666,7 @@ ist in <code>R</code> ein Wert, der für „Nicht-Existenz“ steht.</p>
 <p>Nachdem wir das Paket <code>psychometric</code> geladen und die Spalte <code>score</code>
 entfernt haben, können wir Cronbachs Alpha mit der Funktion <code>alpha()</code>
 bestimmen:</p>
-<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb402-1" title="1"><span class="kw">alpha</span>(test_data) <span class="co"># erfordert Laden des Pakets psychometric</span></a></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb423-1" title="1"><span class="kw">alpha</span>(test_data) <span class="co"># erfordert Laden des Pakets psychometric</span></a></code></pre></div>
 <pre><code>[1] 0.7596154</code></pre>
 </div>
 <div id="split-half-reliabilität" class="section level2">
@@ -605,39 +704,39 @@ zweimal der gesamte Test in die Korrelation ein).</p>
 teilen wir zunächst die Items in zwei Mengen auf; hier ist es nicht
 möglich gleich große Teile zu generieren, also wählen wir die ersten
 drei und die letzten zwei Items aus:</p>
-<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb404-1" title="1">first_half  &lt;-<span class="st"> </span>test_data[, <span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)]</a>
-<a class="sourceLine" id="cb404-2" title="2">second_half &lt;-<span class="st"> </span>test_data[, <span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">5</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb425-1" title="1">first_half  &lt;-<span class="st"> </span>test_data[, <span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)]</a>
+<a class="sourceLine" id="cb425-2" title="2">second_half &lt;-<span class="st"> </span>test_data[, <span class="kw">paste0</span>(<span class="st">&quot;Item_&quot;</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">5</span>)]</a></code></pre></div>
 <p>Als nächstes berechnen wir die Korrelation zwischen den beiden
 Testhälften:</p>
-<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb405-1" title="1">cor_halfs &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="kw">rowSums</span>(first_half), <span class="kw">rowSums</span>(second_half))</a>
-<a class="sourceLine" id="cb405-2" title="2">cor_halfs</a></code></pre></div>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb426-1" title="1">cor_halfs &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="kw">rowSums</span>(first_half), <span class="kw">rowSums</span>(second_half))</a>
+<a class="sourceLine" id="cb426-2" title="2">cor_halfs</a></code></pre></div>
 <pre><code>[1] 0.6049383</code></pre>
 <p>Nun wollen wir diese Korrelation mit der Spearman-Brown-Formel
 korrigieren. Zu diesem Zweck definieren wir eine eigene Funktion, die
 die Spearman-Brown-Formel umsetzt. An dieser Stelle reicht es aus, das
 Konzept einer eigenen Funktion zur Kenntnis zu nehmen – es wird in
 Kapitel 6 wieder aufgegriffen:</p>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb407-1" title="1"><span class="co">## Definiere eine SPEARMAN-BROWN Funktion. Sie nimmt zwei Argumente an: </span></a>
-<a class="sourceLine" id="cb407-2" title="2"><span class="co">## (a) einen Reliabilitäts-Schätzer</span></a>
-<a class="sourceLine" id="cb407-3" title="3"><span class="co">## (b) einen Verlängerungsfaktor</span></a>
-<a class="sourceLine" id="cb407-4" title="4"></a>
-<a class="sourceLine" id="cb407-5" title="5">spearman_brown &lt;-<span class="st"> </span><span class="cf">function</span>(reliability, factor) {</a>
-<a class="sourceLine" id="cb407-6" title="6">    numerator  &lt;-<span class="st"> </span>reliability <span class="op">*</span><span class="st"> </span>factor</a>
-<a class="sourceLine" id="cb407-7" title="7">    denominator &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(factor<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span>reliability</a>
-<a class="sourceLine" id="cb407-8" title="8">    corrected_reliability &lt;-<span class="st"> </span>numerator <span class="op">/</span><span class="st"> </span>denominator</a>
-<a class="sourceLine" id="cb407-9" title="9">    <span class="kw">return</span>(corrected_reliability)</a>
-<a class="sourceLine" id="cb407-10" title="10">}</a></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb428-1" title="1"><span class="co">## Definiere eine SPEARMAN-BROWN Funktion. Sie nimmt zwei Argumente an: </span></a>
+<a class="sourceLine" id="cb428-2" title="2"><span class="co">## (a) einen Reliabilitäts-Schätzer</span></a>
+<a class="sourceLine" id="cb428-3" title="3"><span class="co">## (b) einen Verlängerungsfaktor</span></a>
+<a class="sourceLine" id="cb428-4" title="4"></a>
+<a class="sourceLine" id="cb428-5" title="5">spearman_brown &lt;-<span class="st"> </span><span class="cf">function</span>(reliability, factor) {</a>
+<a class="sourceLine" id="cb428-6" title="6">    numerator  &lt;-<span class="st"> </span>reliability <span class="op">*</span><span class="st"> </span>factor</a>
+<a class="sourceLine" id="cb428-7" title="7">    denominator &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(factor<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span>reliability</a>
+<a class="sourceLine" id="cb428-8" title="8">    corrected_reliability &lt;-<span class="st"> </span>numerator <span class="op">/</span><span class="st"> </span>denominator</a>
+<a class="sourceLine" id="cb428-9" title="9">    <span class="kw">return</span>(corrected_reliability)</a>
+<a class="sourceLine" id="cb428-10" title="10">}</a></code></pre></div>
 <p>Wenn wir die Funktion definiert haben – das heißt: den Funktions-Code
 in der Konsole ausgeführt haben –, können wir sie wie andere bekannte
 Funktionen aufrufen. Wir müssen zwei Argumente angeben: (1) Unseren
 initialen Schätzer der Reliabilität, also die Korrelation zwischen den
 zwei Testhälften; (2) den Verlängerungsfaktor, hier 2, da wir die
 Reliabilität für die doppelte Testlänge schätzen wollen:</p>
-<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb408-1" title="1">split_half &lt;-<span class="st"> </span><span class="kw">spearman_brown</span>(cor_halfs, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb408-2" title="2">split_half</a></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb429-1" title="1">split_half &lt;-<span class="st"> </span><span class="kw">spearman_brown</span>(cor_halfs, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb429-2" title="2">split_half</a></code></pre></div>
 <pre><code>[1] 0.7538462</code></pre>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb410-1" title="1"><span class="co">## Vergleiche mit Cronbachs Alpha:</span></a>
-<a class="sourceLine" id="cb410-2" title="2"><span class="kw">alpha</span>(test_data)</a></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb431-1" title="1"><span class="co">## Vergleiche mit Cronbachs Alpha:</span></a>
+<a class="sourceLine" id="cb431-2" title="2"><span class="kw">alpha</span>(test_data)</a></code></pre></div>
 <pre><code>[1] 0.7596154</code></pre>
 <p>Wie wir sehen, liegt die Spearman-Brown-korrigierte
 Split-Half-Reliabilität näher an Cronbachs Alpha als die unkorrigierte
@@ -668,12 +767,12 @@ Standardformat an: Zeilen sind Testteilnehmer, Spalten sind Items. Für dieses
 Datenformat gibt <code>item.exam()</code> nicht nur die korrigierte Trennschärfen aller
 Items, sondern auch andere Kennwerte wie die Item-Schwierigkeiten aus. Wir
 nutzen die Funktion wie folgt:</p>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb412-1" title="1"><span class="kw">library</span>(<span class="st">&quot;psychometric&quot;</span>)</a>
-<a class="sourceLine" id="cb412-2" title="2">kennwerte &lt;-<span class="st"> </span><span class="kw">item.exam</span>(test_data)</a></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb433-1" title="1"><span class="kw">library</span>(<span class="st">&quot;psychometric&quot;</span>)</a>
+<a class="sourceLine" id="cb433-2" title="2">kennwerte &lt;-<span class="st"> </span><span class="kw">item.exam</span>(test_data)</a></code></pre></div>
 <p>Die Variable <code>kennwerte</code> enthält nun einen <code>data.frame</code>, der für jedes Item
 verschiedene psychometrische Kennwerte abbildet; jede Zeile ist ein Item
 und jede Spalte ist ein Kennwert.</p>
-<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb413-1" title="1">kennwerte</a></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb434-1" title="1">kennwerte</a></code></pre></div>
 <pre><code>       Sample.SD Item.total Item.Tot.woi Difficulty Discrimination
 Item_1 0.5163978  0.5063697    0.2286648        0.6             NA
 Item_2 0.3162278  0.6201737    0.4842001        0.1             NA
@@ -691,7 +790,7 @@ die unkorrigierte Trennschärfe befindet sich in der Spalte <code>Item.total</co
 die korrigierte Trennschärfe befindet sich in der Spalte <code>Item.Tot.woi</code>; für die
 Bedeutung der anderen Kennwerte sei auf die Dokumentation der Funktion
 verwiesen, auf die wir mit der <code>R</code>-Hilfe in der <code>R</code>-Konsole zugreifen können:</p>
-<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb415-1" title="1">?item.exam</a></code></pre></div>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb436-1" title="1">?item.exam</a></code></pre></div>
 <p>Für Item 2 wird dieselbe korrigierte Trennschärfe ausgegeben, die wir oben
 <a href="psychometrie.html#trennschaerfe">im Abschnitt zu Item-Trennschärfen</a> per Hand berechnet haben.</p>
 <p>Neben <code>psychometric</code> ist auch das Paket <code>psych</code> ein wichtiges <code>R</code>-Zusatzpaket
@@ -702,6 +801,20 @@ Dazu gehört auch ein ganzes Buch zur psychometrischen Datenauswertung
 (<a href="http://www.personality-project.org/r/book/" class="uri">http://www.personality-project.org/r/book/</a>).</p>
 
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="24">
+<li id="fn24"><p>Wer mehr zur Manipulation von Matritzen lernen möchte, kann eine
+Recherche zu den Funktionen <code>upper.tri()</code>, <code>lower.tri()</code> und <code>diag()</code>
+durchführen.<a href="psychometrie.html#fnref24" class="footnote-back">↩</a></p></li>
+<li id="fn25"><p>Praktisch gesehen werden unkorrigierte und korrigierte
+Trennschärfe dieselbe relative Rangreihe zwischen den Items hinsichtlich
+ihrer Diskriminationsgüte abbilden.<a href="psychometrie.html#fnref25" class="footnote-back">↩</a></p></li>
+<li id="fn26"><p>Das wäre sogar eine gute Übung. Die Formel findet sich
+unter
+<a href="https://de.wikipedia.org/wiki/Cronbachs_Alpha">https://de.wikipedia.org/wiki/Cronbachs_Alpha</a><a href="psychometrie.html#fnref26" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 

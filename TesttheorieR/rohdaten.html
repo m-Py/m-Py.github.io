@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Aufarbeitung von Fragebogendaten | Testtheorie mit R</title>
   <meta name="description" content="5 Aufarbeitung von Fragebogendaten | Testtheorie mit R" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Aufarbeitung von Fragebogendaten | Testtheorie mit R" />
   <meta property="og:type" content="book" />
@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>3.4.2</b> Funktionsargumente</a></li>
 <li class="chapter" data-level="3.4.3" data-path="dataframes.html"><a href="dataframes.html#spalteneinfach"><i class="fa fa-check"></i><b>3.4.3</b> Sonderregeln zur Auswahl von Spalten</a></li>
 <li class="chapter" data-level="3.4.4" data-path="dataframes.html"><a href="dataframes.html#non-standard-evaluation"><i class="fa fa-check"></i><b>3.4.4</b> Non-Standard-Evaluation</a></li>
-<li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#umgang-mit-na-subset-bevorzugt-zur-zeilenauswahl"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
+<li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#subsettoll"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="dataframes.html"><a href="dataframes.html#doppelteckig"><i class="fa fa-check"></i><b>3.5</b> Weitere Zugriffe auf <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.5.1" data-path="dataframes.html"><a href="dataframes.html#der--zugriff"><i class="fa fa-check"></i><b>3.5.1</b> Der <code>[[·]]</code>-Zugriff</a></li>
@@ -196,7 +196,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="psychometrie.html"><a href="psychometrie.html"><i class="fa fa-check"></i><b>4</b> Erste psychometrische Auswertungen</a><ul>
 <li class="chapter" data-level="4.1" data-path="psychometrie.html"><a href="psychometrie.html#summenwerte"><i class="fa fa-check"></i><b>4.1</b> Summenwerte</a></li>
 <li class="chapter" data-level="4.2" data-path="psychometrie.html"><a href="psychometrie.html#item-schwierigkeiten"><i class="fa fa-check"></i><b>4.2</b> Item-Schwierigkeiten</a></li>
-<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a></li>
+<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="psychometrie.html"><a href="psychometrie.html#exkurs-programmatische-untersuchung-der-korrelationsmatrix"><i class="fa fa-check"></i><b>4.3.1</b> Exkurs: Programmatische Untersuchung der Korrelationsmatrix</a></li>
+</ul></li>
 <li class="chapter" data-level="4.4" data-path="psychometrie.html"><a href="psychometrie.html#trennschaerfe"><i class="fa fa-check"></i><b>4.4</b> Item-Trennschärfen</a></li>
 <li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#cronbachs-alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
 <li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilität"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
@@ -325,15 +327,15 @@ händisch neu durchzuführen.</p>
 <p>Mit der Funktion <code>ifelse()</code> lassen sich Transformationen, die anhand
 eines Schlüssels Korrektheit kodieren, bequem durchführen. Das folgende
 Beispiel basiert auf dem obigen Multiple-Choice-Item:</p>
-<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb416-1" title="1"><span class="co"># Hypothetische Antworten auf das Bundesland Multiple-Choice-Item:</span></a>
-<a class="sourceLine" id="cb416-2" title="2">bundesland_answers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb416-3" title="3">bundesland_key     &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb416-4" title="4">bundesland_score   &lt;-<span class="st"> </span><span class="kw">ifelse</span>(</a>
-<a class="sourceLine" id="cb416-5" title="5">  <span class="dt">test =</span> bundesland_answers <span class="op">==</span><span class="st"> </span>bundesland_key,</a>
-<a class="sourceLine" id="cb416-6" title="6">  <span class="dt">yes =</span> <span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb416-7" title="7">  <span class="dt">no =</span> <span class="dv">0</span></a>
-<a class="sourceLine" id="cb416-8" title="8">)</a>
-<a class="sourceLine" id="cb416-9" title="9">bundesland_score</a></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb437-1" title="1"><span class="co"># Hypothetische Antworten auf das Bundesland Multiple-Choice-Item:</span></a>
+<a class="sourceLine" id="cb437-2" title="2">bundesland_answers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb437-3" title="3">bundesland_key     &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb437-4" title="4">bundesland_score   &lt;-<span class="st"> </span><span class="kw">ifelse</span>(</a>
+<a class="sourceLine" id="cb437-5" title="5">  <span class="dt">test =</span> bundesland_answers <span class="op">==</span><span class="st"> </span>bundesland_key,</a>
+<a class="sourceLine" id="cb437-6" title="6">  <span class="dt">yes =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb437-7" title="7">  <span class="dt">no =</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb437-8" title="8">)</a>
+<a class="sourceLine" id="cb437-9" title="9">bundesland_score</a></code></pre></div>
 <pre><code>[1] 0 1 0 0 1 0 1</code></pre>
 <p>Was ist hier passiert? Ich habe im Vektor <code>bundesland_answers</code>
 hypothetische Antworten generiert; die Variable <code>bundesland_key</code> enthält
@@ -348,7 +350,7 @@ Antwort mit dem Schlüssel</li>
 </ul>
 <p>In diesem Fall wird dem Argument <code>test</code> der folgende logische Vektor
 übergeben:</p>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb418-1" title="1">bundesland_answers <span class="op">==</span><span class="st"> </span>bundesland_key</a></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb439-1" title="1">bundesland_answers <span class="op">==</span><span class="st"> </span>bundesland_key</a></code></pre></div>
 <pre><code>[1] FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE</code></pre>
 <p>An allen Positionen, an denen dieser Vergleich <code>TRUE</code> ergibt, gibt die
 Funktion <code>ifelse()</code> den Wert 1 aus – also den Wert, der dem Argument
@@ -359,7 +361,7 @@ angeben, welche falschen Werte alle möglich sind; es reicht aus, im
 dann automatisch als falsch interpretiert.</p>
 <p>Nach der Umkodierung können wir mit der Funktion <code>mean()</code> die
 Schwierigkeit des Items berechnen:</p>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb420-1" title="1"><span class="kw">mean</span>(bundesland_score)</a></code></pre></div>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb441-1" title="1"><span class="kw">mean</span>(bundesland_score)</a></code></pre></div>
 <pre><code>[1] 0.4285714</code></pre>
 <p>In diesem Fall hätten 43% der
 Testteilnehmer das Bundesland-Item korrekt beantwortet. Diese
@@ -378,20 +380,20 @@ Position <code>TRUE</code> ergibt, ist das erste Element Ausgabe das erste Eleme
 des Arguments <code>yes</code>. Wenn <code>test</code> an der zweiten Position <code>FALSE</code> ergibt,
 ist das zweite Element Ausgabe das zweite Element des Arguments <code>no</code>.
 Ein kurzes Beispiel ist durch den folgenden Code gegeben:</p>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb422-1" title="1"><span class="kw">ifelse</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">11</span>, <span class="dv">12</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb443-1" title="1"><span class="kw">ifelse</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">11</span>, <span class="dv">12</span>))</a></code></pre></div>
 <pre><code>[1]  1 12</code></pre>
 <p>Diese Funktionalität ist vor allem dann wichtig, wenn wir in einem
 Vektor nur manche Elemente umkodieren wollen, während andere Elemente
 unverändert bleiben sollen. Etwa:</p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb424-1" title="1">mein_vektor &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb424-2" title="2"></a>
-<a class="sourceLine" id="cb424-3" title="3"><span class="kw">ifelse</span>(mein_vektor <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span>, mein_vektor <span class="op">*</span><span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>), mein_vektor)</a></code></pre></div>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb445-1" title="1">mein_vektor &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb445-2" title="2"></a>
+<a class="sourceLine" id="cb445-3" title="3"><span class="kw">ifelse</span>(mein_vektor <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span>, mein_vektor <span class="op">*</span><span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>), mein_vektor)</a></code></pre></div>
 <pre><code> [1] -1 -2 -3 -4 -5  6  7  8  9 10</code></pre>
 <p>Ein weiteres Beispiel:</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb426-1" title="1"><span class="kw">ifelse</span>(mein_vektor <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span>, <span class="dv">-100</span>, mein_vektor)</a></code></pre></div>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb447-1" title="1"><span class="kw">ifelse</span>(mein_vektor <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span>, <span class="dv">-100</span>, mein_vektor)</a></code></pre></div>
 <pre><code> [1] -100 -100 -100 -100 -100    6    7    8    9   10</code></pre>
 <p>Frage: Was ist in diesem Fall der Unterschied zum folgenden Befehl:</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb428-1" title="1">mein_vektor[mein_vektor <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span>] &lt;-<span class="st"> </span><span class="dv">-100</span></a></code></pre></div>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb449-1" title="1">mein_vektor[mein_vektor <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span>] &lt;-<span class="st"> </span><span class="dv">-100</span></a></code></pre></div>
 <p>Die Vektorisierung von <code>ifelse()</code> ist oftmals der Grund, warum man die
 Funktion überhaupt verwendet, für uns aber erst einmal nicht von
 Interesse. Wir nutzen <code>ifelse()</code> zunächst nur zur dichotomen Bepunktung
@@ -442,13 +444,13 @@ können:</p>
 <p>Diese funktioniert, wenn unsere Punktzahlen zwischen 1 und dem
 höchstmöglichen Skalenwert liegen. Probieren wir es mit ein paar
 hypothetischen Antworten aus:</p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb429-1" title="1">big5 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb429-2" title="2">  <span class="dt">item1 =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">5</span>),</a>
-<a class="sourceLine" id="cb429-3" title="3">  <span class="dt">item2 =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb429-4" title="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb450-1" title="1">big5 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb450-2" title="2">  <span class="dt">item1 =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb450-3" title="3">  <span class="dt">item2 =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb450-4" title="4">)</a></code></pre></div>
 <p>Wir können uns mit der <code>cor()</code> Funktion die Korrelation zwischen den
 zwei Items ausgeben lassen:</p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb430-1" title="1"><span class="kw">round</span>(<span class="kw">cor</span>(big5), <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb451-1" title="1"><span class="kw">round</span>(<span class="kw">cor</span>(big5), <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>      item1 item2
 item1  1.00 -0.57
 item2 -0.57  1.00</code></pre>
@@ -460,11 +462,11 @@ tendenziell mit niedrigen Werten im anderen Item einher – wenn die
 unterschiedlich gepolten Items dasselbe Konstrukt erfassen. Durch die
 Invertierung erhalten wir Daten, die positiv miteinander
 korrelieren. Folgender Code führt die Invertierung durch:</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb432-1" title="1"><span class="co"># 5 ist der höchst-mögliche Skalenwert</span></a>
-<a class="sourceLine" id="cb432-2" title="2">big5<span class="op">$</span>item1_inv &lt;-<span class="st"> </span>big5<span class="op">$</span>item1 <span class="op">*</span><span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="dv">6</span></a></code></pre></div>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb453-1" title="1"><span class="co"># 5 ist der höchst-mögliche Skalenwert</span></a>
+<a class="sourceLine" id="cb453-2" title="2">big5<span class="op">$</span>item1_inv &lt;-<span class="st"> </span>big5<span class="op">$</span>item1 <span class="op">*</span><span class="st"> </span>(<span class="op">-</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="dv">6</span></a></code></pre></div>
 <p>Schauen wir uns die Daten an, um zu prüfen, ob die Transformation
 funktioniert hat:</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb433-1" title="1">big5[, <span class="kw">c</span>(<span class="st">&quot;item1&quot;</span>, <span class="st">&quot;item1_inv&quot;</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb454-1" title="1">big5[, <span class="kw">c</span>(<span class="st">&quot;item1&quot;</span>, <span class="st">&quot;item1_inv&quot;</span>)]</a></code></pre></div>
 <pre><code>  item1 item1_inv
 1     2         4
 2     3         3
@@ -476,7 +478,7 @@ funktioniert hat:</p>
 8     5         1</code></pre>
 <p>Das hat geklappt! Schauen wir uns nun auch noch einmal die
 Inter-Itemkorrelationen an:</p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb435-1" title="1"><span class="kw">round</span>(<span class="kw">cor</span>(big5), <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb456-1" title="1"><span class="kw">round</span>(<span class="kw">cor</span>(big5), <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>          item1 item2 item1_inv
 item1      1.00 -0.57     -1.00
 item2     -0.57  1.00      0.57
@@ -495,15 +497,15 @@ Umformungen (1 <span class="math inline">\(\to\)</span> 5; 2 <span class="math i
 durch einen separaten Aufruf von <code>ifelse()</code> umgesetzt. Anstatt einmal
 die Invertierungsformel aufzurufen müssen wir also fünfmal <code>ifelse()</code>
 benutzen. Folgender Code zeigt, wie das funktionieren würde:</p>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb437-1" title="1">item1i &lt;-<span class="st"> </span><span class="kw">ifelse</span>(big5<span class="op">$</span>item1 <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">5</span>, <span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb437-2" title="2">item1i &lt;-<span class="st"> </span><span class="kw">ifelse</span>(big5<span class="op">$</span>item1 <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">4</span>, item1i)</a>
-<a class="sourceLine" id="cb437-3" title="3">item1i &lt;-<span class="st"> </span><span class="kw">ifelse</span>(big5<span class="op">$</span>item1 <span class="op">==</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">3</span>, item1i)</a>
-<a class="sourceLine" id="cb437-4" title="4">item1i &lt;-<span class="st"> </span><span class="kw">ifelse</span>(big5<span class="op">$</span>item1 <span class="op">==</span><span class="st"> </span><span class="dv">4</span>, <span class="dv">2</span>, item1i)</a>
-<a class="sourceLine" id="cb437-5" title="5">item1i &lt;-<span class="st"> </span><span class="kw">ifelse</span>(big5<span class="op">$</span>item1 <span class="op">==</span><span class="st"> </span><span class="dv">5</span>, <span class="dv">1</span>, item1i)</a></code></pre></div>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb458-1" title="1">item1i &lt;-<span class="st"> </span><span class="kw">ifelse</span>(big5<span class="op">$</span>item1 <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">5</span>, <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb458-2" title="2">item1i &lt;-<span class="st"> </span><span class="kw">ifelse</span>(big5<span class="op">$</span>item1 <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">4</span>, item1i)</a>
+<a class="sourceLine" id="cb458-3" title="3">item1i &lt;-<span class="st"> </span><span class="kw">ifelse</span>(big5<span class="op">$</span>item1 <span class="op">==</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">3</span>, item1i)</a>
+<a class="sourceLine" id="cb458-4" title="4">item1i &lt;-<span class="st"> </span><span class="kw">ifelse</span>(big5<span class="op">$</span>item1 <span class="op">==</span><span class="st"> </span><span class="dv">4</span>, <span class="dv">2</span>, item1i)</a>
+<a class="sourceLine" id="cb458-5" title="5">item1i &lt;-<span class="st"> </span><span class="kw">ifelse</span>(big5<span class="op">$</span>item1 <span class="op">==</span><span class="st"> </span><span class="dv">5</span>, <span class="dv">1</span>, item1i)</a></code></pre></div>
 <p>Auch hier können wir durch Korrelation zwischen dem ursprünglichen Item
 und dem invertiertem Item feststellen, ob die Invertierung erfolgreich
 war:</p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb438-1" title="1"><span class="kw">cor</span>(item1i, big5<span class="op">$</span>item1)</a></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb459-1" title="1"><span class="kw">cor</span>(item1i, big5<span class="op">$</span>item1)</a></code></pre></div>
 <pre><code>[1] -1</code></pre>
 <p>Bei mehrfacher Verwendung von <code>ifelse()</code> zur Umkodierung verschiedener
 Werte eines Vektors nutzen wir die Vektorisierung des Arguments <code>no</code>
@@ -538,13 +540,13 @@ Psychometrics Project“ unter
 abrufbar. Wenn wir die Daten heruntergeladen haben und die Datei
 „data.csv“ in unserem RStudio-Projektordner liegt (siehe
 <a href="anhang.html#datenEinlesen">Anhang</a>), können wir den Datensatz wie folgt einlesen:</p>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb440-1" title="1">npi &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb461-1" title="1">npi &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data.csv&quot;</span>)</a></code></pre></div>
 <p>Wie folgt verschaffen wir uns einen Überblick über die Daten:</p>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb441-1" title="1"><span class="kw">nrow</span>(npi) <span class="co"># Wie viele Fälle</span></a></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb462-1" title="1"><span class="kw">nrow</span>(npi) <span class="co"># Wie viele Fälle</span></a></code></pre></div>
 <pre><code>[1] 11243</code></pre>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb443-1" title="1"><span class="kw">ncol</span>(npi) <span class="co"># Wie viele Spalten</span></a></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb464-1" title="1"><span class="kw">ncol</span>(npi) <span class="co"># Wie viele Spalten</span></a></code></pre></div>
 <pre><code>[1] 44</code></pre>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb445-1" title="1"><span class="kw">head</span>(npi, <span class="dt">n =</span> <span class="dv">3</span>) <span class="co"># Wie sehen die Daten aus</span></a></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb466-1" title="1"><span class="kw">head</span>(npi, <span class="dt">n =</span> <span class="dv">3</span>) <span class="co"># Wie sehen die Daten aus</span></a></code></pre></div>
 <pre><code>  score Q1 Q2 Q3 Q4 Q5 Q6 Q7 Q8 Q9 Q10 Q11 Q12 Q13 Q14 Q15 Q16 Q17 Q18 Q19 Q20
 1    18  2  2  2  2  1  2  1  2  2   2   1   1   2   1   1   1   2   1   1   1
 2     6  2  2  2  1  2  2  1  2  1   1   2   2   2   1   2   2   1   1   2   1
@@ -562,7 +564,7 @@ ist es <strong>immer</strong> wichtig, dass jeder Datensatz durch eine eindeutig
 Fallnummer zu identifizieren ist. Da eine solche in den eingelesenen
 Daten jedoch nicht enthalten ist, fügen wir selber eine Fallnummer
 hinzu:</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb447-1" title="1">npi<span class="op">$</span>casenum &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(npi)</a></code></pre></div>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb468-1" title="1">npi<span class="op">$</span>casenum &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(npi)</a></code></pre></div>
 <div id="identifikation-von-fehlenden-werten" class="section level3">
 <h3><span class="header-section-number">5.3.1</span> Identifikation von fehlenden Werten</h3>
 <p>Das NPI besteht aus 40 Items. Aus dem <em>Codebuch</em> des NPI
@@ -586,11 +588,11 @@ nicht für Narzissmus steht (hier Aussage 2: „Ich kann nicht besonders
 gut Einfluss auf jemanden ausüben.“), wird eine 0 vergeben. Wie wir zu
 Beginn dieses Kapitels gelernt haben, können wir Item 1 wie folgt
 bepunkten:</p>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb448-1" title="1">npi<span class="op">$</span>Q1_score &lt;-<span class="st"> </span><span class="kw">ifelse</span>(npi<span class="op">$</span>Q1 <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb469-1" title="1">npi<span class="op">$</span>Q1_score &lt;-<span class="st"> </span><span class="kw">ifelse</span>(npi<span class="op">$</span>Q1 <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</a></code></pre></div>
 <p><strong>Aber Vorsicht: so würden wir einen Fehler machen</strong>! Die Spalte
 <code>npi$Q1</code> enthält nicht nur die Werte 1 und 2, sondern auch den Wert 0,
 wie wir mit dem Befehl <code>table(npi$Q1)</code> prüfen können:</p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb449-1" title="1"><span class="kw">table</span>(npi<span class="op">$</span>Q1)</a></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb470-1" title="1"><span class="kw">table</span>(npi<span class="op">$</span>Q1)</a></code></pre></div>
 <pre><code>
    0    1    2 
   17 6872 4354 </code></pre>
@@ -620,7 +622,7 @@ per 0 als fehlend klassifiziert wurden. Dafür könnten wir ein Vorgehen
 verwenden, das wir in <a href="vektoren.html#vektorAendern">Kapitel 2</a> für Vektoren
 kennengelernt haben. Dieses Vorgehen funktioniert bei <code>data.frames</code>
 tatsächlich gleichermaßen:<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a></p>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb451-1" title="1">npi[npi <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb472-1" title="1">npi[npi <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
 <p>Dabei ergibt sich jedoch ein Problem: Fehlende Werte wurden im Datensatz
 zwar mit 0 kodiert, jedoch existiert eine Spalte (<code>score</code>), die den Wert
 0 aus zwei Gründen enthalten kann:</p>
@@ -645,26 +647,26 @@ Zahl -99 zu verwenden, die dieses Kriterium oftmals erfüllt.</p>
 zunächst einen <code>data.frame</code>, der die Spalte <code>score</code> nicht enthält. Da
 wir die Spalte aber nicht gänzlich verlieren wollen, speichern wir den
 <code>data.frame</code> in einer neuen Variablen ab.</p>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb452-1" title="1"><span class="co"># temp = temporäre Variable</span></a>
-<a class="sourceLine" id="cb452-2" title="2">temp &lt;-<span class="st"> </span><span class="kw">subset</span>(npi, <span class="dt">select =</span> <span class="op">-</span>score)</a></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb473-1" title="1"><span class="co"># temp = temporäre Variable</span></a>
+<a class="sourceLine" id="cb473-2" title="2">temp &lt;-<span class="st"> </span><span class="kw">subset</span>(npi, <span class="dt">select =</span> <span class="op">-</span>score)</a></code></pre></div>
 <p>Nun setzen wir in diesem temporären <code>data.frame</code> alle Nullen auf <code>NA</code>:</p>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb453-1" title="1">temp[temp <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb474-1" title="1">temp[temp <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
 <p>Als Nächstes nutzen wir die Funktion <code>complete.cases()</code>, um
 herauszufinden, in welchen Zeilen von <code>temp</code> fehlende Werte vorliegen:</p>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb454-1" title="1">is_complete &lt;-<span class="st"> </span><span class="kw">complete.cases</span>(temp)</a>
-<a class="sourceLine" id="cb454-2" title="2"><span class="kw">head</span>(is_complete, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb475-1" title="1">is_complete &lt;-<span class="st"> </span><span class="kw">complete.cases</span>(temp)</a>
+<a class="sourceLine" id="cb475-2" title="2"><span class="kw">head</span>(is_complete, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code> [1]  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
 <p>Die Funktion <code>complete.cases()</code> gibt einen logischen Vektor der Länge
 <code>nrow(temp)</code> zurück, der pro Zeile kodiert, ob irgendwo ein fehlender
 Wert vorliegt. Also können wir wie folgt überprüfen, wie viele Fälle mit
 fehlenden Werten es insgesamt gibt:</p>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb456-1" title="1"><span class="kw">sum</span>(<span class="op">!</span>is_complete)</a></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb477-1" title="1"><span class="kw">sum</span>(<span class="op">!</span>is_complete)</a></code></pre></div>
 <pre><code>[1] 825</code></pre>
 <p>Ebenfalls können wir nun aus dem ursprünglichen Datensatz <code>npi</code> nur die
 vollständigen Fällen auswählen:</p>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb458-1" title="1">npi_clean &lt;-<span class="st"> </span>npi[is_complete, ]</a>
-<a class="sourceLine" id="cb458-2" title="2"></a>
-<a class="sourceLine" id="cb458-3" title="3"><span class="kw">nrow</span>(npi_clean)</a></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb479-1" title="1">npi_clean &lt;-<span class="st"> </span>npi[is_complete, ]</a>
+<a class="sourceLine" id="cb479-2" title="2"></a>
+<a class="sourceLine" id="cb479-3" title="3"><span class="kw">nrow</span>(npi_clean)</a></code></pre></div>
 <pre><code>[1] 10418</code></pre>
 <p>Mit dem Datensatz <code>npi_clean</code> können wir nun psychometrische
 Berechnungen durchführen, da wir nur vollständige Datensätze ausgewählt
@@ -673,14 +675,14 @@ Bepunktung durchzuführen. Wir wissen bereits, wie das funktioniert,
 nämlich indem wir mit <code>ifelse()</code> die Antworten auf jedes Item mit dem
 Schlüssel abgleichen. Der Schlüssel für das NPI kodiert für jedes der 40
 Items den Wert, der für Narzissmus steht. Dies wäre wie folgt möglich:</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb460-1" title="1"><span class="co"># Hier kein legaler R-Code, nur exemplarisch:</span></a>
-<a class="sourceLine" id="cb460-2" title="2">npi_key &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, ..., <span class="dv">2</span>) <span class="co"># 40 Schlüsselemente</span></a>
-<a class="sourceLine" id="cb460-3" title="3"></a>
-<a class="sourceLine" id="cb460-4" title="4">npi<span class="op">$</span>Q1_score &lt;-<span class="st"> </span><span class="kw">ifelse</span>(npi<span class="op">$</span>Q1 <span class="op">==</span><span class="st"> </span>npi_key[<span class="dv">1</span>], <span class="dv">1</span>, <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb460-5" title="5"></a>
-<a class="sourceLine" id="cb460-6" title="6"><span class="co"># ...</span></a>
-<a class="sourceLine" id="cb460-7" title="7"></a>
-<a class="sourceLine" id="cb460-8" title="8">npi<span class="op">$</span>Q40_score &lt;-<span class="st"> </span><span class="kw">ifelse</span>(npi<span class="op">$</span>Q40 <span class="op">==</span><span class="st"> </span>npi_key[<span class="dv">40</span>], <span class="dv">1</span>, <span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb481-1" title="1"><span class="co"># Hier kein legaler R-Code, nur exemplarisch:</span></a>
+<a class="sourceLine" id="cb481-2" title="2">npi_key &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, ..., <span class="dv">2</span>) <span class="co"># 40 Schlüsselemente</span></a>
+<a class="sourceLine" id="cb481-3" title="3"></a>
+<a class="sourceLine" id="cb481-4" title="4">npi<span class="op">$</span>Q1_score &lt;-<span class="st"> </span><span class="kw">ifelse</span>(npi<span class="op">$</span>Q1 <span class="op">==</span><span class="st"> </span>npi_key[<span class="dv">1</span>], <span class="dv">1</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb481-5" title="5"></a>
+<a class="sourceLine" id="cb481-6" title="6"><span class="co"># ...</span></a>
+<a class="sourceLine" id="cb481-7" title="7"></a>
+<a class="sourceLine" id="cb481-8" title="8">npi<span class="op">$</span>Q40_score &lt;-<span class="st"> </span><span class="kw">ifelse</span>(npi<span class="op">$</span>Q40 <span class="op">==</span><span class="st"> </span>npi_key[<span class="dv">40</span>], <span class="dv">1</span>, <span class="dv">0</span>)</a></code></pre></div>
 <p>Da wir nicht denselben Code – mit leichten Abwandlungen – 40 Mal
 wiederholen wollen, werden wir in Kapitel 7 lernen, diese Umkodierungen
 effizient durchzuführen, also auf einmal für alle 40 Spalten.</p>
@@ -704,8 +706,24 @@ umgepolten Antworten (d.h. die Item-Schwierigkeit)?</p></li>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="28">
+<ol start="27">
+<li id="fn27"><p>Im Allgemeinen muss ein Schlüssel nicht Korrektheit
+anzeigen, sondern kann auch Merkmalsausprägung in einem
+Persönlichkeitsinventar kodieren. Wir werden das im Narcissistic
+Personality Inventory kennenlernen.<a href="rohdaten.html#fnref27" class="footnote-back">↩</a></p></li>
 <li id="fn28"><p><a href="http://www.burns-stat.com/documents/tutorials/why-use-the-r-language/" class="uri">http://www.burns-stat.com/documents/tutorials/why-use-the-r-language/</a><a href="rohdaten.html#fnref28" class="footnote-back">↩</a></p></li>
+<li id="fn29"><p>Dieses wird gemeinsam mit den Daten des „Open Source
+Psychometrics Project“
+<a href="https://openpsychometrics.org/_rawdata">https://openpsychometrics.org/_rawdata</a>
+runtergeladen.<a href="rohdaten.html#fnref29" class="footnote-back">↩</a></p></li>
+<li id="fn30"><p>Beachtet, dass hier ein Zugriff auf <code>data.frames</code>
+mit eckigen Klammern stattfindet (siehe <a href="#fortgeschritten">Kapitel
+3.5</a>). Der Befehl sieht recht harmlos aus, aber
+tatsächlich steckt hier etwas mehr dahinter, als wir bislang behandelt
+haben. Wir nehmen zunächst einmal einfach hin, dass die Umkodierung von
+Werten in <code>data.frames</code> ebenso funktioniert wie bei Vektoren. Wie wir
+schon bei Vektoren kennengelernt haben, sind viele Operationen in <code>R</code> so
+allgemein, dass sie auf allen Daten eines Objekts stattfinden.<a href="rohdaten.html#fnref30" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

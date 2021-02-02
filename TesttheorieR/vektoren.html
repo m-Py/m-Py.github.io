@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Vektoren | Testtheorie mit R</title>
   <meta name="description" content="2 Vektoren | Testtheorie mit R" />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Vektoren | Testtheorie mit R" />
   <meta property="og:type" content="book" />
@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>3.4.2</b> Funktionsargumente</a></li>
 <li class="chapter" data-level="3.4.3" data-path="dataframes.html"><a href="dataframes.html#spalteneinfach"><i class="fa fa-check"></i><b>3.4.3</b> Sonderregeln zur Auswahl von Spalten</a></li>
 <li class="chapter" data-level="3.4.4" data-path="dataframes.html"><a href="dataframes.html#non-standard-evaluation"><i class="fa fa-check"></i><b>3.4.4</b> Non-Standard-Evaluation</a></li>
-<li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#umgang-mit-na-subset-bevorzugt-zur-zeilenauswahl"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
+<li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#subsettoll"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="dataframes.html"><a href="dataframes.html#doppelteckig"><i class="fa fa-check"></i><b>3.5</b> Weitere Zugriffe auf <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.5.1" data-path="dataframes.html"><a href="dataframes.html#der--zugriff"><i class="fa fa-check"></i><b>3.5.1</b> Der <code>[[·]]</code>-Zugriff</a></li>
@@ -196,7 +196,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="psychometrie.html"><a href="psychometrie.html"><i class="fa fa-check"></i><b>4</b> Erste psychometrische Auswertungen</a><ul>
 <li class="chapter" data-level="4.1" data-path="psychometrie.html"><a href="psychometrie.html#summenwerte"><i class="fa fa-check"></i><b>4.1</b> Summenwerte</a></li>
 <li class="chapter" data-level="4.2" data-path="psychometrie.html"><a href="psychometrie.html#item-schwierigkeiten"><i class="fa fa-check"></i><b>4.2</b> Item-Schwierigkeiten</a></li>
-<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a></li>
+<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="psychometrie.html"><a href="psychometrie.html#exkurs-programmatische-untersuchung-der-korrelationsmatrix"><i class="fa fa-check"></i><b>4.3.1</b> Exkurs: Programmatische Untersuchung der Korrelationsmatrix</a></li>
+</ul></li>
 <li class="chapter" data-level="4.4" data-path="psychometrie.html"><a href="psychometrie.html#trennschaerfe"><i class="fa fa-check"></i><b>4.4</b> Item-Trennschärfen</a></li>
 <li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#cronbachs-alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
 <li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilität"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
@@ -1347,8 +1349,44 @@ ergibt keinen Fehler – was ist passiert?</li>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="7">
+<ol start="4">
+<li id="fn4"><p>Interessanterweise gibt es sogar Vektoren der Länge 0 –
+also Vektoren, die gar kein Element beinhalten. Das soll uns aber erst
+einmal nicht beschäftigen.<a href="vektoren.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p><code>R</code> würde oft auch bei einelementigen Vektoren ein Ergebnis
+ausgeben, aber das ist zum Beispiel beim Mittelwert wenig sinnvoll.<a href="vektoren.html#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>Bis jetzt kennen wir nur das Vektor-Objekt. In <code>R</code> gibt
+es aber ganz verschiedene „Datencontainer“, die allgemein als
+Objekte bezeichnet werden.<a href="vektoren.html#fnref6" class="footnote-back">↩</a></p></li>
 <li id="fn7"><p>Ich werde von dieser Regel in diesem Skript abweichen.<a href="vektoren.html#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p>Leider sind Fehlermeldungen in <code>R</code> oftmals sehr
+kryptisch und gerade für Anfänger schwer verständlich.<a href="vektoren.html#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p>Eigentlich ist <code>NA</code> kein eigener Datentyp. In <code>R</code> hat jeder
+Vektor <strong>nur genau einen</strong> Datentyp. Es ist beispielsweise nicht
+möglich, dass in einem Vektor gleichzeitig Werte vom Typ <code>numeric</code>,
+<code>character</code> und <code>factor</code> vorkommen. <code>NA</code>-Werte können jedoch in
+Kombination mit jedem Datentyp vorkommen. Sie kodieren dann die
+Abwesenheit eines Datums; dieses Datum hätte – wenn es nicht fehlen
+würde – den Datentyp des Vektors.<a href="vektoren.html#fnref9" class="footnote-back">↩</a></p></li>
+<li id="fn10"><p>Ein Argument heißt optional, wenn wir dafür keinen Wert
+angeben müssen. Stattdessen hat es einen sogenannten Standardwert, der
+angenommen wird, wenn wir das Argument nicht selber angeben. Der
+Standardwert des Arguments <code>na.rm</code> der Funktion <code>mean()</code> ist <code>FALSE</code>.<a href="vektoren.html#fnref10" class="footnote-back">↩</a></p></li>
+<li id="fn11"><p>Wenn logische Vektoren einer numerischen Berechnung
+übergeben werden, werden die <code>TRUE</code>/<code>FALSE</code> Elemente des Vektors
+automatisch in Zahlen, d.h. 1 und 0 umgewandelt. Deswegen funktioniert
+beispielsweise auch folgender Befehl: <code>TRUE + 1</code><a href="vektoren.html#fnref11" class="footnote-back">↩</a></p></li>
+<li id="fn12"><p>Ich nenne diese Operation <code>[·]</code>-Zugriff , da zur
+Datenauswahl aus Vektoren hinter den Vektor eckigen Klammern gestellt
+werden. Die Klammern enthalten eine Angabe darüber, welche Elemente ich
+aus dem Vektor auswählen will. Etwa wählt <code>c(4, 2, 6)[1]</code> das erste
+Element aus dem Vektor <code>c(4, 2, 6)</code> aus, also 4. Der Punkt ist bloß ein
+Platzhalter in der <code>[·]</code>-Notation.<a href="vektoren.html#fnref12" class="footnote-back">↩</a></p></li>
+<li id="fn13"><p>Das macht beispielsweise Sinn, damit bei der Eingabe
+explizit gemacht wird, dass der Wert fehlt. Andernfalls könnte das Datum
+bei der Eingabe auch vergessen worden sein.<a href="vektoren.html#fnref13" class="footnote-back">↩</a></p></li>
+<li id="fn14"><p>Das Beispiel mag hier künstlich wirken, aber genau so
+etwas werden wir in <a href="psychometrie.html#trennschaerfe">Kapitel 4</a> machen.<a href="vektoren.html#fnref14" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
