@@ -81,7 +81,7 @@ nruns <- 500
 
 comparisons0 <- simulate_proportion_comparison(
   nruns = nruns, 
-  N = c(seq(from = 50, to = 300, by = 50), 1000), 
+  N = seq(from = 50, to = 750, by = 50), 
   p1 = 0.5,
   p2 = 0.5
 )
@@ -131,7 +131,7 @@ quantiles_null %>%
   geom_line(aes(lty = Method)) + 
   geom_point(aes(shape = Method), size = 5) + 
   scale_color_manual(values = c('#383745', '#A17724', '#9E9CC2')) + 
-  scale_y_continuous(trans = "log", breaks = c(0, 0.1, 1/3, 1, 5, 10, 20, 50, 100, 1000, 10000, 100000), labels = scaleFUN) + 
+  scale_y_continuous(trans = "log", breaks = c(0, 0.1, 1/3, 1, 3, 5, 10, 20), labels = scaleFUN) + 
   ylab("BF 01") + 
   theme_bw(base_size = 22) +
     ggtitle("There is no effect.")
@@ -142,7 +142,7 @@ dev.off()
 
 comparisons1 <- simulate_proportion_comparison(
   nruns = nruns, 
-  N = c(seq(from = 50, to = 300, by = 50), 1000), 
+  N = seq(from = 50, to = 750, by = 50), 
   p1 = 0.7,
   p2 = 0.5
 )
@@ -185,7 +185,7 @@ quantiles_effect %>%
     geom_line(aes(lty = Method)) + 
     geom_point(aes(shape = Method), size = 5) + 
     scale_color_manual(values = c('#383745', '#A17724', '#9E9CC2')) + 
-    scale_y_continuous(trans = "log", breaks = c(0, 0.1, 1/3, 1, 3, 5, 10, 20), labels = scaleFUN) + 
+    scale_y_continuous(trans = "log", breaks = c(0, 0.1, 1/3, 1, 5, 20, 100, 1000^c(1:10)), labels = scaleFUN) + 
     ylab("BF 10") + 
     theme_bw(base_size = 22) +
     ggtitle("There is an effect.")
