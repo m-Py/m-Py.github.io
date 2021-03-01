@@ -1,0 +1,10 @@
+# Non-exhaustive list of R software implementations for Bayes Factors
+
+This document lists for some statistical analyses the corresponding software 
+implementations in R packages and some other interesting links.
+
+- BayesFactor 
+- BFpack
+- abtest
+- brms - bridgesampling
+- bayesTestR (seems to document rather than compute its own stuff)

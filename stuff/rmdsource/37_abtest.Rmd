@@ -1,0 +1,135 @@
+---
+title: "`abtest`: A (not so) new `R` package to compute Bayes factors"
+date: March 1, 2021
+author: Martin Papenberg
+output:
+  html_document:
+    df_print: kable
+---
+
+```{r, include = FALSE}
+
+library(knitr)
+knitr::opts_chunk$set(message=FALSE, warning = FALSE)
+options(scipen = 999)
+
+set.seed(123)
+
+```
+
+I like Bayes factors and I am always thrilled to find out the package 
+[`abtest`](https://github.com/quentingronau/abtest) (also see the corresponding 
+[arxiv paper](https://arxiv.org/abs/1905.02068)) was released that enables the 
+Bayesian comparison of independent proportions. Similarly, the BayesFactor 
+package can also be used for the comparison of proportions, hence in this post I 
+want to compare these two approaches informally.
+
+## Usage
+
+I am using data from one of my papers where I computed a Bayes factor for the 
+comparison of proportions, yielding evidence in favor of the null hypothesis. In 
+this publication used the [awesome BayesFactor 
+package](https://cran.r-project.org/package=BayesFactor), which at the time was 
+the only Bayes factor software implementation I was aware of to achieve this 
+goal. Now, with the `abtest` package, however, another approach is possible. 
+
+```{r data}
+
+classifications <- matrix(c(195, 190, 
+                            68, 67),
+                          byrow = TRUE,
+                          ncol = 2)
+rownames(classifications) <- c("correct", "incorrect")
+colnames(classifications) <- c("MC", "DOMC")
+
+percentages <- round(prop.table(classifications, margin = 2), 4) * 100
+```
+
+In my research, I compared two tests with regard to their classification 
+accuracy. Both tests performed rather 
+
+```{r}
+library(abtest)
+
+data <- list(
+  y1 = classifications["correct", "MC"],
+  n1 = sum(classifications[, "MC"]),
+  y2 = classifications["correct", "DOMC"],
+  n2 = sum(classifications[, "DOMC"])
+)
+bf_abtest <- ab_test(data = data, prior_prob = c(H1 = 0.5, "H+" = 0, "H-" = 0, H0 = 0.5))
+print(bf_abtest)
+
+```
+
+In my paper I was interested in the Bayes Factor 0/1, i.e., the degree to which 
+the null hypothesis is favored over the alternative, whereas the alternative is 
+not specified and either test could outperform the other with regards to the 
+classification performance. We can extract this Bayes factor as follows:
+
+```{r}
+1 / ab$bf$bf10
+```
+
+The Bayes factor we reported in the paper was however the Bayes factor computed 
+by the BayesFactor package, which is the Gunel & Dickey Bayes factor (Gunel & 
+Dickey, 1974). Using the default setting, it is computed as follows:
+
+```{r}
+
+library(BayesFactor)
+bf_bayesfactor <- contingencyTableBF(
+  classifications, 
+  sampleType = "indepMulti", 
+  fixedMargin = "cols"
+)
+bf_bayesfactor
+
+```
+
+The Bayes factor itself is extracted as follows:
+
+```{r}
+1 / extractBF(bf_bayesfactor)$bf
+```
+
+So this Bayes factor favors the null hypothesis to a lesser degree as compared 
+to the Gunel & Dickey Bayes factor. Still, both Bayes factors qualitatively 
+agree with each other. 
+
+## Simulation
+
+In a very small simulation, I compared these two Bayes factors with each other.
+
+```{r}
+
+
+
+```
+
+
+## References 
+
+Gronau, Q. F., & Wagenmakers, E. J. (2019). Informed Bayesian inference for the 
+A/B test. arXiv preprint arXiv:1905.02068.
+
+Gunel, E., & Dickey, J. (1974). Bayes factors for independence in contingency 
+tables. *Biometrika*, 61, 545–557.
+
+Kass, R. E., & Vaidyanathan, S. K. (1992). Approximate Bayes factors and 
+orthogonal parameters, with application to testing equality of two binomial 
+proportions. *Journal of the Royal Statistical Society: Series B 
+(Methodological)*, 54(1), 129-144.
+
+Papenberg, M., Diedenhofen, B., & Musch, J. (2019). An experimental validation 
+of sequential multiple-choice tests. *Journal of Experimental Education*. 
+Advance Online Publication. https://doi.org/10.1080/00220973.2019.1671299.
+Preprint available from https://osf.io/ycaex/.
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
