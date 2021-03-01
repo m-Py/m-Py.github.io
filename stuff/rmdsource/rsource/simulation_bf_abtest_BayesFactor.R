@@ -105,6 +105,7 @@ head(ldf)
 
 # Compute quantiles by method and N, and plot the information
 quantiles_null <- ldf %>% 
+  mutate(BayesFactor = 1 / BayesFactor) %>% # use BF01
   group_by(N, Method) %>% 
   summarise(
     pt20 = quantile(BayesFactor, 0.2), 
@@ -126,7 +127,6 @@ quantiles_null <- ldf %>%
 png(filename = "Sim1-PropBF.png", width = 800, height = 640, pointsize = 48)
 scaleFUN <- function(x) sprintf("%.2f", x)
 quantiles_null %>%
-  mutate(BayesFactor = 1 / BayesFactor) %>% # use BF01
   ggplot(aes(x = N, y = BayesFactor, colour = Quantile)) + 
   geom_line(aes(lty = Method)) + 
   geom_point(aes(shape = Method), size = 5) + 
