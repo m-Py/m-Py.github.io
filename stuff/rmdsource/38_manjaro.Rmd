@@ -1,0 +1,32 @@
+---
+title: "Some commands for Manjaro Linux"
+date: March 30, 2021
+author: Martin Papenberg
+output:
+  html_document:
+    df_print: kable
+---
+
+```{r, include = FALSE}
+
+library(knitr)
+knitr::opts_chunk$set(message=FALSE, warning = FALSE)
+options(scipen = 999)
+
+set.seed(123)
+
+```
+
+- The package manager is really useful, Seafile client can be installed after
+enabling AUR as source for software. Signal and Telegram can also directly be installed
+via the package manager.
+- install R: `sudo pacman -S r`
+- install Rstudio: `pamac build rstudio-desktop-bin`
+- install Ubuntu Mono font:
+  * get from https://fonts.google.com/specimen/Ubuntu+Mono and move to `/usr/share/fonts`
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
