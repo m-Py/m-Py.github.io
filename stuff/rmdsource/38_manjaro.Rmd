@@ -1,5 +1,5 @@
 ---
-title: "Some commands for Manjaro Linux"
+title: "Some options for Manjaro Linux Newbies"
 date: March 30, 2021
 author: Martin Papenberg
 output:
@@ -24,6 +24,8 @@ via the package manager.
 - install Rstudio: `pamac build rstudio-desktop-bin`
 - install Ubuntu Mono font:
   * get from https://fonts.google.com/specimen/Ubuntu+Mono and move to `/usr/share/fonts`
+- Manjaro does not come with gfortran compiler, which is needed for 
+some R packages. Use `pamac install gcc-fortran`
 
 Last updated: `r Sys.Date()`
 
