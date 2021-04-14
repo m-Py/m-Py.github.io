@@ -27,6 +27,10 @@ via the package manager.
 - Manjaro does not come with gfortran compiler, which is needed for 
 some R packages. Use `pamac install gcc-fortran`
 
+- Hide everything from a program in KDE, excpept the content:
+  * `ALT-F3` $\to$ no borders
+  * `ALT-Shift-M` $\to$ toggles availability of menu bar
+
 Last updated: `r Sys.Date()`
 
 ### <a href="index.html">Back to the front page</a>
