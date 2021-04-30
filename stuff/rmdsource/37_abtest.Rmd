@@ -24,6 +24,12 @@ Bayesian comparison of independent proportions. Similarly, the BayesFactor
 package can also be used for the comparison of proportions, hence in this post I 
 want to compare these two approaches informally.
 
+*Note: there has been a release of yet another package for binomial
+comparisons.*: **multibridge**
+
+- paper: https://psyarxiv.com/qk4cy/;
+- package: https://cran.r-project.org/package=multibridge
+
 ## Usage
 
 I am using data from one of my papers where I computed a Bayes factor for the 
