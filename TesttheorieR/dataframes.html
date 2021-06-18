@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 data.frames | Testtheorie mit R</title>
   <meta name="description" content="3 data.frames | Testtheorie mit R" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 data.frames | Testtheorie mit R" />
   <meta property="og:type" content="book" />
@@ -32,6 +32,7 @@
   
 <link rel="prev" href="vektoren.html"/>
 <link rel="next" href="psychometrie.html"/>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,28 +50,32 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -79,9 +84,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -114,6 +119,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -127,38 +155,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="einstieg.html"><a href="einstieg.html"><i class="fa fa-check"></i><b>1</b> Einstieg</a><ul>
-<li class="chapter" data-level="1.1" data-path="einstieg.html"><a href="einstieg.html#über-dieses-skript"><i class="fa fa-check"></i><b>1.1</b> Über dieses Skript</a><ul>
+<li class="chapter" data-level="1" data-path="einstieg.html"><a href="einstieg.html"><i class="fa fa-check"></i><b>1</b> Einstieg</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="einstieg.html"><a href="einstieg.html#über-dieses-skript"><i class="fa fa-check"></i><b>1.1</b> Über dieses Skript</a>
+<ul>
 <li class="chapter" data-level="1.1.1" data-path="einstieg.html"><a href="einstieg.html#feedback-und-fehlermeldungen"><i class="fa fa-check"></i><b>1.1.1</b> Feedback und Fehlermeldungen</a></li>
 <li class="chapter" data-level="1.1.2" data-path="einstieg.html"><a href="einstieg.html#danksagung"><i class="fa fa-check"></i><b>1.1.2</b> Danksagung</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="einstieg.html"><a href="einstieg.html#erste-schritte-mit-r"><i class="fa fa-check"></i><b>1.2</b> Erste Schritte mit <code>R</code></a><ul>
+<li class="chapter" data-level="1.2" data-path="einstieg.html"><a href="einstieg.html#erste-schritte-mit-r"><i class="fa fa-check"></i><b>1.2</b> Erste Schritte mit <code>R</code></a>
+<ul>
 <li class="chapter" data-level="1.2.1" data-path="einstieg.html"><a href="einstieg.html#die-r-konsole"><i class="fa fa-check"></i><b>1.2.1</b> Die <code>R</code>-Konsole</a></li>
 <li class="chapter" data-level="1.2.2" data-path="einstieg.html"><a href="einstieg.html#der-skript-editor"><i class="fa fa-check"></i><b>1.2.2</b> Der Skript-Editor</a></li>
 <li class="chapter" data-level="1.2.3" data-path="einstieg.html"><a href="einstieg.html#kommentare"><i class="fa fa-check"></i><b>1.2.3</b> Kommentare</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="einstieg.html"><a href="einstieg.html#ausblick"><i class="fa fa-check"></i><b>1.3</b> Ausblick</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="vektoren.html"><a href="vektoren.html"><i class="fa fa-check"></i><b>2</b> Vektoren</a><ul>
+<li class="chapter" data-level="2" data-path="vektoren.html"><a href="vektoren.html"><i class="fa fa-check"></i><b>2</b> Vektoren</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="vektoren.html"><a href="vektoren.html#vektorisierung"><i class="fa fa-check"></i><b>2.1</b> Vektorisierung</a></li>
-<li class="chapter" data-level="2.2" data-path="vektoren.html"><a href="vektoren.html#variablen"><i class="fa fa-check"></i><b>2.2</b> Variablen</a><ul>
+<li class="chapter" data-level="2.2" data-path="vektoren.html"><a href="vektoren.html#variablen"><i class="fa fa-check"></i><b>2.2</b> Variablen</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="vektoren.html"><a href="vektoren.html#ausgabevsabspeichern"><i class="fa fa-check"></i><b>2.2.1</b> Ausgabe versus Abspeichern</a></li>
 <li class="chapter" data-level="2.2.2" data-path="vektoren.html"><a href="vektoren.html#variablennamen"><i class="fa fa-check"></i><b>2.2.2</b> Variablennamen</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="vektoren.html"><a href="vektoren.html#datentypen-von-vektoren"><i class="fa fa-check"></i><b>2.3</b> Datentypen von Vektoren</a><ul>
+<li class="chapter" data-level="2.3" data-path="vektoren.html"><a href="vektoren.html#datentypen-von-vektoren"><i class="fa fa-check"></i><b>2.3</b> Datentypen von Vektoren</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="vektoren.html"><a href="vektoren.html#character"><i class="fa fa-check"></i><b>2.3.1</b> <code>character</code></a></li>
 <li class="chapter" data-level="2.3.2" data-path="vektoren.html"><a href="vektoren.html#logical"><i class="fa fa-check"></i><b>2.3.2</b> <code>logical</code></a></li>
 <li class="chapter" data-level="2.3.3" data-path="vektoren.html"><a href="vektoren.html#factor"><i class="fa fa-check"></i><b>2.3.3</b> <code>factor</code></a></li>
 <li class="chapter" data-level="2.3.4" data-path="vektoren.html"><a href="vektoren.html#na"><i class="fa fa-check"></i><b>2.3.4</b> <code>NA</code></a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="vektoren.html"><a href="vektoren.html#logischevergleiche"><i class="fa fa-check"></i><b>2.4</b> Logische Vergleiche</a><ul>
+<li class="chapter" data-level="2.4" data-path="vektoren.html"><a href="vektoren.html#logischevergleiche"><i class="fa fa-check"></i><b>2.4</b> Logische Vergleiche</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="vektoren.html"><a href="vektoren.html#logische-vergleiche-mit-vektoren-vom-typ-character"><i class="fa fa-check"></i><b>2.4.1</b> Logische Vergleiche mit Vektoren vom Typ <code>character</code></a></li>
 <li class="chapter" data-level="2.4.2" data-path="vektoren.html"><a href="vektoren.html#komponentenweise-vergleiche"><i class="fa fa-check"></i><b>2.4.2</b> Komponentenweise Vergleiche</a></li>
 <li class="chapter" data-level="2.4.3" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen"><i class="fa fa-check"></i><b>2.4.3</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
 <li class="chapter" data-level="2.4.4" data-path="vektoren.html"><a href="vektoren.html#nalogik"><i class="fa fa-check"></i><b>2.4.4</b> Logische Operationen mit <code>NA</code></a></li>
 <li class="chapter" data-level="2.4.5" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.4.5</b> Der <code>%in%</code>-Operator</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.5</b> Zugriff auf Vektorelemente</a><ul>
+<li class="chapter" data-level="2.5" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.5</b> Zugriff auf Vektorelemente</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="vektoren.html"><a href="vektoren.html#veczugriff"><i class="fa fa-check"></i><b>2.5.1</b> Der <code>[·]</code>-Zugriff</a></li>
 <li class="chapter" data-level="2.5.2" data-path="vektoren.html"><a href="vektoren.html#logischerZugriff"><i class="fa fa-check"></i><b>2.5.2</b> <code>[·]</code>-Zugriff mit einem logischen Vektor</a></li>
 <li class="chapter" data-level="2.5.3" data-path="vektoren.html"><a href="vektoren.html#vektorAendern"><i class="fa fa-check"></i><b>2.5.3</b> <code>[·]</code>-Zugriff zum Ändern von Daten</a></li>
@@ -167,23 +203,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="vektoren.html"><a href="vektoren.html#zusammenfassung"><i class="fa fa-check"></i><b>2.7</b> Zusammenfassung</a></li>
 <li class="chapter" data-level="2.8" data-path="vektoren.html"><a href="vektoren.html#fragen-zum-vertiefenden-verständnis"><i class="fa fa-check"></i><b>2.8</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="dataframes.html"><a href="dataframes.html"><i class="fa fa-check"></i><b>3</b> <code>data.frames</code></a><ul>
+<li class="chapter" data-level="3" data-path="dataframes.html"><a href="dataframes.html"><i class="fa fa-check"></i><b>3</b> <code>data.frames</code></a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="dataframes.html"><a href="dataframes.html#die-funktion-data.frame"><i class="fa fa-check"></i><b>3.1</b> Die Funktion <code>data.frame()</code></a></li>
 <li class="chapter" data-level="3.2" data-path="dataframes.html"><a href="dataframes.html#zugriff-auf-eine-einzelne-spalte-die--notation"><i class="fa fa-check"></i><b>3.2</b> Zugriff auf eine einzelne Spalte: die <code>$</code>-Notation</a></li>
-<li class="chapter" data-level="3.3" data-path="dataframes.html"><a href="dataframes.html#datenzugriffe"><i class="fa fa-check"></i><b>3.3</b> Zugriff auf Spalten und Zeilen: die <code>[·,·]</code>-Notation</a></li>
-<li class="chapter" data-level="3.4" data-path="dataframes.html"><a href="dataframes.html#subset"><i class="fa fa-check"></i><b>3.4</b> Die Funktion <code>subset()</code></a><ul>
+<li class="chapter" data-level="3.3" data-path="dataframes.html"><a href="dataframes.html#datenzugriffe"><i class="fa fa-check"></i><b>3.3</b> Zugriff auf Spalten und Zeilen: die <code>[·,·]</code>-Notation</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="dataframes.html"><a href="dataframes.html#spaltenauswahl-von-items-mit-der-funktion-paste0"><i class="fa fa-check"></i><b>3.3.1</b> Spaltenauswahl von Items mit der Funktion <code>paste0()</code></a></li>
+<li class="chapter" data-level="3.3.2" data-path="dataframes.html"><a href="dataframes.html#spaltenauswahl-von-items-mit-der-funktion-grepl"><i class="fa fa-check"></i><b>3.3.2</b> Spaltenauswahl von Items mit der Funktion <code>grepl()</code></a></li>
+<li class="chapter" data-level="3.3.3" data-path="dataframes.html"><a href="dataframes.html#komplexere-logische-operationen-zur-zeilenauswahl"><i class="fa fa-check"></i><b>3.3.3</b> Komplexere logische Operationen zur Zeilenauswahl</a></li>
+<li class="chapter" data-level="3.3.4" data-path="dataframes.html"><a href="dataframes.html#weitere-beispiele-zur-verwendung-der--notation"><i class="fa fa-check"></i><b>3.3.4</b> Weitere Beispiele zur Verwendung der <code>[·,·]</code>-Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="dataframes.html"><a href="dataframes.html#subset"><i class="fa fa-check"></i><b>3.4</b> Die Funktion <code>subset()</code></a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="dataframes.html"><a href="dataframes.html#zeileneinfach"><i class="fa fa-check"></i><b>3.4.1</b> Vereinfachte Zeilenauswahl</a></li>
 <li class="chapter" data-level="3.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>3.4.2</b> Funktionsargumente</a></li>
 <li class="chapter" data-level="3.4.3" data-path="dataframes.html"><a href="dataframes.html#spalteneinfach"><i class="fa fa-check"></i><b>3.4.3</b> Sonderregeln zur Auswahl von Spalten</a></li>
 <li class="chapter" data-level="3.4.4" data-path="dataframes.html"><a href="dataframes.html#non-standard-evaluation"><i class="fa fa-check"></i><b>3.4.4</b> Non-Standard-Evaluation</a></li>
 <li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#subsettoll"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="dataframes.html"><a href="dataframes.html#doppelteckig"><i class="fa fa-check"></i><b>3.5</b> Weitere Zugriffe auf <code>data.frames</code></a><ul>
+<li class="chapter" data-level="3.5" data-path="dataframes.html"><a href="dataframes.html#doppelteckig"><i class="fa fa-check"></i><b>3.5</b> Weitere Zugriffe auf <code>data.frames</code></a>
+<ul>
 <li class="chapter" data-level="3.5.1" data-path="dataframes.html"><a href="dataframes.html#der--zugriff"><i class="fa fa-check"></i><b>3.5.1</b> Der <code>[[·]]</code>-Zugriff</a></li>
 <li class="chapter" data-level="3.5.2" data-path="dataframes.html"><a href="dataframes.html#der--zugriff-1"><i class="fa fa-check"></i><b>3.5.2</b> Der <code>[·]</code>-Zugriff</a></li>
 <li class="chapter" data-level="3.5.3" data-path="dataframes.html"><a href="dataframes.html#nameindex"><i class="fa fa-check"></i><b>3.5.3</b> Zugriff nach Name und Index</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="dataframes.html"><a href="dataframes.html#convenient"><i class="fa fa-check"></i><b>3.6</b> Nützliche Funktionen zum Arbeiten mit <code>data.frames</code></a><ul>
+<li class="chapter" data-level="3.6" data-path="dataframes.html"><a href="dataframes.html#convenient"><i class="fa fa-check"></i><b>3.6</b> Nützliche Funktionen zum Arbeiten mit <code>data.frames</code></a>
+<ul>
 <li class="chapter" data-level="3.6.1" data-path="dataframes.html"><a href="dataframes.html#tapply"><i class="fa fa-check"></i><b>3.6.1</b> Gruppierte Statistiken: <code>tapply()</code></a></li>
 <li class="chapter" data-level="3.6.2" data-path="dataframes.html"><a href="dataframes.html#datenstruktur-nrow-und-ncol"><i class="fa fa-check"></i><b>3.6.2</b> Datenstruktur: <code>nrow()</code> und <code>ncol()</code></a></li>
 <li class="chapter" data-level="3.6.3" data-path="dataframes.html"><a href="dataframes.html#wie-sieht-die-tabelle-aus-head-und-tail"><i class="fa fa-check"></i><b>3.6.3</b> Wie sieht die Tabelle aus: <code>head()</code> und <code>tail()</code></a></li>
@@ -193,10 +239,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.7" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-1"><i class="fa fa-check"></i><b>3.7</b> Zusammenfassung</a></li>
 <li class="chapter" data-level="3.8" data-path="dataframes.html"><a href="dataframes.html#fragen-zum-vertiefenden-verständnis-1"><i class="fa fa-check"></i><b>3.8</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="psychometrie.html"><a href="psychometrie.html"><i class="fa fa-check"></i><b>4</b> Erste psychometrische Auswertungen</a><ul>
+<li class="chapter" data-level="4" data-path="psychometrie.html"><a href="psychometrie.html"><i class="fa fa-check"></i><b>4</b> Erste psychometrische Auswertungen</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="psychometrie.html"><a href="psychometrie.html#summenwerte"><i class="fa fa-check"></i><b>4.1</b> Summenwerte</a></li>
 <li class="chapter" data-level="4.2" data-path="psychometrie.html"><a href="psychometrie.html#item-schwierigkeiten"><i class="fa fa-check"></i><b>4.2</b> Item-Schwierigkeiten</a></li>
-<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a><ul>
+<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a>
+<ul>
 <li class="chapter" data-level="4.3.1" data-path="psychometrie.html"><a href="psychometrie.html#exkurs-programmatische-untersuchung-der-korrelationsmatrix"><i class="fa fa-check"></i><b>4.3.1</b> Exkurs: Programmatische Untersuchung der Korrelationsmatrix</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="psychometrie.html"><a href="psychometrie.html#trennschaerfe"><i class="fa fa-check"></i><b>4.4</b> Item-Trennschärfen</a></li>
@@ -204,28 +252,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilität"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
 <li class="chapter" data-level="4.7" data-path="psychometrie.html"><a href="psychometrie.html#in-der-praxis-nutzung-von-zusatzpaketen"><i class="fa fa-check"></i><b>4.7</b> In der Praxis: Nutzung von Zusatzpaketen</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="rohdaten.html"><a href="rohdaten.html"><i class="fa fa-check"></i><b>5</b> Aufarbeitung von Fragebogendaten</a><ul>
-<li class="chapter" data-level="5.1" data-path="rohdaten.html"><a href="rohdaten.html#umkodierung"><i class="fa fa-check"></i><b>5.1</b> Umkodierung von Antworten</a><ul>
+<li class="chapter" data-level="5" data-path="rohdaten.html"><a href="rohdaten.html"><i class="fa fa-check"></i><b>5</b> Aufarbeitung von Fragebogendaten</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rohdaten.html"><a href="rohdaten.html#umkodierung"><i class="fa fa-check"></i><b>5.1</b> Umkodierung von Antworten</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="rohdaten.html"><a href="rohdaten.html#die-funktion-ifelse"><i class="fa fa-check"></i><b>5.1.1</b> Die Funktion <code>ifelse()</code></a></li>
 <li class="chapter" data-level="5.1.2" data-path="rohdaten.html"><a href="rohdaten.html#ifelsevektor"><i class="fa fa-check"></i><b>5.1.2</b> Vektorisierung der Funktion <code>ifelse()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="rohdaten.html"><a href="rohdaten.html#invertierung-von-antworten"><i class="fa fa-check"></i><b>5.2</b> Invertierung von Antworten</a><ul>
+<li class="chapter" data-level="5.2" data-path="rohdaten.html"><a href="rohdaten.html#invertierung-von-antworten"><i class="fa fa-check"></i><b>5.2</b> Invertierung von Antworten</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="rohdaten.html"><a href="rohdaten.html#invertierung-mit-ifelse"><i class="fa fa-check"></i><b>5.2.1</b> Invertierung mit <code>ifelse()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="rohdaten.html"><a href="rohdaten.html#missingvalues"><i class="fa fa-check"></i><b>5.3</b> Umgang mit fehlenden Werten</a><ul>
+<li class="chapter" data-level="5.3" data-path="rohdaten.html"><a href="rohdaten.html#missingvalues"><i class="fa fa-check"></i><b>5.3</b> Umgang mit fehlenden Werten</a>
+<ul>
 <li class="chapter" data-level="5.3.1" data-path="rohdaten.html"><a href="rohdaten.html#identifikation-von-fehlenden-werten"><i class="fa fa-check"></i><b>5.3.1</b> Identifikation von fehlenden Werten</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="rohdaten.html"><a href="rohdaten.html#fragen-zum-vertiefenden-verständnis-2"><i class="fa fa-check"></i><b>5.4</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="funktionen.html"><a href="funktionen.html"><i class="fa fa-check"></i><b>6</b> Funktionen</a><ul>
+<li class="chapter" data-level="6" data-path="funktionen.html"><a href="funktionen.html"><i class="fa fa-check"></i><b>6</b> Funktionen</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="funktionen.html"><a href="funktionen.html#das-black-box-modell"><i class="fa fa-check"></i><b>6.1</b> Das Black-Box-Modell</a></li>
-<li class="chapter" data-level="6.2" data-path="funktionen.html"><a href="funktionen.html#argumente"><i class="fa fa-check"></i><b>6.2</b> Argumente</a><ul>
+<li class="chapter" data-level="6.2" data-path="funktionen.html"><a href="funktionen.html#argumente"><i class="fa fa-check"></i><b>6.2</b> Argumente</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="funktionen.html"><a href="funktionen.html#help"><i class="fa fa-check"></i><b>6.2.1</b> Die <code>R</code>-Hilfe</a></li>
 <li class="chapter" data-level="6.2.2" data-path="funktionen.html"><a href="funktionen.html#namenlose-argumente"><i class="fa fa-check"></i><b>6.2.2</b> Namenlose Argumente</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="funktionen.html"><a href="funktionen.html#rückgabewerte"><i class="fa fa-check"></i><b>6.3</b> Rückgabewerte</a></li>
 <li class="chapter" data-level="6.4" data-path="funktionen.html"><a href="funktionen.html#seiteneffekte"><i class="fa fa-check"></i><b>6.4</b> Seiteneffekte</a></li>
-<li class="chapter" data-level="6.5" data-path="funktionen.html"><a href="funktionen.html#selbst-geschriebene-funktionen"><i class="fa fa-check"></i><b>6.5</b> Selbst geschriebene Funktionen</a><ul>
+<li class="chapter" data-level="6.5" data-path="funktionen.html"><a href="funktionen.html#selbst-geschriebene-funktionen"><i class="fa fa-check"></i><b>6.5</b> Selbst geschriebene Funktionen</a>
+<ul>
 <li class="chapter" data-level="6.5.1" data-path="funktionen.html"><a href="funktionen.html#definition-der-eigenen-funktion"><i class="fa fa-check"></i><b>6.5.1</b> Definition der eigenen Funktion</a></li>
 <li class="chapter" data-level="6.5.2" data-path="funktionen.html"><a href="funktionen.html#lokale-variablen"><i class="fa fa-check"></i><b>6.5.2</b> Lokale Variablen</a></li>
 <li class="chapter" data-level="6.5.3" data-path="funktionen.html"><a href="funktionen.html#optionale-argumente"><i class="fa fa-check"></i><b>6.5.3</b> Optionale Argumente</a></li>
@@ -233,17 +288,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6.6" data-path="funktionen.html"><a href="funktionen.html#fragen-zum-vertiefenden-verständnis-3"><i class="fa fa-check"></i><b>6.6</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="schleifen.html"><a href="schleifen.html"><i class="fa fa-check"></i><b>7</b> Schleifen</a><ul>
+<li class="chapter" data-level="7" data-path="schleifen.html"><a href="schleifen.html"><i class="fa fa-check"></i><b>7</b> Schleifen</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="schleifen.html"><a href="schleifen.html#sequentielle-bepunktung-von-testitems"><i class="fa fa-check"></i><b>7.1</b> Sequentielle Bepunktung von Testitems</a></li>
 <li class="chapter" data-level="7.2" data-path="schleifen.html"><a href="schleifen.html#berechnung-von-part-whole-korrigierten-trennschärfen"><i class="fa fa-check"></i><b>7.2</b> Berechnung von part-whole korrigierten Trennschärfen</a></li>
-<li class="chapter" data-level="7.3" data-path="schleifen.html"><a href="schleifen.html#datenspeicherung-in-einer-schleife"><i class="fa fa-check"></i><b>7.3</b> Datenspeicherung in einer Schleife</a><ul>
+<li class="chapter" data-level="7.3" data-path="schleifen.html"><a href="schleifen.html#datenspeicherung-in-einer-schleife"><i class="fa fa-check"></i><b>7.3</b> Datenspeicherung in einer Schleife</a>
+<ul>
 <li class="chapter" data-level="7.3.1" data-path="schleifen.html"><a href="schleifen.html#adressierung-per-name"><i class="fa fa-check"></i><b>7.3.1</b> Adressierung per Name</a></li>
 <li class="chapter" data-level="7.3.2" data-path="schleifen.html"><a href="schleifen.html#indexadressierung"><i class="fa fa-check"></i><b>7.3.2</b> Vektorspeicherung – Adressierung per Index</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="anhang.html"><a href="anhang.html"><i class="fa fa-check"></i><b>8</b> Anhang</a><ul>
+<li class="chapter" data-level="8" data-path="anhang.html"><a href="anhang.html"><i class="fa fa-check"></i><b>8</b> Anhang</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="anhang.html"><a href="anhang.html#datenEinlesen"><i class="fa fa-check"></i><b>8.1</b> Daten einlesen</a></li>
-<li class="chapter" data-level="8.2" data-path="anhang.html"><a href="anhang.html#das-environment-sauber-halten"><i class="fa fa-check"></i><b>8.2</b> Das Environment sauber halten</a><ul>
+<li class="chapter" data-level="8.2" data-path="anhang.html"><a href="anhang.html#das-environment-sauber-halten"><i class="fa fa-check"></i><b>8.2</b> Das Environment sauber halten</a>
+<ul>
 <li class="chapter" data-level="8.2.1" data-path="anhang.html"><a href="anhang.html#variablen-löschen"><i class="fa fa-check"></i><b>8.2.1</b> Variablen löschen</a></li>
 <li class="chapter" data-level="8.2.2" data-path="anhang.html"><a href="anhang.html#mit-einem-sauberen-environment-starten"><i class="fa fa-check"></i><b>8.2.2</b> Mit einem sauberen Environment starten</a></li>
 </ul></li>
@@ -266,7 +325,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="dataframes" class="section level1">
+<div id="dataframes" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> <code>data.frames</code></h1>
 <p>Wir haben gelernt, dass <code>R</code> Daten in Vektoren abspeichert. Im Normalfall
 haben wir in der psychometrischen Datenauswertung aber eine große
@@ -284,24 +343,24 @@ Person.</p>
 ist, vereinfacht gesagt, eine Sammlung von Vektoren gleicher Länge.
 Jede Spalte – also jede Messvariable – ist ein Vektor. Mit dieser
 Datenstruktur werden wir uns im vorliegenden Kapitel auseinandersetzen.</p>
-<div id="die-funktion-data.frame" class="section level2">
+<div id="die-funktion-data.frame" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Die Funktion <code>data.frame()</code></h2>
 <p>Mit der Funktion <code>data.frame()</code> können wir “händisch” einen <code>data.frame</code>
 erstellen.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> Die folgende unscheinbare Tabelle wird uns durch
 einen Großteil des Kapitels begleiten, um Grundlagen von
 <code>data.frame</code>-Operationen zu betrachten.</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" title="1">mdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb229-2" title="2">  <span class="dt">Fallnummer =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb229-3" title="3">  <span class="dt">Item1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb229-4" title="4">  <span class="dt">Item2 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb229-5" title="5">  <span class="dt">Alter =</span> <span class="kw">c</span>(<span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">15</span>),</a>
-<a class="sourceLine" id="cb229-6" title="6">  <span class="dt">Geschlecht =</span> <span class="kw">c</span>(<span class="st">&quot;w&quot;</span>, <span class="st">&quot;m&quot;</span>, <span class="st">&quot;m&quot;</span>, <span class="st">&quot;w&quot;</span>, <span class="st">&quot;m&quot;</span>)</a>
-<a class="sourceLine" id="cb229-7" title="7">)</a></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="dataframes.html#cb222-1" aria-hidden="true" tabindex="-1"></a>mdf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb222-2"><a href="dataframes.html#cb222-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Fallnummer =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb222-3"><a href="dataframes.html#cb222-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Item1 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb222-4"><a href="dataframes.html#cb222-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Item2 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb222-5"><a href="dataframes.html#cb222-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Alter =</span> <span class="fu">c</span>(<span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">15</span>),</span>
+<span id="cb222-6"><a href="dataframes.html#cb222-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Geschlecht =</span> <span class="fu">c</span>(<span class="st">&quot;w&quot;</span>, <span class="st">&quot;m&quot;</span>, <span class="st">&quot;m&quot;</span>, <span class="st">&quot;w&quot;</span>, <span class="st">&quot;m&quot;</span>)</span>
+<span id="cb222-7"><a href="dataframes.html#cb222-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Der erstellte <code>data.frame</code> ist nun in der Variablen <code>mdf</code> – was
 beispielsweise für “mein <code>data.frame</code>” stehen könnte – abgespeichert.
 Durch Eingabe des Variablennamens in der <code>R</code>-Konsole können wir die
 ganze Tabelle ausgeben lassen:</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1">mdf</a></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="dataframes.html#cb223-1" aria-hidden="true" tabindex="-1"></a>mdf</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht
 1          1     1     1    13          w
 2          2     0     1    14          m
@@ -315,24 +374,24 @@ benannt. <strong>Dieser Punkt ist sehr wichtig, da wir Spalten anhand ihrer
 Namen gezielt auswählen können</strong>. Wenn ich die Spaltennamen eines
 <code>data.frames</code> nicht mehr weiß, kann ich sie mit der Funktion <code>names()</code>
 abrufen:</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" title="1"><span class="kw">names</span>(mdf)</a></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="dataframes.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mdf)</span></code></pre></div>
 <pre><code>[1] &quot;Fallnummer&quot; &quot;Item1&quot;      &quot;Item2&quot;      &quot;Alter&quot;      &quot;Geschlecht&quot;</code></pre>
 </div>
-<div id="zugriff-auf-eine-einzelne-spalte-die--notation" class="section level2">
+<div id="zugriff-auf-eine-einzelne-spalte-die--notation" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Zugriff auf eine einzelne Spalte: die <code>$</code>-Notation</h2>
 <p>Der <code>$</code>-Zugriff ist die grundlegendste Operation auf <code>data.frames</code>. Wir
 nutzen ihn, um auf einzelne Spalten zuzugreifen und diese <strong>als Vektor</strong>
 auszulesen:</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" title="1">mdf<span class="op">$</span>Item1 <span class="co"># gibt einen Vektor aus</span></a></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="dataframes.html#cb227-1" aria-hidden="true" tabindex="-1"></a>mdf<span class="sc">$</span>Item1 <span class="co"># gibt einen Vektor aus</span></span></code></pre></div>
 <pre><code>[1] 1 0 0 1 1</code></pre>
 <p>Ich kann den <code>$</code>-Zugriff nicht nur verwenden, um eine Spalte aus einem
 <code>data.frame</code> auszulesen, sondern kann damit auch neue Spalten
 hinzufügen. Das funktioniert, indem ich der neu zu erstellenden Spalte
 per “<code>&lt;-</code>” einen Vektor zuweise:</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" title="1"><span class="co">## Beachtet die Länge des Vektors</span></a>
-<a class="sourceLine" id="cb236-2" title="2">mdf<span class="op">$</span>Augenfarbe &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;braun&quot;</span>, <span class="st">&quot;blau&quot;</span>, <span class="st">&quot;blau&quot;</span>, <span class="st">&quot;braun&quot;</span>, <span class="st">&quot;gruen&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="dataframes.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Beachtet die Länge des Vektors</span></span>
+<span id="cb229-2"><a href="dataframes.html#cb229-2" aria-hidden="true" tabindex="-1"></a>mdf<span class="sc">$</span>Augenfarbe <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;braun&quot;</span>, <span class="st">&quot;blau&quot;</span>, <span class="st">&quot;blau&quot;</span>, <span class="st">&quot;braun&quot;</span>, <span class="st">&quot;gruen&quot;</span>)</span></code></pre></div>
 <p>Die Tabelle <code>mdf</code><a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> hat nun eine zusätzliche Spalte:</p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" title="1">mdf</a></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="dataframes.html#cb230-1" aria-hidden="true" tabindex="-1"></a>mdf</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe
 1          1     1     1    13          w      braun
 2          2     0     1    14          m       blau
@@ -343,17 +402,17 @@ per “<code>&lt;-</code>” einen Vektor zuweise:</p>
 jegliche Berechnungsvorschriften für Vektoren verwenden. So kann ich
 etwa einen Testscore über zwei Items berechnen und direkt an den
 <code>data.frame</code> anhängen:</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" title="1">mdf<span class="op">$</span>Testscore &lt;-<span class="st"> </span>mdf<span class="op">$</span>Item1 <span class="op">+</span><span class="st"> </span>mdf<span class="op">$</span>Item2</a>
-<a class="sourceLine" id="cb239-2" title="2"></a>
-<a class="sourceLine" id="cb239-3" title="3">mdf<span class="op">$</span>Testscore</a></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="dataframes.html#cb232-1" aria-hidden="true" tabindex="-1"></a>mdf<span class="sc">$</span>Testscore <span class="ot">&lt;-</span> mdf<span class="sc">$</span>Item1 <span class="sc">+</span> mdf<span class="sc">$</span>Item2</span>
+<span id="cb232-2"><a href="dataframes.html#cb232-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb232-3"><a href="dataframes.html#cb232-3" aria-hidden="true" tabindex="-1"></a>mdf<span class="sc">$</span>Testscore</span></code></pre></div>
 <pre><code>[1] 2 1 0 1 2</code></pre>
 <p>In diesem Beispiel kommt die <code>$</code>-Notation recht häufig zum Einsatz, was
 etwas gewöhnungsbedürftig aussieht. Aber es ist wichtig darauf zu
 achten. Die Variablen,<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> die wir verwenden, um den
 Testscore zu berechnen, “wohnen” in <code>mdf</code> und können nicht ohne Verweis
 darauf adressiert werden. Das hier geht schief:</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" title="1">mdf<span class="op">$</span>Testscore &lt;-<span class="st"> </span>Item1 <span class="op">+</span><span class="st"> </span>Item2</a>
-<a class="sourceLine" id="cb241-2" title="2">Fehler<span class="op">:</span><span class="st"> </span>Objekt <span class="st">&#39;Item1&#39;</span> nicht gefunden</a></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="dataframes.html#cb234-1" aria-hidden="true" tabindex="-1"></a>mdf<span class="sc">$</span>Testscore <span class="ot">&lt;-</span> Item1 <span class="sc">+</span> Item2</span>
+<span id="cb234-2"><a href="dataframes.html#cb234-2" aria-hidden="true" tabindex="-1"></a>Fehler<span class="sc">:</span> Objekt <span class="st">&#39;Item1&#39;</span> nicht gefunden</span></code></pre></div>
 <p>Hier sucht <code>R</code> nach einer Variablen <code>Item1</code>, die aber nicht existiert;
 <code>Item1</code> ist nur eine Spalte von <code>mdf</code>. Noch schlimmer wäre es, wenn in
 meiner Arbeitsumgebung tatsächlich Variablen mit den Namen <code>Item1</code> und
@@ -363,9 +422,9 @@ falsche Daten abspeichern und nicht einmal eine Fehlermeldung erhalten.</p>
 Berechnungen durchzuführen. Wir können beispielsweise Mittelwerte von
 Messvariablen berechnen oder uns Häufigkeiten von kategorialen Daten
 angeben lassen:</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" title="1"><span class="kw">mean</span>(mdf<span class="op">$</span>Alter)</a></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="dataframes.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mdf<span class="sc">$</span>Alter)</span></code></pre></div>
 <pre><code>[1] 13.4</code></pre>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" title="1"><span class="kw">table</span>(mdf<span class="op">$</span>Geschlecht)</a></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="dataframes.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(mdf<span class="sc">$</span>Geschlecht)</span></code></pre></div>
 <pre><code>
 m w 
 3 2 </code></pre>
@@ -376,14 +435,14 @@ zur Überprüfung der Plausibilität von Daten ist <code>table()</code> nützlic
 jeder Wert ein “legaler” Wert, der auch vorkommen sollte? Wir können die
 Funktion <code>table()</code> auch verwenden, um die Häufigkeit der Kombination von
 mehreren Variablen zu erfragen:</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb246-1" title="1"><span class="co"># Erstelle Kreuztabelle von Geschlecht und Augenfarbe:</span></a>
-<a class="sourceLine" id="cb246-2" title="2"><span class="kw">table</span>(mdf<span class="op">$</span>Geschlecht, mdf<span class="op">$</span>Augenfarbe)</a></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="dataframes.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Erstelle Kreuztabelle von Geschlecht und Augenfarbe:</span></span>
+<span id="cb239-2"><a href="dataframes.html#cb239-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(mdf<span class="sc">$</span>Geschlecht, mdf<span class="sc">$</span>Augenfarbe)</span></code></pre></div>
 <pre><code>   
     blau braun gruen
   m    2     0     1
   w    0     2     0</code></pre>
 </div>
-<div id="datenzugriffe" class="section level2">
+<div id="datenzugriffe" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Zugriff auf Spalten und Zeilen: die <code>[·,·]</code>-Notation</h2>
 <p>Einzelne Spalten können wir mit dem <code>$</code>-Zugriff aus <code>data.frames</code>
 auslesen. Wir lernen nun den <code>[·,·]</code>-Zugriff kennen, mit dem wir nicht
@@ -397,7 +456,7 @@ Personen, die den maximalen Testwert erreicht haben. Für solche
 Auswahlen hilft uns unser Wissen über <a href="vektoren.html#logischevergleiche">logische Vergleiche aus dem
 letzten Kapitel</a>. Betrachten wir zunächst ein
 Beispiel:</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" title="1">mdf[mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>, ]</a></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="dataframes.html#cb241-1" aria-hidden="true" tabindex="-1"></a>mdf[mdf<span class="sc">$</span>Augenfarbe <span class="sc">==</span> <span class="st">&quot;blau&quot;</span>, ]</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 2          2     0     1    14          m       blau         1
 3          3     0     0    13          m       blau         0</code></pre>
@@ -410,7 +469,7 @@ speichern, wenn wir damit weiter arbeiten wollen (Erinnerung: <a href="vektoren.
 2</a>).</p>
 <p>Wie das folgende Beispiel zeigt, können wir mit der <code>[·,·]</code>-Notation
 auch gezielt Spalten aus <code>data.frames</code> auswählen:</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" title="1">mdf[, <span class="kw">c</span>(<span class="st">&quot;Augenfarbe&quot;</span>, <span class="st">&quot;Alter&quot;</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="dataframes.html#cb243-1" aria-hidden="true" tabindex="-1"></a>mdf[, <span class="fu">c</span>(<span class="st">&quot;Augenfarbe&quot;</span>, <span class="st">&quot;Alter&quot;</span>)]</span></code></pre></div>
 <pre><code>  Augenfarbe Alter
 1      braun    13
 2       blau    14
@@ -434,85 +493,167 @@ Namen der Zeilen/Spalten enthält, die ausgegeben werden sollen.<a href="#fn18" 
 Vektors vom Typ <code>character</code> – adressiert; Zeilen werden am häufigsten
 durch einen logischen Ausdruck – also durch Angabe eines einen Vektors
 vom Typ <code>logical</code> – adressiert (“Gib mir alle Fälle aus, die eine
-bestimmte Eigenschaft aufweisen.”). Durch die UND- bzw. ODER-Operationen
-können wir auch komplexere logische Bedingungen zur Auswahl von Fällen
-formulieren:</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" title="1">mdf[mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span> <span class="op">|</span><span class="st"> </span>mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;braun&quot;</span>, ]</a></code></pre></div>
+bestimmte Eigenschaft aufweisen.”).</p>
+<div id="spaltenauswahl-von-items-mit-der-funktion-paste0" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Spaltenauswahl von Items mit der Funktion <code>paste0()</code></h3>
+<p>Die Funktion <code>paste0()</code> kann genutzt werden, um effizient Spaltennamen zu
+erstellen, wenn die Spaltennamen einem bestimmten Schema folgen, wie es
+bei der Benennung von Fragebogen-Items oftmals der Fall ist. Sie erstellt
+<code>character</code>-Vektoren beliebiger Länge. Etwa wie folgt lassen sich bequem 10
+durchnummerierte Itemnamen generieren:</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="dataframes.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;item_&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code> [1] &quot;item_1&quot;  &quot;item_2&quot;  &quot;item_3&quot;  &quot;item_4&quot;  &quot;item_5&quot;  &quot;item_6&quot;  &quot;item_7&quot; 
+ [8] &quot;item_8&quot;  &quot;item_9&quot;  &quot;item_10&quot;</code></pre>
+<p>Hierbei wird der Text “item_” mit den Zahlen von 1 bis 10 gepaart. Das Ergebnis
+des Befehls ist <strong>ein</strong> 10-elementiger Vektor, der zur Spaltenauswahl mithilfe
+der <code>[·,·]</code>-Notation genutzt werden könnte. Diese Operation ist nützlich, da
+Spaltennamen in echten Datentabellen oft aus einem fixen Stamm – hier <code>item</code> –
+und einem variablen Teil bestehen – hier den Zahlen von 1 bis 10. Die Funktion
+<code>paste0()</code> ermöglicht uns dann, den fixen Teil nicht mehrfach aufschreiben zu
+müssen. Außerdem besteht der variable Teil oftmals aus einer aufsteigenden
+Zahlenfolge, die wir unkompliziert mit dem Doppelpunktoperator erstellen
+können.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p>
+<p>Die Funktion <code>paste0()</code> ist nicht auf die Kombination von zwei Vektoren
+beschränkt, sondern verknüpft im Allgemeinen beliebig viele Vektoren. Sollten
+die Spaltennamen beispielsweise noch ein festes Suffix nach der Nummerierung
+enthalten, kann dieses einfach durch ein zusätzliches Argument angefügt werden:</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="dataframes.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;item_&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="st">&quot;R&quot;</span>)</span></code></pre></div>
+<pre><code>[1] &quot;item_1R&quot; &quot;item_2R&quot; &quot;item_3R&quot;</code></pre>
+<p>In unserer kleinen Datentabelle <code>mdf</code> können wir mithilfe der Funktion
+<code>paste0()</code> die zwei Items wie folgt auswählen:</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="dataframes.html#cb250-1" aria-hidden="true" tabindex="-1"></a>mdf[, <span class="fu">paste0</span>(<span class="st">&quot;Item&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)]</span></code></pre></div>
+<pre><code>  Item1 Item2
+1     1     1
+2     0     1
+3     0     0
+4     1     0
+5     1     1</code></pre>
+<p>Natürlich ist diese Operation nützlicher, wenn die Tabelle mehr Items enthält.</p>
+<p>Eine Verallgemeinerung von <code>paste0()</code> stellt die Funktion <code>paste()</code> dar, die das
+Trennzeichen zwischen den zusammengefügten Vektoren explizit definieren kann.
+Dazu verwendet <code>paste()</code> das benannte Argument <code>sep</code>:</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="dataframes.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;item&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>)</span></code></pre></div>
+<pre><code> [1] &quot;item-1&quot;  &quot;item-2&quot;  &quot;item-3&quot;  &quot;item-4&quot;  &quot;item-5&quot;  &quot;item-6&quot;  &quot;item-7&quot; 
+ [8] &quot;item-8&quot;  &quot;item-9&quot;  &quot;item-10&quot;</code></pre>
+<p>Die Funktionen <code>paste()</code> und <code>paste0()</code> arbeiten vektorisiert und im Allgemeinen
+auch komponentenweise, verknüfen also gleich lange Eingabevektoren paarweise
+anhand der Position ihrer Elemente.</p>
+</div>
+<div id="spaltenauswahl-von-items-mit-der-funktion-grepl" class="section level3" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Spaltenauswahl von Items mit der Funktion <code>grepl()</code></h3>
+<p>Die Funktion <code>grepl()</code> kann ebenfalls genutzt werden, um gezielt Spalten
+auszuwählen, deren Namen einem gewissen Format entsprechen. Sie nimmt (als
+zweites Argument) einen Vektor vom Typ <code>character</code> entgegen und vergleicht darin
+alle Elemente mit einer Vorlage (die als erstes Argument übergeben wird):</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="dataframes.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mdf)</span></code></pre></div>
+<pre><code>[1] &quot;Fallnummer&quot; &quot;Item1&quot;      &quot;Item2&quot;      &quot;Alter&quot;      &quot;Geschlecht&quot;
+[6] &quot;Augenfarbe&quot; &quot;Testscore&quot; </code></pre>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="dataframes.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Teste pro Spaltenname, ob der Stamm &quot;Item&quot; enthalten ist:</span></span>
+<span id="cb256-2"><a href="dataframes.html#cb256-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grepl</span>(<span class="st">&quot;Item&quot;</span>, <span class="fu">names</span>(mdf))</span></code></pre></div>
+<pre><code>[1] FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="dataframes.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Nutze grepl zur Auswahl der Spalten:</span></span>
+<span id="cb258-2"><a href="dataframes.html#cb258-2" aria-hidden="true" tabindex="-1"></a>mdf[, <span class="fu">grepl</span>(<span class="st">&quot;Item&quot;</span>, <span class="fu">names</span>(mdf))]</span></code></pre></div>
+<pre><code>  Item1 Item2
+1     1     1
+2     0     1
+3     0     0
+4     1     0
+5     1     1</code></pre>
+<p>Ähnlich funktioniert die Funktion <code>grep()</code>, die jedoch numerische Indices statt
+eines logischen Vektors zurückgibt und demnach auch zur Spaltenauswahl genutzt
+werden kann.</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="dataframes.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Item&quot;</span>, <span class="fu">names</span>(mdf))</span></code></pre></div>
+<pre><code>[1] 2 3</code></pre>
+<p>Bei der Nutzung von <code>grepl()</code> oder <code>grep()</code> zur Spaltenauswahl ist Vorsicht
+geboten, dass wirklich nur die gewünschten Spalten ausgewählt werden und nicht
+andere, die zufällig denselben Stamm enthalten, aber nicht in der Ausgabemenge
+erwünscht sind.</p>
+</div>
+<div id="komplexere-logische-operationen-zur-zeilenauswahl" class="section level3" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Komplexere logische Operationen zur Zeilenauswahl</h3>
+<p>Durch die UND- bzw. ODER-Operationen können wir auch komplexere logische
+Bedingungen zur Auswahl von Fällen formulieren:</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="dataframes.html#cb262-1" aria-hidden="true" tabindex="-1"></a>mdf[mdf<span class="sc">$</span>Augenfarbe <span class="sc">==</span> <span class="st">&quot;blau&quot;</span> <span class="sc">|</span> mdf<span class="sc">$</span>Augenfarbe <span class="sc">==</span> <span class="st">&quot;braun&quot;</span>, ]</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 1          1     1     1    13          w      braun         2
 2          2     0     1    14          m       blau         1
 3          3     0     0    13          m       blau         0
 4          4     1     0    12          w      braun         1</code></pre>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" title="1">mdf[(mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span> <span class="op">|</span><span class="st"> </span>mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;braun&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>mdf<span class="op">$</span>Item1 <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ]</a></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="dataframes.html#cb264-1" aria-hidden="true" tabindex="-1"></a>mdf[(mdf<span class="sc">$</span>Augenfarbe <span class="sc">==</span> <span class="st">&quot;blau&quot;</span> <span class="sc">|</span> mdf<span class="sc">$</span>Augenfarbe <span class="sc">==</span> <span class="st">&quot;braun&quot;</span>) <span class="sc">&amp;</span> mdf<span class="sc">$</span>Item1 <span class="sc">==</span> <span class="dv">1</span>, ]</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 1          1     1     1    13          w      braun         2
 4          4     1     0    12          w      braun         1</code></pre>
 <p>Beachtet, dass wir hier ohne Klammerung der ODER-Operation eine andere
 Ausgabe erhalten (Erinnerung: Diesen Fall kennen wir auch aus <a href="vektoren.html#praezedenz">Kapitel
 2</a>):</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" title="1">mdf[mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span> <span class="op">|</span><span class="st"> </span>mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;braun&quot;</span> <span class="op">&amp;</span><span class="st"> </span>mdf<span class="op">$</span>Item1 <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, ]</a></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="dataframes.html#cb266-1" aria-hidden="true" tabindex="-1"></a>mdf[mdf<span class="sc">$</span>Augenfarbe <span class="sc">==</span> <span class="st">&quot;blau&quot;</span> <span class="sc">|</span> mdf<span class="sc">$</span>Augenfarbe <span class="sc">==</span> <span class="st">&quot;braun&quot;</span> <span class="sc">&amp;</span> mdf<span class="sc">$</span>Item1 <span class="sc">==</span> <span class="dv">1</span>, ]</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 1          1     1     1    13          w      braun         2
 2          2     0     1    14          m       blau         1
 3          3     0     0    13          m       blau         0
 4          4     1     0    12          w      braun         1</code></pre>
 <p>Wie wir merken, wird die <code>[·,·]</code>-Notation recht schnell
-unübersichtlich, wenn sie komplexere logische Anfragen enthält. Die
+unübersichtlich, wenn sie komplexere logische Bedingungen enthält. Die
 Verknüpfung mehrerer ODER-Bedingungen lässt sich durch den
 <code>%in%</code>-Operator verkürzen:</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" title="1">mdf[mdf<span class="op">$</span>Augenfarbe <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;blau&quot;</span>, <span class="st">&quot;braun&quot;</span>), ]</a></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="dataframes.html#cb268-1" aria-hidden="true" tabindex="-1"></a>mdf[mdf<span class="sc">$</span>Augenfarbe <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;blau&quot;</span>, <span class="st">&quot;braun&quot;</span>), ]</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 1          1     1     1    13          w      braun         2
 2          2     0     1    14          m       blau         1
 3          3     0     0    13          m       blau         0
 4          4     1     0    12          w      braun         1</code></pre>
-<p>Im nächsten Abschnitt lernen wir mit der Funktion <code>subset()</code> eine
-Möglichkeit kennen, komplexere logische Anfragen noch etwas prägnanter
-zu formulieren. Zum Abschluss dieses Abschnitts betrachten wir noch
+<p>Allgemein können beliebige logische Operationen bzw. Vektoren zur Zeilenauswahl
+angegeben werden. Im nächsten Abschnitt lernen wir mit der Funktion <code>subset()</code>
+eine Möglichkeit kennen, komplexere logische Anfragen zur Zeilenauswahl noch
+etwas prägnanter zu formulieren.</p>
+</div>
+<div id="weitere-beispiele-zur-verwendung-der--notation" class="section level3" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> Weitere Beispiele zur Verwendung der <code>[·,·]</code>-Notation</h3>
+<p>Zum Abschluss dieses Abschnitts betrachten wir noch
 einige weitere Beispiele für die verschiedenen Auswahlmöglichkeiten per
 <code>[·,·]</code>:</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" title="1"><span class="co">## Wähle per Index die ersten drei Zeilen aus</span></a>
-<a class="sourceLine" id="cb261-2" title="2">mdf[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, ]</a></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="dataframes.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Wähle per Index die ersten drei Zeilen aus</span></span>
+<span id="cb270-2"><a href="dataframes.html#cb270-2" aria-hidden="true" tabindex="-1"></a>mdf[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, ]</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 1          1     1     1    13          w      braun         2
 2          2     0     1    14          m       blau         1
 3          3     0     0    13          m       blau         0</code></pre>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb263-1" title="1"><span class="co">## Wähle per Index die zweite und vierte Spalte aus</span></a>
-<a class="sourceLine" id="cb263-2" title="2">mdf[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="dataframes.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Wähle per Index die zweite und vierte Spalte aus</span></span>
+<span id="cb272-2"><a href="dataframes.html#cb272-2" aria-hidden="true" tabindex="-1"></a>mdf[, <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]</span></code></pre></div>
 <pre><code>  Item1 Alter
 1     1    13
 2     0    14
 3     0    13
 4     1    12
 5     1    15</code></pre>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" title="1"><span class="co">## Wähle per logischem Vektor alle Personen aus, die beide Aufgaben</span></a>
-<a class="sourceLine" id="cb265-2" title="2"><span class="co">## richtig gelöst haben:</span></a>
-<a class="sourceLine" id="cb265-3" title="3">mdf[mdf<span class="op">$</span>Testscore <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, ]</a></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="dataframes.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Wähle per logischem Vektor alle Personen aus, die beide Aufgaben</span></span>
+<span id="cb274-2"><a href="dataframes.html#cb274-2" aria-hidden="true" tabindex="-1"></a><span class="do">## richtig gelöst haben:</span></span>
+<span id="cb274-3"><a href="dataframes.html#cb274-3" aria-hidden="true" tabindex="-1"></a>mdf[mdf<span class="sc">$</span>Testscore <span class="sc">==</span> <span class="dv">2</span>, ]</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 1          1     1     1    13          w      braun         2
 5          5     1     1    15          m      gruen         2</code></pre>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" title="1"><span class="co">## Wähle Fallnummer, Alter und Testscore per Spaltenname aus:</span></a>
-<a class="sourceLine" id="cb267-2" title="2">mdf[, <span class="kw">c</span>(<span class="st">&quot;Fallnummer&quot;</span>, <span class="st">&quot;Alter&quot;</span>, <span class="st">&quot;Testscore&quot;</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="dataframes.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Wähle Fallnummer, Alter und Testscore per Spaltenname aus:</span></span>
+<span id="cb276-2"><a href="dataframes.html#cb276-2" aria-hidden="true" tabindex="-1"></a>mdf[, <span class="fu">c</span>(<span class="st">&quot;Fallnummer&quot;</span>, <span class="st">&quot;Alter&quot;</span>, <span class="st">&quot;Testscore&quot;</span>)]</span></code></pre></div>
 <pre><code>  Fallnummer Alter Testscore
 1          1    13         2
 2          2    14         1
 3          3    13         0
 4          4    12         1
 5          5    15         2</code></pre>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" title="1"><span class="co">## Wähle Fallnummer, Alter und Testscore aus für alle Personen, die</span></a>
-<a class="sourceLine" id="cb269-2" title="2"><span class="co">## älter als 13 sind</span></a>
-<a class="sourceLine" id="cb269-3" title="3">mdf[mdf<span class="op">$</span>Alter <span class="op">&gt;</span><span class="st"> </span><span class="dv">13</span>, <span class="kw">c</span>(<span class="st">&quot;Fallnummer&quot;</span>, <span class="st">&quot;Alter&quot;</span>, <span class="st">&quot;Testscore&quot;</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="dataframes.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Wähle Fallnummer, Alter und Testscore aus für alle Personen, die</span></span>
+<span id="cb278-2"><a href="dataframes.html#cb278-2" aria-hidden="true" tabindex="-1"></a><span class="do">## älter als 13 sind</span></span>
+<span id="cb278-3"><a href="dataframes.html#cb278-3" aria-hidden="true" tabindex="-1"></a>mdf[mdf<span class="sc">$</span>Alter <span class="sc">&gt;</span> <span class="dv">13</span>, <span class="fu">c</span>(<span class="st">&quot;Fallnummer&quot;</span>, <span class="st">&quot;Alter&quot;</span>, <span class="st">&quot;Testscore&quot;</span>)]</span></code></pre></div>
 <pre><code>  Fallnummer Alter Testscore
 2          2    14         1
 5          5    15         2</code></pre>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" title="1"><span class="co">## Wähle Fallnummer, Alter und Testscore aus für die ersten drei Fälle</span></a>
-<a class="sourceLine" id="cb271-2" title="2">mdf[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="kw">c</span>(<span class="st">&quot;Fallnummer&quot;</span>, <span class="st">&quot;Alter&quot;</span>, <span class="st">&quot;Testscore&quot;</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="dataframes.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Wähle Fallnummer, Alter und Testscore aus für die ersten drei Fälle</span></span>
+<span id="cb280-2"><a href="dataframes.html#cb280-2" aria-hidden="true" tabindex="-1"></a>mdf[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="st">&quot;Fallnummer&quot;</span>, <span class="st">&quot;Alter&quot;</span>, <span class="st">&quot;Testscore&quot;</span>)]</span></code></pre></div>
 <pre><code>  Fallnummer Alter Testscore
 1          1    13         2
 2          2    14         1
 3          3    13         0</code></pre>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" title="1"><span class="co">## Wähle die Itemscores aus - nutze dabei die Funktion paste0</span></a>
-<a class="sourceLine" id="cb273-2" title="2">mdf[, <span class="kw">paste0</span>(<span class="st">&quot;Item&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="dataframes.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Wähle die Itemscores aus - nutze dabei die Funktion paste0</span></span>
+<span id="cb282-2"><a href="dataframes.html#cb282-2" aria-hidden="true" tabindex="-1"></a>mdf[, <span class="fu">paste0</span>(<span class="st">&quot;Item&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)]</span></code></pre></div>
 <pre><code>  Item1 Item2
 1     1     1
 2     0     1
@@ -521,17 +662,18 @@ einige weitere Beispiele für die verschiedenen Auswahlmöglichkeiten per
 5     1     1</code></pre>
 <div class="block">
 <p>
-<strong>Merke</strong>: Mit dem <code>[·,·]</code>-Zugriff wird vor dem Komma die Zeile und nach dem Komma die Spalte adressiert. Man kann die Auswahl nach numerischem Index, mit einem logischen Vektor oder mit einem <code>character</code> Vektor durchführen.
+<strong>Merke</strong>: Mit dem <code>[·,·]</code>-Zugriff wird vor dem Komma die Zeile und nach dem Komma die Spalte adressiert. Man kann die Auswahl nach numerischem Index, mit einem logischen Vektor oder mit einem <code>character</code>-Vektor durchführen.
 </p>
 </div>
 </div>
-<div id="subset" class="section level2">
+</div>
+<div id="subset" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Die Funktion <code>subset()</code></h2>
 <p>In diesem Abschnitt lernen wir die Funktion <code>subset()</code> kennen, die wir
 ebenfalls verwenden können, um Zeilen und Spalten aus <code>data.frames</code>
 auszulesen. Ganz ähnlich zur <code>[·,·]</code>-Notation funktioniert etwa der
 folgende Aufruf:</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" title="1"><span class="kw">subset</span>(mdf, mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="dataframes.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mdf, mdf<span class="sc">$</span>Augenfarbe <span class="sc">==</span> <span class="st">&quot;blau&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>))</span></code></pre></div>
 <pre><code>  Item1 Augenfarbe
 2     0       blau
 3     0       blau</code></pre>
@@ -550,37 +692,37 @@ vereinfacht:</p>
 dieser Abschnitt einen ersten theoretischen Überblick über die
 <a href="dataframes.html#teaserfunktionen">Arbeitsweise von Funktionen in <code>R</code></a>, der in <a href="funktionen.html#funktionen">Kapitel
 6</a> vertieft wird.</p>
-<div id="zeileneinfach" class="section level3">
+<div id="zeileneinfach" class="section level3" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Vereinfachte Zeilenauswahl</h3>
 <p>Die Funktion <code>subset()</code> erlaubt uns logische Bedingungen für die
 Zeilenauswahl zu formulieren, ohne die <code>$</code>-Notation zu verwenden:</p>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" title="1"><span class="kw">subset</span>(mdf, Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="dataframes.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mdf, Augenfarbe <span class="sc">==</span> <span class="st">&quot;blau&quot;</span>)</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 2          2     0     1    14          m       blau         1
 3          3     0     0    13          m       blau         0</code></pre>
 <p>Folgendermaßen könnte man durch Verwendung von <code>$</code> einen äquivalenten
 Aufruf durchführen, der uns eher an die <code>[·,·]</code>-Notation erinnert:</p>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb279-1" title="1"><span class="kw">subset</span>(mdf, mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="dataframes.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mdf, mdf<span class="sc">$</span>Augenfarbe <span class="sc">==</span> <span class="st">&quot;blau&quot;</span>)</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 2          2     0     1    14          m       blau         1
 3          3     0     0    13          m       blau         0</code></pre>
 <p>Außerhalb der Funktion <code>subset()</code> würde der Ausdruck <code>Augenfarbe ==  "blau"</code> einen Fehler ausgeben; schließlich ist <code>Augenfarbe</code> selbst keine
-<code>R</code>-Variable, sondern nur eine Spalte von <code>mdf</code>.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a> Innerhalb
+<code>R</code>-Variable, sondern nur eine Spalte von <code>mdf</code>.<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> Innerhalb
 der Funktion <code>subset()</code> kann die logische Bedingung in dieser Form jedoch
 verarbeitet werden.</p>
 <p>Der äquivalente Befehl mit der <code>[·,·]</code>-Notation sähe folgendermaßen aus:</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" title="1">mdf[mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>, ]</a></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="dataframes.html#cb290-1" aria-hidden="true" tabindex="-1"></a>mdf[mdf<span class="sc">$</span>Augenfarbe <span class="sc">==</span> <span class="st">&quot;blau&quot;</span>, ]</span></code></pre></div>
 <p>Gerade bei der Verknüpfung mehrerer logischer Bedingungen ist es
 praktisch, nicht mehrfach die <code>$</code>-Notation verwenden zu müssen:</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb282-1" title="1"><span class="kw">subset</span>(mdf, Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Item2 <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="dataframes.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mdf, Augenfarbe <span class="sc">==</span> <span class="st">&quot;blau&quot;</span> <span class="sc">&amp;</span> Item2 <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 2          2     0     1    14          m       blau         1</code></pre>
 </div>
-<div id="teaserfunktionen" class="section level3">
+<div id="teaserfunktionen" class="section level3" number="3.4.2">
 <h3><span class="header-section-number">3.4.2</span> Funktionsargumente</h3>
 <p>Die Funktion <code>subset()</code> nimmt optional ein drittes Argument an, das
 auszulesende Spalten adressiert:</p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb284-1" title="1"><span class="kw">subset</span>(mdf, Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="dataframes.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mdf, Augenfarbe <span class="sc">==</span> <span class="st">&quot;blau&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>))</span></code></pre></div>
 <pre><code>  Item1 Augenfarbe
 2     0       blau
 3     0       blau</code></pre>
@@ -589,13 +731,13 @@ Befehl einen <code>data.frame</code> aus, der nur die Spalten <code>Item1</code>
 <code>Augenfarbe</code> enthält, und diese nur für Personen mit blauen Augen.</p>
 <p>Was machen wir aber, wenn wir nur eine Auswahl nach Spalten durchführen
 wollen? Probieren wir erst einmal Folgendes:</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb286-1" title="1"><span class="kw">subset</span>(mdf, <span class="kw">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="dataframes.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mdf, <span class="fu">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>))</span></code></pre></div>
 <p>Hier habe ich einfach das Argument für die Zeilenauswahl weggelassen und
 als zweites Argument einen <code>character</code>-Vektor zur Auswahl zweier Spalten
 angegeben – was aber nicht funktioniert hat. <code>R</code> gibt uns eine
 kryptische Fehlermeldung aus:</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb287-1" title="1">Fehler <span class="cf">in</span> <span class="kw">subset.data.frame</span>(mdf, <span class="kw">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>)) <span class="op">:</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb287-2" title="2"><span class="st">  &#39;subset&#39;</span> muss boolesch sein</a></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="dataframes.html#cb296-1" aria-hidden="true" tabindex="-1"></a>Fehler <span class="cf">in</span> <span class="fu">subset.data.frame</span>(mdf, <span class="fu">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>)) <span class="sc">:</span> </span>
+<span id="cb296-2"><a href="dataframes.html#cb296-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;subset&#39;</span> muss boolesch sein</span></code></pre></div>
 <p>Warum gibt uns <code>R</code> hier einen Fehler aus? An dieser Stellen machen wir
 uns eine wichtige Eigenschaft von Funktionen bewusst: <strong>Funktionen
 identifizieren Argumente anhand der Reihenfolge, in der sie übergeben
@@ -620,7 +762,7 @@ ist uns nur am Rande begegnet – erinnern wir uns an das Argument
 </ul>
 <p>Um eine Übersicht über die Argumente einer Funktion zu erhalten, können
 wir mit dem <code>?</code>-Operator die <code>R</code>-Hilfe anfordern:</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" title="1">?subset</a></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="dataframes.html#cb297-1" aria-hidden="true" tabindex="-1"></a>?subset</span></code></pre></div>
 <p>Leider ist die <code>R</code>-Hilfe oftmals kryptisch – und das nicht nur für
 Anfänger. Sie ist die offizielle Dokumentation von Funktionen und legt
 deswegen zwar großen Wert auf technische Genauigkeit, ist aber nicht
@@ -630,11 +772,11 @@ Funktionen noch einmal darauf zurückkommen, wie wir mit der
 <code>R</code>-Hilfe umgehen können.</p>
 <p>Wenn wir die Namen der Argumente kennen, können wir die Funktion
 <code>subset()</code> auch wie folgt aufrufen:</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" title="1"><span class="kw">subset</span>(</a>
-<a class="sourceLine" id="cb289-2" title="2">  <span class="dt">x =</span> mdf, </a>
-<a class="sourceLine" id="cb289-3" title="3">  <span class="dt">subset =</span> Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>,</a>
-<a class="sourceLine" id="cb289-4" title="4">  <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>)</a>
-<a class="sourceLine" id="cb289-5" title="5">)</a></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="dataframes.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(</span>
+<span id="cb298-2"><a href="dataframes.html#cb298-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> mdf, </span>
+<span id="cb298-3"><a href="dataframes.html#cb298-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">subset =</span> Augenfarbe <span class="sc">==</span> <span class="st">&quot;blau&quot;</span>,</span>
+<span id="cb298-4"><a href="dataframes.html#cb298-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">select =</span> <span class="fu">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>)</span>
+<span id="cb298-5"><a href="dataframes.html#cb298-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>  Item1 Augenfarbe
 2     0       blau
 3     0       blau</code></pre>
@@ -644,18 +786,18 @@ damit mein Code schön übersichtlich ist.</p>
 <p>Wenn ich Funktionsargumente mit Namen adressiere, kann ich deren
 Reihenfolge beliebig vertauschen. Deswegen funktioniert auch der
 folgende Aufruf:</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" title="1"><span class="kw">subset</span>(</a>
-<a class="sourceLine" id="cb291-2" title="2">  <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>),</a>
-<a class="sourceLine" id="cb291-3" title="3">  <span class="dt">subset =</span> Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>, </a>
-<a class="sourceLine" id="cb291-4" title="4">  <span class="dt">x =</span> mdf</a>
-<a class="sourceLine" id="cb291-5" title="5">)</a></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="dataframes.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(</span>
+<span id="cb300-2"><a href="dataframes.html#cb300-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">select =</span> <span class="fu">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>),</span>
+<span id="cb300-3"><a href="dataframes.html#cb300-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">subset =</span> Augenfarbe <span class="sc">==</span> <span class="st">&quot;blau&quot;</span>, </span>
+<span id="cb300-4"><a href="dataframes.html#cb300-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> mdf</span>
+<span id="cb300-5"><a href="dataframes.html#cb300-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>  Item1 Augenfarbe
 2     0       blau
 3     0       blau</code></pre>
 <p>Eine Auswahl nur anhand von Spalten können wir umsetzen, indem wir
 benannt nur das Argument <code>select</code> angeben, aber nicht das Argument
 <code>subset</code>:</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" title="1"><span class="kw">subset</span>(mdf, <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="dataframes.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mdf, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>))</span></code></pre></div>
 <pre><code>  Item1 Augenfarbe
 1     1      braun
 2     0       blau
@@ -675,13 +817,13 @@ Auswahl der Zeilen erwartet hätte.</p>
 </p>
 </div>
 </div>
-<div id="spalteneinfach" class="section level3">
+<div id="spalteneinfach" class="section level3" number="3.4.3">
 <h3><span class="header-section-number">3.4.3</span> Sonderregeln zur Auswahl von Spalten</h3>
 <p>Die Funktion <code>subset()</code> bietet einige Sonderregeln zur Auswahl von
 Spalten, die über die Angabe der Spaltennamen per <code>character</code>-Vektor
 hinausgehen, wie wir sie von der <code>[·,·]</code>-Notation kennen. Zunächst
 einmal können wir Spaltennamen ohne Anführungszeichen angeben:</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" title="1"><span class="kw">subset</span>(mdf, <span class="dt">select =</span> <span class="kw">c</span>(Augenfarbe, Alter))</a></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="dataframes.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mdf, <span class="at">select =</span> <span class="fu">c</span>(Augenfarbe, Alter))</span></code></pre></div>
 <pre><code>  Augenfarbe Alter
 1      braun    13
 2       blau    14
@@ -692,7 +834,7 @@ einmal können wir Spaltennamen ohne Anführungszeichen angeben:</p>
 eine Besonderheit der Funktion <code>subset()</code>, dass wir Spaltennamen ohne
 Anführungszeichen adressieren können. Einfach in die Konsole eingegeben
 würde der Ausdruck <code>c(Augenfarbe, Alter)</code>
-höchstwahrscheinlich<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> einen Fehler verursachen, da
+höchstwahrscheinlich<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a> einen Fehler verursachen, da
 <code>Augenfarbe</code> und <code>Alter</code> nicht unbedingt als Variablen definiert sind;
 sie sind bloß Spalten von <code>mdf</code>.</p>
 <p>Die Auswahl von Spalten ohne Anführungszeichen ist noch keine allzu
@@ -701,7 +843,7 @@ Funktion <code>subset()</code> lässt aber noch einen weiteren Sonderfall bei de
 Spaltenauswahl zu, der einiges an Schreibarbeit ersparen kann: Wir
 können den Doppelpunktoperator verwenden, um mehrere Spalten
 auszuwählen.</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" title="1"><span class="kw">subset</span>(mdf, <span class="dt">select =</span> Item1<span class="op">:</span>Geschlecht)</a></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="dataframes.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mdf, <span class="at">select =</span> Item1<span class="sc">:</span>Geschlecht)</span></code></pre></div>
 <pre><code>  Item1 Item2 Alter Geschlecht
 1     1     1    13          w
 2     0     1    14          m
@@ -714,7 +856,7 @@ verzichten wir auf die Angabe von Anführungszeichen.</p>
 <p>Es gibt noch eine weitere Vereinfachung, die uns die Funktion <code>subset()</code>
 bietet. Wir können angeben, welche Spalten wir <strong>nicht</strong> ausgeben
 wollen:</p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" title="1"><span class="kw">subset</span>(mdf, <span class="dt">select =</span> <span class="op">-</span><span class="kw">c</span>(Geschlecht, Alter))</a></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="dataframes.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mdf, <span class="at">select =</span> <span class="sc">-</span><span class="fu">c</span>(Geschlecht, Alter))</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Augenfarbe Testscore
 1          1     1     1      braun         2
 2          2     0     1       blau         1
@@ -722,16 +864,16 @@ wollen:</p>
 4          4     1     0      braun         1
 5          5     1     1      gruen         2</code></pre>
 </div>
-<div id="non-standard-evaluation" class="section level3">
+<div id="non-standard-evaluation" class="section level3" number="3.4.4">
 <h3><span class="header-section-number">3.4.4</span> Non-Standard-Evaluation</h3>
 <p>Wie schafft es die Funktion <code>subset()</code>, dass wir etwa wie folgt Spalten in einem
 <code>data.frame</code> – ohne Anführungszeichen und ohne die <code>$</code>-Notation – ansteuern
 können:</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb301-1" title="1"><span class="kw">subset</span>(mdf, Testscore <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="dataframes.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mdf, Testscore <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 2          2     0     1    14          m       blau         1
 4          4     1     0    12          w      braun         1</code></pre>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" title="1"><span class="kw">subset</span>(mdf, <span class="dt">select =</span> Item1<span class="op">:</span>Alter)</a></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="dataframes.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mdf, <span class="at">select =</span> Item1<span class="sc">:</span>Alter)</span></code></pre></div>
 <pre><code>  Item1 Item2 Alter
 1     1     1    13
 2     0     1    14
@@ -753,9 +895,9 @@ Verhalten nennt man “non-standard”; die Funktion wendet NSE an.</p>
 <p>Dass <code>subset()</code> NSE anwendet, können wir daran sehen, dass die oben
 übergebenen Argumente für sich gesehen keine <code>R</code>-Objekte, sondern bloß
 Fehlermeldungen ausgeben:</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" title="1">Testscore <span class="op">==</span><span class="st"> </span><span class="dv">1</span></a></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="dataframes.html#cb314-1" aria-hidden="true" tabindex="-1"></a>Testscore <span class="sc">==</span> <span class="dv">1</span></span></code></pre></div>
 <pre><code>Error in eval(expr, envir, enclos): Objekt &#39;Testscore&#39; nicht gefunden</code></pre>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb307-1" title="1">Item1<span class="op">:</span>Alter</a></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="dataframes.html#cb316-1" aria-hidden="true" tabindex="-1"></a>Item1<span class="sc">:</span>Alter</span></code></pre></div>
 <pre><code>Error in eval(expr, envir, enclos): Objekt &#39;Item1&#39; nicht gefunden</code></pre>
 <p>Weitere Ausführungen zu NSE spare ich mir an dieser Stelle; für Interessierte
 sei das <a href="http://adv-r.had.co.nz/Computing-on-the-language.html">Kapitel zu NSE</a>
@@ -768,7 +910,7 @@ Thema liefern.</p>
 </p>
 </div>
 </div>
-<div id="subsettoll" class="section level3">
+<div id="subsettoll" class="section level3" number="3.4.5">
 <h3><span class="header-section-number">3.4.5</span> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</h3>
 <p>Die Funktion <code>subset()</code> bietet uns nicht nur syntaktische Vereinfachungen zur
 Auswahl von Zeilen und Spalten. Darüber hinaus ist auch das Verhalten von
@@ -776,11 +918,11 @@ Auswahl von Zeilen und Spalten. Darüber hinaus ist auch das Verhalten von
 die Auswahl von Zeilen angeht. Betrachten wir im Folgenden, wie <code>subset()</code> und
 der <code>[·,·]</code>-Zugriff jeweils auf die Anwesenheit von fehlenden Werten (<code>NA</code>)
 reagieren:</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb309-1" title="1">minidf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb309-2" title="2">  <span class="dt">nummer =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb309-3" title="3">  <span class="dt">wert =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="ot">NA</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb309-4" title="4">)</a></code></pre></div>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb310-1" title="1">minidf[minidf<span class="op">$</span>wert <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>, ]</a></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="dataframes.html#cb318-1" aria-hidden="true" tabindex="-1"></a>minidf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb318-2"><a href="dataframes.html#cb318-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">nummer =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb318-3"><a href="dataframes.html#cb318-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">wert =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="cn">NA</span>, <span class="dv">1</span>)</span>
+<span id="cb318-4"><a href="dataframes.html#cb318-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="dataframes.html#cb319-1" aria-hidden="true" tabindex="-1"></a>minidf[minidf<span class="sc">$</span>wert <span class="sc">&lt;</span> <span class="dv">4</span>, ]</span></code></pre></div>
 <pre><code>   nummer wert
 1       1    1
 2       2    2
@@ -794,7 +936,7 @@ handelt. Höchstens erinnert sie an die Anwesenheit fehlender Werte – was
 vielleicht manchmal nützlich sein mag.</p>
 <p>Die Funktion <code>subset()</code> hingegen schließt die Zeile aus, in der <code>minidf$wert</code>
 fehlt:</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb312-1" title="1"><span class="kw">subset</span>(minidf, wert <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="dataframes.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(minidf, wert <span class="sc">&lt;</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>  nummer wert
 1      1    1
 2      2    2
@@ -802,7 +944,7 @@ fehlt:</p>
 <p>Diese Ausgabe entspricht vermutlich häufiger dem gewünschten Verhalten. Um diese
 Ausgabe auch mit der <code>[·,·]</code>-Notation zu erhalten, kann ein etwas
 komplizierterer, expliziter Ausschluss der <code>NA</code>-Werte genutzt werden:</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" title="1">minidf[minidf<span class="op">$</span>wert <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(minidf<span class="op">$</span>wert), ]</a></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="dataframes.html#cb323-1" aria-hidden="true" tabindex="-1"></a>minidf[minidf<span class="sc">$</span>wert <span class="sc">&lt;</span> <span class="dv">4</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(minidf<span class="sc">$</span>wert), ]</span></code></pre></div>
 <pre><code>  nummer wert
 1      1    1
 2      2    2
@@ -810,12 +952,12 @@ komplizierterer, expliziter Ausschluss der <code>NA</code>-Werte genutzt werden:
 <p>Es lohnt sich ein wenig über die logische Operation nachzudenken, die diesem
 Befehl zugrunde liegt. Man kann sie mithilfe der folgenden Wahrheitstabelle
 verdeutlichen:</p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" title="1"><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb316-2" title="2">  <span class="dt">wert =</span> minidf<span class="op">$</span>wert,</a>
-<a class="sourceLine" id="cb316-3" title="3">  <span class="dt">kleiner4 =</span> minidf<span class="op">$</span>wert <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb316-4" title="4">  <span class="dt">nichtNA =</span> <span class="op">!</span><span class="kw">is.na</span>(minidf<span class="op">$</span>wert),</a>
-<a class="sourceLine" id="cb316-5" title="5">  <span class="dt">kleiner4_und_nichtNA =</span> minidf<span class="op">$</span>wert <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(minidf<span class="op">$</span>wert)</a>
-<a class="sourceLine" id="cb316-6" title="6">)</a></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="dataframes.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb325-2"><a href="dataframes.html#cb325-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">wert =</span> minidf<span class="sc">$</span>wert,</span>
+<span id="cb325-3"><a href="dataframes.html#cb325-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">kleiner4 =</span> minidf<span class="sc">$</span>wert <span class="sc">&lt;</span> <span class="dv">4</span>,</span>
+<span id="cb325-4"><a href="dataframes.html#cb325-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">nichtNA =</span> <span class="sc">!</span><span class="fu">is.na</span>(minidf<span class="sc">$</span>wert),</span>
+<span id="cb325-5"><a href="dataframes.html#cb325-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">kleiner4_und_nichtNA =</span> minidf<span class="sc">$</span>wert <span class="sc">&lt;</span> <span class="dv">4</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(minidf<span class="sc">$</span>wert)</span>
+<span id="cb325-6"><a href="dataframes.html#cb325-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>  wert kleiner4 nichtNA kleiner4_und_nichtNA
 1    1     TRUE    TRUE                 TRUE
 2    2     TRUE    TRUE                 TRUE
@@ -830,9 +972,9 @@ mithilfe des <code>[·,·]</code>-Zugriffs fehlende Werte bei einer logischen Au
 zu berücksichtigen: durch Verwendung der Funktion <code>which()</code>. Die Funktion
 <code>which()</code> gibt für einen logischen Vektor alle Positionen aus, an denen dieser
 auf <code>TRUE</code> steht. Etwa:</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" title="1">minidf<span class="op">$</span>wert <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span></a></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="dataframes.html#cb327-1" aria-hidden="true" tabindex="-1"></a>minidf<span class="sc">$</span>wert <span class="sc">&lt;</span> <span class="dv">4</span></span></code></pre></div>
 <pre><code>[1]  TRUE  TRUE FALSE    NA  TRUE</code></pre>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb320-1" title="1"><span class="kw">which</span>(minidf<span class="op">$</span>wert <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="dataframes.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(minidf<span class="sc">$</span>wert <span class="sc">&lt;</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>[1] 1 2 5</code></pre>
 <p>Die Länge der Ausgabe von <code>which(x)</code> entspricht <code>sum(x, na.rm = TRUE)</code> für einen
 beliebigen logischen Vektor <code>x</code>.</p>
@@ -840,7 +982,7 @@ beliebigen logischen Vektor <code>x</code>.</p>
 Endeffekt nicht mit einem logischen, sondern einem numerischen Vektor statt. Die
 zugrundeliegende logische Abfrage wird durch <code>which()</code> in einen numerischen
 Vektor konvertiert.</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb322-1" title="1">minidf[<span class="kw">which</span>(minidf<span class="op">$</span>wert <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>), ]</a></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="dataframes.html#cb331-1" aria-hidden="true" tabindex="-1"></a>minidf[<span class="fu">which</span>(minidf<span class="sc">$</span>wert <span class="sc">&lt;</span> <span class="dv">4</span>), ]</span></code></pre></div>
 <pre><code>  nummer wert
 1      1    1
 2      2    2
@@ -852,7 +994,7 @@ ergibt. Die Funktion <code>which()</code> ist also bevorzugt zu nutzen, wenn feh
 vorliegen.</p>
 </div>
 </div>
-<div id="doppelteckig" class="section level2">
+<div id="doppelteckig" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Weitere Zugriffe auf <code>data.frames</code></h2>
 <p>Dieser Abschnitt behandelt zwei weitere Möglichkeiten, mit eckigen
 Klammern auf Spalten in <code>data.frames</code> zuzugreifen. Da wir diese Zugriffe
@@ -861,11 +1003,11 @@ zunächst problemlos <a href="dataframes.html#convenient">übersprungen werden</
 mit eckigen Klammern sind jedoch ein zentraler Bestandteil von <code>R</code>;
 daher lohnt es sich, diesen Abschnitt später zu konsultieren oder zum
 Nachschlagen zu nutzen.</p>
-<div id="der--zugriff" class="section level3">
+<div id="der--zugriff" class="section level3" number="3.5.1">
 <h3><span class="header-section-number">3.5.1</span> Der <code>[[·]]</code>-Zugriff</h3>
 <p>Den <code>[[·]]</code>-Zugriff nutzen wir genau wie den <code>$</code>-Zugriff zum Auslesen
 einzelner Spalten aus <code>data.frames</code>:</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb324-1" title="1">mdf[[<span class="st">&quot;Item1&quot;</span>]] <span class="co"># dasselbe wie mdf$Item1</span></a></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="dataframes.html#cb333-1" aria-hidden="true" tabindex="-1"></a>mdf[[<span class="st">&quot;Item1&quot;</span>]] <span class="co"># dasselbe wie mdf$Item1</span></span></code></pre></div>
 <pre><code>[1] 1 0 0 1 1</code></pre>
 <p>Hierbei wird der Spaltenname als ein-elementiger Vektor vom Typ
 <code>character</code> angegeben – also in Anführungszeichen. Die
@@ -874,13 +1016,13 @@ wir sie hingegen nicht. Das hat zur Folge, dass wir statt der expliziten
 Angabe des Texts auch eine Variable übergeben können, die einen
 ein-elementigen <code>character</code>-Vektor abgespeichert hat; dies ist mit der
 <code>$</code>-Notation nicht möglich.</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb326-1" title="1">spalte &lt;-<span class="st"> &quot;Augenfarbe&quot;</span></a>
-<a class="sourceLine" id="cb326-2" title="2">mdf[[spalte]]</a></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="dataframes.html#cb335-1" aria-hidden="true" tabindex="-1"></a>spalte <span class="ot">&lt;-</span> <span class="st">&quot;Augenfarbe&quot;</span></span>
+<span id="cb335-2"><a href="dataframes.html#cb335-2" aria-hidden="true" tabindex="-1"></a>mdf[[spalte]]</span></code></pre></div>
 <pre><code>[1] &quot;braun&quot; &quot;blau&quot;  &quot;blau&quot;  &quot;braun&quot; &quot;gruen&quot;</code></pre>
 <p>Ebenso ist es möglich, der <code>[[·]]</code>-Klammerung eine Funktion zu
 übergeben, die einen ein-elementigen Vektor vom Typ character ausgibt
 – etwa die Funktion <code>paste0()</code>:</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb328-1" title="1">mdf[[<span class="kw">paste0</span>(<span class="st">&quot;Item&quot;</span>, <span class="dv">1</span>)]]</a></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="dataframes.html#cb337-1" aria-hidden="true" tabindex="-1"></a>mdf[[<span class="fu">paste0</span>(<span class="st">&quot;Item&quot;</span>, <span class="dv">1</span>)]]</span></code></pre></div>
 <pre><code>[1] 1 0 0 1 1</code></pre>
 <p>Der <code>[[·]]</code>-Zugriff wird in Zusammenspiel mit der Funktion <code>paste0()</code>
 noch einmal interessant werden, wenn wir in <a href="schleifen.html#schleifen">Kapitel 6</a> mit
@@ -888,11 +1030,11 @@ noch einmal interessant werden, wenn wir in <a href="schleifen.html#schleifen">K
 zugreifen. In einer Schleife können wir dann Spaltennamen automatisiert
 nacheinander austauschen (etwa: <code>Item_1</code>, <code>Item_2</code>, …).</p>
 </div>
-<div id="der--zugriff-1" class="section level3">
+<div id="der--zugriff-1" class="section level3" number="3.5.2">
 <h3><span class="header-section-number">3.5.2</span> Der <code>[·]</code>-Zugriff</h3>
 <p><strong>Nicht</strong> äquivalent zu den Zugriffen mit <code>$</code> und <code>[[·]]</code> ist
 folgender <code>[·]</code>-Zugriff:</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb330-1" title="1">mdf[<span class="st">&quot;Item1&quot;</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="dataframes.html#cb339-1" aria-hidden="true" tabindex="-1"></a>mdf[<span class="st">&quot;Item1&quot;</span>]</span></code></pre></div>
 <pre><code>  Item1
 1     1
 2     0
@@ -909,7 +1051,7 @@ Spalte nötig. Der Unterschied von <code>[·]</code> zu <code>[[·]]</code> und 
 auswählen, indem wir einen mehr-elementigen Vektor vom Typ <code>character</code>
 übergeben. Das ist mit den Zugriffen per <code>[[·]]</code> und <code>$</code> nicht möglich,
 die immer nur eine Spalte ausgeben.</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb332-1" title="1">mdf[<span class="kw">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="dataframes.html#cb341-1" aria-hidden="true" tabindex="-1"></a>mdf[<span class="fu">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>)]</span></code></pre></div>
 <pre><code>  Item1 Augenfarbe
 1     1      braun
 2     0       blau
@@ -918,7 +1060,7 @@ die immer nur eine Spalte ausgeben.</p>
 5     1      gruen</code></pre>
 <p>Dieser Aufruf sollte uns an die <code>[·,·]</code>-Notation zur Auswahl von Spalten
 erinnern; in der Tat ist der folgende Ausdruck äquivalent:</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb334-1" title="1">mdf[, <span class="kw">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="dataframes.html#cb343-1" aria-hidden="true" tabindex="-1"></a>mdf[, <span class="fu">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>)]</span></code></pre></div>
 <pre><code>  Item1 Augenfarbe
 1     1      braun
 2     0       blau
@@ -928,14 +1070,14 @@ erinnern; in der Tat ist der folgende Ausdruck äquivalent:</p>
 <p>Zwischen dem <code>[·]</code>-Zugriff und der <code>[·,·]</code>-Auswahl für Spalten gibt es
 jedoch einen Unterschied, der zutage kommt, wenn wir nur eine Spalte
 auswählen:</p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb336-1" title="1">mdf[<span class="st">&quot;Item1&quot;</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="dataframes.html#cb345-1" aria-hidden="true" tabindex="-1"></a>mdf[<span class="st">&quot;Item1&quot;</span>]</span></code></pre></div>
 <pre><code>  Item1
 1     1
 2     0
 3     0
 4     1
 5     1</code></pre>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb338-1" title="1">mdf[, <span class="st">&quot;Item1&quot;</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="dataframes.html#cb347-1" aria-hidden="true" tabindex="-1"></a>mdf[, <span class="st">&quot;Item1&quot;</span>]</span></code></pre></div>
 <pre><code>[1] 1 0 0 1 1</code></pre>
 <p>Wenn wir nur eine Spalte auslesen, gibt die <code>[·,·]</code>-Auswahl einen Vektor
 aus, die <code>[·]</code>-Auswahl jedoch einen <code>data.frame</code> mit einer Spalte.
@@ -954,7 +1096,7 @@ auch auf einem Vektor operieren, der gar keine Spalten enthält. Wir
 merken uns: <strong>Code ist in erster Linie für Menschen gemacht;
 verständlicher Code ist gegenüber kürzerem Code zu bevorzugen.</strong></p>
 </div>
-<div id="nameindex" class="section level3">
+<div id="nameindex" class="section level3" number="3.5.3">
 <h3><span class="header-section-number">3.5.3</span> Zugriff nach Name und Index</h3>
 <p>Wir haben nun alle wichtigen Möglichkeiten kennengelernt, Zugriffe auf
 <code>data.frames</code> durchzuführen. An dieser Stelle lohnt es sich deswegen,
@@ -972,19 +1114,19 @@ mitgeteilt, dass man sogar bei Vektoren Zugriffe nach Namen durchführen
 kann, wenn die Elemente des Vektors benannt sind. Das ist gar nicht so
 ungewöhnlich; wie folgt könnte man einen Vektor mit benannten Elementen
 erstellen und mit der bekannten <code>[·]</code>-Notation darauf zugreifen.</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb340-1" title="1"><span class="co">## Benannte Vektoren erstellen funktioniert wie einen data.frame zu</span></a>
-<a class="sourceLine" id="cb340-2" title="2"><span class="co">## erstellen:</span></a>
-<a class="sourceLine" id="cb340-3" title="3">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">foo =</span> <span class="dv">1</span>, <span class="dt">bar =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb340-4" title="4">vec</a></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="dataframes.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Benannte Vektoren erstellen funktioniert wie einen data.frame zu</span></span>
+<span id="cb349-2"><a href="dataframes.html#cb349-2" aria-hidden="true" tabindex="-1"></a><span class="do">## erstellen:</span></span>
+<span id="cb349-3"><a href="dataframes.html#cb349-3" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">foo =</span> <span class="dv">1</span>, <span class="at">bar =</span> <span class="dv">2</span>)</span>
+<span id="cb349-4"><a href="dataframes.html#cb349-4" aria-hidden="true" tabindex="-1"></a>vec</span></code></pre></div>
 <pre><code>foo bar 
   1   2 </code></pre>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb342-1" title="1">vec[<span class="st">&quot;foo&quot;</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="dataframes.html#cb351-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="st">&quot;foo&quot;</span>]</span></code></pre></div>
 <pre><code>foo 
   1 </code></pre>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb344-1" title="1">vec[<span class="st">&quot;bar&quot;</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="dataframes.html#cb353-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="st">&quot;bar&quot;</span>]</span></code></pre></div>
 <pre><code>bar 
   2 </code></pre>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb346-1" title="1">vec[<span class="kw">c</span>(<span class="st">&quot;bar&quot;</span>, <span class="st">&quot;foo&quot;</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="dataframes.html#cb355-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="fu">c</span>(<span class="st">&quot;bar&quot;</span>, <span class="st">&quot;foo&quot;</span>)]</span></code></pre></div>
 <pre><code>bar foo 
   2   1 </code></pre>
 <p>In <code>data.frames</code> haben wir Spalten zumeist nach Namen ausgewählt:</p>
@@ -1001,58 +1143,58 @@ Index durchführen. Dabei kann die Auswahl sowohl nach Spalten als auch
 nach Zeilen – oder beidem – geschehen.</p>
 </div>
 </div>
-<div id="convenient" class="section level2">
+<div id="convenient" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Nützliche Funktionen zum Arbeiten mit <code>data.frames</code></h2>
-<div id="tapply" class="section level3">
+<div id="tapply" class="section level3" number="3.6.1">
 <h3><span class="header-section-number">3.6.1</span> Gruppierte Statistiken: <code>tapply()</code></h3>
 <p>Die Funktion <code>tapply()</code> kann ich verwenden, um mir deskriptive
 Statistiken anhand von Gruppierungsvariablen ausgeben zu lassen, hier
 etwa die mittlere Punktzahl oder das mittlere Alter nach Geschlecht der
 Schüler/innen:</p>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb348-1" title="1"><span class="kw">tapply</span>(mdf<span class="op">$</span>Testscore, mdf<span class="op">$</span>Geschlecht, mean)</a></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="dataframes.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(mdf<span class="sc">$</span>Testscore, mdf<span class="sc">$</span>Geschlecht, mean)</span></code></pre></div>
 <pre><code>  m   w 
 1.0 1.5 </code></pre>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb350-1" title="1"><span class="kw">tapply</span>(mdf<span class="op">$</span>Alter, mdf<span class="op">$</span>Geschlecht, mean)</a></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="dataframes.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(mdf<span class="sc">$</span>Alter, mdf<span class="sc">$</span>Geschlecht, mean)</span></code></pre></div>
 <pre><code>   m    w 
 14.0 12.5 </code></pre>
 <p>Die Funktion <code>tapply()</code> erhält als erstes Argument den Messwertvektor, für
 den Statistiken angefordert werden. Das zweite Argument ist die
-Gruppierungsvariable.<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a> Interessanterweise ist das dritte
+Gruppierungsvariable.<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a> Interessanterweise ist das dritte
 Argument eine Funktion, in diesem Fall die Funktion <code>mean()</code>. So können
 wir die <em>mittlere</em> Punktzahl nach Geschlecht anfordern. Entsprechend
 könnten wir hier andere Funktionen übergeben, um etwa die
 Standardabweichung des Alters zu erfragen:</p>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb352-1" title="1"><span class="kw">tapply</span>(mdf<span class="op">$</span>Alter, mdf<span class="op">$</span>Geschlecht, sd)</a></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="dataframes.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(mdf<span class="sc">$</span>Alter, mdf<span class="sc">$</span>Geschlecht, sd)</span></code></pre></div>
 <pre><code>        m         w 
 1.0000000 0.7071068 </code></pre>
 <p>Wie <code>table()</code> kann auch <code>tapply()</code> deskriptive Statistiken anhand
 mehrerer Gruppierungsvariablen anfordern. Um mehrere
 Gruppierungsvariablen zu nutzen, lesen wir diese als <code>data.frame</code> aus:</p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb354-1" title="1"><span class="kw">tapply</span>(mdf<span class="op">$</span>Alter, mdf[, <span class="kw">c</span>(<span class="st">&quot;Geschlecht&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>)], mean)</a></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="dataframes.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(mdf<span class="sc">$</span>Alter, mdf[, <span class="fu">c</span>(<span class="st">&quot;Geschlecht&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>)], mean)</span></code></pre></div>
 <pre><code>          Augenfarbe
 Geschlecht blau braun gruen
          m 13.5    NA    15
          w   NA  12.5    NA</code></pre>
 <p>Mit nur fünf Datenpunkten macht diese Anfrage hier nur wenig Sinn, da
 jeder ausgegebene Mittelwert nur anhand eines einzelnen Wertes gebildet
-wurde,<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a> was die Idee des Mittelwerts eher ad absurdum
+wurde,<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a> was die Idee des Mittelwerts eher ad absurdum
 führt. Manche Kombinationen von Geschlecht und Augenfarbe kommen in
 unseren Daten sogar gar nicht vor; in diesen Fällen wird <code>NA</code>
 ausgegeben. Die Funktion <code>tapply()</code> zeigt ihre Stärke vor allem, wenn
 man viele – und nicht nur fünf – Datenpunkte hat. Das gilt gerade
 dann, wenn wir mehrere Gruppierungsvariablen angeben.</p>
 </div>
-<div id="datenstruktur-nrow-und-ncol" class="section level3">
+<div id="datenstruktur-nrow-und-ncol" class="section level3" number="3.6.2">
 <h3><span class="header-section-number">3.6.2</span> Datenstruktur: <code>nrow()</code> und <code>ncol()</code></h3>
 <p>Wie viele Zeilen ein <code>data.frame</code> hat – d.h. oftmals die Zahl der
 <em>Fälle</em> – lässt sich mit der Funktion <code>nrow()</code> bestimmen:</p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb356-1" title="1"><span class="kw">nrow</span>(mdf)</a></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="dataframes.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(mdf)</span></code></pre></div>
 <pre><code>[1] 5</code></pre>
 <p>Analog gibt <code>ncol()</code> die Zahl der Spalten aus:</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb358-1" title="1"><span class="kw">ncol</span>(mdf)</a></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="dataframes.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(mdf)</span></code></pre></div>
 <pre><code>[1] 7</code></pre>
 </div>
-<div id="wie-sieht-die-tabelle-aus-head-und-tail" class="section level3">
+<div id="wie-sieht-die-tabelle-aus-head-und-tail" class="section level3" number="3.6.3">
 <h3><span class="header-section-number">3.6.3</span> Wie sieht die Tabelle aus: <code>head()</code> und <code>tail()</code></h3>
 <p>Um sich einen Überblick über einen <code>data.frame</code> zu verschaffen, sind die
 Funktionen <code>head()</code> und <code>tail()</code> sehr nützlich. Die Funktion <code>head()</code>
@@ -1062,17 +1204,17 @@ Argument <code>n</code>, mit dem wir spezifizieren können, wie viele Zeilen
 ausgegeben werden sollen. Wenn wir <code>n</code> nicht angeben, werden sechs
 Zeilen ausgegeben (in <code>R</code>-Jargon: 6 ist der Standardwert des <em>optionalen
 Arguments</em> <code>n</code>). Wir können die Funktionen wie folgt nutzen:</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb360-1" title="1"><span class="kw">head</span>(mdf, <span class="dt">n =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="dataframes.html#cb369-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mdf, <span class="at">n =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 1          1     1     1    13          w      braun         2
 2          2     0     1    14          m       blau         1</code></pre>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb362-1" title="1"><span class="kw">tail</span>(mdf, <span class="dt">n =</span> <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="dataframes.html#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(mdf, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 3          3     0     0    13          m       blau         0
 4          4     1     0    12          w      braun         1
 5          5     1     1    15          m      gruen         2</code></pre>
 </div>
-<div id="zusammenfassung-aller-spalten-hilfe-aus-zusatzpaketen" class="section level3">
+<div id="zusammenfassung-aller-spalten-hilfe-aus-zusatzpaketen" class="section level3" number="3.6.4">
 <h3><span class="header-section-number">3.6.4</span> Zusammenfassung aller Spalten: Hilfe aus Zusatzpaketen</h3>
 <p>Es gibt zahlreiche Funktionen, aus verschiedenen <code>R</code>-Zusatzpaketen und auch der
 Basisversion von <code>R</code> („Base-<code>R</code>“) selbst, die alle dafür gedacht sind, möglichst
@@ -1093,12 +1235,12 @@ auf diese Weise erst einmal einen groben Überblick zu erhalten.</p>
 Basisversion von <code>R</code> nicht enthalten sind. Um die Funktionen auszuprobieren,
 können die nötigen Zusatzpakete mit der Funktion <code>install.packages()</code>
 installiert und der Funktion <code>library()</code> geladen werden:</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb364-1" title="1"><span class="co"># Man kann mit einem Befehl mehrere Pakete installieren:</span></a>
-<a class="sourceLine" id="cb364-2" title="2"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;skimr&quot;</span>, <span class="st">&quot;psych&quot;</span>, <span class="st">&quot;Hmisc&quot;</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb365-1" title="1"><span class="co"># Geladen werden müssen sie aber alle einzeln:</span></a>
-<a class="sourceLine" id="cb365-2" title="2"><span class="kw">library</span>(<span class="st">&quot;skimr&quot;</span>)</a>
-<a class="sourceLine" id="cb365-3" title="3"><span class="kw">library</span>(<span class="st">&quot;psych&quot;</span>)</a>
-<a class="sourceLine" id="cb365-4" title="4"><span class="kw">library</span>(<span class="st">&quot;Hmisc&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="dataframes.html#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Man kann mit einem Befehl mehrere Pakete installieren:</span></span>
+<span id="cb373-2"><a href="dataframes.html#cb373-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;skimr&quot;</span>, <span class="st">&quot;psych&quot;</span>, <span class="st">&quot;Hmisc&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="dataframes.html#cb374-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Geladen werden müssen sie aber alle einzeln:</span></span>
+<span id="cb374-2"><a href="dataframes.html#cb374-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;skimr&quot;</span>)</span>
+<span id="cb374-3"><a href="dataframes.html#cb374-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;psych&quot;</span>)</span>
+<span id="cb374-4"><a href="dataframes.html#cb374-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;Hmisc&quot;</span>)</span></code></pre></div>
 <p>Beachtet an dieser Stelle, dass Zusatzfunktionen aus Paketen erst dann genutzt
 werden können, wenn diese per <code>library()</code> geladen wurden; es reicht nicht aus,
 wenn ein Paket nur per <code>install.packages()</code> installiert wurde. Insbesondere
@@ -1107,15 +1249,15 @@ heißt das, dass benötigte <code>R</code>-Zusatzpakete in jeder neuen <code>R</
 <code>library()</code> stellt die Funktion <code>require()</code> dar.</p>
 <p>Interessanterweise bemerken wir an dieser Stelle ein mögliches Problem, das sich
 bei der Arbeit mit <code>R</code>-Paketen ergeben kann: Sowohl im Paket
-<code>psych</code><a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a> als auch im Paket <code>Hmisc</code> gibt es eine Funktion mit dem
+<code>psych</code><a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a> als auch im Paket <code>Hmisc</code> gibt es eine Funktion mit dem
 Namen <code>describe()</code>. Wenn ich per <code>library()</code> beide Pakete geladen habe – welche
 Funktion wird dann genutzt, wenn ich <code>describe()</code> aufrufe? Das ist von
 vornherein leider nicht zu sagen und hängt von der Reihenfolge ab, in der die
 Pakete geladen wurden. Wenn ich gezielt genau eine der beiden Funktionen
 ansteuern will, kann ich den doppelten Doppelpunktoperator nutzen, um das
 zugehörige Paket anzugeben:</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb366-1" title="1">psych<span class="op">::</span><span class="kw">describe</span>(mdf)</a>
-<a class="sourceLine" id="cb366-2" title="2">Hmisc<span class="op">::</span><span class="kw">describe</span>(mdf)</a></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="dataframes.html#cb375-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(mdf)</span>
+<span id="cb375-2"><a href="dataframes.html#cb375-2" aria-hidden="true" tabindex="-1"></a>Hmisc<span class="sc">::</span><span class="fu">describe</span>(mdf)</span></code></pre></div>
 <p>Die Variante mit doppeltem Doppelpunkt ist in jedem Fall sicher und sollte
 verwendet werden, wenn aus verschiedenen Paketen Funktionen mit demselben Namen
 in Konflikt stehen. Wer ganz sicher gehen will, kann bei der Verwendung von
@@ -1128,21 +1270,21 @@ gestellt wird. Beide berechnen zwar – wie zu erwarten – Cronbachs Alpha,
 jedoch gibt <code>psych::alpha()</code> noch weitere Ergebnisse aus, wohingegen
 <code>psychometric::alpha()</code> wirklich nur Cronbachs Alpha liefert.</p>
 </div>
-<div id="sortieren-die-funktion-arrange-aus-dem-paket-dplyr" class="section level3">
+<div id="sortieren-die-funktion-arrange-aus-dem-paket-dplyr" class="section level3" number="3.6.5">
 <h3><span class="header-section-number">3.6.5</span> Sortieren: Die Funktion <code>arrange</code>() aus dem Paket <code>dplyr</code></h3>
 <p>Oftmals wollen wir Datentabellen nach einer oder mehreren Variablen
 sortieren. Dies funktioniert am bequemsten, wenn wir das <em>Paket</em> <code>dplyr</code>
 laden <span class="citation">(Wickham, François, Henry, &amp; Müller, 2018)</span>:</p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb367-1" title="1"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="dataframes.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
 <p>Voraussetzung dafür, dass ich das Paket <code>dplyr</code> nutzen kann ist, dass
 ich das Paket auf meinem Rechner installiert habe. Falls das Paket noch
 nicht installiert ist – in dem Fall ergibt der Befehl
 <code>library('dyplr')</code> einen Fehler – können wir es es mit dem folgenden
 Befehl installieren:</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb368-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="dataframes.html#cb377-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
 <p>Die Funktion <code>arrange()</code> aus dem Paket <code>dplyr</code> ermöglicht es uns, einen
 <code>data.frame</code> zu sortieren:</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb369-1" title="1"><span class="kw">arrange</span>(mdf, Testscore) <span class="co"># dplyr muss geladen sein</span></a></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="dataframes.html#cb378-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(mdf, Testscore) <span class="co"># dplyr muss geladen sein</span></span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 1          3     0     0    13          m       blau         0
 2          2     0     1    14          m       blau         1
@@ -1155,7 +1297,7 @@ alle Spalten nach denen wir sortieren wollen (hier erst mal nur der
 Testscore). Standardmäßig sortiert <code>arrange()</code> <em>aufsteigend</em>; wenn wir
 eine absteigende Sortierung wünschen, müssen wir ein Minus vor die
 Sortierspalte setzen:</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb371-1" title="1"><span class="kw">arrange</span>(mdf, <span class="op">-</span>Testscore)</a></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="dataframes.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(mdf, <span class="sc">-</span>Testscore)</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 1          1     1     1    13          w      braun         2
 2          5     1     1    15          m      gruen         2
@@ -1167,7 +1309,7 @@ wird bei gleichen Werten im ersten Sortierkriterium anhand des nächsten
 Kriteriums die Reihenfolge entschieden. Wir könnten etwa unsere Daten
 nach Geschlecht sortieren, und innerhalb der Personen gleichen
 Geschlechts nach Punktzahl:</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb373-1" title="1"><span class="kw">arrange</span>(mdf, Geschlecht, <span class="op">-</span>Testscore)</a></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="dataframes.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(mdf, Geschlecht, <span class="sc">-</span>Testscore)</span></code></pre></div>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 1          5     1     1    15          m      gruen         2
 2          2     0     1    14          m       blau         1
@@ -1184,7 +1326,7 @@ Die Pakete aus dem Tidyverse folgen einem zugrundeliegenden Entwurfsprinzip
 und sollen viele Aufgaben der statistischen Datenanalyse vereinfachen.</p>
 </div>
 </div>
-<div id="zusammenfassung-1" class="section level2">
+<div id="zusammenfassung-1" class="section level2" number="3.7">
 <h2><span class="header-section-number">3.7</span> Zusammenfassung</h2>
 <ul>
 <li>Wir haben den <code>data.frame</code> als Datenstruktur zur Speicherung von
@@ -1205,18 +1347,18 @@ und Spalten aus <code>data.frames</code> auslesen</li>
 </ul></li>
 </ul>
 </div>
-<div id="fragen-zum-vertiefenden-verständnis-1" class="section level2">
+<div id="fragen-zum-vertiefenden-verständnis-1" class="section level2" number="3.8">
 <h2><span class="header-section-number">3.8</span> Fragen zum vertiefenden Verständnis</h2>
 <ol style="list-style-type: decimal">
 <li>Worin unterscheiden sich die folgenden Aufrufe? Welche Aufrufe sind
 zueinander äquivalent?</li>
 </ol>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb375-1" title="1"><span class="kw">subset</span>(mdf, <span class="dt">select =</span> <span class="st">&quot;Item1&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb376-1" title="1">mdf[, <span class="st">&quot;Item1&quot;</span>]</a></code></pre></div>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb377-1" title="1">mdf[, <span class="st">&quot;Item1&quot;</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a></code></pre></div>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb378-1" title="1">mdf[<span class="st">&quot;Item1&quot;</span>]</a></code></pre></div>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb379-1" title="1">mdf[[<span class="st">&quot;Item1&quot;</span>]]</a></code></pre></div>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb380-1" title="1">mdf<span class="op">$</span>Item1</a></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="dataframes.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mdf, <span class="at">select =</span> <span class="st">&quot;Item1&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="dataframes.html#cb385-1" aria-hidden="true" tabindex="-1"></a>mdf[, <span class="st">&quot;Item1&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="dataframes.html#cb386-1" aria-hidden="true" tabindex="-1"></a>mdf[, <span class="st">&quot;Item1&quot;</span>, drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="dataframes.html#cb387-1" aria-hidden="true" tabindex="-1"></a>mdf[<span class="st">&quot;Item1&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="dataframes.html#cb388-1" aria-hidden="true" tabindex="-1"></a>mdf[[<span class="st">&quot;Item1&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="dataframes.html#cb389-1" aria-hidden="true" tabindex="-1"></a>mdf<span class="sc">$</span>Item1</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Vergleicht die folgenden Aufrufe der Funktion <code>subset</code>. Warum
 funktionieren der erste und der zweite Aufruf, aber nicht der dritte
@@ -1224,11 +1366,10 @@ und vierte? Wie kann es überhaupt sein, dass die ersten beiden
 Funktionsaufrufe funktionieren, obwohl Argumente unbenannt an der
 “falschen” Position stehen?</li>
 </ol>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb381-1" title="1"><span class="kw">subset</span>(mdf, <span class="dt">select =</span> <span class="st">&quot;Item1&quot;</span>, Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb382-1" title="1"><span class="kw">subset</span>(<span class="dt">select =</span> <span class="st">&quot;Item1&quot;</span>, mdf, Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb383-1" title="1"><span class="kw">subset</span>(mdf, <span class="st">&quot;Item1&quot;</span>, Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb384-1" title="1"><span class="kw">subset</span>(<span class="st">&quot;Item1&quot;</span>, mdf, Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>)</a></code></pre></div>
-
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="dataframes.html#cb390-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mdf, <span class="at">select =</span> <span class="st">&quot;Item1&quot;</span>, Augenfarbe <span class="sc">==</span> <span class="st">&quot;blau&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="dataframes.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(<span class="at">select =</span> <span class="st">&quot;Item1&quot;</span>, mdf, Augenfarbe <span class="sc">==</span> <span class="st">&quot;blau&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="dataframes.html#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(mdf, <span class="st">&quot;Item1&quot;</span>, Augenfarbe <span class="sc">==</span> <span class="st">&quot;blau&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="dataframes.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(<span class="st">&quot;Item1&quot;</span>, mdf, Augenfarbe <span class="sc">==</span> <span class="st">&quot;blau&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div class="footnotes">
@@ -1238,10 +1379,10 @@ Funktionsaufrufe funktionieren, obwohl Argumente unbenannt an der
 <code>data.frame</code> aufschreiben, sondern stattdessen Daten aus einer externen
 Datei einlesen. Beispielsweise können die Daten in einem
 <em>Spreadsheet-Editor</em> wie Excel eingegeben worden sein und wir
-importieren diese dann in <code>R</code>.<a href="dataframes.html#fnref15" class="footnote-back">↩</a></p></li>
+importieren diese dann in <code>R</code>.<a href="dataframes.html#fnref15" class="footnote-back">↩︎</a></p></li>
 <li id="fn16"><p>Technisch korrekt müsste ich sagen: Der
 <code>data.frame</code>, der in der Variablen <code>mdf</code> abgespeichert ist, hat nun eine
-zusätzliche Spalte.<a href="dataframes.html#fnref16" class="footnote-back">↩</a></p></li>
+zusätzliche Spalte.<a href="dataframes.html#fnref16" class="footnote-back">↩︎</a></p></li>
 <li id="fn17"><p>Es ist etwas unglücklich, dass der Begriff “Variable”
 doppeldeutig ist: (1) In <code>R</code> sind Variablen die Speicherorte von
 Objekten; ich erstelle sie mit der “<code>&lt;-</code>”-Zuweisung. (2) Andererseits
@@ -1250,30 +1391,33 @@ Variablen bezeichnet. In diesem Sinne würde der Begriff Variable in <code>R</co
 auf die Spalte in einem <code>data.frame</code> verweisen, da Spalten Messvariablen
 beinhalten. Diese Doppeldeutigkeit ist deswegen unglücklich, da eine
 Spalte in einem <code>data.frame</code> keine <code>R</code>-Variable ist. Stattdessen ist der
-gesamte <code>data.frame</code> in <strong>einer</strong> Variablen abgespeichert.<a href="dataframes.html#fnref17" class="footnote-back">↩</a></p></li>
+gesamte <code>data.frame</code> in <strong>einer</strong> Variablen abgespeichert.<a href="dataframes.html#fnref17" class="footnote-back">↩︎</a></p></li>
 <li id="fn18"><p>Auch Zeilen können benannt sein. Den Fall hatten wir
 bislang aber nicht und es kommt auch nicht oft vor, dass Zeilen explizit
 benannt sind. Häufiger ist der Fall, in dem wir Spalten nach Namen
-auswählen.<a href="dataframes.html#fnref18" class="footnote-back">↩</a></p></li>
-<li id="fn19"><p>Es macht an dieser Stelle Sinn, einen Moment inne zu
+auswählen.<a href="dataframes.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>Bei der Auswahl von Items aus Subskalen ist dieses Vorgehen
+oftmals etwas schwieriger, da hier nur Teilmengen des gesamten Itempools
+ausgewählt werden sollen. Aber auch dann kann die Funktion <code>paste0()</code> helfen.<a href="dataframes.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p>Es macht an dieser Stelle Sinn, einen Moment inne zu
 halten und zu überlegen, warum es eigentlich außergewöhnlich ist, dass
 der Befehl <code>Augenfarbe == "blau"</code> innerhalb der Funktion <code>subset()</code>
-funktioniert.<a href="dataframes.html#fnref19" class="footnote-back">↩</a></p></li>
-<li id="fn20"><p>Unter welchen Umständen würde <code>R</code> keinen Fehler
+funktioniert.<a href="dataframes.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn21"><p>Unter welchen Umständen würde <code>R</code> keinen Fehler
 ausgeben, wenn wir <code>c(Augenfarbe, Alter)</code> in die Konsole eingeben? Es
-ist nützlich, diesen Punkt zu verstehen.<a href="dataframes.html#fnref20" class="footnote-back">↩</a></p></li>
-<li id="fn21"><p>Beachtet, dass sowohl Messwerte als auch
+ist nützlich, diesen Punkt zu verstehen.<a href="dataframes.html#fnref21" class="footnote-back">↩︎</a></p></li>
+<li id="fn22"><p>Beachtet, dass sowohl Messwerte als auch
 Gruppierungsvariable als <strong>Vektoren</strong> übergeben werden. Ich behandle die
 Funktion <code>tapply()</code> jedoch im Kapitel zu <code>data.frames</code>, da es zumeist so
 sein wird, dass wir beide Vektoren aus <strong>einem</strong> <code>data.frame</code> mit der
-<code>$</code>-Notation auslesen werden.<a href="dataframes.html#fnref21" class="footnote-back">↩</a></p></li>
-<li id="fn22"><p>Wie viele Datenpunkte in die Berechnung jedes
+<code>$</code>-Notation auslesen werden.<a href="dataframes.html#fnref22" class="footnote-back">↩︎</a></p></li>
+<li id="fn23"><p>Wie viele Datenpunkte in die Berechnung jedes
 Mittelwerts eingehen, können wir in diesem Fall prüfen mit
-<code>table(mdf$Geschlecht, mdf$Augenfarbe)</code>.<a href="dataframes.html#fnref22" class="footnote-back">↩</a></p></li>
-<li id="fn23"><p>Das Paket <code>psych</code> ist in der psychometrischen Arbeit übrigens
+<code>table(mdf$Geschlecht, mdf$Augenfarbe)</code>.<a href="dataframes.html#fnref23" class="footnote-back">↩︎</a></p></li>
+<li id="fn24"><p>Das Paket <code>psych</code> ist in der psychometrischen Arbeit übrigens
 äußerst wichtig; beispielsweise enthält es viel genutzten Funktionen für
 Faktorenanalysen (etwa eine Standardimplementierung der Parallelanalyse), eine
-Funktion, die Cronbachs Alpha berechnet, und viele mehr.<a href="dataframes.html#fnref23" class="footnote-back">↩</a></p></li>
+Funktion, die Cronbachs Alpha berechnet, und viele mehr.<a href="dataframes.html#fnref24" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -1305,6 +1449,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
