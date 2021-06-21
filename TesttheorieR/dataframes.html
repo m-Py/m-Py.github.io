@@ -513,15 +513,9 @@ und einem variablen Teil bestehen – hier den Zahlen von 1 bis 10. Die Funktion
 müssen. Außerdem besteht der variable Teil oftmals aus einer aufsteigenden
 Zahlenfolge, die wir unkompliziert mit dem Doppelpunktoperator erstellen
 können.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p>
-<p>Die Funktion <code>paste0()</code> ist nicht auf die Kombination von zwei Vektoren
-beschränkt, sondern verknüpft im Allgemeinen beliebig viele Vektoren. Sollten
-die Spaltennamen beispielsweise noch ein festes Suffix nach der Nummerierung
-enthalten, kann dieses einfach durch ein zusätzliches Argument angefügt werden:</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="dataframes.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;item_&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="st">&quot;R&quot;</span>)</span></code></pre></div>
-<pre><code>[1] &quot;item_1R&quot; &quot;item_2R&quot; &quot;item_3R&quot;</code></pre>
-<p>In unserer kleinen Datentabelle <code>mdf</code> können wir mithilfe der Funktion
-<code>paste0()</code> die zwei Items wie folgt auswählen:</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="dataframes.html#cb250-1" aria-hidden="true" tabindex="-1"></a>mdf[, <span class="fu">paste0</span>(<span class="st">&quot;Item&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)]</span></code></pre></div>
+<p>In unserer kleinen Datentabelle <code>mdf</code> können wir demnach wie folgt die zwei
+Items auswählen:</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="dataframes.html#cb248-1" aria-hidden="true" tabindex="-1"></a>mdf[, <span class="fu">paste0</span>(<span class="st">&quot;Item&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)]</span></code></pre></div>
 <pre><code>  Item1 Item2
 1     1     1
 2     0     1
@@ -529,6 +523,12 @@ enthalten, kann dieses einfach durch ein zusätzliches Argument angefügt werden
 4     1     0
 5     1     1</code></pre>
 <p>Natürlich ist diese Operation nützlicher, wenn die Tabelle mehr Items enthält.</p>
+<p>Die Funktion <code>paste0()</code> ist nicht auf die Kombination von zwei Vektoren
+beschränkt, sondern verknüpft im Allgemeinen beliebig viele Vektoren. Sollten
+die Spaltennamen beispielsweise noch ein festes Suffix nach der Nummerierung
+enthalten, kann dieses einfach durch ein zusätzliches Argument angefügt werden:</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="dataframes.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;item_&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="st">&quot;R&quot;</span>)</span></code></pre></div>
+<pre><code>[1] &quot;item_1R&quot; &quot;item_2R&quot; &quot;item_3R&quot;</code></pre>
 <p>Eine Verallgemeinerung von <code>paste0()</code> stellt die Funktion <code>paste()</code> dar, die das
 Trennzeichen zwischen den zusammengefügten Vektoren explizit definieren kann.
 Dazu verwendet <code>paste()</code> das benannte Argument <code>sep</code>:</p>
