@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -106,7 +106,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/m-Py/anticlust/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -132,7 +132,7 @@
     <p>This function can be used to obtain a stratified split of a data set.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>categorical_sampling</span>(<span class='kw'>categories</span>, <span class='kw'>K</span>)</pre>
+    <pre class="usage"><span class='fu'>categorical_sampling</span><span class='op'>(</span><span class='va'>categories</span>, <span class='va'>K</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -160,10 +160,10 @@ that categories are balanced between samples, the split is random.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>schaper2019</span>)
-<span class='kw'>categories</span> <span class='op'>&lt;-</span> <span class='kw'>schaper2019</span><span class='op'>$</span><span class='kw'>room</span>
-<span class='kw'>groups</span> <span class='op'>&lt;-</span> <span class='fu'>categorical_sampling</span>(<span class='kw'>categories</span>, K = <span class='fl'>6</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='kw'>groups</span>, <span class='kw'>categories</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>schaper2019</span><span class='op'>)</span>
+<span class='va'>categories</span> <span class='op'>&lt;-</span> <span class='va'>schaper2019</span><span class='op'>$</span><span class='va'>room</span>
+<span class='va'>groups</span> <span class='op'>&lt;-</span> <span class='fu'>categorical_sampling</span><span class='op'>(</span><span class='va'>categories</span>, K <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span><span class='op'>(</span><span class='va'>groups</span>, <span class='va'>categories</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;       categories
 #&gt; groups bathroom kitchen
 #&gt;      1        8       8
@@ -173,16 +173,16 @@ that categories are balanced between samples, the split is random.</p>
 #&gt;      5        8       8
 #&gt;      6        8       8</div><div class='input'>
 <span class='co'># Unequal sized groups</span>
-<span class='kw'>groups</span> <span class='op'>&lt;-</span> <span class='fu'>categorical_sampling</span>(<span class='kw'>categories</span>, K = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>24</span>, <span class='fl'>24</span>, <span class='fl'>48</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='kw'>groups</span>, <span class='kw'>categories</span>)
+<span class='va'>groups</span> <span class='op'>&lt;-</span> <span class='fu'>categorical_sampling</span><span class='op'>(</span><span class='va'>categories</span>, K <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>24</span>, <span class='fl'>24</span>, <span class='fl'>48</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span><span class='op'>(</span><span class='va'>groups</span>, <span class='va'>categories</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;       categories
 #&gt; groups bathroom kitchen
 #&gt;      1       12      12
 #&gt;      2       12      12
 #&gt;      3       24      24</div><div class='input'>
 <span class='co'># Heavily unequal sized groups, is harder to balance the groups</span>
-<span class='kw'>groups</span> <span class='op'>&lt;-</span> <span class='fu'>categorical_sampling</span>(<span class='kw'>categories</span>, K = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>51</span>, <span class='fl'>19</span>, <span class='fl'>26</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='kw'>groups</span>, <span class='kw'>categories</span>)
+<span class='va'>groups</span> <span class='op'>&lt;-</span> <span class='fu'>categorical_sampling</span><span class='op'>(</span><span class='va'>categories</span>, K <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>51</span>, <span class='fl'>19</span>, <span class='fl'>26</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span><span class='op'>(</span><span class='va'>groups</span>, <span class='va'>categories</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;       categories
 #&gt; groups bathroom kitchen
 #&gt;      1       24      27

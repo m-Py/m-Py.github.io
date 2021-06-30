@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -106,7 +106,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/m-Py/anticlust/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -132,7 +132,7 @@
     <p>Compute the diversity for a given clustering.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>diversity_objective</span>(<span class='kw'>x</span>, <span class='kw'>clusters</span>)</pre>
+    <pre class="usage"><span class='fu'>diversity_objective</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>clusters</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,26 +171,25 @@ unit of this objective.</p>
 diversity and dispersion criteria for anticlustering: A bicriterion
 approach. British Journal of Mathematical and Statistical
 Psychology. https://doi.org/10.1111/bmsp.12186</p>
-<p>Papenberg, M., &amp; Klau, G. W. (2020). Using anticlustering to
-partition data sets into equivalent parts. Psychological
-Methods. Advance Online Publication. 
-https://doi.org/10.1037/met0000301.</p>
+<p>Papenberg, M., &amp; Klau, G. W. (2020). Using anticlustering to partition 
+data sets into equivalent parts. Psychological Methods, 26(2), 
+161–174. https://doi.org/10.1037/met0000301.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Martin Papenberg <a href='mailto:martin.papenberg@hhu.de'>martin.papenberg@hhu.de</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>iris</span>)
-<span class='kw'>distances</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/dist.html'>dist</a></span>(<span class='kw'>iris</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>60</span>, <span class='op'>-</span><span class='fl'>5</span>])
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+<span class='va'>distances</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/dist.html'>dist</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>60</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span>
 <span class='co'>## Clustering</span>
-<span class='kw'>clusters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='balanced_clustering.html'>balanced_clustering</a></span>(<span class='kw'>distances</span>, K = <span class='fl'>3</span>)
+<span class='va'>clusters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='balanced_clustering.html'>balanced_clustering</a></span><span class='op'>(</span><span class='va'>distances</span>, K <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
 <span class='co'># This is low:</span>
-<span class='fu'>diversity_objective</span>(<span class='kw'>distances</span>, <span class='kw'>clusters</span>)
+<span class='fu'>diversity_objective</span><span class='op'>(</span><span class='va'>distances</span>, <span class='va'>clusters</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] 599.9749</div><div class='input'><span class='co'>## Anticlustering</span>
-<span class='kw'>anticlusters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='anticlustering.html'>anticlustering</a></span>(<span class='kw'>distances</span>, K = <span class='fl'>3</span>)
+<span class='va'>anticlusters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='anticlustering.html'>anticlustering</a></span><span class='op'>(</span><span class='va'>distances</span>, K <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
 <span class='co'># This is higher:</span>
-<span class='fu'>diversity_objective</span>(<span class='kw'>distances</span>, <span class='kw'>anticlusters</span>)
+<span class='fu'>diversity_objective</span><span class='op'>(</span><span class='va'>distances</span>, <span class='va'>anticlusters</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] 874.5954</div><div class='input'>
 </div></pre>
   </div>

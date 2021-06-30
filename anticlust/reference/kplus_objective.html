@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -106,7 +106,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/m-Py/anticlust/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -132,7 +132,7 @@
     <p>Objective value for the k-plus criterion</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kplus_objective</span>(<span class='kw'>x</span>, <span class='kw'>clusters</span>)</pre>
+    <pre class="usage"><span class='fu'>kplus_objective</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>clusters</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,47 +196,47 @@ reference is available, or check out the package website
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Papenberg, M., &amp; Klau, G. W. (2020). Using anticlustering to partition 
-data sets into equivalent parts. Psychological Methods. Advance Online 
-Publication. https://doi.org/10.1037/met0000301.</p>
+data sets into equivalent parts. Psychological Methods, 26(2), 
+161–174. https://doi.org/10.1037/met0000301.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Martin Papenberg <a href='mailto:martin.papenberg@hhu.de'>martin.papenberg@hhu.de</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>schaper2019</span>)
-<span class='kw'>features</span> <span class='op'>&lt;-</span> <span class='kw'>schaper2019</span>[, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>6</span>]
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>schaper2019</span><span class='op'>)</span>
+<span class='va'>features</span> <span class='op'>&lt;-</span> <span class='va'>schaper2019</span><span class='op'>[</span>, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>]</span>
 
 <span class='co'># Optimize k-plus criterion</span>
-<span class='kw'>kplus_groups</span> <span class='op'>&lt;-</span> <span class='fu'><a href='anticlustering.html'>anticlustering</a></span>(
-  <span class='kw'>features</span>,
-  K = <span class='fl'>3</span>,
-  objective = <span class='st'>"kplus"</span>
-)
+<span class='va'>kplus_groups</span> <span class='op'>&lt;-</span> <span class='fu'><a href='anticlustering.html'>anticlustering</a></span><span class='op'>(</span>
+  <span class='va'>features</span>,
+  K <span class='op'>=</span> <span class='fl'>3</span>,
+  objective <span class='op'>=</span> <span class='st'>"kplus"</span>
+<span class='op'>)</span>
 <span class='co'># Optimize normal k-means criterion</span>
-<span class='kw'>kmeans_groups</span> <span class='op'>&lt;-</span> <span class='fu'><a href='anticlustering.html'>anticlustering</a></span>(
-  <span class='kw'>features</span>,
-  K = <span class='fl'>3</span>,
-  objective = <span class='st'>"variance"</span>
-)
+<span class='va'>kmeans_groups</span> <span class='op'>&lt;-</span> <span class='fu'><a href='anticlustering.html'>anticlustering</a></span><span class='op'>(</span>
+  <span class='va'>features</span>,
+  K <span class='op'>=</span> <span class='fl'>3</span>,
+  objective <span class='op'>=</span> <span class='st'>"variance"</span>
+<span class='op'>)</span>
 
 <span class='co'># Compute k-plus criterion (k-plus is much better here)</span>
-<span class='fu'>kplus_objective</span>(<span class='kw'>features</span>, <span class='kw'>kplus_groups</span>)
-</div><div class='output co'>#&gt; [1] 5433.656</div><div class='input'><span class='fu'>kplus_objective</span>(<span class='kw'>features</span>, <span class='kw'>kmeans_groups</span>)
+<span class='fu'>kplus_objective</span><span class='op'>(</span><span class='va'>features</span>, <span class='va'>kplus_groups</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 5433.656</div><div class='input'><span class='fu'>kplus_objective</span><span class='op'>(</span><span class='va'>features</span>, <span class='va'>kmeans_groups</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] 5203.045</div><div class='input'>
 <span class='co'># Compare to k-means criterion (k-plus not much worse here)</span>
-<span class='fu'><a href='variance_objective.html'>variance_objective</a></span>(<span class='kw'>features</span>, <span class='kw'>kplus_groups</span>)
-</div><div class='output co'>#&gt; [1] 628.1554</div><div class='input'><span class='fu'><a href='variance_objective.html'>variance_objective</a></span>(<span class='kw'>features</span>, <span class='kw'>kmeans_groups</span>)
+<span class='fu'><a href='variance_objective.html'>variance_objective</a></span><span class='op'>(</span><span class='va'>features</span>, <span class='va'>kplus_groups</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 628.1554</div><div class='input'><span class='fu'><a href='variance_objective.html'>variance_objective</a></span><span class='op'>(</span><span class='va'>features</span>, <span class='va'>kmeans_groups</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] 628.1559</div><div class='input'>
 <span class='co'># Compare means and standard deviations after k-means and k-plus</span>
 <span class='co'># anticlustering (the standard deviations are usually much closer</span>
 <span class='co'># after k-plus anticlustering, but there is only little to no</span>
 <span class='co'># difference with regard to the means)</span>
-<span class='fu'><a href='mean_sd_tab.html'>mean_sd_tab</a></span>(<span class='kw'>features</span>, <span class='kw'>kplus_groups</span>)
+<span class='fu'><a href='mean_sd_tab.html'>mean_sd_tab</a></span><span class='op'>(</span><span class='va'>features</span>, <span class='va'>kplus_groups</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   rating_consistent rating_inconsistent syllables     frequency     
 #&gt; 1 "4.49 (0.25)"     "1.10 (0.06)"       "3.44 (0.91)" "18.31 (2.42)"
 #&gt; 2 "4.49 (0.24)"     "1.10 (0.06)"       "3.41 (0.95)" "18.31 (2.42)"
-#&gt; 3 "4.49 (0.25)"     "1.11 (0.07)"       "3.41 (0.95)" "18.31 (2.40)"</div><div class='input'><span class='fu'><a href='mean_sd_tab.html'>mean_sd_tab</a></span>(<span class='kw'>features</span>, <span class='kw'>kmeans_groups</span>)
+#&gt; 3 "4.49 (0.25)"     "1.11 (0.07)"       "3.41 (0.95)" "18.31 (2.40)"</div><div class='input'><span class='fu'><a href='mean_sd_tab.html'>mean_sd_tab</a></span><span class='op'>(</span><span class='va'>features</span>, <span class='va'>kmeans_groups</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   rating_consistent rating_inconsistent syllables     frequency     
 #&gt; 1 "4.49 (0.26)"     "1.10 (0.07)"       "3.41 (0.87)" "18.31 (2.46)"
 #&gt; 2 "4.49 (0.22)"     "1.10 (0.07)"       "3.44 (1.08)" "18.31 (2.76)"

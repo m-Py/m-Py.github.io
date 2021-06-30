@@ -74,7 +74,7 @@ very large data sets." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@ very large data sets." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -108,7 +108,7 @@ very large data sets." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/m-Py/anticlust/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -136,7 +136,7 @@ k-means variance criterion with an exchange method. Can be used for
 very large data sets.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fast_anticlustering</span>(<span class='kw'>x</span>, <span class='kw'>K</span>, k_neighbours = <span class='fl'>Inf</span>, categories = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>fast_anticlustering</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>K</span>, k_neighbours <span class='op'>=</span> <span class='cn'>Inf</span>, categories <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,23 +198,23 @@ treated as a distinct category by the exchange method.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 
-<span class='kw'>features</span> <span class='op'>&lt;-</span> <span class='kw'>iris</span>[, <span class='op'>-</span> <span class='fl'>5</span>]
+<span class='va'>features</span> <span class='op'>&lt;-</span> <span class='va'>iris</span><span class='op'>[</span>, <span class='op'>-</span> <span class='fl'>5</span><span class='op'>]</span>
 
-<span class='kw'>start</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>()
-<span class='kw'>ac_exchange</span> <span class='op'>&lt;-</span> <span class='fu'>fast_anticlustering</span>(<span class='kw'>features</span>, K = <span class='fl'>3</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>() <span class='op'>-</span> <span class='kw'>start</span>
-</div><div class='output co'>#&gt; Time difference of 0.6022313 secs</div><div class='input'>
+<span class='va'>start</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>ac_exchange</span> <span class='op'>&lt;-</span> <span class='fu'>fast_anticlustering</span><span class='op'>(</span><span class='va'>features</span>, K <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-</span> <span class='va'>start</span>
+</div><div class='output co'>#&gt; Time difference of 0.5710347 secs</div><div class='input'>
 <span class='co'>## The following call is equivalent to the call above:</span>
-<span class='kw'>start</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>()
-<span class='kw'>ac_exchange</span> <span class='op'>&lt;-</span> <span class='fu'><a href='anticlustering.html'>anticlustering</a></span>(<span class='kw'>features</span>, K = <span class='fl'>3</span>, objective = <span class='st'>"variance"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>() <span class='op'>-</span> <span class='kw'>start</span>
-</div><div class='output co'>#&gt; Time difference of 0.008479595 secs</div><div class='input'>
+<span class='va'>start</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>ac_exchange</span> <span class='op'>&lt;-</span> <span class='fu'><a href='anticlustering.html'>anticlustering</a></span><span class='op'>(</span><span class='va'>features</span>, K <span class='op'>=</span> <span class='fl'>3</span>, objective <span class='op'>=</span> <span class='st'>"variance"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-</span> <span class='va'>start</span>
+</div><div class='output co'>#&gt; Time difference of 0.007753134 secs</div><div class='input'>
 <span class='co'>## Improve run time by using fewer exchange partners:</span>
-<span class='kw'>start</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>()
-<span class='kw'>ac_fast</span> <span class='op'>&lt;-</span> <span class='fu'>fast_anticlustering</span>(<span class='kw'>features</span>, K = <span class='fl'>3</span>, k_neighbours = <span class='fl'>10</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>() <span class='op'>-</span> <span class='kw'>start</span>
-</div><div class='output co'>#&gt; Time difference of 0.04863167 secs</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='kw'>features</span>, <span class='kw'>ac_exchange</span>, <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>(<span class='kw'>x</span>), <span class='fl'>2</span>))
+<span class='va'>start</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>ac_fast</span> <span class='op'>&lt;-</span> <span class='fu'>fast_anticlustering</span><span class='op'>(</span><span class='va'>features</span>, K <span class='op'>=</span> <span class='fl'>3</span>, k_neighbours <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-</span> <span class='va'>start</span>
+</div><div class='output co'>#&gt; Time difference of 0.04111767 secs</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span><span class='op'>(</span><span class='va'>features</span>, <span class='va'>ac_exchange</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; ac_exchange: 1
 #&gt; Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
 #&gt;         5.84         3.06         3.76         1.20 
@@ -225,7 +225,7 @@ treated as a distinct category by the exchange method.</p>
 #&gt; ------------------------------------------------------------ 
 #&gt; ac_exchange: 3
 #&gt; Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
-#&gt;         5.85         3.06         3.76         1.20 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span>(<span class='kw'>features</span>, <span class='kw'>ac_fast</span>, <span class='fu'>function</span>(<span class='kw'>x</span>) <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span>(<span class='kw'>x</span>), <span class='fl'>2</span>))
+#&gt;         5.85         3.06         3.76         1.20 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/by.html'>by</a></span><span class='op'>(</span><span class='va'>features</span>, <span class='va'>ac_fast</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; ac_fast: 1
 #&gt; Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
 #&gt;         5.85         3.06         3.76         1.20 

@@ -53,7 +53,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
       </span>
     </div>
 
@@ -61,7 +61,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -87,7 +87,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/m-Py/anticlust/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -107,25 +107,21 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#anticlust-" class="anchor"></a>anticlust <a href="https://m-py.github.io/anticlust/"><img src="reference/figures/anticlustStickerV1-0.svg" align="right" height="160"></a>
 </h1></div>
-<p>Anticlustering partitions a pool of elements into subsets (i.e., anticlusters) in such a way that the subsets are as similar as possible. This is accomplished by maximizing instead of minimizing a clustering objective function, such as the intra-cluster variance (used in k-means clustering) or the sum of pairwise distances within clusters. Thus, anticlustering creates similar sets of elements by maximizing heterogeneity within anticlusters. The package <code>anticlust</code> implements anticlustering algorithms as described in Papenberg and Klau (2020; <a href="https://doi.org/10.1037/met0000301" class="uri">https://doi.org/10.1037/met0000301</a>). It was originally developed to assign items to experimental conditions in experimental psychology, but it can be applied whenever a user requires that a given set of elements has to be partitioned into similar subsets, or when the within-group heterogeneity should be high.</p>
+<p>Anticlustering partitions a pool of elements into clusters (or <em>anticlusters</em>) with the goal of achieving high between-cluster similarity and high within-cluster heterogeneity. This is accomplished by maximizing instead of minimizing a clustering objective function, such as the intra-cluster variance (used in k-means clustering) or the sum of pairwise distances within clusters. The package <code>anticlust</code> implements anticlustering algorithms as described in Papenberg and Klau (2021; <a href="https://doi.org/10.1037/met0000301" class="uri">https://doi.org/10.1037/met0000301</a>). It was originally developed to stimuli items to experimental conditions in experimental psychology, but it can be applied whenever a user requires that a given set of elements has to be partitioned groups that have to be as similar as possible, or when the within-group heterogeneity should be high.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>The stable release of <code>anticlust</code> is available from <a href="https://CRAN.R-project.org/package=anticlust">CRAN</a> and can be installed via:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">"anticlust"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"anticlust"</span>)</span></code></pre></div>
 <p>A (potentially more recent) version of anticlust can also be installed directly via Github:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">library</span>(<span class="st">"remotes"</span>) <span class="co"># if not available: install.packages("remotes")</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">install_github</span>(<span class="st">"m-Py/anticlust"</span>)</span></code></pre></div>
-<p>If you like, you can also install the current (unstable) development version:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">library</span>(<span class="st">"remotes"</span>) <span class="co"># if not available: install.packages("remotes")</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">install_github</span>(<span class="st">"m-Py/anticlust"</span>, <span class="dt">ref =</span> <span class="st">"devel"</span>)</span></code></pre></div>
-<p><a href="https://github.com/m-Py/anticlust/blob/devel/NEWS.md">Here</a> you may find some hints on the most recent additions to the development version.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"remotes"</span>) <span class="co"># if not available: install.packages("remotes")</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">"m-Py/anticlust"</span>)</span></code></pre></div>
 </div>
 <div id="citation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h2>
 <p>If you use <code>anticlust</code> in your research, it would be courteous if you cite the following reference:</p>
-<p>Papenberg, M., &amp; Klau, G. W. (2020). Using anticlustering to partition data sets into equivalent parts. <em>Psychological Methods</em>. Advance Online Publication. <a href="https://doi.org/10.1037/met0000301" class="uri">https://doi.org/10.1037/met0000301</a>.</p>
+<p>Papenberg, M., &amp; Klau, G. W. (2021). Using anticlustering to partition data sets into equivalent parts. <em>Psychological Methods, 26</em>(2), 161–174. <a href="https://doi.org/10.1037/met0000301" class="uri">https://doi.org/10.1037/met0000301</a></p>
 </div>
 <div id="how-do-i-learn-about-anticlust" class="section level2">
 <h2 class="hasAnchor">
@@ -141,97 +137,96 @@
 <h2 class="hasAnchor">
 <a href="#a-quick-start" class="anchor"></a>A quick start</h2>
 <p>In this initial example, I use the main function <code><a href="reference/anticlustering.html">anticlustering()</a></code> to create three similar sets of plants using the classical iris data set:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># load the package via</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">library</span>(<span class="st">"anticlust"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a>anticlusters &lt;-<span class="st"> </span><span class="kw">anticlustering</span>(</span>
-<span id="cb4-5"><a href="#cb4-5"></a>  iris[, <span class="dv">-5</span>],</span>
-<span id="cb4-6"><a href="#cb4-6"></a>  <span class="dt">K =</span> <span class="dv">3</span>,</span>
-<span id="cb4-7"><a href="#cb4-7"></a>  <span class="dt">objective =</span> <span class="st">"variance"</span>,</span>
-<span id="cb4-8"><a href="#cb4-8"></a>  <span class="dt">method =</span> <span class="st">"exchange"</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>)</span>
-<span id="cb4-10"><a href="#cb4-10"></a></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">## The output is a vector that assigns a group (i.e, a number </span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">## between 1 and K) to each input element:</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a>anticlusters</span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt;   [1] 1 1 2 3 2 2 1 3 1 3 1 2 3 2 1 3 1 3 3 1 2 3 1 3 3 2 2 2 2 2 3 2 3 2 1 3 2</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt;  [38] 2 1 2 1 3 2 1 1 1 3 1 3 3 3 1 1 2 3 3 1 3 1 2 3 3 1 2 2 1 1 2 2 3 1 1 3 3</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt;  [75] 2 1 3 3 1 3 1 2 1 2 1 2 3 1 1 3 2 1 2 1 1 2 1 2 3 3 3 2 2 3 3 2 1 1 2 1 3</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt; [112] 2 2 3 2 2 1 3 1 1 1 2 1 3 2 3 1 3 3 2 1 2 3 2 3 3 1 2 2 1 2 2 1 3 3 3 2 2</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt; [149] 1 3</span></span>
-<span id="cb4-19"><a href="#cb4-19"></a></span>
-<span id="cb4-20"><a href="#cb4-20"></a><span class="co">## Each group has the same number of items:</span></span>
-<span id="cb4-21"><a href="#cb4-21"></a><span class="kw">table</span>(anticlusters)</span>
-<span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt; anticlusters</span></span>
-<span id="cb4-23"><a href="#cb4-23"></a><span class="co">#&gt;  1  2  3 </span></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="co">#&gt; 50 50 50</span></span>
-<span id="cb4-25"><a href="#cb4-25"></a></span>
-<span id="cb4-26"><a href="#cb4-26"></a><span class="co">## Compare the feature means by anticluster:</span></span>
-<span id="cb4-27"><a href="#cb4-27"></a><span class="kw">by</span>(iris[, <span class="dv">-5</span>], anticlusters, <span class="cf">function</span>(x) <span class="kw">round</span>(<span class="kw">colMeans</span>(x), <span class="dv">2</span>))</span>
-<span id="cb4-28"><a href="#cb4-28"></a><span class="co">#&gt; anticlusters: 1</span></span>
-<span id="cb4-29"><a href="#cb4-29"></a><span class="co">#&gt; Sepal.Length  Sepal.Width Petal.Length  Petal.Width </span></span>
-<span id="cb4-30"><a href="#cb4-30"></a><span class="co">#&gt;         5.84         3.06         3.76         1.20 </span></span>
-<span id="cb4-31"><a href="#cb4-31"></a><span class="co">#&gt; ------------------------------------------------------------ </span></span>
-<span id="cb4-32"><a href="#cb4-32"></a><span class="co">#&gt; anticlusters: 2</span></span>
-<span id="cb4-33"><a href="#cb4-33"></a><span class="co">#&gt; Sepal.Length  Sepal.Width Petal.Length  Petal.Width </span></span>
-<span id="cb4-34"><a href="#cb4-34"></a><span class="co">#&gt;         5.84         3.06         3.76         1.20 </span></span>
-<span id="cb4-35"><a href="#cb4-35"></a><span class="co">#&gt; ------------------------------------------------------------ </span></span>
-<span id="cb4-36"><a href="#cb4-36"></a><span class="co">#&gt; anticlusters: 3</span></span>
-<span id="cb4-37"><a href="#cb4-37"></a><span class="co">#&gt; Sepal.Length  Sepal.Width Petal.Length  Petal.Width </span></span>
-<span id="cb4-38"><a href="#cb4-38"></a><span class="co">#&gt;         5.84         3.06         3.76         1.20</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the package via</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"anticlust"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>anticlusters <span class="ot">&lt;-</span> <span class="fu">anticlustering</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  iris[, <span class="sc">-</span><span class="dv">5</span>],</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">K =</span> <span class="dv">3</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">objective =</span> <span class="st">"variance"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"exchange"</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># The output is a vector that assigns a group (i.e, a number</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># between 1 and K) to each input element:</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>anticlusters</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   [1] 1 3 1 1 3 2 2 3 3 3 1 2 3 1 1 2 1 2 2 1 3 2 3 2 3 3 1 3 1 2 1 2 3 2 2 1 3</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [38] 3 3 3 2 3 1 2 2 2 1 1 1 1 3 1 2 1 1 3 2 2 1 1 1 2 1 3 2 3 1 2 2 2 3 2 3 3</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [75] 1 1 2 2 1 3 1 2 3 1 1 1 3 2 3 2 3 3 2 1 3 2 2 3 2 3 3 3 3 2 2 1 2 1 1 1 1</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [112] 3 3 1 3 1 2 1 2 1 1 3 2 2 2 3 1 2 1 3 1 3 3 2 2 2 2 1 3 3 1 3 1 1 3 3 3 2</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [149] 2 2</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Each group has the same number of items:</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(anticlusters)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; anticlusters</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1  2  3 </span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50 50 50</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the feature means by anticluster:</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="fu">by</span>(iris[, <span class="sc">-</span><span class="dv">5</span>], anticlusters, <span class="cf">function</span>(x) <span class="fu">round</span>(<span class="fu">colMeans</span>(x), <span class="dv">2</span>))</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; anticlusters: 1</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Sepal.Length  Sepal.Width Petal.Length  Petal.Width </span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         5.84         3.06         3.76         1.20 </span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ------------------------------------------------------------ </span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; anticlusters: 2</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Sepal.Length  Sepal.Width Petal.Length  Petal.Width </span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         5.84         3.06         3.76         1.20 </span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ------------------------------------------------------------ </span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; anticlusters: 3</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Sepal.Length  Sepal.Width Petal.Length  Petal.Width </span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         5.85         3.06         3.76         1.20</span></span></code></pre></div>
 <p>As illustrated in the example, we can use the function <code><a href="reference/anticlustering.html">anticlustering()</a></code> to create similar sets of elements. In this case “similar” primarily means that the mean values of the variables are pretty much the same across three groups. The function <code><a href="reference/anticlustering.html">anticlustering()</a></code> takes as input a data table describing the elements that should be assigned to sets. In the data table, each row represents an element, for example a person, word or a photo. Each column is a numeric variable describing one of the elements’ features. The table may be an R <code>matrix</code> or <code>data.frame</code>; a single feature can also be passed as a <code>vector</code>. The number of groups is specified through the argument <code>K</code>. (Alternatively, it is also possible to pass a dissimilarity matrix describing the pairwise distance between elements.)</p>
-<p>To quantify set similarity, <code>anticlust</code> may employ one of two measures that have been developed in the context of cluster analysis:</p>
+<p>To quantify cluster similarity, <code>anticlust</code> employs one of several measures that have been developed in the context of cluster analysis:</p>
 <ul>
-<li>the k-means “variance” objective</li>
-<li>the cluster editing “diversity” objective</li>
+<li>the cluster editing “diversity” objective, setting <code>objective = "diversity"</code> (default)</li>
+<li>the k-means “variance” objective, setting <code>objective = "variance"</code>
+</li>
+<li>the “k-plus” objective, an extension of the k-means variance criterion, setting <code>objective = "kplus"</code>
+</li>
+<li>the “dispersion” objective (the minimum distance between any two elements within the same cluster), setting <code>objective = "dispersion"</code>
+</li>
 </ul>
-<p>The k-means objective is given by the sum of the squared distances between cluster centers and individual data points. The cluster editing objective is the sum of pairwise distances within each anticluster. The following plot illustrates both objectives for 12 elements that have been assigned to three sets. Each element is described by two numeric features, displayed as the <em>x</em> and <em>y</em> axis:</p>
-<p><img src="reference/figures/objectives-1.png" style="display: block; margin: auto;"></p>
-<p>The lines connecting the dots illustrate the values that enter the objective functions. For (anti)cluster editing (“diversity objective”, plots on the right side), lines are drawn between pairs of elements within the same cluster, because the objective is the sum of the pairwise distances between elements that are part of the same cluster. For k-means (anticlustering) (“variance objective”, plots on the left side ), lines are drawn connecting eech element and the centroid of the cluster to which the element is assigned, because the objective is the sum of the squared distances between cluster centers and elements.</p>
-<p>Minimizing either the diversity or the variance objective creates three distinct clusters of elements (as shown in the lower plots), whereas maximization leads to a strong overlap of the three sets, i.e., three anticlusters (as shown in the upper plots).</p>
-<p>To vary the objective function in the <code>anticlust</code> package, we can change the parameter <code>objective</code>. To use anticluster editing, use <code>objective = "diversity"</code> (this is also the default). To maximize the k-means variance objective, set <code>objective = "variance"</code>.</p>
+<p>The anticlustering objectives are described in detail in the documentation (<code><a href="reference/diversity_objective.html">?diversity_objective</a></code>, <code><a href="reference/variance_objective.html">?variance_objective</a></code>, <code><a href="reference/kplus_objective.html">?kplus_objective</a></code>, <code><a href="reference/dispersion_objective.html">?dispersion_objective</a></code>) and the references therein. It is also possible to optimize user-defined measures of cluster similarity, which is also described in the documentation (<code><a href="reference/anticlustering.html">?anticlustering</a></code>).</p>
 </div>
 <div id="categorical-constraints" class="section level2">
 <h2 class="hasAnchor">
 <a href="#categorical-constraints" class="anchor"></a>Categorical constraints</h2>
 <p>Sometimes, it is required that sets are not only similar with regard to some numeric variables, but we also want to ensure that each set contains an equal number of elements of a certain category. Coming back to the initial iris data set, we may want to require that each set has a balanced number of plants of the three iris species. To this end, we can use the argument <code>categories</code> as follows:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>anticlusters &lt;-<span class="st"> </span><span class="kw">anticlustering</span>(</span>
-<span id="cb5-2"><a href="#cb5-2"></a>  iris[, <span class="dv">-5</span>],</span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="dt">K =</span> <span class="dv">3</span>,</span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="dt">objective =</span> <span class="st">"variance"</span>,</span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="dt">method =</span> <span class="st">"exchange"</span>,</span>
-<span id="cb5-6"><a href="#cb5-6"></a>  <span class="dt">categories =</span> iris[, <span class="dv">5</span>]</span>
-<span id="cb5-7"><a href="#cb5-7"></a>)</span>
-<span id="cb5-8"><a href="#cb5-8"></a></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">## The species are as balanced as possible across anticlusters:</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="kw">table</span>(anticlusters, iris[, <span class="dv">5</span>])</span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt;             </span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt; anticlusters setosa versicolor virginica</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt;            1     17         17        16</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt;            2     17         16        17</span></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="co">#&gt;            3     16         17        17</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>anticlusters <span class="ot">&lt;-</span> <span class="fu">anticlustering</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  iris[, <span class="sc">-</span><span class="dv">5</span>],</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">K =</span> <span class="dv">3</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">categories =</span> iris<span class="sc">$</span>Species</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">## The species are as balanced as possible across anticlusters:</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(anticlusters, iris<span class="sc">$</span>Species)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             </span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; anticlusters setosa versicolor virginica</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            1     17         17        16</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            2     17         16        17</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            3     16         17        17</span></span></code></pre></div>
 </div>
 <div id="matching-and-clustering" class="section level2">
 <h2 class="hasAnchor">
 <a href="#matching-and-clustering" class="anchor"></a>Matching and clustering</h2>
 <p>Anticlustering in a sense creates sets of dissimilar elements; the heterogenity within anticlusters is maximized (either using the cluster editing or k-means objective as measure of heterogenity). The <code>anticlust</code> package also provides functions for “classical” clustering applications: <code><a href="reference/balanced_clustering.html">balanced_clustering()</a></code> creates sets of elements that are similar while ensuring that clusters are of equal size. This is an example:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Generate random data, cluster the data set and visualize results</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>N &lt;-<span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>lds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">var1 =</span> <span class="kw">rnorm</span>(N), <span class="dt">var2 =</span> <span class="kw">rnorm</span>(N))</span>
-<span id="cb6-4"><a href="#cb6-4"></a>cl &lt;-<span class="st"> </span><span class="kw">balanced_clustering</span>(lds, <span class="dt">K =</span> <span class="dv">10</span>)</span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="kw">plot_clusters</span>(lds, <span class="dt">clusters =</span> cl, <span class="dt">show_axes =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate random data, cluster the data set and visualize results</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">1400</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>lds <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">var1 =</span> <span class="fu">rnorm</span>(N), <span class="at">var2 =</span> <span class="fu">rnorm</span>(N))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">balanced_clustering</span>(lds, <span class="at">K =</span> <span class="dv">7</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_clusters</span>(lds, <span class="at">clusters =</span> cl, <span class="at">show_axes =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="reference/figures/clustering-1.png" style="display: block; margin: auto;"></p>
 <p>The function <code><a href="reference/matching.html">matching()</a></code> is very similar, but is usually used to find small groups of similar elements, e.g., triplets as in this example:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Generate random data and find triplets of similar elements:</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>N &lt;-<span class="st"> </span><span class="dv">120</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>lds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">var1 =</span> <span class="kw">rnorm</span>(N), <span class="dt">var2 =</span> <span class="kw">rnorm</span>(N))</span>
-<span id="cb7-4"><a href="#cb7-4"></a>triplets &lt;-<span class="st"> </span><span class="kw">matching</span>(lds, <span class="dt">p =</span> <span class="dv">3</span>)</span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">plot_clusters</span>(</span>
-<span id="cb7-6"><a href="#cb7-6"></a>  lds,</span>
-<span id="cb7-7"><a href="#cb7-7"></a>  <span class="dt">clusters =</span> triplets,</span>
-<span id="cb7-8"><a href="#cb7-8"></a>  <span class="dt">within_connection =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb7-9"><a href="#cb7-9"></a>  <span class="dt">show_axes =</span> <span class="ot">TRUE</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate random data and find triplets of similar elements:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">120</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>lds <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">var1 =</span> <span class="fu">rnorm</span>(N), <span class="at">var2 =</span> <span class="fu">rnorm</span>(N))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>triplets <span class="ot">&lt;-</span> <span class="fu">matching</span>(lds, <span class="at">p =</span> <span class="dv">3</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_clusters</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  lds,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">clusters =</span> triplets,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">within_connection =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_axes =</span> <span class="cn">TRUE</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="reference/figures/matching-1.png" style="display: block; margin: auto;"></p>
 </div>
 <div id="questions-and-suggestions" class="section level2">

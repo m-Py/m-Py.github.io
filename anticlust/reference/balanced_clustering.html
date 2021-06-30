@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -106,7 +106,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/m-Py/anticlust/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -132,7 +132,7 @@
     <p>Create balanced clusters of equal size</p>
     </div>
 
-    <pre class="usage"><span class='fu'>balanced_clustering</span>(<span class='kw'>x</span>, <span class='kw'>K</span>, method = <span class='st'>"centroid"</span>)</pre>
+    <pre class="usage"><span class='fu'>balanced_clustering</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>K</span>, method <span class='op'>=</span> <span class='st'>"centroid"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -205,8 +205,8 @@ https://www.gnu.org/software/glpk/glpk.html) and the R package
     <p>Grötschel, M., &amp; Wakabayashi, Y. (1989). A cutting plane algorithm
 for a clustering problem. Mathematical Programming, 45, 59–96.</p>
 <p>Papenberg, M., &amp; Klau, G. W. (2020). Using anticlustering to partition 
-data sets into equivalent parts. Psychological Methods. Advance Online 
-Publication. https://doi.org/10.1037/met0000301.</p>
+data sets into equivalent parts. Psychological Methods, 26(2), 
+161–174. https://doi.org/10.1037/met0000301.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Martin Papenberg <a href='mailto:martin.papenberg@hhu.de'>martin.papenberg@hhu.de</a></p>
@@ -215,14 +215,14 @@ Publication. https://doi.org/10.1037/met0000301.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># Cluster a data set and visualize results</span>
-<span class='kw'>N</span> <span class='op'>&lt;-</span> <span class='fl'>1000</span>
-<span class='kw'>lds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(f1 = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>N</span>), f2 = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>N</span>))
-<span class='kw'>cl</span> <span class='op'>&lt;-</span> <span class='fu'>balanced_clustering</span>(<span class='kw'>lds</span>, K = <span class='fl'>10</span>)
-<span class='fu'><a href='plot_clusters.html'>plot_clusters</a></span>(<span class='kw'>lds</span>, clusters = <span class='kw'>cl</span>)
+<span class='va'>N</span> <span class='op'>&lt;-</span> <span class='fl'>1000</span>
+<span class='va'>lds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>f1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='va'>N</span><span class='op'>)</span>, f2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='va'>N</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>cl</span> <span class='op'>&lt;-</span> <span class='fu'>balanced_clustering</span><span class='op'>(</span><span class='va'>lds</span>, K <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+<span class='fu'><a href='plot_clusters.html'>plot_clusters</a></span><span class='op'>(</span><span class='va'>lds</span>, clusters <span class='op'>=</span> <span class='va'>cl</span><span class='op'>)</span>
 </div><div class='img'><img src='balanced_clustering-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Repeat using a distance matrix as input</span>
-<span class='kw'>cl2</span> <span class='op'>&lt;-</span> <span class='fu'>balanced_clustering</span>(<span class='fu'><a href='https://rdrr.io/r/stats/dist.html'>dist</a></span>(<span class='kw'>lds</span>), K = <span class='fl'>10</span>)
-<span class='fu'><a href='plot_clusters.html'>plot_clusters</a></span>(<span class='kw'>lds</span>, clusters = <span class='kw'>cl2</span>)
+<span class='va'>cl2</span> <span class='op'>&lt;-</span> <span class='fu'>balanced_clustering</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/dist.html'>dist</a></span><span class='op'>(</span><span class='va'>lds</span><span class='op'>)</span>, K <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+<span class='fu'><a href='plot_clusters.html'>plot_clusters</a></span><span class='op'>(</span><span class='va'>lds</span>, clusters <span class='op'>=</span> <span class='va'>cl2</span><span class='op'>)</span>
 </div><div class='img'><img src='balanced_clustering-2.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
