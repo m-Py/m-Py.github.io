@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7 Schleifen | Testtheorie mit R</title>
   <meta name="description" content="7 Schleifen | Testtheorie mit R" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7 Schleifen | Testtheorie mit R" />
   <meta property="og:type" content="book" />
@@ -32,8 +32,8 @@
   
 <link rel="prev" href="funktionen.html"/>
 <link rel="next" href="anhang.html"/>
-<script src="libs/header-attrs-2.8/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,33 +49,30 @@
 
 
 
-
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -84,9 +81,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -119,28 +116,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -155,46 +130,38 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="einstieg.html"><a href="einstieg.html"><i class="fa fa-check"></i><b>1</b> Einstieg</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="einstieg.html"><a href="einstieg.html#über-dieses-skript"><i class="fa fa-check"></i><b>1.1</b> Über dieses Skript</a>
-<ul>
+<li class="chapter" data-level="1" data-path="einstieg.html"><a href="einstieg.html"><i class="fa fa-check"></i><b>1</b> Einstieg</a><ul>
+<li class="chapter" data-level="1.1" data-path="einstieg.html"><a href="einstieg.html#über-dieses-skript"><i class="fa fa-check"></i><b>1.1</b> Über dieses Skript</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="einstieg.html"><a href="einstieg.html#feedback-und-fehlermeldungen"><i class="fa fa-check"></i><b>1.1.1</b> Feedback und Fehlermeldungen</a></li>
 <li class="chapter" data-level="1.1.2" data-path="einstieg.html"><a href="einstieg.html#danksagung"><i class="fa fa-check"></i><b>1.1.2</b> Danksagung</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="einstieg.html"><a href="einstieg.html#erste-schritte-mit-r"><i class="fa fa-check"></i><b>1.2</b> Erste Schritte mit <code>R</code></a>
-<ul>
+<li class="chapter" data-level="1.2" data-path="einstieg.html"><a href="einstieg.html#erste-schritte-mit-r"><i class="fa fa-check"></i><b>1.2</b> Erste Schritte mit <code>R</code></a><ul>
 <li class="chapter" data-level="1.2.1" data-path="einstieg.html"><a href="einstieg.html#die-r-konsole"><i class="fa fa-check"></i><b>1.2.1</b> Die <code>R</code>-Konsole</a></li>
 <li class="chapter" data-level="1.2.2" data-path="einstieg.html"><a href="einstieg.html#der-skript-editor"><i class="fa fa-check"></i><b>1.2.2</b> Der Skript-Editor</a></li>
 <li class="chapter" data-level="1.2.3" data-path="einstieg.html"><a href="einstieg.html#kommentare"><i class="fa fa-check"></i><b>1.2.3</b> Kommentare</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="einstieg.html"><a href="einstieg.html#ausblick"><i class="fa fa-check"></i><b>1.3</b> Ausblick</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="vektoren.html"><a href="vektoren.html"><i class="fa fa-check"></i><b>2</b> Vektoren</a>
-<ul>
+<li class="chapter" data-level="2" data-path="vektoren.html"><a href="vektoren.html"><i class="fa fa-check"></i><b>2</b> Vektoren</a><ul>
 <li class="chapter" data-level="2.1" data-path="vektoren.html"><a href="vektoren.html#vektorisierung"><i class="fa fa-check"></i><b>2.1</b> Vektorisierung</a></li>
-<li class="chapter" data-level="2.2" data-path="vektoren.html"><a href="vektoren.html#variablen"><i class="fa fa-check"></i><b>2.2</b> Variablen</a>
-<ul>
+<li class="chapter" data-level="2.2" data-path="vektoren.html"><a href="vektoren.html#variablen"><i class="fa fa-check"></i><b>2.2</b> Variablen</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="vektoren.html"><a href="vektoren.html#ausgabevsabspeichern"><i class="fa fa-check"></i><b>2.2.1</b> Ausgabe versus Abspeichern</a></li>
 <li class="chapter" data-level="2.2.2" data-path="vektoren.html"><a href="vektoren.html#variablennamen"><i class="fa fa-check"></i><b>2.2.2</b> Variablennamen</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="vektoren.html"><a href="vektoren.html#datentypen-von-vektoren"><i class="fa fa-check"></i><b>2.3</b> Datentypen von Vektoren</a>
-<ul>
+<li class="chapter" data-level="2.3" data-path="vektoren.html"><a href="vektoren.html#datentypen-von-vektoren"><i class="fa fa-check"></i><b>2.3</b> Datentypen von Vektoren</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="vektoren.html"><a href="vektoren.html#character"><i class="fa fa-check"></i><b>2.3.1</b> <code>character</code></a></li>
 <li class="chapter" data-level="2.3.2" data-path="vektoren.html"><a href="vektoren.html#logical"><i class="fa fa-check"></i><b>2.3.2</b> <code>logical</code></a></li>
 <li class="chapter" data-level="2.3.3" data-path="vektoren.html"><a href="vektoren.html#factor"><i class="fa fa-check"></i><b>2.3.3</b> <code>factor</code></a></li>
 <li class="chapter" data-level="2.3.4" data-path="vektoren.html"><a href="vektoren.html#na"><i class="fa fa-check"></i><b>2.3.4</b> <code>NA</code></a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="vektoren.html"><a href="vektoren.html#logischevergleiche"><i class="fa fa-check"></i><b>2.4</b> Logische Vergleiche</a>
-<ul>
+<li class="chapter" data-level="2.4" data-path="vektoren.html"><a href="vektoren.html#logischevergleiche"><i class="fa fa-check"></i><b>2.4</b> Logische Vergleiche</a><ul>
 <li class="chapter" data-level="2.4.1" data-path="vektoren.html"><a href="vektoren.html#logische-vergleiche-mit-vektoren-vom-typ-character"><i class="fa fa-check"></i><b>2.4.1</b> Logische Vergleiche mit Vektoren vom Typ <code>character</code></a></li>
 <li class="chapter" data-level="2.4.2" data-path="vektoren.html"><a href="vektoren.html#komponentenweise-vergleiche"><i class="fa fa-check"></i><b>2.4.2</b> Komponentenweise Vergleiche</a></li>
 <li class="chapter" data-level="2.4.3" data-path="vektoren.html"><a href="vektoren.html#anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen"><i class="fa fa-check"></i><b>2.4.3</b> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</a></li>
 <li class="chapter" data-level="2.4.4" data-path="vektoren.html"><a href="vektoren.html#nalogik"><i class="fa fa-check"></i><b>2.4.4</b> Logische Operationen mit <code>NA</code></a></li>
 <li class="chapter" data-level="2.4.5" data-path="vektoren.html"><a href="vektoren.html#der-in-operator"><i class="fa fa-check"></i><b>2.4.5</b> Der <code>%in%</code>-Operator</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.5</b> Zugriff auf Vektorelemente</a>
-<ul>
+<li class="chapter" data-level="2.5" data-path="vektoren.html"><a href="vektoren.html#zugriff-auf-vektorelemente"><i class="fa fa-check"></i><b>2.5</b> Zugriff auf Vektorelemente</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="vektoren.html"><a href="vektoren.html#veczugriff"><i class="fa fa-check"></i><b>2.5.1</b> Der <code>[·]</code>-Zugriff</a></li>
 <li class="chapter" data-level="2.5.2" data-path="vektoren.html"><a href="vektoren.html#logischerZugriff"><i class="fa fa-check"></i><b>2.5.2</b> <code>[·]</code>-Zugriff mit einem logischen Vektor</a></li>
 <li class="chapter" data-level="2.5.3" data-path="vektoren.html"><a href="vektoren.html#vektorAendern"><i class="fa fa-check"></i><b>2.5.3</b> <code>[·]</code>-Zugriff zum Ändern von Daten</a></li>
@@ -203,33 +170,28 @@ div.csl-indent {
 <li class="chapter" data-level="2.7" data-path="vektoren.html"><a href="vektoren.html#zusammenfassung"><i class="fa fa-check"></i><b>2.7</b> Zusammenfassung</a></li>
 <li class="chapter" data-level="2.8" data-path="vektoren.html"><a href="vektoren.html#fragen-zum-vertiefenden-verständnis"><i class="fa fa-check"></i><b>2.8</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="dataframes.html"><a href="dataframes.html"><i class="fa fa-check"></i><b>3</b> <code>data.frames</code></a>
-<ul>
+<li class="chapter" data-level="3" data-path="dataframes.html"><a href="dataframes.html"><i class="fa fa-check"></i><b>3</b> <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.1" data-path="dataframes.html"><a href="dataframes.html#die-funktion-data.frame"><i class="fa fa-check"></i><b>3.1</b> Die Funktion <code>data.frame()</code></a></li>
 <li class="chapter" data-level="3.2" data-path="dataframes.html"><a href="dataframes.html#zugriff-auf-eine-einzelne-spalte-die--notation"><i class="fa fa-check"></i><b>3.2</b> Zugriff auf eine einzelne Spalte: die <code>$</code>-Notation</a></li>
-<li class="chapter" data-level="3.3" data-path="dataframes.html"><a href="dataframes.html#datenzugriffe"><i class="fa fa-check"></i><b>3.3</b> Zugriff auf Spalten und Zeilen: die <code>[·,·]</code>-Notation</a>
-<ul>
+<li class="chapter" data-level="3.3" data-path="dataframes.html"><a href="dataframes.html#datenzugriffe"><i class="fa fa-check"></i><b>3.3</b> Zugriff auf Spalten und Zeilen: die <code>[·,·]</code>-Notation</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="dataframes.html"><a href="dataframes.html#spaltenauswahl-von-items-mit-der-funktion-paste0"><i class="fa fa-check"></i><b>3.3.1</b> Spaltenauswahl von Items mit der Funktion <code>paste0()</code></a></li>
 <li class="chapter" data-level="3.3.2" data-path="dataframes.html"><a href="dataframes.html#spaltenauswahl-von-items-mit-der-funktion-grepl"><i class="fa fa-check"></i><b>3.3.2</b> Spaltenauswahl von Items mit der Funktion <code>grepl()</code></a></li>
 <li class="chapter" data-level="3.3.3" data-path="dataframes.html"><a href="dataframes.html#komplexere-logische-operationen-zur-zeilenauswahl"><i class="fa fa-check"></i><b>3.3.3</b> Komplexere logische Operationen zur Zeilenauswahl</a></li>
 <li class="chapter" data-level="3.3.4" data-path="dataframes.html"><a href="dataframes.html#weitere-beispiele-zur-verwendung-der--notation"><i class="fa fa-check"></i><b>3.3.4</b> Weitere Beispiele zur Verwendung der <code>[·,·]</code>-Notation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="dataframes.html"><a href="dataframes.html#subset"><i class="fa fa-check"></i><b>3.4</b> Die Funktion <code>subset()</code></a>
-<ul>
+<li class="chapter" data-level="3.4" data-path="dataframes.html"><a href="dataframes.html#subset"><i class="fa fa-check"></i><b>3.4</b> Die Funktion <code>subset()</code></a><ul>
 <li class="chapter" data-level="3.4.1" data-path="dataframes.html"><a href="dataframes.html#zeileneinfach"><i class="fa fa-check"></i><b>3.4.1</b> Vereinfachte Zeilenauswahl</a></li>
 <li class="chapter" data-level="3.4.2" data-path="dataframes.html"><a href="dataframes.html#teaserfunktionen"><i class="fa fa-check"></i><b>3.4.2</b> Funktionsargumente</a></li>
 <li class="chapter" data-level="3.4.3" data-path="dataframes.html"><a href="dataframes.html#spalteneinfach"><i class="fa fa-check"></i><b>3.4.3</b> Sonderregeln zur Auswahl von Spalten</a></li>
 <li class="chapter" data-level="3.4.4" data-path="dataframes.html"><a href="dataframes.html#non-standard-evaluation"><i class="fa fa-check"></i><b>3.4.4</b> Non-Standard-Evaluation</a></li>
 <li class="chapter" data-level="3.4.5" data-path="dataframes.html"><a href="dataframes.html#subsettoll"><i class="fa fa-check"></i><b>3.4.5</b> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="dataframes.html"><a href="dataframes.html#doppelteckig"><i class="fa fa-check"></i><b>3.5</b> Weitere Zugriffe auf <code>data.frames</code></a>
-<ul>
+<li class="chapter" data-level="3.5" data-path="dataframes.html"><a href="dataframes.html#doppelteckig"><i class="fa fa-check"></i><b>3.5</b> Weitere Zugriffe auf <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.5.1" data-path="dataframes.html"><a href="dataframes.html#der--zugriff"><i class="fa fa-check"></i><b>3.5.1</b> Der <code>[[·]]</code>-Zugriff</a></li>
 <li class="chapter" data-level="3.5.2" data-path="dataframes.html"><a href="dataframes.html#der--zugriff-1"><i class="fa fa-check"></i><b>3.5.2</b> Der <code>[·]</code>-Zugriff</a></li>
 <li class="chapter" data-level="3.5.3" data-path="dataframes.html"><a href="dataframes.html#nameindex"><i class="fa fa-check"></i><b>3.5.3</b> Zugriff nach Name und Index</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="dataframes.html"><a href="dataframes.html#convenient"><i class="fa fa-check"></i><b>3.6</b> Nützliche Funktionen zum Arbeiten mit <code>data.frames</code></a>
-<ul>
+<li class="chapter" data-level="3.6" data-path="dataframes.html"><a href="dataframes.html#convenient"><i class="fa fa-check"></i><b>3.6</b> Nützliche Funktionen zum Arbeiten mit <code>data.frames</code></a><ul>
 <li class="chapter" data-level="3.6.1" data-path="dataframes.html"><a href="dataframes.html#tapply"><i class="fa fa-check"></i><b>3.6.1</b> Gruppierte Statistiken: <code>tapply()</code></a></li>
 <li class="chapter" data-level="3.6.2" data-path="dataframes.html"><a href="dataframes.html#datenstruktur-nrow-und-ncol"><i class="fa fa-check"></i><b>3.6.2</b> Datenstruktur: <code>nrow()</code> und <code>ncol()</code></a></li>
 <li class="chapter" data-level="3.6.3" data-path="dataframes.html"><a href="dataframes.html#wie-sieht-die-tabelle-aus-head-und-tail"><i class="fa fa-check"></i><b>3.6.3</b> Wie sieht die Tabelle aus: <code>head()</code> und <code>tail()</code></a></li>
@@ -239,12 +201,10 @@ div.csl-indent {
 <li class="chapter" data-level="3.7" data-path="dataframes.html"><a href="dataframes.html#zusammenfassung-1"><i class="fa fa-check"></i><b>3.7</b> Zusammenfassung</a></li>
 <li class="chapter" data-level="3.8" data-path="dataframes.html"><a href="dataframes.html#fragen-zum-vertiefenden-verständnis-1"><i class="fa fa-check"></i><b>3.8</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="psychometrie.html"><a href="psychometrie.html"><i class="fa fa-check"></i><b>4</b> Erste psychometrische Auswertungen</a>
-<ul>
+<li class="chapter" data-level="4" data-path="psychometrie.html"><a href="psychometrie.html"><i class="fa fa-check"></i><b>4</b> Erste psychometrische Auswertungen</a><ul>
 <li class="chapter" data-level="4.1" data-path="psychometrie.html"><a href="psychometrie.html#summenwerte"><i class="fa fa-check"></i><b>4.1</b> Summenwerte</a></li>
 <li class="chapter" data-level="4.2" data-path="psychometrie.html"><a href="psychometrie.html#item-schwierigkeiten"><i class="fa fa-check"></i><b>4.2</b> Item-Schwierigkeiten</a></li>
-<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a>
-<ul>
+<li class="chapter" data-level="4.3" data-path="psychometrie.html"><a href="psychometrie.html#item-interkorrelationen"><i class="fa fa-check"></i><b>4.3</b> Item-Interkorrelationen</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="psychometrie.html"><a href="psychometrie.html#exkurs-programmatische-untersuchung-der-korrelationsmatrix"><i class="fa fa-check"></i><b>4.3.1</b> Exkurs: Programmatische Untersuchung der Korrelationsmatrix</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="psychometrie.html"><a href="psychometrie.html#trennschaerfe"><i class="fa fa-check"></i><b>4.4</b> Item-Trennschärfen</a></li>
@@ -252,35 +212,28 @@ div.csl-indent {
 <li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilität"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
 <li class="chapter" data-level="4.7" data-path="psychometrie.html"><a href="psychometrie.html#in-der-praxis-nutzung-von-zusatzpaketen"><i class="fa fa-check"></i><b>4.7</b> In der Praxis: Nutzung von Zusatzpaketen</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="rohdaten.html"><a href="rohdaten.html"><i class="fa fa-check"></i><b>5</b> Aufarbeitung von Fragebogendaten</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="rohdaten.html"><a href="rohdaten.html#umkodierung"><i class="fa fa-check"></i><b>5.1</b> Umkodierung von Antworten</a>
-<ul>
+<li class="chapter" data-level="5" data-path="rohdaten.html"><a href="rohdaten.html"><i class="fa fa-check"></i><b>5</b> Aufarbeitung von Fragebogendaten</a><ul>
+<li class="chapter" data-level="5.1" data-path="rohdaten.html"><a href="rohdaten.html#umkodierung"><i class="fa fa-check"></i><b>5.1</b> Umkodierung von Antworten</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="rohdaten.html"><a href="rohdaten.html#die-funktion-ifelse"><i class="fa fa-check"></i><b>5.1.1</b> Die Funktion <code>ifelse()</code></a></li>
 <li class="chapter" data-level="5.1.2" data-path="rohdaten.html"><a href="rohdaten.html#ifelsevektor"><i class="fa fa-check"></i><b>5.1.2</b> Vektorisierung der Funktion <code>ifelse()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="rohdaten.html"><a href="rohdaten.html#invertierung-von-antworten"><i class="fa fa-check"></i><b>5.2</b> Invertierung von Antworten</a>
-<ul>
+<li class="chapter" data-level="5.2" data-path="rohdaten.html"><a href="rohdaten.html#invertierung-von-antworten"><i class="fa fa-check"></i><b>5.2</b> Invertierung von Antworten</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="rohdaten.html"><a href="rohdaten.html#invertierung-mit-ifelse"><i class="fa fa-check"></i><b>5.2.1</b> Invertierung mit <code>ifelse()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="rohdaten.html"><a href="rohdaten.html#missingvalues"><i class="fa fa-check"></i><b>5.3</b> Umgang mit fehlenden Werten</a>
-<ul>
+<li class="chapter" data-level="5.3" data-path="rohdaten.html"><a href="rohdaten.html#missingvalues"><i class="fa fa-check"></i><b>5.3</b> Umgang mit fehlenden Werten</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="rohdaten.html"><a href="rohdaten.html#identifikation-von-fehlenden-werten"><i class="fa fa-check"></i><b>5.3.1</b> Identifikation von fehlenden Werten</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="rohdaten.html"><a href="rohdaten.html#fragen-zum-vertiefenden-verständnis-2"><i class="fa fa-check"></i><b>5.4</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="funktionen.html"><a href="funktionen.html"><i class="fa fa-check"></i><b>6</b> Funktionen</a>
-<ul>
+<li class="chapter" data-level="6" data-path="funktionen.html"><a href="funktionen.html"><i class="fa fa-check"></i><b>6</b> Funktionen</a><ul>
 <li class="chapter" data-level="6.1" data-path="funktionen.html"><a href="funktionen.html#das-black-box-modell"><i class="fa fa-check"></i><b>6.1</b> Das Black-Box-Modell</a></li>
-<li class="chapter" data-level="6.2" data-path="funktionen.html"><a href="funktionen.html#argumente"><i class="fa fa-check"></i><b>6.2</b> Argumente</a>
-<ul>
+<li class="chapter" data-level="6.2" data-path="funktionen.html"><a href="funktionen.html#argumente"><i class="fa fa-check"></i><b>6.2</b> Argumente</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="funktionen.html"><a href="funktionen.html#help"><i class="fa fa-check"></i><b>6.2.1</b> Die <code>R</code>-Hilfe</a></li>
 <li class="chapter" data-level="6.2.2" data-path="funktionen.html"><a href="funktionen.html#namenlose-argumente"><i class="fa fa-check"></i><b>6.2.2</b> Namenlose Argumente</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="funktionen.html"><a href="funktionen.html#rückgabewerte"><i class="fa fa-check"></i><b>6.3</b> Rückgabewerte</a></li>
 <li class="chapter" data-level="6.4" data-path="funktionen.html"><a href="funktionen.html#seiteneffekte"><i class="fa fa-check"></i><b>6.4</b> Seiteneffekte</a></li>
-<li class="chapter" data-level="6.5" data-path="funktionen.html"><a href="funktionen.html#selbst-geschriebene-funktionen"><i class="fa fa-check"></i><b>6.5</b> Selbst geschriebene Funktionen</a>
-<ul>
+<li class="chapter" data-level="6.5" data-path="funktionen.html"><a href="funktionen.html#selbst-geschriebene-funktionen"><i class="fa fa-check"></i><b>6.5</b> Selbst geschriebene Funktionen</a><ul>
 <li class="chapter" data-level="6.5.1" data-path="funktionen.html"><a href="funktionen.html#definition-der-eigenen-funktion"><i class="fa fa-check"></i><b>6.5.1</b> Definition der eigenen Funktion</a></li>
 <li class="chapter" data-level="6.5.2" data-path="funktionen.html"><a href="funktionen.html#lokale-variablen"><i class="fa fa-check"></i><b>6.5.2</b> Lokale Variablen</a></li>
 <li class="chapter" data-level="6.5.3" data-path="funktionen.html"><a href="funktionen.html#optionale-argumente"><i class="fa fa-check"></i><b>6.5.3</b> Optionale Argumente</a></li>
@@ -288,21 +241,17 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6.6" data-path="funktionen.html"><a href="funktionen.html#fragen-zum-vertiefenden-verständnis-3"><i class="fa fa-check"></i><b>6.6</b> Fragen zum vertiefenden Verständnis</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="schleifen.html"><a href="schleifen.html"><i class="fa fa-check"></i><b>7</b> Schleifen</a>
-<ul>
+<li class="chapter" data-level="7" data-path="schleifen.html"><a href="schleifen.html"><i class="fa fa-check"></i><b>7</b> Schleifen</a><ul>
 <li class="chapter" data-level="7.1" data-path="schleifen.html"><a href="schleifen.html#sequentielle-bepunktung-von-testitems"><i class="fa fa-check"></i><b>7.1</b> Sequentielle Bepunktung von Testitems</a></li>
 <li class="chapter" data-level="7.2" data-path="schleifen.html"><a href="schleifen.html#berechnung-von-part-whole-korrigierten-trennschärfen"><i class="fa fa-check"></i><b>7.2</b> Berechnung von part-whole korrigierten Trennschärfen</a></li>
-<li class="chapter" data-level="7.3" data-path="schleifen.html"><a href="schleifen.html#datenspeicherung-in-einer-schleife"><i class="fa fa-check"></i><b>7.3</b> Datenspeicherung in einer Schleife</a>
-<ul>
+<li class="chapter" data-level="7.3" data-path="schleifen.html"><a href="schleifen.html#datenspeicherung-in-einer-schleife"><i class="fa fa-check"></i><b>7.3</b> Datenspeicherung in einer Schleife</a><ul>
 <li class="chapter" data-level="7.3.1" data-path="schleifen.html"><a href="schleifen.html#adressierung-per-name"><i class="fa fa-check"></i><b>7.3.1</b> Adressierung per Name</a></li>
 <li class="chapter" data-level="7.3.2" data-path="schleifen.html"><a href="schleifen.html#indexadressierung"><i class="fa fa-check"></i><b>7.3.2</b> Vektorspeicherung – Adressierung per Index</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="anhang.html"><a href="anhang.html"><i class="fa fa-check"></i><b>8</b> Anhang</a>
-<ul>
+<li class="chapter" data-level="8" data-path="anhang.html"><a href="anhang.html"><i class="fa fa-check"></i><b>8</b> Anhang</a><ul>
 <li class="chapter" data-level="8.1" data-path="anhang.html"><a href="anhang.html#datenEinlesen"><i class="fa fa-check"></i><b>8.1</b> Daten einlesen</a></li>
-<li class="chapter" data-level="8.2" data-path="anhang.html"><a href="anhang.html#das-environment-sauber-halten"><i class="fa fa-check"></i><b>8.2</b> Das Environment sauber halten</a>
-<ul>
+<li class="chapter" data-level="8.2" data-path="anhang.html"><a href="anhang.html#das-environment-sauber-halten"><i class="fa fa-check"></i><b>8.2</b> Das Environment sauber halten</a><ul>
 <li class="chapter" data-level="8.2.1" data-path="anhang.html"><a href="anhang.html#variablen-löschen"><i class="fa fa-check"></i><b>8.2.1</b> Variablen löschen</a></li>
 <li class="chapter" data-level="8.2.2" data-path="anhang.html"><a href="anhang.html#mit-einem-sauberen-environment-starten"><i class="fa fa-check"></i><b>8.2.2</b> Mit einem sauberen Environment starten</a></li>
 </ul></li>
@@ -325,7 +274,7 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="schleifen" class="section level1" number="7">
+<div id="schleifen" class="section level1">
 <h1><span class="header-section-number">7</span> Schleifen</h1>
 <p>Ein Hinweis zu Beginn: Dieses Kapitel nutzt den <code>[[·]]</code>-Zugriff auf
 Spalten in <code>data.frames</code>. Wer damit noch nicht vertraut ist, sollte
@@ -348,9 +297,9 @@ wird in den verschiedenen Durchläufen der Schleife variiert, auf welche
 Daten – also etwa auf welche Items eines Tests – zugegriffen wird,
 damit nicht in jedem Durchgang einfach dasselbe passiert. Dies ist die
 Syntax einer <code>for</code>-Schleife:</p>
-<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="schleifen.html#cb521-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (Schleifenvariable <span class="cf">in</span> vector) {</span>
-<span id="cb521-2"><a href="schleifen.html#cb521-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># hier steht beliebiger R-Code</span></span>
-<span id="cb521-3"><a href="schleifen.html#cb521-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb521-1" title="1"><span class="cf">for</span> (Schleifenvariable <span class="cf">in</span> vector) {</a>
+<a class="sourceLine" id="cb521-2" title="2">  <span class="co"># hier steht beliebiger R-Code</span></a>
+<a class="sourceLine" id="cb521-3" title="3">}</a></code></pre></div>
 <p>Das sieht erst einmal etwas beunruhigend aus. Gehen wir die einzelnen
 Bestandteile der Schleife einmal durch und schauen uns danach eine
 <code>for</code>-Schleife in Aktion an.</p>
@@ -361,10 +310,10 @@ eigentliche Musik spielt in der darauf folgenden Klammer
 Körper der Schleife – eingeschlossen in den geschwungenen Klammern
 <code>{·}</code> – ausgeführt wird. Wir könnten der <code>for</code>-Schleife beispielsweise
 einen der folgenden Vektoren übergeben:</p>
-<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb522-1"><a href="schleifen.html#cb522-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">83</span>, <span class="dv">45</span>, <span class="dv">12</span>, <span class="sc">-</span><span class="dv">99</span>) <span class="co"># Die Schleife würde 4x laufen</span></span>
-<span id="cb522-2"><a href="schleifen.html#cb522-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;Cronbach&quot;</span>, <span class="st">&quot;Spearman&quot;</span>, <span class="st">&quot;Brown&quot;</span>)  <span class="co"># 3x</span></span>
-<span id="cb522-3"><a href="schleifen.html#cb522-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="co"># 10x</span></span>
-<span id="cb522-4"><a href="schleifen.html#cb522-4" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;item&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>) <span class="co"># 50x</span></span></code></pre></div>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb522-1" title="1"><span class="kw">c</span>(<span class="dv">83</span>, <span class="dv">45</span>, <span class="dv">12</span>, <span class="dv">-99</span>) <span class="co"># Die Schleife würde 4x laufen</span></a>
+<a class="sourceLine" id="cb522-2" title="2"><span class="kw">c</span>(<span class="st">&quot;Cronbach&quot;</span>, <span class="st">&quot;Spearman&quot;</span>, <span class="st">&quot;Brown&quot;</span>)  <span class="co"># 3x</span></a>
+<a class="sourceLine" id="cb522-3" title="3"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="co"># 10x</span></a>
+<a class="sourceLine" id="cb522-4" title="4"><span class="kw">paste0</span>(<span class="st">&quot;item&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>) <span class="co"># 50x</span></a></code></pre></div>
 <p>Wäre <code>vector</code> einer dieser vier Vektoren, würde die Schleife viermal,
 dreimal, zehnmal, oder 50 Mal durchgeführt werden. Um zu verstehen,
 warum es überhaupt Sinn macht, denselben Code-Block mehrfach
@@ -375,9 +324,9 @@ nächste Element von <code>vector</code> zugeordnet.</strong> Auf die <code>Schl
 können wir also im Körper der Schleife zugreifen und ihr Inhalt ändert
 sich in jedem Durchlauf der Schleife. Betrachten wir folgendes
 Spielzeug-Beispiel, das das Konzept der <code>for</code>-Schleife verdeutlicht:</p>
-<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="schleifen.html#cb523-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (name <span class="cf">in</span> <span class="fu">c</span>(<span class="st">&#39;Cronbach&#39;</span>, <span class="st">&#39;Spearman&#39;</span>, <span class="st">&#39;Brown&#39;</span>)) {</span>
-<span id="cb523-2"><a href="schleifen.html#cb523-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(name)</span>
-<span id="cb523-3"><a href="schleifen.html#cb523-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb523-1" title="1"><span class="cf">for</span> (name <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&#39;Cronbach&#39;</span>, <span class="st">&#39;Spearman&#39;</span>, <span class="st">&#39;Brown&#39;</span>)) {</a>
+<a class="sourceLine" id="cb523-2" title="2">  <span class="kw">print</span>(name)</a>
+<a class="sourceLine" id="cb523-3" title="3">}</a></code></pre></div>
 <pre><code>[1] &quot;Cronbach&quot;
 [1] &quot;Spearman&quot;
 [1] &quot;Brown&quot;</code></pre>
@@ -398,7 +347,7 @@ um in jedem Durchlauf andere Berechnungen durchzuführen.</li>
 </ul>
 <p>Das ist tatsächlich schon alles! Im Folgenden lernen wir zwei konkrete
 Anwendungen von <code>for</code>-Schleifen kennen.</p>
-<div id="sequentielle-bepunktung-von-testitems" class="section level2" number="7.1">
+<div id="sequentielle-bepunktung-von-testitems" class="section level2">
 <h2><span class="header-section-number">7.1</span> Sequentielle Bepunktung von Testitems</h2>
 <p>In <a href="rohdaten.html#umkodierung">Kapitel 5</a> haben wir gelernt, wie wir mithilfe eines
 Schlüssels Testfragen aus einem psychologischen Test bepunkten können.
@@ -410,30 +359,30 @@ automatisieren, das heißt auf einmal für alle 40 Items des NPI
 durchführen. Dafür benötige ich für jedes Item des NPI den Schlüssel,
 den ich dem Codebuch entnehmen kann. Wir übertragen die 40 Schlüssel
 zunächst manuell in einen Vektor:</p>
-<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="schleifen.html#cb525-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Schlüssel aller 40 Items in einen Vektor</span></span>
-<span id="cb525-2"><a href="schleifen.html#cb525-2" aria-hidden="true" tabindex="-1"></a>keys <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>,</span>
-<span id="cb525-3"><a href="schleifen.html#cb525-3" aria-hidden="true" tabindex="-1"></a>          <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb525-1" title="1"><span class="co">## Schlüssel aller 40 Items in einen Vektor</span></a>
+<a class="sourceLine" id="cb525-2" title="2">keys &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb525-3" title="3">          <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)</a></code></pre></div>
 <p>Als Nächstes führe ich mit einer <code>for</code>-Schleife die Bepunktung aller
 Items durch. In diesem Code nehme ich an, dass die NPI-Antwortdaten
 schon eingelesen wurden und die Datenbereinigung aus Kapitel 5
 durchgeführt wurde, mir also ein <code>data.frame</code> mit Namen <code>npi_clean</code>
 vorliegt, der alle Fälle ohne fehlende Antworten enthält.</p>
-<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="schleifen.html#cb526-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Die Variable `npi_clean` enthält die Antworten für das NPI, siehe</span></span>
-<span id="cb526-2"><a href="schleifen.html#cb526-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Kapitel 6</span></span>
-<span id="cb526-3"><a href="schleifen.html#cb526-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb526-4"><a href="schleifen.html#cb526-4" aria-hidden="true" tabindex="-1"></a><span class="co"># for-Schleife für die Kodierung:</span></span>
-<span id="cb526-5"><a href="schleifen.html#cb526-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>) {</span>
-<span id="cb526-6"><a href="schleifen.html#cb526-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Wähle Spaltenname des i-ten Items aus:</span></span>
-<span id="cb526-7"><a href="schleifen.html#cb526-7" aria-hidden="true" tabindex="-1"></a>    colname <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Q&quot;</span>, i)</span>
-<span id="cb526-8"><a href="schleifen.html#cb526-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Wähle aus Spalte die Antworten aus:</span></span>
-<span id="cb526-9"><a href="schleifen.html#cb526-9" aria-hidden="true" tabindex="-1"></a>    ith_item <span class="ot">&lt;-</span> npi_clean[[colname]]</span>
-<span id="cb526-10"><a href="schleifen.html#cb526-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. Führe Umkodierung durch:</span></span>
-<span id="cb526-11"><a href="schleifen.html#cb526-11" aria-hidden="true" tabindex="-1"></a>    narcissistic_response <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(ith_item <span class="sc">==</span> keys[i], <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb526-12"><a href="schleifen.html#cb526-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 4. Erstelle Namen für neue Spalte:</span></span>
-<span id="cb526-13"><a href="schleifen.html#cb526-13" aria-hidden="true" tabindex="-1"></a>    new_colname  <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;coded&quot;</span>, colname)</span>
-<span id="cb526-14"><a href="schleifen.html#cb526-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 5. Hänge kodierte Werte an data.frame an:</span></span>
-<span id="cb526-15"><a href="schleifen.html#cb526-15" aria-hidden="true" tabindex="-1"></a>    npi_clean[[new_colname]] <span class="ot">&lt;-</span> narcissistic_response</span>
-<span id="cb526-16"><a href="schleifen.html#cb526-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb526-1" title="1"><span class="co">## Die Variable `npi_clean` enthält die Antworten für das NPI, siehe</span></a>
+<a class="sourceLine" id="cb526-2" title="2"><span class="co">## Kapitel 6</span></a>
+<a class="sourceLine" id="cb526-3" title="3"></a>
+<a class="sourceLine" id="cb526-4" title="4"><span class="co"># for-Schleife für die Kodierung:</span></a>
+<a class="sourceLine" id="cb526-5" title="5"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>) {</a>
+<a class="sourceLine" id="cb526-6" title="6">    <span class="co"># 1. Wähle Spaltenname des i-ten Items aus:</span></a>
+<a class="sourceLine" id="cb526-7" title="7">    colname &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Q&quot;</span>, i)</a>
+<a class="sourceLine" id="cb526-8" title="8">    <span class="co"># 2. Wähle aus Spalte die Antworten aus:</span></a>
+<a class="sourceLine" id="cb526-9" title="9">    ith_item &lt;-<span class="st"> </span>npi_clean[[colname]]</a>
+<a class="sourceLine" id="cb526-10" title="10">    <span class="co"># 3. Führe Umkodierung durch:</span></a>
+<a class="sourceLine" id="cb526-11" title="11">    narcissistic_response &lt;-<span class="st"> </span><span class="kw">ifelse</span>(ith_item <span class="op">==</span><span class="st"> </span>keys[i], <span class="dv">1</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb526-12" title="12">    <span class="co"># 4. Erstelle Namen für neue Spalte:</span></a>
+<a class="sourceLine" id="cb526-13" title="13">    new_colname  &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;coded&quot;</span>, colname)</a>
+<a class="sourceLine" id="cb526-14" title="14">    <span class="co"># 5. Hänge kodierte Werte an data.frame an:</span></a>
+<a class="sourceLine" id="cb526-15" title="15">    npi_clean[[new_colname]] &lt;-<span class="st"> </span>narcissistic_response</a>
+<a class="sourceLine" id="cb526-16" title="16">}</a></code></pre></div>
 <p>Der erste Befehl im Körper der Schleife generiert mit der Funktion
 <code>paste0()</code> den Namen der Spalte, der adressiert werden soll. Im ersten
 Durchgang der <code>for</code>-Schleife wird also die Spalte <code>Q1</code> adressiert, da
@@ -467,18 +416,18 @@ alle Items oder Item-Trennschärfen zu bestimmen.</p>
 <p>Beachtet, dass ich die <code>for</code>-Schleife auch mit weniger
 Zwischenschritten hätte umsetzen können; folgender Code würde in
 weniger Zeilen dasselbe Ergebnis erzielen:</p>
-<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="schleifen.html#cb527-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>) {</span>
-<span id="cb527-2"><a href="schleifen.html#cb527-2" aria-hidden="true" tabindex="-1"></a>    colname <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Q&quot;</span>, i)</span>
-<span id="cb527-3"><a href="schleifen.html#cb527-3" aria-hidden="true" tabindex="-1"></a>    npi_clean[[<span class="fu">paste0</span>(<span class="st">&quot;coded&quot;</span>, colname)]] <span class="ot">&lt;-</span></span>
-<span id="cb527-4"><a href="schleifen.html#cb527-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ifelse</span>(npi_clean[[colname]] <span class="sc">==</span> keys[i], <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb527-5"><a href="schleifen.html#cb527-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb527-1" title="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>) {</a>
+<a class="sourceLine" id="cb527-2" title="2">    colname &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Q&quot;</span>, i)</a>
+<a class="sourceLine" id="cb527-3" title="3">    npi_clean[[<span class="kw">paste0</span>(<span class="st">&quot;coded&quot;</span>, colname)]] &lt;-</a>
+<a class="sourceLine" id="cb527-4" title="4"><span class="st">        </span><span class="kw">ifelse</span>(npi_clean[[colname]] <span class="op">==</span><span class="st"> </span>keys[i], <span class="dv">1</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb527-5" title="5">}</a></code></pre></div>
 <p>Im ersten Beispiel habe ich jedoch jeden Zwischenschritt in einer
 eigenen Variablen abgespeichert, um den Code besser verständlich zu
 machen und alle Schritte zu erklären. Aus meiner Sicht ist das
 Zwischenspeichern in Variablen gut geeignet, um zu kommunizieren, was
 Code macht – insbesondere, wenn die Variablen gut benannt sind.</p>
 </div>
-<div id="berechnung-von-part-whole-korrigierten-trennschärfen" class="section level2" number="7.2">
+<div id="berechnung-von-part-whole-korrigierten-trennschärfen" class="section level2">
 <h2><span class="header-section-number">7.2</span> Berechnung von part-whole korrigierten Trennschärfen</h2>
 <p>Nachdem ich mit der letzten <code>for</code>-Schleife die rohen Antwortdaten in die
 angemessene Form umkodiert habe, kann ich mit meiner Analyse starten.
@@ -487,20 +436,20 @@ Ein wichtiger Teil einer Item-Analyse ist die Berechnung von
 Frage, wie wir mithilfe einer <code>for</code>-Schleife korrigierte
 Item-Trennschärfen für alle 40 Items des NPI berechnen können. Wir
 nutzen diesen Code:</p>
-<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="schleifen.html#cb528-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Wir nutzen die umkodierten NPI-Werte: speichere diese</span></span>
-<span id="cb528-2"><a href="schleifen.html#cb528-2" aria-hidden="true" tabindex="-1"></a><span class="do">## zunächst in einem separaten data.frame ab:</span></span>
-<span id="cb528-3"><a href="schleifen.html#cb528-3" aria-hidden="true" tabindex="-1"></a>columns <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;codedQ&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>)</span>
-<span id="cb528-4"><a href="schleifen.html#cb528-4" aria-hidden="true" tabindex="-1"></a>items <span class="ot">&lt;-</span> npi_clean[, columns]</span>
-<span id="cb528-5"><a href="schleifen.html#cb528-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb528-6"><a href="schleifen.html#cb528-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Berechne die Trennschärfen in Schleife</span></span>
-<span id="cb528-7"><a href="schleifen.html#cb528-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (column <span class="cf">in</span> columns) {</span>
-<span id="cb528-8"><a href="schleifen.html#cb528-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Summenwert unter Ausschluss eines Items</span></span>
-<span id="cb528-9"><a href="schleifen.html#cb528-9" aria-hidden="true" tabindex="-1"></a>    scores <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(items[, column <span class="sc">!=</span> <span class="fu">colnames</span>(items)])</span>
-<span id="cb528-10"><a href="schleifen.html#cb528-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Korreliere damit den Item-Score</span></span>
-<span id="cb528-11"><a href="schleifen.html#cb528-11" aria-hidden="true" tabindex="-1"></a>    part_whole <span class="ot">&lt;-</span> <span class="fu">cor</span>(items[[column]], scores)</span>
-<span id="cb528-12"><a href="schleifen.html#cb528-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. Gib die Trennschärfe aus</span></span>
-<span id="cb528-13"><a href="schleifen.html#cb528-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(part_whole)</span>
-<span id="cb528-14"><a href="schleifen.html#cb528-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb528-1" title="1"><span class="co">## Wir nutzen die umkodierten NPI-Werte: speichere diese</span></a>
+<a class="sourceLine" id="cb528-2" title="2"><span class="co">## zunächst in einem separaten data.frame ab:</span></a>
+<a class="sourceLine" id="cb528-3" title="3">columns &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;codedQ&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb528-4" title="4">items &lt;-<span class="st"> </span>npi_clean[, columns]</a>
+<a class="sourceLine" id="cb528-5" title="5"></a>
+<a class="sourceLine" id="cb528-6" title="6"><span class="co">## Berechne die Trennschärfen in Schleife</span></a>
+<a class="sourceLine" id="cb528-7" title="7"><span class="cf">for</span> (column <span class="cf">in</span> columns) {</a>
+<a class="sourceLine" id="cb528-8" title="8">    <span class="co"># 1. Summenwert unter Ausschluss eines Items</span></a>
+<a class="sourceLine" id="cb528-9" title="9">    scores &lt;-<span class="st"> </span><span class="kw">rowSums</span>(items[, column <span class="op">!=</span><span class="st"> </span><span class="kw">colnames</span>(items)])</a>
+<a class="sourceLine" id="cb528-10" title="10">    <span class="co"># 2. Korreliere damit den Item-Score</span></a>
+<a class="sourceLine" id="cb528-11" title="11">    part_whole &lt;-<span class="st"> </span><span class="kw">cor</span>(items[[column]], scores)</a>
+<a class="sourceLine" id="cb528-12" title="12">    <span class="co"># 3. Gib die Trennschärfe aus</span></a>
+<a class="sourceLine" id="cb528-13" title="13">    <span class="kw">print</span>(part_whole)</a>
+<a class="sourceLine" id="cb528-14" title="14">}</a></code></pre></div>
 <pre><code>[1] 0.3558674
 [1] 0.4201535
 [1] 0.3321716
@@ -539,7 +488,7 @@ Korrelationskoeffizient wird in der Variablen <code>part_whole</code>
 abgespeichert. Der dritte Befehl gibt lediglich die Trennschärfe in der
 Konsole aus.</p>
 </div>
-<div id="datenspeicherung-in-einer-schleife" class="section level2" number="7.3">
+<div id="datenspeicherung-in-einer-schleife" class="section level2">
 <h2><span class="header-section-number">7.3</span> Datenspeicherung in einer Schleife</h2>
 <p>Im vorherigen Beispiel habe ich Item-Trennschärfen berechnet und dann
 mit dem <code>print()</code>-Befehl in der Konsole ausgegeben. Oftmals möchte ich die
@@ -556,19 +505,19 @@ uns an, wie wir das machen können. Dabei betrachten wir zwei Fälle:
 Einmal adressieren wir die Elemente des Vektors, der die Trennschärfen
 beinhaltet per Name und einmal per Index (siehe <a href="dataframes.html#nameindex">Kapitel
 3.5</a>).</p>
-<div id="adressierung-per-name" class="section level3" number="7.3.1">
+<div id="adressierung-per-name" class="section level3">
 <h3><span class="header-section-number">7.3.1</span> Adressierung per Name</h3>
 <p>Zunächst erstelle ich wie folgt einen leeren<a href="#fn47" class="footnote-ref" id="fnref47"><sup>47</sup></a> Vektor der
 Länge 40:</p>
-<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="schleifen.html#cb530-1" aria-hidden="true" tabindex="-1"></a>discriminations <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">length =</span> <span class="dv">40</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb530-1" title="1">discriminations &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length =</span> <span class="dv">40</span>)</a></code></pre></div>
 <p>Mithilfe der Funktion <code>vector()</code><a href="#fn48" class="footnote-ref" id="fnref48"><sup>48</sup></a> erstelle ich einen
 Vektor; das Argument <code>length</code> bestimmt dabei die Länge des Vektors.
 Darin möchte ich im Verlauf der 40 Durchläufe der Schleife die
 Trennschärfen der 40 Items abspeichern. Um eine Adressierung per Name zu
 ermöglichen, gebe ich den Elementen des Vektors wie folgt Namen:</p>
-<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="schleifen.html#cb531-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(discriminations) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;codedQ&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>)</span>
-<span id="cb531-2"><a href="schleifen.html#cb531-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Teste:</span></span>
-<span id="cb531-3"><a href="schleifen.html#cb531-3" aria-hidden="true" tabindex="-1"></a>discriminations[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb531-1" title="1"><span class="kw">names</span>(discriminations) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;codedQ&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb531-2" title="2"><span class="co">## Teste:</span></a>
+<a class="sourceLine" id="cb531-3" title="3">discriminations[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</a></code></pre></div>
 <pre><code>codedQ1 codedQ2 codedQ3 
   FALSE   FALSE   FALSE </code></pre>
 <p>So haben die Elemente meines leeren Vektors dieselben Namen wie die
@@ -577,28 +526,28 @@ Trennschärfen verwendet habe. Dass ich ausgerechnet diese Namen vergeben
 habe, hat zur Folge, dass ich recht einfach den obigen Code zur
 Berechnung der Trennschärfen umwandeln kann, um die Trennschärfen auch
 noch abzuspeichern. Dies ist der leicht angepasste Code:</p>
-<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="schleifen.html#cb533-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Wähle Items aus:</span></span>
-<span id="cb533-2"><a href="schleifen.html#cb533-2" aria-hidden="true" tabindex="-1"></a>columns <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;codedQ&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>)</span>
-<span id="cb533-3"><a href="schleifen.html#cb533-3" aria-hidden="true" tabindex="-1"></a>items <span class="ot">&lt;-</span> npi_clean[, columns]</span>
-<span id="cb533-4"><a href="schleifen.html#cb533-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb533-5"><a href="schleifen.html#cb533-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Erstelle leeren Vektor-Container und benenne ihn:</span></span>
-<span id="cb533-6"><a href="schleifen.html#cb533-6" aria-hidden="true" tabindex="-1"></a>discriminations <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">length =</span> <span class="dv">40</span>)</span>
-<span id="cb533-7"><a href="schleifen.html#cb533-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(discriminations) <span class="ot">&lt;-</span> columns</span>
-<span id="cb533-8"><a href="schleifen.html#cb533-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb533-9"><a href="schleifen.html#cb533-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (column <span class="cf">in</span> columns) {</span>
-<span id="cb533-10"><a href="schleifen.html#cb533-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Summenwert unter Ausschluss eines Items</span></span>
-<span id="cb533-11"><a href="schleifen.html#cb533-11" aria-hidden="true" tabindex="-1"></a>    scores <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(items[, column <span class="sc">!=</span> <span class="fu">colnames</span>(items)])</span>
-<span id="cb533-12"><a href="schleifen.html#cb533-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Korreliere damit den Item-Score</span></span>
-<span id="cb533-13"><a href="schleifen.html#cb533-13" aria-hidden="true" tabindex="-1"></a>    part_whole <span class="ot">&lt;-</span> <span class="fu">cor</span>(items[[column]], scores)</span>
-<span id="cb533-14"><a href="schleifen.html#cb533-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. Speichere Trennschärfe ab</span></span>
-<span id="cb533-15"><a href="schleifen.html#cb533-15" aria-hidden="true" tabindex="-1"></a>    discriminations[column] <span class="ot">&lt;-</span> part_whole</span>
-<span id="cb533-16"><a href="schleifen.html#cb533-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb533-17"><a href="schleifen.html#cb533-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Voilá:</span></span>
-<span id="cb533-18"><a href="schleifen.html#cb533-18" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(discriminations)</span></code></pre></div>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb533-1" title="1"><span class="co">## Wähle Items aus:</span></a>
+<a class="sourceLine" id="cb533-2" title="2">columns &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;codedQ&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb533-3" title="3">items &lt;-<span class="st"> </span>npi_clean[, columns]</a>
+<a class="sourceLine" id="cb533-4" title="4"></a>
+<a class="sourceLine" id="cb533-5" title="5"><span class="co">## Erstelle leeren Vektor-Container und benenne ihn:</span></a>
+<a class="sourceLine" id="cb533-6" title="6">discriminations &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length =</span> <span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb533-7" title="7"><span class="kw">names</span>(discriminations) &lt;-<span class="st"> </span>columns</a>
+<a class="sourceLine" id="cb533-8" title="8"></a>
+<a class="sourceLine" id="cb533-9" title="9"><span class="cf">for</span> (column <span class="cf">in</span> columns) {</a>
+<a class="sourceLine" id="cb533-10" title="10">    <span class="co"># 1. Summenwert unter Ausschluss eines Items</span></a>
+<a class="sourceLine" id="cb533-11" title="11">    scores &lt;-<span class="st"> </span><span class="kw">rowSums</span>(items[, column <span class="op">!=</span><span class="st"> </span><span class="kw">colnames</span>(items)])</a>
+<a class="sourceLine" id="cb533-12" title="12">    <span class="co"># 2. Korreliere damit den Item-Score</span></a>
+<a class="sourceLine" id="cb533-13" title="13">    part_whole &lt;-<span class="st"> </span><span class="kw">cor</span>(items[[column]], scores)</a>
+<a class="sourceLine" id="cb533-14" title="14">    <span class="co"># 3. Speichere Trennschärfe ab</span></a>
+<a class="sourceLine" id="cb533-15" title="15">    discriminations[column] &lt;-<span class="st"> </span>part_whole</a>
+<a class="sourceLine" id="cb533-16" title="16">}</a>
+<a class="sourceLine" id="cb533-17" title="17"><span class="co">## Voilá:</span></a>
+<a class="sourceLine" id="cb533-18" title="18"><span class="kw">head</span>(discriminations)</a></code></pre></div>
 <pre><code>  codedQ1   codedQ2   codedQ3   codedQ4   codedQ5   codedQ6 
 0.3561849 0.4202523 0.3322548 0.5014695 0.4411108 0.4795097 </code></pre>
 </div>
-<div id="indexadressierung" class="section level3" number="7.3.2">
+<div id="indexadressierung" class="section level3">
 <h3><span class="header-section-number">7.3.2</span> Vektorspeicherung – Adressierung per Index</h3>
 <p>Oftmals wird die Schleifenvariable als <em>Indexvariable</em> verwendet, d.h.,
 sie durchläuft einen ganzzahligen numerischen Vektor, zumeist der Form
@@ -610,31 +559,32 @@ Antworten enthält, und einen Vektor, der Schlüssel enthält. Da dieser
 Spezialfall wichtig ist, zeige ich auch für die Berechnung der
 Item-Trennschärfen, wie man die <code>for</code>-Schleife mit einer
 Index-Schleifenvariablen umsetzen kann:</p>
-<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="schleifen.html#cb535-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Wähle Items aus:</span></span>
-<span id="cb535-2"><a href="schleifen.html#cb535-2" aria-hidden="true" tabindex="-1"></a>columns <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;codedQ&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>)</span>
-<span id="cb535-3"><a href="schleifen.html#cb535-3" aria-hidden="true" tabindex="-1"></a>items <span class="ot">&lt;-</span> npi_clean[, columns]</span>
-<span id="cb535-4"><a href="schleifen.html#cb535-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb535-5"><a href="schleifen.html#cb535-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Erstelle leeren Vektor-Container:</span></span>
-<span id="cb535-6"><a href="schleifen.html#cb535-6" aria-hidden="true" tabindex="-1"></a>discriminations <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">length =</span> <span class="dv">40</span>)</span>
-<span id="cb535-7"><a href="schleifen.html#cb535-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb535-8"><a href="schleifen.html#cb535-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Erstelle Index-Vektor:</span></span>
-<span id="cb535-9"><a href="schleifen.html#cb535-9" aria-hidden="true" tabindex="-1"></a>indices <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">40</span></span>
-<span id="cb535-10"><a href="schleifen.html#cb535-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Berechne Trennschärfen in Schleife</span></span>
-<span id="cb535-11"><a href="schleifen.html#cb535-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> indices) {</span>
-<span id="cb535-12"><a href="schleifen.html#cb535-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Summenwert unter Ausschluss eines Items</span></span>
-<span id="cb535-13"><a href="schleifen.html#cb535-13" aria-hidden="true" tabindex="-1"></a>    scores <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(items[, indices[<span class="sc">-</span>i]])</span>
-<span id="cb535-14"><a href="schleifen.html#cb535-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Korreliere damit den Item-Score</span></span>
-<span id="cb535-15"><a href="schleifen.html#cb535-15" aria-hidden="true" tabindex="-1"></a>    part_whole <span class="ot">&lt;-</span> <span class="fu">cor</span>(items[[i]], scores)</span>
-<span id="cb535-16"><a href="schleifen.html#cb535-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. Speichere Trennschärfe ab</span></span>
-<span id="cb535-17"><a href="schleifen.html#cb535-17" aria-hidden="true" tabindex="-1"></a>    discriminations[i] <span class="ot">&lt;-</span> part_whole</span>
-<span id="cb535-18"><a href="schleifen.html#cb535-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb535-19"><a href="schleifen.html#cb535-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Voilá:</span></span>
-<span id="cb535-20"><a href="schleifen.html#cb535-20" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(discriminations)</span></code></pre></div>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb535-1" title="1"><span class="co">## Wähle Items aus:</span></a>
+<a class="sourceLine" id="cb535-2" title="2">columns &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;codedQ&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb535-3" title="3">items &lt;-<span class="st"> </span>npi_clean[, columns]</a>
+<a class="sourceLine" id="cb535-4" title="4"></a>
+<a class="sourceLine" id="cb535-5" title="5"><span class="co">## Erstelle leeren Vektor-Container:</span></a>
+<a class="sourceLine" id="cb535-6" title="6">discriminations &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length =</span> <span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb535-7" title="7"></a>
+<a class="sourceLine" id="cb535-8" title="8"><span class="co">## Erstelle Index-Vektor:</span></a>
+<a class="sourceLine" id="cb535-9" title="9">indices &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">40</span></a>
+<a class="sourceLine" id="cb535-10" title="10"><span class="co">## Berechne Trennschärfen in Schleife</span></a>
+<a class="sourceLine" id="cb535-11" title="11"><span class="cf">for</span> (i <span class="cf">in</span> indices) {</a>
+<a class="sourceLine" id="cb535-12" title="12">    <span class="co"># 1. Summenwert unter Ausschluss eines Items</span></a>
+<a class="sourceLine" id="cb535-13" title="13">    scores &lt;-<span class="st"> </span><span class="kw">rowSums</span>(items[, indices[<span class="op">-</span>i]])</a>
+<a class="sourceLine" id="cb535-14" title="14">    <span class="co"># 2. Korreliere damit den Item-Score</span></a>
+<a class="sourceLine" id="cb535-15" title="15">    part_whole &lt;-<span class="st"> </span><span class="kw">cor</span>(items[[i]], scores)</a>
+<a class="sourceLine" id="cb535-16" title="16">    <span class="co"># 3. Speichere Trennschärfe ab</span></a>
+<a class="sourceLine" id="cb535-17" title="17">    discriminations[i] &lt;-<span class="st"> </span>part_whole</a>
+<a class="sourceLine" id="cb535-18" title="18">}</a>
+<a class="sourceLine" id="cb535-19" title="19"><span class="co">## Voilá:</span></a>
+<a class="sourceLine" id="cb535-20" title="20"><span class="kw">head</span>(discriminations)</a></code></pre></div>
 <pre><code>[1] 0.3561849 0.4202523 0.3322548 0.5014695 0.4411108 0.4795097</code></pre>
 <p>Hier wird die Index-Variable <code>i</code> gleich mehrfach verwendet: (1) zur
 Auswahl der Spalten, die den jeweiligen Testwert berechnen; (2) zur
 Auswahl der Spalte des Items, für das die Trennschärfe bestimmt wird;
 (3) zum Abspeichern der Trennschärfe im Vektor <code>discriminations</code>.</p>
+
 </div>
 </div>
 </div>
@@ -643,16 +593,16 @@ Auswahl der Spalte des Items, für das die Trennschärfe bestimmt wird;
 <ol start="46">
 <li id="fn46"><p>Wer nach dem Durcharbeiten des Kapitels noch nicht genug von
 Schleifen hat, kann sich mithilfe einer Google-Suche mit der
-<code>while</code>-Schleife vertraut machen.<a href="schleifen.html#fnref46" class="footnote-back">↩︎</a></p></li>
+<code>while</code>-Schleife vertraut machen.<a href="schleifen.html#fnref46" class="footnote-back">↩</a></p></li>
 <li id="fn47"><p>Tatsächlich ist der Vektor nicht wirklich leer. Schaut
 ihn euch einmal nach der Erstellung an (d.h., gebt ihn in der Konsole
-aus).<a href="schleifen.html#fnref47" class="footnote-back">↩︎</a></p></li>
+aus).<a href="schleifen.html#fnref47" class="footnote-back">↩</a></p></li>
 <li id="fn48"><p>Es ist allgemein so, dass Funktionen mit dem
 Namen einer Datenstruktur besagte Datenstruktur erstellen. Erinnern wir
 uns an die Funktion <code>data.frame()</code>. Ebenso gibt es die Funktion <code>list()</code>,
 die eine Liste erstellt, oder die Funktion <code>matrix()</code>, die eine Matrix
 erstellt. Diese Funktionen sind oft nützlich, um leere Datencontainer zu
-erstellen, die im Verlaufe einer <code>for</code>-Schleife gefüllt werden.<a href="schleifen.html#fnref48" class="footnote-back">↩︎</a></p></li>
+erstellen, die im Verlaufe einer <code>for</code>-Schleife gefüllt werden.<a href="schleifen.html#fnref48" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -665,7 +615,6 @@ erstellen, die im Verlaufe einer <code>for</code>-Schleife gefüllt werden.<a hr
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -705,10 +654,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": false,
 "toc": {
 "collapse": "subsection"
-},
-"search": false
+}
 });
 });
 </script>
