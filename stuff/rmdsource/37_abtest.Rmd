@@ -30,6 +30,8 @@ comparisons.*: **multibridge**
 - paper: https://psyarxiv.com/qk4cy/;
 - package: https://cran.r-project.org/package=multibridge
 
+**Update**: A paper is available that compares some BFs for the comparison of proportions: https://arxiv.org/abs/2108.04909 (A Puzzle of Proportions: Two Popular Bayesian Tests Can Yield Dramatically Different Conclusions). Also see https://psyarxiv.com/z64th (Bayesian Inference for the A/B Test: Example Applications with R and JASP)
+
 ## Usage
 
 I am using data from one of my papers where I computed a Bayes factor for the 
