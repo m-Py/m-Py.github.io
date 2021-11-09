@@ -148,7 +148,7 @@ on your system.
 # Checking the package
 
 ```
-./R CMD check tar-ball.tar.gz
+./R CMD check --as-cran tar-ball.tar.gz
 ```
 
 # On Windows
