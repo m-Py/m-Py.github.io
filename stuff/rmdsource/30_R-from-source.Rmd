@@ -66,7 +66,7 @@ Then, we need:
 Or: 
 
 ```
-./configure --with-readline=no --with-x=no
+./configure --with-readline=no --with-x=no --with-cairo
 ```
 
 5. 
@@ -90,7 +90,7 @@ make pdf
 make info
 ```
 
-Creates the manuals.
+Creates the manuals. To create html manuals, texi2any seems to be needed:
 
 8. `R` can now be started using the script `R` in directory `bin`:
 
@@ -109,6 +109,30 @@ but I guess this is not recommended because this replaces
 the current stable installation of `R`. [However, it is also possible 
 to have multiple `R` versions at the same 
 time.](https://docs.rstudio.com/resources/install-r-source/)
+
+
+# Unexpected dependencies for checking packages 
+
+Most occur when R CMD check tries to build the documentation in pdf format using 
+Latex. The following packages are for example needed:
+
+- `texi2dvi`, available via
+
+```
+sudo apt install texinfo
+```
+
+`qpdf`, available via
+
+```
+sudo apt install qpdf
+```
+
+Cairo (for images in vignettes), via 
+
+```
+sudo apt install libcairo2-dev
+```
 
 # Installing dependency packages
 
@@ -135,23 +159,6 @@ on your system.
 
 ```
 ./R CMD check tar-ball.tar.gz
-```
-
-# Unexpected dependencies for checking packages 
-
-Most occur when R CMD check tries to build the documentation in pdf format using 
-Latex. The following packages are for example needed:
-
-- `texi2dvi`, available via
-
-```
-sudo apt install texinfo
-```
-
-`qpdf`, available via
-
-```
-sudo apt install qpdf
 ```
 
 # On Windows
