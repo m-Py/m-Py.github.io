@@ -83,23 +83,14 @@ make check
 
 Tests if the installation was successful.
 
-7. 
-
-```
-make pdf
-make info
-```
-
-Creates the manuals. To create html manuals, texi2any seems to be needed:
-
-8. `R` can now be started using the script `R` in directory `bin`:
+7. `R` can now be started using the script `R` in directory `bin`:
 
 ```
 cd bin
 ./R
 ```
 
-9. It is also possible to install `R` devel on the system by using 
+8. It is also possible to install `R` devel on the system by using 
 
 ```
 make install
@@ -109,7 +100,6 @@ but I guess this is not recommended because this replaces
 the current stable installation of `R`. [However, it is also possible 
 to have multiple `R` versions at the same 
 time.](https://docs.rstudio.com/resources/install-r-source/)
-
 
 # Unexpected dependencies for checking packages 
 
