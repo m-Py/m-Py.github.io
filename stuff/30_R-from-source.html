@@ -363,12 +363,22 @@ pre code {
 <blockquote>
 <p>Please ensure that R CMD check –as-cran has been run on the tarball to be uploaded before submission. This should be done with the current version of R-devel (or if that is not possible and explained in the submission, current R-patched or the current release of R.) – CRAN Repository Policy</p>
 </blockquote>
+<div id="unexpected-dependencies-for-installing-r-from-source" class="section level1">
+<h1>Unexpected dependencies for installing R from source</h1>
+<p>Appendix A1 “Essential programs and libraries” in “R Installation and Administration” contains requisite packages for installation from source. Interestingly, Java is necessary to build R from source:</p>
+<pre><code>sudo apt install openjdk-11-jdk</code></pre>
+<p>Some dependencies are needed to build the documentation in pdf format using Latex. The following packages are for example needed:</p>
+<ul>
+<li><code>texi2dvi</code>, available via</li>
+</ul>
+<pre><code>sudo apt install texinfo</code></pre>
+<p><code>qpdf</code>, available via</p>
+<pre><code>sudo apt install qpdf</code></pre>
+<p>Cairo is also needed for images in vignettes, via</p>
+<pre><code>sudo apt install libcairo2-dev</code></pre>
+</div>
 <div id="installing-r-from-source" class="section level1">
 <h1>Installing <code>R</code> from source</h1>
-<ol start="0" style="list-style-type: decimal">
-<li>Appendix A1 “Essential programs and libraries” in “R Installation and Administration” contains requisite packages for installation from source. Interestingly, Java is also necessary to build R from source:</li>
-</ol>
-<pre><code>sudo apt install openjdk-11-jdk</code></pre>
 <ol style="list-style-type: decimal">
 <li>Download the development version from <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a> <span class="math inline">\(\to\)</span> R Sources</li>
 <li>Unpack the sources:</li>
@@ -410,18 +420,6 @@ pre code {
 <pre><code>make install</code></pre>
 <p>but I guess this is not recommended because this replaces the current stable installation of <code>R</code>. <a href="https://docs.rstudio.com/resources/install-r-source/">However, it is also possible to have multiple <code>R</code> versions at the same time.</a></p>
 </div>
-<div id="unexpected-dependencies-for-checking-packages" class="section level1">
-<h1>Unexpected dependencies for checking packages</h1>
-<p>Most occur when R CMD check tries to build the documentation in pdf format using Latex. The following packages are for example needed:</p>
-<ul>
-<li><code>texi2dvi</code>, available via</li>
-</ul>
-<pre><code>sudo apt install texinfo</code></pre>
-<p><code>qpdf</code>, available via</p>
-<pre><code>sudo apt install qpdf</code></pre>
-<p>Cairo (for images in vignettes), via</p>
-<pre><code>sudo apt install libcairo2-dev</code></pre>
-</div>
 <div id="installing-dependency-packages" class="section level1">
 <h1>Installing dependency packages</h1>
 <p>To test your package using <code>R CMD check</code>, you need to make the dependencies of your packages available to <code>R</code> devel. That is, install all of the packages in <code>Imports</code>, <code>Depends</code>, and <code>Suggests</code>.</p>
@@ -450,7 +448,7 @@ initexmf --edit-config-file updmap</code></pre>
 <p>into the console. Then, <code>R CMD check</code> should work.</p>
 <p>I did not try to install R devel from source though on Windows, but used the released version.</p>
 <hr />
-<p>Last updated: 2021-11-09</p>
+<p>Last updated: 2021-11-16</p>
 <div id="back-to-the-front-page" class="section level3">
 <h3><a href="index.html">Back to the front page</a></h3>
 <p> </p>

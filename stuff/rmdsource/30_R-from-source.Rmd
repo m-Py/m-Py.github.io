@@ -16,15 +16,37 @@ version of R-devel (or if that is not possible and explained in the
 submission, current R-patched or the current release of R.) -- CRAN 
 Repository Policy
 
-# Installing `R` from source
+# Unexpected dependencies for installing R from source
 
-0. Appendix A1 "Essential programs and libraries" in "R Installation and 
+Appendix A1 "Essential programs and libraries" in "R Installation and 
 Administration" contains requisite packages for installation from source.
-Interestingly, Java is also necessary to build R from source:
+Interestingly, Java is necessary to build R from source:
 
 ```
 sudo apt install openjdk-11-jdk
 ```
+
+Some dependencies are needed to build the documentation in pdf format using Latex. The following packages are for example needed:
+
+- `texi2dvi`, available via
+
+```
+sudo apt install texinfo
+```
+
+`qpdf`, available via
+
+```
+sudo apt install qpdf
+```
+
+Cairo is also needed for images in vignettes, via 
+
+```
+sudo apt install libcairo2-dev
+```
+
+# Installing `R` from source
 
 1. Download the development version from https://cran.r-project.org/ 
 $\to$ R Sources
@@ -100,29 +122,6 @@ but I guess this is not recommended because this replaces
 the current stable installation of `R`. [However, it is also possible 
 to have multiple `R` versions at the same 
 time.](https://docs.rstudio.com/resources/install-r-source/)
-
-# Unexpected dependencies for checking packages 
-
-Most occur when R CMD check tries to build the documentation in pdf format using 
-Latex. The following packages are for example needed:
-
-- `texi2dvi`, available via
-
-```
-sudo apt install texinfo
-```
-
-`qpdf`, available via
-
-```
-sudo apt install qpdf
-```
-
-Cairo (for images in vignettes), via 
-
-```
-sudo apt install libcairo2-dev
-```
 
 # Installing dependency packages
 
