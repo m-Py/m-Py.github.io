@@ -437,18 +437,18 @@ pre code {
 </div>
 <div id="on-windows" class="section level1">
 <h1>On Windows</h1>
-<p>Some extra work may be required to check your package on a Windows system. Fortunately, at least, we can use <code>R CMD build</code> and <code>R CMD  check</code> in the RStudio terminal. I had to get latex running so that <code>R  CMD check</code> can build the pdf manuals. First, we have to install <a href="miktex.org">Miktex</a>. After installing Miktex, a restart is required so <code>R</code> finds the path to Latex.</p>
-<p>Before <code>R CMD check</code> worked properly, however, I had to enable some fonts as described <a href="https://tex.stackexchange.com/questions/125274/error-font-ts1-zi4r-at-540-not-found">here</a>:</p>
+<p>Some extra work may be required to check your package on a Windows system. Fortunately, at least, we can use <code>R CMD build</code> and <code>R CMD  check</code> in the RStudio terminal. I had to get latex running so that <code>R  CMD check</code> can build the pdf manuals. First, we have to install <a href="https://miktex.org">Miktex</a>. After installing Miktex, a restart is required so <code>R</code> finds the path to Latex.</p>
+<p>Before <code>R CMD check</code> worked properly, however, I had to enable some fonts as described <a href="https://tex.stackexchange.com/questions/125274/error-font-ts1-zi4r-at-540-not-found">here</a>. Put the following in the standard Windows terminal:</p>
 <pre><code>initexmf --update-fndb
 initexmf --edit-config-file updmap</code></pre>
 <p>The second command opens the text editor where we put:</p>
 <pre><code>Map zi4.map</code></pre>
 <p>Last, we type</p>
 <pre><code>initexmf --mkmaps</code></pre>
-<p>into the console. Then, <code>R CMD check</code> should work.</p>
-<p>I did not try to install R devel from source though on Windows, but used the released version.</p>
+<p>into the terminal. Then, <code>R CMD check</code> should work on the tar ball that can be build using the RStudio terminal via <code>R CMD build &quot;.&quot;</code> (in the procect directory of the package).</p>
+<p>I did not try to install R devel from source though on Windows, but used the released version. This seemed to be enough.</p>
 <hr />
-<p>Last updated: 2021-11-16</p>
+<p>Last updated: 2021-11-30</p>
 <div id="back-to-the-front-page" class="section level3">
 <h3><a href="index.html">Back to the front page</a></h3>
 <p> </p>

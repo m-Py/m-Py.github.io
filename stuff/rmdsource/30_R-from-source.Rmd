@@ -156,12 +156,12 @@ Some extra work may be required to check your package on a Windows
 system. Fortunately, at least, we can use `R CMD build` and `R CMD 
 check` in the RStudio terminal. I had to get latex running so that `R 
 CMD check` can build the pdf manuals. First, we have to install 
-[Miktex](miktex.org). After installing Miktex, a restart is required so 
+[Miktex](https://miktex.org). After installing Miktex, a restart is required so 
 `R` finds the path to Latex.
 
 Before `R CMD check` worked properly, however, I had to enable some 
 fonts as described 
-[here](https://tex.stackexchange.com/questions/125274/error-font-ts1-zi4r-at-540-not-found):
+[here](https://tex.stackexchange.com/questions/125274/error-font-ts1-zi4r-at-540-not-found). Put the following in the standard Windows terminal:
 
 ```
 initexmf --update-fndb
@@ -180,10 +180,10 @@ Last, we type
 initexmf --mkmaps
 ```
 
-into the console. Then, `R CMD check` should work.
+into the terminal. Then, `R CMD check` should work on the tar ball that can be build using the RStudio terminal via `R CMD build "."` (in the procect directory of the package).
 
 I did not try to install R devel from source though on Windows, but 
-used the released version.
+used the released version. This seemed to be enough.
 
 ---
 
