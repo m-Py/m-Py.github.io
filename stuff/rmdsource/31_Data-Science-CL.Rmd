@@ -49,6 +49,11 @@ $ grep -r "search-string"
 $ grep "search-string" *
 ```
 
+- Find a file based on pattern in file name:
+
+```
+$ find . -name "*pattern*"
+```
 
 ---
 
