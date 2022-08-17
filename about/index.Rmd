@@ -7,53 +7,27 @@ output:
 
 <img src = "me.png" width = 130 alt = "Photo of Martin Papenberg">
 
-Hi! I am Martin Papenberg, working as a post-doc researcher at the the 
-department of [Psychological Assessment and Differential 
-Psychology](http://www.psychologie.hhu.de/en/research-teams/psychological-assessment-and-differential-psychology/arbeitsgruppe.html) 
-at [Heinrich Heine University 
-Düsseldorf](https://www.uni-duesseldorf.de/home/en/home.html). I am 
-interested in measurement, personality[^diss] and programming.[^R]
+Hi! I am Martin Papenberg, working as a post-doctoral researcher and coordinator at the the [Department of Experimental Psychology](https://www.psychologie.hhu.de/studium-und-lehre-psychologie/institutskoordinator) at [Heinrich Heine University Düsseldorf](https://www.uni-duesseldorf.de/home/en/home.html). I am interested in methods, measurement, and programming.
 
-I am currently working on the `R` package 
-[`anticlust`](https://github.com/m-Py/anticlust) that enables 
-the automatic selection of stimuli for psychological experiments. Check 
-out my [preprint](https://psyarxiv.com/3razc/) on the anticlustering method 
-or [this vignette](https://m-py.github.io/anticlust/articles/stimulus-selection.html) illustrating how to use the `anticlust` package for stimulus 
-selection in experiments. If you have any questions regarding the 
-`anticlust` package, feel free to <a href = 
-"mailto:martin.papenberg@hhu.de?subject=Help with the anticlust 
-package">send me an email</a>.
+I authored the `R` package [`anticlust`](https://github.com/m-Py/anticlust) that enables the automatic selection of stimuli for psychological experiments. Check out my [paper](https://psyarxiv.com/3razc/) on the anticlustering method or [this vignette](https://m-py.github.io/anticlust/articles/stimulus-selection.html) illustrating how to use the `anticlust` package for stimulus selection in experiments. If you have any questions regarding the `anticlust` package, feel free to <a href = "mailto:martin.papenberg@hhu.de?subject=Help with the anticlust package">send me an email</a>.
 
 ### Journal publications
 
-Papenberg, M., & Klau, G. W. (2020). Using anticlustering to partition 
-data sets into equivalent parts. *Psychological Methods*. Advance Online 
-Publication. https://doi.org/10.1037/met0000301 ([Preprint](https://doi.org/10.31234/osf.io/3razc))
+Brandenburg, N., & Papenberg, M. (2022). Reassessment of innovative methods to determine the number of factors: A simulation-based comparison of exploratory graph analysis and next eigenvalue sufficiency test. *Psychological Methods*. Advance online publication. https://doi.org/10.1037/met0000527 ([Preprint](https://psyarxiv.com/dhzrc))
 
-Papenberg, M., Diedenhofen, B., & Musch, J. (2019). An experimental 
-validation of sequential multiple-choice tests. *Journal of Experimental 
-Education*. Advance Online Publication. 
-https://doi.org/10.1080/00220973.2019.1671299 ([Preprint](https://osf.io/x8753/))
+Papenberg, M., & Klau, G. W. (2021). Using anticlustering to partition data sets into equivalent parts. *Psychological Methods, 26*(2), 161--174. https://doi.org/10.1037/met0000301. ([Preprint](https://psyarxiv.com/3razc/))
 
-Papenberg, M., & Musch, J. (2017). Of Small Beauties and Large Beasts: 
-The Quality of Distractors on Multiple-Choice Tests Is More Important 
-Than Their Quantity. *Applied Measurement in Education, 30*(4), 273--286.
-https://doi.org/10.1080/08957347.2017.1353987 ([Preprint](https://osf.io/xytfw/))
+Papenberg, M., Diedenhofen, B., & Musch, J. (2021). An experimental validation of sequential multiple-choice tests. *The Journal of Experimental Education, 89*(2), 402--421. https://doi.org/10.1080/00220973.2019.1671299 ([Preprint](https://osf.io/x8753/))
 
-Papenberg, M., Willing, S., & Musch, J. (2017). Sequentially Presented 
-Response Options Prevent The Use Of Testwiseness Cues In Multiple-Choice 
-Testing. *Psychological Test and Assessment Modeling, 59*(2), 245--266.
-([Paper](http://www.psychologie-aktuell.com/fileadmin/download/ptam/2-2017_20170627/06_Papenberg_.pdf))
+Papenberg, M., & Musch, J. (2017). Of Small Beauties and Large Beasts: The Quality of Distractors on Multiple-Choice Tests Is More Important Than Their Quantity. *Applied Measurement in Education, 30*(4), 273--286. https://doi.org/10.1080/08957347.2017.1353987 ([Preprint](https://osf.io/xytfw/))
+
+Papenberg, M., Willing, S., & Musch, J. (2017). Sequentially Presented Response Options Prevent The Use Of Testwiseness Cues In Multiple-Choice Testing. *Psychological Test and Assessment Modeling, 59*(2), 245--266. ([Paper](http://www.psychologie-aktuell.com/fileadmin/download/ptam/2-2017_20170627/06_Papenberg_.pdf))
 
 ### Other publications
 
-Papenberg, M. (2018). *On how testwiseness and acceptance reluctance 
-influence the validity of sequential knowledge tests*
-(Inaugural-Dissertation). Retrieved from 
-https://docserv.uni-duesseldorf.de/servlets/DocumentServlet?id=46569
+Papenberg, M. (2018). *On how testwiseness and acceptance reluctance influence the validity of sequential knowledge tests* (Inaugural-Dissertation). Retrieved from https://docserv.uni-duesseldorf.de/servlets/DocumentServlet?id=46569
 
-Papenberg, M. (2018). *Test theory in R* [Testtheorie mit R]. Retrieved 
-from https://osf.io/nghyv/
+Papenberg, M. (2018). *Test theory in R* [Testtheorie mit R]. Retrieved from https://osf.io/nghyv/
 
 ### Software
 
@@ -64,7 +38,7 @@ from https://osf.io/nghyv/
 - [bayesEd: An educational R package to visualize Bayes factors](https://github.com/m-Py/bayesEd)
 - [BART: A JavaScript implementation of the Balloon Analogue Risk Task](https://github.com/m-Py/BART)
 
-### Short CV
+### Academic CV
 
 | Year |  |
 | ---- | ------------- | 
@@ -81,13 +55,3 @@ from https://osf.io/nghyv/
 - [Github](https://github.com/m-Py)
 - [Google Scholar](https://scholar.google.de/citations?user=_h33JecAAAAJ&hl=de&oi=sra)
 - [Open Science Framework](https://osf.io/3gq2h)
-
-
-[^diss]: My doctoral dissertation dealt with personality influences on 
-test achievement, see [On how testwiseness and acceptance reluctance 
-influence the validity of sequential knowledge 
-tests](https://docserv.uni-duesseldorf.de/servlets/DerivateServlet/Derivate-49582/%2B%2B%2B%2B%202018%20Dissertation%20Martin%20Papenberg.pdf).
-
-[^R]: For example, I wrote an introduction to the statistical 
-programming language [R](https://cran.r-project.org/), [freely available
-here](https://osf.io/nghyv/) (in German language).
