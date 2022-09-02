@@ -27,7 +27,8 @@ want to compare these two approaches informally.
 *Note: there has been a release of yet another package for binomial
 comparisons.*: **multibridge**
 
-- paper: https://psyarxiv.com/qk4cy/;
+- preprit: https://psyarxiv.com/qk4cy/
+- paper: Evaluating multinomial order restrictions with bridge sampling (Psych Methods; https://psycnet.apa.org/doi/10.1037/met0000411)
 - package: https://cran.r-project.org/package=multibridge
 
 **Update**: A paper is available that compares some BFs for the comparison of proportions: https://arxiv.org/abs/2108.04909 (A Puzzle of Proportions: Two Popular Bayesian Tests Can Yield Dramatically Different Conclusions). Also see https://psyarxiv.com/z64th (Bayesian Inference for the A/B Test: Example Applications with R and JASP)
