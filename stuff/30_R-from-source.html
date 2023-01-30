@@ -249,6 +249,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -270,6 +271,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
 pre code {
   padding: 0;
 }
@@ -289,8 +293,8 @@ pre code {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -298,16 +302,9 @@ pre code {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -363,6 +360,7 @@ pre code {
 <blockquote>
 <p>Please ensure that R CMD check –as-cran has been run on the tarball to be uploaded before submission. This should be done with the current version of R-devel (or if that is not possible and explained in the submission, current R-patched or the current release of R.) – CRAN Repository Policy</p>
 </blockquote>
+<p><em>Note</em>: Henrik Singmann has a (probably better) <a href="http://singmann.org/installing-r-devel-on-linux/">tutorial</a> for installing R devel from source.</p>
 <div id="unexpected-dependencies-for-installing-r-from-source" class="section level1">
 <h1>Unexpected dependencies for installing R from source</h1>
 <p>Appendix A1 “Essential programs and libraries” in “R Installation and Administration” contains requisite packages for installation from source. Interestingly, Java is necessary to build R from source:</p>
@@ -389,6 +387,10 @@ pre code {
 </ol>
 <pre><code>cd R-devel</code></pre>
 <ol start="4" style="list-style-type: decimal">
+<li>“Recommended” packages need to be installed:</li>
+</ol>
+<pre><code>./tools/rsync-recommended</code></pre>
+<ol start="5" style="list-style-type: decimal">
 <li></li>
 </ol>
 <pre><code>./configure </code></pre>
@@ -400,21 +402,21 @@ pre code {
 <pre><code>./configure --with-x=no</code></pre>
 <p>Or:</p>
 <pre><code>./configure --with-readline=no --with-x=no --with-cairo</code></pre>
-<ol start="5" style="list-style-type: decimal">
+<ol start="6" style="list-style-type: decimal">
 <li></li>
 </ol>
 <pre><code>make</code></pre>
-<ol start="6" style="list-style-type: decimal">
+<ol start="7" style="list-style-type: decimal">
 <li></li>
 </ol>
 <pre><code>make check</code></pre>
 <p>Tests if the installation was successful.</p>
-<ol start="7" style="list-style-type: decimal">
+<ol start="8" style="list-style-type: decimal">
 <li><code>R</code> can now be started using the script <code>R</code> in directory <code>bin</code>:</li>
 </ol>
 <pre><code>cd bin
 ./R</code></pre>
-<ol start="8" style="list-style-type: decimal">
+<ol start="9" style="list-style-type: decimal">
 <li>It is also possible to install <code>R</code> devel on the system by using</li>
 </ol>
 <pre><code>make install</code></pre>
@@ -437,6 +439,7 @@ pre code {
 </div>
 <div id="on-windows" class="section level1">
 <h1>On Windows</h1>
+<p><em>Note</em>: Save yourself some pain and just use the <a href="https://win-builder.r-project.org/">win builder</a>. If you choose not to, the notes below may or may not help.</p>
 <p>Some extra work may be required to check your package on a Windows system. Fortunately, at least, we can use <code>R CMD build</code> and <code>R CMD  check</code> in the RStudio terminal. I had to get latex running so that <code>R  CMD check</code> can build the pdf manuals. First, we have to install <a href="https://miktex.org">Miktex</a>. After installing Miktex, a restart is required so <code>R</code> finds the path to Latex.</p>
 <p>Before <code>R CMD check</code> worked properly, however, I had to enable some fonts as described <a href="https://tex.stackexchange.com/questions/125274/error-font-ts1-zi4r-at-540-not-found">here</a>. Put the following in the standard Windows terminal:</p>
 <pre><code>initexmf --update-fndb
@@ -448,7 +451,7 @@ initexmf --edit-config-file updmap</code></pre>
 <p>into the terminal. Then, <code>R CMD check</code> should work on the tar ball that can be build using the RStudio terminal via <code>R CMD build &quot;.&quot;</code> (in the procect directory of the package).</p>
 <p>I did not try to install R devel from source though on Windows, but used the released version. This seemed to be enough.</p>
 <hr />
-<p>Last updated: 2021-11-30</p>
+<p>Last updated: 2023-01-30</p>
 <div id="back-to-the-front-page" class="section level3">
 <h3><a href="index.html">Back to the front page</a></h3>
 <p> </p>

@@ -16,6 +16,8 @@ version of R-devel (or if that is not possible and explained in the
 submission, current R-patched or the current release of R.) -- CRAN 
 Repository Policy
 
+*Note*: Henrik Singmann has a (probably better) [tutorial](http://singmann.org/installing-r-devel-on-linux/) for installing R devel from source. 
+
 # Unexpected dependencies for installing R from source
 
 Appendix A1 "Essential programs and libraries" in "R Installation and 
@@ -63,7 +65,13 @@ doc/html/R-admin.html $\to$ "R Installation and Administration"
 cd R-devel
 ```
 
-4. 
+4. "Recommended" packages need to be installed: 
+
+```
+./tools/rsync-recommended
+```
+
+5. 
 
 ```
 ./configure 
@@ -91,13 +99,13 @@ Or:
 ./configure --with-readline=no --with-x=no --with-cairo
 ```
 
-5. 
+6. 
 
 ```
 make
 ```
 
-6. 
+7. 
 
 ```
 make check
@@ -105,14 +113,14 @@ make check
 
 Tests if the installation was successful.
 
-7. `R` can now be started using the script `R` in directory `bin`:
+8. `R` can now be started using the script `R` in directory `bin`:
 
 ```
 cd bin
 ./R
 ```
 
-8. It is also possible to install `R` devel on the system by using 
+9. It is also possible to install `R` devel on the system by using 
 
 ```
 make install
@@ -151,6 +159,8 @@ on your system.
 ```
 
 # On Windows
+
+*Note*: Save yourself some pain and just use the [win builder](https://win-builder.r-project.org/). If you choose not to, the notes below may or may not help.
 
 Some extra work may be required to check your package on a Windows 
 system. Fortunately, at least, we can use `R CMD build` and `R CMD 
