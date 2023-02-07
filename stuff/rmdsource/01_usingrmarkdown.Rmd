@@ -44,7 +44,7 @@ If these libraries are not available on your system, install them. They are requ
 to install the `devtools` package that we need to install papaja:
 
 ```
-$ sudo apt install libcurl4-openssl-dev libxml2-dev libgsl0-dev libssl-dev
+$ sudo apt install libcurl4-openssl-dev libxml2-dev libgsl0-dev libssl-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
 ```
 
 ### 3) Install the required R packages
@@ -54,6 +54,7 @@ $ sudo apt install libcurl4-openssl-dev libxml2-dev libgsl0-dev libssl-dev
     package dependencies installations to fail
     + update R as described here: https://cran.r-project.org/bin/linux/ubuntu/; 
     also see http://sites.psu.edu/theubunturblog/installing-r-in-ubuntu/
+    + remember to install the development packages `r-base-dev`
 - Install the `devtools` package (`> install.packages("devtools")`)
 - Get the papaja package:
 
