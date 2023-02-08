@@ -23,7 +23,9 @@ Papenberg, M., & Musch, J. (2017). Of Small Beauties and Large Beasts: The Quali
 
 Papenberg, M., Willing, S., & Musch, J. (2017). Sequentially Presented Response Options Prevent The Use Of Testwiseness Cues In Multiple-Choice Testing. *Psychological Test and Assessment Modeling, 59*(2), 245--266. ([Paper](http://www.psychologie-aktuell.com/fileadmin/download/ptam/2-2017_20170627/06_Papenberg_.pdf))
 
-### Other publications
+### Preprints & other publications
+
+Papenberg, M. (2023). *k-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity*. Retrieved from https://doi.org/10.31234/osf.io/7jw6v
 
 Papenberg, M. (2018). *On how testwiseness and acceptance reluctance influence the validity of sequential knowledge tests* (Inaugural-Dissertation). Retrieved from https://docserv.uni-duesseldorf.de/servlets/DocumentServlet?id=46569
 
@@ -31,7 +33,7 @@ Papenberg, M. (2018). *Test theory in R* [Testtheorie mit R]. Retrieved from htt
 
 ### Software
 
-- [anticlust: Subset Partitioning via Anticlustering](../anticlust/index.html)
+- [anticlust: Subset Partitioning via Anticlustering](https://github.com/m-Py/anticlust)
 - [propint: An R package to compute interactions in proportions](https://github.com/m-Py/propint)
 - [cower: An R package for power analyses of the comparison of correlations](https://github.com/m-Py/cower)
 - [prmisc: An R package to print statistical results in R markdown](https://github.com/m-Py/prmisc)
@@ -51,7 +53,7 @@ Papenberg, M. (2018). *Test theory in R* [Testtheorie mit R]. Retrieved from htt
 ### Contact
 
 - <a href = "mailto:martin.papenberg@hhu.de">Send me an email</a>
-- [Twitter](https://twitter.com/MPapenberg)
 - [Github](https://github.com/m-Py)
 - [Google Scholar](https://scholar.google.de/citations?user=_h33JecAAAAJ&hl=de&oi=sra)
+- [Masstodon](https://fosstodon.org/@MPapenberg)
 - [Open Science Framework](https://osf.io/3gq2h)
