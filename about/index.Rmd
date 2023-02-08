@@ -23,7 +23,7 @@ Papenberg, M., & Musch, J. (2017). Of Small Beauties and Large Beasts: The Quali
 
 Papenberg, M., Willing, S., & Musch, J. (2017). Sequentially Presented Response Options Prevent The Use Of Testwiseness Cues In Multiple-Choice Testing. *Psychological Test and Assessment Modeling, 59*(2), 245--266. ([Paper](http://www.psychologie-aktuell.com/fileadmin/download/ptam/2-2017_20170627/06_Papenberg_.pdf))
 
-### Preprints & other publications
+### Other publications & Preprints
 
 Papenberg, M. (2023). *k-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity*. Retrieved from https://doi.org/10.31234/osf.io/7jw6v
 
