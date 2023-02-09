@@ -46,7 +46,6 @@ Papenberg, M. (2018). *Test theory in R* [Testtheorie mit R]. Retrieved from htt
 | ---- | ------------- | 
 | 2018 | Ph.D. (Dr. rer. nat), Faculty of Mathematics and Natural Sciences, Heinrich Heine University Düsseldorf |
 | 2018 | B.Sc., Computer Science, Heinrich Heine University Düsseldorf |
-| Since 2014 | Research assistant at the department of Psychological Assessment and Differential Psychology, Heinrich Heine University Düsseldorf |
 | 2013 | M.Sc., Psychology, Heinrich Heine University Düsseldorf |
 | 2011 | B.Sc., Psychology, Heinrich Heine University Düsseldorf |
 
