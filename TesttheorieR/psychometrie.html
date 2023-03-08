@@ -811,7 +811,8 @@ sich auch die unkorrigierten und korrigierten Item-Trennschärfen. Im
 Output können wir eine Tabelle Item-Kennwerten betrachten:</p>
 <div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb440-1" title="1"><span class="kw">library</span>(<span class="st">&quot;psych&quot;</span>)</a>
 <a class="sourceLine" id="cb440-2" title="2"><span class="kw">alpha</span>(test_data)</a>
-<a class="sourceLine" id="cb440-3" title="3"><span class="co"># Betrachte hier nur die Tabelle mit den Item-Kennwerten:</span></a></code></pre></div>
+<a class="sourceLine" id="cb440-3" title="3"></a>
+<a class="sourceLine" id="cb440-4" title="4"><span class="co"># Betrachte hier im Output nur die Tabelle mit den Item-Kennwerten:</span></a></code></pre></div>
 <pre><code>        n raw.r std.r r.cor r.drop mean   sd
 Item_1 10  0.51  0.49  0.29   0.23  0.6 0.52
 Item_2 10  0.62  0.68  0.55   0.48  0.1 0.32
@@ -819,9 +820,9 @@ Item_3 10  0.76  0.73  0.65   0.57  0.6 0.52
 Item_4 10  0.89  0.87  0.89   0.78  0.4 0.52
 Item_5 10  0.81  0.82  0.82   0.67  0.3 0.48</code></pre>
 <p>Die Spalte mit der Überschrift <code>raw.r</code> beinhaltet die unkorrigierten
-Trennschärfen der Items, die Spalte mit der Überschrift <code>r.cor</code>
+Trennschärfen der Items, die Spalte mit der Überschrift <code>r.drop</code>
 beinhaltet die korrigierten Trennschärfen. Für Item 2 wird dieselbe
-korrigierte Trennschärfe ausgegeben, die wir
+(hier gerundete) korrigierte Trennschärfe ausgegeben, die wir
 oben <a href="psychometrie.html#trennschaerfe">im Abschnitt zu Item-Trennschärfen</a> per Hand
 berechnet haben. Interessant ist auch die Spalte <code>n</code>, die noch einmal
 aufführt, auf der Basis wievieler Item-Teilnahmen die Werte berechnet
