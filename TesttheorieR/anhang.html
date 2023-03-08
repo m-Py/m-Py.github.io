@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 Anhang | Testtheorie mit R</title>
   <meta name="description" content="8 Anhang | Testtheorie mit R" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 Anhang | Testtheorie mit R" />
   <meta property="og:type" content="book" />
-  
   
   
   
@@ -49,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -208,7 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.1" data-path="psychometrie.html"><a href="psychometrie.html#exkurs-programmatische-untersuchung-der-korrelationsmatrix"><i class="fa fa-check"></i><b>4.3.1</b> Exkurs: Programmatische Untersuchung der Korrelationsmatrix</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="psychometrie.html"><a href="psychometrie.html#trennschaerfe"><i class="fa fa-check"></i><b>4.4</b> Item-Trennschärfen</a></li>
-<li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#cronbachs-alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
+<li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
 <li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilität"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
 <li class="chapter" data-level="4.7" data-path="psychometrie.html"><a href="psychometrie.html#in-der-praxis-nutzung-von-zusatzpaketen"><i class="fa fa-check"></i><b>4.7</b> In der Praxis: Nutzung von Zusatzpaketen</a></li>
 </ul></li>
@@ -274,12 +274,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="anhang" class="section level1">
-<h1><span class="header-section-number">8</span> Anhang</h1>
+<div id="anhang" class="section level1 hasAnchor">
+<h1><span class="header-section-number">8</span> Anhang<a href="anhang.html#anhang" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Dieser Abschnitt arbeitet einige Schwierigkeiten auf, die sich in den
 praktischen Übungen des Seminars ergeben haben.</p>
-<div id="datenEinlesen" class="section level2">
-<h2><span class="header-section-number">8.1</span> Daten einlesen</h2>
+<div id="datenEinlesen" class="section level2 hasAnchor">
+<h2><span class="header-section-number">8.1</span> Daten einlesen<a href="anhang.html#datenEinlesen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Das Einlesen von Daten in <code>R</code> stellt uns vor verschiedene Probleme. Ich
 gehe an dieser Stelle auf ein grundlegendes Problem ein, das sich bei
 dem Einlesen jeglicher Daten stellt (egal ob man SPSS, Excel, csv, oder
@@ -309,13 +309,13 @@ haben, können wir Daten einlesen, die in diesem Ordner liegen. Dafür
 werden wir Funktionen aufrufen, die den Datensatz mit Dateinamen
 ansteuern. Folgender Aufruf etwa könnte eine csv-Datei einlesen und die
 Tabelle als <code>data.frame</code> in der Variablen <code>tp</code> speichern.</p>
-<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb537-1" title="1">tp &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;technophobie.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb533-1" title="1">tp &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;technophobie.csv&quot;</span>)</a></code></pre></div>
 <p>Falls das nicht funktioniert, führt folgenden Befehl aus:</p>
-<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb538-1" title="1"><span class="kw">getwd</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb534-1" title="1"><span class="kw">getwd</span>()</a></code></pre></div>
 <p>Dieser Befehl gibt euch euer „Working Directory“ aus; das ist der
 Ausgangspunkt, von dem aus <code>R</code> nach Dateien sucht. Die Ausgabe des Befehls sollte
 der Ordner sein, in dem ihr die Daten abgelegt habt, mit denen ihr arbeiten
-wollt.<a href="#fn49" class="footnote-ref" id="fnref49"><sup>49</sup></a></p>
+wollt.<a href="#fn48" class="footnote-ref" id="fnref48"><sup>48</sup></a></p>
 <p>Wenn wir schon einmal ein Projekt im Ordner mit unseren Daten angelegt
 haben, können wir das Projekt beim nächsten Mal wieder aufrufen. Dafür
 gehen wir über</p>
@@ -325,14 +325,14 @@ gehen wir über</p>
 <span class="math inline">\(\to\)</span> <em>Projektdatei auswählen</em> (hat die Endung .Rproj)
 <span class="math inline">\(\to\)</span> <em>Öffnen</em></p>
 </div>
-<div id="das-environment-sauber-halten" class="section level2">
-<h2><span class="header-section-number">8.2</span> Das Environment sauber halten</h2>
+<div id="das-environment-sauber-halten" class="section level2 hasAnchor">
+<h2><span class="header-section-number">8.2</span> Das Environment sauber halten<a href="anhang.html#das-environment-sauber-halten" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Wenn wir in <code>R</code> arbeiten, ist es wichtig, dass wir einen Überblick über
 die Variablen haben, die gerade existieren. Im Folgenden beschreibe ich
 ein paar grundlegende Strategien, um unsere <code>R</code>-Arbeitsumgebung
 einigermaßen sauber zu halten.</p>
-<div id="variablen-löschen" class="section level3">
-<h3><span class="header-section-number">8.2.1</span> Variablen löschen</h3>
+<div id="variablen-löschen" class="section level3 hasAnchor">
+<h3><span class="header-section-number">8.2.1</span> Variablen löschen<a href="anhang.html#variablen-löschen" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>RStudio gibt uns in einem Panel oben rechts darüber Auskunft, welche
 Variablen sich in unserem sogenannten <em>Environment</em> befinden. Darin
 kommen alle Variablen vor, die wir irgendwann mit einer Zuweisung
@@ -341,17 +341,17 @@ nützlich zu wissen, wie man einzelne oder alle Variablen wieder
 entfernen kann. Es kann schnell passieren, dass man sehr viele Variablen
 erstellt, über die man sonst die Übersicht verliert.</p>
 <p>Mit der Funktion <code>rm</code> kann man Variablen löschen, etwa:</p>
-<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb539-1" title="1">foo &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb539-2" title="2"><span class="kw">rm</span>(foo)</a></code></pre></div>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb535-1" title="1">foo &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb535-2" title="2"><span class="kw">rm</span>(foo)</a></code></pre></div>
 <p>Möchte man alle Variablen aus dem Environment löschen, kann man den
 Befehl <code>rm(list = ls())</code> verwenden, etwa:</p>
-<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb540-1" title="1">foo &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb540-2" title="2">bar &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb540-3" title="3">gaz &lt;-<span class="st"> </span><span class="kw">mean</span>(bar)</a>
-<a class="sourceLine" id="cb540-4" title="4"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>()) <span class="co"># löscht alles, nur mit Vorsicht verwenden</span></a></code></pre></div>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb536-1" title="1">foo &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb536-2" title="2">bar &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb536-3" title="3">gaz &lt;-<span class="st"> </span><span class="kw">mean</span>(bar)</a>
+<a class="sourceLine" id="cb536-4" title="4"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>()) <span class="co"># löscht alles, nur mit Vorsicht verwenden</span></a></code></pre></div>
 </div>
-<div id="mit-einem-sauberen-environment-starten" class="section level3">
-<h3><span class="header-section-number">8.2.2</span> Mit einem sauberen Environment starten</h3>
+<div id="mit-einem-sauberen-environment-starten" class="section level3 hasAnchor">
+<h3><span class="header-section-number">8.2.2</span> Mit einem sauberen Environment starten<a href="anhang.html#mit-einem-sauberen-environment-starten" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Wenn man RStudio beendet, wird einem von RStudio die Frage gestellt, ob
 man seinen “workspace” abspeichern will. Das kann etwa so aussehen, bei
 euch sieht es gegebenenfalls ein wenig anders aus:</p>
@@ -363,7 +363,7 @@ Variablen, die sich derzeit in unserem Environment befinden. Also alle
 Variablen, die uns oben rechts im Panel auch angezeigt werden. Wenn wir
 zustimmen und das Projekt aus dem Ordner neu laden, werden beim nächsten
 Mal alle Variablen unserer Session neu geladen. Ich rate stark davon ab,
-so zu arbeiten. Ich würde bevorzugen, <strong>immer</strong><a href="#fn50" class="footnote-ref" id="fnref50"><sup>50</sup></a> mit
+so zu arbeiten. Ich würde bevorzugen, <strong>immer</strong><a href="#fn49" class="footnote-ref" id="fnref49"><sup>49</sup></a> mit
 einem leeren Environment zu starten. Der einfachste Weg, um dies zu
 bewerkstelligen, ist immer “Don’t save” auszuwählen, wenn man gefragt
 wird. Wenn man aus Versehen mal auf “Save” geklickt hat, kann man das
@@ -376,14 +376,14 @@ heißen).</p>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="49">
-<li id="fn49"><p>Zumindest gilt das, wenn ihr im Befehl, der die Daten einliest
+<ol start="48">
+<li id="fn48"><p>Zumindest gilt das, wenn ihr im Befehl, der die Daten einliest
 (oben etwa <code>read.csv()</code>) nur den Dateinamen annimmt und keine weiteren Angaben
-zum Ordner, in dem die Daten liegen.<a href="anhang.html#fnref49" class="footnote-back">↩</a></p></li>
-<li id="fn50"><p>Natürlich gibt es auch hier Ausnahmen. Wenn ihr
+zum Ordner, in dem die Daten liegen.<a href="anhang.html#fnref48" class="footnote-back">↩</a></p></li>
+<li id="fn49"><p>Natürlich gibt es auch hier Ausnahmen. Wenn ihr
 selber einen Grund findet, aus dem es für euch doch gut ist, die
 Variablen abzuspeichern – etwa weil das Dateneinlesen sonst sehr lange
-dauert –, dann macht bitte das, was für euch sinnvoll ist.<a href="anhang.html#fnref50" class="footnote-back">↩</a></p></li>
+dauert –, dann macht bitte das, was für euch sinnvoll ist.<a href="anhang.html#fnref49" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -449,7 +449,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

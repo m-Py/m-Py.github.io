@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Vektoren | Testtheorie mit R</title>
   <meta name="description" content="2 Vektoren | Testtheorie mit R" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Vektoren | Testtheorie mit R" />
   <meta property="og:type" content="book" />
-  
   
   
   
@@ -49,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -208,7 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.1" data-path="psychometrie.html"><a href="psychometrie.html#exkurs-programmatische-untersuchung-der-korrelationsmatrix"><i class="fa fa-check"></i><b>4.3.1</b> Exkurs: Programmatische Untersuchung der Korrelationsmatrix</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="psychometrie.html"><a href="psychometrie.html#trennschaerfe"><i class="fa fa-check"></i><b>4.4</b> Item-Trennschärfen</a></li>
-<li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#cronbachs-alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
+<li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
 <li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilität"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
 <li class="chapter" data-level="4.7" data-path="psychometrie.html"><a href="psychometrie.html#in-der-praxis-nutzung-von-zusatzpaketen"><i class="fa fa-check"></i><b>4.7</b> In der Praxis: Nutzung von Zusatzpaketen</a></li>
 </ul></li>
@@ -274,8 +274,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="vektoren" class="section level1">
-<h1><span class="header-section-number">2</span> Vektoren</h1>
+<div id="vektoren" class="section level1 hasAnchor">
+<h1><span class="header-section-number">2</span> Vektoren<a href="vektoren.html#vektoren" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Die einfachste und wichtigste Datenstruktur von <code>R</code> ist der
 <em>Vektor</em>. Ein Vektor ist beispielsweise eine einzelne Zahl wie in den
 Taschenrechner-Berechnungen in Kapitel 1. So gilt für die Berechnung
@@ -441,8 +441,8 @@ sein kann. Die Funktionen <code>mean()</code> und <code>sum()</code> ergeben etw
 Länge 1, da sie genau einen Kennwert bestimmen. Die Funktionen <code>sort()</code>,
 <code>sqrt()</code> und <code>round()</code> geben hingegen einen Vektor zurück, der aus
 genauso vielen Elementen besteht wie der Eingabevektor.</p>
-<div id="vektorisierung" class="section level2">
-<h2><span class="header-section-number">2.1</span> Vektorisierung</h2>
+<div id="vektorisierung" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.1</span> Vektorisierung<a href="vektoren.html#vektorisierung" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Basale mathematische Berechnungen werden gleich auf alle Elemente
 eines Vektors angewendet:</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
@@ -474,8 +474,8 @@ beobachten, was passiert.</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>) <span class="op">*</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span></a>
 <a class="sourceLine" id="cb51-2" title="2"><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>) <span class="op">*</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></a></code></pre></div>
 </div>
-<div id="variablen" class="section level2">
-<h2><span class="header-section-number">2.2</span> Variablen</h2>
+<div id="variablen" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.2</span> Variablen<a href="vektoren.html#variablen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Wir wollen unsere Daten nicht nur in der Konsole ausgeben lassen,
 sondern auch abspeichern und damit arbeiten. Ein essentieller
 Bestandteil einer jeden Programmiersprache ist es, Daten in Variablen
@@ -523,8 +523,8 @@ Das funktioniert genauso wie mit <code>&lt;-</code>:</p>
 <code>&lt;-</code> zu verwenden, die ich in diesem Skript auch befolgen werde. In
 vielen anderen Programmiersprachen werden Variablen mit Gleichzeichen
 zugewiesen.</p>
-<div id="ausgabevsabspeichern" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> Ausgabe versus Abspeichern</h3>
+<div id="ausgabevsabspeichern" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.1</span> Ausgabe versus Abspeichern<a href="vektoren.html#ausgabevsabspeichern" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Wir haben jetzt zwei verschiedene Möglichkeiten kennengelernt,
 Objekte<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> in <code>R</code> zu verwenden:</p>
 <ol style="list-style-type: decimal">
@@ -566,8 +566,8 @@ einer Variablen speichern. Beide Verwendungszwecke sind denkbar:
 Manchmal benötige ich nur die Ausgabe einer Berechnung, manchmal möchte
 ich das Ergebnis abspeichern.</p>
 </div>
-<div id="variablennamen" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> Variablennamen</h3>
+<div id="variablennamen" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.2</span> Variablennamen<a href="vektoren.html#variablennamen" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Generell bestehen Variablennamen aus Buchstaben und Zahlen und
 den Zeichen <code>.</code> und <code>_</code>. Folgende Einschränkungen sind zu beachten:</p>
 <ul>
@@ -634,8 +634,8 @@ entscheidet.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
 <a class="sourceLine" id="cb69-7" title="7">meanage  &lt;-<span class="st"> </span><span class="kw">mean</span>(age)</a></code></pre></div>
 </div>
 </div>
-<div id="datentypen-von-vektoren" class="section level2">
-<h2><span class="header-section-number">2.3</span> Datentypen von Vektoren</h2>
+<div id="datentypen-von-vektoren" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.3</span> Datentypen von Vektoren<a href="vektoren.html#datentypen-von-vektoren" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In <code>R</code> hat jeder Vektor genau einen Datentyp. Bis jetzt haben wir nur
 mit dem Datentyp Zahl gearbeitet, der in <code>R</code> „<code>numeric</code>“ heißt. Der
 Datentyp eines Vektors bestimmt, was für Operationen wir damit
@@ -646,8 +646,8 @@ multiplizieren und so weiter. Mit der Funktion <code>mode</code> können wir
 <pre><code>[1] &quot;numeric&quot;</code></pre>
 <p>In diesem Abschnitt werden weitere Datentypen behandelt, die wir nutzen,
 um unterschiedliche Informationen darzustellen.</p>
-<div id="character" class="section level3">
-<h3><span class="header-section-number">2.3.1</span> <code>character</code></h3>
+<div id="character" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.3.1</span> <code>character</code><a href="vektoren.html#character" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Der Datentyp für Text heißt <code>character</code>. Text wird mit doppelten oder
 einfachen Anführungszeichen angegeben:</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"><span class="st">&quot;Hallo Welt!&quot;</span> <span class="co"># doppelte Anführungszeichen</span></a></code></pre></div>
@@ -667,8 +667,8 @@ verwenden; im Speziellen werden wir sie einsetzen, um Spalten in Datentabellen
 zu adressieren, da Spalten normalerweise per Namen angesteuert werden (siehe
 <a href="dataframes.html#datenzugriffe">Kapitel 3</a>).</p>
 </div>
-<div id="logical" class="section level3">
-<h3><span class="header-section-number">2.3.2</span> <code>logical</code></h3>
+<div id="logical" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.3.2</span> <code>logical</code><a href="vektoren.html#logical" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Es hat sich als nützlich erwiesen, einen Datentyp einzuführen, der
 „Wahrheit“ kodiert. Dieser Datentyp wird in <code>R</code> “logical” genannt; er
 kennt nur die Ausprägungen <code>TRUE</code> und <code>FALSE</code>. Eine sonst gängige
@@ -733,8 +733,8 @@ abstrakt eingeführt werden, werden wir in weiteren Abschnitten (<a href="vektor
 wir logische Bedingungen verwenden, um gezielt Daten mit bestimmten
 Eigenschaften auszuwählen.</p>
 </div>
-<div id="factor" class="section level3">
-<h3><span class="header-section-number">2.3.3</span> <code>factor</code></h3>
+<div id="factor" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.3.3</span> <code>factor</code><a href="vektoren.html#factor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Vektoren vom Typ <code>factor</code> stellen kategoriale Variablen dar – etwa die
 unabhängigen Variablen in einer Varianzanalyse. Mithilfe der Funktion
 <code>factor()</code> können wir einen Vektor vom Typ <code>factor</code> erstellen:</p>
@@ -755,7 +755,7 @@ in den Typ <code>factor</code> um. Das heißt: Den numerischen Kategorien (1, 2 
 umgesetzt durch unterschiedlich fröhliche Smileys. Es macht nur dann
 Sinn einen Vektor vom Typ <code>factor</code> anzulegen, wenn eine numerische
 Variable eine vordefinierte Zahl an Ausprägungen aufweist. Welche
-Ausprägungen im Eingangsvektor in diesem Fall möglich sind habe ich mit
+Ausprägungen im Eingangsvektor in diesem Fall möglich sind, habe ich mit
 dem zweiten Argument – <code>1:3</code> – spezifiziert.</p>
 <p>Die Darstellung als <code>factor</code> ist für Menschen besser zu verarbeiten als
 numerische Kategorien. Die Bedeutung der numerischen Kodierung stellt
@@ -789,8 +789,8 @@ ist, dass wir Faktoren normalerweise erhalten, indem wir eine numerische
 Kodierung in eine für Menschen verständliche verbale Beschreibung
 umwandeln.</p>
 </div>
-<div id="na" class="section level3">
-<h3><span class="header-section-number">2.3.4</span> <code>NA</code></h3>
+<div id="na" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.3.4</span> <code>NA</code><a href="vektoren.html#na" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>R</code> hat einen eigenen Datentyp, um fehlende Werte zu kodieren:
 <code>NA</code>.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> Da wir mit echten Datensätzen arbeiten, die oftmals „messy“
 sind, also nicht notwendigerweise vollständig, ist diese Eigenschaft
@@ -819,8 +819,8 @@ benennen kann (per “<code>na.rm =</code>”), was wir aber nicht immer machen.
 diesem Thema mehr in <a href="dataframes.html#subset">Kapitel 3</a>.</p>
 </div>
 </div>
-<div id="logischevergleiche" class="section level2">
-<h2><span class="header-section-number">2.4</span> Logische Vergleiche</h2>
+<div id="logischevergleiche" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.4</span> Logische Vergleiche<a href="vektoren.html#logischevergleiche" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Wir können in <code>R</code> mithilfe von logischen Abfragen überprüfen, ob die
 Elemente in einem Vektor bestimmte Eigenschaften aufweisen. So können
 wir beispielsweise erfragen, welche Werte eines numerischen Vektors (a)
@@ -859,8 +859,8 @@ einer Fehlermeldung bemerkt, da der Befehl <em>syntaktisch</em> korrekt ist. Es
 ist jedoch problematisch, dass ich an dieser Stelle meine Daten mit
 einem irrelevanten Wert überschrieben habe, und das bei einem späteren
 Zugriff darauf vermutlich nicht beachten werde.</p>
-<div id="logische-vergleiche-mit-vektoren-vom-typ-character" class="section level3">
-<h3><span class="header-section-number">2.4.1</span> Logische Vergleiche mit Vektoren vom Typ <code>character</code></h3>
+<div id="logische-vergleiche-mit-vektoren-vom-typ-character" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.4.1</span> Logische Vergleiche mit Vektoren vom Typ <code>character</code><a href="vektoren.html#logische-vergleiche-mit-vektoren-vom-typ-character" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Welche logischen Vergleiche möglich sind, hängt vom Datentyp eines
 Vektors ab. Für Vektoren vom Typ <code>character</code> etwa macht eine
 Kleiner/Größer-Abfrage keinen Sinn, jedoch eine Abfrage auf Gleichheit:</p>
@@ -882,8 +882,8 @@ gesetzt:</p>
 <a class="sourceLine" id="cb130-7" title="7">geschlecht <span class="op">==</span><span class="st"> &quot;maennlich&quot;</span></a></code></pre></div>
 <pre><code>[1] FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE</code></pre>
 </div>
-<div id="komponentenweise-vergleiche" class="section level3">
-<h3><span class="header-section-number">2.4.2</span> Komponentenweise Vergleiche</h3>
+<div id="komponentenweise-vergleiche" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.4.2</span> Komponentenweise Vergleiche<a href="vektoren.html#komponentenweise-vergleiche" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Wenn zwei Vektoren gleicher Länge mit logischen Operatoren verglichen
 werden, werden die Elemente komponentenweise verglichen:</p>
 <div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" title="1">score_test1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">19</span>, <span class="dv">44</span>, <span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">22</span>)</a>
@@ -902,8 +902,8 @@ verbinden:</p>
 <p>Es macht an dieser Stelle Sinn, darüber nachzudenken, wie diese Ausgabe
 zustande kommt.</p>
 </div>
-<div id="anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen" class="section level3">
-<h3><span class="header-section-number">2.4.3</span> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen</h3>
+<div id="anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.4.3</span> Anwendungsbeispiel: Überprüfe das Gesetz der großen Zahlen<a href="vektoren.html#anwendungsbeispiel-überprüfe-das-gesetz-der-großen-zahlen" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Häufig verwendet man die Vergleichsoperatoren, um zu prüfen, wie viele
 Daten eine bestimmte Eigenschaft erfüllen. Dafür können wir die
 Vergleichsoperatoren mit den Funktionen <code>sum()</code> oder <code>mean()</code>
@@ -971,8 +971,7 @@ dafür ist folgender: Für eine Variable, bei der die Werte nur 1 oder 0
 annehmen können (analog in R: <code>TRUE</code>/<code>FALSE</code>), entspricht der Mittelwert
 dieser Variablen dem relativen Anteil der Werte, die 1 bzw. <code>TRUE</code> sind.
 Als Beispiel betrachten wir den folgenden Vektor:</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" title="1">beispiel_<span class="dv">01</span> &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb148-2" title="2"><span class="kw">mean</span>(beispiel_<span class="dv">01</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" title="1"><span class="kw">mean</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a></code></pre></div>
 <pre><code>[1] 0.75</code></pre>
 <p>Der Mittelwert des Vektors ist <code>(1 + 0 + 1 + 1) / 4</code>, also 0.75 – und
 damit genau der relative Anteil der 1-Elemente. Dies ist eine praktische
@@ -1007,8 +1006,8 @@ wenn ihr mehrfach <code>mean(rnorm(1000) &gt; 1)</code> und <code>mean(rnorm(100
 in die <code>R</code>-Konsole eingebt und beobachtet, welcher Wert häufiger näher
 an 0.159 liegt.</p>
 </div>
-<div id="nalogik" class="section level3">
-<h3><span class="header-section-number">2.4.4</span> Logische Operationen mit <code>NA</code></h3>
+<div id="nalogik" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.4.4</span> Logische Operationen mit <code>NA</code><a href="vektoren.html#nalogik" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Oftmals will man herausfinden, ob in Vektoren fehlende Werte vorliegen (also ob
 einige Elemente darin <code>NA</code> sind). Die Funktion <code>is.na()</code> führt eine logische
 Abfrage durch, die für jedes Element in einem Vektor überprüft, ob es <code>NA</code> ist.</p>
@@ -1053,8 +1052,8 @@ können wir auch nachvollziehen, was passiert, wenn wir <code>FALSE</code> mit <
 per UND und ODER verknüpfen: <code>FALSE | NA</code> ergibt <code>NA</code>, <code>FALSE &amp; NA</code>
 ergibt <code>FALSE</code>.</p>
 </div>
-<div id="der-in-operator" class="section level3">
-<h3><span class="header-section-number">2.4.5</span> Der <code>%in%</code>-Operator</h3>
+<div id="der-in-operator" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.4.5</span> Der <code>%in%</code>-Operator<a href="vektoren.html#der-in-operator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Um zu testen, ob ein oder mehrere Elemente in einem Vektor enthalten
 sind, kann man den <code>%in%</code>-Operator verwenden. Der sieht zwar
 gewöhnungsbedürftig aus, ist aber einfach zu verwenden und hat auch eine
@@ -1085,16 +1084,16 @@ Ausgabevektors entspricht der Länge des Vektors auf der linken Seite von
 <code>%in%</code>.</p>
 </div>
 </div>
-<div id="zugriff-auf-vektorelemente" class="section level2">
-<h2><span class="header-section-number">2.5</span> Zugriff auf Vektorelemente</h2>
+<div id="zugriff-auf-vektorelemente" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.5</span> Zugriff auf Vektorelemente<a href="vektoren.html#zugriff-auf-vektorelemente" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Der Zugriff auf Daten ist ein wichtiger Abschnitt unserer Einleitung in
 die Grundlagen von <code>R</code>. In diesem Abschnitt lernen wir, wie wir Elemente
 aus Vektoren „herausgreifen“ können und wie wir einzelne Elemente in
 einem Vektor ändern können. In <a href="dataframes.html#datenzugriffe">Kapitel 3</a> wird als
 Fortführung behandelt, wie wir Daten aus Tabellen (wie wir sie etwa aus
 Excel kennen) auswählen können.</p>
-<div id="veczugriff" class="section level3">
-<h3><span class="header-section-number">2.5.1</span> Der <code>[·]</code>-Zugriff</h3>
+<div id="veczugriff" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.1</span> Der <code>[·]</code>-Zugriff<a href="vektoren.html#veczugriff" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Daten können mit dem <code>[·]</code>-Zugriff<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> <em>indexbasiert</em> aus
 Vektoren ausgewählt werden. Jedes Element im Vektor hat einen <em>Index</em>,
 der seiner Position im Vektor entspricht. Im folgenden Vektor etwa hat
@@ -1119,8 +1118,8 @@ nutzen wir die Funktion <code>c()</code>:</p>
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1">daten[<span class="op">-</span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)]</a></code></pre></div>
 <pre><code>[1] 2</code></pre>
 </div>
-<div id="logischerZugriff" class="section level3">
-<h3><span class="header-section-number">2.5.2</span> <code>[·]</code>-Zugriff mit einem logischen Vektor</h3>
+<div id="logischerZugriff" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.2</span> <code>[·]</code>-Zugriff mit einem logischen Vektor<a href="vektoren.html#logischerZugriff" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Anstatt direkt den Index eines Elements zu übergeben – den wir häufig
 nicht wissen, da wir bei vielen Daten nicht den Überblick über die
 Position aller einzelnen Datenpunkte behalten – möchten wir häufig
@@ -1161,12 +1160,12 @@ um Daten anhand verschiedener Kriterien auszuwählen:</p>
 <pre><code>[1] 3.196362 2.386513 2.791331 2.123950</code></pre>
 <p>An dieser Stelle sollte man sich klar machen, warum <code>daten</code> sowohl vor
 als auch innerhalb der <code>[·]</code> Klammern vorkommt. Das ist prinzipiell
-dasselbe wie im Beispiel <code>meinVektor[auswahl]</code> oben, nur das ich dort
+dasselbe wie im Beispiel <code>meinVektor[auswahl]</code> oben, nur, dass ich dort
 den <code>TRUE/FALSE</code> Vektor, der die Daten ausgewählt hat, in einer
 Variablen – <code>auswahl</code> – zwischengespeichert habe.</p>
 </div>
-<div id="vektorAendern" class="section level3">
-<h3><span class="header-section-number">2.5.3</span> <code>[·]</code>-Zugriff zum Ändern von Daten</h3>
+<div id="vektorAendern" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.3</span> <code>[·]</code>-Zugriff zum Ändern von Daten<a href="vektoren.html#vektorAendern" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Wir sind mit dem <code>[·]</code>-Zugriff nicht darauf beschränkt Elemente aus
 Vektoren auszulesen, sondern wir können auf diese Weise auch einzelne
 Elemente im Vektor verändern:</p>
@@ -1217,8 +1216,8 @@ dem Narcissistic Personality Inventory nicht auswerten können. Bevor
 die Analyse startet, müssen fehlende Werte gekennzeichnet werden.</p>
 </div>
 </div>
-<div id="praezedenz" class="section level2">
-<h2><span class="header-section-number">2.6</span> Präzedenz</h2>
+<div id="praezedenz" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.6</span> Präzedenz<a href="vektoren.html#praezedenz" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Durch Klammerung können wir die <em>Präzedenz</em> von <code>R</code>-Befehlen steuern.
 Präzendenz bezieht sich auf die Reihenfolge, in der <code>R</code>-Befehle
 ausgeführt werden. Betrachten wir das folgende Beispiel:</p>
@@ -1276,8 +1275,8 @@ existiert. Stattdessen erhalten wir einfach wieder <code>10</code>:</p>
 </div>
 
 </div>
-<div id="zusammenfassung" class="section level2">
-<h2><span class="header-section-number">2.7</span> Zusammenfassung</h2>
+<div id="zusammenfassung" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.7</span> Zusammenfassung<a href="vektoren.html#zusammenfassung" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>Wir haben die grundlegendste Datenstruktur von <code>R</code>, den Vektor, kennengelernt</li>
 <li>Vektoren enthalten beliebig viele Elemente gleichartiger Daten, etwa
@@ -1302,8 +1301,8 @@ auswählen will (“Negativauswahl”)</li>
 </ul></li>
 </ul>
 </div>
-<div id="fragen-zum-vertiefenden-verständnis" class="section level2">
-<h2><span class="header-section-number">2.8</span> Fragen zum vertiefenden Verständnis</h2>
+<div id="fragen-zum-vertiefenden-verständnis" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.8</span> Fragen zum vertiefenden Verständnis<a href="vektoren.html#fragen-zum-vertiefenden-verständnis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
 <li>Wie berechnet man den Standardfehler von <code>1:10</code>?</li>
 <li>Was für Objekte nimmt die Funktion <code>c()</code> entgegen, und was gibt sie
@@ -1433,7 +1432,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

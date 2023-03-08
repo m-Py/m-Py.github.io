@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 data.frames | Testtheorie mit R</title>
   <meta name="description" content="3 data.frames | Testtheorie mit R" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 data.frames | Testtheorie mit R" />
   <meta property="og:type" content="book" />
-  
   
   
   
@@ -49,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -208,7 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.1" data-path="psychometrie.html"><a href="psychometrie.html#exkurs-programmatische-untersuchung-der-korrelationsmatrix"><i class="fa fa-check"></i><b>4.3.1</b> Exkurs: Programmatische Untersuchung der Korrelationsmatrix</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="psychometrie.html"><a href="psychometrie.html#trennschaerfe"><i class="fa fa-check"></i><b>4.4</b> Item-Trennschärfen</a></li>
-<li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#cronbachs-alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
+<li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
 <li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilität"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
 <li class="chapter" data-level="4.7" data-path="psychometrie.html"><a href="psychometrie.html#in-der-praxis-nutzung-von-zusatzpaketen"><i class="fa fa-check"></i><b>4.7</b> In der Praxis: Nutzung von Zusatzpaketen</a></li>
 </ul></li>
@@ -274,8 +274,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="dataframes" class="section level1">
-<h1><span class="header-section-number">3</span> <code>data.frames</code></h1>
+<div id="dataframes" class="section level1 hasAnchor">
+<h1><span class="header-section-number">3</span> <code>data.frames</code><a href="dataframes.html#dataframes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Wir haben gelernt, dass <code>R</code> Daten in Vektoren abspeichert. Im Normalfall
 haben wir in der psychometrischen Datenauswertung aber eine große
 Datenmenge vorliegen, die wir nicht sinnvoll als einzelnen Vektor
@@ -292,8 +292,8 @@ Person.</p>
 ist, vereinfacht gesagt, eine Sammlung von Vektoren gleicher Länge.
 Jede Spalte – also jede Messvariable – ist ein Vektor. Mit dieser
 Datenstruktur werden wir uns im vorliegenden Kapitel auseinandersetzen.</p>
-<div id="die-funktion-data.frame" class="section level2">
-<h2><span class="header-section-number">3.1</span> Die Funktion <code>data.frame()</code></h2>
+<div id="die-funktion-data.frame" class="section level2 hasAnchor">
+<h2><span class="header-section-number">3.1</span> Die Funktion <code>data.frame()</code><a href="dataframes.html#die-funktion-data.frame" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Mit der Funktion <code>data.frame()</code> können wir “händisch” einen <code>data.frame</code>
 erstellen.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> Die folgende unscheinbare Tabelle wird uns durch
 einen Großteil des Kapitels begleiten, um Grundlagen von
@@ -326,8 +326,8 @@ abrufen:</p>
 <div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" title="1"><span class="kw">names</span>(mdf)</a></code></pre></div>
 <pre><code>[1] &quot;Fallnummer&quot; &quot;Item1&quot;      &quot;Item2&quot;      &quot;Alter&quot;      &quot;Geschlecht&quot;</code></pre>
 </div>
-<div id="zugriff-auf-eine-einzelne-spalte-die--notation" class="section level2">
-<h2><span class="header-section-number">3.2</span> Zugriff auf eine einzelne Spalte: die <code>$</code>-Notation</h2>
+<div id="zugriff-auf-eine-einzelne-spalte-die--notation" class="section level2 hasAnchor">
+<h2><span class="header-section-number">3.2</span> Zugriff auf eine einzelne Spalte: die <code>$</code>-Notation<a href="dataframes.html#zugriff-auf-eine-einzelne-spalte-die--notation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Der <code>$</code>-Zugriff ist die grundlegendste Operation auf <code>data.frames</code>. Wir
 nutzen ihn, um auf einzelne Spalten zuzugreifen und diese <strong>als Vektor</strong>
 auszulesen:</p>
@@ -391,8 +391,8 @@ mehreren Variablen zu erfragen:</p>
   m    2     0     1
   w    0     2     0</code></pre>
 </div>
-<div id="datenzugriffe" class="section level2">
-<h2><span class="header-section-number">3.3</span> Zugriff auf Spalten und Zeilen: die <code>[·,·]</code>-Notation</h2>
+<div id="datenzugriffe" class="section level2 hasAnchor">
+<h2><span class="header-section-number">3.3</span> Zugriff auf Spalten und Zeilen: die <code>[·,·]</code>-Notation<a href="dataframes.html#datenzugriffe" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Einzelne Spalten können wir mit dem <code>$</code>-Zugriff aus <code>data.frames</code>
 auslesen. Wir lernen nun den <code>[·,·]</code>-Zugriff kennen, mit dem wir nicht
 nur einzelne Spalten, sondern beliebige Spalten und Zeilen aus
@@ -443,8 +443,8 @@ Vektors vom Typ <code>character</code> – adressiert; Zeilen werden am häufigs
 durch einen logischen Ausdruck – also durch Angabe eines einen Vektors
 vom Typ <code>logical</code> – adressiert (“Gib mir alle Fälle aus, die eine
 bestimmte Eigenschaft aufweisen.”).</p>
-<div id="spaltenauswahl-von-items-mit-der-funktion-paste0" class="section level3">
-<h3><span class="header-section-number">3.3.1</span> Spaltenauswahl von Items mit der Funktion <code>paste0()</code></h3>
+<div id="spaltenauswahl-von-items-mit-der-funktion-paste0" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.3.1</span> Spaltenauswahl von Items mit der Funktion <code>paste0()</code><a href="dataframes.html#spaltenauswahl-von-items-mit-der-funktion-paste0" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Die Funktion <code>paste0()</code> kann genutzt werden, um effizient Spaltennamen zu
 erstellen, wenn die Spaltennamen einem bestimmten Schema folgen, wie es
 bei der Benennung von Fragebogen-Items oftmals der Fall ist. Sie erstellt
@@ -488,8 +488,8 @@ Dazu verwendet <code>paste()</code> das benannte Argument <code>sep</code>:</p>
 auch komponentenweise, verknüfen also gleich lange Eingabevektoren paarweise
 anhand der Position ihrer Elemente.</p>
 </div>
-<div id="spaltenauswahl-von-items-mit-der-funktion-grepl" class="section level3">
-<h3><span class="header-section-number">3.3.2</span> Spaltenauswahl von Items mit der Funktion <code>grepl()</code></h3>
+<div id="spaltenauswahl-von-items-mit-der-funktion-grepl" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.3.2</span> Spaltenauswahl von Items mit der Funktion <code>grepl()</code><a href="dataframes.html#spaltenauswahl-von-items-mit-der-funktion-grepl" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Die Funktion <code>grepl()</code> kann ebenfalls genutzt werden, um gezielt Spalten
 auszuwählen, deren Namen einem gewissen Format entsprechen. Sie nimmt (als
 zweites Argument) einen Vektor vom Typ <code>character</code> entgegen und vergleicht darin
@@ -518,8 +518,8 @@ geboten, dass wirklich nur die gewünschten Spalten ausgewählt werden und nicht
 andere, die zufällig denselben Stamm enthalten, aber nicht in der Ausgabemenge
 erwünscht sind.</p>
 </div>
-<div id="komplexere-logische-operationen-zur-zeilenauswahl" class="section level3">
-<h3><span class="header-section-number">3.3.3</span> Komplexere logische Operationen zur Zeilenauswahl</h3>
+<div id="komplexere-logische-operationen-zur-zeilenauswahl" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.3.3</span> Komplexere logische Operationen zur Zeilenauswahl<a href="dataframes.html#komplexere-logische-operationen-zur-zeilenauswahl" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Durch die UND- bzw. ODER-Operationen können wir auch komplexere logische
 Bedingungen zur Auswahl von Fällen formulieren:</p>
 <div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb262-1" title="1">mdf[mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span> <span class="op">|</span><span class="st"> </span>mdf<span class="op">$</span>Augenfarbe <span class="op">==</span><span class="st"> &quot;braun&quot;</span>, ]</a></code></pre></div>
@@ -556,8 +556,8 @@ angegeben werden. Im nächsten Abschnitt lernen wir mit der Funktion <code>subse
 eine Möglichkeit kennen, komplexere logische Anfragen zur Zeilenauswahl noch
 etwas prägnanter zu formulieren.</p>
 </div>
-<div id="weitere-beispiele-zur-verwendung-der--notation" class="section level3">
-<h3><span class="header-section-number">3.3.4</span> Weitere Beispiele zur Verwendung der <code>[·,·]</code>-Notation</h3>
+<div id="weitere-beispiele-zur-verwendung-der--notation" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.3.4</span> Weitere Beispiele zur Verwendung der <code>[·,·]</code>-Notation<a href="dataframes.html#weitere-beispiele-zur-verwendung-der--notation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Zum Abschluss dieses Abschnitts betrachten wir noch
 einige weitere Beispiele für die verschiedenen Auswahlmöglichkeiten per
 <code>[·,·]</code>:</p>
@@ -616,8 +616,8 @@ einige weitere Beispiele für die verschiedenen Auswahlmöglichkeiten per
 </div>
 </div>
 </div>
-<div id="subset" class="section level2">
-<h2><span class="header-section-number">3.4</span> Die Funktion <code>subset()</code></h2>
+<div id="subset" class="section level2 hasAnchor">
+<h2><span class="header-section-number">3.4</span> Die Funktion <code>subset()</code><a href="dataframes.html#subset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In diesem Abschnitt lernen wir die Funktion <code>subset()</code> kennen, die wir
 ebenfalls verwenden können, um Zeilen und Spalten aus <code>data.frames</code>
 auszulesen. Ganz ähnlich zur <code>[·,·]</code>-Notation funktioniert etwa der
@@ -626,7 +626,7 @@ folgende Aufruf:</p>
 <pre><code>  Item1 Augenfarbe
 2     0       blau
 3     0       blau</code></pre>
-<p>Als erstes Argument nimmt die Funktion <code>subset()</code> immer den <code>data.frame</code>
+<p>Als erstes Argument nimmt die Funktion <code>subset()</code> den <code>data.frame</code>
 an, aus dem wir Daten auslesen wollen. Danach folgen Argumente zur
 Auswahl von Zeilen und zur Auswahl von Spalten.</p>
 <p>Wie hier angewendet, ist durch die Funktion <code>subset()</code> im Vergleich zur
@@ -641,8 +641,8 @@ vereinfacht:</p>
 dieser Abschnitt einen ersten theoretischen Überblick über die
 <a href="dataframes.html#teaserfunktionen">Arbeitsweise von Funktionen in <code>R</code></a>, der in <a href="funktionen.html#funktionen">Kapitel
 6</a> vertieft wird.</p>
-<div id="zeileneinfach" class="section level3">
-<h3><span class="header-section-number">3.4.1</span> Vereinfachte Zeilenauswahl</h3>
+<div id="zeileneinfach" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.4.1</span> Vereinfachte Zeilenauswahl<a href="dataframes.html#zeileneinfach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Die Funktion <code>subset()</code> erlaubt uns logische Bedingungen für die
 Zeilenauswahl zu formulieren, ohne die <code>$</code>-Notation zu verwenden:</p>
 <div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb286-1" title="1"><span class="kw">subset</span>(mdf, Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>)</a></code></pre></div>
@@ -667,8 +667,8 @@ praktisch, nicht mehrfach die <code>$</code>-Notation verwenden zu müssen:</p>
 <pre><code>  Fallnummer Item1 Item2 Alter Geschlecht Augenfarbe Testscore
 2          2     0     1    14          m       blau         1</code></pre>
 </div>
-<div id="teaserfunktionen" class="section level3">
-<h3><span class="header-section-number">3.4.2</span> Funktionsargumente</h3>
+<div id="teaserfunktionen" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.4.2</span> Funktionsargumente<a href="dataframes.html#teaserfunktionen" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Die Funktion <code>subset()</code> nimmt optional ein drittes Argument an, das
 auszulesende Spalten adressiert:</p>
 <div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" title="1"><span class="kw">subset</span>(mdf, Augenfarbe <span class="op">==</span><span class="st"> &quot;blau&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Item1&quot;</span>, <span class="st">&quot;Augenfarbe&quot;</span>))</a></code></pre></div>
@@ -716,7 +716,7 @@ wir mit dem <code>?</code>-Operator die <code>R</code>-Hilfe anfordern:</p>
 Anfänger. Sie ist die offizielle Dokumentation von Funktionen und legt
 deswegen zwar großen Wert auf technische Genauigkeit, ist aber nicht
 immer sonderlich ausführlich oder gar verständlich. Wir werden in
-<a href="funktionen.html#funktionen">Kapitel 5</a> bei einer ausführlicheren Besprechung von
+<a href="funktionen.html#funktionen">Kapitel 6</a> bei einer ausführlicheren Besprechung von
 Funktionen noch einmal darauf zurückkommen, wie wir mit der
 <code>R</code>-Hilfe umgehen können.</p>
 <p>Wenn wir die Namen der Argumente kennen, können wir die Funktion
@@ -766,8 +766,8 @@ Auswahl der Zeilen erwartet hätte.</p>
 </p>
 </div>
 </div>
-<div id="spalteneinfach" class="section level3">
-<h3><span class="header-section-number">3.4.3</span> Sonderregeln zur Auswahl von Spalten</h3>
+<div id="spalteneinfach" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.4.3</span> Sonderregeln zur Auswahl von Spalten<a href="dataframes.html#spalteneinfach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Die Funktion <code>subset()</code> bietet einige Sonderregeln zur Auswahl von
 Spalten, die über die Angabe der Spaltennamen per <code>character</code>-Vektor
 hinausgehen, wie wir sie von der <code>[·,·]</code>-Notation kennen. Zunächst
@@ -813,8 +813,8 @@ wollen:</p>
 4          4     1     0      braun         1
 5          5     1     1      gruen         2</code></pre>
 </div>
-<div id="non-standard-evaluation" class="section level3">
-<h3><span class="header-section-number">3.4.4</span> Non-Standard-Evaluation</h3>
+<div id="non-standard-evaluation" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.4.4</span> Non-Standard-Evaluation<a href="dataframes.html#non-standard-evaluation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Wie schafft es die Funktion <code>subset()</code>, dass wir etwa wie folgt Spalten in einem
 <code>data.frame</code> – ohne Anführungszeichen und ohne die <code>$</code>-Notation – ansteuern
 können:</p>
@@ -859,8 +859,8 @@ Thema liefern.</p>
 </p>
 </div>
 </div>
-<div id="subsettoll" class="section level3">
-<h3><span class="header-section-number">3.4.5</span> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl</h3>
+<div id="subsettoll" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.4.5</span> Umgang mit <code>NA</code>: <code>subset()</code> bevorzugt zur Zeilenauswahl<a href="dataframes.html#subsettoll" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Die Funktion <code>subset()</code> bietet uns nicht nur syntaktische Vereinfachungen zur
 Auswahl von Zeilen und Spalten. Darüber hinaus ist auch das Verhalten von
 <code>subset()</code> manchmal gegenüber dem <code>[·,·]</code>-Zugriff zu bevorzugen, zumindest was
@@ -943,8 +943,8 @@ ergibt. Die Funktion <code>which()</code> ist also bevorzugt zu nutzen, wenn feh
 vorliegen.</p>
 </div>
 </div>
-<div id="doppelteckig" class="section level2">
-<h2><span class="header-section-number">3.5</span> Weitere Zugriffe auf <code>data.frames</code></h2>
+<div id="doppelteckig" class="section level2 hasAnchor">
+<h2><span class="header-section-number">3.5</span> Weitere Zugriffe auf <code>data.frames</code><a href="dataframes.html#doppelteckig" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Dieser Abschnitt behandelt zwei weitere Möglichkeiten, mit eckigen
 Klammern auf Spalten in <code>data.frames</code> zuzugreifen. Da wir diese Zugriffe
 danach erst einmal nicht weiter verwenden, kann der folgende Inhalt jedoch
@@ -952,8 +952,8 @@ zunächst problemlos <a href="dataframes.html#convenient">übersprungen werden</
 mit eckigen Klammern sind jedoch ein zentraler Bestandteil von <code>R</code>;
 daher lohnt es sich, diesen Abschnitt später zu konsultieren oder zum
 Nachschlagen zu nutzen.</p>
-<div id="der--zugriff" class="section level3">
-<h3><span class="header-section-number">3.5.1</span> Der <code>[[·]]</code>-Zugriff</h3>
+<div id="der--zugriff" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.5.1</span> Der <code>[[·]]</code>-Zugriff<a href="dataframes.html#der--zugriff" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Den <code>[[·]]</code>-Zugriff nutzen wir genau wie den <code>$</code>-Zugriff zum Auslesen
 einzelner Spalten aus <code>data.frames</code>:</p>
 <div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb333-1" title="1">mdf[[<span class="st">&quot;Item1&quot;</span>]] <span class="co"># dasselbe wie mdf$Item1</span></a></code></pre></div>
@@ -974,13 +974,13 @@ ein-elementigen <code>character</code>-Vektor abgespeichert hat; dies ist mit de
 <div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb337-1" title="1">mdf[[<span class="kw">paste0</span>(<span class="st">&quot;Item&quot;</span>, <span class="dv">1</span>)]]</a></code></pre></div>
 <pre><code>[1] 1 0 0 1 1</code></pre>
 <p>Der <code>[[·]]</code>-Zugriff wird in Zusammenspiel mit der Funktion <code>paste0()</code>
-noch einmal interessant werden, wenn wir in <a href="schleifen.html#schleifen">Kapitel 6</a> mit
+noch einmal interessant werden, wenn wir in <a href="schleifen.html#schleifen">Kapitel 7</a> mit
 <em>Schleifen</em> nacheinander auf beliebig viele Spalten von <code>data.frames</code>
 zugreifen. In einer Schleife können wir dann Spaltennamen automatisiert
 nacheinander austauschen (etwa: <code>Item_1</code>, <code>Item_2</code>, …).</p>
 </div>
-<div id="der--zugriff-1" class="section level3">
-<h3><span class="header-section-number">3.5.2</span> Der <code>[·]</code>-Zugriff</h3>
+<div id="der--zugriff-1" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.5.2</span> Der <code>[·]</code>-Zugriff<a href="dataframes.html#der--zugriff-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Nicht</strong> äquivalent zu den Zugriffen mit <code>$</code> und <code>[[·]]</code> ist
 folgender <code>[·]</code>-Zugriff:</p>
 <div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb339-1" title="1">mdf[<span class="st">&quot;Item1&quot;</span>]</a></code></pre></div>
@@ -1045,8 +1045,8 @@ auch auf einem Vektor operieren, der gar keine Spalten enthält. Wir
 merken uns: <strong>Code ist in erster Linie für Menschen gemacht;
 verständlicher Code ist gegenüber kürzerem Code zu bevorzugen.</strong></p>
 </div>
-<div id="nameindex" class="section level3">
-<h3><span class="header-section-number">3.5.3</span> Zugriff nach Name und Index</h3>
+<div id="nameindex" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.5.3</span> Zugriff nach Name und Index<a href="dataframes.html#nameindex" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Wir haben nun alle wichtigen Möglichkeiten kennengelernt, Zugriffe auf
 <code>data.frames</code> durchzuführen. An dieser Stelle lohnt es sich deswegen,
 ein grundsätzliches Prinzip von Datenzugriffen in <code>R</code> festzuhalten:
@@ -1092,10 +1092,10 @@ Index durchführen. Dabei kann die Auswahl sowohl nach Spalten als auch
 nach Zeilen – oder beidem – geschehen.</p>
 </div>
 </div>
-<div id="convenient" class="section level2">
-<h2><span class="header-section-number">3.6</span> Nützliche Funktionen zum Arbeiten mit <code>data.frames</code></h2>
-<div id="tapply" class="section level3">
-<h3><span class="header-section-number">3.6.1</span> Gruppierte Statistiken: <code>tapply()</code></h3>
+<div id="convenient" class="section level2 hasAnchor">
+<h2><span class="header-section-number">3.6</span> Nützliche Funktionen zum Arbeiten mit <code>data.frames</code><a href="dataframes.html#convenient" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="tapply" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.6.1</span> Gruppierte Statistiken: <code>tapply()</code><a href="dataframes.html#tapply" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Die Funktion <code>tapply()</code> kann ich verwenden, um mir deskriptive
 Statistiken anhand von Gruppierungsvariablen ausgeben zu lassen, hier
 etwa die mittlere Punktzahl oder das mittlere Alter nach Geschlecht der
@@ -1133,8 +1133,8 @@ ausgegeben. Die Funktion <code>tapply()</code> zeigt ihre Stärke vor allem, wen
 man viele – und nicht nur fünf – Datenpunkte hat. Das gilt gerade
 dann, wenn wir mehrere Gruppierungsvariablen angeben.</p>
 </div>
-<div id="datenstruktur-nrow-und-ncol" class="section level3">
-<h3><span class="header-section-number">3.6.2</span> Datenstruktur: <code>nrow()</code> und <code>ncol()</code></h3>
+<div id="datenstruktur-nrow-und-ncol" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.6.2</span> Datenstruktur: <code>nrow()</code> und <code>ncol()</code><a href="dataframes.html#datenstruktur-nrow-und-ncol" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Wie viele Zeilen ein <code>data.frame</code> hat – d.h. oftmals die Zahl der
 <em>Fälle</em> – lässt sich mit der Funktion <code>nrow()</code> bestimmen:</p>
 <div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb365-1" title="1"><span class="kw">nrow</span>(mdf)</a></code></pre></div>
@@ -1143,8 +1143,8 @@ dann, wenn wir mehrere Gruppierungsvariablen angeben.</p>
 <div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb367-1" title="1"><span class="kw">ncol</span>(mdf)</a></code></pre></div>
 <pre><code>[1] 7</code></pre>
 </div>
-<div id="wie-sieht-die-tabelle-aus-head-und-tail" class="section level3">
-<h3><span class="header-section-number">3.6.3</span> Wie sieht die Tabelle aus: <code>head()</code> und <code>tail()</code></h3>
+<div id="wie-sieht-die-tabelle-aus-head-und-tail" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.6.3</span> Wie sieht die Tabelle aus: <code>head()</code> und <code>tail()</code><a href="dataframes.html#wie-sieht-die-tabelle-aus-head-und-tail" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Um sich einen Überblick über einen <code>data.frame</code> zu verschaffen, sind die
 Funktionen <code>head()</code> und <code>tail()</code> sehr nützlich. Die Funktion <code>head()</code>
 gibt die ersten Zeilen eines <code>data.frames</code> aus; <code>tail()</code> gibt
@@ -1163,8 +1163,8 @@ Arguments</em> <code>n</code>). Wir können die Funktionen wie folgt nutzen:</p>
 4          4     1     0    12          w      braun         1
 5          5     1     1    15          m      gruen         2</code></pre>
 </div>
-<div id="zusammenfassung-aller-spalten-hilfe-aus-zusatzpaketen" class="section level3">
-<h3><span class="header-section-number">3.6.4</span> Zusammenfassung aller Spalten: Hilfe aus Zusatzpaketen</h3>
+<div id="zusammenfassung-aller-spalten-hilfe-aus-zusatzpaketen" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.6.4</span> Zusammenfassung aller Spalten: Hilfe aus Zusatzpaketen<a href="dataframes.html#zusammenfassung-aller-spalten-hilfe-aus-zusatzpaketen" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Es gibt zahlreiche Funktionen, aus verschiedenen <code>R</code>-Zusatzpaketen und auch der
 Basisversion von <code>R</code> („Base-<code>R</code>“) selbst, die alle dafür gedacht sind, möglichst
 kompakt einen Überblick über einen ganzen <code>data.frame</code> zu bieten. Solche
@@ -1198,7 +1198,7 @@ heißt das, dass benötigte <code>R</code>-Zusatzpakete in jeder neuen <code>R</
 <code>library()</code> stellt die Funktion <code>require()</code> dar.</p>
 <p>Interessanterweise bemerken wir an dieser Stelle ein mögliches Problem, das sich
 bei der Arbeit mit <code>R</code>-Paketen ergeben kann: Sowohl im Paket
-<code>psych</code><a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a> als auch im Paket <code>Hmisc</code> gibt es eine Funktion mit dem
+<code>psych</code>[^psychwichtig] als auch im Paket <code>Hmisc</code> gibt es eine Funktion mit dem
 Namen <code>describe()</code>. Wenn ich per <code>library()</code> beide Pakete geladen habe – welche
 Funktion wird dann genutzt, wenn ich <code>describe()</code> aufrufe? Das ist von
 vornherein leider nicht zu sagen und hängt von der Reihenfolge ab, in der die
@@ -1211,16 +1211,10 @@ zugehörige Paket anzugeben:</p>
 verwendet werden, wenn aus verschiedenen Paketen Funktionen mit demselben Namen
 in Konflikt stehen. Wer ganz sicher gehen will, kann bei der Verwendung von
 Funktionen aus Zusatzpaketen immer den doppelten Doppelpunktoperator nutzen,
-auch wenn das vermutlich ein bisschen übertrieben ist. In der psychometrischen
-Auswertung kann sich beispielsweise der Konflikt ergeben, dass in den zwei
-wichtigen Paketen <code>psych</code> <span class="citation">(Revelle, 2019)</span> und <code>psychometric</code> <span class="citation">(Fletcher, 2010)</span>
-jeweils eine Funktion <code>alpha()</code> zur Berechnung von Cronbachs Alpha zur Verfügung
-gestellt wird. Beide berechnen zwar – wie zu erwarten – Cronbachs Alpha,
-jedoch gibt <code>psych::alpha()</code> noch weitere Ergebnisse aus, wohingegen
-<code>psychometric::alpha()</code> wirklich nur Cronbachs Alpha liefert.</p>
+auch wenn das vermutlich ein bisschen übertrieben ist.</p>
 </div>
-<div id="sortieren-die-funktion-arrange-aus-dem-paket-dplyr" class="section level3">
-<h3><span class="header-section-number">3.6.5</span> Sortieren: Die Funktion <code>arrange</code>() aus dem Paket <code>dplyr</code></h3>
+<div id="sortieren-die-funktion-arrange-aus-dem-paket-dplyr" class="section level3 hasAnchor">
+<h3><span class="header-section-number">3.6.5</span> Sortieren: Die Funktion <code>arrange</code>() aus dem Paket <code>dplyr</code><a href="dataframes.html#sortieren-die-funktion-arrange-aus-dem-paket-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Oftmals wollen wir Datentabellen nach einer oder mehreren Variablen
 sortieren. Dies funktioniert am bequemsten, wenn wir das <em>Paket</em> <code>dplyr</code>
 laden <span class="citation">(Wickham, François, Henry, &amp; Müller, 2018)</span>:</p>
@@ -1275,8 +1269,8 @@ Die Pakete aus dem Tidyverse folgen einem zugrundeliegenden Entwurfsprinzip
 und sollen viele Aufgaben der statistischen Datenanalyse vereinfachen.</p>
 </div>
 </div>
-<div id="zusammenfassung-1" class="section level2">
-<h2><span class="header-section-number">3.7</span> Zusammenfassung</h2>
+<div id="zusammenfassung-1" class="section level2 hasAnchor">
+<h2><span class="header-section-number">3.7</span> Zusammenfassung<a href="dataframes.html#zusammenfassung-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>Wir haben den <code>data.frame</code> als Datenstruktur zur Speicherung von
 psychometrischen Daten kennengelernt</li>
@@ -1296,8 +1290,8 @@ und Spalten aus <code>data.frames</code> auslesen</li>
 </ul></li>
 </ul>
 </div>
-<div id="fragen-zum-vertiefenden-verständnis-1" class="section level2">
-<h2><span class="header-section-number">3.8</span> Fragen zum vertiefenden Verständnis</h2>
+<div id="fragen-zum-vertiefenden-verständnis-1" class="section level2 hasAnchor">
+<h2><span class="header-section-number">3.8</span> Fragen zum vertiefenden Verständnis<a href="dataframes.html#fragen-zum-vertiefenden-verständnis-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
 <li>Worin unterscheiden sich die folgenden Aufrufe? Welche Aufrufe sind
 zueinander äquivalent?</li>
@@ -1364,10 +1358,6 @@ sein wird, dass wir beide Vektoren aus <strong>einem</strong> <code>data.frame</
 <li id="fn23"><p>Wie viele Datenpunkte in die Berechnung jedes
 Mittelwerts eingehen, können wir in diesem Fall prüfen mit
 <code>table(mdf$Geschlecht, mdf$Augenfarbe)</code>.<a href="dataframes.html#fnref23" class="footnote-back">↩</a></p></li>
-<li id="fn24"><p>Das Paket <code>psych</code> ist in der psychometrischen Arbeit übrigens
-äußerst wichtig; beispielsweise enthält es viel genutzten Funktionen für
-Faktorenanalysen (etwa eine Standardimplementierung der Parallelanalyse), eine
-Funktion, die Cronbachs Alpha berechnet, und viele mehr.<a href="dataframes.html#fnref24" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1433,7 +1423,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Erste psychometrische Auswertungen | Testtheorie mit R</title>
   <meta name="description" content="4 Erste psychometrische Auswertungen | Testtheorie mit R" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Erste psychometrische Auswertungen | Testtheorie mit R" />
   <meta property="og:type" content="book" />
-  
   
   
   
@@ -49,8 +48,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -208,7 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.1" data-path="psychometrie.html"><a href="psychometrie.html#exkurs-programmatische-untersuchung-der-korrelationsmatrix"><i class="fa fa-check"></i><b>4.3.1</b> Exkurs: Programmatische Untersuchung der Korrelationsmatrix</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="psychometrie.html"><a href="psychometrie.html#trennschaerfe"><i class="fa fa-check"></i><b>4.4</b> Item-Trennschärfen</a></li>
-<li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#cronbachs-alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
+<li class="chapter" data-level="4.5" data-path="psychometrie.html"><a href="psychometrie.html#alpha"><i class="fa fa-check"></i><b>4.5</b> Cronbachs Alpha</a></li>
 <li class="chapter" data-level="4.6" data-path="psychometrie.html"><a href="psychometrie.html#split-half-reliabilität"><i class="fa fa-check"></i><b>4.6</b> Split-Half-Reliabilität</a></li>
 <li class="chapter" data-level="4.7" data-path="psychometrie.html"><a href="psychometrie.html#in-der-praxis-nutzung-von-zusatzpaketen"><i class="fa fa-check"></i><b>4.7</b> In der Praxis: Nutzung von Zusatzpaketen</a></li>
 </ul></li>
@@ -274,8 +274,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="psychometrie" class="section level1">
-<h1><span class="header-section-number">4</span> Erste psychometrische Auswertungen</h1>
+<div id="psychometrie" class="section level1 hasAnchor">
+<h1><span class="header-section-number">4</span> Erste psychometrische Auswertungen<a href="psychometrie.html#psychometrie" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Dieses Kapitel arbeitet einige Kennwerte der klassischen Testtheorie auf
 und bespricht wie wir diese in <code>R</code> berechnen können. Dabei werden die
 folgenden Konzepte behandelt:</p>
@@ -320,8 +320,8 @@ diese Analysen benötigen wir genau dieses Datenformat!</p>
 <strong>Merke</strong>: Das ist das Standard-Datenformat für all unsere psychometrischen Berechnungen: (a) Zeilen sind Fälle; (b) Spalten sind Items bzw. Messvariablen; (c) Zellen enthalten Datenpunkte, etwa die Korrektheit von Antworten (kodiert mit 1/0). Datenpunkte müssen nicht unbedingt – wie es in diesem Beispiel der Fall ist – dichotom sein, sondern können beispielsweise auch die Antworten in einem Persönlichkeitsfragebogen auf einer Likert-Skala repräsentieren.
 </p>
 </div>
-<div id="summenwerte" class="section level2">
-<h2><span class="header-section-number">4.1</span> Summenwerte</h2>
+<div id="summenwerte" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.1</span> Summenwerte<a href="psychometrie.html#summenwerte" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Wir bestimmen zunächst die Testscores der 10 Kinder. Da jede Zeile ein
 Kind repräsentiert, ist der Gesamt-Testscore die Summe der Werte in
 jeder Reihe. Die Summe der Reihen (engl: <em>rows</em>) eines <code>data.frames</code>
@@ -348,8 +348,8 @@ erklärt, ist das mit der <code>$</code>-Notation möglich:</p>
 benötigt (<span class="math inline">\(\to\)</span> psychometrisches Standardformat), ist hier Vorsicht bei
 der Weiterverwendung geboten!</p>
 </div>
-<div id="item-schwierigkeiten" class="section level2">
-<h2><span class="header-section-number">4.2</span> Item-Schwierigkeiten</h2>
+<div id="item-schwierigkeiten" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.2</span> Item-Schwierigkeiten<a href="psychometrie.html#item-schwierigkeiten" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Die Schwierigkeit eines Items ist die mittlere Punktzahl aller Personen
 in diesem Item. Auch bei Items, die nicht Korrektheit kodieren, kann man
 von Item-Schwierigkeit sprechen. Beispielsweise wäre dann die
@@ -377,8 +377,8 @@ enthalten, wäre es nicht möglich, Funktionen wie <code>rowSums()</code> und
 <code>colMeans()</code> darauf anzuwenden. Hier muss jede Spalte einen numerischen
 Vektor enthalten.</p>
 </div>
-<div id="item-interkorrelationen" class="section level2">
-<h2><span class="header-section-number">4.3</span> Item-Interkorrelationen</h2>
+<div id="item-interkorrelationen" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.3</span> Item-Interkorrelationen<a href="psychometrie.html#item-interkorrelationen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Als Nächstes geben wir mit der Funktion <code>cor()</code> die Korrelationen
 zwischen allen Items als Korrelationsmatrix aus. Wenn <code>cor()</code> als
 Argument einen <code>data.frame</code> erhält, wird eine Tabelle ausgegeben, die
@@ -402,8 +402,8 @@ Item perfekt mit sich selbst korreliert. Die ausgegebene Tabelle erinnert an
 einen <code>data.frame</code>, ist aber technisch gesehen eine andere Datenstruktur,
 nämlich eine Matrix. Der Unterschied zwischen Matritzen und <code>data.frames</code> soll
 uns jedoch zunächst nicht kümmern.</p>
-<div id="exkurs-programmatische-untersuchung-der-korrelationsmatrix" class="section level3">
-<h3><span class="header-section-number">4.3.1</span> Exkurs: Programmatische Untersuchung der Korrelationsmatrix</h3>
+<div id="exkurs-programmatische-untersuchung-der-korrelationsmatrix" class="section level3 hasAnchor">
+<h3><span class="header-section-number">4.3.1</span> Exkurs: Programmatische Untersuchung der Korrelationsmatrix<a href="psychometrie.html#exkurs-programmatische-untersuchung-der-korrelationsmatrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Große Item-Korrelationsmatritzen sind oftmals unübersichtlich und erschweren den
 Überblick darüber, welche Items stärker oder weniger stark miteinander
 korrelieren. Eine visuelle Inspektion ist demnach mühsam und fehleranfällig.
@@ -485,7 +485,7 @@ Item_4   4   5</code></pre>
 <p>Noch besser wird die Ausgabe, wenn wir die Redundanz aus der Korrelationsmatrix
 entfernen; schließlich befinden sich im oberen und unteren Dreieck der Matrix
 dieselben Informationen. Wir können die Korrelationen oben rechts durch
-Verwendung der Funktion <code>upper.tri()</code><a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a> durch <code>NA</code> ersetzen:</p>
+Verwendung der Funktion <code>upper.tri()</code><a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a> durch <code>NA</code> ersetzen:</p>
 <div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb412-1" title="1">item_cors[<span class="kw">upper.tri</span>(item_cors)] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
 <a class="sourceLine" id="cb412-2" title="2"><span class="kw">round</span>(item_cors, <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>       Item_1 Item_2 Item_3 Item_4 Item_5
@@ -523,8 +523,8 @@ ist die programmatische Untersuchung einer Korrelationsmatrix einer visuellen
 Inspektion gegenüber deutlich zu bevorzugen.</p>
 </div>
 </div>
-<div id="trennschaerfe" class="section level2">
-<h2><span class="header-section-number">4.4</span> Item-Trennschärfen</h2>
+<div id="trennschaerfe" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.4</span> Item-Trennschärfen<a href="psychometrie.html#trennschaerfe" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Interessant ist die letzte Spalte (bzw. genauso die letzte Zeile) der obigen
 Korrelationsmatrix:</p>
 <div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb420-1" title="1"><span class="kw">round</span>(<span class="kw">cor</span>(test_data), <span class="dv">2</span>)</a></code></pre></div>
@@ -550,7 +550,7 @@ Items aus der Gesamtpunktzahl ausgelassen wird. Somit wird eine
 „Kriterienkontamination“ vermieden, die zu einer Erhöhung der
 Trennschärfe führt. Diese Kriterienkontamination ergibt sich bei der
 unkorrigierten Trennschärfe daraus, dass der Itemscore selbst in das
-„Kriterium“ – also den Gesamt-Testscore – eingeht.<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a> Im
+„Kriterium“ – also den Gesamt-Testscore – eingeht.<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a> Im
 Folgenden berechnen wir eine part-whole korrigierte Trennschärfe für
 Item 2. Zunächst erstelle ich einen Vektor zur Auswahl der Items, die
 ich zur Berechnung des Testscores unter Ausschluss von Item 2
@@ -623,8 +623,8 @@ Arbeiten automatisieren können. In <a href="schleifen.html#schleifen">Kapitel 7
 Schleifen kennen, die uns ermöglichen, ohne wesentlich mehr Aufwand für
 beliebig viele Items korrigierte Trennschärfen zu bestimmen.</p>
 </div>
-<div id="cronbachs-alpha" class="section level2">
-<h2><span class="header-section-number">4.5</span> Cronbachs Alpha</h2>
+<div id="alpha" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.5</span> Cronbachs Alpha<a href="psychometrie.html#alpha" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Als Nächstes bestimmen wir „Cronbachs Alpha“ als Maß für die interne
 Konsistenz der Antworten der Schüler/innen. Cronbachs Alpha ist ein
 Schätzer für die Reliabilität eines Tests. Im Falle eines Leistungstest
@@ -639,21 +639,20 @@ spricht dafür, dass gar keine Systematik in den Punktzahlen liegt – ob
 ich viele oder wenig Punkte bekommen habe, ist gänzlich zufällig.</p>
 <p><code>R</code> bietet in der Grundversion keine Möglichkeit, Cronbachs Alpha zu
 bestimmen. Man könnte sich eine eigene Berechnung programmieren, die
-Cronbachs Alpha umsetzt.<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a> Wir machen uns aber zunutze, dass
+Cronbachs Alpha umsetzt.<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a> Wir machen uns aber zunutze, dass
 bereits andere <code>R</code>-Nutzer Cronbachs Alpha als Funktion umgesetzt haben,
 und diese in einem <em>Paket</em> zur Verfügung gestellt haben. Eine Umsetzung
-von Cronbachs Alpha findet sich im Paket <code>psychometric</code>
-<span class="citation">(Fletcher, 2010)</span>. Mit der Funktion <code>library()</code> kann ich Pakete laden,
-die nicht zur Grundausstattung von <code>R</code> gehören. Voraussetzung ist, dass
-ich das Paket auf meinem Rechner installiert habe. Die Erweiterbarkeit
-durch Pakete ist eine der großen Stärken von <code>R</code>.</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb428-1" title="1"><span class="co"># Das Paket `psychometric` enthält eine Funktion, die Cronbachs Alpha</span></a>
-<a class="sourceLine" id="cb428-2" title="2"><span class="co"># berechnet</span></a>
-<a class="sourceLine" id="cb428-3" title="3"><span class="kw">library</span>(<span class="st">&quot;psychometric&quot;</span>)</a></code></pre></div>
+von Cronbachs Alpha findet sich im Paket <code>psych</code> <span class="citation">(Revelle, 2019)</span>. Mit der
+Funktion <code>library()</code> kann ich Pakete laden, die nicht zur
+Grundausstattung von <code>R</code> gehören. Voraussetzung ist, dass ich das Paket
+auf meinem Rechner installiert habe. Die Erweiterbarkeit durch Pakete
+ist eine der großen Stärken von <code>R</code>.</p>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb428-1" title="1"><span class="co"># Das Paket `psych` enthält eine Funktion, die Cronbachs Alpha berechnet</span></a>
+<a class="sourceLine" id="cb428-2" title="2"><span class="kw">library</span>(<span class="st">&quot;psych&quot;</span>)</a></code></pre></div>
 <p>Falls das Paket nicht installiert ist, kann ich es mit dem folgenden
 Befehl installieren:</p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb429-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;psychometric&quot;</span>)</a></code></pre></div>
-<p>Praktischerweise arbeitet die Funktion <code>alpha()</code> aus dem <code>psychometric</code>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb429-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;psych&quot;</span>)</a></code></pre></div>
+<p>Praktischerweise arbeitet die Funktion <code>alpha()</code> aus dem <code>psych</code>
 Paket genau mit dem Standard-Datenformat, das uns vorliegt: Zeilen
 kennzeichnen Testteilnehmer, Spalten kennzeichnen Items. <strong>Wichtig ist
 aber nun</strong>: Wir haben soeben den Testscore als zusätzliche Spalte an die
@@ -671,14 +670,52 @@ können. Wir können sie aber nicht nutzen, wenn wir Spalten aus
 keine Variable ist, sondern zu einem <code>data.frame</code> gehört. Deswegen muss
 man Spalten mit dem Befehl <code>data.frame$spalte &lt;- NULL</code> entfernen. <code>NULL</code>
 ist in <code>R</code> ein Wert, der für „Nicht-Existenz“ steht.</p>
-<p>Nachdem wir das Paket <code>psychometric</code> geladen und die Spalte <code>score</code>
+<p>Nachdem wir das Paket <code>psych</code> geladen und die Spalte <code>score</code>
 entfernt haben, können wir Cronbachs Alpha mit der Funktion <code>alpha()</code>
 bestimmen:</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb432-1" title="1"><span class="kw">alpha</span>(test_data) <span class="co"># erfordert Laden des Pakets psychometric</span></a></code></pre></div>
-<pre><code>[1] 0.7596154</code></pre>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb432-1" title="1"><span class="kw">alpha</span>(test_data) <span class="co"># erfordert Laden des Pakets psych</span></a></code></pre></div>
+<pre><code>
+Reliability analysis   
+Call: alpha(x = test_data)
+
+  raw_alpha std.alpha G6(smc) average_r S/N  ase mean   sd median_r
+      0.76      0.77     0.8       0.4 3.3 0.12  0.4 0.34     0.34
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.40  0.76  0.93
+Duhachek  0.53  0.76  0.99
+
+ Reliability if an item is dropped:
+       raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
+Item_1      0.82      0.82    0.82      0.53 4.5    0.082 0.035  0.52
+Item_2      0.74      0.74    0.77      0.42 2.9    0.136 0.084  0.39
+Item_3      0.70      0.72    0.75      0.39 2.5    0.156 0.062  0.34
+Item_4      0.61      0.64    0.63      0.31 1.8    0.201 0.032  0.27
+Item_5      0.66      0.67    0.66      0.34 2.1    0.170 0.032  0.27
+
+ Item statistics 
+        n raw.r std.r r.cor r.drop mean   sd
+Item_1 10  0.51  0.49  0.29   0.23  0.6 0.52
+Item_2 10  0.62  0.68  0.55   0.48  0.1 0.32
+Item_3 10  0.76  0.73  0.65   0.57  0.6 0.52
+Item_4 10  0.89  0.87  0.89   0.78  0.4 0.52
+Item_5 10  0.81  0.82  0.82   0.67  0.3 0.48
+
+Non missing response frequency for each item
+         0   1 miss
+Item_1 0.4 0.6    0
+Item_2 0.9 0.1    0
+Item_3 0.4 0.6    0
+Item_4 0.6 0.4    0
+Item_5 0.7 0.3    0</code></pre>
+<p>Wir sehen, dass die Funktion <code>alpha()</code> viel Output mit
+Informationen zum übergebenen Item-Datensatz generiert und uns nicht
+nur den Wert für Cronbachs Alpha zurückgibt. Dieser kann unter
+<code>raw_alpha</code> abgelesen werden und beträgt 0.76.</p>
 </div>
-<div id="split-half-reliabilität" class="section level2">
-<h2><span class="header-section-number">4.6</span> Split-Half-Reliabilität</h2>
+<div id="split-half-reliabilität" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.6</span> Split-Half-Reliabilität<a href="psychometrie.html#split-half-reliabilität" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Cronbachs Alpha ist ein Schätzer für die Reliabilität eines Tests.
 Andere mögliche Schätzer sind die Retest-Reliabilität und die
 Split-Half-Reliabilität. Diese basieren auf der Berechnung einer
@@ -743,11 +780,8 @@ Reliabilität für die doppelte Testlänge schätzen wollen:</p>
 <div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb438-1" title="1">split_half &lt;-<span class="st"> </span><span class="kw">spearman_brown</span>(cor_halfs, <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb438-2" title="2">split_half</a></code></pre></div>
 <pre><code>[1] 0.7538462</code></pre>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb440-1" title="1"><span class="co">## Vergleiche mit Cronbachs Alpha:</span></a>
-<a class="sourceLine" id="cb440-2" title="2"><span class="kw">alpha</span>(test_data)</a></code></pre></div>
-<pre><code>[1] 0.7596154</code></pre>
 <p>Wie wir sehen, liegt die Spearman-Brown-korrigierte
-Split-Half-Reliabilität näher an Cronbachs Alpha als die unkorrigierte
+Split-Half-Reliabilität näher an Cronbachs Alpha (0.76) als die unkorrigierte
 Korrelation der zwei Testhälften. Das liegt daran, dass die Korrelation
 der zwei Testhälften die Reliabilität systematisch unterschätzt, da
 dieser Schätzer nur auf der Hälfte der Items beruht. Es ist sogar so,
@@ -759,49 +793,40 @@ Testscores einerseits für die Items 1, 3 und 5, und andererseits für die
 Items 2 und 4 berechnet. Diese lässt sich mit nur wenig Änderungen am
 Code oben umsetzen – ich schlage vor, dies als Übung zu machen.</p>
 </div>
-<div id="in-der-praxis-nutzung-von-zusatzpaketen" class="section level2">
-<h2><span class="header-section-number">4.7</span> In der Praxis: Nutzung von Zusatzpaketen</h2>
+<div id="in-der-praxis-nutzung-von-zusatzpaketen" class="section level2 hasAnchor">
+<h2><span class="header-section-number">4.7</span> In der Praxis: Nutzung von Zusatzpaketen<a href="psychometrie.html#in-der-praxis-nutzung-von-zusatzpaketen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In der praktischen psychometrischen Auswertung werden wir oftmals auf externe
 Pakete zurückgreifen, um Berechnungen durchzuführen. Insbesondere die selbst
 programmierte Berechnung der korrigierten Trennschärfe war, wie oben
 vorgestellt, recht mühsam und fehleranfällig. Außerdem ergab sie erst einmal
 nur eine einzige Trennschärfe. Idealerweise hätten wir aber durch nur einen
-Funktionsaufruf direkt die Trennschärfen aller Items eines Tests bestimmt. Zu
-diesem Zweck ist die Funktion <code>item.exam()</code> nützlich, die durch das Paket
-<code>psychometric</code> zur Verfügung gestellt wird, das wir auch zur Bestimmung von
-Cronbachs Alpha genutzt haben.</p>
-<p>Die Funktion <code>item.exam()</code> nimmt einen <code>data.frame</code> im psychometrischen
-Standardformat an: Zeilen sind Testteilnehmer, Spalten sind Items. Für dieses
-Datenformat gibt <code>item.exam()</code> nicht nur die korrigierte Trennschärfen aller
-Items, sondern auch andere Kennwerte wie die Item-Schwierigkeiten aus. Wir
-nutzen die Funktion wie folgt:</p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb442-1" title="1"><span class="kw">library</span>(<span class="st">&quot;psychometric&quot;</span>)</a>
-<a class="sourceLine" id="cb442-2" title="2">kennwerte &lt;-<span class="st"> </span><span class="kw">item.exam</span>(test_data)</a></code></pre></div>
-<p>Die Variable <code>kennwerte</code> enthält nun einen <code>data.frame</code>, der für jedes Item
-verschiedene psychometrische Kennwerte abbildet; jede Zeile ist ein Item
-und jede Spalte ist ein Kennwert.</p>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb443-1" title="1">kennwerte</a></code></pre></div>
-<pre><code>       Sample.SD Item.total Item.Tot.woi Difficulty Discrimination
-Item_1 0.5163978  0.5063697    0.2286648        0.6             NA
-Item_2 0.3162278  0.6201737    0.4842001        0.1             NA
-Item_3 0.5163978  0.7595545    0.5738190        0.6             NA
-Item_4 0.5163978  0.8861469    0.7824759        0.4             NA
-Item_5 0.4830459  0.8119979    0.6707212        0.3             NA
-       Item.Criterion Item.Reliab Item.Rel.woi Item.Validity
-Item_1             NA   0.2480695    0.1120224            NA
-Item_2             NA   0.1860521    0.1452600            NA
-Item_3             NA   0.3721042    0.2811128            NA
-Item_4             NA   0.4341216    0.3833333            NA
-Item_5             NA   0.3721042    0.3073631            NA</code></pre>
-<p>Die Item-Schwierigkeit befindet sich in der Spalte <code>Difficulty</code>;
-die unkorrigierte Trennschärfe befindet sich in der Spalte <code>Item.total</code>;
-die korrigierte Trennschärfe befindet sich in der Spalte <code>Item.Tot.woi</code>; für die
-Bedeutung der anderen Kennwerte sei auf die Dokumentation der Funktion
-verwiesen, auf die wir mit der <code>R</code>-Hilfe in der <code>R</code>-Konsole zugreifen können:</p>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb445-1" title="1">?item.exam</a></code></pre></div>
-<p>Für Item 2 wird dieselbe korrigierte Trennschärfe ausgegeben, die wir oben
-<a href="psychometrie.html#trennschaerfe">im Abschnitt zu Item-Trennschärfen</a> per Hand berechnet haben.</p>
-<p>Neben <code>psychometric</code> ist auch das Paket <code>psych</code> ein wichtiges <code>R</code>-Zusatzpaket
+Funktionsaufruf direkt die Trennschärfen aller Items eines Tests
+bestimmt.</p>
+<p>Zu diesem Zweck greifen wir noch einmal auf das Paket <code>psych</code> zurück.
+Wie wir im <a href="psychometrie.html#alpha">Abschnitt zu Cronbachs Alpha</a> gesehen haben, gibt
+die Funktion <code>alpha()</code> nicht nur den Wert von Cronbachs Alpha zurück,
+sondern führt gleich noch eine ganze Reihe weiterer Berechnungen für
+den Item-Datensatz durch, der ihr übergeben wird. Darunter befinden
+sich auch die unkorrigierten und korrigierten Item-Trennschärfen. Im
+Output können wir eine Tabelle Item-Kennwerten betrachten:</p>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb440-1" title="1"><span class="kw">library</span>(<span class="st">&quot;psych&quot;</span>)</a>
+<a class="sourceLine" id="cb440-2" title="2"><span class="kw">alpha</span>(test_data)</a>
+<a class="sourceLine" id="cb440-3" title="3"><span class="co"># Betrachte hier nur die Tabelle mit den Item-Kennwerten:</span></a></code></pre></div>
+<pre><code>        n raw.r std.r r.cor r.drop mean   sd
+Item_1 10  0.51  0.49  0.29   0.23  0.6 0.52
+Item_2 10  0.62  0.68  0.55   0.48  0.1 0.32
+Item_3 10  0.76  0.73  0.65   0.57  0.6 0.52
+Item_4 10  0.89  0.87  0.89   0.78  0.4 0.52
+Item_5 10  0.81  0.82  0.82   0.67  0.3 0.48</code></pre>
+<p>Die Spalte mit der Überschrift <code>raw.r</code> beinhaltet die unkorrigierten
+Trennschärfen der Items, die Spalte mit der Überschrift <code>r.cor</code>
+beinhaltet die korrigierten Trennschärfen. Für Item 2 wird dieselbe
+korrigierte Trennschärfe ausgegeben, die wir
+oben <a href="psychometrie.html#trennschaerfe">im Abschnitt zu Item-Trennschärfen</a> per Hand
+berechnet haben. Interessant ist auch die Spalte <code>n</code>, die noch einmal
+aufführt, auf der Basis wievieler Item-Teilnahmen die Werte berechnet
+wurden.</p>
+<p>Insgesamt ist das Paket <code>psych</code> ein wichtiges <code>R</code>-Zusatzpaket
 für psychometrische Auswertungen. Der Autor des <code>psych</code>-Pakets (William Revelle)
 stellt außerdem auf seiner Website (<a href="https://personality-project.org/r/psych/" class="uri">https://personality-project.org/r/psych/</a>)
 hilfreiche Materialien für die psychometrische Auswertung in <code>R</code> zur Verfügung.
@@ -812,16 +837,15 @@ Dazu gehört auch ein ganzes Buch zur psychometrischen Datenauswertung
 </div>
 <div class="footnotes">
 <hr />
-<ol start="25">
-<li id="fn25"><p>Wer mehr zur Manipulation von Matritzen lernen möchte, kann eine
+<ol start="24">
+<li id="fn24"><p>Wer mehr zur Manipulation von Matritzen lernen möchte, kann eine
 Recherche zu den Funktionen <code>upper.tri()</code>, <code>lower.tri()</code> und <code>diag()</code>
-durchführen.<a href="psychometrie.html#fnref25" class="footnote-back">↩</a></p></li>
-<li id="fn26"><p>Praktisch gesehen werden unkorrigierte und korrigierte
+durchführen.<a href="psychometrie.html#fnref24" class="footnote-back">↩</a></p></li>
+<li id="fn25"><p>Praktisch gesehen werden unkorrigierte und korrigierte
 Trennschärfe dieselbe relative Rangreihe zwischen den Items hinsichtlich
-ihrer Diskriminationsgüte abbilden.<a href="psychometrie.html#fnref26" class="footnote-back">↩</a></p></li>
-<li id="fn27"><p>Das wäre sogar eine gute Übung. Die Formel findet sich
-unter
-<a href="https://de.wikipedia.org/wiki/Cronbachs_Alpha">https://de.wikipedia.org/wiki/Cronbachs_Alpha</a><a href="psychometrie.html#fnref27" class="footnote-back">↩</a></p></li>
+ihrer Diskriminationsgüte abbilden.<a href="psychometrie.html#fnref25" class="footnote-back">↩</a></p></li>
+<li id="fn26"><p>Das wäre sogar eine gute Übung. Die Formel findet sich
+unter <a href="https://de.wikipedia.org/wiki/Cronbachs_Alpha">https://de.wikipedia.org/wiki/Cronbachs_Alpha</a><a href="psychometrie.html#fnref26" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -887,7 +911,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
