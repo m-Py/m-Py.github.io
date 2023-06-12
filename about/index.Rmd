@@ -13,6 +13,8 @@ I authored the `R` package [`anticlust`](https://github.com/m-Py/anticlust) that
 
 ### Journal publications
 
+Papenberg, M. (in press). k-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity. *British Journal of Mathematical and Statistical Psychology*.
+
 Brandenburg, N., & Papenberg, M. (2022). Reassessment of innovative methods to determine the number of factors: A simulation-based comparison of exploratory graph analysis and next eigenvalue sufficiency test. *Psychological Methods*. Advance online publication. https://doi.org/10.1037/met0000527 ([Preprint](https://psyarxiv.com/dhzrc))
 
 Papenberg, M., & Klau, G. W. (2021). Using anticlustering to partition data sets into equivalent parts. *Psychological Methods, 26*(2), 161--174. https://doi.org/10.1037/met0000301. ([Preprint](https://psyarxiv.com/3razc/))
@@ -24,8 +26,6 @@ Papenberg, M., & Musch, J. (2017). Of Small Beauties and Large Beasts: The Quali
 Papenberg, M., Willing, S., & Musch, J. (2017). Sequentially Presented Response Options Prevent The Use Of Testwiseness Cues In Multiple-Choice Testing. *Psychological Test and Assessment Modeling, 59*(2), 245--266. ([Paper](http://www.psychologie-aktuell.com/fileadmin/download/ptam/2-2017_20170627/06_Papenberg_.pdf))
 
 ### Other publications & Preprints
-
-Papenberg, M. (2023). *k-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity*. Retrieved from https://doi.org/10.31234/osf.io/7jw6v
 
 Papenberg, M. (2018). *On how testwiseness and acceptance reluctance influence the validity of sequential knowledge tests* (Inaugural-Dissertation). Retrieved from https://docserv.uni-duesseldorf.de/servlets/DocumentServlet?id=46569
 
