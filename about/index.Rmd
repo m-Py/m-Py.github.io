@@ -13,7 +13,7 @@ I authored the `R` package [`anticlust`](https://github.com/m-Py/anticlust) that
 
 ### Journal publications
 
-Papenberg, M. (in press). k-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity. *British Journal of Mathematical and Statistical Psychology*.
+Papenberg, M. (in press). k-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity. *British Journal of Mathematical and Statistical Psychology*. ([Preprint](https://psyarxiv.com/7jw6v/))
 
 Brandenburg, N., & Papenberg, M. (2022). Reassessment of innovative methods to determine the number of factors: A simulation-based comparison of exploratory graph analysis and next eigenvalue sufficiency test. *Psychological Methods*. Advance online publication. https://doi.org/10.1037/met0000527 ([Preprint](https://psyarxiv.com/dhzrc))
 
