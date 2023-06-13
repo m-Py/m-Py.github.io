@@ -2,9 +2,8 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  Equivalence_Diversity_KMeans: Equivalence_Diversity_KMeans.html
   How_to_cite_anticlust: How_to_cite_anticlust.html
   Speeding_up_anticlustering: Speeding_up_anticlustering.html
   stimulus-selection: stimulus-selection.html
-last_built: 2023-06-13T11:20Z
+last_built: 2023-06-13T11:40Z
 

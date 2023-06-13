@@ -50,9 +50,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Equivalence_Diversity_KMeans.html">On the equivalence of the k-means objective and the diversity objective</a>
-    </li>
-    <li>
       <a href="../articles/How_to_cite_anticlust.html">How to cite anticlust</a>
     </li>
     <li>
@@ -162,10 +159,10 @@ time, using the iris data set, which contains 150 elements.</p>
 <span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"exchange"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.011   0.000   0.010</span></span>
+<span><span class="co">#&gt;   0.012   0.000   0.012</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"local-maximum"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.053   0.000   0.052</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.055   0.000   0.056</span></span></code></pre></div>
 <p>Depending on how many iterations are needed, the default exchange
 method can be much faster than the local maximum method. Generally I
 would recommend to use <code>method = "local-maximum"</code> for better
@@ -181,13 +178,13 @@ repetitions:</p>
 <span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"exchange"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;    0.01    0.00    0.01</span></span>
+<span><span class="co">#&gt;   0.011   0.000   0.011</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"local-maximum"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.047   0.000   0.047</span></span>
+<span><span class="co">#&gt;   0.045   0.000   0.045</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"local-maximum"</span>, repetitions <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;    0.46    0.00    0.46</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.473   0.000   0.473</span></span></code></pre></div>
 <p>In this case, sticking with the default leads to run times that are
 much much faster. Still, if your data set is not too large, using
 several repetitions may be useful (but you can judge yourself via the
@@ -247,7 +244,7 @@ defined:</p>
 <span><span class="co">#&gt;   0.009   0.000   0.009</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, categories <span class="op">=</span> <span class="va">exchange_partners</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.003   0.000   0.003</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.003   0.000   0.004</span></span></code></pre></div>
 <p>Well, there is not a lot going on here with this very small data set
 (N = 150), so let’s do this for a larger data set with 1000 data
 points.</p>
@@ -263,10 +260,10 @@ points.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   3.318   0.000   3.319</span></span>
+<span><span class="co">#&gt;   3.286   0.000   3.286</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, categories <span class="op">=</span> <span class="va">exchange_partners</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.054   0.004   0.059</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.048   0.012   0.060</span></span></code></pre></div>
 <p>The speedup is enormous! Note that this approach even reduces the
 theoretical run time of the algorithm, because the number of exchanges
 no longer depends on the size of the input data, but instead is given a
@@ -415,10 +412,10 @@ groups:</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span>, objective <span class="op">=</span> <span class="st">"diversity"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   3.307   0.004   3.312</span></span>
+<span><span class="co">#&gt;   3.279   0.000   3.279</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span>, objective <span class="op">=</span> <span class="st">"variance"</span><span class="op">)</span><span class="op">)</span> <span class="co"># k-means anticlustering</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   1.880   0.000   1.879</span></span></code></pre></div>
+<span><span class="co">#&gt;   1.863   0.000   1.863</span></span></code></pre></div>
 <p>When <span class="math inline">\(M\)</span> and/or <span class="math inline">\(K\)</span> increase, the diversity implementation
 may be faster, e.g. using <span class="math inline">\(N = 1000\)</span>,
 <span class="math inline">\(M = 20\)</span> variables and <span class="math inline">\(K = 50\)</span> yields:</p>
@@ -430,64 +427,31 @@ may be faster, e.g. using <span class="math inline">\(N = 1000\)</span>,
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span>, objective <span class="op">=</span> <span class="st">"diversity"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.213   0.000   0.213</span></span>
+<span><span class="co">#&gt;   0.205   0.008   0.213</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span>, objective <span class="op">=</span> <span class="st">"variance"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.831   0.000   0.832</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.826   0.000   0.826</span></span></code></pre></div>
 <p>In most application I am aware of, the k-means method is faster
 because <span class="math inline">\(M\)</span> and <span class="math inline">\(K\)</span> are usually not very large. However,
 for example, if we happen to have (approximately) “<span class="math inline">\(M = N\)</span>”, the diversity implementation is
-much faster because its theoretical run time is better. If we still wish
-to work with the k-means objective for <span class="math inline">\(M =
-N\)</span>, we can exploit the fact that maximizing the k-means
-objective is actually equivalent to maximizing the diversity. Wow –
-right? The equivalence holds when we have equal-sized groups (which is
-the default) and when we use the squared Euclidean distance as input for
-the diversity implementation:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
-<span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">250</span></span>
-<span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fl">250</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">M</span><span class="op">*</span><span class="va">N</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">M</span><span class="op">)</span></span>
-<span><span class="va">dists_squared</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
-<span></span>
-<span><span class="va">initial_clusters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">K</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">cl1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">dists_squared</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, objective <span class="op">=</span> <span class="st">"diversity"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.031   0.000   0.032</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">cl2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, objective <span class="op">=</span> <span class="st">"variance"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.705   0.000   0.705</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="va">cl1</span> <span class="op">==</span> <span class="va">cl2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
-<p>Based on the same initial grouping, the outputs of the k-means and
-the diversity implementation are identical. But the diversity
-implementation was much faster. Thus, we can transform a k-means problem
-into a diversity problem. The equivalence also generalizes to k-plus
-anticlustering when we compute the squared Euclidean distance over all
-variables (i.e., the original and the additional k-plus variables).
-However, the reverse does not work in general: We cannot convert a
-diversity problem into a k-means problem (for other distances than
-squared Euclidean).</p>
-<p>Note that for very large data sets, using the diversity objective may
-not be feasible at all. The reason for this is that a quadratic matrix
-of between-item distances has to be computed and stored in memory. It is
-my experience that on a personal computer this becomes difficult for
-about &gt; 20000 elements (where the distance matrix has 20000^2 =
-400000000 elements). Thus, for large data sets a change of the objective
-is reasonable; the k-means objective is computationally more efficient
-and even very large data sets can be processed—at least this is true
-when the number of variables is (much) smaller than the number of
-elements. I live in a world where this is usually the case.</p>
+much faster because its theoretical run time is better. Note that for
+very large data sets, however, using the diversity objective may not be
+feasible at all. The reason for this is that a quadratic matrix of
+between-item distances has to be computed and stored in memory. It is my
+experience that on a personal computer this becomes difficult for about
+&gt; 20000 elements (where the distance matrix has 20000^2 = 400000000
+elements). Thus, for large data sets a change of the objective is
+reasonable; the k-means objective is computationally more efficient and
+even very large data sets can be processed—at least this is true when
+the number of variables is (much) smaller than the number of elements. I
+live in a world where this is usually the case.</p>
 <p>Because the k-means objective has some disadvantages for
 anticlustering (see Papenberg, 2023),<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> you may consider using the k-plus
 objective, which extends—and effectively re-uses—the k-means criterion.
 For example, the following code—using <span class="math inline">\(N =
 50000\)</span>, 2 features and 2 exchange partners per element—ran in
 just about 15 seconds on my 10 year old personal computer:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">50000</span></span>
 <span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
@@ -530,7 +494,7 @@ not straight forward use the C implementation of the exchange method in
 future, but I am not sure when this will happen. So, ironically,
 <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> is currently not the fastest method
 for anticlustering, by a long shot:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
@@ -543,10 +507,10 @@ for anticlustering, by a long shot:</p>
 <span><span class="co"># fast_anticlustering() always optimizes the k-means criterion (i.e., objective = "variance")</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, categories <span class="op">=</span> <span class="va">exchange_partners</span>, objective <span class="op">=</span> <span class="st">"variance"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.024   0.000   0.025</span></span>
+<span><span class="co">#&gt;   0.026   0.000   0.025</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/fast_anticlustering.html">fast_anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, k_neighbours <span class="op">=</span> <span class="va">n_exchange_partners</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.979   0.000   0.979</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.866   0.004   0.870</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
