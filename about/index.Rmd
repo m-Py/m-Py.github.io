@@ -7,13 +7,13 @@ output:
 
 <img src = "me.png" width = 130 alt = "Photo of Martin Papenberg">
 
-Hi! I am Martin Papenberg, working as a post-doctoral researcher and coordinator at the the [Department of Experimental Psychology](https://www.psychologie.hhu.de/studium-und-lehre-psychologie/institutskoordinator) at [Heinrich Heine University Düsseldorf](https://www.uni-duesseldorf.de/home/en/home.html). I am interested in methods, measurement, and programming.
+Hi! I am Martin Papenberg, working as a post-doctoral researcher and coordinator at the the [Department of Experimental Psychology](https://www.psychologie.hhu.de/studium-und-lehre-psychologie/institutskoordinator) at [Heinrich Heine University Düsseldorf](https://www.uni-duesseldorf.de/home/en/home.html). I am interested in statistics, methodology, measurement, and programming.
 
 I authored the `R` package [`anticlust`](https://github.com/m-Py/anticlust) that enables the automatic selection of stimuli for psychological experiments. Check out my [paper](https://psyarxiv.com/3razc/) on the anticlustering method or [this vignette](https://m-py.github.io/anticlust/articles/stimulus-selection.html) illustrating how to use the `anticlust` package for stimulus selection in experiments. If you have any questions regarding the `anticlust` package, feel free to <a href = "mailto:martin.papenberg@hhu.de?subject=Help with the anticlust package">send me an email</a>.
 
 ### Journal publications
 
-Papenberg, M. (in press). k-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity. *British Journal of Mathematical and Statistical Psychology*. ([Preprint](https://psyarxiv.com/7jw6v/))
+Papenberg, M. (2023). K-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity. *British Journal of Mathematical and Statistical Psychology*. Advance online publication. https://doi.org/10.1111/bmsp.12315 ([Preprint](https://psyarxiv.com/7jw6v/))
 
 Brandenburg, N., & Papenberg, M. (2022). Reassessment of innovative methods to determine the number of factors: A simulation-based comparison of exploratory graph analysis and next eigenvalue sufficiency test. *Psychological Methods*. Advance online publication. https://doi.org/10.1037/met0000527 ([Preprint](https://psyarxiv.com/dhzrc))
 
