@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0</span>
       </span>
     </div>
 
@@ -33,7 +33,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/How_to_cite_anticlust.html">How to cite anticlust</a>
+      <a href="../articles/Best_practices.html">Some best practices for anticlustering</a>
+    </li>
+    <li>
+      <a href="../articles/Categorical_vars.html">Using categorical variables with anticlustering</a>
     </li>
     <li>
       <a href="../articles/Speeding_up_anticlustering.html">Speeding up anticlustering</a>
@@ -71,7 +74,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wce</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wce</span><span class="op">(</span><span class="va">x</span>, solver <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -79,6 +82,11 @@
     <dl><dt>x</dt>
 <dd><p>A N x N similarity matrix. Larger values indicate stronger
 agreement / similarity between a pair of data points</p></dd>
+
+
+<dt>solver</dt>
+<dd><p>Optional argument; if passed, has to be either "glpk" or
+"symphony". See details.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -92,12 +100,16 @@ agreement / similarity between a pair of data points</p></dd>
     <p>Finds the clustering that maximizes the sum of pairwise similarities within clusters. 
 In the input some similarities should be negative (indicating dissimilarity) because 
 otherwise the maximum sum of similarities is obtained by simply joining all elements 
-within a single big cluster.</p>
+within a single big cluster. If the argument <code>solver</code> is not specified, the function
+will try to find the GLPK or SYMPHONY solver by itself (it prioritizes using SYMPHONY if both are
+available).</p>
     </div>
     <div id="note">
     <h2>Note</h2>
-    <p>This function requires the R package <code>Rglpk</code> and the GNU linear 
-programming kit.</p>
+    <p>This function either requires the R package <code>Rglpk</code> and the GNU linear 
+programming kit (&lt;http://www.gnu.org/software/glpk/&gt;) or the R package 
+<code>Rsymphony</code> and the COIN-OR SYMPHONY solver libraries 
+(&lt;https://github.com/coin-or/SYMPHONY&gt;).</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -107,7 +119,7 @@ Machine Learning, 56, 89–113.</p>
 Computability in Europe (pp. 33–44).</p>
 <p>Grötschel, M., &amp; Wakabayashi, Y. (1989). A cutting plane algorithm
 for a clustering problem. Mathematical Programming, 45, 59-96.</p>
-<p>Wittkop, T., Emig, D., Lange, S., Rahmann, S., Albrecht, M., Morris, J. H., . . . Baumbach,
+<p>Wittkop, T., Emig, D., Lange, S., Rahmann, S., Albrecht, M., Morris, J. H., ..., Baumbach,
 J. (2010). Partitioning biological data with transitivity clustering. Nature Methods, 7,
 419–420.</p>
     </div>

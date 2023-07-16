@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0</span>
       </span>
     </div>
 
@@ -32,7 +32,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/How_to_cite_anticlust.html">How to cite anticlust</a>
+      <a href="../articles/Best_practices.html">Some best practices for anticlustering</a>
+    </li>
+    <li>
+      <a href="../articles/Categorical_vars.html">Using categorical variables with anticlustering</a>
     </li>
     <li>
       <a href="../articles/Speeding_up_anticlustering.html">Speeding up anticlustering</a>
@@ -64,6 +67,32 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="0.7.0" id="anticlust-070">anticlust 0.7.0<small>2023-07-15</small><a class="anchor" aria-label="anchor" href="#anticlust-070"></a></h2>
+<ul><li>An exact ILP method is now available for maximizing the dispersion, contributed by Max Diekhoff.
+<ul><li>
+<code><a href="../reference/optimal_dispersion.html">optimal_dispersion()</a></code> is a new exported function implementing the method</li>
+<li>
+<code><a href="../reference/anticlustering.html">anticlustering()</a></code> makes it available when using <code>method = "ilp"</code> and <code>objective = "dispersion"</code>
+</li>
+</ul></li>
+<li>
+<code><a href="../reference/kplus_moment_variables.html">kplus_moment_variables()</a></code> is a new exported function that generates k-plus variables from a data set</li>
+<li>Offers some additional flexibility as compared to calling <code><a href="../reference/kplus_anticlustering.html">kplus_anticlustering()</a></code>, which generates these variables internally (e.g., use k-plus augmentation on some variables but not all – such as binary variables)</li>
+<li>
+<code><a href="../reference/categories_to_binary.html">categories_to_binary()</a></code> is a new exported function that converts one or several categorical variables into a binary representation
+<ul><li>Can be used to include categorical variables as part of the optimization criterion in k-means / k-plus anticlustering, see new vignette “Using categorical variables with anticlustering”</li>
+</ul></li>
+<li>3 new vignettes have been added to the <code>anticlust</code> documentation</li>
+<li>Fixed a bug in <code><a href="../reference/kplus_anticlustering.html">kplus_anticlustering()</a></code> that did not correctly implement <code>preclustering = TRUE</code>
+</li>
+<li>It is now possible to use the SYMPHONY solver as backend for the optimal ILP methods.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.6.4-1" id="anticlust-064-1--064-2--064-3">anticlust 0.6.4-1 / 0.6.4-2 / 0.6.4-3<a class="anchor" aria-label="anchor" href="#anticlust-064-1--064-2--064-3"></a></h2>
+<ul><li>
+<a href="https://github.com/m-Py/anticlust/commit/435958a0577" class="external-link">Implements</a> <a href="https://github.com/m-Py/anticlust/commit/9bb8275cad" class="external-link">some</a> <a href="https://github.com/m-Py/anticlust/commit/33cee784cb392a" class="external-link">fixes</a> in the internal function <code>gdc_set()</code> that finds the greatest common denominator in a set of numbers. The fixes prevent <code><a href="../reference/categorical_sampling.html">categorical_sampling()</a></code> (which is also called by <code><a href="../reference/anticlustering.html">anticlustering()</a></code> when using the <code>categories</code> argument) from potentially running into an infinite loop when combining uneven group sizes via <code>K</code> with a <code>categories</code> argument.</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.6.4" id="anticlust-064">anticlust 0.6.4<small>2023-05-02</small><a class="anchor" aria-label="anchor" href="#anticlust-064"></a></h2>
 <ul><li>
 <code><a href="../reference/kplus_anticlustering.html">kplus_anticlustering()</a></code> now has an argument <code>T</code> instead of <code>moments</code>, where <code>T</code> denotes the number of distribution moments considered during k-plus anticlustering (<code>moments</code> was an integer vector specifying each individual moment that should be considered)
@@ -75,7 +104,7 @@
 <p><strong>Major changes</strong></p>
 <ul><li>This release adds a new exported function and removes two others (I very much doubt anyone used those, though – see below – if your code is affected, please email me).
 <ul><li>
-<code><a href="../reference/kplus_anticlustering.html">kplus_anticlustering()</a></code> is a new exported function: A new interface function to k-plus anticlustering, implementing the k-plus method as described in “k-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity” (Papenberg, 2023; <a href="https://doi.org/10.31234/osf.io/7jw6v" class="external-link uri">https://doi.org/10.31234/osf.io/7jw6v</a>). Using <code>anticlustering(x, K, objective = "kplus")</code> is still supported and remains unchanged. The new function <code><a href="../reference/kplus_anticlustering.html">kplus_anticlustering()</a></code>, however, offers more functionality and nuance with regard to optimizing the k-plus objective family.</li>
+<code><a href="../reference/kplus_anticlustering.html">kplus_anticlustering()</a></code> is a new exported function: A new interface function to k-plus anticlustering, implementing the k-plus method as described in “K-plus Anticlustering: An Improved K-means Criterion for Maximizing Between-Group Similarity” (Papenberg, 2023; <a href="https://doi.org/10.1111/bmsp.12315" class="external-link uri">https://doi.org/10.1111/bmsp.12315</a>). Using <code>anticlustering(x, K, objective = "kplus")</code> is still supported and remains unchanged. The new function <code><a href="../reference/kplus_anticlustering.html">kplus_anticlustering()</a></code>, however, offers more functionality and nuance with regard to optimizing the k-plus objective family.</li>
 <li>The function <code>kplus_objective()</code> was removed.</li>
 <li>The function <code>mean_sd_obj()</code> was removed.</li>
 </ul></li>

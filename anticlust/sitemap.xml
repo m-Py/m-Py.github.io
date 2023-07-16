@@ -16,6 +16,12 @@
     <loc>/OLD_NEWS.html</loc>
   </url>
   <url>
+    <loc>/articles/Best_practices.html</loc>
+  </url>
+  <url>
+    <loc>/articles/Categorical_vars.html</loc>
+  </url>
+  <url>
     <loc>/articles/Equivalence_Diversity_KMeans.html</loc>
   </url>
   <url>
@@ -55,6 +61,9 @@
     <loc>/reference/categorical_sampling.html</loc>
   </url>
   <url>
+    <loc>/reference/categories_to_binary.html</loc>
+  </url>
+  <url>
     <loc>/reference/dispersion_objective.html</loc>
   </url>
   <url>
@@ -73,6 +82,9 @@
     <loc>/reference/kplus_anticlustering.html</loc>
   </url>
   <url>
+    <loc>/reference/kplus_moment_variables.html</loc>
+  </url>
+  <url>
     <loc>/reference/matching.html</loc>
   </url>
   <url>
@@ -80,6 +92,9 @@
   </url>
   <url>
     <loc>/reference/n_partitions.html</loc>
+  </url>
+  <url>
+    <loc>/reference/optimal_dispersion.html</loc>
   </url>
   <url>
     <loc>/reference/plot_clusters.html</loc>
