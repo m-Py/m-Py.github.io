@@ -399,6 +399,26 @@ pre code {
 <li>Package <code>terra</code> needs <code>sudo apt install libgdal-dev</code></li>
 </ul></li>
 </ul>
+<p>When you have a log file (here “your_track_file.log”), you can display the track on a map as follows:</p>
+<pre class="r"><code>library(&quot;leaflet&quot;)
+library(&quot;ambit&quot;)
+
+track &lt;- &quot;your_track_file.log&quot;
+gps_df &lt;- ambit_get_gps(track)
+
+# Start plotting. First set up map.
+m &lt;- leaflet() %&gt;%
+  addTiles() %&gt;%
+  addPolylines(
+    lng = gps_df$lon,
+    lat = gps_df$lat,
+    color = &quot;red&quot;,
+    weight = 3,
+    fillOpacity = .6,
+    opacity = .6
+  )
+m</code></pre>
+<p>This displays the tracks on an OpenstreetMap, which is really neat. Unfortunately, the leaflet package seems to retire in the future.</p>
 <hr />
 <p>Last updated: 2023-08-15</p>
 </div>

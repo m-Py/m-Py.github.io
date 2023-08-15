@@ -41,6 +41,30 @@ Now just use the GUI to synchronize data, it seems to store the XML files in `~/
 - Install package leaflet and dependencies
   * Package `terra` needs `sudo apt install libgdal-dev`
 
+When you have a log file (here "your_track_file.log"), you can display the track on a map as follows:
+
+```R
+library("leaflet")
+library("ambit")
+
+track <- "your_track_file.log"
+gps_df <- ambit_get_gps(track)
+
+# Start plotting. First set up map.
+m <- leaflet() %>%
+  addTiles() %>%
+  addPolylines(
+    lng = gps_df$lon,
+    lat = gps_df$lat,
+    color = "red",
+    weight = 3,
+    fillOpacity = .6,
+    opacity = .6
+  )
+m
+```
+
+This displays the tracks on an OpenstreetMap, which is really neat. Unfortunately, the leaflet package seems to retire in the future.
 
 ---
 
