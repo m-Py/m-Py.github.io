@@ -1,0 +1,40 @@
+---
+title: "Using Openambit on Ubuntu"
+date: November 15.08.2023
+author: Martin Papenberg
+---
+
+The following configuration works for me to synchronize my Suunto ambit watch data with my computer. Currently I am using Kubuntu 22.04 (LTS release).
+
+Pull the latest sources from https://github.com/openambitproject/openambit (at the time of writing the latest commit is `a3ebe71`, and the development seems to be stale based on the latest commit message).
+
+Follow the installation from source instructions in the README:
+
+- Get the required development packages
+
+`sudo apt-get install debhelper gcc g++ make cmake libusb-1.0-0-dev libudev-dev qtbase5-dev qttools5-dev-tools zlib1g-dev libpcap-dev libglib2.0-dev wireshark-dev qttools5-dev`
+
+- Build:
+
+```
+cd /path/to/your/clone/of/openambit
+./build.sh -DCMAKE_BUILD_TYPE=Debug
+```
+
+To remove the "permission denied" message when running the GUI via `./run.sh` or `./run.sh openambit`, use
+
+```
+sudo cp ./src/libambit/libambit.rules /etc/udev/rules.d/
+```
+
+See [this issue](https://github.com/openambitproject/openambit/issues/261) on their Github page. Or maybe use `sudo make install` in the sources directory.
+
+Now just use the GUI to synchronize data, it seems to store the XML files in `~/.openambit` by default.
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
