@@ -26,7 +26,7 @@ href="https://www.r-project.org/" target="_blank">R</a>-related stuff.
 
 ### Short notes
 
-- <a href="40_updates_rkward.html">2023/08: Using Openambit on Ubuntu</a>
+- <a href="40_using_openambit.html">2023/08: Using Openambit on Ubuntu</a>
 - <a href="39_updates_rkward.html">2023/08: Some updates on my Rkward configurations</a>
 - <a href="38_manjaro.html">2021/03: Some options for Manjaro Linux Newbies</a>
 - <a href="36-kate_ds.html">2020/11: Using Kate as a Data Science Environment</a>

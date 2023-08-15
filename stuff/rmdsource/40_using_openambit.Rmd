@@ -31,6 +31,17 @@ See [this issue](https://github.com/openambitproject/openambit/issues/261) on th
 
 Now just use the GUI to synchronize data, it seems to store the XML files in `~/.openambit` by default.
 
+## Using the `ambit` R package to work with data
+
+- Available from [https://github.com/m-Py/ambit](https://github.com/m-Py/ambit), works with the log files returned by Openambit.
+- Is very much in early development, everything may change (in particular input and output, maybe it should also work with `xml2` objects
+
+### Displaying leaflet map
+
+- Install package leaflet and dependencies
+  * Package `terra` needs `sudo apt install libgdal-dev`
+
+
 ---
 
 Last updated: `r Sys.Date()`

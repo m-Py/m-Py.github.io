@@ -384,11 +384,27 @@ pre code {
 <pre><code>sudo cp ./src/libambit/libambit.rules /etc/udev/rules.d/</code></pre>
 <p>See <a href="https://github.com/openambitproject/openambit/issues/261">this issue</a> on their Github page. Or maybe use <code>sudo make install</code> in the sources directory.</p>
 <p>Now just use the GUI to synchronize data, it seems to store the XML files in <code>~/.openambit</code> by default.</p>
+<div id="using-the-ambit-r-package-to-work-with-data" class="section level2">
+<h2>Using the <code>ambit</code> R package to work with data</h2>
+<ul>
+<li>Available from <a href="https://github.com/m-Py/ambit">https://github.com/m-Py/ambit</a>, works with the log files returned by Openambit.</li>
+<li>Is very much in early development, everything may change (in particular input and output, maybe it should also work with <code>xml2</code> objects</li>
+</ul>
+<div id="displaying-leaflet-map" class="section level3">
+<h3>Displaying leaflet map</h3>
+<ul>
+<li>Install package leaflet and dependencies
+<ul>
+<li>Package <code>terra</code> needs <code>sudo apt install libgdal-dev</code></li>
+</ul></li>
+</ul>
 <hr />
 <p>Last updated: 2023-08-15</p>
+</div>
 <div id="back-to-the-front-page" class="section level3">
 <h3><a href="index.html">Back to the front page</a></h3>
 <p> </p>
+</div>
 </div>
 
 
