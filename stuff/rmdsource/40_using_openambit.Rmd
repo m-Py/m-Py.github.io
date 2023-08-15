@@ -1,6 +1,6 @@
 ---
 title: "Using Openambit on Ubuntu"
-date: November 15.08.2023
+date: August 8, 2023
 author: Martin Papenberg
 ---
 

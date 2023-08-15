@@ -1,6 +1,6 @@
 ---
 title: "Using Rkward in 2023"
-date: November 15.08.2023
+date: August 8, 2023
 author: Martin Papenberg
 ---
 
@@ -21,7 +21,7 @@ Normal mode:
 Insert mode:
 - `<s-c-c>`: `<esc> } V { <c-cr> <esc> } i`
 
-I also enjoy replacing COntrol-Enter with q in visual mode (i.e. when a variable is marked in the editor), set `q` to `<c-cr>` in visual mode.
+I also enjoy replacing Control-Enter with q in visual mode (i.e. when a variable is marked in the editor), set `q` to `<c-cr>` in visual mode.
 
 Using Control-Shift-C we can now execute an entire code block instead of a single line. Also, we can use vim editing commands. This seems to work better than combining [Kate with VI commands for R](https://m-py.github.io/stuff/36-kate_ds.html).
 
