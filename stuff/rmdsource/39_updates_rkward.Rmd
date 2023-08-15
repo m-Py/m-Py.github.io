@@ -4,26 +4,19 @@ date: August 8, 2023
 author: Martin Papenberg
 ---
 
-This is an update on my current configurations in Rkward.
+This is an update on my current configurations in [Rkward](https://rkward.kde.org/).
 
-Related old posts:
+Related old posts: [1](https://m-py.github.io/stuff/35_rsyntax.html), [2](https://m-py.github.io/stuff/34_ctags-2.html), [3](https://m-py.github.io/stuff/36-kate_ds.html), [4](https://m-py.github.io/stuff/07_SettingUpKate.html)
 
-- [1](https://m-py.github.io/stuff/35_rsyntax.html)
-- [2](https://m-py.github.io/stuff/34_ctags-2.html)
-- [3](https://m-py.github.io/stuff/36-kate_ds.html)
-- [4](https://m-py.github.io/stuff/07_SettingUpKate.html)
+Use VI-mode in editor to execute code blocks, then add two key bindings:
 
-- Use VI-mode in editor to execute code blocks, then add two key bindings:
+Normal mode: `<s-c-c>`: `V { <c-cr> <esc> }`
 
-Normal mode:
-- `<s-c-c>`: `V { <c-cr> <esc> }`
-
-Insert mode:
-- `<s-c-c>`: `<esc> } V { <c-cr> <esc> } i`
+Insert mode: `<s-c-c>`: `<esc> } V { <c-cr> <esc> } i`
 
 I also enjoy replacing Control-Enter with q in visual mode (i.e. when a variable is marked in the editor), set `q` to `<c-cr>` in visual mode.
 
-Using Control-Shift-C we can now execute an entire code block instead of a single line. Also, we can use vim editing commands. This seems to work better than combining [Kate with VI commands for R](https://m-py.github.io/stuff/36-kate_ds.html).
+Using Control-Shift-C we can now execute an entire code block instead of a single line. Also, we can use vim editing commands. For me, this seems to work better than combining [Kate with VI commands for R](https://m-py.github.io/stuff/36-kate_ds.html).
 
 Morever, ensure that a key binding for dynamic line break is set (I use Control-Alt-Z). Otherwise, it is also possible to use [VI mode for hard line breaks](https://m-py.github.io/stuff/36-kate_ds.html).
 
