@@ -64,7 +64,7 @@ m <- leaflet() %>%
 m
 ```
 
-This displays the tracks on an OpenstreetMap, which is really neat. Unfortunately, the leaflet package seems to retire in the future.
+This displays the tracks on an OpenstreetMap, which is really neat. Unfortunately, the leaflet package seems to retire in the future (or [it doesn't](https://github.com/rstudio/leaflet/issues/833)?!).
 
 ---
 
