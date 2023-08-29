@@ -1,0 +1,14 @@
+---
+title: "The anticlust blog"
+author: "by Martin Papenberg"
+---
+
+This is the blog about the [anticlust R package](https://github.com/m-Py/anticlust). Here I share
+some thoughts and stuff on the anticlust package that do not really fit into the documentation and
+vignettes (even though materials gathered here may be used there in the future).
+
+[About the author](../about/index.html).
+
+## Posts
+
+- <a href="one.html">2023/08: Rewriting it in C: Anticlustering (part 1)
