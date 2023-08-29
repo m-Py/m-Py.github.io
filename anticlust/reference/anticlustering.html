@@ -54,6 +54,9 @@ Klau (2021; &amp;lt;doi:10.1037/met0000301&amp;gt;), Brusco et al.
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
+<li>
+  <a href="https://m-py.github.io/anticlust-blog" class="external-link">Blog</a>
+</li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/m-Py/anticlust/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
@@ -393,28 +396,28 @@ Control and Cybernetics, 15, 213-218.</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/by.html" class="external-link">by</a></span><span class="op">(</span><span class="va">schaper2019</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="va">anticlusters</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                4.50                1.09                3.38               18.31 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                4.49                1.11                3.41               18.31 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                4.48                1.10                3.44               18.31 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                4.50                1.11                3.44               18.34 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                4.50                1.11                3.44               18.31 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                4.48                1.10                3.41               18.28 </span>
 <span class="r-in"><span><span class="co"># Compare standard deviations by anticluster</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/by.html" class="external-link">by</a></span><span class="op">(</span><span class="va">schaper2019</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="va">anticlusters</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="va">sd</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.06                0.94                2.47 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.22                0.07                0.87                2.38 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.24                0.07                0.88                2.38 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.26                0.06                1.01                2.39 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.06                0.98                2.39 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.27                0.07                0.91                2.47 </span>
 <span class="r-in"><span><span class="co"># check that the "room" is balanced across anticlusters:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">anticlusters</span>, <span class="va">schaper2019</span><span class="op">$</span><span class="va">room</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             </span>
@@ -449,15 +452,15 @@ Control and Cybernetics, 15, 213-218.</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/by.html" class="external-link">by</a></span><span class="op">(</span><span class="va">schaper2019</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="va">anticlusters</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="va">sd</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.28                0.06                1.10                2.71 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.07                0.95                2.13 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.23                0.06                0.72                1.93 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.24                0.07                0.95                2.67 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.24                0.07                0.95                2.53 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.26                0.06                0.91                2.40 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Use different group sizes and optimize the extended k-means</span></span></span>
 <span class="r-in"><span><span class="co"># criterion ("kplus")</span></span></span>
@@ -493,15 +496,15 @@ Control and Cybernetics, 15, 213-218.</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/by.html" class="external-link">by</a></span><span class="op">(</span><span class="va">schaper2019</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="va">anticlusters</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="va">sd</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.07                0.93                2.44 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.07                0.93                2.39 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.07                0.93                2.40 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.07                0.93                2.42 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.07                0.94                2.40 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.07                0.94                2.42 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

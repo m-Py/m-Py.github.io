@@ -47,6 +47,9 @@
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
+<li>
+  <a href="https://m-py.github.io/anticlust-blog" class="external-link">Blog</a>
+</li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/m-Py/anticlust/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
@@ -156,18 +159,18 @@ data sets into equivalent parts. Psychological Methods, 26(2),
 <span class="r-in"><span><span class="va">best_obj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">all_objectives</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co">## It is possible that there are multiple best solutions:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">all_objectives</span> <span class="op">==</span> <span class="va">best_obj</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 <span class="r-in"><span><span class="co">## Select one best partition:</span></span></span>
 <span class="r-in"><span><span class="va">best_anticlustering</span> <span class="op">&lt;-</span> <span class="va">partitions</span><span class="op">[</span><span class="va">all_objectives</span> <span class="op">==</span> <span class="va">best_obj</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="co">## Look at mean for each partition:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/by.html" class="external-link">by</a></span><span class="op">(</span><span class="va">features</span>, <span class="va">best_anticlustering</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> INDICES: 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    V1    V2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15.29 15.29 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> V1 V2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14 14 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> INDICES: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    V1    V2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15.29 15.43 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13.86 14.00 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Get best k-means clustering objective:</span></span></span>

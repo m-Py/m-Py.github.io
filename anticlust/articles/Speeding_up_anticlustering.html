@@ -66,6 +66,9 @@
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
+<li>
+  <a href="https://m-py.github.io/anticlust-blog" class="external-link">Blog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -162,10 +165,10 @@ time, using the iris data set, which contains 150 elements.</p>
 <span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"exchange"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.013   0.000   0.013</span></span>
+<span><span class="co">#&gt;   0.011   0.000   0.012</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"local-maximum"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.056   0.000   0.056</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.057   0.000   0.057</span></span></code></pre></div>
 <p>Depending on how many iterations are needed, the default exchange
 method can be much faster than the local maximum method. Generally I
 would recommend to use <code>method = "local-maximum"</code> for better
@@ -181,13 +184,13 @@ repetitions:</p>
 <span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"exchange"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;    0.01    0.00    0.01</span></span>
+<span><span class="co">#&gt;   0.009   0.000   0.009</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"local-maximum"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.045   0.000   0.045</span></span>
+<span><span class="co">#&gt;   0.046   0.000   0.046</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"local-maximum"</span>, repetitions <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.458   0.000   0.458</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.479   0.000   0.478</span></span></code></pre></div>
 <p>In this case, sticking with the default leads to run times that are
 much much faster. Still, if your data set is not too large, using
 several repetitions may be useful (but you can judge yourself via the
@@ -222,10 +225,10 @@ larger data set to see the improvement in running time:</p>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">N</span><span class="op">*</span><span class="va">M</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">M</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   4.768   0.003   4.773</span></span>
+<span><span class="co">#&gt;   4.843   0.008   4.851</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span>, preclustering <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.098   0.008   0.107</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.095   0.012   0.107</span></span></code></pre></div>
 <p>As we can see, for N = 1000, the speedup is enormous. There is also
 an additional “hidden” method to make the <code><a href="../reference/anticlustering.html">anticlustering()</a></code>
 function run faster. This method also relies on using fewer exchange
@@ -271,7 +274,7 @@ defined:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">initial_clusters</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.009   0.000   0.010</span></span>
+<span><span class="co">#&gt;   0.010   0.000   0.011</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, categories <span class="op">=</span> <span class="va">exchange_partners</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
 <span><span class="co">#&gt;   0.003   0.000   0.003</span></span></code></pre></div>
@@ -290,10 +293,10 @@ points.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   3.274   0.000   3.274</span></span>
+<span><span class="co">#&gt;   3.346   0.004   3.350</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, categories <span class="op">=</span> <span class="va">exchange_partners</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.050   0.007   0.057</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.059   0.000   0.059</span></span></code></pre></div>
 <p>The speedup is enormous! Note that this approach even reduces the
 theoretical run time of the algorithm, because the number of exchanges
 no longer depends on the size of the input data, but instead is given a
@@ -442,10 +445,10 @@ groups:</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span>, objective <span class="op">=</span> <span class="st">"diversity"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   3.323   0.008   3.332</span></span>
+<span><span class="co">#&gt;   3.341   0.000   3.341</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span>, objective <span class="op">=</span> <span class="st">"variance"</span><span class="op">)</span><span class="op">)</span> <span class="co"># k-means anticlustering</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   1.854   0.000   1.854</span></span></code></pre></div>
+<span><span class="co">#&gt;   1.875   0.000   1.875</span></span></code></pre></div>
 <p>When <span class="math inline">\(M\)</span> and/or <span class="math inline">\(K\)</span> increase, the diversity implementation
 may be faster, e.g. using <span class="math inline">\(N = 1000\)</span>,
 <span class="math inline">\(M = 20\)</span> variables and <span class="math inline">\(K = 50\)</span> yields:</p>
@@ -457,10 +460,10 @@ may be faster, e.g. using <span class="math inline">\(N = 1000\)</span>,
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span>, objective <span class="op">=</span> <span class="st">"diversity"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.217   0.000   0.218</span></span>
+<span><span class="co">#&gt;   0.208   0.008   0.216</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span>, objective <span class="op">=</span> <span class="st">"variance"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.830   0.000   0.831</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.821   0.000   0.820</span></span></code></pre></div>
 <p>In most application I am aware of, the k-means method is faster
 because <span class="math inline">\(M\)</span> and <span class="math inline">\(K\)</span> are usually not very large. However,
 for example, if we happen to have (approximately) “<span class="math inline">\(M = N\)</span>”, the diversity implementation is
@@ -537,10 +540,10 @@ for anticlustering, by a long shot:</p>
 <span><span class="co"># fast_anticlustering() always optimizes the k-means criterion (i.e., objective = "variance")</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, categories <span class="op">=</span> <span class="va">exchange_partners</span>, objective <span class="op">=</span> <span class="st">"variance"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.026   0.000   0.026</span></span>
+<span><span class="co">#&gt;   0.025   0.000   0.025</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/fast_anticlustering.html">fast_anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, k_neighbours <span class="op">=</span> <span class="va">n_exchange_partners</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   1.407   0.000   1.407</span></span></code></pre></div>
+<span><span class="co">#&gt;   1.094   0.000   1.094</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
