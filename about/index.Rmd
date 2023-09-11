@@ -5,7 +5,7 @@ output:
     theme: united
 ---
 
-<img src = "me.png" width = 130 alt = "Photo of Martin Papenberg">
+<img src = "me.jpg" width = 130 alt = "Photo of Martin Papenberg">
 
 Hi! I am Martin Papenberg, working as a post-doctoral researcher and coordinator at the the [Department of Experimental Psychology](https://www.psychologie.hhu.de/studium-und-lehre-psychologie/institutskoordinator) at [Heinrich Heine University Düsseldorf](https://www.uni-duesseldorf.de/home/en/home.html). I am interested in statistics, methodology, measurement, and programming.
 
