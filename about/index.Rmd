@@ -54,5 +54,5 @@ Papenberg, M. (2018). *Test theory in R* [Testtheorie mit R]. Retrieved from htt
 - <a href = "mailto:martin.papenberg@hhu.de">Send me an email</a>
 - [Github](https://github.com/m-Py)
 - [Google Scholar](https://scholar.google.de/citations?user=_h33JecAAAAJ&hl=de&oi=sra)
-- [Masstodon](https://fosstodon.org/@MPapenberg)
+- <a rel="me" href="https://fosstodon.org/@MPapenberg">Mastodon</a>
 - [Open Science Framework](https://osf.io/3gq2h)
