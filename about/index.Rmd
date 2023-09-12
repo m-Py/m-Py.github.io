@@ -9,7 +9,7 @@ output:
 
 Hi! I am Martin Papenberg, working as a post-doctoral researcher and coordinator at the the [Department of Experimental Psychology](https://www.psychologie.hhu.de/studium-und-lehre-psychologie/institutskoordinator) at [Heinrich Heine University Düsseldorf](https://www.uni-duesseldorf.de/home/en/home.html). I am interested in statistics, methodology, measurement, and programming.
 
-I am author of the `R` package [`anticlust`](https://github.com/m-Py/anticlust) that (among others) can be used automatically assign stimuli to conditions in psychological experiments. The [package website](../anticlust/index.html) contains all documentation, introductory vignettes, and installation instructions. If you have any questions regarding the `anticlust` package, feel free to <a href = "mailto:martin.papenberg@hhu.de?subject=Help with the anticlust package">send me an email</a>.
+I am author of the `R` package [`anticlust`](https://github.com/m-Py/anticlust) that (among others) can be used to automatically assign stimuli to conditions in psychological experiments. The [package website](../anticlust/index.html) contains all documentation, introductory vignettes, and installation instructions. If you have any questions regarding the `anticlust` package, feel free to <a href = "mailto:martin.papenberg@hhu.de?subject=Help with the anticlust package">send me an email</a>.
 
 ### Journal publications
 
