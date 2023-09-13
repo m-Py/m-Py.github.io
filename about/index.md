@@ -1,8 +1,7 @@
 ---
 title: "About me"
 output:
-  html_document:
-    theme: united
+  html_document
 ---
 
 <img src = "me.jpg" width = 130 alt = "Photo of Martin Papenberg">
