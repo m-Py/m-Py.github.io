@@ -1,0 +1,95 @@
+---
+title: "the anticlust blog"
+date: September 13, 2023
+author: Martin Papenberg
+---
+
+## anticlust 0.8.0: The revival of `fast_anticlustering()`
+
+The latest version of `anticlust` (version 0.8.0) was just published on [CRAN](https://cran.r-project.org/package=anticlust). It is mostly concerned with optimizing `anticlust` for (very) large data sets, so most users are probably not affected by the changes. Specifically, three internal changes were implemented, which were all pretty much triggered by an [issue on Github](https://github.com/m-Py/anticlust/issues/50):
+
+1. Internal changes to `anticlustering()` ensure that it no longer crashes the R session for very large data sets (for about N > 200000).
+2. `fast_anticlustering()` has been re-implemented in C.
+3. `fast_anticlustering()` now uses an alternative computation of the k-means objective, which can be computed faster (especially in large data sets).
+
+The most pronounced changes affect the function `fast_anticlustering()`, which was pretty much a second class citizen in `anticlust` ever since `anticlustering()` was re-implemented in C, which was in October 2020 when I released `anticlust` version 0.5.4. For anticlustering, [using C really makes a huge difference in run time as compared to plain R code](one.html).  So, after publishing anticlust 0.5.4, `fast_anticlustering()` was ironically slower than `anticlustering()` and only had limited use cases.[^veryverylarge] With version 0.8.0, `fast_anticlustering()` is now again the best choice for processing (very) large data sets. This is due to two changes. First, `fast_anticlustering()` now also uses a C implementation. Moreover, it now uses a different way of re-computing the k-means objective during the optimization process, thereby gaining an order of magnitude in run time. 
+
+The k-means objective is the "variance", which is the sum of the squared Euclidean distances between data points and their cluster centers. It can be visualized as follows using the well-known [iris data set](https://en.wikipedia.org/wiki/Iris_flower_data_set):
+
+[^veryverylarge]: The function `fast_anticlustering()` has an improved theoretical run time (by an order of magnitude) because the optimization algorithm can employ fewer iterations. For very large data sets, this improved theoretical run time outweighs the worse implementation (R vs. C). However, this only relevant for very large data sets. Still: at least one user profited from `fast_anticlustering()` using the old R implementation, as evident from the [issue on Github](https://github.com/m-Py/anticlust/issues/50).
+
+```{r}
+library(anticlust)
+kmeans_clusters <- kmeans(iris[, 1:2], centers = 3)$cluster
+plot_clusters(iris[, 1:2], kmeans_clusters, illustrate_variance = TRUE, show_axes = TRUE)
+```
+
+Here, the `anticlust` function `plot_clusters()` is used to illustrate the k-means objective by highlighting the cluster affiliation (after applying the k-means *clustering* algorithm) and the cluster centers (as triangles). While the k-means clustering method *minimizes* the sum of squared distances between cluster centers and data points, k-means *anti*clustering maximizes it. Thereby, k-means anticlustering leads to cluster centers that are very close to each other:
+
+```{r}
+kmeans_anticlusters <- anticlustering(
+  iris[, 1:2],
+  K = 3,
+  objective = "variance" # k-means criterion
+)
+
+plot_clusters(iris[, 1:2], kmeans_anticlusters, illustrate_variance = TRUE, show_axes = TRUE)
+```
+
+Anticlustering is an iterative method that exchanges data points between clusters repeatedly and re-computes the objective after each exchange. Therefore, computing the distances between data points and cluster centers is the major factor driving the run time of k-means anticlustering. While the cluster centers can be re-computed rather quickly after an exchange, computing the distances requires iterating through all data points for each exchange that is attempted[^onlytwogroups]. Thus, re-computing the objective depends on the size of the data set *N*, and it has to be done very often during the optimization process. Instead of maximizing the sum of squared distances between cluster centers and data points, it is also possible (and equivalent) to minimize the (weighted) squared Euclidean distances between cluster centers and the overall centroid. In this case, much fewer distances need to be re-computed during each iteration of the optimization algorithm (here: only three distances). In particular, re-computing the objective the no longer depends on the number of data points. Therefore we gain an order of magnitude in run time as compared to when computing the variance. However, this is only practically relevant for rather large data sets. We can show this by comparing `anticlustering()` (which computes the variance) and `fast_anticlustering()` (which computes the distances between cluster centers and overall center):
+
+[^onlytwogroups]: Or at least the data points that are currently assigned to the two groups that are affected by the exchange.
+
+```{r}
+
+# 1. Compute k-means anticlustering for, N = 500, 2 variables, 5 groups
+N <- 500
+M <- 2
+K <- 5
+data <- matrix(rnorm(N * M), ncol = M)
+
+# 1.1 Using the variance computation
+system.time(anticlustering(data, K = K, objective = "variance"))
+
+# 1.2 Using the cluster-center-to-overall-center computation
+system.time(fast_anticlustering(data, K = K))
+
+```
+
+For N = 500, `anticlustering()` (which is not a small data set for most anticlustering applications), the old implementation is almost as fast as the new one (and both are very fast). Let's see what happens with a larger data set:
+
+```{r}
+
+# 2. Compute k-means anticlustering for, N = 2000, 2 variables, 5 groups
+N <- 2000
+M <- 2
+K <- 5
+data <- matrix(rnorm(N * M), ncol = M)
+
+# 2.1 Using the variance computation
+system.time(anticlustering(data, K = K, objective = "variance"))
+
+# 2.2 Using the cluster-center-to-overall-center computation
+system.time(fast_anticlustering(data, K = K))
+
+```
+
+When N gets larger, gaining an order of magnitude of computation time makes a huge difference. Usually, for large data sets, we would also specify the argument `k_neighbours` when using `fast_anticlustering()`, which then gains another order of magnitude in run time. Then, we can even process 1 million data points in a few minutes. The user viv-analytics, who opened the Github issue reporting that anticlustering fails for large N, reported that the old implementation of `fast_anticlustering()` took about 6000 seconds (almost two hours) for processing about 295k data points with 2 numeric variables. Let's see how that works using the new `anticlust` version:
+
+```{r}
+
+N <- 295000
+M <- 2
+K <- 2
+data <- matrix(rnorm(N * M), ncol = M)
+system.time(fast_anticlustering(data, K = K, k_neighbours = 2))
+
+```
+
+About 13 seconds vs. about 6000 seconds -- what an improvement!
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
