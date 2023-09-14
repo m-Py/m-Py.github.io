@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
       </span>
     </div>
 
@@ -120,13 +120,14 @@ be found in Papenberg and Klau (2021; <a href="https://doi.org/10.1037/met000030
 <code>anticlust</code> documentation (<code><a href="../reference/anticlustering.html">?anticlustering</a></code>).
 Basically, running more exchanges tends to improve the results, but the
 improvements are diminishing with many repetitions—especially for large
-data sets. So, to speed up <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, we can reduce
-the number of exchanges. Here we will learn how to do that. However,
-first we learn how to slow down anticlustering. Slowing down can lead to
-better results and is recommended if you have the time.</p>
-<div class="section level3">
-<h3 id="slowing-down">Slowing down<a class="anchor" aria-label="anchor" href="#slowing-down"></a>
-</h3>
+data sets. So, to speed up anticlustering, we can reduce the number of
+exchanges. Here we will learn how to do that. However, first we learn
+how to slow down anticlustering. Slowing down can lead to better results
+and is recommended if you have the time.</p>
+</div>
+<div class="section level2">
+<h2 id="slowing-down">Slowing down<a class="anchor" aria-label="anchor" href="#slowing-down"></a>
+</h2>
 <p>The default exchange algorithm
 (<code>anticlustering(..., method = "exchange")</code>) iterates through
 all input elements and attempts to improve the anticlustering by
@@ -165,10 +166,10 @@ time, using the iris data set, which contains 150 elements.</p>
 <span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"exchange"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.011   0.000   0.012</span></span>
+<span><span class="co">#&gt;   0.011   0.000   0.010</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"local-maximum"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.057   0.000   0.057</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.048   0.000   0.048</span></span></code></pre></div>
 <p>Depending on how many iterations are needed, the default exchange
 method can be much faster than the local maximum method. Generally I
 would recommend to use <code>method = "local-maximum"</code> for better
@@ -187,19 +188,19 @@ repetitions:</p>
 <span><span class="co">#&gt;   0.009   0.000   0.009</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"local-maximum"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.046   0.000   0.046</span></span>
+<span><span class="co">#&gt;   0.040   0.000   0.039</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"local-maximum"</span>, repetitions <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.479   0.000   0.478</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.416   0.000   0.416</span></span></code></pre></div>
 <p>In this case, sticking with the default leads to run times that are
 much much faster. Still, if your data set is not too large, using
 several repetitions may be useful (but you can judge yourself via the
 results). The good news is that fewer exchanges may be enough in large
 data sets: anticlustering generally becomes easier with more data.</p>
 </div>
-<div class="section level3">
-<h3 id="getting-fast-using-fewer-exchange-partners">Getting fast: Using fewer exchange partners<a class="anchor" aria-label="anchor" href="#getting-fast-using-fewer-exchange-partners"></a>
-</h3>
+<div class="section level2">
+<h2 id="getting-fast-using-fewer-exchange-partners">Getting fast: Using fewer exchange partners<a class="anchor" aria-label="anchor" href="#getting-fast-using-fewer-exchange-partners"></a>
+</h2>
 <p>If the default exchange method is not fast enough for your taste, it
 is possible to use fewer exchange partners during the anticlustering
 process. By default, the exchange method evaluates each possible
@@ -209,112 +210,205 @@ exchanges. If we only use a fixed number of exchange partners per
 element, we can reduce the number of exchanges to <span class="math inline">\(O(N)\)</span>, corresponding to a gain of an order
 of magnitude in terms of run time. Using fewer exchange partners for
 each element may decrease the quality of the results, and is generally
-only recommended for (very) large data sets. But the run time will be
-considerably faster.</p>
-<p>One way of doing using fewer exchange partners is by including
-“preclustering” restrictions (see <code><a href="../reference/anticlustering.html">?anticlustering</a></code>). When
-setting <code>preclustering = TRUE</code>, the optimization restricts
-the number of exchange partners to <code>K - 1</code> (very similar)
-elements. Note that the preclustering algorithm itself has <span class="math inline">\(O(N^2)\)</span> run time, which has to be
-performed prior to the anticlustering algorithm. Thus, we have to use a
-larger data set to see the improvement in running time:</p>
+only recommended if speed is an issue, e.g. for large data sets. But the
+run time will be considerably faster. We will consider three
+possibilities of using fewer exchange partners in
+<code>anticlust</code>: <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>,
+preclustering, and an additional secret hack.</p>
+<div class="section level3">
+<h3 id="fast_anticlustering">fast_anticlustering()<a class="anchor" aria-label="anchor" href="#fast_anticlustering"></a>
+</h3>
+<p>In Papenberg and Klau (2021), we described the function
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> as a method to speed up the
+anticlustering process for large data sets. It optimizes the k-means
+objective because computing all pairwise distances as is done when
+optimizing the “diversity” (i.e., the default in
+<code><a href="../reference/anticlustering.html">anticlustering()</a></code>) is not feasible for very large data sets
+(for about N &gt; 20000 on my personal computer). Moreover,
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> directly takes as argument the number
+of exchange partners for each element, via the argument
+<code>k_neighbours</code>. In this case, the application is straight
+forward:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">5000</span></span>
+<span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">N</span> <span class="op">*</span> <span class="va">M</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">M</span><span class="op">)</span></span>
+<span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">groups1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fast_anticlustering.html">fast_anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>  <span class="co"># default uses all exchange partners</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span> </span>
+<span><span class="co">#&gt; Time difference of 2.259511 secs</span></span></code></pre></div>
+<p>The default behaviour in <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> is to use
+all exchange partners. Using fewer exchange partners can lead to much
+faster run time:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">groups2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fast_anticlustering.html">fast_anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="fl">2</span>, k_neighbours <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span> </span>
+<span><span class="co">#&gt; Time difference of 0.2139812 secs</span></span></code></pre></div>
+<p>Was there a cost to this speedup?</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/variance_objective.html">variance_objective</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">groups1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 9879.643</span></span>
+<span><span class="fu"><a href="../reference/variance_objective.html">variance_objective</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">groups2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 9879.643</span></span></code></pre></div>
+<p>Frankly, there is no observable difference with regard to the
+objective that was obtained, but the call to
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>, which used fewer exchange partners,
+was much faster. In general, for large data sets, using fewer exchange
+partners may not impair the results and instead lead to heavily reduced
+run times. <em>Sometimes, there is free lunch</em>.</p>
+<p>By default, <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> selects exchange
+partners though a nearest neighbour search when specifying
+<code>k_neighbours</code>: similar elements serve as exchange partners.
+The nearest neighbour search, which is done once in the beginning, only
+has O(N log(N)) run time and therefore does not strongly contribute to
+the overall run time. It is possible to suppress the nearest neighbour
+search by passing custom exchange partners using the
+<code>exchange_partners</code> argument of
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>. Exchange partners can for example be
+generated by <code><a href="../reference/generate_exchange_partners.html">generate_exchange_partners()</a></code>, but a custom
+list may also be used. See the documentation
+(<code><a href="../reference/fast_anticlustering.html">?fast_anticlustering</a></code> and
+<code>?generate_exchange_partners()</code>) for more information.</p>
+</div>
+<div class="section level3">
+<h3 id="preclustering">Preclustering<a class="anchor" aria-label="anchor" href="#preclustering"></a>
+</h3>
+<p>A second way of doing using fewer exchange partners is by including
+“preclustering” restrictions with the standard anticlustering function
+<code><a href="../reference/anticlustering.html">anticlustering()</a></code>. Unlike
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>, preclustering works with all
+anticlustering objectives that are available in
+<code><a href="../reference/anticlustering.html">anticlustering()</a></code> (e.g., the diversity). When setting
+<code>preclustering = TRUE</code>, the optimization restricts the number
+of exchange partners to <code>K - 1</code> (very similar) elements.
+While the logic is similar to the nearest neighbour approach in
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>, the difference is that the exchange
+partners consist of mutually exclusive groups when using preclustering.
+For example, the first, third and tenth element may only serve as
+exchange partners for each other, and none of them is exchanged with an
+“outsider” of this particular group. With
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>, each element has its own separate
+list of exchange partners, which can even be user generated when using
+the argument <code>exchange_partners</code>. In graph terms, with
+preclustering, the exchange partners form a clique, whereas with
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>, any (number of) connections are
+possible.</p>
+<p>Note that the preclustering algorithm, which has to be performed
+prior to the anticlustering algorithm, has <span class="math inline">\(O(N^2)\)</span> run time, which is slower than the
+nearest neighbour search in <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>. It
+nevertheless leads to strongly improved run times for larger data
+sets:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">N</span><span class="op">*</span><span class="va">M</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">M</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   4.843   0.008   4.851</span></span>
+<span><span class="co">#&gt;   4.834   0.000   4.835</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span>, preclustering <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.095   0.012   0.107</span></span></code></pre></div>
-<p>As we can see, for N = 1000, the speedup is enormous. There is also
-an additional “hidden” method to make the <code><a href="../reference/anticlustering.html">anticlustering()</a></code>
-function run faster. This method also relies on using fewer exchange
-partners during the exchange process, but does not use preclustering.
-This approach is documented here and mostly relies on a dirty “hack”
-involving the <code><a href="../reference/anticlustering.html">anticlustering()</a></code> argument
-<code>categories</code>:</p>
+<span><span class="co">#&gt;   0.097   0.000   0.098</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="secret-hack">Secret hack<a class="anchor" aria-label="anchor" href="#secret-hack"></a>
+</h3>
+<p>There is also an additional “hidden” method to make the
+<code><a href="../reference/anticlustering.html">anticlustering()</a></code> function run faster. This method also
+relies on using fewer exchange partners during the exchange process, but
+does not use preclustering or the approach used in
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>. This approach is documented here and
+mostly relies on a dirty “hack” involving the
+<code><a href="../reference/anticlustering.html">anticlustering()</a></code> argument <code>categories</code>. Since it
+works with <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, it can be used for all
+anticlustering objectives (unlike <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>).
+Let’s see how it works:</p>
 <p>The first step that I am using here is not strictly necessary—in the
 next section, we will learn more about what this accomplishes—but let’s
 create the initial clusters before calling
 <code><a href="../reference/anticlustering.html">anticlustering()</a></code>. This grouping is the basis on which the
 exchange procedure starts to improve the anticlustering:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
+<span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="va">initial_clusters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">K</span>, <span class="va">N</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">initial_clusters</span></span>
-<span><span class="co">#&gt;   [1] 2 2 3 1 3 3 3 3 3 2 1 1 1 3 3 2 1 1 3 1 3 1 1 3 2 1 3 2 2 2 3 2 1 3 2 1 2</span></span>
-<span><span class="co">#&gt;  [38] 3 3 3 2 3 2 1 2 2 1 3 1 1 2 1 1 3 2 2 2 3 2 1 3 3 3 3 1 1 2 1 1 2 1 2 2 1</span></span>
-<span><span class="co">#&gt;  [75] 3 1 1 2 3 3 3 2 1 2 2 3 2 1 3 2 1 2 3 1 1 2 2 1 1 1 3 1 1 2 1 3 3 3 3 3 1</span></span>
-<span><span class="co">#&gt; [112] 3 1 2 2 2 3 2 3 2 2 3 2 3 2 1 2 2 2 1 3 3 3 1 3 1 2 2 1 1 3 3 1 1 2 2 2 1</span></span>
-<span><span class="co">#&gt; [149] 1 3</span></span></code></pre></div>
+<span><span class="co">#&gt;   [1] 3 2 2 1 3 3 2 3 3 3 3 1 1 3 2 3 2 1 3 3 2 1 2 1 3 2 1 3 2 1 1 3 3 1 1 1 1</span></span>
+<span><span class="co">#&gt;  [38] 3 1 3 3 2 2 2 2 2 2 3 2 1 3 2 2 2 1 2 3 1 2 1 3 2 2 3 3 3 1 2 3 3 3 2 3 1</span></span>
+<span><span class="co">#&gt;  [75] 3 1 1 2 3 1 2 1 3 1 3 3 1 2 2 2 2 3 3 3 1 1 1 2 3 3 2 3 1 3 1 1 2 2 1 2 1</span></span>
+<span><span class="co">#&gt; [112] 2 1 2 3 1 2 3 1 1 3 2 1 3 1 2 1 3 2 2 3 1 2 1 1 3 3 2 1 2 1 2 2 2 2 3 1 1</span></span>
+<span><span class="co">#&gt; [149] 1 1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">initial_clusters</span><span class="op">)</span></span>
+<span><span class="co">#&gt; initial_clusters</span></span>
+<span><span class="co">#&gt;  1  2  3 </span></span>
+<span><span class="co">#&gt; 50 50 50</span></span></code></pre></div>
 <p>Now, the argument <code>categories</code> can be used to define which
 elements serve as exchange partners for each other. Lets create random
 groups of 10 elements that serve as exchange elements for each
 other:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">n_exchange_partners</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
-<span><span class="va">exchange_partners</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">N</span><span class="op">/</span><span class="va">n_exchange_partners</span><span class="op">)</span>, <span class="va">N</span><span class="op">)</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exchange_partners</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">N</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span>, <span class="va">N</span><span class="op">)</span><span class="op">)</span> <span class="co">#somewhat ugly but works</span></span>
 <span><span class="va">exchange_partners</span></span>
-<span><span class="co">#&gt;   [1]  5 13  2 11  7  5  6  1  7  3  1  1 15  3 10 10  8  4 14 15 15  7  8  3  2</span></span>
-<span><span class="co">#&gt;  [26] 13  1  9 11  6 13  6  9 13 13  1  9 11 15  7 12  8 12 13 14  7  3 10 12  8</span></span>
-<span><span class="co">#&gt;  [51] 11 11  7  5 15  5  6 14 15  4  9  5 15 12 14  4  4  6 11 10  1  9  6 12  1</span></span>
-<span><span class="co">#&gt;  [76]  8 10 11 14 11 15 14 10  7  2  8  4  8  5 15  3  1  2  4  5 12 12  3  9 13</span></span>
-<span><span class="co">#&gt; [101]  3  8  5 10  1  2  7  9  6 10  1  8 10  5  4  4  9  2  3 14  9  2  5  7 10</span></span>
-<span><span class="co">#&gt; [126] 12 11 13 12  6  9  6 14 14 15 13 13  4  3  4 14 11  2  6  2  3  8  2 12  7</span></span></code></pre></div>
+<span><span class="co">#&gt;   [1]  6  7 13  1  8  2 10  9  2 14  7 14  8  9 14  8 12  3  2  1  5  9  5  6 10</span></span>
+<span><span class="co">#&gt;  [26]  3  9  1 11 10  8  4 12 15 13  7  7  3 12  5 14 15  5 12 10 11  7  4  8 13</span></span>
+<span><span class="co">#&gt;  [51] 10 14  9  5 10 14 13 12 15  4  4 11  4 15 11  6  1  1 12  6 13 12  3 15 12</span></span>
+<span><span class="co">#&gt;  [76]  2  8 11  3  4 11  9  3  1  5  2  7  7  1 14 11 11  9 13  9  1  6  5  1  8</span></span>
+<span><span class="co">#&gt; [101]  8  5 10 15 14 15 13  7  7  5  2 15  4  6 10 15 12  9  8  5 11  3  7  2 15</span></span>
+<span><span class="co">#&gt; [126]  2 14 13 10  4 13  6  4  3  2  3 14  4  8  2  3 10  6  9  6 13  6 12 11  1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">exchange_partners</span><span class="op">)</span></span>
+<span><span class="co">#&gt; exchange_partners</span></span>
+<span><span class="co">#&gt;  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 </span></span>
+<span><span class="co">#&gt; 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10</span></span></code></pre></div>
 <p>The variable <code>exchange_partners</code> now defines groups of
-elements that are exchanged with each other. Only elements having the
-same value in <code>exchange_partners</code> serve as exchange partners
-for each other. Thus, each element is only swapped with 10 other
-elements instead of all 150 elements.</p>
+elements that are exchanged with each other: When passed to
+<code>categories</code>, only elements having the same value in
+<code>exchange_partners</code> serve as exchange partners for each other
+– this is how the <code>categories</code> argument operates. Thus, each
+element is only swapped with 9 other elements instead of all 150
+elements.</p>
 <p>Now let’s call anticlustering using the exchange partners we just
 defined:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">initial_clusters</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.010   0.000   0.011</span></span>
+<span><span class="co">#&gt;   0.009   0.000   0.009</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, categories <span class="op">=</span> <span class="va">exchange_partners</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
 <span><span class="co">#&gt;   0.003   0.000   0.003</span></span></code></pre></div>
 <p>Well, there is not a lot going on here with this very small data set
 (N = 150), so let’s do this for a larger data set with 1000 data
 points.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">M</span><span class="op">*</span><span class="va">N</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">M</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">initial_clusters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">K</span>, <span class="va">N</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">n_exchange_partners</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
-<span><span class="va">exchange_partners</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">N</span><span class="op">/</span><span class="va">n_exchange_partners</span><span class="op">)</span>, <span class="va">N</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">exchange_partners</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">N</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span>, <span class="va">N</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   3.346   0.004   3.350</span></span>
+<span><span class="co">#&gt;   3.323   0.000   3.323</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, categories <span class="op">=</span> <span class="va">exchange_partners</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.059   0.000   0.059</span></span></code></pre></div>
-<p>The speedup is enormous! Note that this approach even reduces the
-theoretical run time of the algorithm, because the number of exchanges
-no longer depends on the size of the input data, but instead is given a
-fixed value.</p>
+<span><span class="co">#&gt;   0.053   0.000   0.053</span></span></code></pre></div>
+<p>The speedup is enormous!</p>
 </div>
 <div class="section level3">
 <h3 id="including-categorical-variables">Including categorical variables<a class="anchor" aria-label="anchor" href="#including-categorical-variables"></a>
 </h3>
-<p>The previous approach to speed up the anticlustering by requiring
-fewer exchange partners used the <code>categories</code> argument. We
-should now reflect how this was accomplished, and first note that the
-<code>categories</code> argument usually has a different purpose: It is
-used to evenly distribute a categorical variable across groups—we did
-not care for that in the previous example.</p>
+<p>The previous “hacky” approach to speed up anticlustering used the
+<code>categories</code> argument. We should now reflect how this was
+accomplished, and first note that the <code>categories</code> argument
+usually has a different purpose: It is used to evenly distribute a
+categorical variable across groups—we did not care for that in the
+previous example.</p>
 <p>For example, coming back to the iris data set, we may require to
 evenly distribute the species of the iris plants across 5 groups of
 plants:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="fl">5</span>, categories <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">groups</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       </span></span>
@@ -329,13 +423,14 @@ spread of the species? First, the initial grouping of the elements is
 not random, but instead a “stratified split”, which ensures that a
 categorical variable occurs an equal number of times in each split.
 <code>anticlust</code> has the function
-<code><a href="../reference/categorical_sampling.html">categorical_sampling()</a></code> for this purpose. After conducting
-the initial stratified split, only plants belonging to the same species
-serve as exchange partners for each other. This second purpose of the
-<code>categories</code> argument is the one that we used above to
-restrict the number of exchange partners to speed up anticlustering:
-Only elements that have the same value in <code>categories</code> serve
-as exchange partners for each other.</p>
+<code><a href="../reference/categorical_sampling.html">categorical_sampling()</a></code> for this purpose, which is called by
+<code><a href="../reference/anticlustering.html">anticlustering()</a></code> internally before the exchange algorithm
+starts. After conducting the initial stratified split, only plants
+belonging to the same species serve as exchange partners for each other.
+This second purpose of the <code>categories</code> argument is the one
+that we used above to restrict the number of exchange partners to speed
+up anticlustering: Only elements that have the same value in
+<code>categories</code> serve as exchange partners for each other.</p>
 <p>In the example above, we prevented <code><a href="../reference/anticlustering.html">anticlustering()</a></code> from
 conducting a stratified split on the basis of the
 <code>categories</code> argument because we passed the initial grouping
@@ -348,7 +443,7 @@ split.</p>
 <p>First, we conduct a manual stratified split as the initial grouping
 vector for the <code>K</code> argument in
 <code><a href="../reference/anticlustering.html">anticlustering()</a></code>:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">initial_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/categorical_sampling.html">categorical_sampling</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span>, K <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">initial_groups</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span> <span class="co"># even!</span></span>
 <span><span class="co">#&gt;               </span></span>
@@ -360,10 +455,9 @@ vector for the <code>K</code> argument in
 <span><span class="co">#&gt;              5     10         10        10</span></span></code></pre></div>
 <p>Next, as in the previous section, we generate a vector that defines
 groups of pairwise exchange partners.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
-<span><span class="va">n_exchange_partners</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
-<span><span class="va">exchange_partners</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">N</span><span class="op">/</span><span class="va">n_exchange_partners</span><span class="op">)</span>, <span class="va">N</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">exchange_partners</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">N</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span>, <span class="va">N</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Now, and this is the crucial part, we pass to the argument
 <code>categories</code> a matrix that contains both the species as well
 as the <code>exchange_partners</code> vector, and to the argument
@@ -372,13 +466,13 @@ ensure that:</p>
 <ol style="list-style-type: lower-alpha">
 <li>the species is split evenly between groups at the start of the
 algorithm (argument <code>K</code>)</li>
-<li>the number of exchange partners is restricted to 10 (one column of
-the argument <code>categories</code>)</li>
+<li>the number of exchange partners is restricted to 9 elements (one
+column of the argument <code>categories</code>)</li>
 <li>the exchange partners are from the same species, thereby ensuring
 that the species remains evenly distributed between groups (the other
 column of <code>categories</code>)</li>
 </ol>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span></span>
 <span>  <span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>,</span>
 <span>  K <span class="op">=</span> <span class="va">initial_groups</span>, </span>
@@ -386,7 +480,7 @@ column of <code>categories</code>)</li>
 <span><span class="op">)</span></span></code></pre></div>
 <p>The groups are still balanced after <code><a href="../reference/anticlustering.html">anticlustering()</a></code> was
 called:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">groups</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       </span></span>
 <span><span class="co">#&gt; groups setosa versicolor virginica</span></span>
@@ -404,146 +498,82 @@ called:</p>
 functions for anticlustering: k-means and the diversity.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> The k-means criterion
 is well-known in cluster analysis and is computed as the sum of the
 squared Euclidean distances between all data points and the centroid of
-their respective cluster. The diversity is the overall sum of distances
-of elements in the same sets (for details, see Papenberg &amp; Klau,
-2021). By default, <code><a href="../reference/anticlustering.html">anticlustering()</a></code> optimizes the
-“Euclidean diversity”: the diversity objective using the Euclidean
-distance as measure of pairwise dissimilarity. However, any kind of
-dissimilarity matrix can be used as input.</p>
-<p>As stated above, the anticlustering algorithms recompute the
-objective function for each attempted exchange. Thus, computing the
-objective is the major contributor to overall run time. In
+their respective cluster: the variance. The diversity is the overall sum
+of all pairwise distances between elements that are grouped in the same
+cluster (for details, see Papenberg &amp; Klau, 2021). By default,
+<code><a href="../reference/anticlustering.html">anticlustering()</a></code> optimizes the “Euclidean diversity”: the
+diversity objective using the Euclidean distance as measure of pairwise
+dissimilarity.</p>
+<p>As explained in the previous section, the anticlustering algorithms
+recompute the objective function for each attempted exchange. Computing
+the objective is therefore the major contributor to overall run time. In
 <code>anticlust</code>, I exploit the fact that anticlustering
 objectives can be recomputed faster when only two items have swapped
 between clusters and the objective value prior to the exchange is known.
 For example, computing the diversity objective “from scratch” is in
-<span class="math inline">\(O(N^2)\)</span>, but when only two items
-differ between swaps, it is not necessary to spend the entire <span class="math inline">\(O(N^2)\)</span> time during each exchange.
+<span class="math inline">\(O(N^2)\)</span>. When the cluster
+affiliation of only two items differs between swaps, it is however not
+necessary to spend the entire <span class="math inline">\(O(N^2)\)</span> time during each exchange.
 Instead, by “cleverly” updating the objective before and after the swap,
 the computation reduces to <span class="math inline">\(O(N)\)</span>,
 leading to about <span class="math inline">\(O(N^3)\)</span> for the
-entire exchange method (instead of <span class="math inline">\(O(N^4)\)</span>—this is a huge difference).
-Computing the k-means objective (<code>objective = "variance"</code>) is
-in <span class="math inline">\(O(M \cdot N)\)</span>, where <span class="math inline">\(M\)</span> is the number of variables.
-<code>anticlust</code> uses some optimizations during the exchange
-process to prevent the entire re-computation of the cluster centroids
-for each exchange, which otherwise consumes most of the run time.
-However, this does not change the theoretical <span class="math inline">\(O(M \cdot N)\)</span> run time of the computation.
-Thus, theoretically, re-computing the k-means objective is slower than
-re-computing the diversity objective. In practice, however, I observe
-that k-means anticlustering is oftentimes faster than diversity
-anticlustering. That is, when <span class="math inline">\(N\)</span> is
-large as compared to <span class="math inline">\(M\)</span> and <span class="math inline">\(K\)</span>. For example, let’s compare running
-times for k-means and diversity anticlustering for <span class="math inline">\(N = 1000\)</span>, <span class="math inline">\(M =
-2\)</span> variables and <span class="math inline">\(K = 5\)</span>
-groups:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
-<span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
-<span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">M</span><span class="op">*</span><span class="va">N</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">M</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span>, objective <span class="op">=</span> <span class="st">"diversity"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   3.341   0.000   3.341</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span>, objective <span class="op">=</span> <span class="st">"variance"</span><span class="op">)</span><span class="op">)</span> <span class="co"># k-means anticlustering</span></span>
-<span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   1.875   0.000   1.875</span></span></code></pre></div>
-<p>When <span class="math inline">\(M\)</span> and/or <span class="math inline">\(K\)</span> increase, the diversity implementation
-may be faster, e.g. using <span class="math inline">\(N = 1000\)</span>,
-<span class="math inline">\(M = 20\)</span> variables and <span class="math inline">\(K = 50\)</span> yields:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
-<span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fl">20</span></span>
-<span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">50</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">M</span><span class="op">*</span><span class="va">N</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">M</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span>, objective <span class="op">=</span> <span class="st">"diversity"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.208   0.008   0.216</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span>, objective <span class="op">=</span> <span class="st">"variance"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.821   0.000   0.820</span></span></code></pre></div>
-<p>In most application I am aware of, the k-means method is faster
-because <span class="math inline">\(M\)</span> and <span class="math inline">\(K\)</span> are usually not very large. However,
-for example, if we happen to have (approximately) “<span class="math inline">\(M = N\)</span>”, the diversity implementation is
-much faster because its theoretical run time is better. Note that for
-very large data sets, however, using the diversity objective may not be
+entire exchange method (instead of <span class="math inline">\(O(N^4)\)</span>—this is a huge difference). When
+using a fixed number of exchange partners as described in the previous
+section, we are left with a run time of <span class="math inline">\(O(N^2)\)</span> <em>in total</em>. However, note
+that for very large data sets, using the diversity objective may not be
 feasible at all. The reason for this is that a quadratic matrix of
 between-item distances has to be computed and stored in memory. It is my
 experience that on a personal computer this becomes difficult for about
 &gt; 20000 elements (where the distance matrix has 20000^2 = 400000000
-elements). Thus, for large data sets a change of the objective is
-reasonable; the k-means objective is computationally more efficient and
-even very large data sets can be processed—at least this is true when
-the number of variables is (much) smaller than the number of elements. I
-live in a world where this is usually the case.</p>
+elements).</p>
+<p>Computing the standard k-means objective (which is done when using
+<code>anticlustering(..., objective = "variance"</code>) is in <span class="math inline">\(O(M \cdot N)\)</span>, where <span class="math inline">\(M\)</span> is the number of variables. The
+function <code><a href="../reference/anticlustering.html">anticlustering()</a></code> uses some optimizations during
+the exchange process to prevent the entire re-computation of the cluster
+centroids for each exchange, which otherwise consumes most of the run
+time. However, this does not change the theoretical <span class="math inline">\(O(M \cdot N)\)</span> run time of the computation.
+The function <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> uses a different – but
+equivalent – formulation of the k-means objective where the
+re-computation of the objective only depends on <span class="math inline">\(K\)</span> and <span class="math inline">\(M\)</span>, but no longer on <span class="math inline">\(N\)</span>;<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> this reduces the run time by an additional
+order of magnitude and makes k-means anticlustering applicable to very
+large data sets (even in the millions).</p>
 <p>Because the k-means objective has some disadvantages for
-anticlustering (see Papenberg, 2023),<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> you may consider using the k-plus
+anticlustering (see Papenberg, 2023),<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> you may consider using the k-plus
 objective, which extends—and effectively re-uses—the k-means criterion.
-For example, the following code—using <span class="math inline">\(N =
-50000\)</span>, 2 features and 2 exchange partners per element—ran in
-just about 15 seconds on my 10 year old personal computer:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">50000</span></span>
-<span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
-<span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">M</span><span class="op">*</span><span class="va">N</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">M</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">initial_clusters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">K</span>, <span class="va">N</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">n_exchange_partners</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
-<span><span class="va">exchange_partners</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">N</span><span class="op">/</span><span class="va">n_exchange_partners</span><span class="op">)</span>, <span class="va">N</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="../reference/kplus_anticlustering.html">kplus_anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, categories <span class="op">=</span> <span class="va">exchange_partners</span><span class="op">)</span></span></code></pre></div>
-<p>My computer crashes when I insert 50000 data points into diversity
-anticlustering.</p>
-</div>
-<div class="section level2">
-<h2 id="addendum-fast_anticlustering">Addendum: <code>fast_anticlustering()</code><a class="anchor" aria-label="anchor" href="#addendum-fast_anticlustering"></a>
-</h2>
-<p>The <code>anticlust</code> package contains a function called
-<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>, which (as the name suggests) was
-introduced to be a faster version of <code><a href="../reference/anticlustering.html">anticlustering()</a></code> to
-process large data sets. <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> optimizes
-the k-means criterion and has an argument <code>k_neighbours</code>,
-which adjusts the number of exchange partners. Details are found in the
-documentation (<code><a href="../reference/fast_anticlustering.html">?fast_anticlustering</a></code>) and in Papenberg and
-Klau (2021). In my view, the <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> approach
-to adjusting the number of exchange partners is theoretically and
-practically more satisfying than the previous “hack” of using the
-<code>categories</code> argument. However, while the function may still
-be useful in some settings, I currently do not recommend its use. This
-is because the exchange algorithm that is called in
-<code><a href="../reference/anticlustering.html">anticlustering()</a></code> (and therefore also
-<code><a href="../reference/kplus_anticlustering.html">kplus_anticlustering()</a></code>, which calls
-<code><a href="../reference/anticlustering.html">anticlustering()</a></code>) has been rewritten in C after including
-<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> in the package. The C implementation
-is considerably faster as compared to the R implementation in
-<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>. Due to the way in which exchange
-partners are generated in <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>, it is also
-not straight forward use the C implementation of the exchange method in
-<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>—I would like to change this in the
-future, but I am not sure when this will happen. So, ironically,
-<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> is currently not the fastest method
-for anticlustering, by a long shot:</p>
+It can also be applied to very large data sets using
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>. For example, the following
+code—using <span class="math inline">\(N = 100000\)</span>, <span class="math inline">\(K = 5\)</span>, 3 features and 10 exchange
+partners per element—runs quite quickly:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
-<span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<code class="sourceCode R"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">100000</span></span>
+<span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">M</span><span class="op">*</span><span class="va">N</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">M</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">initial_clusters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">K</span>, <span class="va">N</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">n_exchange_partners</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
-<span><span class="va">exchange_partners</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">N</span><span class="op">/</span><span class="va">n_exchange_partners</span><span class="op">)</span>, <span class="va">N</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># fast_anticlustering() always optimizes the k-means criterion (i.e., objective = "variance")</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, categories <span class="op">=</span> <span class="va">exchange_partners</span>, objective <span class="op">=</span> <span class="st">"variance"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.025   0.000   0.025</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/fast_anticlustering.html">fast_anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, k_neighbours <span class="op">=</span> <span class="va">n_exchange_partners</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   1.094   0.000   1.094</span></span></code></pre></div>
+<span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fast_anticlustering.html">fast_anticlustering</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/kplus_moment_variables.html">kplus_moment_variables</a></span><span class="op">(</span><span class="va">data</span>, T <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, </span>
+<span>  K <span class="op">=</span> <span class="va">K</span>, </span>
+<span>  exchange_partners <span class="op">=</span> <span class="fu"><a href="../reference/generate_exchange_partners.html">generate_exchange_partners</a></span><span class="op">(</span><span class="fl">10</span>, N <span class="op">=</span> <span class="va">N</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span></span>
+<span><span class="co">#&gt; Time difference of 4.333959 secs</span></span>
+<span><span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">groups</span><span class="op">)</span> <span class="co"># means and standard deviations are similar</span></span>
+<span><span class="co">#&gt;   [,1]          [,2]           [,3]         </span></span>
+<span><span class="co">#&gt; 1 "0.00 (1.00)" "-0.01 (1.00)" "0.00 (1.00)"</span></span>
+<span><span class="co">#&gt; 2 "0.00 (1.00)" "-0.01 (1.00)" "0.00 (1.00)"</span></span>
+<span><span class="co">#&gt; 3 "0.00 (1.00)" "-0.01 (1.00)" "0.00 (1.00)"</span></span>
+<span><span class="co">#&gt; 4 "0.00 (1.00)" "-0.01 (1.00)" "0.00 (1.00)"</span></span>
+<span><span class="co">#&gt; 5 "0.00 (1.00)" "-0.01 (1.00)" "0.00 (1.00)"</span></span></code></pre></div>
+<p>When k-plus anticlustering is conducted with
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>, we have to augment the numeric input
+with so called k-plus variables to ensure that k-plus anticlustering is
+actually performed (because otherwise <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>
+just performs k-means anticlustering). We should also use the argument
+<code>exchange_partners</code> instead of relying on the default nearest
+neighbour search, because searching nearest neighbours based on the
+k-plus variables does not really make sense (even though it probably
+wouldn’t hurt too much).</p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -568,13 +598,20 @@ of the Operational Research Society, 49</em>(6), 635–646. <a href="https://doi
 <code>"kplus"</code> and <code>"dispersion"</code>. However, the k-plus
 objective as implemented in <code>anticlust</code> effectively re-uses
 the original k-means criterion and just extends the input data
-internally. The dispersion objective has a different goal than the other
-objectives as it does not strive for between-group similarity, so it
-cannot be used as an alternative to the other objectives.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>The primary disadvantage is that k-means anticlustering
+internally. So, k-plus anticlustering will be somewhat slower than
+k-means anticlustering because the number of variables <span class="math inline">\(M\)</span> does contribute to the overall run
+time; however, the run time is usually dominated by <span class="math inline">\(N\)</span>, the number of elements. The dispersion
+objective has a different goal than the other objectives as it does not
+strive for between-group similarity, so it cannot be used as an
+alternative to the other objectives.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p><code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> minimizes the
+weighted sum of squared distances between cluster centroids and the
+overall data centroid; the distances between all individual data points
+and their cluster center are no longer computed.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>The primary disadvantage is that k-means anticlustering
 only leads to similarity in means, but not in standard deviations or any
 other distribution aspects; the k-plus criterion can be used to equalize
-arbitrary distribution moments between groups.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+any distribution moments between groups.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>

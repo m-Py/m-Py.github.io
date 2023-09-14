@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@
 <li>All clustering and anticlustering functions now only take one data argument (called <code>x</code>). Internally, <code>anticlust</code> tests if the input is a distance matrix or not. This is a major improvement for the function interfaces.</li>
 <li>The argument <code>iv</code> was removed from the function <code><a href="reference/anticlustering.html">anticlustering()</a></code> as it does not fit the anticlustering semantic. Its functionality is available in other functions (in particular: <code><a href="reference/matching.html">matching()</a></code>),</li>
 <li>The random sampling method for anticlustering was removed. It was an unnecessary burden for the <code>anticlust</code> code base as it is much less performant than the exchange method. (This implies that the <code><a href="reference/anticlustering.html">anticlustering()</a></code> function no longer has an argument <code>nrep</code>)</li>
-<li>The functions <code>initialize_K()</code> and <code>generate_exchange_partners()</code> were removed. They did not fit into the current design philosophy of the project (as soon as <code>anticlust</code> hits CRAN I will no longer remove exported functions)</li>
+<li>The functions <code>initialize_K()</code> and <code><a href="reference/generate_exchange_partners.html">generate_exchange_partners()</a></code> were removed. They did not fit into the current design philosophy of the project (as soon as <code>anticlust</code> hits CRAN I will no longer remove exported functions)</li>
 <li>It is no longer possible to pass a cluster assignment to <code><a href="reference/anticlustering.html">anticlustering()</a></code> via argument <code>K</code> that contains some <code>NA</code>. This functionality is now obsolete because the function <code><a href="reference/matching.html">matching()</a></code> exists for subset selection (see the package vignette)</li>
 <li>Alas, dropped support for the commercial linear programming solvers that hinder compatibility with CRAN checks
 <ul><li>Using the commericial solvers to solve anticluster editing or cluster editing is still be possible via version 0.3.0 that is tagged on Github</li>
@@ -123,22 +123,22 @@
 <span><span class="op">)</span></span></code></pre></div>
 <ul><li><p>An enhancement was added to the <code><a href="reference/balanced_clustering.html">balanced_clustering()</a></code> function: The heuristic algorithm to create equal-sized clusters was replaced by one that is much faster and better (courteously contributed by <a href="https://reaktanz.de/?c=hacking&amp;s=koRpus" class="external-link">Meik Michalke</a>). This method is also called when the argument <code>preclustering</code> is <code>TRUE</code> in a function call of the <code><a href="reference/anticlustering.html">anticlustering()</a></code> function (unless the argument <code>method</code> is “ilp”, in which case an exact clustering algorithm is called).</p></li>
 <li><p>A new function is available: <code><a href="reference/n_partitions.html">n_partitions()</a></code> computes the number of equal-sized partitions for given <em>N</em> and <em>K</em>.</p></li>
-<li><p>A new function is available: <code>generate_exchange_partners()</code> can be used to group elements that serve as exchange partners when using one of the functions <code><a href="reference/anticlustering.html">anticlustering()</a></code> or <code><a href="reference/fast_anticlustering.html">fast_anticlustering()</a></code>. This is good because users can now easily speed up anticlustering computations by reducing the number of exchange partners. The function also enables the possibility to combine categorical and preclustering restrictions, see <code>?generate_exchange_partners()</code> (it is still not possible to combine <code>preclustering = TRUE</code> and the <code>categories</code> argument). In the following example, we restrict the exchange partners to four random elements within the same species:</p></li>
+<li><p>A new function is available: <code><a href="reference/generate_exchange_partners.html">generate_exchange_partners()</a></code> can be used to group elements that serve as exchange partners when using one of the functions <code><a href="reference/anticlustering.html">anticlustering()</a></code> or <code><a href="reference/fast_anticlustering.html">fast_anticlustering()</a></code>. This is good because users can now easily speed up anticlustering computations by reducing the number of exchange partners. The function also enables the possibility to combine categorical and preclustering restrictions, see <code>?generate_exchange_partners()</code> (it is still not possible to combine <code>preclustering = TRUE</code> and the <code>categories</code> argument). In the following example, we restrict the exchange partners to four random elements within the same species:</p></li>
 </ul><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/anticlustering.html">anticlustering</a></span><span class="op">(</span></span>
 <span>  <span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>,</span>
 <span>  K <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  categories <span class="op">=</span> <span class="fu">generate_exchange_partners</span><span class="op">(</span></span>
+<span>  categories <span class="op">=</span> <span class="fu"><a href="reference/generate_exchange_partners.html">generate_exchange_partners</a></span><span class="op">(</span></span>
 <span>    categories <span class="op">=</span> <span class="va">iris</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span>, </span>
 <span>    p <span class="op">=</span> <span class="fl">4</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<ul><li>Note that the function <code>generate_exchange_partners()</code> takes as argument the number of exchange partners «<code>p</code>»; this is different from the anticlustering and clustering functions that take as input the size of the expected cluster «<code>K</code>». Hence, <code>K = 5</code> and <code>p = 4</code> will lead to the same number of exchange partners.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> In another example, we restrict the exchange partners to four similar elements within the same species (here, balanced input is necessary again because internally, clusters of equal size are computed using the function <code><a href="reference/balanced_clustering.html">balanced_clustering()</a></code> on each category separately):</li>
+<ul><li>Note that the function <code><a href="reference/generate_exchange_partners.html">generate_exchange_partners()</a></code> takes as argument the number of exchange partners «<code>p</code>»; this is different from the anticlustering and clustering functions that take as input the size of the expected cluster «<code>K</code>». Hence, <code>K = 5</code> and <code>p = 4</code> will lead to the same number of exchange partners.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> In another example, we restrict the exchange partners to four similar elements within the same species (here, balanced input is necessary again because internally, clusters of equal size are computed using the function <code><a href="reference/balanced_clustering.html">balanced_clustering()</a></code> on each category separately):</li>
 </ul><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/anticlustering.html">anticlustering</a></span><span class="op">(</span></span>
 <span>  <span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>,</span>
 <span>  K <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  categories <span class="op">=</span> <span class="fu">generate_exchange_partners</span><span class="op">(</span></span>
+<span>  categories <span class="op">=</span> <span class="fu"><a href="reference/generate_exchange_partners.html">generate_exchange_partners</a></span><span class="op">(</span></span>
 <span>    features <span class="op">=</span> <span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, </span>
 <span>    categories <span class="op">=</span> <span class="va">iris</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span>, </span>
 <span>    p <span class="op">=</span> <span class="fl">4</span>, </span>
@@ -304,7 +304,7 @@
 </div>
 </div>
 <div class="footnotes footnotes-end-of-document">
-<hr><ol><li id="fn1"><p>Maybe the argument <code>p</code> will be added to the <code><a href="reference/anticlustering.html">anticlustering()</a></code> function in a future release (in this case, the function <code>generate_exchange_partners()</code> would be called internally). This is probably a useful extension.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<hr><ol><li id="fn1"><p>Maybe the argument <code>p</code> will be added to the <code><a href="reference/anticlustering.html">anticlustering()</a></code> function in a future release (in this case, the function <code><a href="reference/generate_exchange_partners.html">generate_exchange_partners()</a></code> would be called internally). This is probably a useful extension.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol></div>
 
 

@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
       </span>
     </div>
 
@@ -91,6 +91,8 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Some best practices for anticlustering</h1>
+                        <h4 data-toc-skip class="author">Martin
+Papenberg</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/m-Py/anticlust/blob/HEAD/vignettes/Best_practices.Rmd" class="external-link"><code>vignettes/Best_practices.Rmd</code></a></small>
@@ -100,17 +102,15 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/m-Py/anticlust" class="external-link">anticlust</a></span><span class="op">)</span></span></code></pre></div>
-<p>This vignette documents some “best practices” for using the function
-<code><a href="../reference/anticlustering.html">anticlustering()</a></code> (and they are mostly applicable to
-<code><a href="../reference/kplus_anticlustering.html">kplus_anticlustering()</a></code> as well). In many cases, the
-suggestions pertain to overriding the default values of arguments, which
-seems to be a difficult decision for users. However, I advise you: Do
-not stick with the defaults; check out the results of different
-anticlustering specifications; repeat the process; play around; read the
-documentation (especially <code><a href="../reference/anticlustering.html">?anticlustering</a></code>); change
-arguments arbitrarily; compare the output. Nothing can break.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>This vignette documents some “best practices” for anticlustering
+using the R package <code>anticlust</code>. In many cases, the
+suggestions pertain to overriding the default values of arguments of
+<code><a href="../reference/anticlustering.html">anticlustering()</a></code>, which seems to be a difficult decision
+for users. However, I advise you: Do not stick with the defaults; check
+out the results of different anticlustering specifications; repeat the
+process; play around; read the documentation (especially
+<code><a href="../reference/anticlustering.html">?anticlustering</a></code>); change arguments arbitrarily; compare the
+output. Nothing can break.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>This document uses somewhat imperative language; nuance and
 explanations are given in the package documentation, the other
 vignettes, and the papers by Papenberg and Klau (2021; <a href="https://doi.org/10.1037/met0000301" class="external-link uri">https://doi.org/10.1037/met0000301</a>) and Papenberg (2023;
@@ -137,28 +137,28 @@ group sizes are not equal (preferably, use
 <li>
 <strong>You should (probably) not only care about similarity in mean
 values</strong>: prefer <code>objective = "kplus"</code> over
-<code>objective = "variance"</code> (or even better: check out the
-function <code><a href="../reference/kplus_anticlustering.html">kplus_anticlustering()</a></code>).</li>
+<code>objective = "variance"</code> (or check out the function
+<code><a href="../reference/kplus_anticlustering.html">kplus_anticlustering()</a></code>).</li>
 <li>If you (only) care about similarity in means and standard
 deviations, use <code>objective = "kplus"</code> instead of the default
 <code>objective = "diversity"</code>.</li>
 <li>With k-plus anticlustering, <strong>always</strong> use
 <code>standardize = TRUE</code>.</li>
-<li>Do not use the function <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> (which is
-usually slower than <code><a href="../reference/anticlustering.html">anticlustering()</a></code>).</li>
+<li>If you want to apply anticlustering on a large data set, read the
+vignette “Speeding up Anticlustering”.</li>
+<li>If you have a very large<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> data set, do not use the default
+<code>objective = "diversity"</code> because computing the distance
+matrix may overwhelm your computer. Instead use
+<code>objective = "variance"</code> or
+<code>objective = "kplus"</code>.</li>
 <li>For the optimal anticlustering algorithms (i.e.,
 <code>method = "ilp"</code>): Install the SYMPHONY solver instead of the
 GLPK solver.</li>
 <li>The <code>objective = "dispersion"</code> is the only objective
 where you should first try out the optimal method instead of a
 heuristic, i.e., use <code>method = "ilp"</code> or the function
-<code><a href="../reference/optimal_dispersion.html">optimal_dispersion()</a></code>.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
+<code><a href="../reference/optimal_dispersion.html">optimal_dispersion()</a></code>.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>
 </li>
-<li>If you have a very large<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> data set, do not use the default
-<code>objective = "diversity"</code> because computing the distance
-matrix may overwhelm your computer. Instead use
-<code>objective = "variance"</code> or
-<code>objective = "kplus"</code>.</li>
 </ul>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -182,17 +182,17 @@ the default. Actually, there are two reasons. First, the argument was
 not always available in <code>anticlust</code> and changing the default
 behaviour of a function when releasing a new version is oftentimes
 undesirable. Second, it seems like a big decision to me to just change
-users’ data by default. In doubt, just compare the results of using
-<code>standardize = TRUE</code> and <code>standardize = FALSE</code> and
-decide for yourself which you like best. Standardization may not be the
-best choice in all settings.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>The maximum dispersion problem can be solved optimally
+users’ data by default (which is done when standardizing the data). In
+doubt, just compare the results of using <code>standardize = TRUE</code>
+and <code>standardize = FALSE</code> and decide for yourself which you
+like best. Standardization may not be the best choice in all settings.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>What is considered very large may depend on the
+specifications of your computer. I used to have problems computing a
+distance matrix for <span class="math inline">\(N &gt; 20000\)</span>.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>The maximum dispersion problem can be solved optimally
 for rather large data sets, especially for <span class="math inline">\(K
 = 2\)</span>. For <span class="math inline">\(K = 3\)</span> and <span class="math inline">\(K = 4\)</span>, several 100 elements can usually
-be processed, especially when installing the SYMPHONY solver.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>What is considered very large may depend on the
-specifications of your computer. I used to have problems computing a
-distance matrix for <span class="math inline">\(N &gt; 20000\)</span>.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+be processed, especially when installing the SYMPHONY solver.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>

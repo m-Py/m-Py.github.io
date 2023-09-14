@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
       </span>
     </div>
 
@@ -69,6 +69,30 @@
       <small>Source: <a href="https://github.com/m-Py/anticlust/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.8.0" id="anticlust-080">anticlust 0.8.0<small>2023-09-13</small><a class="anchor" aria-label="anchor" href="#anticlust-080"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-8-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-8-0"></a></h3>
+<ul><li>
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> now has an additional argument <code>exchange_partners</code>, which can be used to pass custom exchange partners instead of using the default nearest neighbour search.</li>
+<li>
+<code><a href="../reference/generate_exchange_partners.html">generate_exchange_partners()</a></code> is a new exported function that can be used to address the new argument <code>exchange_partners</code> in <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="internal-changes-0-8-0">Internal changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-8-0"></a></h3>
+<ul><li>
+<code><a href="../reference/anticlustering.html">anticlustering()</a></code> received internal changes to ensure that it <a href="https://github.com/m-Py/anticlust/issues/50" class="external-link">no longer crashes the computer for about N &gt; 250000 elements</a>.</li>
+<li>
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> has been re-implemented in C, which is much faster than the previous R implementation.</li>
+<li>
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> now uses an alternative computation of the k-means objective, which reduces run time by an order of magnitude as compared to before.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-0-8-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-8-0"></a></h3>
+<ul><li>Expanded documentation of <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>.</li>
+<li>The vignette “Speeding up anticlustering” has been rewritten to reflect that <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> is now again the best choice for processing (very) large data sets.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7.0" id="anticlust-070">anticlust 0.7.0<small>2023-07-15</small><a class="anchor" aria-label="anchor" href="#anticlust-070"></a></h2>
 <ul><li>An exact ILP method is now available for maximizing the dispersion, contributed by Max Diekhoff.
@@ -269,7 +293,7 @@
 <li><p>All clustering and anticlustering functions now only take one data argument (called <code>x</code>) instead of either <code>features</code> or <code>distances</code>.</p></li>
 <li><p>The argument <code>iv</code> was removed from <code><a href="../reference/anticlustering.html">anticlustering()</a></code> because it does not fit the anticlustering semantic (anticlustering should make sets «similar» and not dissimilar).</p></li>
 <li><p>The random sampling method for anticlustering was removed. This implies that the <code><a href="../reference/anticlustering.html">anticlustering()</a></code> function no longer has an argument <code>nrep</code>.</p></li>
-<li><p>The functions <code>initialize_K()</code> and <code>generate_exchange_partners()</code> were removed.</p></li>
+<li><p>The functions <code>initialize_K()</code> and <code><a href="../reference/generate_exchange_partners.html">generate_exchange_partners()</a></code> were removed.</p></li>
 <li><p>Dropped support for the commercial integer linear programming solvers CPLEX and gurobi for exact (anti)cluster editing. If this functionality is needed, install version 0.3.0 from Github:</p></li>
 </ul><pre><code><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"m-Py/anticlust"</span>, ref <span class="op">=</span> <span class="st">"v0.3.0"</span><span class="op">)</span></span></code></pre>
 <ul><li><p><code>mean_sd_obj()</code> no longer computes the discrepancy of medians, only in means and standard deviations (as the name also suggests).</p></li>
