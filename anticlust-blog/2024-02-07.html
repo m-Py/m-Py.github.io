@@ -9,10 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="by Martin Papenberg" />
+<meta name="author" content="Martin Papenberg" />
 
+<meta name="date" content="2023-08-29" />
 
-<title>The anticlust blog</title>
+<title>the anticlust blog</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,29 +350,158 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">The anticlust blog</h1>
-<h4 class="author">by Martin Papenberg</h4>
+<h1 class="title toc-ignore">the anticlust blog</h1>
+<h4 class="author">Martin Papenberg</h4>
+<h4 class="date">August 29, 2023</h4>
 
 </div>
 
 
-<p>This is the blog about the <a href="https://github.com/m-Py/anticlust">anticlust R package</a>. Here I
-share some thoughts and stuff on the anticlust package that do not
-really fit into the documentation and vignettes (even though materials
-gathered here may be used there in the future). It will often be
-concerned with the internal details of anticlust that may not be of
-primary interest to its users.</p>
-<p><a href="../about/index.html">About the author</a>.</p>
-<div id="posts" class="section level2">
-<h2>Posts</h2>
+<div id="anticlust-development-diary-issue-1-2024" class="section level2">
+<h2>Anticlust Development Diary, Issue 1, 2024</h2>
+<p>Since the <code>anticlust</code> <a href="https://github.com/m-Py/anticlust">Github repository</a> is
+currently quite the mess for different reasons, it seems reasonable to
+write down the status of the different branches that are currently
+developed, mostly for myself to stay on top of things.</p>
+<div id="the-main-branch-previously-master" class="section level3">
+<h3>The “main” branch (previously master)</h3>
+<p>The main branch has <a href="https://github.com/m-Py/anticlust/releases/tag/v0.8.2">version
+0.8.2</a> of anticlust. This version is not on CRAN, and ironically,
+version 0.8.1, which <em>is</em> <a href="https://cran.r-project.org/src/contrib/Archive/anticlust/">currently</a>
+on CRAN, is not <a href="https://github.com/m-Py/anticlust/releases">released on Gihub</a>.
+The reason for this is my very personal CRAN horror story. Two days
+after my paternal leave started in September 2023, an error occurred
+(“additional issue”) on the CRAN results page, indicating that on a
+specific version of a mac computer (“M1mac”), there was a segfault. This
+error was not removed by submitting an intermediate patch 0.8.0-1, and
+even remained shortly after I submitted version 0.8.1, <strong>which is
+a 100% copy</strong> of the previous version 0.7.0, which did not have
+any issues on CRAN.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> This means that right now, the new features
+from <a href="https://m-py.github.io/anticlust/news/index.html">version
+0.8.0</a> are not available from CRAN.</p>
+<p>Version 0.8.2, which is the latest published version of Github
+introduces one regression as compared to the version 0.8.0: <a href="https://github.com/m-Py/anticlust/issues/50">the fix</a>, which
+addressed <code>anticlustering()</code> crashing for very large data
+sets, is not included, and it probably never will.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> Otherwise, it is the
+same code of <code>anticlust</code>. I will soon resubmit a version of
+<code>anticlust</code> to CRAN, which will probably feature one
+additional change to version 0.8.2, which is that I could make
+<code>fast_anticlustering()</code> <a href="https://github.com/m-Py/anticlust/commit/c5cb24b28b99">even
+faster</a>, especially for many clusters, by removing some unneeded
+computations and copying. So (hopefully) expect anticlust version 0.8.3
+on CRAN in the near future.</p>
+<p>When a new version is published on CRAN, I will also update the <a href="https://m-py.github.io/anticlust/index.html">package homepage</a>
+to the new version; here, the latest version is still version 0.8.0. I
+will not include version 0.8.0-1 and 0.8.1 in the <a href="https://m-py.github.io/anticlust/news/index.html">change logs</a>
+of <code>anticlust</code>, because they were only introduced to fix some
+CRAN issues.</p>
+</div>
+<div id="the-bils-e-branch" class="section level3">
+<h3>The “bils-e” branch</h3>
+<p>Here, most development is happening with regard to my latest research
+project, which addresses the <a href="https://m-py.github.io/anticlust/reference/bicriterion_anticlustering.html">bicriterion
+anticlustering algorithm BILS</a> by <a href="https://doi.org/10.1111/bmsp.12186">Brusco et al. (2020)</a>. The
+<a href="https://github.com/m-Py/anticlust/blob/bils-e/NEWS.md">NEWS
+page</a> in that branch already lists some of the changes.</p>
+<p>Some other notable changes include:</p>
 <ul>
-<li><a href="2024-02-07.html">2024/02 Anticlust Development Diary, Issue
-1, 2024</li>
-<li><a href="2023-09-13.html">2023/09: anticlust 0.8.0: The revival of
-<code>fast_anticlustering()</code></li>
-<li><a href="2023-08-29.html">2023/08: Rewriting it in C: Anticlustering
-(part 1)</li>
+<li>(Internal change only) For diversity anticlustering, the local
+maximum method is now directly implemented in C (it no longer repeatedly
+calls <code>anticlustering()</code> from R and checks when no
+improvement occurs), as well as the argument <code>repetitions</code>.
+This speeds up computation a bit and facilitates some features that I
+currently implement with regard to combining cannot-link constraints in
+anticlustering.</li>
+<li>(This is currently only available internally and I do not know how
+this functionality will eventually be made available to users) It is now
+possible to pass many initial partitions for all
+<code>repetitions</code> in
+<code>anticlustering(..., objective = &quot;diversity&quot;)</code>. This may be
+useful to include cannot-link constraints.</li>
+<li>Right now, there is an exported function <a href="https://github.com/m-Py/anticlust/blob/bils-e/R/cannot_link_anticlustering.R"><code>cannot_link_anticlustering()</code></a>,
+which however will not remain in the package as is; rather, it will be
+made available as part of other functions, but I am not yet sure how
+(e.g., add an argument <code>cannot_link</code> to
+<code>anticlustering()</code>).</li>
+<li>There is now an objective <code>&quot;average-diversity&quot;</code>. It is
+computed just as the diversity, but the sum of within-group distances is
+divided by the group size before the global sum of within-group
+distances is computed. Actually, this does not change the computation
+for equal-sized anticlusters, but using the average diversity is much
+more useful if the groups are different-sized (if the diversity is used
+as a measure of between-group similarity, which it usually is). The
+average diversity objective is now also available from the function
+<code>bicriterion_anticlustering()</code>.</li>
 </ul>
+</div>
+<div id="the-wce_heuristic-branch" class="section level3">
+<h3>The “wce_heuristic” branch</h3>
+<p>This branch includes a heuristic local maximum exchange method for
+the weighted cluster editing / clique partitioning problem. It is
+actually quite fast, and I think that with this function I kind of
+perfected the local updating procedure for clustering problems.
+Unfortunately it is based on the old master branch of
+<code>anticlust</code>, which has many unused commits that are not part
+of the current main branch. So I guess I need to conduct some <a href="https://git-scm.com/docs/git-cherry-pick">cherry picking</a> if
+this feature is included in the released version of anticlust at some
+point.</p>
+</div>
+<div id="the-diversity2-branch" class="section level3">
+<h3>The “diversity2” branch</h3>
+<p>This branch probably has the most unfortunate name and unfortunately
+is based on the “wce_heuristic” branch. It implements yet another
+version of k-means anticlustering and uses the fact that the sum of
+within-cluster squared Euclidean distances (which is the diversity,
+using the squared Euclidean distance as input) is equivalent to the
+k-means objective; at least when the group sizes are equal - otherwise,
+we would need the “average” diversity to maintain the equivalence. The
+diversity implementation of anticlustering profits from having many
+groups (because increasing the number of groups leads to a quadratic
+decrease in the number of within-group distances) and I assumed that
+using this implementation may be best suited for very many groups (e.g.,
+K = N/2). Unfortunately, we cannot use the quadratic matrix of pairwise
+distances for very large N. For this reason, the new implementation does
+not store this matrix and instead computes the distances when they are
+needed. It seems that this implementation can actually outperform the
+very fast implementation in <a href="2023-09-13.html"><code>fast_anticlustering()</code></a>, but only
+for highly specific conditions (such as K = N/2 for very large data
+sets).</p>
+<p>Based on my experienced implementing this new k-means anticlustering
+version, I was however able to speed up
+<code>fast_anticlustering()</code> even more than before by <a href="https://github.com/m-Py/anticlust/commit/c5cb24b28b995">preventing
+some redundant computations and copying</a>. It uses the logic that I
+first used for the heuristic cluster editing function, as discussed
+above. This functionality is now also included in the “diversity2”
+branch, but I would like to have it in the next anticlust release, so
+some more cherry picking will be required.</p>
+</div>
+<div id="other-branches" class="section level3">
+<h3>Other branches</h3>
+<p>In the <code>anticlust</code> repository, there are even some more
+branches, many are old and stale or there is not really anything going
+on there. The branch “gurobisolver” may be useful at some point for
+research, because it includes the commercial gurobi mathematical
+programming solver for integer linear programming. The “must-link”
+branch will probably be unearthed at some point when I proceed to
+working on these kind of constraints with anticlustering. I am not sure
+if the other branches will see the light of the day again.</p>
+<hr />
+<p>Last updated: 2024-02-07</p>
+</div>
+<div id="back-to-the-front-page" class="section level3">
+<h3><a href="index.html">Back to the front page</a></h3>
+</div>
+</div>
+<div class="footnotes footnotes-end-of-document">
+<hr />
+<ol>
+<li id="fn1"><p>For some strange reason, the issue persisted even with
+the old anticlust code (i.e., version 0.8.1) at first, but after I wrote
+another email to the CRAN maintainers, it disappeared from the results
+page.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>This is not so bad, because you should use
+<code>fast_anticlustering()</code> for such data sets anyway.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
 
 
