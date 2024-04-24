@@ -410,19 +410,19 @@ just should not be forgotten prior to a release).</p>
 <h3>K-Means anticlustering in <code>anticlustering()</code></h3>
 <p>This section gives some outlook for the implementation of k-means
 anticlustering in <code>anticlustering()</code>.</p>
-<p>It is possible to unit the implementations for the diversity
+<p>It is possible to unite the implementations for the diversity
 objective and the k-means objective because the k-means objective can
 also be formulated as a “normalized” diversity, i.e., the sum of the
 squared pairwise distances within each cluster, divided by the number of
 objects in a cluster. The standard diversity is just defined as the
 plain sum of within-cluster dissimilarities, but the addition of a
-normalizing factor was straight forward and has already been done (as
+normalizing factor is straight forward and has already been done (as
 already described <a href="2024-02-07.html">here</a>). Thus, I can just
 re-use the diversity implementation for k-means and k-plus
-anticlustering, which has some advantages pertaining to maintainance. I
-just need to correctly compute the relevant distances depending on the
-user input, and I am already doing this if cannot-link constraints are
-inserted.</p>
+anticlustering, which has some advantages pertaining to maintenance. I
+just need to correctly compute the correct input distances depending on
+the user input, and I am already doing this if cannot-link constraints
+are inserted.</p>
 <p>This means that I could retire the current implementation of k-means
 anticlustering in <code>anticlustering()</code>, which maximizes the sum
 of squared Euclidean distances between cluster centers and their
