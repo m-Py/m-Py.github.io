@@ -9,10 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="by Martin Papenberg" />
 
 
-<title>The anticlust blog</title>
+<title>2024-04-24.knit</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,31 +348,106 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">The anticlust blog</h1>
-<h4 class="author">by Martin Papenberg</h4>
 
 </div>
 
 
-<p>This is the blog about the <a href="https://github.com/m-Py/anticlust">anticlust R package</a>. Here I
-share some thoughts and stuff on the anticlust package that do not
-really fit into the documentation and vignettes (even though materials
-gathered here may be used there in the future). It will often be
-concerned with the internal details of anticlust that may not be of
-primary interest to its users.</p>
-<p><a href="../about/index.html">About the author</a>.</p>
-<div id="posts" class="section level2">
-<h2>Posts</h2>
+<p>title: “the anticlust blog” date: April , 2024 author: Martin
+Papenberg —</p>
+<div id="anticlust-development-diary-issue-2-2024" class="section level2">
+<h2>Anticlust Development Diary, Issue 2, 2024</h2>
+<p>I just submitted <code>anticlust</code> version 0.8.3 to CRAN and
+hope for the best that it remains there without any CRAN issues. I use
+this opportunity to give an update on the status of the
+<code>anticlust</code> development.</p>
+<div id="the-new-version-0.8.3" class="section level3">
+<h3>The new version 0.8.3</h3>
 <ul>
-<li><a href="2024-04-24.html">2024/02 Anticlust Development Diary, Issue
-2, 2024</li>
-<li><a href="2024-02-07.html">2024/02 Anticlust Development Diary, Issue
-1, 2024</li>
-<li><a href="2023-09-13.html">2023/09: anticlust 0.8.0: The revival of
-<code>fast_anticlustering()</code></li>
-<li><a href="2023-08-29.html">2023/08: Rewriting it in C: Anticlustering
-(part 1)</li>
+<li>Version 0.8.3 primarily restores the fast C implementation of
+<code>fast_anticlustering()</code> to CRAN, which I removed temporarily
+due to CRAN issues described <a href="2024-02-07.html">here</a> (which
+were probably not related to <code>fast_anticlustering()</code>,
+however)</li>
+<li>An internal change in 0.8.3 is that it is now even faster than the
+original 0.8.0 implementation because updating the objective is now done
+by only inspecting the two clusters between which an exchange actually
+took place, instead of re-computing a sum across all clusters.</li>
+<li>Additionally, a bug in the new implementation was fixed because the
+new computation method for the k-means objective did not incorporate the
+cluster sizes—but it has to. Past Martin turned out to be a smart
+because he included a unit test for unequal group sizes, which
+identified that <code>anticlustering()</code> and
+<code>fast_anticlustering()</code> produced different results for
+unequal cluster sizes. Present Martin was not as smart and initially
+thought the test result was bogus and <a href="https://github.com/m-Py/anticlust/commit/72635aad56e454">reacted
+by removing the test</a>, <a href="https://github.com/m-Py/anticlust/commit/2970f3debf61a">but later
+restored it</a> and <a href="https://github.com/m-Py/anticlust/commit/957490ac2fe047">fixed the
+implementation</a>.</li>
+<li>Apart from these minor internal changes, 0.8.3 only has slight
+changes to the documentation of <code>anticlustering()</code> and
+otherwise is the same as 0.8.2.</li>
 </ul>
+</div>
+<div id="the-bils-e-branch" class="section level3">
+<h3>The “bils-e” branch</h3>
+<p>I <a href="2024-02-07.html">previously</a> described some important
+development going on on <a href="https://github.com/m-Py/anticlust/tree/bils-e">this development
+branch</a>. Since then, I implemented an interface for employing
+cannot-link constraints with anticlustering, which is given through the
+argument <code>cannot_link</code> in <code>anticlustering()</code>. I
+strongly assume that this is how it will remain. The implementation is
+already quite potent. It can be used in conjunction with all implemented
+algorithms (<code>&quot;exchange&quot;</code>, <code>&quot;local-maximum&quot;</code>,
+<code>&quot;brusco&quot;</code>, <code>&quot;ilp&quot;</code>), even the optimal integer
+linear programming algorithm, and for the objectives
+<code>&quot;diversity&quot;</code>, <code>&quot;variance&quot;</code> and
+<code>&quot;kplus&quot;</code>. I still need to implement unit tests for this
+argument and currently the selection of the partition is not correctly
+implemented for <code>method = &quot;brusco&quot;</code> (this is an easy fix, it
+just should not be forgotten prior to a release).</p>
+</div>
+<div id="k-means-anticlustering-in-anticlustering" class="section level3">
+<h3>K-Means anticlustering in <code>anticlustering()</code></h3>
+<p>This section gives some outlook for the implementation of k-means
+anticlustering in <code>anticlustering()</code>.</p>
+<p>It is possible to unit the implementations for the diversity
+objective and the k-means objective because the k-means objective can
+also be formulated as a “normalized” diversity, i.e., the sum of the
+squared pairwise distances within each cluster, divided by the number of
+objects in a cluster. The standard diversity is just defined as the
+plain sum of within-cluster dissimilarities, but the addition of a
+normalizing factor was straight forward and has already been done (as
+already described <a href="2024-02-07.html">here</a>). Thus, I can just
+re-use the diversity implementation for k-means and k-plus
+anticlustering, which has some advantages pertaining to maintainance. I
+just need to correctly compute the relevant distances depending on the
+user input, and I am already doing this if cannot-link constraints are
+inserted.</p>
+<p>This means that I could retire the current implementation of k-means
+anticlustering in <code>anticlustering()</code>, which maximizes the sum
+of squared Euclidean distances between cluster centers and their
+centroid (the “variance”). I would keep the k-means implementation in
+<code>fast_anticlustering()</code>, which minimizes the normalized sum
+of squared distances between the cluster centroids and the overall
+centroid. This minimization is equivalent to maximizing the variance—and
+it is by far the most efficient way to optimize the k-means criterion.
+It is particularly well suited for large data sets. Given that computing
+the quadratic distance matrix is usually the bottleneck for large data
+sets when using maximizing the diversity, it is not a problem replacing
+the variance maximizing by diversity maximization—if the data set is too
+large, just use <code>fast_anticlustering()</code>, which is still
+possible and even recommended. Maximizing the variance can be fast in
+some constellations than maximizing the diversity (as discussed in <a href="https://cran.r-project.org/web/packages/anticlust/vignettes/Speeding_up_anticlustering.html">this
+package vignette</a>), but the discrepancy is not very pronounced. And
+as stated, we can just use <code>fast_anticlustering()</code> for
+speed.</p>
+<p>I will consider this option as I am not decided yet.</p>
+<hr />
+<p>Last updated: 2024-04-24</p>
+</div>
+<div id="back-to-the-front-page" class="section level3">
+<h3><a href="index.html">Back to the front page</a></h3>
+</div>
 </div>
 
 

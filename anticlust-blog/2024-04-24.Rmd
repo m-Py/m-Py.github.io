@@ -1,0 +1,40 @@
+title: "the anticlust blog"
+date: April , 2024
+author: Martin Papenberg
+---
+
+## Anticlust Development Diary, Issue 2, 2024
+
+```{r, echo = FALSE}
+set.seed(6789)
+options(scipen = 999)
+```
+
+I just submitted `anticlust` version 0.8.3 to CRAN and hope for the best that it remains there without any CRAN issues. I use this opportunity to give an update on the status of the `anticlust` development.
+
+### The new version 0.8.3
+
+- Version 0.8.3 primarily restores the fast C implementation of `fast_anticlustering()` to CRAN, which I removed temporarily due to CRAN issues described [here](2024-02-07.html) (which were probably not related to `fast_anticlustering()`, however)
+- An internal change in 0.8.3 is that it is now even faster than the original 0.8.0 implementation because updating the objective is now done by only inspecting the two clusters between which an exchange actually took place, instead of re-computing a sum across all clusters. 
+- Additionally, a bug in the new implementation was fixed because the new computation method for the k-means objective did not incorporate the cluster sizes---but it has to. Past Martin turned out to be a smart because he included a unit test for unequal group sizes, which identified that `anticlustering()` and `fast_anticlustering()` produced different results for unequal cluster sizes. Present Martin was not as smart and initially thought the test result was bogus and [reacted by removing the test](https://github.com/m-Py/anticlust/commit/72635aad56e454), [but later restored it](https://github.com/m-Py/anticlust/commit/2970f3debf61a) and [fixed the implementation](https://github.com/m-Py/anticlust/commit/957490ac2fe047).
+- Apart from these minor internal changes, 0.8.3 only has slight changes to the documentation of `anticlustering()` and otherwise is the same as 0.8.2.
+
+### The "bils-e" branch
+
+I [previously](2024-02-07.html) described some important development going on on [this development branch](https://github.com/m-Py/anticlust/tree/bils-e). Since then, I implemented an interface for employing cannot-link constraints with anticlustering, which is given through the argument `cannot_link` in `anticlustering()`. I strongly assume that this is how it will remain. The implementation is already quite potent. It can be used in conjunction with all implemented algorithms (`"exchange"`, `"local-maximum"`, `"brusco"`, `"ilp"`), even the optimal integer linear programming algorithm, and for the objectives `"diversity"`, `"variance"` and `"kplus"`. I still need to implement unit tests for this argument and currently the selection of the partition is not correctly implemented for `method = "brusco"` (this is an easy fix, it just should not be forgotten prior to a release).
+
+### K-Means anticlustering in `anticlustering()`
+
+This section gives some outlook for the implementation of k-means anticlustering in `anticlustering()`.
+
+It is possible to unite the implementations for the diversity objective and the k-means objective because the k-means objective can also be formulated as a "normalized" diversity, i.e., the sum of the squared pairwise distances within each cluster, divided by the number of objects in a cluster. The standard diversity is just defined as the plain sum of within-cluster dissimilarities, but the addition of a normalizing factor is straight forward and has already been done (as already described [here](2024-02-07.html)). Thus, I can just re-use the diversity implementation for k-means and k-plus anticlustering, which has some advantages pertaining to maintenance. I just need to correctly compute the correct input distances depending on the user input, and I am already doing this if cannot-link constraints are inserted. 
+
+This means that I could retire the current implementation of k-means anticlustering in `anticlustering()`, which maximizes the sum of squared Euclidean distances between cluster centers and their centroid (the "variance"). I would keep the k-means implementation in `fast_anticlustering()`, which minimizes the normalized sum of squared distances between the cluster centroids and the overall centroid. This minimization is equivalent to maximizing the variance---and it is by far the most efficient way to optimize the k-means criterion. It is particularly well suited for large data sets. Given that computing the quadratic distance matrix is usually the bottleneck for large data sets when using maximizing the diversity, it is not a problem replacing the variance maximizing by diversity maximization---if the data set is too large, just use `fast_anticlustering()`, which is still possible and even recommended. Maximizing the variance can be fast in some constellations than maximizing the diversity (as discussed in [this package vignette](https://cran.r-project.org/web/packages/anticlust/vignettes/Speeding_up_anticlustering.html)), but the discrepancy is not very pronounced. And as stated, we can just use `fast_anticlustering()` for speed. 
+
+I will consider this option as I am not decided yet.
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
