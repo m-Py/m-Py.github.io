@@ -360,7 +360,7 @@ pre code {
 <blockquote>
 <p>Please ensure that R CMD check –as-cran has been run on the tarball to be uploaded before submission. This should be done with the current version of R-devel (or if that is not possible and explained in the submission, current R-patched or the current release of R.) – CRAN Repository Policy</p>
 </blockquote>
-<p><em>Note</em>: Henrik Singmann has a (probably better) <a href="http://singmann.org/installing-r-devel-on-linux/">tutorial</a> for installing R devel from source.</p>
+<p><em>Note</em>: Henrik Singmann has a (probably better) <a href="http://singmann.org/installing-r-devel-on-linux/">tutorial</a> for installing R devel from source, but the last update is from 2019.</p>
 <div id="unexpected-dependencies-for-installing-r-from-source" class="section level1">
 <h1>Unexpected dependencies for installing R from source</h1>
 <p>Appendix A1 “Essential programs and libraries” in “R Installation and Administration” contains requisite packages for installation from source. Interestingly, Java is necessary to build R from source:</p>
@@ -402,6 +402,7 @@ pre code {
 <pre><code>./configure --with-x=no</code></pre>
 <p>Or:</p>
 <pre><code>./configure --with-readline=no --with-x=no --with-cairo</code></pre>
+<p>Note: As of 2023/2024 it was always sufficient for me to just use <code>./configure</code>.</p>
 <ol start="6" style="list-style-type: decimal">
 <li></li>
 </ol>
@@ -436,6 +437,7 @@ pre code {
 <div id="checking-the-package" class="section level1">
 <h1>Checking the package</h1>
 <pre><code>./R CMD check --as-cran tar-ball.tar.gz</code></pre>
+<p>I usually ignore the warning “‘qpdf’ is needed for checks on size reduction of PDFs” and the note “Skipping checking HTML validation: no command ‘tidy’ found”, which are not relevant for CRAN.</p>
 </div>
 <div id="on-windows" class="section level1">
 <h1>On Windows</h1>
@@ -451,7 +453,7 @@ initexmf --edit-config-file updmap</code></pre>
 <p>into the terminal. Then, <code>R CMD check</code> should work on the tar ball that can be build using the RStudio terminal via <code>R CMD build &quot;.&quot;</code> (in the procect directory of the package).</p>
 <p>I did not try to install R devel from source though on Windows, but used the released version. This seemed to be enough.</p>
 <hr />
-<p>Last updated: 2023-01-30</p>
+<p>Last updated: 2024-04-24</p>
 <div id="back-to-the-front-page" class="section level3">
 <h3><a href="index.html">Back to the front page</a></h3>
 <p> </p>

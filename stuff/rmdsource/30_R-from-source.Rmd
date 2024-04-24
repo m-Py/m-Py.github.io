@@ -16,7 +16,7 @@ version of R-devel (or if that is not possible and explained in the
 submission, current R-patched or the current release of R.) -- CRAN 
 Repository Policy
 
-*Note*: Henrik Singmann has a (probably better) [tutorial](http://singmann.org/installing-r-devel-on-linux/) for installing R devel from source. 
+*Note*: Henrik Singmann has a (probably better) [tutorial](http://singmann.org/installing-r-devel-on-linux/) for installing R devel from source, but the last update is from 2019.
 
 # Unexpected dependencies for installing R from source
 
@@ -99,6 +99,8 @@ Or:
 ./configure --with-readline=no --with-x=no --with-cairo
 ```
 
+Note: As of 2023/2024 it was always sufficient for me to just use `./configure`.
+
 6. 
 
 ```
@@ -157,6 +159,8 @@ on your system.
 ```
 ./R CMD check --as-cran tar-ball.tar.gz
 ```
+
+I usually ignore the warning "‘qpdf’ is needed for checks on size reduction of PDFs" and the note "Skipping checking HTML validation: no command 'tidy' found", which are not relevant for CRAN.
 
 # On Windows
 
