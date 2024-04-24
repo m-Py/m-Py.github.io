@@ -12,7 +12,7 @@ concerned with the internal details of anticlust that may not be of primary inte
 
 ## Posts
 
-- <a href="2024-04-24.html">2024/02 Anticlust Development Diary, Issue 2, 2024
+- <a href="2024-04-24.html">2024/04 Anticlust Development Diary, Issue 2, 2024
 - <a href="2024-02-07.html">2024/02 Anticlust Development Diary, Issue 1, 2024
 - <a href="2023-09-13.html">2023/09: anticlust 0.8.0: The revival of `fast_anticlustering()`
 - <a href="2023-08-29.html">2023/08: Rewriting it in C: Anticlustering (part 1)
