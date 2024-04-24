@@ -1,0 +1,194 @@
+---
+title: "the anticlust blog"
+date: April 25, 2024
+author: Martin Papenberg
+---
+
+## Should we balance stimuli between sets in within-subject designs
+
+```{r, echo = FALSE}
+set.seed(6789)
+options(scipen = 999)
+```
+
+This post is concerned with the very reason why the `anticlust` package came to exist: Originally, I sought a method to assign stimuli to different sets in experiments while minimizing differences between sets.[^minDiff] As it turns out, I was not alone with this problem as it frequently occurs in experimental psychology, but previously lacked an accessible software solution. When working on the problem in more depth for my [Bachelor thesis in Computer science](https://www.cs.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Informatik/Algorithmische_Bioinformatik/Bachelor-_Masterarbeiten/BA-Papenberg.pdf), we realized that this problem can be tackled by optimizing a reversed clustering criterion. Only shortly before submitting my thesis, I actually found the reference by Späth (1986) who already coined the term anticlustering. When we submitted our own anticlustering paper (Papenberg & Klau, 2021), it even turned out during review that the method we "invented" was actually known as the maximum diverse grouping problem (MDGP) in operations research. Furthermore, a few weeks before we submitted our paper (which was not known to me), the first anticlustering paper in a psychological journal was published (Brusco et al., 2020). Brusco et al. had also identified that the MDGP can be understood as an anticlustering problem because it corresponds to the reversal of a classical clustering criterion. So, in the revised and then published version, we acknowledge these prior contributions.
+
+The basic anticlustering problem in psychological research occurs in within-subjects designs: Each participant processes two experimental conditions and in each condition, a set of stimuli is shown. For example, in Papenberg and Klau (2021) we discuss the following application:
+
+> Lahl [et al.] (2008) investigated the effect of napping on recall memory. In their study, each participant completed a napping session and a wake session, separated by a 1-week wash out period. Before each session, participants had to memorize a list of 30 words; after each session, word recall was tested. Due to possible carry-over effects, presenting the same word list in both conditions was not feasible. Instead, two word lists had to be created and counterbalanced across the experimental conditions (wake vs. sleep). (p. 162)
+
+In practice, researchers often opt for using fixed sets,[^random] i.e., the same stimuli are grouped together and are always shown in the same condition. Here, a set of stimuli---let's denote the sets as S1 and S2---was either shown in the wake condition or in the sleep condition. Sets are usually counterbalanced between conditions to avoid a confounding between stimuli and experimental condition, which would render any difference between conditions uninterpretable. So, for some participants, the wake condition was paired with set S1 and the sleep condition was paired with set S2; others worked on condition A with set S2 and condition B with set S1. Researchers intuitively wish that the sets S1 and S2 are similar to each other on any factors that may influence the responses of the participants---this is one of the reasons why the `anticlust` package is being used with increasing frequency. Lintz et al. (2021) gave two reasons for this intuition and explained why balancing stimuli between sets is really needed: 
+
+[^random]: It is also feasible to generate a random subset of stimuli for each participant. In this case, we do not need anticlustering. For practical reasons, it seems that fixed sets are often used. For example, it may facilitate implementing the experiment (e.g. via computer or pen and paper) and the data analysis. In some cases, the experimental logic might even require the use of sets. Still, there are experiments where random sets of stimuli are generated for each participant. 
+
+> First, failing to balance lists well within subjects will drastically inflate the variance between those subjects (with some having extreme bias in one direction, some having low bias, and still others having extreme bias in the other direction), and it will correspondingly lower statistical power. (p. 18)
+
+Their first reason is of statistical nature: If the sets are dissimilar, this will increase the effect of an experimental manipulation for some participants, while it decreases the effect for others. The increased variance in within-person effects is expected to reduce statistical power. Below, I present a small simulation to investigate this claim by Lintz et al. (2021). It turns out that the concern is correct, but only if there is no statistical control of the stimulus sets. A simple ANOVA can remediate the problem on a statistical level (i.e., adding the counterbalancing variable as a covariate). However, this control is not expected to be done in all cases. For example, Lahl et al. (2008) only reported the simple *t*-test and did not control for the counterbalancing of the stimulus sets, which I assume is the norm rather than the exception.[^notsobad]
+
+[^notsobad]: To be fair, Lahl et al. (2008) used a matching method (see Lahl & Pietrowsky, 2006) that like anticlustering strives for similarity between stimulus sets. So while not using statistical control, they attempted to ensure comparability between sets.
+
+Lintz et al. (2021) go on to provide an additional problem with failing to creating similar stimulus sets: 
+
+> Second, sufficiently unbalanced lists could have secondary effects well beyond the low-level influences of the
+lexical properties on measures like response time. For instance, if a participant becomes consciously aware that one condition’s words are consistently longer than another’s, they might change their strategy, suspect deception, lose focus on the task, or behave in other unpredictable ways that could distort the results to a degree that violates the typical expectations underlying law-of-large-numbers logic. (p. 18)
+
+Arguably, this concern is more severe because neither can it be identified in the data, nor can it be controlled for by statistical analysis. If participants adjust their response strategy depending on the perceived similarity between stimulus sets, the comparison between experimental conditions can be strongly biased, rendering comparisons between conditions useless in the worst case.
+
+While I actually find the second concern of Lintz et al. to be a more convincing as to why balancing stimuli is needed, this post investigates the claims in their first concern. This is because it can actually be investigated in terms of statistical analysis. 
+
+## The simulation 
+
+I implemented a function that generates a data set that includes a numeric response variable that is given by the the combination of an experimental effect and the effect of the item set and some random (normally distributed) error. 
+
+```{r}
+# N = Sample Size; Total Number of Participants
+# D = Effect Size Experimental Condition (the same true effect is assumed for each person)
+# M = Effect Size Materials
+# balance = ratio of persons in each balancing condition. Default is "random" assignment
+get_data_set <- function(N, D, M, balance = "random") { 
+  if (balance == "random") {
+    tab <- table(sample(1:2, size = N, replace = TRUE)) 
+    N1 <- tab[1]
+    N2 <- tab[2]
+  } else {
+    N1 <- round((N/2) * balance)
+    N2 <- N - N1
+  }
+  C1M1 <- rnorm(N1, D + M)
+  C2M2 <- rnorm(N1)
+  C1M2 <- rnorm(N2, D)
+  C2M1 <- rnorm(N2, M)
+  data.frame(
+    value = c(C1M1, C2M2, C1M2, C2M1),
+    condition = rep(c(1, 2, 1, 2), c(N1, N1, N2, N2)),
+    balancing = rep(c(1, 1, 2, 2), c(N1, N1, N2, N2)),
+    set = rep(c(1, 2, 2, 1), c(N1, N1, N2, N2)),
+    casenum = c(rep(1:N1, 2), rep((N1+1):N, 2))
+  )
+}
+```
+
+The function returns a data frame in long format that has $2N$ rows where $N$ is the number of participants. Let's use it for four participants, assuming an effect size of .5 for the experimental condition and an effect size of .3 for the materials (i.e., the difference between the stimulus sets): 
+
+```{r}
+get_data_set(4, D = .5, M = .3)
+```
+
+We obtain 8 rows because the data is in long format and there are two responses for each participant. We see that there is already some bookkeeping required for this simple design.[^sequence] The variable `balancing` encodes the pairing of condition with item set; so it could in principle be deduced from the columns `condition` and `set`. 
+
+Next, I define a function to generate a data set and then compute a *t*-test on the response variable by condition. 
+
+```{r}
+sim_ttest <- function(X, N, D, M, balance = "random") {
+  data <- get_data_set(N = N, D = D, M = M, balance)
+  t.test(value ~ condition, data = data, paired = TRUE)$p.value
+}
+```
+
+Using `sapply()`, I can repeatedly call it to conduct a small scale simulation (i.e., for the same parameter combination):
+
+**Alpha error rate**
+
+```{r}
+nsim <- 1000 # number of simulation runs
+N <- 100
+D <- .5
+M <- 1
+pvalues1 <- sapply(1:nsim, sim_ttest, N = N, D = 0, M = M) # effect of item set
+# Alpha error rate:
+mean(pvalues1 <= .05)
+pvalues1 <- sapply(1:nsim, sim_ttest, N = N, D = 0, M = M, balance = 1.2) # effect of item set and item set is unbalanced
+# Alpha error rate:
+mean(pvalues1 <= .05)
+```
+
+**Power**
+
+```{r}
+nsim <- 1000 # number of simulation runs
+N <- 100
+D <- .5
+M <- 1
+pvalues1 <- sapply(1:nsim, sim_ttest, N = N, D = D, M = M) # effect of item set
+pvalues2 <- sapply(1:nsim, sim_ttest, N = N, D = D, M = 0) # no effect of item set
+# Alpha error rate:
+mean(pvalues1 <= .05)
+mean(pvalues2 <= .05)
+
+pvalues1 <- sapply(1:nsim, sim_ttest, N = N, D = D, M = M, balance = .8) # effect of item set
+pvalues2 <- sapply(1:nsim, sim_ttest, N = N, D = D, M = 0, balance = .8) # no effect of item set
+# Alpha error rate:
+mean(pvalues1 <= .05)
+mean(pvalues2 <= .05)
+```
+
+### Statistical control via ANOVA
+
+```{r}
+library(afex)
+sim_aov <- function(X, N, D, M, balance = "random") {
+  tt <- get_data_set(N = N, D = D, M = M, balance = balance)
+  tt$balancing <- factor(tt$balancing)
+  aov_data <- aov_ez(tt, id = "casenum", dv = "value",
+         between = "balancing", within = "condition")
+  aov_data$anova["condition", ][["Pr(>F)"]]
+}
+```
+
+```{r, message = FALSE}
+nsim <- 1000 # number of simulation runs
+N <- 100
+D <- .5
+M <- 1
+pvalues1 <- sapply(1:nsim, sim_aov, N = N, D = 0, M = M) # effect of item set
+# Alpha error rate:
+mean(pvalues1 <= .05)
+pvalues1 <- sapply(1:nsim, sim_aov, N = N, D = 0, M = M, balance = 1.2) # effect of item set and item set is unbalanced
+# Alpha error rate:
+mean(pvalues1 <= .05)
+```
+
+**Power**
+
+```{r, message = FALSE}
+nsim <- 1000 # number of simulation runs
+N <- 100
+D <- .5
+M <- 1
+pvalues1 <- sapply(1:nsim, sim_aov, N = N, D = D, M = M) # effect of item set
+pvalues2 <- sapply(1:nsim, sim_aov, N = N, D = D, M = 0) # no effect of item set
+# Alpha error rate:
+mean(pvalues1 <= .05)
+mean(pvalues2 <= .05)
+
+pvalues1 <- sapply(1:nsim, sim_aov, N = N, D = D, M = M, balance = .8) # effect of item set
+pvalues2 <- sapply(1:nsim, sim_aov, N = N, D = D, M = 0, balance = .8) # no effect of item set
+# Alpha error rate:
+mean(pvalues1 <= .05)
+mean(pvalues2 <= .05)
+```
+
+[^sequence]: And in reality, there could even be an additional balancing variable pertaining to the sequence of the experimental conditions. 
+
+[^minDiff]: I even wrote a less sophisticated R package to do this: [`minDiff`](https://github.com/m-Py/minDiff).
+
+## References 
+
+Brusco, M. J., Cradit, J. D., & Steinley, D. (2020). Combining diversity and dispersion criteria for anticlustering: A bicriterion approach. *British Journal of Mathematical and Statistical Psychology, 73*(3), 375–396. https://doi.org/10.1111/bmsp.12186
+
+Lahl, O., & Pietrowsky, R. (2006). EQUIWORD: A software application for the automatic creation of truly equivalent word lists. *Behavior Research Methods, 38*, 146--152. http://dx.doi.org/10.3758/BF03192760
+
+Lahl, O., Wispel, C., Willigens, B., & Pietrowsky, R. (2008). An ultra short episode of sleep is sufficient to promote declarative memory performance. *Journal of Sleep Research, 17*, 3--10. http://dx.doi.org/10.1111/j.1365-2869.2008.00622.x
+
+
+Lintz, E. N., Lim, P. C., & Johnson, M. R. (2021). A new tool for equating lexical stimuli across experimental conditions. *MethodsX*, 8, 101545.
+
+Papenberg, M., & Klau, G. W. (2021). Using anticlustering to partition data sets into equivalent parts. *Psychological Methods, 26*(2), 161--174. https://doi.org/10.1037/met0000301
+
+Späth, H. (1986). Anticlustering: Maximizing the variance criterion. *Control and Cybernetics*, 15, 213--218.
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
