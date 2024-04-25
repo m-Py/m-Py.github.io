@@ -11,7 +11,7 @@ set.seed(6789)
 options(scipen = 999)
 ```
 
-This post is concerned with the very reason why the `anticlust` package came to exist: Originally, I sought a method to assign stimuli to different sets in experiments while minimizing differences between sets.[^minDiff] As it turns out, I was not alone with this problem as it frequently occurs in experimental psychology, but previously lacked an accessible software solution. When working on the problem in more depth for my [Bachelor thesis in Computer science](https://www.cs.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Informatik/Algorithmische_Bioinformatik/Bachelor-_Masterarbeiten/BA-Papenberg.pdf), we realized that this problem can be tackled by optimizing a reversed clustering criterion. Only shortly before submitting my thesis, I actually found the reference by Späth (1986) who already coined the term anticlustering. When we submitted our own anticlustering paper (Papenberg & Klau, 2021), it even turned out during review that the method we "invented" was actually known as the maximum diverse grouping problem (MDGP) in operations research. Furthermore, a few weeks before we submitted our paper (which was not known to me), the first anticlustering paper in a psychological journal was published (Brusco et al., 2020). Brusco et al. had also identified that the MDGP can be understood as an anticlustering problem because it corresponds to the reversal of a classical clustering criterion. So, in the revised and then published version, we acknowledge these prior contributions.
+This post is concerned with the very reason why the `anticlust` package came to exist: Originally, I sought a method to assign stimuli to different sets in experiments while minimizing differences between sets.[^minDiff] **This post asks if it is even useful to strive for similarity between stimulus sets or if some other method (e.g., random assignment) might not suffice.** As it turns out, I was not alone with this problem as it frequently occurs in experimental psychology, but previously lacked an accessible software solution. When working on the problem in more depth for my [Bachelor thesis in Computer science](https://www.cs.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Informatik/Algorithmische_Bioinformatik/Bachelor-_Masterarbeiten/BA-Papenberg.pdf), we realized that this problem can be tackled by optimizing a reversed clustering criterion. Only shortly before submitting my thesis, I actually found the reference by Späth (1986) who already coined the term anticlustering for optimizing a different anticlustering criterion. When we submitted our own anticlustering paper (Papenberg & Klau, 2021), it even turned out during review that the method we "invented" was actually known as the maximum diverse grouping problem (MDGP) in operations research. Furthermore, a few weeks before we submitted our paper (which was not known to me), the first anticlustering paper in a psychological journal was published (Brusco et al., 2020). Brusco et al. had also identified that the MDGP can be understood as an anticlustering problem because it corresponds to the reversal of a classical clustering criterion. So, in the revised and then published version, we acknowledge these prior contributions.
 
 The basic anticlustering problem in psychological research occurs in within-subjects designs: Each participant processes two experimental conditions and in each condition, a set of stimuli is shown. For example, in Papenberg and Klau (2021) we discuss the following application:
 
@@ -38,14 +38,17 @@ While I actually find the second concern of Lintz et al. to be a more convincing
 
 ## The simulation 
 
-I implemented a function that generates a data set that includes a numeric response variable that is given by the the combination of an experimental effect and the effect of the item set and some random (normally distributed) error. 
+I implemented a function that generates a data set that includes a numeric response variable that is given by the the combination of an experimental effect and the effect of the item set and some random (normally distributed) error. It also has arguments to adjust the imbalance of the counterbalancing variable (i.e., how many people see condition A with set S1 and how many people see condition A with set S2), and to request that stimuli are assigned to conditions via k-means anticlustering. 
 
 ```{r}
+library(anticlust)
 # N = Sample Size; Total Number of Participants
 # D = Effect Size Experimental Condition (the same true effect is assumed for each person)
-# M = Effect Size Materials
+# D_M = Effect Size of Materials (i.e., average difference between two sets)
 # balance = ratio of persons in each balancing condition. Default is "random" assignment
-get_data_set <- function(N, D, M, balance = "random") { 
+# anticlust = are the 20 stimuli balanced between experimental sets via k-means anticlustering?
+get_data_set <- function(N, D, D_M = 0, balance = "random", anticlust = FALSE) { 
+  # Generate group sizes according to balancing variable:
   if (balance == "random") {
     tab <- table(sample(1:2, size = N, replace = TRUE)) 
     N1 <- tab[1]
@@ -54,6 +57,19 @@ get_data_set <- function(N, D, M, balance = "random") {
     N1 <- round((N/2) * balance)
     N2 <- N - N1
   }
+  
+  # Generate two groups of 10 stimuli each that differ in their mean by M
+  stimuli1 <- rnorm(10, D_M)
+  stimuli2 <- rnorm(10, 0)
+  M <- mean(stimuli1) - mean(stimuli2) # actual effect of the stimuli in the sample
+  
+  if (anticlust) {
+    all_stimuli <- c(stimuli1, stimuli2)
+    stimulus_groups <- anticlustering(all_stimuli, K = 2, objective = "variance", method = "local-maximum") 
+    M <- diff(tapply(all_stimuli, stimulus_groups, mean))
+  }
+  
+  # Actually generate the data:
   C1M1 <- rnorm(N1, D + M)
   C2M2 <- rnorm(N1)
   C1M2 <- rnorm(N2, D)
@@ -68,111 +84,124 @@ get_data_set <- function(N, D, M, balance = "random") {
 }
 ```
 
-The function returns a data frame in long format that has $2N$ rows where $N$ is the number of participants. Let's use it for four participants, assuming an effect size of .5 for the experimental condition and an effect size of .3 for the materials (i.e., the difference between the stimulus sets): 
+The function returns a data frame in long format that has $2N$ rows where $N$ is the number of participants. For purposes of illustration, let's use it to simulate data for four respondents, assuming an effect size of .5 for the experimental condition and an effect size of .3 for the materials (i.e., the expected difference between the stimulus sets): 
 
 ```{r}
-get_data_set(4, D = .5, M = .3)
+get_data_set(4, D = .5, D_M = .3)
 ```
 
 We obtain 8 rows because the data is in long format and there are two responses for each participant. We see that there is already some bookkeeping required for this simple design.[^sequence] The variable `balancing` encodes the pairing of condition with item set; so it could in principle be deduced from the columns `condition` and `set`. 
 
-Next, I define a function to generate a data set and then compute a *t*-test on the response variable by condition. 
+Next, I define a function to generate a data set and then compute a *t*-test on the response variable by condition. It returns the *p*-value of the *t*-test, which can be used to estimate statistical power. 
 
 ```{r}
-sim_ttest <- function(X, N, D, M, balance = "random") {
-  data <- get_data_set(N = N, D = D, M = M, balance)
+sim_ttest <- function(X, N, D, D_M = 0, balance = "random", anticlust = FALSE) {
+  data <- get_data_set(N = N, D = D, D_M = D_M, balance, anticlust)
   t.test(value ~ condition, data = data, paired = TRUE)$p.value
 }
 ```
 
-Using `sapply()`, I can repeatedly call it to conduct a small scale simulation (i.e., for the same parameter combination):
-
-**Alpha error rate**
+Using `sapply()`, I can repeatedly call it to conduct a small scale simulation (i.e., for the same parameter combination). So, in the following I define some parameters that I use throughout my examples; a real simulation would be obtained by varying the input parameters systematically. To estimate statistical power, 10000 repeated calls to `sim_ttest()` are conducted. 
 
 ```{r}
-nsim <- 1000 # number of simulation runs
-N <- 100
+nsim <- 10000 # number of simulation runs
+N <- 50
 D <- .5
-M <- 1
-pvalues1 <- sapply(1:nsim, sim_ttest, N = N, D = 0, M = M) # effect of item set
-# Alpha error rate:
-mean(pvalues1 <= .05)
-pvalues1 <- sapply(1:nsim, sim_ttest, N = N, D = 0, M = M, balance = 1.2) # effect of item set and item set is unbalanced
-# Alpha error rate:
-mean(pvalues1 <= .05)
 ```
+
+First, I simulate the power of the *t*-test for an effect of $D = 0.5$ in a sample of 50 participants when there is no systematic effect of the item set. Still, in a given sample there is a random difference caused by the item set, because while the implementation of the `get_data_set()` assumes that there is no systematic difference between item sets, a difference may occur due to random sampling. This actually simulates how it would be in a real study when using random assignment of stimuli to sets!
 
 **Power**
 
 ```{r}
-nsim <- 1000 # number of simulation runs
-N <- 100
-D <- .5
-M <- 1
-pvalues1 <- sapply(1:nsim, sim_ttest, N = N, D = D, M = M) # effect of item set
-pvalues2 <- sapply(1:nsim, sim_ttest, N = N, D = D, M = 0) # no effect of item set
-# Alpha error rate:
-mean(pvalues1 <= .05)
-mean(pvalues2 <= .05)
 
-pvalues1 <- sapply(1:nsim, sim_ttest, N = N, D = D, M = M, balance = .8) # effect of item set
-pvalues2 <- sapply(1:nsim, sim_ttest, N = N, D = D, M = 0, balance = .8) # no effect of item set
-# Alpha error rate:
+# Base line power:  no effect of item set
+pvalues1 <- sapply(1:nsim, sim_ttest, N = N, D = D)
+pvalues2 <- sapply(1:nsim, sim_ttest, N = N, D = D, anticlust = TRUE) 
+
 mean(pvalues1 <= .05)
 mean(pvalues2 <= .05)
 ```
+
+We see that power is slightly improved (about `r `round(abs(mean(pvalues1 <= .05) - mean(pvalues2 <= .05)) * 100)`percantage points) when using anticlustering assignment instead of random assignment of stimuli.
+
+In the next example, I increase the bias induced by difference in item sets. It simulates the case when we got unlucky with a random assignment or if some other (suboptimal) method of stimulus assignment was used. I even assume that $D_M$, which is the expected effect of the item set (i.e., the mean difference in the dependent variable between the item sets) is quite large and even larger than the effect of the experimental manipulation. This may not be a realistic assumption when dividing stimuli randomly into fixed sets. However, this setting makes it possible to show the potential detrimental effects of the stimulus sets on our analysis, specifically on the statistical power of our study. As a ground comparison, I also simulate *p*-values for standard random assignment (`pvalues0`):
+
+```{r}
+D_M <- 1
+pvalues3 <- sapply(1:nsim, sim_ttest, N = N, D = D, D_M = D_M) 
+pvalues4 <- sapply(1:nsim, sim_ttest, N = N, D = D, D_M = D_M, anticlust = TRUE) 
+
+mean(pvalues3 <= .05)
+mean(pvalues4 <= .05)
+```
+
+The power of the standard *t*-test is strongly reduced when there is a systematic bias between stimulus sets. Using anticlustering on these stimuli (that are effectively drawn from two populations when specifying $D_M$) leads to much higher statistical power.
 
 ### Statistical control via ANOVA
 
+Instead of using anticlustering---or even better: in addition to!---we can use statistical control to remediate the problem of variation caused by differences in item sets. A simple tool[^LMM] is to use a mixed ANOVA to includes the counterbalancing variable as a between subjects factor. I define the function `sim_aov()` analogously to `sim_ttest()` to compute this ANOVA instead of the simple *t*-test. 
+
+[^LMM]: If we do not apply a linear mixed model, which would be the prefered choice of many for this type of design.
+
 ```{r}
 library(afex)
-sim_aov <- function(X, N, D, M, balance = "random") {
-  tt <- get_data_set(N = N, D = D, M = M, balance = balance)
-  tt$balancing <- factor(tt$balancing)
-  aov_data <- aov_ez(tt, id = "casenum", dv = "value",
-         between = "balancing", within = "condition")
-  aov_data$anova["condition", ][["Pr(>F)"]]
+sim_aov <- function(X, N, D, D_M = 0, balance = "random", anticlust = FALSE) {
+  data <- get_data_set(N = N, D = D, D_M = D_M, balance = balance, anticlust = anticlust)
+  data$balancing <- factor(data$balancing)
+  aov_data <- suppressMessages(aov_ez(data, id = "casenum", dv = "value",
+         between = "balancing", within = "condition"))
+  p_value_condition <- aov_data$anova["condition", ][["Pr(>F)"]] 
+  p_value_condition
 }
 ```
 
-```{r, message = FALSE}
-nsim <- 1000 # number of simulation runs
-N <- 100
-D <- .5
-M <- 1
-pvalues1 <- sapply(1:nsim, sim_aov, N = N, D = 0, M = M) # effect of item set
-# Alpha error rate:
-mean(pvalues1 <= .05)
-pvalues1 <- sapply(1:nsim, sim_aov, N = N, D = 0, M = M, balance = 1.2) # effect of item set and item set is unbalanced
-# Alpha error rate:
-mean(pvalues1 <= .05)
-```
-
-**Power**
+The function uses the powerful [afex package](https://github.com/singmann/afex) to compute the mixed ANOVA (which I generally recommend for usage). The function `sim_aov()` returns the *p*-value of the within-subjects condition effect and can be called repeatedly to conduct a simulation. Again, I stick with the same parameters (i.e., $D = 0.5$, $N = 50$) and do not vary the parameters. I redo the simulation for the *t*-test (once using anticlustering and once not) for comparison.
 
 ```{r, message = FALSE}
-nsim <- 1000 # number of simulation runs
-N <- 100
-D <- .5
-M <- 1
-pvalues1 <- sapply(1:nsim, sim_aov, N = N, D = D, M = M) # effect of item set
-pvalues2 <- sapply(1:nsim, sim_aov, N = N, D = D, M = 0) # no effect of item set
-# Alpha error rate:
-mean(pvalues1 <= .05)
-mean(pvalues2 <= .05)
 
-pvalues1 <- sapply(1:nsim, sim_aov, N = N, D = D, M = M, balance = .8) # effect of item set
-pvalues2 <- sapply(1:nsim, sim_aov, N = N, D = D, M = 0, balance = .8) # no effect of item set
-# Alpha error rate:
-mean(pvalues1 <= .05)
-mean(pvalues2 <= .05)
+pvalues5 <- sapply(1:nsim, sim_ttest, N = N, D = D) 
+pvalues6 <- sapply(1:nsim, sim_aov, N = N, D = D)
+pvalues7 <- sapply(1:nsim, sim_ttest, N = N, D = D, anticlust = TRUE)
+
+# Power
+mean(pvalues5 <= .05)
+mean(pvalues6 <= .05)
+mean(pvalues7 <= .05)
+
+# significance test for comparing the proportions of significant results between ANOVA and anticlustering
+# prop.test(rbind(table(pvalues6 > .05), table(pvalues7 > .05)))
 ```
 
-[^sequence]: And in reality, there could even be an additional balancing variable pertaining to the sequence of the experimental conditions. 
+We repeat the pattern that the power of the *t*-test is lowest. ANOVA improves power, while statistical power is best when using anticlustering (the effect is even statistically significant and is reproduced when repaating the simulation).
+
+I repeat this simulation for the case of highly biased sets:
+
+```{r, message = FALSE}
+D_M <- 1
+pvalues8 <- sapply(1:nsim, sim_ttest, N = N, D = D, D_M = D_M) 
+pvalues9 <- sapply(1:nsim, sim_aov, N = N, D = D, D_M = D_M)
+pvalues10 <- sapply(1:nsim, sim_ttest, N = N, D = D, , D_M = D_M, anticlust = TRUE)
+
+# Power
+mean(pvalues8 <= .05)
+mean(pvalues9 <= .05)
+mean(pvalues10 <= .05)
+```
+
+Again, we see that the *t*-test suffers a lot when stimulus sets are highly different. Interestingly, the ANOVA approach can deal with the bias pretty well and has the same performance as using anticlustering (which effectively removes the bias).
+
+We can conclude that anticlustering can redemiate the problem of reduced power caused by (random or systematic) differences between item sets, when fixed sets are used and when there is no statistical control of the stimuli. Using ANOVA to employ a statistical control should be done when using stimulus sets instead of the simple *t*-test, preferably combined with anticlustering to remove bias 
+
+Descriptively, combining anticlustering with the simple *t*-test even yielded higher power than the ANOVA approach. I would urge caution in interpreting these results for two reasons: First, only a very small universe of conditions was considered. Second, even better statistical control might be possible with linear mixed models which were specifically discussed to control for variation in stimuli (e.g., Baayen et al., 2008), so a serious comparison should involve this method. However, even the ANOVA approach does not seem to be used in all cases, so anticlustering is certainly useful, especially when considering that potential secondary effects of differences in item sets cannot be controled for via statistical analysis (Lintz et al. 2021). 
+
+[^sequence]: And in reality, there could even be an additional balancing variable pertaining to the sequence in which the experimental conditions are processed. So a simple design with 2 conditions quickly becomes a three-factorial data analysis.
 
 [^minDiff]: I even wrote a less sophisticated R package to do this: [`minDiff`](https://github.com/m-Py/minDiff).
 
 ## References 
+
+Baayen, R. H., Davidson, D. J., & Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. Journal of memory and language, 59(4), 390-412.
 
 Brusco, M. J., Cradit, J. D., & Steinley, D. (2020). Combining diversity and dispersion criteria for anticlustering: A bicriterion approach. *British Journal of Mathematical and Statistical Psychology, 73*(3), 375–396. https://doi.org/10.1111/bmsp.12186
 
