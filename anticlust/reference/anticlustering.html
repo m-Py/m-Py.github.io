@@ -5,7 +5,7 @@ between-group similarity.  Anticlustering is accomplished by
 maximizing instead of minimizing a clustering objective function.
 Implements anticlustering methods as described in Papenberg and
 Klau (2021; &amp;lt;doi:10.1037/met0000301&amp;gt;), Brusco et al. 
-(2020; &amp;lt;doi:10.1111/bmsp.12186&amp;gt;), and Papenberg (2023; 
+(2020; &amp;lt;doi:10.1111/bmsp.12186&amp;gt;), and Papenberg (2024; 
 &amp;lt;doi:10.1111/bmsp.12315&amp;gt;)."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -24,7 +24,7 @@ Klau (2021; &amp;lt;doi:10.1037/met0000301&amp;gt;), Brusco et al.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.3</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@ between-group similarity.  Anticlustering is accomplished by
 maximizing instead of minimizing a clustering objective function.
 Implements anticlustering methods as described in Papenberg and
 Klau (2021; &lt;doi:10.1037/met0000301&gt;), Brusco et al. 
-(2020; &lt;doi:10.1111/bmsp.12186&gt;), and Papenberg (2023; 
+(2020; &lt;doi:10.1111/bmsp.12186&gt;), and Papenberg (2024; 
 &lt;doi:10.1111/bmsp.12315&gt;).</p>
     </div>
 
@@ -205,17 +205,13 @@ distances of elements within the same groups (see
 <code><a href="diversity_objective.html">diversity_objective</a></code>). Hence, anticlustering using the diversity 
 criterion maximizes between-group similarity
 by maximizing within-group heterogeneity (represented as the sum of all pairwise distances). 
-The diversity is an all rounder objective that tends to equalize all distribution 
+If it is computed on the basis of the Euclidean distance (which is the default
+behaviour if <code>x</code> is a feature matrix), the diversity is an all rounder objective that tends to equalize all distribution 
 characteristics between groups (such as means, variances, ...). 
 Note that the equivalence of within-group heterogeneity and between-group similarity only
 holds for equal-sized groups. For unequal-sized groups, it is recommended to
 use a different objective when striving for overall between-group similarity
-(e.g., the k-plus objective). In previous versions of this
-package, <code>objective = "distance"</code> was used (and is still
-supported) to refer to the diversity objective, but now <code>objective =
-"diversity"</code> is preferred because there are several clustering
-objectives based on pairwise distances (e.g., see
-<code><a href="dispersion_objective.html">dispersion_objective</a></code>). In the publication that introduces
+(e.g., the k-plus objective). In the publication that introduces
 the <code>anticlust</code> package (Papenberg &amp; Klau, 2021), we used the term "anticluster 
 editing" to refer to the maximization of the diversity, because the reversed 
 procedure - minimizing the diversity - is also known as "cluster editing".</p>
@@ -230,10 +226,10 @@ same time, see the function
 <code><a href="bicriterion_anticlustering.html">bicriterion_anticlustering</a></code>.</p>
 <p>If the data input <code>x</code> is a feature matrix (that is: each row
 is a "case" and each column is a "variable") and the option
-<code>objective = "diversity"</code> is used, the Euclidean distance is
-computed as the basic unit of the diversity and dispersion objectives. If
+<code>objective = "diversity"</code> or <code>objective = "dispersion"</code> is used, 
+the Euclidean distance is computed as the basic unit of the objectives. If
 a different measure of dissimilarity is preferred, you may pass a
-self-generated dissimiliarity matrix via the argument <code>x</code>.</p>
+self-generated dissimilarity matrix via the argument <code>x</code>.</p>
 <p>In the standard case, groups of equal size are generated. Adjust
 the argument <code>K</code> to create groups of different size (see
 Examples).</p>
@@ -252,7 +248,8 @@ if there is an improvement at all. This swapping procedure is
 repeated for each element. When using <code>method =
 "local-maximum"</code>, the exchange method does not terminate after the
 first iteration over all elements; instead, the swapping continues
-until a local maximum is reached. This means that after the
+until a local maximum is reached. This method corresponds to the algorithm 
+"LCW" by Weitz and Lakshminarayanan (1998). This means that after the
 exchange process has been conducted once for each data point, the
 algorithm restarts with the first element and proceeds to conduct
 exchanges until the objective cannot be improved.</p>
@@ -371,12 +368,14 @@ Psychology, 73, 275-396. https://doi.org/10.1111/bmsp.12186</p>
 <p>Papenberg, M., &amp; Klau, G. W. (2021). Using anticlustering to partition 
 data sets into equivalent parts. Psychological Methods, 26(2), 
 161–174. https://doi.org/10.1037/met0000301.</p>
-<p>Papenberg, M. (2023). K-plus Anticlustering: An Improved k-means Criterion 
-for Maximizing Between-Group Similarity. British Journal of Mathematical 
-and Statistical Psychology. Advance online publication. 
-https://doi.org/10.1111/bmsp.12315</p>
+<p>Papenberg, M. (2024). K-plus Anticlustering: An Improved k-means Criterion for 
+Maximizing Between-Group Similarity. British Journal of Mathematical and 
+Statistical Psychology, 77(1), 80-102. https://doi.org/10.1111/bmsp.12315</p>
 <p>Späth, H. (1986). Anticlustering: Maximizing the variance criterion.
 Control and Cybernetics, 15, 213-218.</p>
+<p>Weitz, R. R., &amp; Lakshminarayanan, S. (1998). An empirical comparison of 
+heuristic methods for creating maximally diverse groups. Journal of the 
+Operational Research Society, 49(6), 635-646. https://doi.org/10.1057/palgrave.jors.2600510</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -396,28 +395,28 @@ Control and Cybernetics, 15, 213-218.</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/by.html" class="external-link">by</a></span><span class="op">(</span><span class="va">schaper2019</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="va">anticlusters</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                4.49                1.10                3.41               18.28 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                4.50                1.10                3.38               18.38 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                4.50                1.11                3.44               18.31 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                4.49                1.11                3.41               18.31 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                4.49                1.10                3.41               18.34 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                4.48                1.10                3.47               18.25 </span>
 <span class="r-in"><span><span class="co"># Compare standard deviations by anticluster</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/by.html" class="external-link">by</a></span><span class="op">(</span><span class="va">schaper2019</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="va">anticlusters</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="va">sd</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.26                0.07                0.87                2.47 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.24                0.06                0.94                2.35 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.24                0.07                0.91                2.36 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.07                0.87                2.48 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.06                1.01                2.40 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.26                0.06                0.98                2.40 </span>
 <span class="r-in"><span><span class="co"># check that the "room" is balanced across anticlusters:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">anticlusters</span>, <span class="va">schaper2019</span><span class="op">$</span><span class="va">room</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             </span>
@@ -452,15 +451,15 @@ Control and Cybernetics, 15, 213-218.</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/by.html" class="external-link">by</a></span><span class="op">(</span><span class="va">schaper2019</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="va">anticlusters</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="va">sd</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.24                0.06                1.11                2.39 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.28                0.06                0.80                2.38 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.27                0.05                0.84                2.62 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.22                0.07                1.10                2.62 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.24                0.08                0.84                2.21 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.07                0.87                2.22 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Use different group sizes and optimize the extended k-means</span></span></span>
 <span class="r-in"><span><span class="co"># criterion ("kplus")</span></span></span>
@@ -484,7 +483,7 @@ Control and Cybernetics, 15, 213-218.</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/by.html" class="external-link">by</a></span><span class="op">(</span><span class="va">schaper2019</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="va">anticlusters</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                4.49                1.10                3.42               18.33 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                4.49                1.10                3.42               18.29 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
@@ -492,11 +491,11 @@ Control and Cybernetics, 15, 213-218.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                4.49                1.10                3.42               18.29 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                4.49                1.10                3.42               18.31 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/by.html" class="external-link">by</a></span><span class="op">(</span><span class="va">schaper2019</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="va">anticlusters</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="va">sd</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.07                0.93                2.43 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.07                0.93                2.44 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
@@ -504,7 +503,7 @@ Control and Cybernetics, 15, 213-218.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.07                0.94                2.40 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.07                0.94                2.39 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

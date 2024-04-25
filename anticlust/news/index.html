@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.3</span>
       </span>
     </div>
 
@@ -69,6 +69,28 @@
       <small>Source: <a href="https://github.com/m-Py/anticlust/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.8.3" id="anticlust-083">anticlust 0.8.3<small>2024-04-24</small><a class="anchor" aria-label="anchor" href="#anticlust-083"></a></h2>
+<div class="section level3">
+<h3 id="documentation-0-8-3">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-8-3"></a></h3>
+<ul><li>Some minor updates to documentation and vignettes</li>
+<li>Updating all references to the k-plus anticlustering paper after its “actual” publication:</li>
+</ul><p>Papenberg, M. (2024). K-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity. <em>British Journal of Mathematical and Statistical Psychology, 77</em>(1), 80–102. <a href="https://doi.org/10.1111/bmsp.12315" class="external-link uri">https://doi.org/10.1111/bmsp.12315</a></p>
+</div>
+<div class="section level3">
+<h3 id="internal-changes-0-8-3">Internal changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-8-3"></a></h3>
+<ul><li>
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> received <a href="https://github.com/m-Py/anticlust/commit/8d3c85dc0076" class="external-link">another internal change</a> to improve the speed of the re-computation of the objective during the optimization. In particular, updating the objective is now done by only inspecting the two clusters between which an exchange actually took place, instead of re-computing a sum across all clusters.</li>
+<li>A bug in <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> <a href="https://github.com/m-Py/anticlust/commit/957490ac2fe04" class="external-link">was fixed</a>; the computation of the objective did not incoorporate the cluster sizes</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.8.2" id="anticlust-082">anticlust 0.8.2<a class="anchor" aria-label="anchor" href="#anticlust-082"></a></h2>
+<div class="section level3">
+<h3 id="internal-changes-0-8-2">Internal changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-8-2"></a></h3>
+<ul><li>(Regression) <code>anticlustering(..., objective = "variance")</code> uses pre 0.8.0 implementation to fix some CRAN issues</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.8.0" id="anticlust-080">anticlust 0.8.0<small>2023-09-13</small><a class="anchor" aria-label="anchor" href="#anticlust-080"></a></h2>
 <div class="section level3">

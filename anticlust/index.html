@@ -24,7 +24,7 @@
     anticlustering() gives access to exact and heuristic anticlustering
     methods described in Papenberg and Klau (2021;
     &lt;doi:10.1037/met0000301&gt;), Brusco et al. (2020;
-    &lt;doi:10.1111/bmsp.12186&gt;), and Papenberg (2023;
+    &lt;doi:10.1111/bmsp.12186&gt;), and Papenberg (2024;
     &lt;doi:10.1111/bmsp.12315&gt;). The exact algorithms require that an
     integer linear programming solver is installed, either the GNU linear
     programming kit (&lt;https://www.gnu.org/software/glpk/glpk.html&gt;)
@@ -36,7 +36,7 @@
     bicriterion anticlustering method proposed by Brusco et al. (2020) is
     given via the function bicriterion_anticlustering(), while
     kplus_anticlustering() implements the full functionality of the k-plus
-    anticlustering approach proposed by Papenberg (2023). Some other
+    anticlustering approach proposed by Papenberg (2024). Some other
     functions are available to solve classical clustering problems. The
     function balanced_clustering() applies a cluster analysis under size
     constraints, i.e., creates equal-sized clusters. The function
@@ -64,7 +64,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.3</span>
       </span>
     </div>
 
@@ -124,7 +124,7 @@
 <div class="page-header"><h1 id="anticlust-">anticlust <a href="https://m-py.github.io/anticlust/" class="external-link"><img src="reference/figures/anticlustStickerV1-0.svg" style="float:right; height:160px"></a>
 <a class="anchor" aria-label="anchor" href="#anticlust-"></a>
 </h1></div>
-<p>Anticlustering partitions a pool of elements into clusters (or <em>anticlusters</em>) with the goal of achieving high between-cluster similarity and high within-cluster heterogeneity. This is accomplished by maximizing instead of minimizing a clustering objective function, such as the intra-cluster variance (used in k-means clustering) or the sum of pairwise distances within clusters. The package <code>anticlust</code> implements anticlustering methods as described in Papenberg and Klau (2021; <a href="https://doi.org/10.1037/met0000301" class="external-link uri">https://doi.org/10.1037/met0000301</a>), Brusco et al. (2020; <a href="https://doi.org/10.1111/bmsp.12186" class="external-link uri">https://doi.org/10.1111/bmsp.12186</a>), and Papenberg (2023; <a href="https://doi.org/10.1111/bmsp.12315" class="external-link uri">https://doi.org/10.1111/bmsp.12315</a>).</p>
+<p>Anticlustering partitions a pool of elements into clusters (or <em>anticlusters</em>) with the goal of achieving high between-cluster similarity and high within-cluster heterogeneity. This is accomplished by maximizing instead of minimizing a clustering objective function, such as the intra-cluster variance (used in k-means clustering) or the sum of pairwise distances within clusters. The package <code>anticlust</code> implements anticlustering methods as described in Papenberg and Klau (2021; <a href="https://doi.org/10.1037/met0000301" class="external-link uri">https://doi.org/10.1037/met0000301</a>), Brusco et al. (2020; <a href="https://doi.org/10.1111/bmsp.12186" class="external-link uri">https://doi.org/10.1111/bmsp.12186</a>), and Papenberg (2024; <a href="https://doi.org/10.1111/bmsp.12315" class="external-link uri">https://doi.org/10.1111/bmsp.12315</a>).</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -154,7 +154,7 @@
 <li>A paper is available describing the theoretical background of anticlustering and the <code>anticlust</code> package in detail (<a href="https://doi.org/10.1037/met0000301" class="external-link uri">https://doi.org/10.1037/met0000301</a>). The freely available preprint can be retrieved from <a href="https://psyarxiv.com/3razc/" class="external-link uri">https://psyarxiv.com/3razc/</a>. A more recent paper focusing on the k-plus anticlustering method can be retrieved from <a href="https://psyarxiv.com/7jw6v/" class="external-link uri">https://psyarxiv.com/7jw6v/</a>.</li>
 <li>The <code>R</code> documentation of the main functions is actually quite rich and up to date, so you should definitely check that out when using the <code>anticlust</code> package (primarily <code><a href="reference/anticlustering.html">?anticlustering</a></code>, <code><a href="reference/kplus_anticlustering.html">?kplus_anticlustering</a></code>, <code><a href="reference/balanced_clustering.html">?balanced_clustering</a></code>, and <code><a href="reference/matching.html">?matching</a></code>).</li>
 <li>A <a href="https://youtu.be/YGrhSmi1oA8" class="external-link">video</a> is available in German language where I illustrate the main functionalities of the <code><a href="reference/anticlustering.html">anticlustering()</a></code> function. My plan is to make a similar video in English in the future.</li>
-<li>The <a href="https://m-py.github.io/anticlust/" class="external-link">package website</a> contains all documentation as a convenient website. At the current time, the website also lists three package vignettes, while additional vignettes are planned.</li>
+<li>The <a href="https://m-py.github.io/anticlust/" class="external-link">package website</a> contains all documentation as a convenient website. At the current time, the website also lists four package vignettes, while additional vignettes are planned.</li>
 </ul>
 </div>
 <div class="section level2">
