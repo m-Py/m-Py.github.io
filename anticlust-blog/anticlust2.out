@@ -1,0 +1,143 @@
+* using log directory ‘/Users/ripley/R/packages/tests-devel/anticlust.Rcheck’
+* using R Under development (unstable) (2024-04-29 r86495)
+* using platform: aarch64-apple-darwin23.4.0
+* R was compiled by
+    Apple clang version 15.0.0 (clang-1500.3.9.4)
+    GNU Fortran (GCC) 12.2.0
+* running under: macOS Sonoma 14.4.1
+* using session charset: UTF-8
+* using option ‘--no-stop-on-test-error’
+* checking for file ‘anticlust/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘anticlust’ version ‘0.8.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘anticlust’ can be installed ... OK
+* used C compiler: ‘Apple clang version 15.0.0 (clang-1500.3.9.4)’
+* used SDK: ‘MacOSX14.4.sdk’
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking pragmas in C/C++ headers and code ... OK
+* checking compilation flags used ... OK
+* checking compiled code ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ...
+  Running ‘testthat.R’/Users/ripley/R/R-devel/bin/BATCH: line 60: 82719 Segmentation fault: 11  ${R_HOME}/bin/R -f ${in} ${opts} ${R_BATCH_OPTIONS} > ${out} 2>&1
+ [22s/22s]
+ [22s/23s] ERROR
+Running the tests in ‘tests/testthat.R’ failed.
+Complete output:
+  > 
+  > if (!requireNamespace("testthat", quietly = TRUE)) {
+  +   stop("The `testthat` package is not available, therefore `anticlust` cannot be tested.")
+  + }
+  > 
+  > library("anticlust")
+  > library("testthat")
+  > 
+  > test_check("anticlust")
+  sym_get_col_solution(): No solution has been stored!
+  sym_get_col_solution(): No solution has been stored!
+  sym_get_col_solution(): No solution has been stored!
+  sym_get_col_solution(): No solution has been stored!
+  
+   *** caught segfault ***
+  address 0x30, cause 'invalid permissions'
+  
+  Traceback:
+   1: solver_function(obj = ilp$obj_function, mat = ilp$constraints,     dir = ilp$equalities, rhs = ilp$rhs, types = "B", max = max)
+   2: solve_ilp_diversity(ilp, "min")
+   3: exact_anticlustering(as.matrix(dist(features)), p_anticlusters,     preclustering = i)
+   4: eval(code, test_env)
+   5: eval(code, test_env)
+   6: withCallingHandlers({    eval(code, test_env)    if (!handled && !is.null(test)) {        skip_empty()    }}, expectation = handle_expectation, skip = handle_skip, warning = handle_warning,     message = handle_message, error = handle_error)
+   7: doTryCatch(return(expr), name, parentenv, handler)
+   8: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+   9: tryCatchList(expr, names[-nh], parentenv, handlers[-nh])
+  10: doTryCatch(return(expr), name, parentenv, handler)
+  11: tryCatchOne(tryCatchList(expr, names[-nh], parentenv, handlers[-nh]),     names[nh], parentenv, handlers[[nh]])
+  12: tryCatchList(expr, classes, parentenv, handlers)
+  13: tryCatch(withCallingHandlers({    eval(code, test_env)    if (!handled && !is.null(test)) {        skip_empty()    }}, expectation = handle_expectation, skip = handle_skip, warning = handle_warning,     message = handle_message, error = handle_error), error = handle_fatal,     skip = function(e) {    })
+  14: test_code(desc, code, env = parent.frame(), default_reporter = local_interactive_reporter())
+  15: test_that("all levels of heuristicism work and that exact approach has best objective",     {        conditions <- expand.grid(m = 1:4, p = 2)        for (k in 1:nrow(conditions)) {            m_features <- conditions[k, "m"]            p_anticlusters <- conditions[k, "p"]            n_elements <- p_anticlusters * 5            features <- matrix(rnorm(n_elements * m_features),                 ncol = m_features)            obj_values <- rep(NA, 4)            anti_list <- list()            for (i in c(TRUE, FALSE)) {                anticlusters <- exact_anticlustering(as.matrix(dist(features)),                   p_anticlusters, preclustering = i)                anti_list[[i + 1]] <- anticlusters                obj_values[i + 1] <- round(diversity_objective_(anticlusters,                   features), 10)            }            expect_equal(which.max(obj_values), 1)        }    })
+  16: eval(code, test_env)
+  17: eval(code, test_env)
+  18: withCallingHandlers({    eval(code, test_env)    if (!handled && !is.null(test)) {        skip_empty()    }}, expectation = handle_expectation, skip = handle_skip, warning = handle_warning,     message = handle_message, error = handle_error)
+  19: doTryCatch(return(expr), name, parentenv, handler)
+  20: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+  21: tryCatchList(expr, names[-nh], parentenv, handlers[-nh])
+  22: doTryCatch(return(expr), name, parentenv, handler)
+  23: tryCatchOne(tryCatchList(expr, names[-nh], parentenv, handlers[-nh]),     names[nh], parentenv, handlers[[nh]])
+  24: tryCatchList(expr, classes, parentenv, handlers)
+  25: tryCatch(withCallingHandlers({    eval(code, test_env)    if (!handled && !is.null(test)) {        skip_empty()    }}, expectation = handle_expectation, skip = handle_skip, warning = handle_warning,     message = handle_message, error = handle_error), error = handle_fatal,     skip = function(e) {    })
+  26: test_code(test = NULL, code = exprs, env = env, default_reporter = StopReporter$new())
+  27: source_file(path, env = env(env), desc = desc, error_call = error_call)
+  28: FUN(X[[i]], ...)
+  29: lapply(test_paths, test_one_file, env = env, desc = desc, error_call = error_call)
+  30: doTryCatch(return(expr), name, parentenv, handler)
+  31: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+  32: tryCatchList(expr, classes, parentenv, handlers)
+  33: tryCatch(code, testthat_abort_reporter = function(cnd) {    cat(conditionMessage(cnd), "\n")    NULL})
+  34: with_reporter(reporters$multi, lapply(test_paths, test_one_file,     env = env, desc = desc, error_call = error_call))
+  35: test_files_serial(test_dir = test_dir, test_package = test_package,     test_paths = test_paths, load_helpers = load_helpers, reporter = reporter,     env = env, stop_on_failure = stop_on_failure, stop_on_warning = stop_on_warning,     desc = desc, load_package = load_package, error_call = error_call)
+  36: test_files(test_dir = path, test_paths = test_paths, test_package = package,     reporter = reporter, load_helpers = load_helpers, env = env,     stop_on_failure = stop_on_failure, stop_on_warning = stop_on_warning,     load_package = load_package, parallel = parallel)
+  37: test_dir("testthat", package = package, reporter = reporter,     ..., load_package = "installed")
+  38: test_check("anticlust")
+  An irrecoverable exception occurred. R is aborting now ...
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... [27s/32s] OK
+* checking PDF version of manual ... OK
+* checking HTML version of manual ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+
+Status: 1 ERROR
+See
+  ‘/Users/ripley/R/packages/tests-devel/anticlust.Rcheck/00check.log’
+for details.
+
+       87.19 real        69.20 user        10.19 sys
