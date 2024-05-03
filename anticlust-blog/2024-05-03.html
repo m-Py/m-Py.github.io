@@ -9,8 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="by Martin Papenberg" />
+<meta name="author" content="Martin Papenberg" />
 
+<meta name="date" content="2024-05-03" />
 
 <title>the anticlust blog</title>
 
@@ -350,31 +351,72 @@ display: none;
 
 
 <h1 class="title toc-ignore">the anticlust blog</h1>
-<h4 class="author">by Martin Papenberg</h4>
+<h4 class="author">Martin Papenberg</h4>
+<h4 class="date">May 03, 2024</h4>
 
 </div>
 
 
-<p>This is the blog about the <a href="https://github.com/m-Py/anticlust">anticlust R package</a>. Here I
-share some thoughts and stuff on the <code>anticlust</code> package that
-do not really fit into the documentation and vignettes (even though
-materials gathered here may be used there in the future). It will often
-be concerned with the internal details of <code>anticlust</code> that
-may not be of primary interest to its users.</p>
-<p><a href="../about/index.html">About the author</a>.</p>
-<div id="posts" class="section level2">
-<h2>Posts</h2>
-<ul>
-<li><a href="2024-05-03.html">2024/05: Using the Mac builder</li>
-<li><a href="2024-04-24.html">2024/04: Anticlust Development Diary,
-Issue 2, 2024</li>
-<li><a href="2024-02-07.html">2024/02: Anticlust Development Diary,
-Issue 1, 2024</li>
-<li><a href="2023-09-13.html">2023/09: anticlust 0.8.0: The revival of
-<code>fast_anticlustering()</code></li>
-<li><a href="2023-08-29.html">2023/08: Rewriting it in C: Anticlustering
-(part 1)</li>
-</ul>
+<div id="using-the-mac-builder" class="section level2">
+<h2>Using the Mac builder</h2>
+<p>The mac builder (<a href="https://mac.r-project.org/macbuilder/submit.html" class="uri">https://mac.r-project.org/macbuilder/submit.html</a>) can be
+used as a testing ground before submitting packages to CRAN. It has “the
+same setup” as the M1Mac test station on CRAN. My package
+<code>anticlust</code> has produced a segfault on M1Mac on CRAN and
+therefore I was keen to be able to reproduce the issue on a test station
+for the purpose of debugging. Unfortunately, it seems that the Mac
+builder does not have “the same setup” (see <a href="https://www.stats.ox.ac.uk/pub/bdr/M1mac/README.txt">here</a>
+maybe) as the M1Mac test station on CRAN, given that the segfault could
+not be reproduced.</p>
+<p>Using the Mac builder with the release version of R is quite straight
+forward. You can just submit your package as the tar ball that is
+generated via <code>R CMD build</code>. However, the M1mac on CRAN runs
+a development version of R (“R unstable”) and we have to select the
+development version to obtain a more realistic test of the CRAN
+settings. The bad news is that is is very likely impossible for the vast
+majority of R packages.</p>
+<p>The dependencies of the to-be-tested package need to be submitted
+manually by the user because there are no packages for R unstable on
+CRAN that can be accessed instead (unlike for the <a href="https://win-builder.r-project.org/">win builder</a>, it seems).
+Because the package dependencies need to be installed and tested on the
+Mac builder themselves, we are also required to upload their
+dependencies, and so on—even all the “suggested” dependencies
+recursively. This leaves us with more than 1500 dependencies of
+<code>testthat</code> alone, which is used by many packages for unit
+tests:</p>
+<pre class="r"><code>imports &lt;- tools::package_dependencies(&quot;testthat&quot;, recursive = TRUE)
+suggests &lt;- tools::package_dependencies(&quot;testthat&quot;, recursive = TRUE, which = &quot;Suggests&quot;)
+
+length(unlist(imports)) + length(unlist(suggests))</code></pre>
+<pre><code>## [1] 1563</code></pre>
+<p>Uploading all of these packages exceeds the allowed data limit and is
+therefore impossible.</p>
+<p><code>anticlust</code> has few dependencies, I thought, but some of
+the suggested dependencies are heavy. <code>anticlust</code> also used
+<code>testthat</code>, so I switched to <a href="https://github.com/markvanderloo/tinytest"><code>tinytest</code></a>,
+which has 0 dependencies, so I was able to please the Mac builder (I
+also think in general this was a good switch and I keep
+<code>tinytest</code> from now on). For vignette building,
+<code>anticlust</code> also has suggested dependencies on
+<code>knitr</code> and <code>rmarkdown</code>, which themselves have a
+lot of additional dependencies. So I generated a version of anticlust
+without vignettes for testing, which is quite straight forward – I just
+removed <code>knitr</code> and <code>rmarkdown</code> (and also
+<code>palmergenguins</code>, which is only used in a vignette) from the
+DESCRIPTION and removed the “vignettes” directory. In total, this only
+left <code>anticlust</code> plus an additional 5 packages that had to be
+uploaded. Well, at least after I generated a version of
+<code>RANN</code> that excludes the <code>testthat</code> dependency (by
+removing <code>testthat</code> from the DESCRIPTION and the “tests”
+directory).</p>
+<p>Unfortunately, the Mac builder still did not reproduce the CRAN
+issue. But well, it is at least one way to test your package on a Mac
+before CRAN submission if you—as I—do not have a Mac.</p>
+<hr />
+<p>Last updated: 2024-05-03</p>
+<div id="back-to-the-front-page" class="section level3">
+<h3><a href="index.html">Back to the front page</a></h3>
+</div>
 </div>
 
 

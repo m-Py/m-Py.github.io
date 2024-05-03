@@ -1,0 +1,39 @@
+---
+title: "the anticlust blog"
+date: May 03, 2024
+author: Martin Papenberg
+---
+
+## Using the Mac builder
+
+```{r, echo = FALSE}
+set.seed(6789)
+options(scipen = 999)
+```
+
+The mac builder (https://mac.r-project.org/macbuilder/submit.html) can be used as a testing ground before submitting packages to CRAN. It has "the same setup" as the M1Mac test station on CRAN. My package `anticlust` has produced a segfault on M1Mac on CRAN and therefore I was keen to be able to reproduce the issue on a test station for the purpose of debugging. Unfortunately, it seems that the Mac builder does not have "the same setup" (see [here](https://www.stats.ox.ac.uk/pub/bdr/M1mac/README.txt) maybe) as the M1Mac test station on CRAN, given that the segfault could not be reproduced. 
+
+Using the Mac builder with the release version of R is quite straight forward. You can just submit your package as the tar ball that is generated via `R CMD build`. However, the M1mac on CRAN runs a development version of R ("R unstable") and we have to select the development version to obtain a more realistic test of the CRAN settings. The bad news is that is is very likely impossible for the vast majority of R packages. 
+
+The dependencies of the to-be-tested package need to be submitted manually by the user because there are no packages for R unstable on CRAN that can be accessed instead (unlike for the [win builder](https://win-builder.r-project.org/), it seems). Because the package dependencies need to be installed and tested on the Mac builder themselves, we are also required to upload their dependencies, and so on---even all the "suggested" dependencies recursively. This leaves us with more than 1500 dependencies of `testthat` alone, which is used by many packages for unit tests:
+
+```{r}
+
+imports <- tools::package_dependencies("testthat", recursive = TRUE)
+suggests <- tools::package_dependencies("testthat", recursive = TRUE, which = "Suggests")
+
+length(unlist(imports)) + length(unlist(suggests))
+
+```
+
+Uploading all of these packages exceeds the allowed data limit and is therefore impossible.
+
+`anticlust` has few dependencies, I thought, but some of the suggested dependencies are heavy. `anticlust` also used `testthat`, so I switched to [`tinytest`](https://github.com/markvanderloo/tinytest), which has 0 dependencies, so I was able to please the Mac builder (I also think in general this was a good switch and I keep `tinytest` from now on). For vignette building, `anticlust` also has suggested dependencies on `knitr` and `rmarkdown`, which themselves have a lot of additional dependencies. So I generated a version of anticlust without vignettes for testing, which is quite straight forward -- I just removed `knitr` and `rmarkdown` (and also `palmergenguins`, which is only used in a vignette) from the DESCRIPTION and removed the "vignettes" directory. In total, this only left `anticlust` plus an additional 5 packages that had to be uploaded. Well, at least after I generated a version of `RANN` that excludes the `testthat` dependency (by removing `testthat` from the DESCRIPTION and the "tests" directory).
+
+Unfortunately, the Mac builder still did not reproduce the CRAN issue. But well, it is at least one way to test your package on a Mac before CRAN submission if you---as I---do not have a Mac.
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
