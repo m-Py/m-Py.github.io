@@ -365,8 +365,11 @@ designs</h2>
 method to assign stimuli to different sets in experiments while
 minimizing differences between sets.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> As it turns out, I was not alone with this
 problem as it frequently occurs in experimental psychology, but
-previously lacked an accessible software solution. When working on the
-problem in more depth for my <a href="https://www.cs.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Informatik/Algorithmische_Bioinformatik/Bachelor-_Masterarbeiten/BA-Papenberg.pdf">Bachelor
+previously lacked an accessible software solution. <strong>This post
+asks the awkward question if my effort was even needed: Is it necessary
+to strive for similarity between stimulus sets or is some other
+assignment method (e.g., random assignment) sufficient?</strong> When
+working on the problem in more depth for my <a href="https://www.cs.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Informatik/Algorithmische_Bioinformatik/Bachelor-_Masterarbeiten/BA-Papenberg.pdf">Bachelor
 thesis in Computer science</a>, we realized that this problem can be
 tackled by optimizing a reversed clustering criterion. Only shortly
 before submitting my thesis, I actually found the reference by Späth
@@ -399,19 +402,18 @@ experimental conditions (wake vs. sleep). (p. 162)</p>
 </blockquote>
 <p>In practice, researchers often opt for using fixed sets,<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> i.e., the
 same stimuli are grouped together and are always shown in the same
-condition. Here, a set of stimuli—let’s denote the sets as S1 and S2—was
-either shown in the wake condition or in the sleep condition. Sets are
-usually counterbalanced between conditions to avoid a confounding
-between stimuli and experimental condition, which would render any
-difference between conditions uninterpretable. So, for some
-participants, the wake condition was paired with set S1 and the sleep
-condition was paired with set S2; others worked on condition A with set
-S2 and condition B with set S1. Researchers intuitively wish that the
-sets S1 and S2 are similar to each other on any factors that may
-influence the responses of the participants—this is one of the reasons
-why the <code>anticlust</code> package is being used with increasing
-frequency. Lintz et al. (2021) gave two reasons for this intuition and
-explained why balancing stimuli between sets is really needed:</p>
+condition. In the study by Lahl et al. (2008), two sets of stimuli—let’s
+denote them as S1 and S2—was either shown in the wake condition or in
+the sleep condition.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> So, for some participants, the wake
+condition was paired with set S1 and the sleep condition was paired with
+set S2; for the other participants, the wake condition was paired with
+set S2 and the sleep condition was paired with set S1. Researchers
+intuitively wish that the sets S1 and S2 have to similar to each other
+on any factors that may influence the responses of the participants—this
+is one of the reasons why the <code>anticlust</code> package is being
+used with increasing frequency. Lintz et al. (2021) gave two reasons for
+this intuition and explained why balancing stimuli between sets is
+really needed:</p>
 <blockquote>
 <p>First, failing to balance lists well within subjects will drastically
 inflate the variance between those subjects (with some having extreme
@@ -427,11 +429,12 @@ reduce statistical power. Below, I present a small simulation to
 investigate this claim by Lintz et al. (2021). It turns out that the
 concern is correct, but only if there is no statistical control of the
 stimulus sets. A simple ANOVA can remediate the problem on a statistical
-level (i.e., adding the counterbalancing variable as a covariate).
-However, this control is not expected to be done in all cases. For
-example, Lahl et al. (2008) only reported the simple <em>t</em>-test and
-did not control for the counterbalancing of the stimulus sets, which I
-assume is the norm rather than the exception.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+level (i.e., adding the counterbalancing variable as an additional
+independent variable). However, proper statistical control is not
+expected to be done in all cases. For example, Lahl et al. (2008) only
+reported the simple <em>t</em>-test and did not control for the
+counterbalancing of the stimulus sets, which I assume is the norm rather
+than the exception.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
 <p>Lintz et al. (2021) go on to provide an additional problem with
 failing to creating similar stimulus sets:</p>
 <blockquote>
@@ -458,14 +461,21 @@ investigated in terms of statistical analysis.</p>
 <div id="the-simulation" class="section level2">
 <h2>The simulation</h2>
 <p>I implemented a function that generates a data set that includes a
-numeric response variable that is given by the the combination of an
-experimental effect and the effect of the item set and some random
-(normally distributed) error.</p>
-<pre class="r"><code># N = Sample Size; Total Number of Participants
+numeric response variable that is influenced by (a) an experimental
+effect and (b) the effect of the item set and (c) some random (normally
+distributed) error. It also has arguments to adjust the imbalance of the
+counterbalancing variable (i.e., how many people see condition A with
+set S1 and how many people see condition A with set S2), and to request
+that stimuli are assigned to conditions via k-means anticlustering (via
+argument <code>anticlust</code>).</p>
+<pre class="r"><code>library(anticlust)
+# N = Sample Size; Total Number of Participants
 # D = Effect Size Experimental Condition (the same true effect is assumed for each person)
-# M = Effect Size Materials
+# D_M = Effect Size of Materials (i.e., average difference between two sets)
 # balance = ratio of persons in each balancing condition. Default is &quot;random&quot; assignment
-get_data_set &lt;- function(N, D, M, balance = &quot;random&quot;) { 
+# anticlust = are the 20 stimuli balanced between experimental sets via k-means anticlustering?
+get_data_set &lt;- function(N, D, D_M = 0, balance = &quot;random&quot;, anticlust = FALSE) { 
+  # Generate group sizes according to balancing variable:
   if (balance == &quot;random&quot;) {
     tab &lt;- table(sample(1:2, size = N, replace = TRUE)) 
     N1 &lt;- tab[1]
@@ -474,6 +484,19 @@ get_data_set &lt;- function(N, D, M, balance = &quot;random&quot;) {
     N1 &lt;- round((N/2) * balance)
     N2 &lt;- N - N1
   }
+  
+  # Generate two groups of 10 stimuli each that differ in their mean by M
+  stimuli1 &lt;- rnorm(10, D_M)
+  stimuli2 &lt;- rnorm(10, 0)
+  M &lt;- mean(stimuli1) - mean(stimuli2) # actual effect of the stimuli in the sample
+  
+  if (anticlust) {
+    all_stimuli &lt;- c(stimuli1, stimuli2)
+    stimulus_groups &lt;- anticlustering(all_stimuli, K = 2, objective = &quot;variance&quot;, method = &quot;local-maximum&quot;) 
+    M &lt;- diff(tapply(all_stimuli, stimulus_groups, mean))
+  }
+  
+  # Actually generate the data:
   C1M1 &lt;- rnorm(N1, D + M)
   C2M2 &lt;- rnorm(N1)
   C1M2 &lt;- rnorm(N2, D)
@@ -486,131 +509,163 @@ get_data_set &lt;- function(N, D, M, balance = &quot;random&quot;) {
     casenum = c(rep(1:N1, 2), rep((N1+1):N, 2))
   )
 }</code></pre>
-<p>The function returns a data frame in long format that has <span class="math inline">\(2N\)</span> rows where <span class="math inline">\(N\)</span> is the number of participants. Let’s
-use it for four participants, assuming an effect size of .5 for the
-experimental condition and an effect size of .3 for the materials (i.e.,
-the difference between the stimulus sets):</p>
-<pre class="r"><code>get_data_set(4, D = .5, M = .3)</code></pre>
+<p>The function returns a data frame in long format that has <span class="math inline">\(2N\)</span> rows where <span class="math inline">\(N\)</span> is the number of participants. For
+purposes of illustration, let’s use it to simulate data for four
+respondents, assuming an effect size of .5 for the experimental
+condition and an effect size of .3 for the materials (i.e., the expected
+difference between the stimulus sets):</p>
+<pre class="r"><code>get_data_set(4, D = .5, D_M = .3)</code></pre>
 <pre><code>##        value condition balancing set casenum
-## 1 -0.8166770         1         1   1       1
-## 2  1.9566955         2         1   2       1
-## 3 -0.6932538         1         2   2       2
-## 4  0.7278487         1         2   2       3
-## 5 -0.2856349         1         2   2       4
-## 6  0.2202353         2         2   1       2
-## 7  1.3921716         2         2   1       3
-## 8 -0.7032110         2         2   1       4</code></pre>
+## 1  0.2806703         1         1   1       1
+## 2  1.9725869         1         1   1       2
+## 3  1.7496621         2         1   2       1
+## 4 -2.4187267         2         1   2       2
+## 5  0.9597199         1         2   2       3
+## 6  0.3806283         1         2   2       4
+## 7  0.1648688         2         2   1       3
+## 8  0.8384304         2         2   1       4</code></pre>
 <p>We obtain 8 rows because the data is in long format and there are two
 responses for each participant. We see that there is already some
-bookkeeping required for this simple design.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> The variable
+bookkeeping required for this simple design.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> The variable
 <code>balancing</code> encodes the pairing of condition with item set;
 so it could in principle be deduced from the columns
-<code>condition</code> and <code>set</code>.</p>
-<p>Next, I define a function to generate a data set and then compute a
-<em>t</em>-test on the response variable by condition.</p>
-<pre class="r"><code>sim_ttest &lt;- function(X, N, D, M, balance = &quot;random&quot;) {
-  data &lt;- get_data_set(N = N, D = D, M = M, balance)
+<code>condition</code> and <code>set</code>. Next, I define a function
+to generate a data set and then compute a <em>t</em>-test on the
+response variable by condition. It returns the <em>p</em>-value of the
+<em>t</em>-test, which can be used to estimate statistical power.</p>
+<pre class="r"><code>sim_ttest &lt;- function(X, N, D, D_M = 0, balance = &quot;random&quot;, anticlust = FALSE) {
+  data &lt;- get_data_set(N = N, D = D, D_M = D_M, balance, anticlust)
   t.test(value ~ condition, data = data, paired = TRUE)$p.value
 }</code></pre>
 <p>Using <code>sapply()</code>, I can repeatedly call it to conduct a
-small scale simulation (i.e., for the same parameter combination):</p>
-<p><strong>Alpha error rate</strong></p>
+small scale simulation (i.e., for the same parameter combination). So,
+in the following I define some parameters that I use throughout my
+examples; a real simulation would be obtained by varying the input
+parameters systematically. To estimate statistical power, 10000 repeated
+calls to <code>sim_ttest()</code> are conducted.</p>
 <pre class="r"><code>nsim &lt;- 1000 # number of simulation runs
-N &lt;- 100
-D &lt;- .5
-M &lt;- 1
-pvalues1 &lt;- sapply(1:nsim, sim_ttest, N = N, D = 0, M = M) # effect of item set
-# Alpha error rate:
-mean(pvalues1 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.057</code></pre>
-<pre class="r"><code>pvalues1 &lt;- sapply(1:nsim, sim_ttest, N = N, D = 0, M = M, balance = 1.2) # effect of item set and item set is unbalanced
-# Alpha error rate:
-mean(pvalues1 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.171</code></pre>
+N &lt;- 50
+D &lt;- .5</code></pre>
+<p>First, I simulate the power of the <em>t</em>-test for an effect of
+<span class="math inline">\(D = 0.5\)</span> in a sample of 50
+participants when there is no systematic effect of the item set. Still,
+in a given sample there is a random difference caused by the item set,
+because while the implementation of the <code>get_data_set()</code>
+assumes that there is no systematic difference between item sets, a
+difference may occur due to random sampling. This actually simulates how
+it would be in a real study when using random assignment of stimuli to
+sets!</p>
 <p><strong>Power</strong></p>
-<pre class="r"><code>nsim &lt;- 1000 # number of simulation runs
-N &lt;- 100
-D &lt;- .5
-M &lt;- 1
-pvalues1 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, M = M) # effect of item set
-pvalues2 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, M = 0) # no effect of item set
-# Alpha error rate:
+<pre class="r"><code># Base line power:  no effect of item set
+pvalues1 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D)
+pvalues2 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, anticlust = TRUE) 
+
 mean(pvalues1 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.81</code></pre>
+<pre><code>## [1] 0.659</code></pre>
 <pre class="r"><code>mean(pvalues2 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.937</code></pre>
-<pre class="r"><code>pvalues1 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, M = M, balance = .8) # effect of item set
-pvalues2 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, M = 0, balance = .8) # no effect of item set
-# Alpha error rate:
-mean(pvalues1 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.408</code></pre>
-<pre class="r"><code>mean(pvalues2 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.929</code></pre>
+<pre><code>## [1] 0.702</code></pre>
+<p>We see that power is slightly improved (about 4 percantage points)
+when using anticlustering assignment instead of random assignment of
+stimuli.</p>
+<p>In the next example, I increase the bias induced by difference in
+item sets. It simulates the case when we got unlucky with a random
+assignment or if some other (suboptimal) method of stimulus assignment
+was used. I even assume that <span class="math inline">\(D_M\)</span>,
+which is the expected effect of the item set (i.e., the mean difference
+in the dependent variable between the item sets) is quite large and even
+larger than the effect of the experimental manipulation. This may not be
+a realistic assumption when dividing stimuli randomly into fixed sets.
+However, this setting makes it possible to show the potential
+detrimental effects of the stimulus sets on our analysis, specifically
+on the statistical power of our study. As a ground comparison, I also
+simulate <em>p</em>-values for standard random assignment
+(<code>pvalues0</code>):</p>
+<pre class="r"><code>D_M &lt;- 1
+pvalues3 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, D_M = D_M) 
+pvalues4 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, D_M = D_M, anticlust = TRUE) 
+
+mean(pvalues3 &lt;= .05)</code></pre>
+<pre><code>## [1] 0.481</code></pre>
+<pre class="r"><code>mean(pvalues4 &lt;= .05)</code></pre>
+<pre><code>## [1] 0.695</code></pre>
+<p>The power of the standard <em>t</em>-test is strongly reduced when
+there is a systematic bias between stimulus sets. Using anticlustering
+on these stimuli (that are effectively drawn from two populations when
+specifying <span class="math inline">\(D_M\)</span>) leads to much
+higher statistical power.</p>
 <div id="statistical-control-via-anova" class="section level3">
 <h3>Statistical control via ANOVA</h3>
-<pre class="r"><code>library(afex)</code></pre>
-<pre><code>## Lade nötiges Paket: lme4</code></pre>
-<pre><code>## Lade nötiges Paket: Matrix</code></pre>
-<pre><code>## Warning in check_dep_version(): ABI version mismatch: 
-## lme4 was built with Matrix ABI version 0
-## Current Matrix ABI version is 1
-## Please re-install lme4 from source or restore original &#39;Matrix&#39; package</code></pre>
-<pre><code>## ************
-## Welcome to afex. For support visit: http://afex.singmann.science/</code></pre>
-<pre><code>## - Functions for ANOVAs: aov_car(), aov_ez(), and aov_4()
-## - Methods for calculating p-values with mixed(): &#39;S&#39;, &#39;KR&#39;, &#39;LRT&#39;, and &#39;PB&#39;
-## - &#39;afex_aov&#39; and &#39;mixed&#39; objects can be passed to emmeans() for follow-up tests
-## - Get and set global package options with: afex_options()
-## - Set sum-to-zero contrasts globally: set_sum_contrasts()
-## - For example analyses see: browseVignettes(&quot;afex&quot;)
-## ************</code></pre>
-<pre><code>## 
-## Attache Paket: &#39;afex&#39;</code></pre>
-<pre><code>## Das folgende Objekt ist maskiert &#39;package:lme4&#39;:
-## 
-##     lmer</code></pre>
-<pre class="r"><code>sim_aov &lt;- function(X, N, D, M, balance = &quot;random&quot;) {
-  tt &lt;- get_data_set(N = N, D = D, M = M, balance = balance)
-  tt$balancing &lt;- factor(tt$balancing)
-  aov_data &lt;- aov_ez(tt, id = &quot;casenum&quot;, dv = &quot;value&quot;,
-         between = &quot;balancing&quot;, within = &quot;condition&quot;)
-  aov_data$anova[&quot;condition&quot;, ][[&quot;Pr(&gt;F)&quot;]]
+<p>Instead of using anticlustering—or even better: in addition to!—we
+can use statistical control to remediate the problem of variation caused
+by differences in item sets. A simple tool<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> is to use a mixed
+ANOVA to includes the counterbalancing variable as a between subjects
+factor. I define the function <code>sim_aov()</code> analogously to
+<code>sim_ttest()</code> to compute this ANOVA instead of the simple
+<em>t</em>-test.</p>
+<pre class="r"><code>library(afex)
+sim_aov &lt;- function(X, N, D, D_M = 0, balance = &quot;random&quot;, anticlust = FALSE) {
+  data &lt;- get_data_set(N = N, D = D, D_M = D_M, balance = balance, anticlust = anticlust)
+  data$balancing &lt;- factor(data$balancing)
+  aov_data &lt;- suppressMessages(aov_ez(data, id = &quot;casenum&quot;, dv = &quot;value&quot;,
+         between = &quot;balancing&quot;, within = &quot;condition&quot;))
+  p_value_condition &lt;- aov_data$anova[&quot;condition&quot;, ][[&quot;Pr(&gt;F)&quot;]] 
+  p_value_condition
 }</code></pre>
-<pre class="r"><code>nsim &lt;- 1000 # number of simulation runs
-N &lt;- 100
-D &lt;- .5
-M &lt;- 1
-pvalues1 &lt;- sapply(1:nsim, sim_aov, N = N, D = 0, M = M) # effect of item set
-# Alpha error rate:
-mean(pvalues1 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.036</code></pre>
-<pre class="r"><code>pvalues1 &lt;- sapply(1:nsim, sim_aov, N = N, D = 0, M = M, balance = 1.2) # effect of item set and item set is unbalanced
-# Alpha error rate:
-mean(pvalues1 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.062</code></pre>
-<p><strong>Power</strong></p>
-<pre class="r"><code>nsim &lt;- 1000 # number of simulation runs
-N &lt;- 100
-D &lt;- .5
-M &lt;- 1
-pvalues1 &lt;- sapply(1:nsim, sim_aov, N = N, D = D, M = M) # effect of item set
-pvalues2 &lt;- sapply(1:nsim, sim_aov, N = N, D = D, M = 0) # no effect of item set
-# Alpha error rate:
-mean(pvalues1 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.943</code></pre>
-<pre class="r"><code>mean(pvalues2 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.945</code></pre>
-<pre class="r"><code>pvalues1 &lt;- sapply(1:nsim, sim_aov, N = N, D = D, M = M, balance = .8) # effect of item set
-pvalues2 &lt;- sapply(1:nsim, sim_aov, N = N, D = D, M = 0, balance = .8) # no effect of item set
-# Alpha error rate:
-mean(pvalues1 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.922</code></pre>
-<pre class="r"><code>mean(pvalues2 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.938</code></pre>
+<p>The function uses the powerful <a href="https://github.com/singmann/afex">afex package</a> to compute the
+mixed ANOVA (which I generally recommend for usage). The function
+<code>sim_aov()</code> returns the <em>p</em>-value of the
+within-subjects condition effect and can be called repeatedly to conduct
+a simulation. Again, I stick with the same parameters (i.e., <span class="math inline">\(D = 0.5\)</span>, <span class="math inline">\(N =
+50\)</span>) and do not vary the parameters. I redo the simulation for
+the <em>t</em>-test (once using anticlustering and once not) for
+comparison.</p>
+<pre class="r"><code>pvalues5 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D) 
+pvalues6 &lt;- sapply(1:nsim, sim_aov, N = N, D = D)
+pvalues7 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, anticlust = TRUE)
+
+# Power
+mean(pvalues5 &lt;= .05)</code></pre>
+<pre><code>## [1] 0.672</code></pre>
+<pre class="r"><code>mean(pvalues6 &lt;= .05)</code></pre>
+<pre><code>## [1] 0.677</code></pre>
+<pre class="r"><code>mean(pvalues7 &lt;= .05)</code></pre>
+<pre><code>## [1] 0.688</code></pre>
+<p>We repeat the pattern that the power of the <em>t</em>-test is
+lowest. ANOVA improves power as compared to the <em>t</em>-test, and
+anticlustering + <em>t</em>-test has comparable power.</p>
+<p>I repeat this simulation for the case of highly biased sets:</p>
+<pre class="r"><code>D_M &lt;- 1
+pvalues8 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, D_M = D_M) 
+pvalues9 &lt;- sapply(1:nsim, sim_aov, N = N, D = D, D_M = D_M)
+pvalues10 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, D_M = D_M, anticlust = TRUE)
+
+# Power
+mean(pvalues8 &lt;= .05)</code></pre>
+<pre><code>## [1] 0.503</code></pre>
+<pre class="r"><code>mean(pvalues9 &lt;= .05)</code></pre>
+<pre><code>## [1] 0.653</code></pre>
+<pre class="r"><code>mean(pvalues10 &lt;= .05)</code></pre>
+<pre><code>## [1] 0.683</code></pre>
+<p>Again, we see that the <em>t</em>-test suffers a lot when stimulus
+sets are highly different. Interestingly, the ANOVA approach can deal
+with the bias pretty well and has the comparable performance as using
+anticlustering (which removes the bias).</p>
+<p>We can conclude that anticlustering can redemiate the problem of
+reduced power caused by (random or systematic) differences between item
+sets, when fixed sets are used and when there is no statistical control
+of the stimuli. Using ANOVA to employ a statistical control should be
+done when using stimulus sets instead of the simple <em>t</em>-test,
+preferably combined with anticlustering. Using anticlustering as well as
+statistical control is expected to (a) maximize statistical power via
+and to (b) reduce the risk of bias due to differences in response
+strategy between conditions.</p>
 </div>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
+<p>Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008).
+Mixed-effects modeling with crossed random effects for subjects and
+items. Journal of memory and language, 59(4), 390-412.</p>
 <p>Brusco, M. J., Cradit, J. D., &amp; Steinley, D. (2020). Combining
 diversity and dispersion criteria for anticlustering: A bicriterion
 approach. <em>British Journal of Mathematical and Statistical
@@ -630,7 +685,7 @@ partition data sets into equivalent parts. <em>Psychological Methods,
 <p>Späth, H. (1986). Anticlustering: Maximizing the variance criterion.
 <em>Control and Cybernetics</em>, 15, 213–218.</p>
 <hr />
-<p>Last updated: 2024-04-25</p>
+<p>Last updated: 2024-05-03</p>
 <div id="back-to-the-front-page" class="section level3">
 <h3><a href="index.html">Back to the front page</a></h3>
 </div>
@@ -645,16 +700,23 @@ stimuli for each participant. In this case, we do not need
 anticlustering. For practical reasons, it seems that fixed sets are
 often used. For example, it may facilitate implementing the experiment
 (e.g. via computer or pen and paper) and the data analysis. In some
-cases, the experimental logic might even require the use of sets. Still,
-there are experiments where random sets of stimuli are generated for
-each participant.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>To be fair, Lahl et al. (2008) used a matching method
+cases, the experimental logic might even demand the use of fixed sets.
+Still, experiments do exist where random sets of stimuli are generated
+for each participant, which potentially circumvents the need for
+anticlustering.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Sets are usually counterbalanced between conditions to
+avoid a confounding between stimuli and experimental condition, which
+would render any difference between conditions uninterpretable.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>To be fair, Lahl et al. (2008) used a matching method
 (see Lahl &amp; Pietrowsky, 2006) that like anticlustering strives for
 similarity between stimulus sets. So while not using statistical
-control, they attempted to ensure comparability between sets.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>And in reality, there could even be an additional
-balancing variable pertaining to the sequence of the experimental
-conditions.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+control, they attempted to ensure comparability between sets.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>And in reality, there could even be an additional
+balancing variable pertaining to the sequence in which the experimental
+conditions are processed. So a simple design with 2 conditions quickly
+becomes a three-factorial data analysis.<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>If we do not apply a linear mixed model, which would be
+the prefered choice of many for this type of design.<a href="#fnref6" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
