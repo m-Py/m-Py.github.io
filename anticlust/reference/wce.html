@@ -143,21 +143,8 @@ J. (2010). Partitioning biological data with transitivity clustering. Nature Met
 <span class="r-in"><span><span class="co"># solve *unweighted* cluster editing</span></span></span>
 <span class="r-in"><span><span class="va">agreements</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">distances</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">3</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">clusters</span> <span class="op">&lt;-</span> <span class="fu">wce</span><span class="op">(</span><span class="va">agreements</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_if_solver_is_available():</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> An exact method was requested, but no ILP solver is available. For example, you could install the GNU linear programming kit: </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - On windows, visit http://gnuwin32.sourceforge.net/packages/glpk.htm </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - Use homebrew to install it on mac, 'brew install glpk' </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - 'sudo apt install libglpk-dev' on Ubuntu </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Then, install the Rglpk package via `install.packages('Rglpk')`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>  Another possibilty is to install the R package 'Rsymphony' and the SYMPHONY ILP solver (https://github.com/coin-or/SYMPHONY).</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">swiss</span>, col <span class="op">=</span> <span class="va">clusters</span>, pch <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'clusters' not found</span>
+<span class="r-plt img"><img src="wce-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

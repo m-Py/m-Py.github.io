@@ -205,21 +205,42 @@ problem. Omega, 41(4), 721–730. https://doi.org/10.1016/j.omega.2012.09.005</p
 <span class="r-in"><span><span class="va">distances</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">opt</span> <span class="op">&lt;-</span> <span class="fu">optimal_dispersion</span><span class="op">(</span><span class="va">distances</span>, K <span class="op">=</span> <span class="va">K</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_if_solver_is_available():</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> An exact method was requested, but no ILP solver is available. For example, you could install the GNU linear programming kit: </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - On windows, visit http://gnuwin32.sourceforge.net/packages/glpk.htm </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - Use homebrew to install it on mac, 'brew install glpk' </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - 'sudo apt install libglpk-dev' on Ubuntu </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Then, install the Rglpk package via `install.packages('Rglpk')`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>  Another possibilty is to install the R package 'Rsymphony' and the SYMPHONY ILP solver (https://github.com/coin-or/SYMPHONY).</span>
 <span class="r-in"><span><span class="va">opt</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'opt' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $dispersion</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.558493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $groups</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 1 3 3 3 3 1 3 2 2 2 3 1 2 1 2 2 3 1 1 2 1 3 2 1 3 1 2 3 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       [,1] [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]    2    8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]    8   14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]    7   21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]   16   20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]   13   29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]   12   21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,]    2   14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]   10   22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]    7   12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]    8   24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11,]    2   11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [12,]    2    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13,]    1   30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [14,]   15   26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15,]   11   27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16,]    7    9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [17,]    8   11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [18,]    6   11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19,]    6   10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [20,]    2   24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21,]    6    8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $dispersions_considered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.7800843 0.9378773 1.0469722 1.0848882 1.2456892 1.2616679 1.2636728</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] 1.2674152 1.2782485 1.3077583 1.3128102 1.3478616 1.3947288 1.3978609</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15] 1.5123242 1.5282671 1.5304251 1.5413485 1.5458909 1.5568297 1.5584930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Compare to bicriterion heuristic:</span></span></span>
 <span class="r-in"><span><span class="va">groups_heuristic</span> <span class="op">&lt;-</span> <span class="fu"><a href="anticlustering.html">anticlustering</a></span><span class="op">(</span></span></span>
@@ -233,23 +254,14 @@ problem. Omega, 41(4), 721–730. https://doi.org/10.1016/j.omega.2012.09.005</p
 <span class="r-in"><span>  OPT <span class="op">=</span> <span class="fu"><a href="dispersion_objective.html">dispersion_objective</a></span><span class="op">(</span><span class="va">distances</span>, <span class="va">opt</span><span class="op">$</span><span class="va">groups</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  HEURISTIC <span class="op">=</span> <span class="fu"><a href="dispersion_objective.html">dispersion_objective</a></span><span class="op">(</span><span class="va">distances</span>, <span class="va">groups_heuristic</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'opt' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       OPT HEURISTIC </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.558493  1.558493 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Different group sizes are possible:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu">optimal_dispersion</span><span class="op">(</span><span class="va">distances</span>, K <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">groups</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_if_solver_is_available():</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> An exact method was requested, but no ILP solver is available. For example, you could install the GNU linear programming kit: </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - On windows, visit http://gnuwin32.sourceforge.net/packages/glpk.htm </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - Use homebrew to install it on mac, 'brew install glpk' </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - 'sudo apt install libglpk-dev' on Ubuntu </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Then, install the Rglpk package via `install.packages('Rglpk')`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>  Another possibilty is to install the R package 'Rsymphony' and the SYMPHONY ILP solver (https://github.com/coin-or/SYMPHONY).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1  2  3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15 10  5 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Induce cannot-link constraints by maximizing the dispersion:</span></span></span>
 <span class="r-in"><span><span class="va">solvable</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, ncol <span class="op">=</span> <span class="fl">6</span>, nrow <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></span>
@@ -268,19 +280,7 @@ problem. Omega, 41(4), 721–730. https://doi.org/10.1016/j.omega.2012.09.005</p
 <span class="r-in"><span><span class="co"># An optimal solution has to put item 1 in a different group than </span></span></span>
 <span class="r-in"><span><span class="co"># items 2, 3 and 4 -&gt; this is possible for K = 2</span></span></span>
 <span class="r-in"><span><span class="fu">optimal_dispersion</span><span class="op">(</span><span class="va">solvable</span>, K <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="va">groups</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_if_solver_is_available():</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> An exact method was requested, but no ILP solver is available. For example, you could install the GNU linear programming kit: </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - On windows, visit http://gnuwin32.sourceforge.net/packages/glpk.htm </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - Use homebrew to install it on mac, 'brew install glpk' </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - 'sudo apt install libglpk-dev' on Ubuntu </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Then, install the Rglpk package via `install.packages('Rglpk')`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>  Another possibilty is to install the R package 'Rsymphony' and the SYMPHONY ILP solver (https://github.com/coin-or/SYMPHONY).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 1 1 1 2 2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># It no longer works when item 1 can also not be linked with item 5:</span></span></span>
 <span class="r-in"><span><span class="co"># (check out output!)</span></span></span>
@@ -295,34 +295,47 @@ problem. Omega, 41(4), 721–730. https://doi.org/10.1016/j.omega.2012.09.005</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5 -1  1  1  1   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6  1  1  1  1  1</span>
 <span class="r-in"><span><span class="fu">optimal_dispersion</span><span class="op">(</span><span class="va">unsolvable</span>, K <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_if_solver_is_available():</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> An exact method was requested, but no ILP solver is available. For example, you could install the GNU linear programming kit: </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - On windows, visit http://gnuwin32.sourceforge.net/packages/glpk.htm </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - Use homebrew to install it on mac, 'brew install glpk' </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - 'sudo apt install libglpk-dev' on Ubuntu </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Then, install the Rglpk package via `install.packages('Rglpk')`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>  Another possibilty is to install the R package 'Rsymphony' and the SYMPHONY ILP solver (https://github.com/coin-or/SYMPHONY).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $dispersion</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $groups</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $dispersions_considered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># But:</span></span></span>
 <span class="r-in"><span><span class="fu">optimal_dispersion</span><span class="op">(</span><span class="va">unsolvable</span>, K <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="co"># group sizes, not number of groups</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_if_solver_is_available():</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> An exact method was requested, but no ILP solver is available. For example, you could install the GNU linear programming kit: </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - On windows, visit http://gnuwin32.sourceforge.net/packages/glpk.htm </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - Use homebrew to install it on mac, 'brew install glpk' </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> - 'sudo apt install libglpk-dev' on Ubuntu </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Then, install the Rglpk package via `install.packages('Rglpk')`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>  Another possibilty is to install the R package 'Rsymphony' and the SYMPHONY ILP solver (https://github.com/coin-or/SYMPHONY).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $dispersion</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $groups</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 1 1 1 1 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       [,1] [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]    1    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]    1    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]    1    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]    1    5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]    1    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]    2    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,]    2    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]    2    5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]    2    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]    3    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11,]    3    5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [12,]    3    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13,]    4    5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [14,]    4    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15,]    5    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $dispersions_considered</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -1  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
