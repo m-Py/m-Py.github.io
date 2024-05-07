@@ -420,6 +420,19 @@ error. Well, I guess it doesn’t matter now since the issue is fixed. By
 now, the results page includes output which identifies the source of the
 error, which is a good thing and may help other developers (or myself)
 in the future.</p>
+<p>Knowing which function produced the error, I could fix the CRAN
+problem as follows:</p>
+<ul>
+<li>For the optimal algorithms, if no solver is specified, the GLPK
+solver is now selected by default.</li>
+<li>It is now possible to manually specify the solver for all optimal
+methods (i.e., using the functions <code>optimal_dispersion()</code>,
+<code>optimal_anticlustering()</code> and
+<code>balanced_clustering()</code>).</li>
+</ul>
+<p>It is a relieve to me that CRAN now has the most recent
+<code>anticlust</code> developments and I can now focus on the future
+instead of the past (when it comes to <code>anticlust</code>).</p>
 <hr />
 <p>Last updated: 2024-05-07</p>
 <div id="back-to-the-front-page" class="section level3">
