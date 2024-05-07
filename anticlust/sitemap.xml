@@ -37,6 +37,9 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/anticlust.html</loc>
+  </url>
+  <url>
     <loc>/reference/anticlustering.html</loc>
   </url>
   <url>
@@ -83,6 +86,9 @@
   </url>
   <url>
     <loc>/reference/n_partitions.html</loc>
+  </url>
+  <url>
+    <loc>/reference/optimal_anticlustering.html</loc>
   </url>
   <url>
     <loc>/reference/optimal_dispersion.html</loc>
