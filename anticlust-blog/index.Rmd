@@ -12,6 +12,7 @@ concerned with the internal details of `anticlust` that may not be of primary in
 
 ## Posts
 
+- <a href="2024-05-07.html">2024/05: anticlust is again up to date on CRAN
 - <a href="2024-05-03.html">2024/05: Using the Mac builder
 - <a href="2024-04-24.html">2024/04: Anticlust Development Diary, Issue 2, 2024
 - <a href="2024-02-07.html">2024/02: Anticlust Development Diary, Issue 1, 2024

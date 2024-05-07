@@ -9,8 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="by Martin Papenberg" />
+<meta name="author" content="Martin Papenberg" />
 
+<meta name="date" content="2024-05-07" />
 
 <title>the anticlust blog</title>
 
@@ -350,33 +351,80 @@ display: none;
 
 
 <h1 class="title toc-ignore">the anticlust blog</h1>
-<h4 class="author">by Martin Papenberg</h4>
+<h4 class="author">Martin Papenberg</h4>
+<h4 class="date">May 07, 2024</h4>
 
 </div>
 
 
-<p>This is the blog about the <a href="https://github.com/m-Py/anticlust">anticlust R package</a>. Here I
-share some thoughts and stuff on the <code>anticlust</code> package that
-do not really fit into the documentation and vignettes (even though
-materials gathered here may be used there in the future). It will often
-be concerned with the internal details of <code>anticlust</code> that
-may not be of primary interest to its users.</p>
-<p><a href="../about/index.html">About the author</a>.</p>
-<div id="posts" class="section level2">
-<h2>Posts</h2>
-<ul>
-<li><a href="2024-05-07.html">2024/05: anticlust is again up to date on
-CRAN</li>
-<li><a href="2024-05-03.html">2024/05: Using the Mac builder</li>
-<li><a href="2024-04-24.html">2024/04: Anticlust Development Diary,
-Issue 2, 2024</li>
-<li><a href="2024-02-07.html">2024/02: Anticlust Development Diary,
-Issue 1, 2024</li>
-<li><a href="2023-09-13.html">2023/09: anticlust 0.8.0: The revival of
-<code>fast_anticlustering()</code></li>
-<li><a href="2023-08-29.html">2023/08: Rewriting it in C: Anticlustering
-(part 1)</li>
-</ul>
+<div id="anticlust-is-again-up-to-date-on-cran" class="section level2">
+<h2>anticlust is again up to date on CRAN</h2>
+<p>Hooray. CRAN now again has the most up to date version of anticlust,
+and it will remain there without issues. The change log for anticlust
+version 0.8.5 is found <a href="https://m-py.github.io/anticlust/news/index.html">here</a>.</p>
+<p>This post documents my journey of keeping <code>anticlust</code> on
+CRAN while fighting a hard to reproduce error on a particular CRAN
+testing machine: The M1Mac. Errors on this machine are not shown in the
+standard <a href="https://cran.r-project.org/web/checks/check_results_anticlust.html">results
+page</a>, but instead occur as an “additional issue”.</p>
+<p><a href="2023-09-13.html">Last year I submitted version 0.8.0 to
+CRAN</a>. I was quite proud of this release, honestly. It made
+anticlustering vastly more performant with large data sets, by fixing
+issues with <code>anticlustering()</code> for large data sets and
+resurrecting <code>fast_anticlustering()</code> from the dead. Due to
+the nature of the problems this version dealt with (speed!), most new
+code was in the C code base rather than on the R side. This means
+potential trouble because it can break a lot of things.</p>
+<p>So, a few days after submitting the improved <code>anticlust</code>
+version to CRAN, I received message that the automated unit tests
+produced an error on the M1Mac testing machine on CRAN: A <a href="https://en.wikipedia.org/wiki/Segmentation_fault">segfault</a>,
+which is kind of a worst case scenario. This means that some
+<code>anticlust</code> code tried to access memory that it should not.
+This usually cannot happen with R code only but regularly happens with C
+code. The problem was that the “additional issue” did not show which
+function actually produced the error and therefore I could only guess.
+My inquiries about the source of the error were not answered by the CRAN
+maintainers at that time.</p>
+<p><a href="https://github.com/m-Py/anticlust/issues/50">My fixes to
+<code>anticlustering()</code></a>, which were a big part of the 0.8.0
+update were actually primarily concerned with changing memory access to
+allow it to allocate more memory with large data sets. So of course, I
+assumed these changes were the culprit. Because I did not really have
+time to fix the issue (I was in paternal leave due to the birth of our
+second child) I quickly generated a version of <code>anticlust</code>
+that reversed these changes. To my surprise, the issue persisted. Again,
+due to a lack of time, I simply uploaded the previous version (0.7.0;
+now called 0.8.1 because CRAN requires that version numbers increase),
+which removed the M1Mac issue.</p>
+<p>Up until last week, this was the status quo on CRAN. Hence, CRAN
+still had the slow R version of <code>fast_anticlustering()</code>,
+which was quite annoying to me, but I did not have much motivation for
+fixing stuff—until last week, when I “just did it” and submitted version
+0.8.3.</p>
+<p>To my dismay, the additional issue on M1Mac reappeared last week. My
+hypothesis was that <code>fast_anticlustering()</code> somehow had to
+generate the error because it was the only C code that changed between
+versions—even though <code>fast_anticlustering()</code> does not really
+mess with any memory allocation. But who knows what might happen with C
+code (on a Mac even)…</p>
+<p>After submitting an unsuccessful update, the responsible CRAN
+maintainer was compliant with my request for debugging output, which was
+a huge relieve for me. And: It turns out it was not my own C code that
+was responsible for the segfault! Instead, it was generated by the
+Rsymphony package, which I use as the default solver for optimal
+anticlustering algorithms. I actually changed this in a recent version
+because Symphony is faster than the previous default solver, the GNU
+linear programming kit. But: I think this was already in version 0.7.0
+and I still do not understand why this version did not generate the
+error. Well, I guess it doesn’t matter now since the issue is fixed. By
+now, the results page includes output which identifies the source of the
+error, which is a good thing and may help other developers (or myself)
+in the future.</p>
+<hr />
+<p>Last updated: 2024-05-07</p>
+<div id="back-to-the-front-page" class="section level3">
+<h3><a href="index.html">Back to the front page</a></h3>
+</div>
 </div>
 
 
