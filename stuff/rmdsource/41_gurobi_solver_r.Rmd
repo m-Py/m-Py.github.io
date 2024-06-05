@@ -12,10 +12,9 @@ See https://support.gurobi.com/hc/en-us/articles/4534161999889-How-do-I-install-
 - Download the tar ball for Linux
 - Extract tar ball to directory /opt
 - If there is an old installation of gurobi in /opt, adjust some environment variables. In .bashrc include:
-
-export GUROBI_HOME="/opt/gurobi1102/linux64"
-export PATH="${PATH}:${GUROBI_HOME}/bin"
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
+  * `export GUROBI_HOME="/opt/gurobi1102/linux64"` (check out version number!)
+  * `export PATH="${PATH}:${GUROBI_HOME}/bin"`
+  * `export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"`
 
 
 ## Acticate license
