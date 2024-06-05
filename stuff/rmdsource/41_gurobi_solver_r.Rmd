@@ -27,6 +27,9 @@ The R package is in the installation directory in the directory R. Use
 
 `install.packages('gurobi_11.0-2_R_4.4.0.tar.gz', repos=NULL)` 
 
+As of June 2024, the package still only seems to work in the console and not for 
+example in RStudio (at least on Linux, I was told it is different on Windows).
+
 ---
 
 Last updated: `r Sys.Date()`
