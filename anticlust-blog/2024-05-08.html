@@ -11,7 +11,7 @@
 
 <meta name="author" content="Martin Papenberg" />
 
-<meta name="date" content="2024-04-25" />
+<meta name="date" content="2024-05-08" />
 
 <title>the anticlust blog</title>
 
@@ -352,14 +352,13 @@ display: none;
 
 <h1 class="title toc-ignore">the anticlust blog</h1>
 <h4 class="author">Martin Papenberg</h4>
-<h4 class="date">April 25, 2024</h4>
+<h4 class="date">May 08, 2024</h4>
 
 </div>
 
 
-<div id="should-we-balance-stimuli-between-sets-in-within-subject-designs" class="section level2">
-<h2>Should we balance stimuli between sets in within-subject
-designs</h2>
+<div id="do-we-need-anticlustering-in-psychological-experiments" class="section level2">
+<h2>Do we need anticlustering in psychological experiments?</h2>
 <p>This post is concerned with the very reason why the
 <code>anticlust</code> package came to exist: Originally, I sought a
 method to assign stimuli to different sets in experiments while
@@ -368,23 +367,7 @@ problem as it frequently occurs in experimental psychology, but
 previously lacked an accessible software solution. <strong>This post
 asks the awkward question if my effort was even needed: Is it necessary
 to strive for similarity between stimulus sets or is some other
-assignment method (e.g., random assignment) sufficient?</strong> When
-working on the problem in more depth for my <a href="https://www.cs.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Informatik/Algorithmische_Bioinformatik/Bachelor-_Masterarbeiten/BA-Papenberg.pdf">Bachelor
-thesis in Computer science</a>, we realized that this problem can be
-tackled by optimizing a reversed clustering criterion. Only shortly
-before submitting my thesis, I actually found the reference by Späth
-(1986) who already coined the term anticlustering for optimizing a
-different anticlustering criterion. When we submitted our own
-anticlustering paper (Papenberg &amp; Klau, 2021), it even turned out
-during review that the method we “invented” was actually known as the
-maximum diverse grouping problem (MDGP) in operations research.
-Furthermore, a few weeks before we submitted our paper (which was not
-known to me), the first anticlustering paper in a psychological journal
-was published (Brusco et al., 2020). Brusco et al. had also identified
-that the MDGP can be understood as an anticlustering problem because it
-corresponds to the reversal of a classical clustering criterion. So, in
-the revised and then published version, we acknowledge these prior
-contributions.</p>
+assignment method (e.g., random assignment) sufficient?</strong></p>
 <p>The basic anticlustering problem in psychological research occurs in
 within-subjects designs: Each participant processes two experimental
 conditions and in each condition, a set of stimuli is shown. For
@@ -404,16 +387,16 @@ experimental conditions (wake vs. sleep). (p. 162)</p>
 same stimuli are grouped together and are always shown in the same
 condition. In the study by Lahl et al. (2008), two sets of stimuli—let’s
 denote them as S1 and S2—was either shown in the wake condition or in
-the sleep condition.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> So, for some participants, the wake
-condition was paired with set S1 and the sleep condition was paired with
-set S2; for the other participants, the wake condition was paired with
-set S2 and the sleep condition was paired with set S1. Researchers
-intuitively wish that the sets S1 and S2 have to similar to each other
-on any factors that may influence the responses of the participants—this
-is one of the reasons why the <code>anticlust</code> package is being
-used with increasing frequency. Lintz et al. (2021) gave two reasons for
-this intuition and explained why balancing stimuli between sets is
-really needed:</p>
+the sleep condition. So, for some participants, the wake condition was
+paired with set S1 and the sleep condition was paired with set S2; for
+the other participants, the wake condition was paired with set S2 and
+the sleep condition was paired with set S1. Researchers intuitively wish
+that the sets S1 and S2 have to similar to each other on any factors
+that may influence the responses of the participants—this is one of the
+reasons why the <code>anticlust</code> package is being used with
+increasing frequency. Lintz et al. (2021) gave two reasons for this
+intuition and explained why balancing stimuli between sets is really
+needed:</p>
 <blockquote>
 <p>First, failing to balance lists well within subjects will drastically
 inflate the variance between those subjects (with some having extreme
@@ -434,7 +417,7 @@ independent variable). However, proper statistical control is not
 expected to be done in all cases. For example, Lahl et al. (2008) only
 reported the simple <em>t</em>-test and did not control for the
 counterbalancing of the stimulus sets, which I assume is the norm rather
-than the exception.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+than the exception.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <p>Lintz et al. (2021) go on to provide an additional problem with
 failing to creating similar stimulus sets:</p>
 <blockquote>
@@ -447,8 +430,8 @@ lose focus on the task, or behave in other unpredictable ways that could
 distort the results to a degree that violates the typical expectations
 underlying law-of-large-numbers logic. (p. 18)</p>
 </blockquote>
-<p>Arguably, this concern is more severe because neither can it be
-identified in the data, nor can it be controlled for by statistical
+<p>Arguably, this second concern is more severe because neither can it
+be identified in the data, nor can it be controlled for by statistical
 analysis. If participants adjust their response strategy depending on
 the perceived similarity between stimulus sets, the comparison between
 experimental conditions can be strongly biased, rendering comparisons
@@ -509,21 +492,41 @@ get_data_set &lt;- function(N, D, D_M = 0, balance = &quot;random&quot;, anticlu
     casenum = c(rep(1:N1, 2), rep((N1+1):N, 2))
   )
 }</code></pre>
-<p>The function returns a data frame in long format that has <span class="math inline">\(2N\)</span> rows where <span class="math inline">\(N\)</span> is the number of participants. For
-purposes of illustration, let’s use it to simulate data for four
-respondents, assuming an effect size of .5 for the experimental
-condition and an effect size of .3 for the materials (i.e., the expected
-difference between the stimulus sets):</p>
+<p>The function returns a data frame in long format that has <span class="math inline">\(2N\)</span> rows where <span class="math inline">\(N\)</span> is the number of participants. The
+function arguments can adjust the sample size, the effect size between
+conditions, the effect size of the stimulus sets, the relative sizes of
+the counterbalancing groups (via argument <code>balance</code>) and if
+anticlustering is used for stimulus assignment.</p>
+<p>How I actually implemented the effect of the stimulus sets may be up
+to debate, but this implementation lets me induce the anticlustering of
+the stimuli conveniently: In the function body, I generate two sets of
+stimuli, which are simply given by the function <code>rnorm()</code> as
+normal variate values. They are drawn from potentially different normal
+distributions if <span class="math inline">\(D_M\)</span> is set to a
+different value than 0. For each set, I (arbitrarily) generate 10
+stimuli.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>
+Then, I compute the difference in means between the two sets, which is
+used as the actual effect of the item sets on responses. Therefore, even
+if <span class="math inline">\(D_M\)</span> remains as the default value
+of 0, there will be a random influence of the item sets because the mean
+values of the item sets will vary according to random fluctuation. So
+the default setting actually resembles the common use case that stimuli
+are assigned randomly to sets.</p>
+<p>For purposes of illustration, let’s use it the function
+<code>get_data_set()</code> to simulate data for four respondents,
+assuming an effect size of .5 for the experimental condition and an
+effect size of .3 for the materials (i.e., the expected difference
+between the stimulus sets):</p>
 <pre class="r"><code>get_data_set(4, D = .5, D_M = .3)</code></pre>
-<pre><code>##        value condition balancing set casenum
-## 1  0.2806703         1         1   1       1
-## 2  1.9725869         1         1   1       2
-## 3  1.7496621         2         1   2       1
-## 4 -2.4187267         2         1   2       2
-## 5  0.9597199         1         2   2       3
-## 6  0.3806283         1         2   2       4
-## 7  0.1648688         2         2   1       3
-## 8  0.8384304         2         2   1       4</code></pre>
+<pre><code>##         value condition balancing set casenum
+## 1  1.10447046         1         1   1       1
+## 2  3.31477763         1         1   1       2
+## 3  1.38281645         2         1   2       1
+## 4 -0.75791367         2         1   2       2
+## 5  0.02994794         1         2   2       3
+## 6  0.06674425         1         2   2       4
+## 7  0.96727978         2         2   1       3
+## 8  1.71328679         2         2   1       4</code></pre>
 <p>We obtain 8 rows because the data is in long format and there are two
 responses for each participant. We see that there is already some
 bookkeeping required for this simple design.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> The variable
@@ -535,15 +538,15 @@ response variable by condition. It returns the <em>p</em>-value of the
 <em>t</em>-test, which can be used to estimate statistical power.</p>
 <pre class="r"><code>sim_ttest &lt;- function(X, N, D, D_M = 0, balance = &quot;random&quot;, anticlust = FALSE) {
   data &lt;- get_data_set(N = N, D = D, D_M = D_M, balance, anticlust)
-  t.test(value ~ condition, data = data, paired = TRUE)$p.value
+  t.test(data$value[data$condition == 1], data$value[data$condition == 2], paired = TRUE)$p.value
 }</code></pre>
 <p>Using <code>sapply()</code>, I can repeatedly call it to conduct a
 small scale simulation (i.e., for the same parameter combination). So,
 in the following I define some parameters that I use throughout my
 examples; a real simulation would be obtained by varying the input
 parameters systematically. To estimate statistical power, 10000 repeated
-calls to <code>sim_ttest()</code> are conducted.</p>
-<pre class="r"><code>nsim &lt;- 1000 # number of simulation runs
+calls to <code>sim_ttest()</code> are conducted.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
+<pre class="r"><code>nsim &lt;- 10000 # number of simulation runs
 N &lt;- 50
 D &lt;- .5</code></pre>
 <p>First, I simulate the power of the <em>t</em>-test for an effect of
@@ -561,10 +564,10 @@ pvalues1 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D)
 pvalues2 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, anticlust = TRUE) 
 
 mean(pvalues1 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.659</code></pre>
+<pre><code>## [1] 0.6538</code></pre>
 <pre class="r"><code>mean(pvalues2 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.702</code></pre>
-<p>We see that power is slightly improved (about 4 percantage points)
+<pre><code>## [1] 0.6839</code></pre>
+<p>We see that power is slightly improved (about 3 percantage points)
 when using anticlustering assignment instead of random assignment of
 stimuli.</p>
 <p>In the next example, I increase the bias induced by difference in
@@ -585,9 +588,9 @@ pvalues3 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, D_M = D_M)
 pvalues4 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, D_M = D_M, anticlust = TRUE) 
 
 mean(pvalues3 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.481</code></pre>
+<pre><code>## [1] 0.5086</code></pre>
 <pre class="r"><code>mean(pvalues4 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.695</code></pre>
+<pre><code>## [1] 0.6839</code></pre>
 <p>The power of the standard <em>t</em>-test is strongly reduced when
 there is a systematic bias between stimulus sets. Using anticlustering
 on these stimuli (that are effectively drawn from two populations when
@@ -597,7 +600,7 @@ higher statistical power.</p>
 <h3>Statistical control via ANOVA</h3>
 <p>Instead of using anticlustering—or even better: in addition to!—we
 can use statistical control to remediate the problem of variation caused
-by differences in item sets. A simple tool<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> is to use a mixed
+by differences in item sets. A simple tool<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> is to use a mixed
 ANOVA to includes the counterbalancing variable as a between subjects
 factor. I define the function <code>sim_aov()</code> analogously to
 <code>sim_ttest()</code> to compute this ANOVA instead of the simple
@@ -625,11 +628,11 @@ pvalues7 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, anticlust = TRUE)
 
 # Power
 mean(pvalues5 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.672</code></pre>
+<pre><code>## [1] 0.6586</code></pre>
 <pre class="r"><code>mean(pvalues6 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.677</code></pre>
+<pre><code>## [1] 0.6843</code></pre>
 <pre class="r"><code>mean(pvalues7 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.688</code></pre>
+<pre><code>## [1] 0.6861</code></pre>
 <p>We repeat the pattern that the power of the <em>t</em>-test is
 lowest. ANOVA improves power as compared to the <em>t</em>-test, and
 anticlustering + <em>t</em>-test has comparable power.</p>
@@ -641,11 +644,11 @@ pvalues10 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, D_M = D_M, anticlust = T
 
 # Power
 mean(pvalues8 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.503</code></pre>
+<pre><code>## [1] 0.5153</code></pre>
 <pre class="r"><code>mean(pvalues9 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.653</code></pre>
+<pre><code>## [1] 0.6841</code></pre>
 <pre class="r"><code>mean(pvalues10 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.683</code></pre>
+<pre><code>## [1] 0.6981</code></pre>
 <p>Again, we see that the <em>t</em>-test suffers a lot when stimulus
 sets are highly different. Interestingly, the ANOVA approach can deal
 with the bias pretty well and has the comparable performance as using
@@ -659,6 +662,10 @@ preferably combined with anticlustering. Using anticlustering as well as
 statistical control is expected to (a) maximize statistical power via
 and to (b) reduce the risk of bias due to differences in response
 strategy between conditions.</p>
+<p>So, to answer the question posed in the title: I think that
+anticlustering is needed when assigning stimuli to sets for experiments.
+Sure, a larger scale simulation might be nice to test this claim more
+thoroughly, but I think the comparisons above already make a point.</p>
 </div>
 </div>
 <div id="references" class="section level2">
@@ -666,10 +673,6 @@ strategy between conditions.</p>
 <p>Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008).
 Mixed-effects modeling with crossed random effects for subjects and
 items. Journal of memory and language, 59(4), 390-412.</p>
-<p>Brusco, M. J., Cradit, J. D., &amp; Steinley, D. (2020). Combining
-diversity and dispersion criteria for anticlustering: A bicriterion
-approach. <em>British Journal of Mathematical and Statistical
-Psychology, 73</em>(3), 375–396. <a href="https://doi.org/10.1111/bmsp.12186" class="uri">https://doi.org/10.1111/bmsp.12186</a></p>
 <p>Lahl, O., &amp; Pietrowsky, R. (2006). EQUIWORD: A software
 application for the automatic creation of truly equivalent word lists.
 <em>Behavior Research Methods, 38</em>, 146–152. <a href="http://dx.doi.org/10.3758/BF03192760" class="uri">http://dx.doi.org/10.3758/BF03192760</a></p>
@@ -682,10 +685,8 @@ equating lexical stimuli across experimental conditions.
 <p>Papenberg, M., &amp; Klau, G. W. (2021). Using anticlustering to
 partition data sets into equivalent parts. <em>Psychological Methods,
 26</em>(2), 161–174. <a href="https://doi.org/10.1037/met0000301" class="uri">https://doi.org/10.1037/met0000301</a></p>
-<p>Späth, H. (1986). Anticlustering: Maximizing the variance criterion.
-<em>Control and Cybernetics</em>, 15, 213–218.</p>
 <hr />
-<p>Last updated: 2024-05-03</p>
+<p>Last updated: 2024-05-08</p>
 <div id="back-to-the-front-page" class="section level3">
 <h3><a href="index.html">Back to the front page</a></h3>
 </div>
@@ -698,25 +699,28 @@ partition data sets into equivalent parts. <em>Psychological Methods,
 <li id="fn2"><p>It is also feasible to generate a random subset of
 stimuli for each participant. In this case, we do not need
 anticlustering. For practical reasons, it seems that fixed sets are
-often used. For example, it may facilitate implementing the experiment
-(e.g. via computer or pen and paper) and the data analysis. In some
-cases, the experimental logic might even demand the use of fixed sets.
-Still, experiments do exist where random sets of stimuli are generated
-for each participant, which potentially circumvents the need for
-anticlustering.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>Sets are usually counterbalanced between conditions to
-avoid a confounding between stimuli and experimental condition, which
-would render any difference between conditions uninterpretable.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>To be fair, Lahl et al. (2008) used a matching method
+often used. It makes sense, given that we usually try to keep as many
+things fixed as possible in experiments to maximize the precision of our
+experimental manipulation. Using fixed sets may facilitate implementing
+the experiment (e.g. via computer or pen and paper) and the data
+analysis. In some cases, the experimental logic might even demand the
+use of fixed sets. Still, experiments do exist where random sets of
+stimuli are generated for each participant, which potentially
+circumvents the need for anticlustering.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>To be fair, Lahl et al. (2008) used a matching method
 (see Lahl &amp; Pietrowsky, 2006) that like anticlustering strives for
 similarity between stimulus sets. So while not using statistical
-control, they attempted to ensure comparability between sets.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+control, they attempted to ensure comparability between sets.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>In a larger simulation, the number of stimuli might be
+varied and not fix.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 <li id="fn5"><p>And in reality, there could even be an additional
 balancing variable pertaining to the sequence in which the experimental
 conditions are processed. So a simple design with 2 conditions quickly
 becomes a three-factorial data analysis.<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p>If we do not apply a linear mixed model, which would be
-the prefered choice of many for this type of design.<a href="#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>I guess 10000 is a nice number for simulation runs.
+Maybe this choice should be justified.<a href="#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>If we do not apply a linear mixed model, which would be
+the prefered choice of many for this type of design.<a href="#fnref7" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 

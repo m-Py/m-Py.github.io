@@ -1,0 +1,37 @@
+---
+title: "How to set up Gurobi solver on Linux"
+date: June, 5, 2024
+author: Martin Papenberg
+---
+
+## Download plus installation to set up Gurobi solver on Linux
+
+See https://support.gurobi.com/hc/en-us/articles/4534161999889-How-do-I-install-Gurobi-Optimizer
+
+- Login in https://portal.gurobi.com, add academic license to account
+- Download the tar ball for Linux
+- Extract tar ball to directory /opt
+- If there is an old installation of gurobi in /opt, adjust some environment variables. In .bashrc include:
+
+export GUROBI_HOME="/opt/gurobi1102/linux64"
+export PATH="${PATH}:${GUROBI_HOME}/bin"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
+
+
+## Acticate license
+
+Using the command for grbgetkey that is shown when getting the license.
+
+## Install R package gurobi
+
+The R package is in the installation directory in the directory R. Use
+
+`install.packages('gurobi_11.0-2_R_4.4.0.tar.gz', repos=NULL)` 
+
+---
+
+Last updated: `r Sys.Date()`
+
+### <a href="index.html">Back to the front page</a>
+
+&nbsp;
