@@ -20,7 +20,7 @@ quite large data sets."><!-- mathjax --><script src="https://cdnjs.cloudflare.co
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.6</span>
       </span>
     </div>
 
@@ -235,11 +235,11 @@ Control and Cybernetics, 15, 213-218.</p>
 <span class="r-in"><span><span class="va">groups3</span> <span class="op">&lt;-</span> <span class="fu">fast_anticlustering</span><span class="op">(</span><span class="va">features</span>, K <span class="op">=</span> <span class="va">init</span>, k_neighbours <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="variance_objective.html">variance_objective</a></span><span class="op">(</span><span class="va">features</span>, <span class="va">groups1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 681.3698</span>
-<span class="r-in"><span><span class="fu"><a href="variance_objective.html">variance_objective</a></span><span class="op">(</span><span class="va">features</span>, <span class="va">groups2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 681.3686</span>
+<span class="r-in"><span><span class="fu"><a href="variance_objective.html">variance_objective</a></span><span class="op">(</span><span class="va">features</span>, <span class="va">groups2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 681.3682</span>
 <span class="r-in"><span><span class="fu"><a href="variance_objective.html">variance_objective</a></span><span class="op">(</span><span class="va">features</span>, <span class="va">groups3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 680.6526</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 680.9906</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># K-plus anticlustering is straight forward when sticking with the default</span></span></span>
 <span class="r-in"><span><span class="co"># for k_neighbours</span></span></span>
@@ -249,9 +249,9 @@ Control and Cybernetics, 15, 213-218.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">features</span>, <span class="va">kplus_anticlusters</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Sepal.Length  Sepal.Width   Petal.Length  Petal.Width  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 "5.84 (0.83)" "3.06 (0.44)" "3.77 (1.77)" "1.20 (0.77)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 "5.84 (0.83)" "3.06 (0.44)" "3.74 (1.78)" "1.20 (0.77)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 "5.84 (0.84)" "3.06 (0.44)" "3.76 (1.78)" "1.20 (0.77)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 "5.84 (0.84)" "3.06 (0.44)" "3.76 (1.78)" "1.20 (0.77)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 "5.84 (0.83)" "3.06 (0.44)" "3.76 (1.78)" "1.19 (0.77)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 "5.85 (0.83)" "3.05 (0.43)" "3.76 (1.78)" "1.21 (0.77)"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Some care is needed when applying k-plus using with this function </span></span></span>
 <span class="r-in"><span><span class="co"># while using a reduced number of exchange partners generated in the </span></span></span>
@@ -268,9 +268,9 @@ Control and Cybernetics, 15, 213-218.</p>
 <span class="r-in"><span> <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">features</span>, <span class="va">kplus_anticlusters</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Sepal.Length  Sepal.Width   Petal.Length  Petal.Width  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 "5.85 (0.83)" "3.06 (0.44)" "3.78 (1.78)" "1.20 (0.77)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 "5.84 (0.83)" "3.06 (0.44)" "3.78 (1.77)" "1.21 (0.77)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 "5.84 (0.84)" "3.06 (0.44)" "3.72 (1.78)" "1.19 (0.77)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 "5.85 (0.84)" "3.06 (0.44)" "3.76 (1.78)" "1.20 (0.77)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 "5.84 (0.83)" "3.06 (0.44)" "3.77 (1.77)" "1.20 (0.77)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 "5.84 (0.83)" "3.06 (0.44)" "3.75 (1.78)" "1.20 (0.77)"</span>
 <span class="r-in"><span><span class="co"># Or we use random exchange partners: </span></span></span>
 <span class="r-in"><span><span class="va">kplus_anticlusters</span> <span class="op">&lt;-</span> <span class="fu">fast_anticlustering</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="kplus_moment_variables.html">kplus_moment_variables</a></span><span class="op">(</span><span class="va">features</span>, T <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, </span></span>
@@ -279,9 +279,9 @@ Control and Cybernetics, 15, 213-218.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">features</span>, <span class="va">kplus_anticlusters</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Sepal.Length  Sepal.Width   Petal.Length  Petal.Width  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 "5.85 (0.84)" "3.05 (0.44)" "3.76 (1.77)" "1.20 (0.77)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 "5.84 (0.83)" "3.06 (0.44)" "3.75 (1.78)" "1.20 (0.77)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 "5.85 (0.83)" "3.06 (0.44)" "3.76 (1.78)" "1.20 (0.77)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 "5.84 (0.83)" "3.06 (0.44)" "3.77 (1.77)" "1.20 (0.77)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 "5.85 (0.83)" "3.06 (0.44)" "3.75 (1.78)" "1.20 (0.77)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 "5.84 (0.84)" "3.06 (0.44)" "3.76 (1.78)" "1.20 (0.77)"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Working on several 1000 elements is very fast (Here n = 10000, m = 2)</span></span></span>
@@ -289,7 +289,7 @@ Control and Cybernetics, 15, 213-218.</p>
 <span class="r-in"><span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu">fast_anticlustering</span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="fl">5</span>, k_neighbours <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span> </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.3660877 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.3704498 secs</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.6</span>
       </span>
     </div>
 
@@ -70,6 +70,35 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="0.8.6" id="anticlust-086">anticlust 0.8.6<a class="anchor" aria-label="anchor" href="#anticlust-086"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-8-6">New features<a class="anchor" aria-label="anchor" href="#new-features-0-8-6"></a></h3>
+<ul><li>
+<code><a href="../reference/bicriterion_anticlustering.html">bicriterion_anticlustering()</a></code> has new arguments: <code>dispersion_distances</code>, <code>average_diversity</code>, <code>init_partitions</code>, <code>return</code>.</li>
+<li>
+<code><a href="../reference/anticlustering.html">anticlustering()</a></code> now has new <code>objective = "average-diversity"</code>
+</li>
+<li>In <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, <code>method = "brusco"</code> now works for <code>objective = "variance"</code> and <code>"objective = kplus"</code>
+</li>
+<li>Added <code>lpSolve</code> solver as backend for the optimal methods, and it is now the default solver</li>
+<li>
+<code><a href="../reference/optimal_anticlustering.html">optimal_anticlustering()</a></code> and <code><a href="../reference/optimal_dispersion.html">optimal_dispersion()</a></code> now have an additional argument <code>time_limit</code>
+</li>
+<li>
+<code><a href="../reference/anticlustering.html">anticlustering()</a></code> now has an argument <code>cannot_link</code>, which can be used to forbid pairs of elements from being assigned to the same cluster. When used, this solves the same (NP hard) graph coloring problem as <code><a href="../reference/optimal_dispersion.html">optimal_dispersion()</a></code>. Unlike the other optimal methods, it uses the Symphony solver with priority, when it is found (otherwise the <code>lpSolve</code>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-8-6">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-8-6"></a></h3>
+<ul><li>Bug fix in <code><a href="../reference/optimal_dispersion.html">optimal_dispersion()</a></code>: Output element <code>$edges</code> no longer includes edges that were investigated in the last iteration of the algorithm (and which are not relevant for finding the optimal dispersion)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="other-0-8-6">Other<a class="anchor" aria-label="anchor" href="#other-0-8-6"></a></h3>
+<ul><li>
+<code>anticlust</code> now depends on package <code>lpSolve</code>
+</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.8.5" id="anticlust-085">anticlust 0.8.5<small>2024-05-05</small><a class="anchor" aria-label="anchor" href="#anticlust-085"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-8-5">New features<a class="anchor" aria-label="anchor" href="#new-features-0-8-5"></a></h3>
@@ -98,7 +127,6 @@
 <h3 id="internal-changes-0-8-3">Internal changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-8-3"></a></h3>
 <ul><li>
 <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> received <a href="https://github.com/m-Py/anticlust/commit/8d3c85dc0076" class="external-link">another internal change</a> to improve the speed of the re-computation of the objective during the optimization. In particular, updating the objective is now done by only inspecting the two clusters between which an exchange actually took place, instead of re-computing a sum across all clusters.</li>
-<li>A bug in <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> <a href="https://github.com/m-Py/anticlust/commit/957490ac2fe04" class="external-link">was fixed</a>; the computation of the objective did not incoorporate the cluster sizes</li>
 </ul></div>
 </div>
     <div class="section level2">

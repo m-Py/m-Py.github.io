@@ -18,7 +18,7 @@ that are available in anticlust."><!-- mathjax --><script src="https://cdnjs.clo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.6</span>
       </span>
     </div>
 
@@ -77,17 +77,17 @@ that are available in anticlust.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">optimal_anticlustering</span><span class="op">(</span><span class="va">x</span>, <span class="va">K</span>, <span class="va">objective</span>, solver <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">optimal_anticlustering</span><span class="op">(</span><span class="va">x</span>, <span class="va">K</span>, <span class="va">objective</span>, solver <span class="op">=</span> <span class="cn">NULL</span>, time_limit <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
-<dd><p>The data input. Can be one of two structures: (1) A
-feature matrix where rows correspond to elements and columns
-correspond to variables (a single numeric variable can be
-passed as a vector). (2) An N x N matrix dissimilarity matrix;
-can be an object of class <code>dist</code> (e.g., returned by
+<dd><p>The data input. Can be one of two structures: (1) A feature
+matrix where rows correspond to elements and columns correspond
+to variables (a single numeric variable can be passed as a
+vector). (2) An N x N matrix dissimilarity matrix; can be an
+object of class <code>dist</code> (e.g., returned by
 <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></code> or <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">as.dist</a></code>) or a <code>matrix</code>
 where the entries of the upper and lower triangular matrix
 represent pairwise dissimilarities.</p></dd>
@@ -95,18 +95,24 @@ represent pairwise dissimilarities.</p></dd>
 
 <dt>K</dt>
 <dd><p>How many anticlusters should be created or alternatively:
-(a) A vector describing the size of each group (the latter currently 
-only works for <code>objective = "dispersion")</code>.</p></dd>
+(a) A vector describing the size of each group (the latter
+currently only works for <code>objective = "dispersion")</code>.</p></dd>
 
 
 <dt>objective</dt>
-<dd><p>The anticlustering objective, can be "diversity", "variance", 
-"kplus" or "dispersion".</p></dd>
+<dd><p>The anticlustering objective, can be "diversity",
+"variance", "kplus" or "dispersion".</p></dd>
 
 
 <dt>solver</dt>
-<dd><p>Optional. The solver used to obtain the optimal method. 
-Currently supports "glpk" and "symphony". See details.</p></dd>
+<dd><p>Optional. The solver used to obtain the optimal
+method.  Currently supports "glpk", "symphony", and
+"lpSolve". See details.</p></dd>
+
+
+<dt>time_limit</dt>
+<dd><p>Time limit in seconds, given to the solver.
+Default is there is no time limit.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -118,29 +124,40 @@ Currently supports "glpk" and "symphony". See details.</p></dd>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>This is a wrapper for all optimal methods supported in anticlust (currently and in the future). 
-As compared to <code><a href="anticlustering.html">anticlustering</a></code>, it allows to specify the solver to obtain an optimal
-solution and it can be used to obtain optimal solutions for all supported
-anticlustering objectives (variance, diversity, k-plus, dispersion). For 
-the objectives "variance", "diversity" and "kplus", the optimal ILP method 
-in Papenberg and Klau (2021) is used, which maximizes the sum of all pairwise 
-intra-cluster distances (given user specified number of clusters, for equal-sized clusters).
-To employ k-means anticlustering (i.e. set <code>objective = "variance"</code>), the
-squared Euclidean distance is used. For k-plus anticlustering, the squared Euclidean distance
-based on the extended k-plus data matrix is used (see <code><a href="kplus_moment_variables.html">kplus_moment_variables</a></code>).
-For the diversity (and the dispersion), the Euclidean distance is used by default, 
-but any user-defined dissimilarity matrix is possible.</p>
-<p>The dispersion is solved optimal using the approach described in <code><a href="optimal_dispersion.html">optimal_dispersion</a></code>.</p>
-<p>The optimal methods either require the R package <code>Rglpk</code> and the GNU linear programming kit
-(&lt;http://www.gnu.org/software/glpk/&gt;), or the R package
-<code>Rsymphony</code> and the COIN-OR SYMPHONY solver libraries
-(&lt;https://github.com/coin-or/SYMPHONY&gt;). If the argument <code>solver</code> is not 
-specified by the user, the function will try to find the GLPK or SYMPHONY 
-solver and throw an error if none is available. It will select the 
-GLPK solver if both are available because some rare instances have been observed where
-the SYMPHONY solver crashes on Mac computers. I would still try out the 
-SYMPHONY solver to see if the unlikely crash occurs. However, this has to be 
-set by the user (at least if both solver packages Rsymphony and Rglpk are available on the system).</p>
+    <p>This is a wrapper for all optimal methods supported in anticlust
+(currently and in the future).  As compared to
+<code><a href="anticlustering.html">anticlustering</a></code>, it allows to specify the solver to
+obtain an optimal solution and it can be used to obtain optimal
+solutions for all supported anticlustering objectives (variance,
+diversity, k-plus, dispersion). For the objectives "variance",
+"diversity" and "kplus", the optimal ILP method in Papenberg and
+Klau (2021) is used, which maximizes the sum of all pairwise
+intra-cluster distances (given user specified number of clusters,
+for equal-sized clusters).  To employ k-means anticlustering
+(i.e. set <code>objective = "variance"</code>), the squared Euclidean
+distance is used. For k-plus anticlustering, the squared Euclidean
+distance based on the extended k-plus data matrix is used (see
+<code><a href="kplus_moment_variables.html">kplus_moment_variables</a></code>).  For the diversity (and the
+dispersion), the Euclidean distance is used by default, but any
+user-defined dissimilarity matrix is possible.</p>
+<p>The dispersion is solved optimal using the approach described in
+<code><a href="optimal_dispersion.html">optimal_dispersion</a></code>.</p>
+<p>The optimal methods make use of "solvers" that actually implement
+the algorithm for finding optimal solutions. The package anticlust
+supports three solvers:</p>
+<ul><li><p>The default solver lpSolve (&lt;https://sourceforge.net/projects/lpsolve/&gt;).</p></li>
+<li><p>GNU linear programming kit (&lt;http://www.gnu.org/software/glpk/&gt;), 
+  available from the package Rglpk and requested using <code>solver = "glpk"</code>.
+  The R package Rglpk has to be installed manually if this solver should be used.</p></li>
+<li><p>The Symphony solver (&lt;https://github.com/coin-or/SYMPHONY&gt;),
+  available from the package Rsymphony and requested using <code>solver = "symphony"</code>.
+  (The package Rsymphony has to be installed manually if this solver should be used).</p></li>
+</ul><p>For the maximum dispersion problem, it seems that the Symphony
+solver is fastest, while the lpSolve solver seems to be good for
+maximum diversity. However, note that in general the dispersion can
+be solved optimally for much larger data sets than the diversity.</p>
+<p>If a <code>time_limit</code> is set and the function cannot find in the optimal
+objective in the given time, it will throw an error.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -150,17 +167,20 @@ set by the user (at least if both solver packages Rsymphony and Rglpk are availa
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># data &lt;- matrix(rnorm(24), ncol = 2)</span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">24</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># These calls are equivalent for k-means anticlustering:</span></span></span>
-<span class="r-in"><span><span class="co"># optimal_anticlustering(data, K = 2, objective = "variance")</span></span></span>
-<span class="r-in"><span><span class="co"># optimal_anticlustering(dist(data)^2, K = 2, objective = "diversity")</span></span></span>
+<span class="r-in"><span><span class="fu">optimal_anticlustering</span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="fl">2</span>, objective <span class="op">=</span> <span class="st">"variance"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 2 1 1 2 2 2 1 2 1 2 1</span>
+<span class="r-in"><span><span class="fu">optimal_anticlustering</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>, K <span class="op">=</span> <span class="fl">2</span>, objective <span class="op">=</span> <span class="st">"diversity"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 2 1 1 2 2 2 1 2 1 2 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># These calls are equivalent for k-plus anticlustering:</span></span></span>
-<span class="r-in"><span><span class="co"># optimal_anticlustering(data, K = 2, objective = "kplus")</span></span></span>
-<span class="r-in"><span><span class="co"># optimal_anticlustering(dist(kplus_moment_variables(data, 2))^2, K = 2, objective = "diversity")</span></span></span>
+<span class="r-in"><span><span class="fu">optimal_anticlustering</span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="fl">2</span>, objective <span class="op">=</span> <span class="st">"kplus"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 1 1 1 2 1 2 2 2 1 2 2</span>
+<span class="r-in"><span><span class="fu">optimal_anticlustering</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="fu"><a href="kplus_moment_variables.html">kplus_moment_variables</a></span><span class="op">(</span><span class="va">data</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>, K <span class="op">=</span> <span class="fl">2</span>, objective <span class="op">=</span> <span class="st">"diversity"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 1 1 1 2 1 2 2 2 1 2 2</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>

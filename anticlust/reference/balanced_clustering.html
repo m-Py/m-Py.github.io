@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.6</span>
       </span>
     </div>
 
@@ -147,15 +147,9 @@ Euclidean distance is computed as the basic unit of the cluster
 editing objective. If another distance measure is preferred, users
 may pass a self-computed dissimiliarity matrix via the argument
 <code>x</code>.</p>
-<p>The optimal <code>method = "ilp"</code> either require the R 
-package <code>Rglpk</code> and the GNU linear programming kit
-(&lt;http://www.gnu.org/software/glpk/&gt;), or the R package
-<code>Rsymphony</code> and the COIN-OR SYMPHONY solver libraries
-(&lt;https://github.com/coin-or/SYMPHONY&gt;). If the argument <code>solver</code> is not 
-specified by the user, the function will try to find the GLPK or SYMPHONY 
-solver and throw an error if none is available. It will select the 
-GLPK solver if both are available and if the argument <code>solver</code> is not set
-by the user.</p>
+<p>The optimal <code>method = "ilp"</code> uses a "solver" to optimize
+the clustering objective. See <code><a href="optimal_anticlustering.html">optimal_anticlustering</a></code>
+for an overview of the solvers that are available.</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -179,12 +173,11 @@ data sets into equivalent parts. Psychological Methods, 26(2),
 <span class="r-in"><span><span class="va">lds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>f1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span>, f2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu">balanced_clustering</span><span class="op">(</span><span class="va">lds</span>, K <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_clusters.html">plot_clusters</a></span><span class="op">(</span><span class="va">lds</span>, clusters <span class="op">=</span> <span class="va">cl</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="balanced_clustering-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Repeat using a distance matrix as input</span></span></span>
 <span class="r-in"><span><span class="va">cl2</span> <span class="op">&lt;-</span> <span class="fu">balanced_clustering</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">lds</span><span class="op">)</span>, K <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot_clusters.html">plot_clusters</a></span><span class="op">(</span><span class="va">lds</span>, clusters <span class="op">=</span> <span class="va">cl2</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="balanced_clustering-2.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="balanced_clustering-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
