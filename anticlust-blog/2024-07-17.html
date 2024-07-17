@@ -9,8 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="by Martin Papenberg" />
+<meta name="author" content="Martin Papenberg" />
 
+<meta name="date" content="2024-07-17" />
 
 <title>the anticlust blog</title>
 
@@ -350,33 +351,271 @@ display: none;
 
 
 <h1 class="title toc-ignore">the anticlust blog</h1>
-<h4 class="author">by Martin Papenberg</h4>
+<h4 class="author">Martin Papenberg</h4>
+<h4 class="date">July 17, 2024</h4>
 
 </div>
 
 
-<p>This is the blog about the <a href="https://github.com/m-Py/anticlust">anticlust R package</a>. Here I
-share some thoughts and stuff on the <code>anticlust</code> package that
-do not really fit into the documentation and vignettes (even though
-materials gathered here may be used there in the future). It will often
-be concerned with the internal details of <code>anticlust</code> that
-may not be of primary interest to its users.</p>
-<p><a href="../about/index.html">About the author</a>.</p>
-<div id="posts" class="section level2">
-<h2>Posts</h2>
-<ul>
-<li><a href="2024-07-17.html">2024/07: anticlust 0.8.6: A quick
-overview</li>
-<li><a href="2024-05-03.html">2024/05: Using the Mac builder</li>
-<li><a href="2024-04-24.html">2024/04: Anticlust Development Diary,
-Issue 2, 2024</li>
-<li><a href="2024-02-07.html">2024/02: Anticlust Development Diary,
-Issue 1, 2024</li>
-<li><a href="2023-09-13.html">2023/09: anticlust 0.8.0: The revival of
-<code>fast_anticlustering()</code></li>
-<li><a href="2023-08-29.html">2023/08: Rewriting it in C: Anticlustering
-(part 1)</li>
-</ul>
+<div id="anticlust-0.8.6-a-quick-overview" class="section level2">
+<h2>anticlust 0.8.6: A quick overview</h2>
+<p>A new anticlust version was released two days ago. This one will
+probably not go to CRAN, so for now we can install it via <a href="https://m-py.r-universe.dev/anticlust">R Universe</a>:</p>
+<pre class="r"><code>install.packages(&#39;anticlust&#39;, repos = c(&#39;https://m-py.r-universe.dev&#39;, &#39;https://cloud.r-project.org&#39;))</code></pre>
+<p>or via <a href="https://github.com/m-Py/anticlust">Github</a>:</p>
+<pre class="r"><code>library(&quot;remotes&quot;) # if not available: install.packages(&quot;remotes&quot;)
+install_github(&quot;m-Py/anticlust&quot;)</code></pre>
+<p>I think I will add some tweaks to the documentation and do some
+additional testing on other platforms before submitting the following
+version to CRAN.</p>
+<p>However, it is quite a big update, and this post gives an overview of
+some important changes. Not everything is explained in detail, because
+some of the changes will be explained in more detail in an upcoming
+preprint (especially the changes to the function
+<code>bicriterion_anticlustering()</code>).</p>
+</div>
+<div id="using-cannot-link-constraints" class="section level2">
+<h2>Using cannot-link constraints</h2>
+<p>This version allows that pairs of items must not be part of the same
+(anti)cluster. Most straight forward, we can use the argument
+<code>cannot_link</code> to request this feature. It is a 2-column
+matrix, where each row contains the indices of two elements that must
+not be part of the same group. For example, this is how I prevent the
+first flower in the iris data set to be part of the same cluster as
+flower 2 to 20:</p>
+<pre class="r"><code>library(anticlust)
+
+# Use cannot_link constraints: Element 1 must not be linked with elements 2 to 10:
+cl_matrix &lt;- matrix(c(rep(1, 19), 2:20), ncol = 2)
+cl_matrix</code></pre>
+<pre><code>##       [,1] [,2]
+##  [1,]    1    2
+##  [2,]    1    3
+##  [3,]    1    4
+##  [4,]    1    5
+##  [5,]    1    6
+##  [6,]    1    7
+##  [7,]    1    8
+##  [8,]    1    9
+##  [9,]    1   10
+## [10,]    1   11
+## [11,]    1   12
+## [12,]    1   13
+## [13,]    1   14
+## [14,]    1   15
+## [15,]    1   16
+## [16,]    1   17
+## [17,]    1   18
+## [18,]    1   19
+## [19,]    1   20</code></pre>
+<pre class="r"><code>cl &lt;- anticlustering(
+  iris[, 1:4],
+  K = 3,
+  cannot_link = cl_matrix,
+  objective = &quot;kplus&quot;,
+  method = &quot;local-maximum&quot;
+)
+cl[1:20]</code></pre>
+<pre><code>##  [1] 3 2 2 2 1 1 2 2 1 1 1 1 2 1 1 2 2 2 2 1</code></pre>
+<pre class="r"><code>all(cl[1] != cl[2:20])</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>mean_sd_tab(iris[, 1:4], cl)</code></pre>
+<pre><code>##   Sepal.Length  Sepal.Width   Petal.Length  Petal.Width  
+## 1 &quot;5.84 (0.83)&quot; &quot;3.06 (0.44)&quot; &quot;3.75 (1.77)&quot; &quot;1.20 (0.77)&quot;
+## 2 &quot;5.84 (0.83)&quot; &quot;3.06 (0.44)&quot; &quot;3.76 (1.78)&quot; &quot;1.20 (0.77)&quot;
+## 3 &quot;5.84 (0.84)&quot; &quot;3.06 (0.44)&quot; &quot;3.76 (1.78)&quot; &quot;1.19 (0.77)&quot;</code></pre>
+<p>Using such constraints may decrease the quality of the solution, but
+here the three groups are still very similar.</p>
+<p>One possibility is to use the maximum dispersion as a cannot-link
+constraint. That means: We prevent the most similar items from being
+part of the same cluster. This for example works as follows on the iris
+data set:</p>
+<pre class="r"><code>opt &lt;- optimal_dispersion(
+  iris[, 1:4], 
+  K = 3
+)</code></pre>
+<p>The output of <code>optimal_dispersion()</code> is a list that
+includes several elements, including “edges”:</p>
+<pre class="r"><code>opt$edges</code></pre>
+<pre><code>##       [,1] [,2]
+##  [1,]  102  143
+##  [2,]    8   40
+##  [3,]    1   18
+##  [4,]   10   35
+##  [5,]  129  133
+##  [6,]   11   49
+##  [7,]   18   41
+##  [8,]    5   38
+##  [9,]   20   22
+## [10,]    1    5
+## [11,]   30   31
+## [12,]   58   94
+## [13,]   81   82
+## [14,]  117  138
+## [15,]    9   39
+## [16,]   20   47
+## [17,]    1   40
+## [18,]    2   35
+## [19,]    4   48
+## [20,]    8   50
+## [21,]   28   29
+## [22,]   83   93
+## [23,]   96   97
+## [24,]  128  139
+## [25,]    3   48
+## [26,]    2   46
+## [27,]    2   13</code></pre>
+<p>The rows of this matrix indicate the indices of the plants which must
+not be part of the same (anti)cluster to ensure that the most similar
+plants are not in the same group. So we can actually use this output as
+input for the argument <code>cannot_link</code>:</p>
+<pre class="r"><code>cl &lt;- anticlustering(
+  iris[, 1:4],
+  K = 3,
+  objective = &quot;kplus&quot;,
+  method = &quot;local-maximum&quot;,
+  cannot_link = opt$edges
+)
+
+mean_sd_tab(iris[, 1:4], cl)</code></pre>
+<pre><code>##   Sepal.Length  Sepal.Width   Petal.Length  Petal.Width  
+## 1 &quot;5.84 (0.83)&quot; &quot;3.06 (0.44)&quot; &quot;3.76 (1.78)&quot; &quot;1.20 (0.77)&quot;
+## 2 &quot;5.84 (0.83)&quot; &quot;3.06 (0.44)&quot; &quot;3.75 (1.78)&quot; &quot;1.19 (0.77)&quot;
+## 3 &quot;5.85 (0.83)&quot; &quot;3.06 (0.44)&quot; &quot;3.76 (1.78)&quot; &quot;1.20 (0.77)&quot;</code></pre>
+<pre class="r"><code>dispersion_objective(iris[, 1:4], cl)</code></pre>
+<pre><code>## [1] 0.1414214</code></pre>
+<p>This way, we obtain the maximum possible dispersion (pairwise
+dissimilarity of plants within each cluster) while maximizing
+between-group similarity (here, using the k-plus objective).</p>
+</div>
+<div id="a-new-objective-average-diversity" class="section level2">
+<h2>A new objective: average diversity</h2>
+<p>The diversity is the default objective in anticlust, and it is very
+popular. It is defined as the overall sum of all pairwise intra-cluster
+distances (by default using the Euclidean distance). It has the
+disadvantage that it does not represent between-group similarity when
+not all clusters are of the same size:</p>
+<pre class="r"><code>cl &lt;- anticlustering(
+  iris[, 1:4],
+  K = c(100, 25, 25),
+  objective = &quot;diversity&quot;,
+  method = &quot;local-maximum&quot;
+)
+
+mean_sd_tab(iris[, 1:4], cl)</code></pre>
+<pre><code>##   Sepal.Length  Sepal.Width   Petal.Length  Petal.Width  
+## 1 &quot;5.84 (0.96)&quot; &quot;3.10 (0.48)&quot; &quot;3.66 (2.02)&quot; &quot;1.17 (0.87)&quot;
+## 2 &quot;5.86 (0.49)&quot; &quot;2.97 (0.29)&quot; &quot;3.96 (1.13)&quot; &quot;1.26 (0.48)&quot;
+## 3 &quot;5.86 (0.50)&quot; &quot;2.96 (0.32)&quot; &quot;3.95 (1.10)&quot; &quot;1.25 (0.46)&quot;</code></pre>
+<p>The standard deviation (i.e., the spread of the data) is much larger
+in the largest group than in the other groups. The k-plus objective, for
+example, does not have this problem:</p>
+<pre class="r"><code>cl &lt;- anticlustering(
+  iris[, 1:4],
+  K = c(100, 25, 25),
+  objective = &quot;kplus&quot;,
+  method = &quot;local-maximum&quot;
+)
+
+mean_sd_tab(iris[, 1:4], cl)</code></pre>
+<pre><code>##   Sepal.Length  Sepal.Width   Petal.Length  Petal.Width  
+## 1 &quot;5.84 (0.83)&quot; &quot;3.06 (0.44)&quot; &quot;3.76 (1.77)&quot; &quot;1.20 (0.76)&quot;
+## 2 &quot;5.84 (0.84)&quot; &quot;3.06 (0.44)&quot; &quot;3.74 (1.80)&quot; &quot;1.20 (0.78)&quot;
+## 3 &quot;5.85 (0.85)&quot; &quot;3.06 (0.44)&quot; &quot;3.76 (1.79)&quot; &quot;1.20 (0.78)&quot;</code></pre>
+<p>We can now also use the objective “average-diversity”, which
+normalizes the sum of within-cluster distances by cluster size. It
+better represents between-group similarity for unequal-sized groups:</p>
+<pre class="r"><code>cl &lt;- anticlustering(
+  iris[, 1:4],
+  K = c(100, 25, 25),
+  objective = &quot;average-diversity&quot;,
+  method = &quot;local-maximum&quot;
+)
+
+mean_sd_tab(iris[, 1:4], cl)</code></pre>
+<pre><code>##   Sepal.Length  Sepal.Width   Petal.Length  Petal.Width  
+## 1 &quot;5.84 (0.84)&quot; &quot;3.06 (0.45)&quot; &quot;3.76 (1.77)&quot; &quot;1.20 (0.76)&quot;
+## 2 &quot;5.83 (0.81)&quot; &quot;3.05 (0.43)&quot; &quot;3.77 (1.78)&quot; &quot;1.20 (0.78)&quot;
+## 3 &quot;5.85 (0.84)&quot; &quot;3.06 (0.40)&quot; &quot;3.76 (1.81)&quot; &quot;1.20 (0.77)&quot;</code></pre>
+</div>
+<div id="improved-speed-for-objective-diversity" class="section level2">
+<h2>Improved speed for objective = “diversity”</h2>
+<p>I implemented some changes in the C code underlying the algorithm
+that optimizes the diversity (and average diversity) objective, when
+using method = “local-maximum” and repetitions. In particular, the
+restart algorithm is now entirely implemented in C and does not call
+<code>method = &quot;exchange&quot;</code> repeatedly from R. I used these
+specifications to compare the implementations in version 0.8.5 and
+0.8.6:</p>
+<pre class="r"><code># This code generated the data:
+# N &lt;- 100
+# M &lt;- 5
+# data &lt;- matrix(rnorm(N * M), ncol = M)
+# write.csv(data, &quot;test_data.csv&quot;, row.names = FALSE)
+
+
+# This code was called with the two versions:
+library(anticlust)
+data &lt;- read.csv(&quot;test_data.csv&quot;)
+K &lt;- 5
+start &lt;- Sys.time()
+cl &lt;- anticlustering(
+  data, 
+  K = K,
+  objective = &quot;diversity&quot;, 
+  method = &quot;local-maximum&quot;, 
+  repetitions = 100
+)
+Sys.time() - start
+</code></pre>
+<p>The new implementation used 0.5 seconds on my personal computer, the
+old implementation used 0.90 seconds, which really is a substantial
+speedup (indicating that a similar change in implementation for the
+k-means objective would also be desirable).</p>
+</div>
+<div id="lpsolve-as-new-and-default-solver-for-ilp-methods" class="section level2">
+<h2><code>lpSolve</code> as new (and default) solver for ILP
+methods</h2>
+<p><code>anticlust</code> now depends on the R package
+<code>lpSolve</code>, which it uses by default to solve optimal
+anticlustering methods. These are the methods than can be called via
+<code>optimal_anticlustering()</code>,
+<code>optimal_dispersion()</code>, and
+<code>anticlustering(..., method = &quot;ilp&quot;)</code>. Previously,
+<code>anticlust</code> only supported the solvers GLPK (via R package
+<code>Rplpk</code>) and Symphony (via R package <code>Rsymphony</code>),
+which however were “suggested” dependencies. This means that users
+explicitly had to install these packages themselves and they were not
+installed together with <code>anticlust</code>. A potential problem with
+these packages is that they require an additional installation of a
+“system dependency”: Users were required to install the solver library
+from external websites (or package repositories) and not through the R
+environment. I am not sure how many “average users” would actually do
+this.</p>
+<p>The advantage of the <code>lpSolve</code> package as compared to the
+other two is that it has no system dependencies, the solver library
+“lpsolve” is included in the source code of the R package. So, for now,
+everyone at least has a possibility to apply the optimal methods (even
+though the Symphony solver really is better for maximum “dispersion”
+than the <code>lpSolve</code> solver).</p>
+<p>Note that when we use the argument <code>cannot_link</code> in
+<code>anticlustering()</code>, we basically solve the same problem
+(although maybe a less difficult version) as
+<code>optimal_dispersion()</code>, so this argument also requires a
+solver package. This is also the main reason why <code>anticlust</code>
+now depends on <code>lpSolve</code>: Everyone now can use the argument
+<code>cannot_link</code>. However, when using <code>cannot_link</code>,
+<code>anticlustering()</code> will by default select the Symphony solver
+when the package <code>Rsymphony</code> is found because it is much
+better at this problem. It is not possible for the user to explicitly
+specify the solver here. If <code>Rsymphony</code> is not available, it
+will opt for <code>lpSolve</code>, which is always present when
+<code>anticlust</code> is installed.</p>
+<hr />
+<p>Last updated: 2024-07-17</p>
+<div id="back-to-the-front-page" class="section level3">
+<h3><a href="index.html">Back to the front page</a></h3>
+</div>
 </div>
 
 
