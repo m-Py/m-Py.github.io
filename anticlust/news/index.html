@@ -92,8 +92,9 @@
 <ul><li>Bug fix in <code><a href="../reference/optimal_dispersion.html">optimal_dispersion()</a></code>: Output element <code>$edges</code> no longer includes edges that were investigated in the last iteration of the algorithm (and which are not relevant for finding the optimal dispersion)</li>
 </ul></div>
 <div class="section level3">
-<h3 id="other-0-8-6">Other<a class="anchor" aria-label="anchor" href="#other-0-8-6"></a></h3>
-<ul><li>
+<h3 id="internal-changes--other-0-8-6">Internal changes / Other<a class="anchor" aria-label="anchor" href="#internal-changes--other-0-8-6"></a></h3>
+<ul><li>Speed improvements for <code>anticlustering(..., objective = "diversity")</code> when using <code>method = "local-maximum"</code> and <code>repetitions</code> (the restart algorithm is now entirely implemented in C and does not call <code>method = "exchange"</code> repeatedly from R)</li>
+<li>
 <code>anticlust</code> now depends on package <code>lpSolve</code>
 </li>
 </ul></div>
