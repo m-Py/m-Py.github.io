@@ -128,6 +128,8 @@ cl <- anticlustering(
 mean_sd_tab(iris[, 1:4], cl)
 ```
 
+For equal-sized groups (which is the default), the objectives diversity and average diversity are equivalent.
+
 ## Improved speed for objective = "diversity"
 
 I implemented some changes in the C code underlying the algorithm that optimizes the diversity (and average diversity) objective, when using method = "local-maximum" and repetitions. In particular, the restart algorithm is now entirely implemented in C and does not call `method = "exchange"` repeatedly from R. I used these specifications to compare the implementations in version 0.8.5 and 0.8.6:
