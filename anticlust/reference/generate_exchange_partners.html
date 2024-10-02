@@ -3,7 +3,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.7</span>
       </span>
     </div>
 
@@ -28,7 +28,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
@@ -53,14 +53,14 @@
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/m-Py/anticlust/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
@@ -86,48 +86,47 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>n_exchange_partners</dt>
+
+
+<dl><dt id="arg-n-exchange-partners">n_exchange_partners<a class="anchor" aria-label="anchor" href="#arg-n-exchange-partners"></a></dt>
 <dd><p>The number of exchange partners per
 element</p></dd>
 
 
-<dt>N</dt>
+<dt id="arg-n">N<a class="anchor" aria-label="anchor" href="#arg-n"></a></dt>
 <dd><p>The number of elements for which exchange partners; can be
 <code>NULL</code> if <code>features</code> is passed (it is ignored if
 <code>features</code> is passed).</p></dd>
 
 
-<dt>features</dt>
+<dt id="arg-features">features<a class="anchor" aria-label="anchor" href="#arg-features"></a></dt>
 <dd><p>The features for which nearest neighbours are
 sought if <code>method = "RANN"</code>.  May be NULL if random
 exchange partners are generated.</p></dd>
 
 
-<dt>method</dt>
+<dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p>Currently supports "random" (default), "RANN" and
 "restricted_random". See details.</p></dd>
 
 
-<dt>categories</dt>
+<dt id="arg-categories">categories<a class="anchor" aria-label="anchor" href="#arg-categories"></a></dt>
 <dd><p>A vector, data.frame or matrix representing one
 or several categorical constraints.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>A list of length <code>N</code>. Is usually used as input to the
-    argument <code>exchange_partners</code> in</p>
-<p></p>
-<p><code><a href="fast_anticlustering.html">fast_anticlustering</a></code>.  Then, the i'th element of
+    <p>A list of length <code>N</code>. Is usually used as input to the
+    argument <code>exchange_partners</code> in
+    <code><a href="fast_anticlustering.html">fast_anticlustering</a></code>.  Then, the i'th element of
     the list contains the indices of the exchange partners that are
     used for the i'th element.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
     <p>The <code>method = "RANN"</code> generates exchange partners using a
-nearest neighbour search via <code><a href="https://rdrr.io/pkg/RANN/man/nn2.html" class="external-link">nn2</a></code> from the
+nearest neighbour search via <code><a href="https://jefferislab.github.io/RANN/reference/nn2.html" class="external-link">nn2</a></code> from the
 <code>RANN</code> package; <code>methode = "restricted_random"</code> generates
 random exchange partners but ensures that for each element, no
 duplicates are generated and that the element itself does not occur
@@ -152,67 +151,67 @@ exchange partners from the same category as itself); <code>methode
 <span class="r-in"><span><span class="co"># the element itself as exchange partner</span></span></span>
 <span class="r-in"><span><span class="fu">generate_exchange_partners</span><span class="op">(</span><span class="fl">5</span>, N <span class="op">=</span> <span class="fl">10</span>, method <span class="op">=</span> <span class="st">"restricted_random"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  4  5  9 10  8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9 6 3 4 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1  3  4 10  5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 3 7 1 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  7  9  5  2 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7 1 5 4 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  2  6 10  5  3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 7 5 6 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 7 6 4 9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 2 8 6 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1  7  3 10  5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 2 7 5 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 8 3 5 9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  8  5  1 10  3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[8]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 9 7 4 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 7 6 5 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[9]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8 3 2 7 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 8 4 6 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[10]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7 6 3 1 4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 3 7 6 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># "random" simply randomizes with replacement and without restrictions</span></span></span>
 <span class="r-in"><span><span class="co"># (categorical restrictions are also not possible; is much faster for large data sets)</span></span></span>
 <span class="r-in"><span><span class="fu">generate_exchange_partners</span><span class="op">(</span><span class="fl">5</span>, N <span class="op">=</span> <span class="fl">10</span>, method <span class="op">=</span> <span class="st">"random"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6 9 3 8 4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 6 5 8 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8 6 2 8 7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10  8  3  1  8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9 8 8 9 4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 4 6 1 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  5  3  5  3 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 5 4 6 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6 8 1 8 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 6 9 4 8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 8 8 6 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  3  9 10  7  6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 9 9 7 9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8 2 7 6 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[8]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  5 10  4  4  4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 4 5 6 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[9]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 2 2 6 4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  6  9  5 10  8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[10]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8 5 9 5 4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  2 10  1 10  9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># May return less than 5 exchange partners if there are not enough members </span></span></span>
 <span class="r-in"><span><span class="co"># of the same category: </span></span></span>
@@ -222,292 +221,292 @@ exchange partners from the same category as itself); <code>methode
 <span class="r-in"><span>  categories <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">schaper2019</span><span class="op">$</span><span class="va">room</span>, <span class="va">schaper2019</span><span class="op">$</span><span class="va">frequency</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 37 71 12 41  6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 66 41 37  6 71</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 70 36 69 65 67</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 72 36 69 67 77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  4 14  8 34 44</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 13 34 44 14  8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 44  8 13 46 14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 34 13 46 44  8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> integer(0)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 37 66 71  1 41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 66  1 37 41 71</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 38 48 47 35 76</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 48 76 15 11 38</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[8]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 34 46 14  4 13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 44 13  3 14  4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[9]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> integer(0)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[10]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 45 39 75</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 75 45 39</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[11]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 38 48 35 76 73</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 42 73 76 35 38</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[12]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 41 66 37  1 71</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  6 71 37  1 41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[13]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 34 14  3 44  8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 44 34  4 46  8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[14]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 34  3  8  4 13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  3  8 44 13 46</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[15]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 38 76 35 42  7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 76 80 47 35  7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[16]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 79 33 40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 79 40 33</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[17]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 30 28 88 85 18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 28 96 63 85 30</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[18]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 63 30 88 17 28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 96 17 88 85 30</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[19]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 61 84 54 60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 60 54 61 84</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[20]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 53 89 22 52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 53 22 89 52</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[21]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 90 23 57</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 57 23 90</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[22]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 20 52 53 89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 53 20 52 89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[23]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 21 90 57</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 21 57 90</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[24]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> integer(0)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[25]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 82 27 58 81 29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 59 29 81 82 58</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[26]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 62 83 31 51 49</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 51 92 62 87 49</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[27]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 58 82 81 29 59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 82 58 25 29 81</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[28]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 30 88 63 17 18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 96 18 63 30 88</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[29]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 59 81 27 82 58</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 25 27 81 58 59</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[30]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 28 96 88 63 17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 96 18 88 63 85</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[31]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 55 83 62 49 51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 87 26 92 49 83</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[32]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 86</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[33]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 16 40 79</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 79 40 16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[34]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  4 14 13  8 46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  4 44 13 46  3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[35]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 73 15 76 80 11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 38 47 42  7 80</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[36]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 70 65 77 72 67</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 67 65 70 77 69</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[37]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 12  6 41 66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 71 66  1 41 12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[38]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 35 76 73 48 47</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 42 48 35 47 76</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[39]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10 45 75</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10 75 45</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[40]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 79 16 33</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 33 79 16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[41]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 37 12 66 71</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 71  1 12  6 66</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[42]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 73 48 11 47  7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 11 38 15 48 73</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[43]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 68 74</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 74 68</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[44]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  8  4 34 46 14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  4  8 46 13  3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[45]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 39 10 75</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[46]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 14  8  3  4 13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  4 44 14  3 13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[47]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 38 73 35 80 42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 48 11 38 76 80</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[48]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 76 15 73 11  7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  7 42 73 35 80</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[49]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 83 31 87 55 51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 55 62 51 92 83</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[50]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 94 91 95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 95 94 91</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[51]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 92 26 83 31 49</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 26 87 55 31 83</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[52]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 20 22 53 89</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[53]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 20 22 52 89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 20 89 52 22</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[54]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 84 60 61 19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 19 61 84 60</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[55]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 92 87 83 51 31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 49 26 83 62 51</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[56]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> integer(0)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[57]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 21 90 23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 90 23 21</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[58]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 29 81 59 25 82</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 27 82 25 29 81</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[59]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 81 58 82 27 25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 25 58 81 82 29</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[60]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 61 54 84 19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 84 61 54 19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[61]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 84 60 19 54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 54 84 19 60</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[62]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 49 31 87 83 55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 92 49 26 55 31</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[63]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 17 28 18 88 96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 17 18 88 96 30</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[64]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 93</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[65]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 67 36 72 70 69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 70 36 69  2 77</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[66]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 41  6  1 71 37</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 37 41  6 12  1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[67]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 36 69 70  2 65</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 36 77 72 69 65</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[68]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 74 43</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[69]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 67 65 70 36 72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 70 65 36 77  2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[70]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 77 69 67 65 36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 65  2 67 77 69</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[71]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 41 12  1 66  6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 41 37 12  6 66</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[72]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 65 69 77 67 36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 36 70 65 67 69</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[73]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 76 38  7 48 15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 35 38  7 42 80</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[74]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 43 68</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 68 43</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[75]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 45 39 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 39 10 45</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[76]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  7 48 11 73 15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 47 80 11 42 73</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[77]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 72 70 67  2 36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 67 70 65  2 72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[78]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> integer(0)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[79]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 16 40 33</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 33 16 40</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[80]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 15 73 35  7 11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 76 15 11 48 73</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[81]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 27 82 25 59 29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 58 25 82 27 29</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[82]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 81 25 27 58 29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 29 59 25 27 58</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[83]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 51 92 49 62 87</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 87 55 62 49 92</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[84]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 60 19 61 54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 19 61 60 54</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[85]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 63 18 28 96 88</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 17 18 96 28 63</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[86]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 32</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[87]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 26 83 62 31 51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 31 49 51 83 26</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[88]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 96 85 28 17 30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 30 17 18 28 63</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[89]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 20 22 52 53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 22 53 52 20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[90]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 21 23 57</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 57 21 23</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[91]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 50 95 94</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 95 94 50</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[92]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 31 83 62 87 49</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 83 55 31 49 26</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[93]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 64</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[94]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 95 91 50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 91 95 50</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[95]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 50 91 94</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[96]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 18 17 28 88 30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 18 30 17 85 88</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># using nearest neighbour search (unlike RANN::nn2, this does not </span></span></span>
 <span class="r-in"><span><span class="co"># return the ID of the element itself as neighbour)</span></span></span>
@@ -522,7 +521,7 @@ exchange partners from the same category as itself); <code>methode
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 11 35  4 92 93</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># compare with RANN directly:</span></span></span>
-<span class="r-in"><span><span class="fu">RANN</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RANN/man/nn2.html" class="external-link">nn2</a></span><span class="op">(</span><span class="va">schaper2019</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, k <span class="op">=</span> <span class="fl">6</span><span class="op">)</span><span class="op">$</span><span class="va">nn.idx</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="co"># note k = 6</span></span></span>
+<span class="r-in"><span><span class="fu">RANN</span><span class="fu">::</span><span class="fu"><a href="https://jefferislab.github.io/RANN/reference/nn2.html" class="external-link">nn2</a></span><span class="op">(</span><span class="va">schaper2019</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, k <span class="op">=</span> <span class="fl">6</span><span class="op">)</span><span class="op">$</span><span class="va">nn.idx</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="co"># note k = 6</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      [,1] [,2] [,3] [,4] [,5] [,6]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    1   65   74   43   83   21</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    2   18   10   90   82   42</span>
@@ -542,15 +541,15 @@ exchange partners from the same category as itself); <code>methode
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 

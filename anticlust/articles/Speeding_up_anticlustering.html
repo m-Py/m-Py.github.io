@@ -12,14 +12,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Speeding up anticlustering">
-<meta property="og:description" content="anticlust">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -33,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.7</span>
       </span>
     </div>
 
@@ -45,7 +44,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -74,7 +73,7 @@
 <li>
   <a href="https://github.com/m-Py/anticlust/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -85,7 +84,7 @@
 </div>
 <!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
@@ -135,20 +134,32 @@ swapping each input element with a element that is currently assigned to
 a different cluster. No swap is conducted if an element cannot be
 swapped in such a way that the anticlustering objective is improved. The
 process stops after all possible exchanges have been evaluated for each
-element. When the number of input elements is <span class="math inline">\(N\)</span>, this process leads to approximately
-<span class="math inline">\(N^2\)</span>—or <span class="math inline">\(O(N^2)\)</span>—attempted exchanges, because each
-element is swapped with all elements that are currently assigned to a
-different cluster. To give a concrete example, when having <span class="math inline">\(N = 100\)</span> data points and <span class="math inline">\(K = 4\)</span> equal-sized groups, 75 swaps are
-evaluated for each element and the best swap is realized. This leads to
-100 * 75 = 7500 exchanges that have to be conducted during the entire
-exchange algorithm, and for each exchange the objective function has to
-be re-evaluated. This is less exchanges than <span class="math inline">\(N^2 = 100^2 = 10000\)</span> because we skip
-exchanges with the 25 elements that are currently in the same cluster
-(including itself). However, according to the <a href="https://en.wikipedia.org/wiki/Big_O_notation" class="external-link">Big O notation</a>,
-we would still classify the number of exchanges as <span class="math inline">\(O(N^2)\)</span>, independent of the number of
-groups. Thus, the total theoretical run time of the exchange method is
-<span class="math inline">\(O(N^2)\)</span> multiplied with the effort
-needed to compute an anticlustering objective.</p>
+element. When the number of input elements is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>,
+this process leads to approximately
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>N</mi><mn>2</mn></msup><annotation encoding="application/x-tex">N^2</annotation></semantics></math>—or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>N</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(N^2)</annotation></semantics></math>—attempted
+exchanges, because each element is swapped with all elements that are
+currently assigned to a different cluster. To give a concrete example,
+when having
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">N = 100</annotation></semantics></math>
+data points and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">K = 4</annotation></semantics></math>
+equal-sized groups, 75 swaps are evaluated for each element and the best
+swap is realized. This leads to 100 * 75 = 7500 exchanges that have to
+be conducted during the entire exchange algorithm, and for each exchange
+the objective function has to be re-evaluated. This is less exchanges
+than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>N</mi><mn>2</mn></msup><mo>=</mo><msup><mn>100</mn><mn>2</mn></msup><mo>=</mo><mn>10000</mn></mrow><annotation encoding="application/x-tex">N^2 = 100^2 = 10000</annotation></semantics></math>
+because we skip exchanges with the 25 elements that are currently in the
+same cluster (including itself). However, according to the <a href="https://en.wikipedia.org/wiki/Big_O_notation" class="external-link">Big O notation</a>,
+we would still classify the number of exchanges as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>N</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(N^2)</annotation></semantics></math>,
+independent of the number of groups. Thus, the total theoretical run
+time of the exchange method is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>N</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(N^2)</annotation></semantics></math>
+multiplied with the effort needed to compute an anticlustering
+objective.</p>
 <p>The results of the exchange method can be improved by not stopping
 after a single iteration through the data set; instead we may repeat the
 process until no single exchange is able to further improve the
@@ -169,7 +180,7 @@ time, using the iris data set, which contains 150 elements.</p>
 <span><span class="co">#&gt;    0.01    0.00    0.01</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"local-maximum"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.045   0.000   0.045</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.043   0.000   0.043</span></span></code></pre></div>
 <p>Depending on how many iterations are needed, the default exchange
 method can be much faster than the local maximum method. Generally I
 would recommend to use <code>method = "local-maximum"</code> for better
@@ -185,13 +196,13 @@ repetitions:</p>
 <span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"exchange"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.009   0.000   0.010</span></span>
+<span><span class="co">#&gt;   0.009   0.000   0.009</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"local-maximum"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.030   0.000   0.029</span></span>
+<span><span class="co">#&gt;   0.030   0.000   0.031</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"local-maximum"</span>, repetitions <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.278   0.000   0.278</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.284   0.000   0.284</span></span></code></pre></div>
 <p>In this case, sticking with the default leads to run times that are
 much much faster. Still, if your data set is not too large, using
 several repetitions may be useful (but you can judge yourself via the
@@ -205,14 +216,16 @@ data sets: anticlustering generally becomes easier with more data.</p>
 is possible to use fewer exchange partners during the anticlustering
 process. By default, the exchange method evaluates each possible
 exchange with all elements that are currently assigned to a different
-cluster, leading to <span class="math inline">\(O(N^2)\)</span>
+cluster, leading to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>N</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(N^2)</annotation></semantics></math>
 exchanges. If we only use a fixed number of exchange partners per
-element, we can reduce the number of exchanges to <span class="math inline">\(O(N)\)</span>, corresponding to a gain of an order
-of magnitude in terms of run time. Using fewer exchange partners for
-each element may decrease the quality of the results, and is generally
-only recommended if speed is an issue, e.g. for large data sets. But the
-run time will be considerably faster. We will consider three
-possibilities of using fewer exchange partners in
+element, we can reduce the number of exchanges to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(N)</annotation></semantics></math>,
+corresponding to a gain of an order of magnitude in terms of run time.
+Using fewer exchange partners for each element may decrease the quality
+of the results, and is generally only recommended if speed is an issue,
+e.g. for large data sets. But the run time will be considerably faster.
+We will consider three possibilities of using fewer exchange partners in
 <code>anticlust</code>: <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>,
 preclustering, and an additional secret hack.</p>
 <div class="section level3">
@@ -236,7 +249,7 @@ forward:</p>
 <span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">groups1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fast_anticlustering.html">fast_anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>  <span class="co"># default uses all exchange partners</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span> </span>
-<span><span class="co">#&gt; Time difference of 2.349087 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 2.228492 secs</span></span></code></pre></div>
 <p>The default behaviour in <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> is to use
 all exchange partners. Using fewer exchange partners can lead to much
 faster run time:</p>
@@ -244,7 +257,7 @@ faster run time:</p>
 <code class="sourceCode R"><span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">groups2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fast_anticlustering.html">fast_anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="fl">2</span>, k_neighbours <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span> </span>
-<span><span class="co">#&gt; Time difference of 0.2238996 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.2135947 secs</span></span></code></pre></div>
 <p>Was there a cost to this speedup?</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/variance_objective.html">variance_objective</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">groups1</span><span class="op">)</span></span>
@@ -295,10 +308,11 @@ preclustering, the exchange partners form a clique, whereas with
 <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>, any (number of) connections are
 possible.</p>
 <p>Note that the preclustering algorithm, which has to be performed
-prior to the anticlustering algorithm, has <span class="math inline">\(O(N^2)\)</span> run time, which is slower than the
-nearest neighbour search in <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>. It
-nevertheless leads to strongly improved run times for larger data
-sets:</p>
+prior to the anticlustering algorithm, has
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>N</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(N^2)</annotation></semantics></math>
+run time, which is slower than the nearest neighbour search in
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>. It nevertheless leads to strongly
+improved run times for larger data sets:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
@@ -306,10 +320,10 @@ sets:</p>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">N</span><span class="op">*</span><span class="va">M</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">M</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   4.705   0.000   4.705</span></span>
+<span><span class="co">#&gt;   4.608   0.000   4.609</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span>, preclustering <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.095   0.000   0.094</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.098   0.000   0.098</span></span></code></pre></div>
 <p>Still, the preclustering approach is probably not necessarily
 recommended to speed up anticlustering for very large data sets; it is
 useful if you are interested in enforcing the preclustering restrictions
@@ -376,10 +390,10 @@ defined:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">initial_clusters</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.010   0.000   0.009</span></span>
+<span><span class="co">#&gt;   0.010   0.000   0.011</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, categories <span class="op">=</span> <span class="va">exchange_partners</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.004   0.000   0.003</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.004   0.000   0.004</span></span></code></pre></div>
 <p>Well, there is not a lot going on here with this very small data set
 (N = 150), so let’s do this for a larger data set with 1000 data
 points.</p>
@@ -394,10 +408,10 @@ points.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   3.193   0.000   3.192</span></span>
+<span><span class="co">#&gt;   3.193   0.000   3.193</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, categories <span class="op">=</span> <span class="va">exchange_partners</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.047   0.000   0.047</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.047   0.000   0.046</span></span></code></pre></div>
 <p>The speedup is enormous!</p>
 </div>
 <div class="section level3">
@@ -515,39 +529,55 @@ the objective is therefore the major contributor to overall run time. In
 objectives can be recomputed faster when only two items have swapped
 between clusters and the objective value prior to the exchange is known.
 For example, computing the diversity objective “from scratch” is in
-<span class="math inline">\(O(N^2)\)</span>. When the cluster
-affiliation of only two items differs between swaps, it is however not
-necessary to spend the entire <span class="math inline">\(O(N^2)\)</span> time during each exchange.
-Instead, by “cleverly” updating the objective before and after the swap,
-the computation reduces to <span class="math inline">\(O(N)\)</span>,
-leading to about <span class="math inline">\(O(N^3)\)</span> for the
-entire exchange method (instead of <span class="math inline">\(O(N^4)\)</span>—this is a huge difference). When
-using a fixed number of exchange partners as described in the previous
-section, we are left with a run time of <span class="math inline">\(O(N^2)\)</span> <em>in total</em>. However, note
-that for very large data sets, using the diversity objective may not be
-feasible at all. The reason for this is that a quadratic matrix of
-between-item distances has to be computed and stored in memory. It is my
-experience that on a personal computer this becomes difficult for about
-&gt; 20000 elements (where the distance matrix has 20000^2 = 400000000
-elements).</p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>N</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(N^2)</annotation></semantics></math>.
+When the cluster affiliation of only two items differs between swaps, it
+is however not necessary to spend the entire
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>N</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(N^2)</annotation></semantics></math>
+time during each exchange. Instead, by “cleverly” updating the objective
+before and after the swap, the computation reduces to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(N)</annotation></semantics></math>,
+leading to about
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>N</mi><mn>3</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(N^3)</annotation></semantics></math>
+for the entire exchange method (instead of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>N</mi><mn>4</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(N^4)</annotation></semantics></math>—this
+is a huge difference). When using a fixed number of exchange partners as
+described in the previous section, we are left with a run time of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>N</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(N^2)</annotation></semantics></math><em>in total</em>. However, note that for very large data sets, using
+the diversity objective may not be feasible at all. The reason for this
+is that a quadratic matrix of between-item distances has to be computed
+and stored in memory. It is my experience that on a personal computer
+this becomes difficult for about &gt; 20000 elements (where the distance
+matrix has 20000^2 = 400000000 elements).</p>
 <p>Computing the standard k-means objective (which is done when using
-<code>anticlustering(..., objective = "variance"</code>) is in <span class="math inline">\(O(M \cdot N)\)</span>, where <span class="math inline">\(M\)</span> is the number of variables. The
-function <code><a href="../reference/anticlustering.html">anticlustering()</a></code> uses some optimizations during
-the exchange process to prevent the entire re-computation of the cluster
-centroids for each exchange, which otherwise consumes most of the run
-time. However, this does not change the theoretical <span class="math inline">\(O(M \cdot N)\)</span> run time of the computation.
-The function <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> uses a different – but
-equivalent – formulation of the k-means objective where the
-re-computation of the objective only depends on <span class="math inline">\(M\)</span>, but no longer on <span class="math inline">\(N\)</span>.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> This reduces the run time by an additional
-order of magnitude and makes k-means anticlustering applicable to very
-large data sets (even in the millions).</p>
+<code>anticlustering(..., objective = "variance"</code>) is in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mo>⋅</mo><mi>N</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(M \cdot N)</annotation></semantics></math>,
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
+is the number of variables. The function <code><a href="../reference/anticlustering.html">anticlustering()</a></code>
+uses some optimizations during the exchange process to prevent the
+entire re-computation of the cluster centroids for each exchange, which
+otherwise consumes most of the run time. However, this does not change
+the theoretical
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mo>⋅</mo><mi>N</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(M \cdot N)</annotation></semantics></math>
+run time of the computation. The function
+<code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> uses a different – but equivalent –
+formulation of the k-means objective where the re-computation of the
+objective only depends on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>,
+but no longer on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> This
+reduces the run time by an additional order of magnitude and makes
+k-means anticlustering applicable to very large data sets (even in the
+millions).</p>
 <p>Because the k-means objective has some disadvantages for
 anticlustering (see Papenberg, 2024),<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> you may consider using the k-plus
 objective, which extends—and effectively re-uses—the k-means criterion.
 It can also be applied to very large data sets using
 <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code>. For example, the following
-code—using <span class="math inline">\(N = 100000\)</span>, <span class="math inline">\(K = 5\)</span>, 3 features and 10 exchange
-partners per element—runs quite quickly:</p>
+code—using
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>100000</mn></mrow><annotation encoding="application/x-tex">N = 100000</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">K = 5</annotation></semantics></math>,
+3 features and 10 exchange partners per element—runs quite quickly:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">100000</span></span>
 <span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
@@ -561,7 +591,7 @@ partners per element—runs quite quickly:</p>
 <span>  exchange_partners <span class="op">=</span> <span class="fu"><a href="../reference/generate_exchange_partners.html">generate_exchange_partners</a></span><span class="op">(</span><span class="fl">10</span>, N <span class="op">=</span> <span class="va">N</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span></span>
-<span><span class="co">#&gt; Time difference of 4.221437 secs</span></span>
+<span><span class="co">#&gt; Time difference of 4.400916 secs</span></span>
 <span><span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">groups</span><span class="op">)</span> <span class="co"># means and standard deviations are similar</span></span>
 <span><span class="co">#&gt;   [,1]          [,2]          [,3]         </span></span>
 <span><span class="co">#&gt; 1 "0.00 (1.00)" "0.01 (1.00)" "0.00 (1.00)"</span></span>
@@ -602,11 +632,15 @@ of the Operational Research Society, 49</em>(6), 635–646. <a href="https://doi
 objective as implemented in <code>anticlust</code> effectively re-uses
 the original k-means criterion and just extends the input data
 internally. So, k-plus anticlustering will be somewhat slower than
-k-means anticlustering because the number of variables <span class="math inline">\(M\)</span> does contribute to the overall run
-time; however, the run time is usually dominated by <span class="math inline">\(N\)</span>, the number of elements. The dispersion
-objective has a different goal than the other objectives as it does not
-strive for between-group similarity, so it cannot be used as an
-alternative to the other objectives.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+k-means anticlustering because the number of variables
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
+does contribute to the overall run time; however, the run time is
+usually dominated by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>,
+the number of elements. The dispersion objective has a different goal
+than the other objectives as it does not strive for between-group
+similarity, so it cannot be used as an alternative to the other
+objectives.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p><code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> minimizes the
 weighted sum of squared distances between cluster centroids and the
 overall data centroid; the distances between all individual data points
@@ -621,9 +655,7 @@ any distribution moments between groups.<a href="#fnref3" class="footnote-back">
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
+      </div>
 
 </div>
 
@@ -636,16 +668,16 @@ any distribution moments between groups.<a href="#fnref3" class="footnote-back">
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer>
 </div>
 
-  
 
 
-  
+
+
 
   </body>
 </html>

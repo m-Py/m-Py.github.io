@@ -1,10 +1,9 @@
 pandoc: 3.1.1
-pkgdown: 2.0.9
+pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   Best_practices: Best_practices.html
   Categorical_vars: Categorical_vars.html
   Speeding_up_anticlustering: Speeding_up_anticlustering.html
   stimulus-selection: stimulus-selection.html
-last_built: 2024-07-15T18:45Z
-
+last_built: 2024-10-02T07:43Z
