@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.9-1</span>
       </span>
     </div>
 
@@ -94,17 +94,26 @@ the combination / interaction of the categories (defaults to <code>FALSE</code>)
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A matrix representing the categorical variables in binary form ("dummy coding")</p>
+    <p>A matrix encoding the categorical variable(s) in binary form.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>The conversion of categorical variable to binary variables is done via
-<code><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></code>. This function can be used to include
-categorical variables as part of the optimization criterion in k-means /
-k-plus anticlustering, rather than including them as hard constraints as
-done in <code><a href="anticlustering.html">anticlustering</a></code>. This can be useful when there are several
+    <p>The conversion of categorical variables to binary variables is done via
+<code><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix</a></code>. Since version 0.8.9, each category
+of a categorical variable is coded by a separate variable. So this is not
+'dummy' coding, which is often used to encode predictors in statistical
+analysis. Dummy coding uses a reference category that has only zeros for
+each variable, while all other categories consist of a 1 and otherwise zeros.
+This implies that there is a different distance to the reference category
+than among the other categories, which is unwarranted in anticlustering.</p>
+<p>This function can be used to include categorical variables as part of the
+optimization criterion in anticlustering, rather than including them as hard constraints as done when using the
+argument <code>categories</code> in <code><a href="anticlustering.html">anticlustering</a></code> (or <code><a href="fast_anticlustering.html">fast_anticlustering</a></code>).
+This way, categorical variables are treated as numeric variables,
+which can be useful when there are several
 categorical variables or when the group sizes are unequal (or both).
-See examples.</p>
+See examples. Please see the vignette 'Using categorical variables with anticlustering'
+for more information on this approach.</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -120,7 +129,17 @@ Statistical Psychology, 77(1), 80–102. https://doi.org/10.1111/bmsp.12315</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Use Schaper data set for example</span></span></span>
+<span class="r-in"><span><span class="co"># How to encode a categorical variable with three levels:</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] setosa     versicolor virginica </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Levels: setosa versicolor virginica</span>
+<span class="r-in"><span><span class="fu">categories_to_binary</span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">51</span>, <span class="fl">101</span><span class="op">)</span>, <span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     categoriessetosa categoriesversicolor categoriesvirginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                  1                    0                   0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51                 0                    1                   0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 101                0                    0                   1</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use Schaper data set for anticlustering example</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">schaper2019</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">features</span> <span class="op">&lt;-</span> <span class="va">schaper2019</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">3</span></span></span>
@@ -129,7 +148,7 @@ Statistical Psychology, 77(1), 80–102. https://doi.org/10.1111/bmsp.12315</p>
 <span class="r-in"><span><span class="co"># - Generate data input for k-means anticlustering -</span></span></span>
 <span class="r-in"><span><span class="co"># We conduct k-plus anticlustering by first generating k-plus variables, </span></span></span>
 <span class="r-in"><span><span class="co"># and also include the categorical variable as "numeric" input for the </span></span></span>
-<span class="r-in"><span><span class="co"># k-means optimization (rather than as input for the argument `categories`)</span></span></span>
+<span class="r-in"><span><span class="co"># k-means optimization (rather than as input for the argument \code{categories})</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">input_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="kplus_moment_variables.html">kplus_moment_variables</a></span><span class="op">(</span><span class="va">features</span>, T <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, </span></span>
@@ -145,9 +164,9 @@ Statistical Psychology, 77(1), 80–102. https://doi.org/10.1111/bmsp.12315</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">features</span>, <span class="va">kplus_groups</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent syllables     frequency     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 "4.49 (0.25)"     "1.10 (0.07)"       "3.41 (0.95)" "18.31 (2.40)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 "4.49 (0.25)"     "1.10 (0.07)"       "3.44 (0.91)" "18.31 (2.42)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 "4.49 (0.25)"     "1.10 (0.07)"       "3.41 (0.95)" "18.31 (2.42)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 "4.49 (0.25)"     "1.10 (0.07)"       "3.41 (0.95)" "18.28 (2.43)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 "4.49 (0.25)"     "1.10 (0.07)"       "3.44 (0.91)" "18.31 (2.40)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 "4.49 (0.25)"     "1.10 (0.07)"       "3.41 (0.95)" "18.34 (2.40)"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">kplus_groups</span>, <span class="va">schaper2019</span><span class="op">$</span><span class="va">room</span><span class="op">)</span> <span class="co"># argument categories was not used!</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> kplus_groups bathroom kitchen</span>

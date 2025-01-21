@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.9-1</span>
       </span>
     </div>
 
@@ -222,13 +222,13 @@ of <code>1</code>s in that variable).</p>
 <code class="sourceCode R"><span><span class="va">binary_categories</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/categories_to_binary.html">categories_to_binary</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"species"</span>, <span class="st">"sex"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co"># see ?categories_to_binary</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">binary_categories</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   speciesChinstrap speciesGentoo sexmale</span></span>
-<span><span class="co">#&gt; 1                0             0       1</span></span>
-<span><span class="co">#&gt; 2                0             0       0</span></span>
-<span><span class="co">#&gt; 3                0             0       0</span></span>
-<span><span class="co">#&gt; 4                0             0       0</span></span>
-<span><span class="co">#&gt; 5                0             0       1</span></span>
-<span><span class="co">#&gt; 6                0             0       0</span></span></code></pre></div>
+<span><span class="co">#&gt;   speciesAdelie speciesChinstrap speciesGentoo sexfemale sexmale</span></span>
+<span><span class="co">#&gt; 1             1                0             0         0       1</span></span>
+<span><span class="co">#&gt; 2             1                0             0         1       0</span></span>
+<span><span class="co">#&gt; 3             1                0             0         1       0</span></span>
+<span><span class="co">#&gt; 4             1                0             0         1       0</span></span>
+<span><span class="co">#&gt; 5             1                0             0         0       1</span></span>
+<span><span class="co">#&gt; 6             1                0             0         1       0</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span></span>
 <span>  <span class="va">binary_categories</span>,</span>
@@ -357,9 +357,9 @@ optimization process:<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup
 <span><span class="co">#&gt;      3     48        23     40</span></span>
 <span><span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">numeric_vars</span>, <span class="va">final_groups</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   bill_length_mm bill_depth_mm  flipper_length_mm body_mass_g       </span></span>
-<span><span class="co">#&gt; 1 "44.00 (5.46)" "17.17 (1.97)" "200.92 (14.05)"  "4203.38 (810.54)"</span></span>
-<span><span class="co">#&gt; 2 "44.00 (5.47)" "17.16 (1.96)" "201.05 (14.07)"  "4209.23 (812.49)"</span></span>
-<span><span class="co">#&gt; 3 "43.98 (5.52)" "17.17 (1.99)" "200.94 (14.05)"  "4208.56 (799.86)"</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 "43.99 (5.58)" "17.17 (1.96)" "201.00 (14.09)"  "4206.31 (811.03)"</span></span>
+<span><span class="co">#&gt; 2 "43.99 (5.38)" "17.16 (1.98)" "201.00 (14.04)"  "4207.66 (803.24)"</span></span>
+<span><span class="co">#&gt; 3 "44.00 (5.49)" "17.17 (1.98)" "200.90 (14.05)"  "4207.21 (808.66)"</span></span></code></pre></div>
 <p>The results are convincing, both with regard to the numeric variables
 and the categorical variables.</p>
 </div>
@@ -398,9 +398,9 @@ not use the <code>categories</code> argument here!</p>
 <span><span class="co">#&gt;      3     48        23     40</span></span>
 <span><span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">numeric_vars</span>, <span class="va">final_groups</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   bill_length_mm bill_depth_mm  flipper_length_mm body_mass_g       </span></span>
-<span><span class="co">#&gt; 1 "43.99 (5.54)" "17.17 (2.05)" "200.97 (14.04)"  "4207.21 (815.03)"</span></span>
-<span><span class="co">#&gt; 2 "44.00 (5.64)" "17.16 (2.06)" "200.96 (13.36)"  "4207.21 (769.92)"</span></span>
-<span><span class="co">#&gt; 3 "43.99 (5.28)" "17.16 (1.81)" "200.96 (14.73)"  "4206.76 (836.58)"</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 "44.00 (5.48)" "17.17 (1.96)" "200.96 (13.70)"  "4206.98 (828.22)"</span></span>
+<span><span class="co">#&gt; 2 "43.99 (5.54)" "17.16 (1.94)" "200.96 (14.58)"  "4206.98 (803.28)"</span></span>
+<span><span class="co">#&gt; 3 "43.99 (5.43)" "17.16 (2.02)" "200.97 (13.88)"  "4207.21 (791.01)"</span></span></code></pre></div>
 <p>The following code extends the simultaneous optimization approach
 towards k-plus anticlustering, which ensures that standard deviations as
 well as means are similar between groups (and not only the means, which
@@ -428,9 +428,9 @@ is achieved via standard k-means anticlustering):</p>
 <span><span class="co">#&gt;      3     48        23     40</span></span>
 <span><span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">numeric_vars</span>, <span class="va">final_groups</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   bill_length_mm bill_depth_mm  flipper_length_mm body_mass_g       </span></span>
-<span><span class="co">#&gt; 1 "43.99 (5.49)" "17.17 (1.98)" "200.95 (14.06)"  "4207.21 (807.83)"</span></span>
-<span><span class="co">#&gt; 2 "43.99 (5.48)" "17.17 (1.97)" "200.98 (14.04)"  "4206.76 (808.06)"</span></span>
-<span><span class="co">#&gt; 3 "44.00 (5.48)" "17.16 (1.97)" "200.96 (14.08)"  "4207.21 (807.06)"</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 "44.00 (5.48)" "17.16 (1.98)" "200.97 (14.05)"  "4207.88 (807.64)"</span></span>
+<span><span class="co">#&gt; 2 "43.99 (5.48)" "17.17 (1.98)" "200.97 (14.07)"  "4207.43 (807.94)"</span></span>
+<span><span class="co">#&gt; 3 "43.99 (5.49)" "17.16 (1.97)" "200.95 (14.06)"  "4205.86 (807.37)"</span></span></code></pre></div>
 <p>While we use <code>objective = "variance"</code>—indicating that the
 k-means objective is used—this code actually performs k-plus
 anticlustering because the first argument takes as input the augmented
@@ -444,8 +444,8 @@ with categorical variables and see which one works best for you!</p>
 <div class="footnotes footnotes-end-of-document">
 <hr>
 <ol>
-<li id="fn1"><p>Internally, <code><a href="../reference/categories_to_binary.html">categories_to_binary()</a></code> is just
-a thin wrapper around the base <code>R</code> function
+<li id="fn1"><p>Internally, <code><a href="../reference/categories_to_binary.html">categories_to_binary()</a></code> is
+wrapper around the base <code>R</code> function
 <code><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix()</a></code>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p>Only elements that have the same value in
 <code>categories</code> are exchanged between clusters throughout the

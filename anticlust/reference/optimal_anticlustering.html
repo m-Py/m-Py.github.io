@@ -18,7 +18,7 @@ that are available in anticlust."><!-- mathjax --><script src="https://cdnjs.clo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.9-1</span>
       </span>
     </div>
 
@@ -171,15 +171,15 @@ objective in the given time, it will throw an error.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># These calls are equivalent for k-means anticlustering:</span></span></span>
 <span class="r-in"><span><span class="fu">optimal_anticlustering</span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="fl">2</span>, objective <span class="op">=</span> <span class="st">"variance"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 2 1 2 2 2 1 2 1 2 1 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 1 2 2 1 1 2 1 2 1 2 2</span>
 <span class="r-in"><span><span class="fu">optimal_anticlustering</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>, K <span class="op">=</span> <span class="fl">2</span>, objective <span class="op">=</span> <span class="st">"diversity"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 2 1 2 2 2 1 2 1 2 1 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 1 2 2 1 1 2 1 2 1 2 2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># These calls are equivalent for k-plus anticlustering:</span></span></span>
 <span class="r-in"><span><span class="fu">optimal_anticlustering</span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="fl">2</span>, objective <span class="op">=</span> <span class="st">"kplus"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 2 2 1 2 1 2 2 1 1 1 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 2 2 2 2 1 2 1 2 1 1 1</span>
 <span class="r-in"><span><span class="fu">optimal_anticlustering</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="fu"><a href="kplus_moment_variables.html">kplus_moment_variables</a></span><span class="op">(</span><span class="va">data</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>, K <span class="op">=</span> <span class="fl">2</span>, objective <span class="op">=</span> <span class="st">"diversity"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 2 2 1 2 1 2 2 1 1 1 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 2 2 2 2 1 2 1 2 1 1 1</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

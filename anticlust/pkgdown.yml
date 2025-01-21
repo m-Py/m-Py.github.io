@@ -1,4 +1,4 @@
-pandoc: 3.1.1
+pandoc: '3.2'
 pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
@@ -6,4 +6,4 @@ articles:
   Categorical_vars: Categorical_vars.html
   Speeding_up_anticlustering: Speeding_up_anticlustering.html
   stimulus-selection: stimulus-selection.html
-last_built: 2024-10-02T07:43Z
+last_built: 2025-01-21T10:45Z

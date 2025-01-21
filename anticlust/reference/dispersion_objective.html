@@ -18,7 +18,7 @@ minimum distance between two elements within the same cluster)."><!-- mathjax --
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.9-1</span>
       </span>
     </div>
 
@@ -125,7 +125,7 @@ Psychology, 73, 275-396. https://doi.org/10.1111/bmsp.12186</p>
 <span class="r-in"><span><span class="va">random_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">N</span> <span class="op">*</span> <span class="va">M</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">M</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">random_clusters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep_len</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">K</span>, <span class="va">N</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">dispersion_objective</span><span class="op">(</span><span class="va">random_data</span>, <span class="va">random_clusters</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.119121</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1107932</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Maximize the dispersion </span></span></span>
 <span class="r-in"><span><span class="va">optimized_clusters</span> <span class="op">&lt;-</span> <span class="fu"><a href="anticlustering.html">anticlustering</a></span><span class="op">(</span></span></span>
@@ -134,7 +134,7 @@ Psychology, 73, 275-396. https://doi.org/10.1111/bmsp.12186</p>
 <span class="r-in"><span>  objective <span class="op">=</span> <span class="va">dispersion_objective</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">dispersion_objective</span><span class="op">(</span><span class="va">random_data</span>, <span class="va">optimized_clusters</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5631864</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.405511</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

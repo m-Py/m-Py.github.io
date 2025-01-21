@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.9-1</span>
       </span>
     </div>
 
@@ -180,7 +180,7 @@ time, using the iris data set, which contains 150 elements.</p>
 <span><span class="co">#&gt;    0.01    0.00    0.01</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"local-maximum"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.043   0.000   0.043</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.044   0.000   0.044</span></span></code></pre></div>
 <p>Depending on how many iterations are needed, the default exchange
 method can be much faster than the local maximum method. Generally I
 would recommend to use <code>method = "local-maximum"</code> for better
@@ -199,10 +199,10 @@ repetitions:</p>
 <span><span class="co">#&gt;   0.009   0.000   0.009</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"local-maximum"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.030   0.000   0.031</span></span>
+<span><span class="co">#&gt;   0.029   0.000   0.029</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">K</span>, method <span class="op">=</span> <span class="st">"local-maximum"</span>, repetitions <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.284   0.000   0.284</span></span></code></pre></div>
+<span><span class="co">#&gt;    0.25    0.00    0.25</span></span></code></pre></div>
 <p>In this case, sticking with the default leads to run times that are
 much much faster. Still, if your data set is not too large, using
 several repetitions may be useful (but you can judge yourself via the
@@ -249,7 +249,7 @@ forward:</p>
 <span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">groups1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fast_anticlustering.html">fast_anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>  <span class="co"># default uses all exchange partners</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span> </span>
-<span><span class="co">#&gt; Time difference of 2.228492 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 2.182382 secs</span></span></code></pre></div>
 <p>The default behaviour in <code><a href="../reference/fast_anticlustering.html">fast_anticlustering()</a></code> is to use
 all exchange partners. Using fewer exchange partners can lead to much
 faster run time:</p>
@@ -257,7 +257,7 @@ faster run time:</p>
 <code class="sourceCode R"><span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">groups2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fast_anticlustering.html">fast_anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="fl">2</span>, k_neighbours <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span> </span>
-<span><span class="co">#&gt; Time difference of 0.2135947 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 0.2124186 secs</span></span></code></pre></div>
 <p>Was there a cost to this speedup?</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/variance_objective.html">variance_objective</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">groups1</span><span class="op">)</span></span>
@@ -320,10 +320,10 @@ improved run times for larger data sets:</p>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">N</span><span class="op">*</span><span class="va">M</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">M</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   4.608   0.000   4.609</span></span>
+<span><span class="co">#&gt;   4.593   0.000   4.593</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">K</span>, preclustering <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.098   0.000   0.098</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.091   0.000   0.092</span></span></code></pre></div>
 <p>Still, the preclustering approach is probably not necessarily
 recommended to speed up anticlustering for very large data sets; it is
 useful if you are interested in enforcing the preclustering restrictions
@@ -390,10 +390,10 @@ defined:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">initial_clusters</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.010   0.000   0.011</span></span>
+<span><span class="co">#&gt;   0.009   0.000   0.009</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, categories <span class="op">=</span> <span class="va">exchange_partners</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.004   0.000   0.004</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.003   0.000   0.004</span></span></code></pre></div>
 <p>Well, there is not a lot going on here with this very small data set
 (N = 150), so let’s do this for a larger data set with 1000 data
 points.</p>
@@ -408,10 +408,10 @@ points.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   3.193   0.000   3.193</span></span>
+<span><span class="co">#&gt;   3.121   0.000   3.121</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span><span class="va">data</span>, K <span class="op">=</span> <span class="va">initial_clusters</span>, categories <span class="op">=</span> <span class="va">exchange_partners</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.047   0.000   0.046</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.046   0.000   0.046</span></span></code></pre></div>
 <p>The speedup is enormous!</p>
 </div>
 <div class="section level3">
@@ -591,7 +591,7 @@ code—using
 <span>  exchange_partners <span class="op">=</span> <span class="fu"><a href="../reference/generate_exchange_partners.html">generate_exchange_partners</a></span><span class="op">(</span><span class="fl">10</span>, N <span class="op">=</span> <span class="va">N</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span></span>
-<span><span class="co">#&gt; Time difference of 4.400916 secs</span></span>
+<span><span class="co">#&gt; Time difference of 4.254434 secs</span></span>
 <span><span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">groups</span><span class="op">)</span> <span class="co"># means and standard deviations are similar</span></span>
 <span><span class="co">#&gt;   [,1]          [,2]          [,3]         </span></span>
 <span><span class="co">#&gt; 1 "0.00 (1.00)" "0.01 (1.00)" "0.00 (1.00)"</span></span>

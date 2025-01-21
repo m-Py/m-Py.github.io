@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.9-1</span>
       </span>
     </div>
 
@@ -231,41 +231,54 @@ problem. Omega, 41(4), 721–730. https://doi.org/10.1016/j.omega.2012.09.005</p
 <span class="r-in"><span><span class="va">opt</span> <span class="op">&lt;-</span> <span class="fu">optimal_dispersion</span><span class="op">(</span><span class="va">distances</span>, K <span class="op">=</span> <span class="va">K</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">opt</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dispersion</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.448638</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.646841</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $groups</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 2 2 3 3 1 1 1 1 2 3 3 1 1 3 2 1 3 1 3 2 3 2 3 2 3 2 1 1 2 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 3 3 3 2 1 1 2 1 3 3 3 3 2 1 2 2 3 2 2 1 2 2 3 2 1 1 3 1 1 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $groups_fixated</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  2  2 NA NA  1  1  1  1  2 NA NA  1  1  3  2  1 NA  1  3 NA NA  2 NA  2  3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [26]  2  1  1  2 NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  3  3 NA  1  1  2  1 NA NA  3  3  2  1  2  2 NA  2  2  1  2 NA  3 NA  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [26]  1  3  1  1  1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       [,1] [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]   13   19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]    5   25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]   19   22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]    1    5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]   13   24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]   15   18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,]   13   26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]    1   25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]    8   14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]   19   26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11,]    9   27</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [12,]    2   14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13,]   16   22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [14,]    6   14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15,]   12   26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16,]   18   26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [17,]   13   22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [18,]   26   28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19,]    7   29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]   20   23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]   11   19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]    8   11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]    5   13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]    2    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]   12   29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,]    6   18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]    5   18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]    3   26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]    2    8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11,]    3   15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [12,]    5   19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13,]   18   27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [14,]    5   27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15,]    5   16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16,]    7   25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [17,]    2   18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [18,]   14   16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19,]   21   28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [20,]   15   26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21,]   16   27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [22,]    5   11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [23,]    6   15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [24,]    8   19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25,]   23   26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [26,]   21   23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [27,]   11   29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [28,]   19   29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [29,]   13   27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [30,]   19   23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31,]   23   30</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dispersions_considered</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.7562317 0.8188051 0.8932547 0.9000676 0.9625287 0.9848395 0.9972598</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] 1.0666849 1.0879575 1.1949480 1.1966636 1.2927882 1.2994952 1.3275895</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15] 1.3311682 1.3464776 1.3575125 1.3695842 1.4470740 1.4486377</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1.028233 1.075159 1.144307 1.159567 1.182799 1.226687 1.260399 1.338457</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] 1.349471 1.353310 1.367298 1.394381 1.399823 1.404871 1.410823 1.436337</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [17] 1.466566 1.504632 1.519661 1.522956 1.532941 1.568069 1.572953 1.577198</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] 1.578936 1.580271 1.601445 1.628697 1.628733 1.634875 1.636778 1.646841</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Compare to bicriterion heuristic:</span></span></span>
@@ -281,7 +294,7 @@ problem. Omega, 41(4), 721–730. https://doi.org/10.1016/j.omega.2012.09.005</p
 <span class="r-in"><span>  HEURISTIC <span class="op">=</span> <span class="fu"><a href="dispersion_objective.html">dispersion_objective</a></span><span class="op">(</span><span class="va">distances</span>, <span class="va">groups_heuristic</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       OPT HEURISTIC </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.448638  1.448638 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.646841  1.646841 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Different group sizes are possible:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu">optimal_dispersion</span><span class="op">(</span><span class="va">distances</span>, K <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">groups</span><span class="op">)</span></span></span>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.9-1</span>
       </span>
     </div>
 
@@ -70,6 +70,30 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="0.8.9-1" id="anticlust-089-1">anticlust 0.8.9-1<small>2025-01-20</small><a class="anchor" aria-label="anchor" href="#anticlust-089-1"></a></h2>
+<ul><li>
+<a href="https://github.com/m-Py/anticlust/commit/e184b1fd1a9403254cdcb" class="external-link">Minor fix</a> in <code><a href="../reference/three_phase_search_anticlustering.html">three_phase_search_anticlustering()</a></code> for <code>objective = "dispersion"</code>
+</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.8.9" id="anticlust-089">anticlust 0.8.9<small>2025-01-17</small><a class="anchor" aria-label="anchor" href="#anticlust-089"></a></h2>
+<div class="section level3">
+<h3 id="user-visible-changes-0-8-9">User visible changes<a class="anchor" aria-label="anchor" href="#user-visible-changes-0-8-9"></a></h3>
+<ul><li>
+<code><a href="../reference/categories_to_binary.html">categories_to_binary()</a></code> no longer uses dummy coding with a reference category, but instead codes each levels of a categorical variable with a separate variable (thanks to <a href="https://github.com/guwek" class="external-link">Gunnar Klau</a> for spotting potential problems with dummy coding).</li>
+<li>
+<code><a href="../reference/anticlustering.html">anticlustering()</a></code> has new <code>method = "2PML"</code>, which is an improved heuristic when using must-link constraints</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.8.8" id="anticlust-088">anticlust 0.8.8<a class="anchor" aria-label="anchor" href="#anticlust-088"></a></h2>
+<div class="section level3">
+<h3 id="user-visible-changes-0-8-8">User visible changes<a class="anchor" aria-label="anchor" href="#user-visible-changes-0-8-8"></a></h3>
+<ul><li>
+<code><a href="../reference/three_phase_search_anticlustering.html">three_phase_search_anticlustering()</a></code> implements the three phase search algorithm by <a href="https://doi.org/10.1016/j.ejor.2022.02.003" class="external-link">Yang et al.</a>, contributed by Hannah Hengelbrock (<a href="https://github.com/HanneyAI" class="external-link">@HanneyAI</a>)</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.8.7" id="anticlust-087">anticlust 0.8.7<small>2024-10-01</small><a class="anchor" aria-label="anchor" href="#anticlust-087"></a></h2>
 <div class="section level3">
 <h3 id="user-visible-changes-0-8-7">User visible changes<a class="anchor" aria-label="anchor" href="#user-visible-changes-0-8-7"></a></h3>
@@ -81,7 +105,7 @@
 <h3 id="bug-fixes-0-8-7">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-8-7"></a></h3>
 <ul><li>
 <code><a href="../reference/diversity_objective.html">diversity_objective()</a></code> is now computed correctly when a cluster only has one member (fixed via <a href="https://github.com/m-Py/anticlust/commit/8403fab1461b2cda8dda768d8e80c5ec92552e4a" class="external-link">8403fab1461b2cda8</a>)</li>
-<li>Fixed a memory leak in <code>anticlustering(..., objective = "diversity")</code> thanks to <a href="https://github.com/Hanney100" class="external-link">@Hanney100</a> (via <a href="https://github.com/m-Py/anticlust/commit/24c244faf8b2c07740710cac957a753f96f545fc" class="external-link">24c244faf8b2c0774071</a>)</li>
+<li>Fixed a memory leak in <code>anticlustering(..., objective = "diversity")</code> thanks to <a href="https://github.com/HanneyAI" class="external-link">@HanneyAI</a> (via <a href="https://github.com/m-Py/anticlust/commit/24c244faf8b2c07740710cac957a753f96f545fc" class="external-link">24c244faf8b2c0774071</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">

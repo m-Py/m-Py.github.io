@@ -24,7 +24,7 @@ Klau (2021; &amp;lt;doi:10.1037/met0000301&amp;gt;), Brusco et al.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.9-1</span>
       </span>
     </div>
 
@@ -135,7 +135,7 @@ Details.</p></dd>
 
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p>One of "exchange" (default) , "local-maximum",
-"brusco", or "ilp".  See Details.</p></dd>
+"brusco", "ilp", or "2PML".  See Details.</p></dd>
 
 
 <dt id="arg-preclustering">preclustering<a class="anchor" aria-label="anchor" href="#arg-preclustering"></a></dt>
@@ -153,8 +153,8 @@ between groups. See Details.</p></dd>
 <dt id="arg-repetitions">repetitions<a class="anchor" aria-label="anchor" href="#arg-repetitions"></a></dt>
 <dd><p>The number of times a search heuristic is
 initiated when using <code>method = "exchange"</code>, <code>method =
-"local-maximum"</code>, or <code>method = "brusco"</code>. In the end, the
-best objective found across the repetitions is returned.</p></dd>
+"local-maximum"</code>, <code>method = "brusco"</code>, or <code>method = "2PML"</code>.
+In the end, the best objective found across the repetitions is returned.</p></dd>
 
 
 <dt id="arg-standardize">standardize<a class="anchor" aria-label="anchor" href="#arg-standardize"></a></dt>
@@ -354,7 +354,9 @@ manually install the Rsymphony package, which is then automatically
 selected as solver when using the <code>must_link</code> argument.</p>
 <p>Must-link constraints are passed as a single vector of length <code>nrow(x)</code>.
 Positions that have the same numeric index are assigned to the same anticluster
-(if the constraints can be fulfilled).</p>
+(if the constraints can be fulfilled). When including must-link constraints,
+<code>method = "2PML"</code> performs a specialized search heuristic that potentially
+yields better results than <code>method = "local-maximum"</code>.</p>
 <p>The examples illustrate the usage of the <code>must_link</code> and <code>cannot_link</code>
 arguments. Currently, the different kinds of constraints (arguments <code>must_link</code>,
 <code>cannot_link</code>, and <code>categories</code>) cannot be used together, but this
@@ -511,9 +513,9 @@ Operational Research Society, 49(6), 635-646. https://doi.org/10.1057/palgrave.j
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">schaper2019</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="va">anticlusters</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent syllables     frequency     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 "4.49 (0.25)"     "1.10 (0.07)"       "3.44 (0.95)" "18.31 (2.42)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 "4.49 (0.25)"     "1.10 (0.07)"       "3.41 (0.91)" "18.31 (2.40)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 "4.49 (0.25)"     "1.10 (0.07)"       "3.41 (0.95)" "18.31 (2.42)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 "4.49 (0.25)"     "1.10 (0.07)"       "3.44 (0.91)" "18.31 (2.42)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 "4.50 (0.25)"     "1.10 (0.07)"       "3.41 (0.95)" "18.31 (2.42)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 "4.49 (0.25)"     "1.10 (0.07)"       "3.41 (0.95)" "18.31 (2.40)"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">anticlusters</span>, <span class="va">schaper2019</span><span class="op">$</span><span class="va">room</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters bathroom kitchen</span>
