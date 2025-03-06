@@ -12,11 +12,11 @@ I am author of the `R` package [`anticlust`](https://github.com/m-Py/anticlust) 
 
 ### Journal publications
 
-Papenberg, M. (2023). K-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity. *British Journal of Mathematical and Statistical Psychology*. Advance online publication. https://doi.org/10.1111/bmsp.12315 ([Preprint](https://psyarxiv.com/7jw6v/))
+Papenberg, M. (2024). K-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity. *British Journal of Mathematical and Statistical Psychology*, 77(1), 80--102. https://doi.org/10.1111/bmsp.12315 ([Preprint](https://doi.org/10.31234/osf.io/7jw6v))
 
-Brandenburg, N., & Papenberg, M. (2022). Reassessment of innovative methods to determine the number of factors: A simulation-based comparison of exploratory graph analysis and next eigenvalue sufficiency test. *Psychological Methods*. Advance online publication. https://doi.org/10.1037/met0000527 ([Preprint](https://psyarxiv.com/dhzrc))
+Brandenburg, N., & Papenberg, M. (2022). Reassessment of innovative methods to determine the number of factors: A simulation-based comparison of exploratory graph analysis and next eigenvalue sufficiency test. *Psychological Methods*, 29(1), 21--47. https://doi.org/10.1037/met0000527 ([Preprint](https://doi.org/10.31234/osf.io/dhzrc))
 
-Papenberg, M., & Klau, G. W. (2021). Using anticlustering to partition data sets into equivalent parts. *Psychological Methods, 26*(2), 161--174. https://doi.org/10.1037/met0000301. ([Preprint](https://psyarxiv.com/3razc/))
+Papenberg, M., & Klau, G. W. (2021). Using anticlustering to partition data sets into equivalent parts. *Psychological Methods, 26*(2), 161--174. https://doi.org/10.1037/met0000301. ([Preprint](https://doi.org/10.31234/osf.io/3razc))
 
 Papenberg, M., Diedenhofen, B., & Musch, J. (2021). An experimental validation of sequential multiple-choice tests. *The Journal of Experimental Education, 89*(2), 402--421. https://doi.org/10.1080/00220973.2019.1671299 ([Preprint](https://osf.io/x8753/))
 
