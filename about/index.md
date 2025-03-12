@@ -10,6 +10,10 @@ Hi! I am Martin Papenberg, working as a post-doctoral researcher and coordinator
 
 I am author of the `R` package [`anticlust`](https://github.com/m-Py/anticlust) that (among others) can be used to automatically assign stimuli to conditions in psychological experiments. The [package website](../anticlust/index.html) contains all documentation, introductory vignettes, and installation instructions. If you have any questions regarding the `anticlust` package, feel free to <a href = "mailto:martin.papenberg@hhu.de?subject=Help with the anticlust package">send me an email</a>.
 
+### Preprints
+
+Papenberg, M., Wang, C., Diop, M., Bukhari, S. H., Oskotsky, B., Davidson, B. R., Vo, K. C., Liu, B., Irwin, J. C., Combes, A., Gaudilliere, B., Li, J., Stevenson, D. K., Klau, G. W., Giudice, L. C., Sirota, M., & Oskotsky, T. T. (2025). Anticlustering for sample allocation to minimize batch effects. *bioRxiv*. https://doi.org/10.1101/2025.03.03.641320
+
 ### Journal publications
 
 Papenberg, M. (2024). K-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity. *British Journal of Mathematical and Statistical Psychology*, 77(1), 80--102. https://doi.org/10.1111/bmsp.12315 ([Preprint](https://doi.org/10.31234/osf.io/7jw6v))
