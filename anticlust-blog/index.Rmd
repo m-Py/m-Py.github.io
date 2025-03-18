@@ -12,6 +12,7 @@ concerned with the internal details of `anticlust` that may not be of primary in
 
 ## Posts
 
+- <a href="2025-03-18.html">2025/03: Do we need anticlustering in psychological experiments?
 - <a href="2024-07-17.html">2024/07: anticlust 0.8.6: A quick overview
 - <a href="2024-05-07.html">2024/05: anticlust is again up to date on CRAN
 - <a href="2024-05-03.html">2024/05: Using the Mac builder

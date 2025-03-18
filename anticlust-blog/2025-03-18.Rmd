@@ -1,6 +1,6 @@
 ---
 title: "the anticlust blog"
-date: May 08, 2024
+date: March 03, 2025
 author: Martin Papenberg
 ---
 
@@ -195,11 +195,13 @@ Again, we see that the *t*-test suffers a lot when stimulus sets are highly diff
 
 We can conclude that anticlustering can redemiate the problem of reduced power caused by (random or systematic) differences between item sets, when fixed sets are used and when there is no statistical control of the stimuli. Using ANOVA to employ a statistical control should be done when using stimulus sets instead of the simple *t*-test, preferably combined with anticlustering. Using anticlustering as well as statistical control is expected to (a) maximize statistical power via and to (b) reduce the risk of bias due to differences in response strategy between conditions.
 
-So, to answer the question posed in the title: I think that anticlustering is needed when assigning stimuli to sets for experiments. Sure, a larger scale simulation might be nice to test this claim more thoroughly, but I think the comparisons above already make a point. 
-
 [^sequence]: And in reality, there could even be an additional balancing variable pertaining to the sequence in which the experimental conditions are processed. So a simple design with 2 conditions quickly becomes a three-factorial data analysis.
 
 [^minDiff]: I even wrote a less sophisticated R package to do this: [`minDiff`](https://github.com/m-Py/minDiff).
+
+## Conclusion
+
+So we need anticlustering in psychological experiments? I would say it definitely helps. From a pure statistical standpoint, controlling for stimuli through the analysis should sufficiently remediate imbalances in stimulus sets. However, actively balancing stimuli still has advantages: Even though there are loud proponents of sophistication in analysis (e.g., controlling for stimuli in mixed models), statistical control is not always done, for different reasons. For example, it still seems that statistically controlling for imbalance instead of removing it is regarded with more scepticism (e.g., Treasure & MacRae, 1998; Senn, 2005). More complex analyses also tend to produce problems for practical researchers, such as non-convergence of the model fitting algorithm, or uncertainty about which interactions to include. Moreover, as Lintz et al. (2021) pointed our, we cannot rule out that participants react to differences in stimulus sets in unanticipated ways. In the end, I personally would advocate using anticlustering (when using fixed stimulus sets), but still employ statistical control of the stimuli. If statistical control is not done, I would definitely advocate anticlustering of stimulus sets, given that power is indeed enhanced with anticlustering, and when we get unlucky with our one assignment, differences in stimulus sets may completely interfere with the experimental effect.
 
 ## References 
 
@@ -209,10 +211,14 @@ Lahl, O., & Pietrowsky, R. (2006). EQUIWORD: A software application for the auto
 
 Lahl, O., Wispel, C., Willigens, B., & Pietrowsky, R. (2008). An ultra short episode of sleep is sufficient to promote declarative memory performance. *Journal of Sleep Research, 17*, 3--10. http://dx.doi.org/10.1111/j.1365-2869.2008.00622.x
 
-
 Lintz, E. N., Lim, P. C., & Johnson, M. R. (2021). A new tool for equating lexical stimuli across experimental conditions. *MethodsX*, 8, 101545.
 
 Papenberg, M., & Klau, G. W. (2021). Using anticlustering to partition data sets into equivalent parts. *Psychological Methods, 26*(2), 161--174. https://doi.org/10.1037/met0000301
+
+Senn, S. (2005). An unreasonable prejudice against modelling? Pharmaceutical Statistics:
+*The Journal of Applied Statistics in the Pharmaceutical Industry, 4*(2), 87--89.
+
+Treasure, T., & MacRae, K. D. (1998). Minimisation: The platinum standard for trials?: Randomisation doesn’t guarantee similarity of groups; minimisation does. In Bmj (7155; Vol. 317, pp. 362--363). British Medical Journal Publishing Group.
 
 ---
 

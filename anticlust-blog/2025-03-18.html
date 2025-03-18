@@ -11,7 +11,7 @@
 
 <meta name="author" content="Martin Papenberg" />
 
-<meta name="date" content="2024-05-08" />
+<meta name="date" content="2025-03-03" />
 
 <title>the anticlust blog</title>
 
@@ -352,7 +352,7 @@ display: none;
 
 <h1 class="title toc-ignore">the anticlust blog</h1>
 <h4 class="author">Martin Papenberg</h4>
-<h4 class="date">May 08, 2024</h4>
+<h4 class="date">March 03, 2025</h4>
 
 </div>
 
@@ -519,14 +519,14 @@ effect size of .3 for the materials (i.e., the expected difference
 between the stimulus sets):</p>
 <pre class="r"><code>get_data_set(4, D = .5, D_M = .3)</code></pre>
 <pre><code>##        value condition balancing set casenum
-## 1 -0.2906206         1         1   1       1
-## 2  1.4810376         1         1   1       2
-## 3  0.4917095         1         1   1       3
-## 4 -1.9760799         2         1   2       1
-## 5 -0.6913692         2         1   2       2
-## 6  0.5310626         2         1   2       3
-## 7  0.2645634         1         2   2       4
-## 8 -1.1542743         2         2   1       4</code></pre>
+## 1  2.2603253         1         1   1       1
+## 2  0.6485547         1         1   1       2
+## 3 -0.3446353         2         1   2       1
+## 4  0.1429062         2         1   2       2
+## 5 -1.7332583         1         2   2       3
+## 6  0.3293714         1         2   2       4
+## 7  1.2203604         2         2   1       3
+## 8  0.9996620         2         2   1       4</code></pre>
 <p>We obtain 8 rows because the data is in long format and there are two
 responses for each participant. We see that there is already some
 bookkeeping required for this simple design.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> The variable
@@ -564,9 +564,9 @@ pvalues1 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D)
 pvalues2 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, anticlust = TRUE) 
 
 mean(pvalues1 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.6452</code></pre>
+<pre><code>## [1] 0.6519</code></pre>
 <pre class="r"><code>mean(pvalues2 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.6892</code></pre>
+<pre><code>## [1] 0.6909</code></pre>
 <p>We see that power is slightly improved (about 4 percantage points)
 when using anticlustering assignment instead of random assignment of
 stimuli.</p>
@@ -588,9 +588,9 @@ pvalues3 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, D_M = D_M)
 pvalues4 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, D_M = D_M, anticlust = TRUE) 
 
 mean(pvalues3 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.5214</code></pre>
+<pre><code>## [1] 0.5083</code></pre>
 <pre class="r"><code>mean(pvalues4 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.6886</code></pre>
+<pre><code>## [1] 0.6923</code></pre>
 <p>The power of the standard <em>t</em>-test is strongly reduced when
 there is a systematic bias between stimulus sets. Using anticlustering
 on these stimuli (that are effectively drawn from two populations when
@@ -628,11 +628,11 @@ pvalues7 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, anticlust = TRUE)
 
 # Power
 mean(pvalues5 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.6504</code></pre>
+<pre><code>## [1] 0.6459</code></pre>
 <pre class="r"><code>mean(pvalues6 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.681</code></pre>
+<pre><code>## [1] 0.6848</code></pre>
 <pre class="r"><code>mean(pvalues7 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.6923</code></pre>
+<pre><code>## [1] 0.693</code></pre>
 <p>We repeat the pattern that the power of the <em>t</em>-test is
 lowest. ANOVA improves power as compared to the <em>t</em>-test, and
 anticlustering + <em>t</em>-test has comparable power.</p>
@@ -644,11 +644,11 @@ pvalues10 &lt;- sapply(1:nsim, sim_ttest, N = N, D = D, D_M = D_M, anticlust = T
 
 # Power
 mean(pvalues8 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.5106</code></pre>
+<pre><code>## [1] 0.5147</code></pre>
 <pre class="r"><code>mean(pvalues9 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.6807</code></pre>
+<pre><code>## [1] 0.6767</code></pre>
 <pre class="r"><code>mean(pvalues10 &lt;= .05)</code></pre>
-<pre><code>## [1] 0.6941</code></pre>
+<pre><code>## [1] 0.69</code></pre>
 <p>Again, we see that the <em>t</em>-test suffers a lot when stimulus
 sets are highly different. Interestingly, the ANOVA approach can deal
 with the bias pretty well and has the comparable performance as using
@@ -662,11 +662,31 @@ preferably combined with anticlustering. Using anticlustering as well as
 statistical control is expected to (a) maximize statistical power via
 and to (b) reduce the risk of bias due to differences in response
 strategy between conditions.</p>
-<p>So, to answer the question posed in the title: I think that
-anticlustering is needed when assigning stimuli to sets for experiments.
-Sure, a larger scale simulation might be nice to test this claim more
-thoroughly, but I think the comparisons above already make a point.</p>
 </div>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
+<p>So we need anticlustering in psychological experiments? I would say
+it definitely helps. From a pure statistical standpoint, controlling for
+stimuli through the analysis should sufficiently remediate imbalances in
+stimulus sets. However, actively balancing stimuli still has advantages:
+Even though there are loud proponents of sophistication in analysis
+(e.g., controlling for stimuli in mixed models), statistical control is
+not always done, for different reasons. For example, it still seems that
+statistically controlling for imbalance instead of removing it is
+regarded with more scepticism (e.g., Treasure &amp; MacRae, 1998; Senn,
+2005). More complex analyses also tend to produce problems for practical
+researchers, such as non-convergence of the model fitting algorithm, or
+uncertainty about which interactions to include. Moreover, as Lintz et
+al. (2021) pointed our, we cannot rule out that participants react to
+differences in stimulus sets in unanticipated ways. In the end, I
+personally would advocate using anticlustering (when using fixed
+stimulus sets), but still employ statistical control of the stimuli. If
+statistical control is not done, I would definitely advocate
+anticlustering of stimulus sets, given that power is indeed enhanced
+with anticlustering, and when we get unlucky with our one assignment,
+differences in stimulus sets may completely interfere with the
+experimental effect.</p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
@@ -685,6 +705,13 @@ equating lexical stimuli across experimental conditions.
 <p>Papenberg, M., &amp; Klau, G. W. (2021). Using anticlustering to
 partition data sets into equivalent parts. <em>Psychological Methods,
 26</em>(2), 161–174. <a href="https://doi.org/10.1037/met0000301" class="uri">https://doi.org/10.1037/met0000301</a></p>
+<p>Senn, S. (2005). An unreasonable prejudice against modelling?
+Pharmaceutical Statistics: <em>The Journal of Applied Statistics in the
+Pharmaceutical Industry, 4</em>(2), 87–89.</p>
+<p>Treasure, T., &amp; MacRae, K. D. (1998). Minimisation: The platinum
+standard for trials?: Randomisation doesn’t guarantee similarity of
+groups; minimisation does. In Bmj (7155; Vol. 317, pp. 362–363). British
+Medical Journal Publishing Group.</p>
 <hr />
 <p>Last updated: 2025-03-18</p>
 <div id="back-to-the-front-page" class="section level3">
