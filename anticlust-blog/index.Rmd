@@ -3,10 +3,7 @@ title: "the anticlust blog"
 author: "by Martin Papenberg"
 ---
 
-This is the blog about the [anticlust R package](https://github.com/m-Py/anticlust). Here I share
-some thoughts and stuff on the `anticlust` package that do not really fit into the documentation and
-vignettes (even though materials gathered here may be used there in the future). It will often be 
-concerned with the internal details of `anticlust` that may not be of primary interest to its users.
+This is the blog about the [anticlust R package](https://github.com/m-Py/anticlust). Here I share some thoughts and stuff on the `anticlust` package that do not really fit into the documentation and vignettes (even though materials gathered here may be used there in the future). 
 
 [About the author](../about/index.html).
 
