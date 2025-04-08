@@ -12,21 +12,23 @@ I am author of the `R` package [`anticlust`](https://github.com/m-Py/anticlust) 
 
 ### Preprints
 
-Papenberg, M., Wang, C., Diop, M., Bukhari, S. H., Oskotsky, B., Davidson, B. R., Vo, K. C., Liu, B., Irwin, J. C., Combes, A., Gaudilliere, B., Li, J., Stevenson, D. K., Klau, G. W., Giudice, L. C., Sirota, M., & Oskotsky, T. T. (2025). Anticlustering for sample allocation to minimize batch effects. *bioRxiv*. https://doi.org/10.1101/2025.03.03.641320
+**Papenberg, M.**, Breuer, M., Diekhoff, M., Tran, N. K., & Klau, G. W. (2025). Extending the Bicriterion Approach for Anticlustering: Exact and Hybrid Approaches. PsyArXiv. https://doi.org/10.31234/osf.io/wkqhx_v1
+
+**Papenberg, M.**, Wang, C., Diop, M., Bukhari, S. H., Oskotsky, B., Davidson, B. R., Vo, K. C., Liu, B., Irwin, J. C., Combes, A., Gaudilliere, B., Li, J., Stevenson, D. K., Klau, G. W., Giudice, L. C., Sirota, M., & Oskotsky, T. T. (2025). Anticlustering for sample allocation to minimize batch effects. *bioRxiv*. https://doi.org/10.1101/2025.03.03.641320
 
 ### Journal publications
 
-Papenberg, M. (2024). K-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity. *British Journal of Mathematical and Statistical Psychology*, 77(1), 80--102. https://doi.org/10.1111/bmsp.12315 ([Preprint](https://doi.org/10.31234/osf.io/7jw6v))
+**Papenberg, M.** (2024). K-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity. *British Journal of Mathematical and Statistical Psychology*, 77(1), 80--102. https://doi.org/10.1111/bmsp.12315 ([Preprint](https://doi.org/10.31234/osf.io/7jw6v))
 
-Brandenburg, N., & Papenberg, M. (2022). Reassessment of innovative methods to determine the number of factors: A simulation-based comparison of exploratory graph analysis and next eigenvalue sufficiency test. *Psychological Methods*, 29(1), 21--47. https://doi.org/10.1037/met0000527 ([Preprint](https://doi.org/10.31234/osf.io/dhzrc))
+Brandenburg, N., & **Papenberg, M.** (2022). Reassessment of innovative methods to determine the number of factors: A simulation-based comparison of exploratory graph analysis and next eigenvalue sufficiency test. *Psychological Methods*, 29(1), 21--47. https://doi.org/10.1037/met0000527 ([Preprint](https://doi.org/10.31234/osf.io/dhzrc))
 
-Papenberg, M., & Klau, G. W. (2021). Using anticlustering to partition data sets into equivalent parts. *Psychological Methods, 26*(2), 161--174. https://doi.org/10.1037/met0000301. ([Preprint](https://doi.org/10.31234/osf.io/3razc))
+**Papenberg, M.**, & Klau, G. W. (2021). Using anticlustering to partition data sets into equivalent parts. *Psychological Methods, 26*(2), 161--174. https://doi.org/10.1037/met0000301. ([Preprint](https://doi.org/10.31234/osf.io/3razc))
 
-Papenberg, M., Diedenhofen, B., & Musch, J. (2021). An experimental validation of sequential multiple-choice tests. *The Journal of Experimental Education, 89*(2), 402--421. https://doi.org/10.1080/00220973.2019.1671299 ([Preprint](https://osf.io/x8753/))
+**Papenberg, M.**, Diedenhofen, B., & Musch, J. (2021). An experimental validation of sequential multiple-choice tests. *The Journal of Experimental Education, 89*(2), 402--421. https://doi.org/10.1080/00220973.2019.1671299 ([Preprint](https://osf.io/x8753/))
 
-Papenberg, M., & Musch, J. (2017). Of Small Beauties and Large Beasts: The Quality of Distractors on Multiple-Choice Tests Is More Important Than Their Quantity. *Applied Measurement in Education, 30*(4), 273--286. https://doi.org/10.1080/08957347.2017.1353987 ([Preprint](https://osf.io/xytfw/))
+**Papenberg, M.**, & Musch, J. (2017). Of Small Beauties and Large Beasts: The Quality of Distractors on Multiple-Choice Tests Is More Important Than Their Quantity. *Applied Measurement in Education, 30*(4), 273--286. https://doi.org/10.1080/08957347.2017.1353987 ([Preprint](https://osf.io/xytfw/))
 
-Papenberg, M., Willing, S., & Musch, J. (2017). Sequentially Presented Response Options Prevent The Use Of Testwiseness Cues In Multiple-Choice Testing. *Psychological Test and Assessment Modeling, 59*(2), 245--266. ([Paper](http://www.psychologie-aktuell.com/fileadmin/download/ptam/2-2017_20170627/06_Papenberg_.pdf))
+**Papenberg, M.**, Willing, S., & Musch, J. (2017). Sequentially Presented Response Options Prevent The Use Of Testwiseness Cues In Multiple-Choice Testing. *Psychological Test and Assessment Modeling, 59*(2), 245--266. ([Paper](http://www.psychologie-aktuell.com/fileadmin/download/ptam/2-2017_20170627/06_Papenberg_.pdf))
 
 ### Other publications & Preprints
 
