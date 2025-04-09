@@ -5,8 +5,9 @@ between-group similarity.  Anticlustering is accomplished by
 maximizing instead of minimizing a clustering objective function.
 Implements anticlustering methods as described in Papenberg and
 Klau (2021; &amp;lt;doi:10.1037/met0000301&amp;gt;), Brusco et al.
-(2020; &amp;lt;doi:10.1111/bmsp.12186&amp;gt;), and Papenberg (2024;
-&amp;lt;doi:10.1111/bmsp.12315&amp;gt;)."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+(2020; &amp;lt;doi:10.1111/bmsp.12186&amp;gt;), Papenberg (2024;
+&amp;lt;doi:10.1111/bmsp.12315&amp;gt;), and Papenberg et al. (2025;
+&amp;lt;doi:10.1101/2025.03.03.641320&amp;gt;)."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
@@ -24,7 +25,7 @@ Klau (2021; &amp;lt;doi:10.1037/met0000301&amp;gt;), Brusco et al.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.9-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.10-1</span>
       </span>
     </div>
 
@@ -84,8 +85,9 @@ between-group similarity.  Anticlustering is accomplished by
 maximizing instead of minimizing a clustering objective function.
 Implements anticlustering methods as described in Papenberg and
 Klau (2021; &lt;doi:10.1037/met0000301&gt;), Brusco et al.
-(2020; &lt;doi:10.1111/bmsp.12186&gt;), and Papenberg (2024;
-&lt;doi:10.1111/bmsp.12315&gt;).</p>
+(2020; &lt;doi:10.1111/bmsp.12186&gt;), Papenberg (2024;
+&lt;doi:10.1111/bmsp.12315&gt;), and Papenberg et al. (2025;
+&lt;doi:10.1101/2025.03.03.641320&gt;).</p>
     </div>
 
     <div id="ref-usage">
@@ -351,12 +353,15 @@ The graph coloring algorithm uses an ILP solver and it greatly profits (that is,
 it may be much faster) from the Rsymphony package, which is not installed as
 a necessary dependency with anticlust. It is therefore recommended to
 manually install the Rsymphony package, which is then automatically
-selected as solver when using the <code>must_link</code> argument.</p>
+selected as solver when using the <code>must_link</code> argument. If you have
+access to the gurobi solver and have the gurobi R package installed, it will
+be selected as solver (which is even faster than Symphony).</p>
 <p>Must-link constraints are passed as a single vector of length <code>nrow(x)</code>.
 Positions that have the same numeric index are assigned to the same anticluster
 (if the constraints can be fulfilled). When including must-link constraints,
 <code>method = "2PML"</code> performs a specialized search heuristic that potentially
-yields better results than <code>method = "local-maximum"</code>.</p>
+yields better results than <code>method = "local-maximum"</code>. The must-link
+functionality and the 2PML algorithm was introduced in Papenberg et al. (2025).</p>
 <p>The examples illustrate the usage of the <code>must_link</code> and <code>cannot_link</code>
 arguments. Currently, the different kinds of constraints (arguments <code>must_link</code>,
 <code>cannot_link</code>, and <code>categories</code>) cannot be used together, but this
@@ -408,6 +413,11 @@ data sets into equivalent parts. Psychological Methods, 26(2),
 <p>Papenberg, M. (2024). K-plus Anticlustering: An Improved k-means Criterion for
 Maximizing Between-Group Similarity. British Journal of Mathematical and
 Statistical Psychology, 77(1), 80-102. https://doi.org/10.1111/bmsp.12315</p>
+<p>Papenberg, M., Wang, C., Diop, M., Bukhari, S. H., Oskotsky, B., Davidson,
+B. R., Vo, K. C., Liu, B., Irwin, J. C., Combes, A., Gaudilliere, B.,
+Li, J., Stevenson, D. K., Klau, G. W., Giudice, L. C., Sirota, M.,
+&amp; Oskotsky, T. T. (2025). Anticlustering for sample allocation to minimize
+batch effects. bioRxiv. https://doi.org/10.1101/2025.03.03.641320</p>
 <p>Späth, H. (1986). Anticlustering: Maximizing the variance criterion.
 Control and Cybernetics, 15, 213-218.</p>
 <p>Weitz, R. R., &amp; Lakshminarayanan, S. (1998). An empirical comparison of
