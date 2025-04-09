@@ -30,7 +30,7 @@ Brandenburg, N., & **Papenberg, M.** (2024). Reassessment of innovative methods 
 
 **Papenberg, M.**, Willing, S., & Musch, J. (2017). Sequentially Presented Response Options Prevent The Use Of Testwiseness Cues In Multiple-Choice Testing. *Psychological Test and Assessment Modeling, 59*(2), 245--266. ([Paper](http://www.psychologie-aktuell.com/fileadmin/download/ptam/2-2017_20170627/06_Papenberg_.pdf))
 
-### Other publications & Preprints
+### Other Publications
 
 Papenberg, M. (2018). *On how testwiseness and acceptance reluctance influence the validity of sequential knowledge tests* (Inaugural-Dissertation). Retrieved from https://docserv.uni-duesseldorf.de/servlets/DocumentServlet?id=46569
 
