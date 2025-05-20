@@ -12,7 +12,9 @@ I am author of the `R` package [`anticlust`](https://github.com/m-Py/anticlust) 
 
 ### Preprints
 
-Angelike, T., & **Papenberg, M.** (2025). Preventing Dataset Shift During Cross-Validation: Is it worth it? https://doi.org/10.31219/osf.io/b5fus_v1
+Angelike, T., & **Papenberg, M.** (2025). Preventing Dataset Shift During Cross-Validation: Is it worth it? *PsyArXiv*. https://doi.org/10.31219/osf.io/b5fus_v1
+
+**Papenberg, M.**, & Angelike, T. (2025). Balancing Covariates Among Experimental Conditions With Anticlustering. *PsyArXiv*. https://doi.org/10.31234/osf.io/dpcyf_v1
 
 **Papenberg, M.**, Breuer, M., Diekhoff, M., Tran, N. K., & Klau, G. W. (2025). Extending the Bicriterion Approach for Anticlustering: Exact and Hybrid Approaches. *PsyArXiv*. https://doi.org/10.31234/osf.io/wkqhx_v1
 
