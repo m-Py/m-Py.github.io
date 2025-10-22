@@ -37,6 +37,8 @@ More examples on Bayesian proportion comparisons in this Twitter thread:
 
 https://twitter.com/EJWagenmakers/status/1456994146862907400
 
+- Another package: bayesAB (https://cran.r-project.org/package=bayesAB)
+
 ## Usage
 
 I am using data from one of my papers where I computed a Bayes factor for the 
