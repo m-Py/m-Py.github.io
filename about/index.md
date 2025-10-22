@@ -12,11 +12,15 @@ I am author of the `R` package [`anticlust`](https://github.com/m-Py/anticlust) 
 
 ### Preprints
 
-**Papenberg, M.**, Breuer, M., Diekhoff, M., Tran, N. K., & Klau, G. W. (2025). Extending the Bicriterion Approach for Anticlustering: Exact and Hybrid Approaches. *PsyArXiv*. https://doi.org/10.31234/osf.io/wkqhx_v1
+Angelike, T., & **Papenberg, M.** (2025). Preventing Dataset Shift During Cross-Validation: Is it worth it? *OSF Preprints*. https://doi.org/10.31219/osf.io/b5fus_v1
 
-**Papenberg, M.**, Wang, C., Diop, M., Bukhari, S. H., Oskotsky, B., Davidson, B. R., Vo, K. C., Liu, B., Irwin, J. C., Combes, A., Gaudilliere, B., Li, J., Stevenson, D. K., Klau, G. W., Giudice, L. C., Sirota, M., & Oskotsky, T. T. (2025). Anticlustering for sample allocation to minimize batch effects. *bioRxiv*. https://doi.org/10.1101/2025.03.03.641320
+**Papenberg, M.**, & Angelike, T. (2025). Balancing Covariates Among Experimental Conditions With Anticlustering. *PsyArXiv*. https://doi.org/10.31234/osf.io/dpcyf_v1
 
 ### Journal publications
+
+**Papenberg, M.**, Breuer, M., Diekhoff, M., Tran, N. K., & Klau, G. W. (2025). Extending the Bicriterion Approach for Anticlustering: Exact and Hybrid Approaches. *Psychometrika*. Advance online publication. https://doi.org/10.1017/psy.2025.10052 ([Preprint](https://osf.io/a5r4y))
+
+**Papenberg, M.**, Wang, C., Diop, M., Bukhari, S. H., Oskotsky, B., Davidson, B. R., Vo, K. C., Liu, B., Irwin, J. C., Combes, A., Gaudilliere, B., Li, J., Stevenson, D. K., Klau, G. W., Giudice, L. C., Sirota, M., & Oskotsky, T. T. (2025). Anticlustering for sample allocation to minimize batch effects. *Cell Reports Methods, 5*(8), 101137. https://doi.org/10.1016/j.crmeth.2025.101137 ([Preprint](https://doi.org/10.1101/2025.03.03.641320))
 
 **Papenberg, M.** (2024). K-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity. *British Journal of Mathematical and Statistical Psychology*, 77(1), 80--102. https://doi.org/10.1111/bmsp.12315 ([Preprint](https://doi.org/10.31234/osf.io/7jw6v))
 
