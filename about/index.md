@@ -14,7 +14,7 @@ I am author of the `R` package [`anticlust`](https://github.com/m-Py/anticlust) 
 
 Angelike, T., & **Papenberg, M.** (2025). Preventing Dataset Shift During Cross-Validation: Is it worth it? *OSF Preprints*. https://doi.org/10.31219/osf.io/b5fus_v1
 
-**Papenberg, M.**, & Angelike, T. (2025). Balancing Covariates Among Experimental Conditions With Anticlustering. *PsyArXiv*. https://doi.org/10.31234/osf.io/dpcyf_v1
+**Papenberg, M.**, & Angelike, T. (2025). A simulation-based comparison of minimization, rerandomization, and anticlustering for creating experimental conditions. *PsyArXiv*. https://doi.org/10.31234/osf.io/dpcyf_v2
 
 ### Journal publications
 
