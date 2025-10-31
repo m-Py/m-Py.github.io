@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.10-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.12</span>
       </span>
     </div>
 
@@ -32,6 +32,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/Anticlustering_in_2025.html">Anticlustering in 2025</a>
+    </li>
+    <li>
       <a href="../articles/Best_practices.html">Some best practices for anticlustering</a>
     </li>
     <li>
@@ -160,21 +163,21 @@ Default is there is no time limit.</p></dd>
   within the same group. This function implements an optimal method
   to maximize the dispersion. If the data input <code>x</code> is a
   feature matrix and not a dissimilarity matrix, the pairwise
-  Euclidean distance is used. It uses the algorithm presented in
+  Euclidean distance is used. It uses the algorithm OptDispF presented
+  Papenberg, Breuer, et al. (2025). It was originally developed as part of
   Max Diekhoff's Bachelor thesis at the Computer Science Department
   at Heinrich Heine University Düsseldorf.</p>
 <p>To find out which items are not allowed to be grouped in the same
   cluster for maximum dispersion, the algorithm sequentially builds
   instances of a graph coloring problem, using an integer linear
-  programming (ILP) representation (also see Fernandez et al.,
-  2013).  It is possible to specify the ILP solver via the argument
+  programming (ILP) representation. It is possible to specify the ILP solver via the argument
   <code>solver</code> (See <code><a href="optimal_anticlustering.html">optimal_anticlustering</a></code> for more
   information on this argument). Optimally solving the maximum
   dispersion problem is NP-hard for K &gt; 2 and therefore
   computationally infeasible for larger data sets. For K = 3 and K
   = 4, it seems that this approach scales up to several 100
   elements, or even &gt; 1000 for K = 3 (at least when using the
-  Symphony solver).  For larger data sets, use the heuristic
+  Symphony or gurobi solver).  For larger data sets, use the heuristic
   approaches in <code><a href="anticlustering.html">anticlustering</a></code> or
   <code><a href="bicriterion_anticlustering.html">bicriterion_anticlustering</a></code>. However, note that for
   K = 2, the optimal approach is usually much faster than the
@@ -206,8 +209,9 @@ which cannot be prevented in R.</p>
     <h2>References</h2>
     <p>Diekhoff (2023). Maximizing dispersion for anticlustering. Retrieved from
 https://www.cs.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Informatik/Algorithmische_Bioinformatik/Bachelor-_Masterarbeiten/2831963_ba_ifo_AbschlArbeit_klau_mapap102_madie120_20230203_1815.pdf</p>
-<p>Fernández, E., Kalcsics, J., &amp; Nickel, S. (2013). The maximum dispersion
-problem. Omega, 41(4), 721–730. https://doi.org/10.1016/j.omega.2012.09.005</p>
+<p>Papenberg, M., Breuer, M., Diekhoff, M., Tran, N. K., &amp; Klau, G. W. (2025).
+Extending the Bicriterion Approach for Anticlustering: Exact and Hybrid
+Approaches. Psychometrika. Advance online publication. https://doi.org/10.1017/psy.2025.10052</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -231,54 +235,47 @@ problem. Omega, 41(4), 721–730. https://doi.org/10.1016/j.omega.2012.09.005</p
 <span class="r-in"><span><span class="va">opt</span> <span class="op">&lt;-</span> <span class="fu">optimal_dispersion</span><span class="op">(</span><span class="va">distances</span>, K <span class="op">=</span> <span class="va">K</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">opt</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dispersion</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.646841</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.561004</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $groups</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 3 3 3 2 1 1 2 1 3 3 3 3 2 1 2 2 3 2 2 1 2 2 3 2 1 1 3 1 1 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 3 1 3 1 2 2 2 1 3 2 1 3 3 2 1 2 1 2 3 3 1 3 2 3 2 1 1 3 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $groups_fixated</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  3  3 NA  1  1  2  1 NA NA  3  3  2  1  2  2 NA  2  2  1  2 NA  3 NA  1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [26]  1  3  1  1  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  3  1  3 NA  2  2 NA  1  3  2  1  3  3 NA  1  2  1 NA NA NA  1 NA  2 NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [26]  2  1 NA  3  2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       [,1] [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]   20   23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]   11   19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]    8   11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]    5   13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]    2    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]   12   29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,]    6   18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]    5   18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]    3   26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]    2    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11,]    3   15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [12,]    5   19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13,]   18   27</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [14,]    5   27</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15,]    5   16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16,]    7   25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [17,]    2   18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [18,]   14   16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19,]   21   28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [20,]   15   26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21,]   16   27</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [22,]    5   11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [23,]    6   15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [24,]    8   19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25,]   23   26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [26,]   21   23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [27,]   11   29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [28,]   19   29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [29,]   13   27</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [30,]   19   23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [31,]   23   30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]    4   18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]    9   30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]   14   17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]   11   13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]   14   16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]   16   24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,]    3    7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]    2   22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]    4   24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]    7   16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11,]   10   12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [12,]    4   17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13,]   17   18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [14,]    3   30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15,]    3    6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16,]    6   13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [17,]   11   27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [18,]    4   16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19,]   16   17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [20,]   18   29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21,]   13   27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [22,]    3    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [23,]    9   26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [24,]    4   26</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dispersions_considered</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1.028233 1.075159 1.144307 1.159567 1.182799 1.226687 1.260399 1.338457</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] 1.349471 1.353310 1.367298 1.394381 1.399823 1.404871 1.410823 1.436337</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [17] 1.466566 1.504632 1.519661 1.522956 1.532941 1.568069 1.572953 1.577198</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] 1.578936 1.580271 1.601445 1.628697 1.628733 1.634875 1.636778 1.646841</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.5891415 0.6344812 0.9442080 1.1104094 1.1606808 1.1766972 1.2135827</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] 1.2265947 1.2672756 1.2921035 1.2968939 1.3209648 1.3474920 1.3759957</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15] 1.3813938 1.3834584 1.3995159 1.4138010 1.4157629 1.4399366 1.4679589</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [22] 1.4882430 1.5424820 1.5494991 1.5610038</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Compare to bicriterion heuristic:</span></span></span>
@@ -294,7 +291,7 @@ problem. Omega, 41(4), 721–730. https://doi.org/10.1016/j.omega.2012.09.005</p
 <span class="r-in"><span>  HEURISTIC <span class="op">=</span> <span class="fu"><a href="dispersion_objective.html">dispersion_objective</a></span><span class="op">(</span><span class="va">distances</span>, <span class="va">groups_heuristic</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       OPT HEURISTIC </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.646841  1.646841 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.561004  1.561004 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Different group sizes are possible:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu">optimal_dispersion</span><span class="op">(</span><span class="va">distances</span>, K <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">groups</span><span class="op">)</span></span></span>
@@ -382,7 +379,7 @@ problem. Omega, 41(4), 721–730. https://doi.org/10.1016/j.omega.2012.09.005</p
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>

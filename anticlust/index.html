@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Subset Partitioning via Anticlustering">
-<meta property="og:description" content="The method of anticlustering partitions a pool of elements into groups (i.e., anticlusters) with the goal of maximizing between-group similarity or within-group heterogeneity. The anticlustering approach thereby reverses the logic of cluster analysis that strives for high within-group homogeneity and clear separation between groups. Computationally, anticlustering is accomplished by maximizing instead of minimizing a clustering objective function, such as the intra-cluster variance (used in k-means clustering) or the sum of pairwise distances within clusters. The main function anticlustering() gives access to optimal and heuristic anticlustering methods described in Papenberg and Klau (2021; &lt;doi:10.1037/met0000301&gt;), Brusco et al. (2020; &lt;doi:10.1111/bmsp.12186&gt;), Papenberg (2024; &lt;doi:10.1111/bmsp.12315&gt;), and Papenberg et al. (2025; &lt;doi:10.1101/2025.03.03.641320&gt;). The optimal algorithms require that an integer linear programming solver is installed. This package will install lpSolve (&lt;https://cran.r-project.org/package=lpSolve&gt;) as a default solver, but it is also possible to use the package Rglpk (&lt;https://cran.r-project.org/package=Rglpk&gt;), which requires the GNU linear programming kit (&lt;https://www.gnu.org/software/glpk/glpk.html&gt;), the package Rsymphony (&lt;https://cran.r-project.org/package=Rsymphony&gt;), which requires the SYMPHONY ILP solver (&lt;https://github.com/coin-or/SYMPHONY&gt;), or the commercial solver Gurobi, which provides its own R package that is not available via CRAN (&lt;https://www.gurobi.com/downloads/&gt;). Rglpk, Rsymphony, gurobi and their system dependencies have to be manually installed by the user because they are only suggested dependencies. Full access to the bicriterion anticlustering method proposed by Brusco et al. (2020) is given via the function bicriterion_anticlustering(), while kplus_anticlustering() implements the full functionality of the k-plus anticlustering approach proposed by Papenberg (2024). Some other functions are available to solve classical clustering problems. The function balanced_clustering() applies a cluster analysis under size constraints, i.e., creates equal-sized clusters. The function matching() can be used for (unrestricted, bipartite, or K-partite) matching. The function wce() can be used optimally solve the (weighted) cluster editing problem, also known as correlation clustering, clique partitioning problem or transitivity clustering.">
+<meta property="og:description" content="The method of anticlustering partitions a pool of elements into groups (i.e., anticlusters) with the goal of maximizing between-group similarity or within-group heterogeneity. The anticlustering approach thereby reverses the logic of cluster analysis that strives for high within-group homogeneity and clear separation between groups. Computationally, anticlustering is accomplished by maximizing instead of minimizing a clustering objective function, such as the intra-cluster variance (used in k-means clustering) or the sum of pairwise distances within clusters. The main function anticlustering() gives access to optimal and heuristic anticlustering methods described in Papenberg and Klau (2021; &lt;doi:10.1037/met0000301&gt;), Brusco et al. (2020; &lt;doi:10.1111/bmsp.12186&gt;), Papenberg (2024; &lt;doi:10.1111/bmsp.12315&gt;), Papenberg, Wang, et al. (2025; &lt;doi:10.1016/j.crmeth.2025.101137&gt;), Papenberg, Breuer, et al. (2025; &lt;doi:10.1017/psy.2025.10052&gt;), and Yang et al. (2022; &lt;doi:10.1016/j.ejor.2022.02.003&gt;). The optimal algorithms require that an integer linear programming solver is installed. This package will install lpSolve (&lt;https://cran.r-project.org/package=lpSolve&gt;) as a default solver, but it is also possible to use the package Rglpk (&lt;https://cran.r-project.org/package=Rglpk&gt;), which requires the GNU linear programming kit (&lt;https://www.gnu.org/software/glpk/glpk.html&gt;), the package Rsymphony (&lt;https://cran.r-project.org/package=Rsymphony&gt;), which requires the SYMPHONY ILP solver (&lt;https://github.com/coin-or/SYMPHONY&gt;), or the commercial solver Gurobi, which provides its own R package that is not available via CRAN (&lt;https://www.gurobi.com/downloads/&gt;). Rglpk, Rsymphony, gurobi and their system dependencies have to be manually installed by the user because they are only suggested dependencies. Full access to the bicriterion anticlustering method proposed by Brusco et al. (2020) is given via the function bicriterion_anticlustering(), while kplus_anticlustering() implements the full functionality of the k-plus anticlustering approach proposed by Papenberg (2024). Some other functions are available to solve classical clustering problems. The function balanced_clustering() applies a cluster analysis under size constraints, i.e., creates equal-sized clusters. The function matching() can be used for (unrestricted, bipartite, or K-partite) matching. The function wce() can be used optimally solve the (weighted) cluster editing problem, also known as correlation clustering, clique partitioning problem or transitivity clustering.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.10-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.12</span>
       </span>
     </div>
 
@@ -50,6 +50,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/Anticlustering_in_2025.html">Anticlustering in 2025</a>
+    </li>
+    <li>
       <a href="articles/Best_practices.html">Some best practices for anticlustering</a>
     </li>
     <li>
@@ -93,7 +96,7 @@
 <div class="page-header"><h1 id="anticlust-">anticlust <a href="https://m-py.github.io/anticlust/" class="external-link"><img src="reference/figures/anticlustStickerV1-0.svg" style="float:right; height:160px"></a>
 <a class="anchor" aria-label="anchor" href="#anticlust-"></a>
 </h1></div>
-<p>Anticlustering partitions a pool of elements into clusters (or <em>anticlusters</em>) with the goal of achieving high between-cluster similarity and high within-cluster heterogeneity. This is accomplished by maximizing instead of minimizing a clustering objective function, such as the intra-cluster variance (used in k-means clustering) or the sum of pairwise distances within clusters. The package <code>anticlust</code> implements anticlustering methods as described in Papenberg and Klau (2021; <a href="https://doi.org/10.1037/met0000301" class="external-link uri">https://doi.org/10.1037/met0000301</a>), Brusco et al. (2020; <a href="https://doi.org/10.1111/bmsp.12186" class="external-link uri">https://doi.org/10.1111/bmsp.12186</a>), Papenberg (2024; <a href="https://doi.org/10.1111/bmsp.12315" class="external-link uri">https://doi.org/10.1111/bmsp.12315</a>), and Papenberg et al. (2025; <a href="https://doi.org/10.1101/2025.03.03.641320" class="external-link uri">https://doi.org/10.1101/2025.03.03.641320</a>).</p>
+<p>Anticlustering partitions a pool of elements into clusters (or <em>anticlusters</em>) with the goal of achieving high between-cluster similarity and high within-cluster heterogeneity. This is accomplished by maximizing instead of minimizing a clustering objective function, such as the intra-cluster variance (used in k-means clustering) or the sum of pairwise distances within clusters. The package <code>anticlust</code> implements anticlustering methods as described in Papenberg and Klau (2021; <a href="https://doi.org/10.1037/met0000301" class="external-link uri">https://doi.org/10.1037/met0000301</a>), Brusco et al. (2020; <a href="https://doi.org/10.1111/bmsp.12186" class="external-link uri">https://doi.org/10.1111/bmsp.12186</a>), Papenberg (2024; <a href="https://doi.org/10.1111/bmsp.12315" class="external-link uri">https://doi.org/10.1111/bmsp.12315</a>), Papenberg, Wang, et al. (2025; <a href="https://doi.org/10.1016/j.crmeth.2025.101137" class="external-link uri">https://doi.org/10.1016/j.crmeth.2025.101137</a>), Papenberg, Breuer, et al. (2025; <a href="https://doi.org/10.1017/psy.2025.10052" class="external-link uri">https://doi.org/10.1017/psy.2025.10052</a>), and Yang et al. (2022; <a href="https://doi.org/10.1016/j.ejor.2022.02.003" class="external-link uri">https://doi.org/10.1016/j.ejor.2022.02.003</a>)</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -122,16 +125,16 @@
 </h2>
 <p>This README contains some basic information on the <code>R</code> package <code>anticlust</code>. More information is available via the following sources:</p>
 <ul>
-<li>Up until now, we published 3 papers describing the theoretical background of <code>anticlust</code>.
+<li>Up until now, we published 4 papers describing the theoretical background of <code>anticlust</code>.
 <ul>
 <li>The initial presentation of the <code>anticlust</code> package is given in Papenberg and Klau (2021) (<a href="https://doi.org/10.1111/bmsp.12315" class="external-link uri">https://doi.org/10.1111/bmsp.12315</a>; <a href="https://doi.org/10.31234/osf.io/7jw6v" class="external-link">Preprint</a>).</li>
 <li>The k-plus anticlustering method is described in Papenberg (2024) (<a href="https://doi.org/10.1037/met0000527" class="external-link uri">https://doi.org/10.1037/met0000527</a>; <a href="https://doi.org/10.31234/osf.io/dhzrc" class="external-link">Preprint</a>).</li>
-<li>A new paper describes the must-link feature and provides additional comparisons to alternative methods, focusing on categorical variables (Papenberg et al., 2025; <a href="https://doi.org/10.1101/2025.03.03.641320" class="external-link uri">https://doi.org/10.1101/2025.03.03.641320</a>).</li>
+<li>A new paper describes the must-link feature and provides additional comparisons to alternative methods, focusing on categorical variables (Papenberg, Wang, et al., 2025; <a href="https://doi.org/10.1016/j.crmeth.2025.101137" class="external-link uri">https://doi.org/10.1016/j.crmeth.2025.101137</a>).</li>
+<li>Another new paper describes several new algorithms for anticlustering and the cannot-link feature (Papenberg, Breuer, et al., 2025; <a href="https://doi.org/10.1017/psy.2025.10052" class="external-link uri">https://doi.org/10.1017/psy.2025.10052</a>).</li>
 <li>The R documentation of the main functions is actually quite rich and up to date, so you should definitely check that out when using the <code>anticlust</code> package. The most important background is provided in <code><a href="reference/anticlustering.html">?anticlustering</a></code>.</li>
 </ul>
 </li>
-<li>A <a href="https://youtu.be/YGrhSmi1oA8" class="external-link">video</a> is available in German language where I illustrate the main functionalities of the <code><a href="reference/anticlustering.html">anticlustering()</a></code> function. My plan is to make a similar video in English in the future.</li>
-<li>The <a href="https://m-py.github.io/anticlust/" class="external-link">package website</a> contains all documentation as a convenient website. At the current time, the website also has four package vignettes, while additional vignettes are planned.</li>
+<li>The <a href="https://m-py.github.io/anticlust/" class="external-link">package website</a> contains all documentation as a convenient website. Also check out the vignettes on that website.</li>
 </ul>
 </div>
 <div class="section level2">
@@ -142,19 +145,20 @@
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"anticlust"</span>)</span></code></pre></div>
 <p>Call the <code><a href="reference/anticlustering.html">anticlustering()</a></code> method:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>anticlusters <span class="ot">&lt;-</span> <span class="fu">anticlustering</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  iris[, <span class="sc">-</span><span class="dv">5</span>],</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  iris,</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="at">K =</span> <span class="dv">5</span>,</span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="at">objective =</span> <span class="st">"kplus"</span>,</span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"local-maximum"</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="at">repetitions =</span> <span class="dv">10</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="at">repetitions =</span> <span class="dv">10</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  <span class="at">standardize =</span> <span class="cn">TRUE</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>The output is a vector that assigns a group (i.e, a number between 1 and <code>K</code>) to each input element:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>anticlusters</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt;   [1] 1 2 4 5 3 4 2 3 2 2 1 5 1 2 4 1 2 3 2 5 1 5 4 5 1 1 3 4 5 5 5 4 5 2 1 1 3</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt;  [38] 4 3 3 4 2 3 5 2 5 3 4 3 1 2 2 5 1 2 3 3 4 4 1 5 1 2 3 3 1 2 4 4 4 4 1 3 4</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt;  [75] 2 4 5 2 5 2 3 3 1 5 4 1 5 3 2 1 2 5 3 4 1 4 1 2 4 5 2 2 3 1 4 1 3 4 4 5 3</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; [112] 2 3 1 5 2 5 3 1 5 4 1 2 5 1 2 3 1 3 3 5 1 2 5 5 4 3 5 4 3 5 5 1 4 4 1 3 4</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; [149] 2 2</span></span></code></pre></div>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt;   [1] 1 3 4 2 1 5 5 3 4 1 2 3 2 2 2 3 1 5 3 2 3 5 1 2 1 5 4 3 4 3 5 2 4 4 2 3 5</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt;  [38] 1 4 4 5 5 1 1 5 4 4 3 1 2 2 4 5 1 3 2 4 4 4 3 1 1 5 5 3 1 1 5 2 1 2 4 1 5</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt;  [75] 3 3 1 1 4 2 4 3 3 3 2 3 2 4 4 2 5 4 1 5 2 5 3 5 5 2 3 3 5 5 1 4 3 4 1 5 1</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; [112] 4 4 2 4 2 2 3 3 2 5 1 5 3 4 1 5 5 4 1 3 2 1 3 2 2 2 1 2 4 1 1 3 2 5 3 4 5</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; [149] 5 4</span></span></code></pre></div>
 <p>By default, each group has the same number of elements (but the argument <code>K</code> can be adjusted to request different group sizes):</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">table</span>(anticlusters)</span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co">#&gt; anticlusters</span></span>
@@ -185,13 +189,13 @@ Petal.Width
 1
 </td>
 <td style="text-align: left;">
-5.84 (0.84)
+5.85 (0.84)
 </td>
 <td style="text-align: left;">
 3.06 (0.44)
 </td>
 <td style="text-align: left;">
-3.76 (1.79)
+3.76 (1.78)
 </td>
 <td style="text-align: left;">
 1.20 (0.77)
@@ -205,10 +209,10 @@ Petal.Width
 5.84 (0.84)
 </td>
 <td style="text-align: left;">
-3.06 (0.45)
+3.06 (0.44)
 </td>
 <td style="text-align: left;">
-3.76 (1.79)
+3.77 (1.79)
 </td>
 <td style="text-align: left;">
 1.20 (0.77)
@@ -225,7 +229,7 @@ Petal.Width
 3.06 (0.44)
 </td>
 <td style="text-align: left;">
-3.75 (1.79)
+3.76 (1.79)
 </td>
 <td style="text-align: left;">
 1.20 (0.77)
@@ -236,16 +240,16 @@ Petal.Width
 4
 </td>
 <td style="text-align: left;">
-5.85 (0.84)
+5.84 (0.84)
 </td>
 <td style="text-align: left;">
-3.05 (0.45)
+3.06 (0.44)
 </td>
 <td style="text-align: left;">
-3.76 (1.79)
+3.75 (1.79)
 </td>
 <td style="text-align: left;">
-1.21 (0.77)
+1.19 (0.77)
 </td>
 </tr>
 <tr class="odd">
@@ -253,21 +257,106 @@ Petal.Width
 5
 </td>
 <td style="text-align: left;">
-5.84 (0.84)
+5.85 (0.84)
 </td>
 <td style="text-align: left;">
 3.06 (0.44)
 </td>
 <td style="text-align: left;">
-3.76 (1.79)
+3.75 (1.79)
 </td>
 <td style="text-align: left;">
-1.19 (0.78)
+1.20 (0.77)
 </td>
 </tr>
 </tbody>
 </table>
-<p>As illustrated in the example, we can use the function <code><a href="reference/anticlustering.html">anticlustering()</a></code> to create similar groups of plants. In this case “similar” primarily means that the means and standard deviations (in parentheses) of the variables are pretty much the same across the five groups. The function <code><a href="reference/anticlustering.html">anticlustering()</a></code> takes as input a data table describing the elements that should be assigned to sets. In the data table, each row represents an element (here a plant, but it can be anything; for example a person, word, or a photo). Each column is a numeric variable describing one of the elements’ features. The number of groups is specified through the argument <code>K</code>. The argument <code>objective</code> specifies how between-group similarity is quantified; the argument <code>method</code> specifies the algorithm by which this measure is optimized. See the documentation <code><a href="reference/anticlustering.html">?anticlustering</a></code> for more details.</p>
+<p>We can also verify that the species of plants (a categorical feature) is evenly distributed among groups:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">table</span>(iris[, <span class="dv">5</span>], anticlusters), <span class="at">row.names =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th style="text-align: left;">
+</th>
+<th style="text-align: right;">
+1
+</th>
+<th style="text-align: right;">
+2
+</th>
+<th style="text-align: right;">
+3
+</th>
+<th style="text-align: right;">
+4
+</th>
+<th style="text-align: right;">
+5
+</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">
+setosa
+</td>
+<td style="text-align: right;">
+10
+</td>
+<td style="text-align: right;">
+10
+</td>
+<td style="text-align: right;">
+10
+</td>
+<td style="text-align: right;">
+10
+</td>
+<td style="text-align: right;">
+10
+</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">
+versicolor
+</td>
+<td style="text-align: right;">
+10
+</td>
+<td style="text-align: right;">
+10
+</td>
+<td style="text-align: right;">
+10
+</td>
+<td style="text-align: right;">
+10
+</td>
+<td style="text-align: right;">
+10
+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">
+virginica
+</td>
+<td style="text-align: right;">
+10
+</td>
+<td style="text-align: right;">
+10
+</td>
+<td style="text-align: right;">
+10
+</td>
+<td style="text-align: right;">
+10
+</td>
+<td style="text-align: right;">
+10
+</td>
+</tr>
+</tbody>
+</table>
+<p>As illustrated in the example, we can use the function <code><a href="reference/anticlustering.html">anticlustering()</a></code> to create similar groups of plants. In this case “similar” primarily means that the means and standard deviations (in parentheses) of the variables are pretty much the same across the five groups, and that the species was evenly assigned to groups. The function <code><a href="reference/anticlustering.html">anticlustering()</a></code> takes as input a data table describing the elements that should be assigned to sets. In the data table, each row represents an element (here a plant, but it can be anything; for example a person, word, or a photo). Each column is a numeric variable describing one of the elements’ features. The number of groups is specified through the argument <code>K</code>. The argument <code>objective</code> specifies how between-group similarity is quantified; the argument <code>method</code> specifies the algorithm by which this measure is optimized. See the documentation <code><a href="reference/anticlustering.html">?anticlustering</a></code> for more details.</p>
 <p>Five anticlustering objectives are natively supported in <code><a href="reference/anticlustering.html">anticlustering()</a></code>:</p>
 <ul>
 <li>the “diversity” objective, setting <code>objective = "diversity"</code> (default)</li>
@@ -280,24 +369,6 @@ Petal.Width
 </li>
 </ul>
 <p>The anticlustering objectives are described in detail in the documentation (<code><a href="reference/anticlustering.html">?anticlustering</a></code>, <code><a href="reference/diversity_objective.html">?diversity_objective</a></code>, <code><a href="reference/variance_objective.html">?variance_objective</a></code>, <code><a href="reference/kplus_anticlustering.html">?kplus_anticlustering</a></code>, <code><a href="reference/dispersion_objective.html">?dispersion_objective</a></code>) and the references therein. It is also possible to optimize user-defined objectives, which is also described in the documentation (<code><a href="reference/anticlustering.html">?anticlustering</a></code>).</p>
-</div>
-<div class="section level2">
-<h2 id="categorical-variables">Categorical variables<a class="anchor" aria-label="anchor" href="#categorical-variables"></a>
-</h2>
-<p>Sometimes, it is required that sets are not only similar with regard to some numeric variables, but we also want to ensure that each set contains an equal number of elements of a certain category. Coming back to the initial iris data set, we may want to require that each set has a balanced number of plants of the three iris species. To this end, we can use the argument <code>categories</code> as follows:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>anticlusters <span class="ot">&lt;-</span> <span class="fu">anticlustering</span>(</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  iris[, <span class="sc">-</span><span class="dv">5</span>],</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="at">K =</span> <span class="dv">3</span>,</span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="at">categories =</span> iris<span class="sc">$</span>Species</span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>)</span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="do">## The species are as balanced as possible across anticlusters:</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="fu">table</span>(anticlusters, iris<span class="sc">$</span>Species)</span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#&gt;             </span></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co">#&gt; anticlusters setosa versicolor virginica</span></span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">#&gt;            1     17         17        16</span></span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co">#&gt;            2     17         16        17</span></span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co">#&gt;            3     16         17        17</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="matching-and-clustering">Matching and clustering<a class="anchor" aria-label="anchor" href="#matching-and-clustering"></a>
@@ -359,7 +430,7 @@ Petal.Width
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Martin Papenberg <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-9900-4268" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Martin Papenberg <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-9900-4268" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -377,7 +448,7 @@ Petal.Width
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer>

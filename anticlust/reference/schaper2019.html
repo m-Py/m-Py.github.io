@@ -20,7 +20,7 @@ typically found in a bathroom or in a kitchen."><!-- mathjax --><script src="htt
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.10-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.12</span>
       </span>
     </div>
 
@@ -35,6 +35,9 @@ typically found in a bathroom or in a kitchen."><!-- mathjax --><script src="htt
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/Anticlustering_in_2025.html">Anticlustering in 2025</a>
+    </li>
+    <li>
       <a href="../articles/Best_practices.html">Some best practices for anticlustering</a>
     </li>
     <li>
@@ -164,11 +167,11 @@ https://doi.org/10.1037/xlm0000602</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/by.html" class="external-link">by</a></span><span class="op">(</span><span class="va">features</span>, <span class="va">anticlusters</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                4.49                1.10                3.44               18.31 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                4.49                1.10                3.41               18.31 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                4.49                1.10                3.41               18.31 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                4.49                1.11                3.44               18.31 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
@@ -177,15 +180,15 @@ https://doi.org/10.1037/xlm0000602</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/by.html" class="external-link">by</a></span><span class="op">(</span><span class="va">features</span>, <span class="va">anticlusters</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="va">sd</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.27                0.06                1.05                2.42 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.27                0.07                0.84                1.93 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.23                0.07                0.84                2.01 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.25                0.06                1.08                2.89 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.24                0.06                0.91                2.75 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.23                0.07                0.87                2.32 </span>
 <span class="r-in"><span><span class="co"># Room is balanced between the three sets:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span>Room <span class="op">=</span> <span class="va">schaper2019</span><span class="op">$</span><span class="va">room</span>, Set <span class="op">=</span> <span class="va">anticlusters</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           Set</span>
@@ -206,27 +209,27 @@ https://doi.org/10.1037/xlm0000602</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/by.html" class="external-link">by</a></span><span class="op">(</span><span class="va">features</span>, <span class="va">ac_dist</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ac_dist: 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                4.49                1.10                3.41               18.31 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                4.48                1.10                3.44               18.34 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ac_dist: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                4.50                1.11                3.44               18.31 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                4.50                1.10                3.41               18.31 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ac_dist: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                4.49                1.10                3.41               18.31 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                4.50                1.11                3.41               18.28 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/by.html" class="external-link">by</a></span><span class="op">(</span><span class="va">features</span>, <span class="va">ac_dist</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="va">sd</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ac_dist: 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.24                0.07                0.84                2.39 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.26                0.07                0.88                2.35 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ac_dist: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.26                0.06                1.05                2.42 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.23                0.06                0.95                2.47 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ac_dist: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent           syllables           frequency </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.26                0.07                0.91                2.43 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.26                0.07                0.98                2.41 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -243,7 +246,7 @@ https://doi.org/10.1037/xlm0000602</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>

@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.10-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.12</span>
       </span>
     </div>
 
@@ -49,6 +49,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/Anticlustering_in_2025.html">Anticlustering in 2025</a>
+    </li>
+    <li>
       <a href="../articles/Best_practices.html">Some best practices for anticlustering</a>
     </li>
     <li>
@@ -104,41 +107,37 @@ Papenberg</h4>
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/m-Py/anticlust" class="external-link">anticlust</a></span><span class="op">)</span></span></code></pre></div>
-<p>In this vignette I explore two ways to incorporate categorical
+<p>In this vignette I explore some ways to incorporate categorical
 variables with anticlustering. The main function of
 <code>anticlust</code> is <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, and it has an
 argument <code>categories</code>. It can be used easily enough: We just
 pass the numeric variables as first argument (<code>x</code>) and our
 categorical variable(s) to <code>categories</code>. I will use the
-penguin data set from the <code>palmerpenguins</code> package to
-illustrate the usage:</p>
+penguin data set to illustrate the usage:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/" class="external-link">palmerpenguins</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span>
 <span><span class="co"># First exclude cases with missing values</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 8</span></span></span>
-<span><span class="co">#&gt;   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Adelie  Torgersen           39.1          18.7               181        <span style="text-decoration: underline;">3</span>750</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Adelie  Torgersen           39.5          17.4               186        <span style="text-decoration: underline;">3</span>800</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Adelie  Torgersen           40.3          18                 195        <span style="text-decoration: underline;">3</span>250</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Adelie  Torgersen           36.7          19.3               193        <span style="text-decoration: underline;">3</span>450</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Adelie  Torgersen           39.3          20.6               190        <span style="text-decoration: underline;">3</span>650</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Adelie  Torgersen           38.9          17.8               181        <span style="text-decoration: underline;">3</span>625</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</span></span></span>
+<span><span class="co">#&gt;   species    island bill_len bill_dep flipper_len body_mass    sex year</span></span>
+<span><span class="co">#&gt; 1  Adelie Torgersen     39.1     18.7         181      3750   male 2007</span></span>
+<span><span class="co">#&gt; 2  Adelie Torgersen     39.5     17.4         186      3800 female 2007</span></span>
+<span><span class="co">#&gt; 3  Adelie Torgersen     40.3     18.0         195      3250 female 2007</span></span>
+<span><span class="co">#&gt; 5  Adelie Torgersen     36.7     19.3         193      3450 female 2007</span></span>
+<span><span class="co">#&gt; 6  Adelie Torgersen     39.3     20.6         190      3650   male 2007</span></span>
+<span><span class="co">#&gt; 7  Adelie Torgersen     38.9     17.8         181      3625 female 2007</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 333</span></span></code></pre></div>
 <p>In the data set, each row represents a penguin, and the data set has
-four numeric variables (bill_length_mm, bill_depth_mm,
-flipper_length_mm, body_mass_g) and several categorical variables
-(species, island, sex) as descriptions of the penguins.</p>
+four numeric variables (bill_len, bill_dep, flipper_len, body_mass) and
+several categorical variables (species, island, sex) as descriptions of
+the penguins.</p>
 <p>Let’s call <code><a href="../reference/anticlustering.html">anticlustering()</a></code> to divide the 333 penguins
 into 3 groups. We use the four the numeric variables as first argument
 (i.e., the anticlustering objective is computed on the basis of the
 numeric variables), and the penguins’ sex as categorical variable:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">numeric_vars</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span>, <span class="st">"flipper_length_mm"</span>, <span class="st">"body_mass_g"</span><span class="op">)</span><span class="op">]</span></span>
+<code class="sourceCode R"><span><span class="va">numeric_vars</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bill_len"</span>, <span class="st">"bill_dep"</span>, <span class="st">"flipper_len"</span>, <span class="st">"body_mass"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span></span>
 <span>  <span class="va">numeric_vars</span>, </span>
 <span>  K <span class="op">=</span> <span class="fl">3</span>,</span>
@@ -206,36 +205,23 @@ them as numeric variables and use them as part of the first argument
 <code>x</code>, which is used to compute the anticlustering objective
 (e.g., the diversity or variance). This approach can lead to better
 results when multiple categorical variables are available, and / or if
-the group sizes are unequal. I discuss the approach by the example of
-k-means anticlustering, but using the diversity objective is also
-possible (in principle, any reasonable way to transform categorical
-variables to pairwise dissimilarities would work).</p>
-<p>To use categorical variables as part of the anticlustering objective,
-we first generate a matrix of the categorical variables in binary
-representation using the <code>anticlust</code> convenience function
-<code><a href="../reference/categories_to_binary.html">categories_to_binary()</a></code>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Because k-means anticlustering optimizes
-similarity with regard to means, k-means anticlustering applied to this
-binary matrix will even out the proportion of each category in each
-group (this is because the mean of a binary variable is the proportion
-of <code>1</code>s in that variable).</p>
+the group sizes are unequal. Since version 0.8.12, we can use
+categorical variables as part of the first argument when they are
+defined as factors. Before that, we manually had to convert categorical
+variables into a binary representation via
+<code><a href="../reference/categories_to_binary.html">categories_to_binary()</a></code>. Manual conversion can still be
+useful, as shown further below.</p>
+<p>In the penguin data sets, all variables are already correctly coded,
+i.e., categorical variables are defined as factors. So I generate a data
+frame that includes all features – numeric and categorical features –
+and use it as input for anticlustering.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">binary_categories</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/categories_to_binary.html">categories_to_binary</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"species"</span>, <span class="st">"sex"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co"># see ?categories_to_binary</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">binary_categories</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   speciesAdelie speciesChinstrap speciesGentoo sexfemale sexmale</span></span>
-<span><span class="co">#&gt; 1             1                0             0         0       1</span></span>
-<span><span class="co">#&gt; 2             1                0             0         1       0</span></span>
-<span><span class="co">#&gt; 3             1                0             0         1       0</span></span>
-<span><span class="co">#&gt; 4             1                0             0         1       0</span></span>
-<span><span class="co">#&gt; 5             1                0             0         0       1</span></span>
-<span><span class="co">#&gt; 6             1                0             0         1       0</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">all_features</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">numeric_vars</span>, <span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"species"</span>, <span class="st">"sex"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span></span>
-<span>  <span class="va">binary_categories</span>,</span>
+<span>  <span class="va">all_features</span>,</span>
 <span>  K <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"local-maximum"</span>, </span>
-<span>  objective <span class="op">=</span> <span class="st">"variance"</span>,</span>
-<span>  repetitions <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  standardize <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">groups</span>, <span class="va">df</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span>
@@ -247,199 +233,105 @@ of <code>1</code>s in that variable).</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">groups</span>, <span class="va">df</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       </span></span>
 <span><span class="co">#&gt; groups Adelie Chinstrap Gentoo</span></span>
-<span><span class="co">#&gt;      1     49        23     39</span></span>
-<span><span class="co">#&gt;      2     49        22     40</span></span>
-<span><span class="co">#&gt;      3     48        23     40</span></span></code></pre></div>
+<span><span class="co">#&gt;      1     49        22     40</span></span>
+<span><span class="co">#&gt;      2     48        23     40</span></span>
+<span><span class="co">#&gt;      3     49        23     39</span></span></code></pre></div>
 <p>The results are quite convincing. In particular, the penguins’ sex is
 better balanced than previously when we used the argument
 <code>categories</code>. If we have multiple categorical variables and /
-or unequal-sized groups, it may be useful to try out the k-means
-optimization version of including categorical variables, instead of
-(only) using the <code>categories</code> argument. If we also wish to
-ensure that the categorical variables <em>in their combination</em> are
-balanced between groups (i.e., the proportion of the penguins’ sex is
-roughly the same for each species in each group), we could set the
-optional argument <code>use_combinations</code> of
-<code><a href="../reference/categories_to_binary.html">categories_to_binary()</a></code> to <code>TRUE</code>:</p>
+or unequal-sized groups, it may be useful to try out using categorical
+variables as factors, instead of using the <code>categories</code>
+argument.</p>
+<p>If we also wish to ensure that the categorical variables <em>in their
+combination</em> are balanced between groups, we must do some manual
+data preparation. For anticlustering, categorical variables are
+converted into a binary representation via “one hot” encoding. The
+<code>anticlust</code> package has the convenience function
+<code><a href="../reference/categories_to_binary.html">categories_to_binary()</a></code>. for this purpose.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> This is done
+internally via <code><a href="../reference/anticlustering.html">anticlustering()</a></code> when using categorical
+variables as part of the data input (as factors). In that case, however,
+combinations of categorical variables are not considered. To consider
+combinations, we can manually create our data set with binary
+categorical variables, setting the optional argument
+<code>use_combinations</code> of <code><a href="../reference/categories_to_binary.html">categories_to_binary()</a></code> to
+<code>TRUE</code>. First, let’s see how we would manually encode
+categorical variables without considering their combinations. We will
+use collection year (2007, 2008, 2009) and species as categorical
+variables:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">binary_categories</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/categories_to_binary.html">categories_to_binary</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"species"</span>, <span class="st">"sex"</span><span class="op">)</span><span class="op">]</span>, use_combinations <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">binary_categories</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/categories_to_binary.html">categories_to_binary</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"species"</span>, <span class="st">"year"</span><span class="op">)</span><span class="op">]</span>, use_combinations <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">data_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">binary_categories</span>, <span class="va">numeric_vars</span><span class="op">)</span></span>
 <span><span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span></span>
-<span>  <span class="va">binary_categories</span>,</span>
+<span>  <span class="va">data_input</span>,</span>
 <span>  K <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  method <span class="op">=</span> <span class="st">"local-maximum"</span>, </span>
-<span>  objective <span class="op">=</span> <span class="st">"variance"</span>,</span>
-<span>  repetitions <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"local-maximum"</span>,</span>
 <span>  standardize <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">groups</span>, <span class="va">df</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span>
-<span><span class="co">#&gt;       </span></span>
-<span><span class="co">#&gt; groups female male</span></span>
-<span><span class="co">#&gt;      1     55   56</span></span>
-<span><span class="co">#&gt;      2     55   56</span></span>
-<span><span class="co">#&gt;      3     55   56</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">groups</span>, <span class="va">df</span><span class="op">$</span><span class="va">species</span><span class="op">)</span> </span>
-<span><span class="co">#&gt;       </span></span>
-<span><span class="co">#&gt; groups Adelie Chinstrap Gentoo</span></span>
-<span><span class="co">#&gt;      1     49        23     39</span></span>
-<span><span class="co">#&gt;      2     49        22     40</span></span>
-<span><span class="co">#&gt;      3     48        23     40</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">groups</span>, <span class="va">df</span><span class="op">$</span><span class="va">sex</span>, <span class="va">df</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">groups</span>, <span class="va">df</span><span class="op">$</span><span class="va">year</span>, <span class="va">df</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span>
 <span><span class="co">#&gt; , ,  = Adelie</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       </span></span>
-<span><span class="co">#&gt; groups female male</span></span>
-<span><span class="co">#&gt;      1     24   25</span></span>
-<span><span class="co">#&gt;      2     25   24</span></span>
-<span><span class="co">#&gt;      3     24   24</span></span>
+<span><span class="co">#&gt; groups 2007 2008 2009</span></span>
+<span><span class="co">#&gt;      1   15   17   17</span></span>
+<span><span class="co">#&gt;      2   14   16   18</span></span>
+<span><span class="co">#&gt;      3   15   17   17</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; , ,  = Chinstrap</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       </span></span>
-<span><span class="co">#&gt; groups female male</span></span>
-<span><span class="co">#&gt;      1     12   11</span></span>
-<span><span class="co">#&gt;      2     11   11</span></span>
-<span><span class="co">#&gt;      3     11   12</span></span>
+<span><span class="co">#&gt; groups 2007 2008 2009</span></span>
+<span><span class="co">#&gt;      1    8    7    8</span></span>
+<span><span class="co">#&gt;      2    9    6    8</span></span>
+<span><span class="co">#&gt;      3    9    5    8</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; , ,  = Gentoo</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       </span></span>
-<span><span class="co">#&gt; groups female male</span></span>
-<span><span class="co">#&gt;      1     19   20</span></span>
-<span><span class="co">#&gt;      2     19   21</span></span>
-<span><span class="co">#&gt;      3     20   20</span></span></code></pre></div>
-<p>Note that we only evenly distributed the categorical variable between
-groups and did not consider any numeric variables. Fortunately, also
-considering the numeric variables is possible, and can we accomplish
-that in two different ways:</p>
-<ol style="list-style-type: lower-alpha">
-<li>we first optimize similarity with regard to the categorical
-variable(s) via k-means anticlustering, and then insert the resulting
-group assignment as a “hard constraint” into
-<code><a href="../reference/anticlustering.html">anticlustering()</a></code>
-</li>
-<li>we simultaneous optimize similarity with regard to numeric and
-categorical variables</li>
-</ol>
-<p>We discuss both approaches in the following.</p>
-<div class="section level3">
-<h3 id="a--sequential-optimization">a. Sequential optimization<a class="anchor" aria-label="anchor" href="#a--sequential-optimization"></a>
-</h3>
-<p>We use the output vector <code>groups</code> of the previous call to
-<code><a href="../reference/anticlustering.html">anticlustering()</a></code>—which convincingly balanced our
-categorical variables—as input to the <code>K</code> argument in an
-additional call to <code><a href="../reference/anticlustering.html">anticlustering()</a></code>. The
-<code>groups</code> vector is used as the initial group assignment
-before the anticlustering optimization starts. In this group assignment,
-the categories are already well balanced. We additionally pass the two
-categorical variables to <code>categories</code>, thus ensuring that the
-balancing of the categorical variable is never changed throughout the
-optimization process:<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<span><span class="co">#&gt; groups 2007 2008 2009</span></span>
+<span><span class="co">#&gt;      1   11   14   14</span></span>
+<span><span class="co">#&gt;      2   11   16   13</span></span>
+<span><span class="co">#&gt;      3   11   15   14</span></span></code></pre></div>
+<p>When setting <code>use_combinations = TRUE</code>, we will also
+balance the proportions of species collected in each year across groups,
+which was not explicitly done before:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">final_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span></span>
-<span>  <span class="va">numeric_vars</span>,</span>
-<span>  K <span class="op">=</span> <span class="va">groups</span>,</span>
-<span>  standardize <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<code class="sourceCode R"><span><span class="va">binary_categories</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/categories_to_binary.html">categories_to_binary</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"species"</span>, <span class="st">"year"</span><span class="op">)</span><span class="op">]</span>, use_combinations <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">data_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">binary_categories</span>, <span class="va">numeric_vars</span><span class="op">)</span></span>
+<span><span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span></span>
+<span>  <span class="va">data_input</span>,</span>
+<span>  K <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"local-maximum"</span>,</span>
-<span>  categories <span class="op">=</span> <span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"species"</span>, <span class="st">"sex"</span><span class="op">)</span><span class="op">]</span></span>
+<span>  standardize <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">groups</span>, <span class="va">df</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">groups</span>, <span class="va">df</span><span class="op">$</span><span class="va">year</span>, <span class="va">df</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span>
+<span><span class="co">#&gt; , ,  = Adelie</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       </span></span>
-<span><span class="co">#&gt; groups female male</span></span>
-<span><span class="co">#&gt;      1     55   56</span></span>
-<span><span class="co">#&gt;      2     55   56</span></span>
-<span><span class="co">#&gt;      3     55   56</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">groups</span>, <span class="va">df</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span>
+<span><span class="co">#&gt; groups 2007 2008 2009</span></span>
+<span><span class="co">#&gt;      1   14   17   18</span></span>
+<span><span class="co">#&gt;      2   15   16   17</span></span>
+<span><span class="co">#&gt;      3   15   17   17</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; , ,  = Chinstrap</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       </span></span>
-<span><span class="co">#&gt; groups Adelie Chinstrap Gentoo</span></span>
-<span><span class="co">#&gt;      1     49        23     39</span></span>
-<span><span class="co">#&gt;      2     49        22     40</span></span>
-<span><span class="co">#&gt;      3     48        23     40</span></span>
-<span><span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">numeric_vars</span>, <span class="va">final_groups</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   bill_length_mm bill_depth_mm  flipper_length_mm body_mass_g       </span></span>
-<span><span class="co">#&gt; 1 "43.99 (5.58)" "17.17 (1.96)" "201.00 (14.09)"  "4206.31 (811.03)"</span></span>
-<span><span class="co">#&gt; 2 "43.99 (5.38)" "17.16 (1.98)" "201.00 (14.04)"  "4207.66 (803.24)"</span></span>
-<span><span class="co">#&gt; 3 "44.00 (5.49)" "17.17 (1.98)" "200.90 (14.05)"  "4207.21 (808.66)"</span></span></code></pre></div>
-<p>The results are convincing, both with regard to the numeric variables
-and the categorical variables.</p>
-</div>
-<div class="section level3">
-<h3 id="b--simultaneous-optimization">b. Simultaneous optimization<a class="anchor" aria-label="anchor" href="#b--simultaneous-optimization"></a>
-</h3>
-<p>We can simultaneously consider the numeric and categorical variables
-in the optimization process. Note that this approach only works with the
-k-means and k-plus objectives, because only k-means adequately deals
-with the categorical variables (at least when using the approach
-described here). Using the simultaneous approach, we just pass all
-variables (representing binary categories and numeric variables) as a
-single matrix to the first argument of <code><a href="../reference/anticlustering.html">anticlustering()</a></code>. Do
-not use the <code>categories</code> argument here!</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">final_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">numeric_vars</span>, <span class="va">binary_categories</span><span class="op">)</span>,</span>
-<span>  K <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  standardize <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  method <span class="op">=</span> <span class="st">"local-maximum"</span>, </span>
-<span>  objective <span class="op">=</span> <span class="st">"variance"</span>,</span>
-<span>  repetitions <span class="op">=</span> <span class="fl">10</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">groups</span>, <span class="va">df</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span>
+<span><span class="co">#&gt; groups 2007 2008 2009</span></span>
+<span><span class="co">#&gt;      1    9    6    8</span></span>
+<span><span class="co">#&gt;      2    9    6    8</span></span>
+<span><span class="co">#&gt;      3    8    6    8</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; , ,  = Gentoo</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       </span></span>
-<span><span class="co">#&gt; groups female male</span></span>
-<span><span class="co">#&gt;      1     55   56</span></span>
-<span><span class="co">#&gt;      2     55   56</span></span>
-<span><span class="co">#&gt;      3     55   56</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">groups</span>, <span class="va">df</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span>
-<span><span class="co">#&gt;       </span></span>
-<span><span class="co">#&gt; groups Adelie Chinstrap Gentoo</span></span>
-<span><span class="co">#&gt;      1     49        23     39</span></span>
-<span><span class="co">#&gt;      2     49        22     40</span></span>
-<span><span class="co">#&gt;      3     48        23     40</span></span>
-<span><span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">numeric_vars</span>, <span class="va">final_groups</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   bill_length_mm bill_depth_mm  flipper_length_mm body_mass_g       </span></span>
-<span><span class="co">#&gt; 1 "44.00 (5.48)" "17.17 (1.96)" "200.96 (13.70)"  "4206.98 (828.22)"</span></span>
-<span><span class="co">#&gt; 2 "43.99 (5.54)" "17.16 (1.94)" "200.96 (14.58)"  "4206.98 (803.28)"</span></span>
-<span><span class="co">#&gt; 3 "43.99 (5.43)" "17.16 (2.02)" "200.97 (13.88)"  "4207.21 (791.01)"</span></span></code></pre></div>
-<p>The following code extends the simultaneous optimization approach
-towards k-plus anticlustering, which ensures that standard deviations as
-well as means are similar between groups (and not only the means, which
-is achieved via standard k-means anticlustering):</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">final_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="../reference/kplus_moment_variables.html">kplus_moment_variables</a></span><span class="op">(</span><span class="va">numeric_vars</span>, T <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, <span class="va">binary_categories</span><span class="op">)</span>,</span>
-<span>  K <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  method <span class="op">=</span> <span class="st">"local-maximum"</span>, </span>
-<span>  objective <span class="op">=</span> <span class="st">"variance"</span>, </span>
-<span>  repetitions <span class="op">=</span> <span class="fl">10</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">groups</span>, <span class="va">df</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span>
-<span><span class="co">#&gt;       </span></span>
-<span><span class="co">#&gt; groups female male</span></span>
-<span><span class="co">#&gt;      1     55   56</span></span>
-<span><span class="co">#&gt;      2     55   56</span></span>
-<span><span class="co">#&gt;      3     55   56</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">groups</span>, <span class="va">df</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span>
-<span><span class="co">#&gt;       </span></span>
-<span><span class="co">#&gt; groups Adelie Chinstrap Gentoo</span></span>
-<span><span class="co">#&gt;      1     49        23     39</span></span>
-<span><span class="co">#&gt;      2     49        22     40</span></span>
-<span><span class="co">#&gt;      3     48        23     40</span></span>
-<span><span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">numeric_vars</span>, <span class="va">final_groups</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   bill_length_mm bill_depth_mm  flipper_length_mm body_mass_g       </span></span>
-<span><span class="co">#&gt; 1 "44.00 (5.48)" "17.16 (1.98)" "200.97 (14.05)"  "4207.88 (807.64)"</span></span>
-<span><span class="co">#&gt; 2 "43.99 (5.48)" "17.17 (1.98)" "200.97 (14.07)"  "4207.43 (807.94)"</span></span>
-<span><span class="co">#&gt; 3 "43.99 (5.49)" "17.16 (1.97)" "200.95 (14.06)"  "4205.86 (807.37)"</span></span></code></pre></div>
-<p>While we use <code>objective = "variance"</code>—indicating that the
-k-means objective is used—this code actually performs k-plus
-anticlustering because the first argument takes as input the augmented
-k-plus variable matrix<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. We see that the standard deviations are
-now also quite evenly matched between groups (which is unlike when using
-standard k-means anticlustering).</p>
-<p>In the end: You should try out the different approaches for dealing
-with categorical variables and see which one works best for you!</p>
-</div>
+<span><span class="co">#&gt; groups 2007 2008 2009</span></span>
+<span><span class="co">#&gt;      1   11   15   13</span></span>
+<span><span class="co">#&gt;      2   11   15   14</span></span>
+<span><span class="co">#&gt;      3   11   15   14</span></span></code></pre></div>
+<p>Now, the year of data collection is perfectly balance across groups
+for each of the three species, which is not accomplished when setting
+<code>use_combinations = FALSE</code> or when using the categories as
+factors, which internally sets
+<code>use_combinations = FALSE</code>.</p>
 </div>
 <div class="footnotes footnotes-end-of-document">
 <hr>
@@ -447,15 +339,6 @@ with categorical variables and see which one works best for you!</p>
 <li id="fn1"><p>Internally, <code><a href="../reference/categories_to_binary.html">categories_to_binary()</a></code> is
 wrapper around the base <code>R</code> function
 <code><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix()</a></code>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Only elements that have the same value in
-<code>categories</code> are exchanged between clusters throughout the
-optimization algorithm, so the initial balancing of the categories is
-never changed when the algorithm runs.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>This is how k-plus anticlustering actually works: It
-reuses the k-means criterion but uses additional “k-plus” variables as
-input. More information on the k-plus approach is given in the
-documentation: <code><a href="../reference/kplus_moment_variables.html">?kplus_moment_variables</a></code> and
-<code><a href="../reference/kplus_anticlustering.html">?kplus_anticlustering</a></code>.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>
@@ -475,7 +358,7 @@ documentation: <code><a href="../reference/kplus_moment_variables.html">?kplus_m
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer>

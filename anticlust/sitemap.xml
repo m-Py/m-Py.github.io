@@ -3,6 +3,7 @@
 <url><loc>/LICENSE-text.html</loc></url>
 <url><loc>/LICENSE.html</loc></url>
 <url><loc>/OLD_NEWS.html</loc></url>
+<url><loc>/articles/Anticlustering_in_2025.html</loc></url>
 <url><loc>/articles/Best_practices.html</loc></url>
 <url><loc>/articles/Categorical_vars.html</loc></url>
 <url><loc>/articles/Speeding_up_anticlustering.html</loc></url>
@@ -14,6 +15,7 @@
 <url><loc>/reference/anticlustering.html</loc></url>
 <url><loc>/reference/balanced_clustering.html</loc></url>
 <url><loc>/reference/bicriterion_anticlustering.html</loc></url>
+<url><loc>/reference/brunel2025.html</loc></url>
 <url><loc>/reference/categorical_sampling.html</loc></url>
 <url><loc>/reference/categories_to_binary.html</loc></url>
 <url><loc>/reference/dispersion_objective.html</loc></url>

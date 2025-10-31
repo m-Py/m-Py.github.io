@@ -1,9 +1,10 @@
-pandoc: '3.2'
-pkgdown: 2.1.1
+pandoc: '3.4'
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
+  Anticlustering_in_2025: Anticlustering_in_2025.html
   Best_practices: Best_practices.html
   Categorical_vars: Categorical_vars.html
   Speeding_up_anticlustering: Speeding_up_anticlustering.html
   stimulus-selection: stimulus-selection.html
-last_built: 2025-04-09T09:30Z
+last_built: 2025-10-31T15:01Z

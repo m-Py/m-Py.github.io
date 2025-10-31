@@ -6,8 +6,9 @@ maximizing instead of minimizing a clustering objective function.
 Implements anticlustering methods as described in Papenberg and
 Klau (2021; &amp;lt;doi:10.1037/met0000301&amp;gt;), Brusco et al.
 (2020; &amp;lt;doi:10.1111/bmsp.12186&amp;gt;), Papenberg (2024;
-&amp;lt;doi:10.1111/bmsp.12315&amp;gt;), and Papenberg et al. (2025;
-&amp;lt;doi:10.1101/2025.03.03.641320&amp;gt;)."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+&amp;lt;doi:10.1111/bmsp.12315&amp;gt;), Papenberg, Wang, et al. (2025;
+&amp;lt;doi:10.1016/j.crmeth.2025.101137&amp;gt;), Papenberg, Breuer, et al. (2025;
+&amp;lt;doi:10.1017/psy.2025.10052&amp;gt;), and Yang et al. (2022; &amp;lt;doi:10.1016/j.ejor.2022.02.003&amp;gt;)."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
@@ -25,7 +26,7 @@ Klau (2021; &amp;lt;doi:10.1037/met0000301&amp;gt;), Brusco et al.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.10-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.12</span>
       </span>
     </div>
 
@@ -40,6 +41,9 @@ Klau (2021; &amp;lt;doi:10.1037/met0000301&amp;gt;), Brusco et al.
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/Anticlustering_in_2025.html">Anticlustering in 2025</a>
+    </li>
+    <li>
       <a href="../articles/Best_practices.html">Some best practices for anticlustering</a>
     </li>
     <li>
@@ -86,8 +90,9 @@ maximizing instead of minimizing a clustering objective function.
 Implements anticlustering methods as described in Papenberg and
 Klau (2021; &lt;doi:10.1037/met0000301&gt;), Brusco et al.
 (2020; &lt;doi:10.1111/bmsp.12186&gt;), Papenberg (2024;
-&lt;doi:10.1111/bmsp.12315&gt;), and Papenberg et al. (2025;
-&lt;doi:10.1101/2025.03.03.641320&gt;).</p>
+&lt;doi:10.1111/bmsp.12315&gt;), Papenberg, Wang, et al. (2025;
+&lt;doi:10.1016/j.crmeth.2025.101137&gt;), Papenberg, Breuer, et al. (2025;
+&lt;doi:10.1017/psy.2025.10052&gt;), and Yang et al. (2022; &lt;doi:10.1016/j.ejor.2022.02.003&gt;).</p>
     </div>
 
     <div id="ref-usage">
@@ -137,7 +142,7 @@ Details.</p></dd>
 
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p>One of "exchange" (default) , "local-maximum",
-"brusco", "ilp", or "2PML".  See Details.</p></dd>
+"brusco", "ilp", "2PML", or "3phase".  See Details.</p></dd>
 
 
 <dt id="arg-preclustering">preclustering<a class="anchor" aria-label="anchor" href="#arg-preclustering"></a></dt>
@@ -155,8 +160,9 @@ between groups. See Details.</p></dd>
 <dt id="arg-repetitions">repetitions<a class="anchor" aria-label="anchor" href="#arg-repetitions"></a></dt>
 <dd><p>The number of times a search heuristic is
 initiated when using <code>method = "exchange"</code>, <code>method =
-"local-maximum"</code>, <code>method = "brusco"</code>, or <code>method = "2PML"</code>.
-In the end, the best objective found across the repetitions is returned.</p></dd>
+"local-maximum"</code>, <code>method = "brusco"</code>, <code>method = "3phase"</code>,
+or <code>method = "2PML"</code>. In the end, the best objective found across
+the repetitions is returned.</p></dd>
 
 
 <dt id="arg-standardize">standardize<a class="anchor" aria-label="anchor" href="#arg-standardize"></a></dt>
@@ -168,7 +174,9 @@ argument is silently ignored if <code>x</code> is a distance matrix.</p></dd>
 
 <dt id="arg-cannot-link">cannot_link<a class="anchor" aria-label="anchor" href="#arg-cannot-link"></a></dt>
 <dd><p>A 2 column matrix where each row has the indices
-of two elements that must not be assigned to the same anticluster.</p></dd>
+of two elements that must not be assigned to the same anticluster.
+Alternatively a vector of length <code>nrow(x)</code>; elements having
+the same value in this vector cannot be assigned to the same anticluster.</p></dd>
 
 
 <dt id="arg-must-link">must_link<a class="anchor" aria-label="anchor" href="#arg-must-link"></a></dt>
@@ -254,6 +262,9 @@ self-generated dissimilarity matrix via the argument <code>x</code>.</p>
 <p>In the standard case, groups of equal size are generated. Adjust
 the argument <code>K</code> to create groups of different size (see
 Examples).</p>
+<p>As of version 0.8.12, this function supports handling of missing values (<code>NA</code>).
+In this case the function <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></code> handles the (<code>NA</code>) when converting
+features to pairwise distances.</p>
 <p><strong>Algorithms for anticlustering</strong></p>
 <p>By default, a heuristic method is employed for anticlustering: the
 exchange method (<code>method = "exchange"</code>). First, elements are
@@ -290,6 +301,13 @@ that approximate the optimal pareto efficient set according to both
 objectives (diversity and dispersion). Thus, to fully utilize the
 BILS algorithm, use the function
 <code><a href="bicriterion_anticlustering.html">bicriterion_anticlustering</a></code>.</p>
+<p>Since version 0.8.12, <code>method = "3phase"</code> calls the three phase search algorithm
+for anticlustering by Yang et al. (2022). For anticlust, we implemented some
+changes of their default procedure, in particular they used a maximum "time"
+that the algorithm runs before terminating. For consistency with our other
+methods in anticlust, we are however using a maximum number of repetitions.
+Our default is 50 repetitions, which may be increased (but not decreased!)
+with the <code>repetitions</code> argument.</p>
 <p><strong>Optimal anticlustering</strong></p>
 <p>Usually, heuristics are employed to tackle anticlustering problems,
 and their performance is generally very satisfying.  However,
@@ -338,6 +356,14 @@ the numeric data, i.e., the first argument <code>x</code> via binary coding
 when using the bicriterion algorithm by Bruso et al. Using the argument
 <code>categories</code> is only available for the classical exchange procedures,
 that is, for <code>method = "exchange"</code> and <code>method = "local-maximum"</code>.</p>
+<p>As of version 0.8.12, the data input <code>x</code> can contain variables of type <code>factor</code>
+to represent categorical variables. In this case, they are internally converted to
+binary via <code><a href="categories_to_binary.html">categories_to_binary</a></code>, which no longer needs to be done
+manually by users (and which can be tricky in particular when combining categorical
+and numeric variables, and when using the k-plus objective). However note that the internal
+conversion always uses <code>use_combinations = FALSE</code>, which may not always
+what users need. In this case, I still recommend using <code><a href="categories_to_binary.html">categories_to_binary</a></code>
+manually.</p>
 <p><strong>Anticlustering with constraints</strong></p>
 <p>Versions 0.8.6 and 0.8.7 of anticlust introduced the possibility to induce
 cannot-link and must-link constraints with anticlustering with
@@ -355,13 +381,17 @@ a necessary dependency with anticlust. It is therefore recommended to
 manually install the Rsymphony package, which is then automatically
 selected as solver when using the <code>must_link</code> argument. If you have
 access to the gurobi solver and have the gurobi R package installed, it will
-be selected as solver (which is even faster than Symphony).</p>
+be selected as solver (which is even faster than Symphony). As of version 0.8.11,
+it is also possible to use <code>cannot_link</code> as a vector. In this case it
+is ensured that elements having the same value in <code>cannot_link</code> are not
+linked in the same cluster. The methods for handling <code>cannot_link</code> constraints
+have been described in Papenberg, Breuer, et al. (2025).</p>
 <p>Must-link constraints are passed as a single vector of length <code>nrow(x)</code>.
 Positions that have the same numeric index are assigned to the same anticluster
 (if the constraints can be fulfilled). When including must-link constraints,
 <code>method = "2PML"</code> performs a specialized search heuristic that potentially
 yields better results than <code>method = "local-maximum"</code>. The must-link
-functionality and the 2PML algorithm was introduced in Papenberg et al. (2025).</p>
+functionality and the 2PML algorithm was introduced in Papenberg, Wang, et al. (2025).</p>
 <p>The examples illustrate the usage of the <code>must_link</code> and <code>cannot_link</code>
 arguments. Currently, the different kinds of constraints (arguments <code>must_link</code>,
 <code>cannot_link</code>, and <code>categories</code>) cannot be used together, but this
@@ -407,6 +437,9 @@ as well.</p>
 diversity and dispersion criteria for anticlustering: A bicriterion
 approach. British Journal of Mathematical and Statistical
 Psychology, 73, 275-396. https://doi.org/10.1111/bmsp.12186</p>
+<p>Papenberg, M., Breuer, M., Diekhoff, M., Tran, N. K., &amp; Klau, G. W.
+(2025). Extending the Bicriterion Approach for Anticlustering:
+Exact and Hybrid Approaches. Advance online publication. Psychometrika.</p>
 <p>Papenberg, M., &amp; Klau, G. W. (2021). Using anticlustering to partition
 data sets into equivalent parts. Psychological Methods, 26(2),
 161–174. https://doi.org/10.1037/met0000301.</p>
@@ -423,6 +456,10 @@ Control and Cybernetics, 15, 213-218.</p>
 <p>Weitz, R. R., &amp; Lakshminarayanan, S. (1998). An empirical comparison of
 heuristic methods for creating maximally diverse groups. Journal of the
 Operational Research Society, 49(6), 635-646. https://doi.org/10.1057/palgrave.jors.2600510</p>
+<p>Yang, X., Cai, Z., Jin, T., Tang, Z., &amp; Gao, S. (2022). A three-phase search
+approach with dynamic population size for solving the maximally diverse grouping
+problem. European Journal of Operational Research, 302(3), 925-953.
+https://doi.org/10.1016/j.ejor.2022.02.003</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -505,7 +542,7 @@ Operational Research Society, 49(6), 635-646. https://doi.org/10.1057/palgrave.j
 <span class="r-in"><span><span class="va">cl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 1 1 1 1 1 1 1 1 1</span>
 <span class="r-in"><span><span class="va">cl</span><span class="op">[</span><span class="fl">11</span><span class="op">:</span><span class="fl">20</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 1 1 1 1 1 1 1 1 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 3 3 3 3 3 3 3 3 3 3</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Use the heuristic by Brusco et al. (2020) for k-plus anticlustering</span></span></span>
 <span class="r-in"><span><span class="co"># Include categorical variable as part of the optimization criterion rather </span></span></span>
@@ -523,9 +560,9 @@ Operational Research Society, 49(6), 635-646. https://doi.org/10.1057/palgrave.j
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">schaper2019</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="va">anticlusters</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   rating_consistent rating_inconsistent syllables     frequency     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 "4.49 (0.25)"     "1.10 (0.07)"       "3.44 (0.91)" "18.31 (2.42)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 "4.50 (0.25)"     "1.10 (0.07)"       "3.41 (0.95)" "18.31 (2.42)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 "4.49 (0.25)"     "1.10 (0.07)"       "3.41 (0.95)" "18.31 (2.40)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 "4.49 (0.25)"     "1.10 (0.07)"       "3.44 (0.91)" "18.34 (2.42)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 "4.49 (0.25)"     "1.10 (0.07)"       "3.41 (0.95)" "18.31 (2.42)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 "4.49 (0.25)"     "1.10 (0.07)"       "3.41 (0.95)" "18.28 (2.40)"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">anticlusters</span>, <span class="va">schaper2019</span><span class="op">$</span><span class="va">room</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> anticlusters bathroom kitchen</span>
@@ -547,7 +584,7 @@ Operational Research Society, 49(6), 635-646. https://doi.org/10.1057/palgrave.j
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>
