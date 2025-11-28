@@ -64,6 +64,7 @@ In my research, I compared two tests with regard to their classification
 accuracy. Both tests performed rather 
 
 ```{r}
+
 library(abtest)
 
 data <- list(
@@ -73,7 +74,7 @@ data <- list(
   n2 = sum(classifications[, "DOMC"])
 )
 bf_abtest <- ab_test(data = data, prior_prob = c(H1 = 0.5, "H+" = 0, "H-" = 0, H0 = 0.5))
-print(bf_abtest)
+
 
 ```
 
@@ -83,7 +84,7 @@ not specified and either test could outperform the other with regards to the
 classification performance. We can extract this Bayes factor as follows:
 
 ```{r}
-1 / ab$bf$bf10
+1/bf_abtest$bf$bf10
 ```
 
 The Bayes factor we reported in the paper was however the Bayes factor computed 
