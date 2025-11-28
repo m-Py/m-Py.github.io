@@ -7,6 +7,20 @@ output:
     df_print: kable
 ---
 
+*Update on 2025-11-28*: As of now, I only check locally using `R CMD check --as-cran` and then submit to win builder to test on older machines.
+I no longer bother with building R devel myself.
+
+For the local check I use `devtools::check()`:
+
+```
+devtools::check(".", force_suggests=FALSE, cran = TRUE)
+```
+
+This way I can conveniently set the force_suggests environment variable because `anticlust` suggests `gurobi`, which is not available on all of my machines.
+
+
+---
+
 Before uploading a package to CRAN, it has to be tested using a recent
 development version of `R` that has to be installed from source:
 
