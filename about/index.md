@@ -6,7 +6,7 @@ output:
 
 <img src = "me.jpg" width = 130 alt = "Photo of Martin Papenberg">
 
-Hi! I am Martin Papenberg, working as a post-doctoral researcher and coordinator at the the [Department of Experimental Psychology](https://www.psychologie.hhu.de/studium-und-lehre-psychologie/institutskoordinator) at [Heinrich Heine University Düsseldorf](https://www.uni-duesseldorf.de/home/en/home.html). I am interested in statistics, methodology, measurement, and programming.
+Hi! I am Martin Papenberg. I am a post-doctoral researcher and coordinator at the [Department of Experimental Psychology](https://www.psychologie.hhu.de/studium-und-lehre-psychologie/institutskoordinator), and member of the [Center for Digital Medicine](https://www.zdm.hhu.de/en/) at [Heinrich Heine University Düsseldorf](https://www.uni-duesseldorf.de/home/en/home.html). I am interested in statistics, methodology, measurement, and programming.
 
 I am author of the `R` package [`anticlust`](https://github.com/m-Py/anticlust) that (among others) can be used to automatically assign stimuli to conditions in psychological experiments. The [package website](../anticlust/index.html) contains all documentation, introductory vignettes, and installation instructions. If you have any questions regarding the `anticlust` package, feel free to <a href = "mailto:martin.papenberg@hhu.de?subject=Help with the anticlust package">send me an email</a>.
 
@@ -18,7 +18,7 @@ Angelike, T., & **Papenberg, M.** (2025). Preventing Dataset Shift During Cross-
 
 ### Journal publications
 
-**Papenberg, M.**, Breuer, M., Diekhoff, M., Tran, N. K., & Klau, G. W. (2025). Extending the Bicriterion Approach for Anticlustering: Exact and Hybrid Approaches. *Psychometrika*. Advance online publication. https://doi.org/10.1017/psy.2025.10052 ([Preprint](https://osf.io/a5r4y))
+**Papenberg, M.**, Breuer, M., Diekhoff, M., Tran, N. K., & Klau, G. W. (2025). Extending the Bicriterion Approach for Anticlustering: Exact and Hybrid Approaches. *Psychometrika, 90*(5), 1789--1808. https://doi.org/10.1017/psy.2025.10052 ([Preprint](https://osf.io/a5r4y))
 
 **Papenberg, M.**, Wang, C., Diop, M., Bukhari, S. H., Oskotsky, B., Davidson, B. R., Vo, K. C., Liu, B., Irwin, J. C., Combes, A., Gaudilliere, B., Li, J., Stevenson, D. K., Klau, G. W., Giudice, L. C., Sirota, M., & Oskotsky, T. T. (2025). Anticlustering for sample allocation to minimize batch effects. *Cell Reports Methods, 5*(8), 101137. https://doi.org/10.1016/j.crmeth.2025.101137 ([Preprint](https://doi.org/10.1101/2025.03.03.641320))
 
