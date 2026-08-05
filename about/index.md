@@ -12,6 +12,8 @@ I am author of the `R` package [`anticlust`](https://github.com/m-Py/anticlust) 
 
 ### Preprints
 
+Tran, N. K., Mu, L., **Papenberg, M.**, & Klau, G. W. (2026). Coloring for dispersion: A polynomial-time algorithm for cardinality-constrained 2-anticlustering. *arXiv preprint*. https://doi.org/10.48550/arXiv.2604.24285
+
 Angelike, T., & **Papenberg, M.** (2025). Preventing Dataset Shift During Cross-Validation: Is it worth it? *OSF Preprints*. https://doi.org/10.31219/osf.io/b5fus_v1
 
 ### Journal publications
