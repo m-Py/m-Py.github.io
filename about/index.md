@@ -16,15 +16,15 @@ Angelike, T., & **Papenberg, M.** (2025). Preventing Dataset Shift During Cross-
 
 ### Journal publications
 
-**Papenberg, M.**, & Angelike, T. (in press). A simulation-based comparison of minimization, rerandomization, and anticlustering for creating experimental conditions. *Methodology*. https://doi.org/10.5964/meth.17973 ([Accepted Author Version](https://doi.org/10.23668/psycharchives.21773)) ([Preprint](https://doi.org/10.31234/osf.io/dpcyf_v2))
+**Papenberg, M.**, & Angelike, T. (2026). A simulation-based comparison of minimization, rerandomization, and anticlustering for creating experimental conditions. *Methodology, 22*(2), 127--150. https://doi.org/10.5964/meth.17973 ([Accepted Author Version](https://doi.org/10.23668/psycharchives.21773)) ([Preprint](https://doi.org/10.31234/osf.io/dpcyf_v2))
 
 **Papenberg, M.**, Breuer, M., Diekhoff, M., Tran, N. K., & Klau, G. W. (2025). Extending the Bicriterion Approach for Anticlustering: Exact and Hybrid Approaches. *Psychometrika, 90*(5), 1789--1808. https://doi.org/10.1017/psy.2025.10052 ([Preprint](https://osf.io/a5r4y))
 
 **Papenberg, M.**, Wang, C., Diop, M., Bukhari, S. H., Oskotsky, B., Davidson, B. R., Vo, K. C., Liu, B., Irwin, J. C., Combes, A., Gaudilliere, B., Li, J., Stevenson, D. K., Klau, G. W., Giudice, L. C., Sirota, M., & Oskotsky, T. T. (2025). Anticlustering for sample allocation to minimize batch effects. *Cell Reports Methods, 5*(8), 101137. https://doi.org/10.1016/j.crmeth.2025.101137 ([Preprint](https://doi.org/10.1101/2025.03.03.641320))
 
-**Papenberg, M.** (2024). K-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity. *British Journal of Mathematical and Statistical Psychology*, 77(1), 80--102. https://doi.org/10.1111/bmsp.12315 ([Preprint](https://doi.org/10.31234/osf.io/7jw6v))
+**Papenberg, M.** (2024). K-plus Anticlustering: An Improved k-means Criterion for Maximizing Between-Group Similarity. *British Journal of Mathematical and Statistical Psychology, 77*(1), 80--102. https://doi.org/10.1111/bmsp.12315 ([Preprint](https://doi.org/10.31234/osf.io/7jw6v))
 
-Brandenburg, N., & **Papenberg, M.** (2024). Reassessment of innovative methods to determine the number of factors: A simulation-based comparison of exploratory graph analysis and next eigenvalue sufficiency test. *Psychological Methods*, 29(1), 21--47. https://doi.org/10.1037/met0000527 ([Preprint](https://doi.org/10.31234/osf.io/dhzrc))
+Brandenburg, N., & **Papenberg, M.** (2024). Reassessment of innovative methods to determine the number of factors: A simulation-based comparison of exploratory graph analysis and next eigenvalue sufficiency test. *Psychological Methods, 29*(1), 21--47. https://doi.org/10.1037/met0000527 ([Preprint](https://doi.org/10.31234/osf.io/dhzrc))
 
 **Papenberg, M.**, & Klau, G. W. (2021). Using anticlustering to partition data sets into equivalent parts. *Psychological Methods, 26*(2), 161--174. https://doi.org/10.1037/met0000301. ([Preprint](https://doi.org/10.31234/osf.io/3razc))
 
