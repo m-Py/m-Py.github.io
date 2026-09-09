@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.16</span>
       </span>
     </div>
 
@@ -424,7 +424,7 @@ affiliation to color the Pulse values:</p>
 <span>  xlab <span class="op">=</span> <span class="st">"Students (ordered by pulse)"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Group"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">colors</span>, pch <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Anticlustering_in_2025_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
+<p><img src="Anticlustering_in_2025_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="" width="700"></p>
 <p>This plot is an astonishing illustration why the <em>k</em>-means
 objective can be problematic (and why you should not only rely on
 <em>p</em> values to assess whether the distribution of numeric
@@ -587,7 +587,7 @@ trivial. When inspecting the variable, we find out that it is highly
 skewed with 2 outliers of age &gt; 70:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">survey</span><span class="op">$</span><span class="va">Age</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Anticlustering_in_2025_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<p><img src="Anticlustering_in_2025_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" alt="" width="700"></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">survey</span><span class="op">$</span><span class="va">Age</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
 <span><span class="co">#&gt;  [1] 73.000 70.417 44.250 43.833 41.583 39.750 36.583 35.833 35.500 32.750</span></span></code></pre></div>
@@ -715,7 +715,7 @@ sample allocation to minimize batch effects. <em>Cell Reports Methods,
 5</em>(8). <a href="https://doi.org/10.1016/j.crmeth.2025.101137" class="external-link uri">https://doi.org/10.1016/j.crmeth.2025.101137</a></p>
 <p>Papenberg, M., Breuer, M., Diekhoff, M., Tran, N. K., &amp; Klau, G.
 W. (2025). Extending the Bicriterion Approach for Anticlustering: Exact
-and Hybrid Approaches. Psychometrika. Advance online publication. <a href="https://doi.org/10.1017/psy.2025.10052" class="external-link uri">https://doi.org/10.1017/psy.2025.10052</a></p>
+and Hybrid Approaches. <em>Psychometrika, 90</em>(5), 1789–1808. <a href="https://doi.org/10.1017/psy.2025.10052" class="external-link uri">https://doi.org/10.1017/psy.2025.10052</a></p>
 <p>Weitz, R. R., &amp; Lakshminarayanan, S. (1996). On a heuristic for
 the final exam scheduling problem. <em>Journal of the Operational
 Research Society, 47</em>(4), 599–600.</p>
@@ -744,7 +744,7 @@ Research, 302</em>(3), 925–953. <a href="https://doi.org/10.1016/j.ejor.2022.0
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer>

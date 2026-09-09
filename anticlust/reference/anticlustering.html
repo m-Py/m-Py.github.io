@@ -8,7 +8,8 @@ Klau (2021; &amp;lt;doi:10.1037/met0000301&amp;gt;), Brusco et al.
 (2020; &amp;lt;doi:10.1111/bmsp.12186&amp;gt;), Papenberg (2024;
 &amp;lt;doi:10.1111/bmsp.12315&amp;gt;), Papenberg, Wang, et al. (2025;
 &amp;lt;doi:10.1016/j.crmeth.2025.101137&amp;gt;), Papenberg, Breuer, et al. (2025;
-&amp;lt;doi:10.1017/psy.2025.10052&amp;gt;), and Yang et al. (2022; &amp;lt;doi:10.1016/j.ejor.2022.02.003&amp;gt;)."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+&amp;lt;doi:10.1017/psy.2025.10052&amp;gt;), Yang et al. (2022; &amp;lt;doi:10.1016/j.ejor.2022.02.003&amp;gt;),
+and Wu et al. (2025; &amp;lt;doi.org/10.1016/j.cor.2025.107030&amp;gt;)."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
@@ -26,7 +27,7 @@ Klau (2021; &amp;lt;doi:10.1037/met0000301&amp;gt;), Brusco et al.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.16</span>
       </span>
     </div>
 
@@ -92,7 +93,8 @@ Klau (2021; &lt;doi:10.1037/met0000301&gt;), Brusco et al.
 (2020; &lt;doi:10.1111/bmsp.12186&gt;), Papenberg (2024;
 &lt;doi:10.1111/bmsp.12315&gt;), Papenberg, Wang, et al. (2025;
 &lt;doi:10.1016/j.crmeth.2025.101137&gt;), Papenberg, Breuer, et al. (2025;
-&lt;doi:10.1017/psy.2025.10052&gt;), and Yang et al. (2022; &lt;doi:10.1016/j.ejor.2022.02.003&gt;).</p>
+&lt;doi:10.1017/psy.2025.10052&gt;), Yang et al. (2022; &lt;doi:10.1016/j.ejor.2022.02.003&gt;),
+and Wu et al. (2025; &lt;doi.org/10.1016/j.cor.2025.107030&gt;).</p>
     </div>
 
     <div id="ref-usage">
@@ -106,7 +108,8 @@ Klau (2021; &lt;doi:10.1037/met0000301&gt;), Brusco et al.
 <span>  repetitions <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  standardize <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  cannot_link <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  must_link <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  must_link <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  blocks <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -142,7 +145,7 @@ Details.</p></dd>
 
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p>One of "exchange" (default) , "local-maximum",
-"brusco", "ilp", "2PML", or "3phase".  See Details.</p></dd>
+"brusco", "ilp", "2PML", "3phase", or "fifr".  See Details.</p></dd>
 
 
 <dt id="arg-preclustering">preclustering<a class="anchor" aria-label="anchor" href="#arg-preclustering"></a></dt>
@@ -161,8 +164,8 @@ between groups. See Details.</p></dd>
 <dd><p>The number of times a search heuristic is
 initiated when using <code>method = "exchange"</code>, <code>method =
 "local-maximum"</code>, <code>method = "brusco"</code>, <code>method = "3phase"</code>,
-or <code>method = "2PML"</code>. In the end, the best objective found across
-the repetitions is returned.</p></dd>
+<code>method = "fifr"</code>, or <code>method = "2PML"</code>. In the end, the
+best objective found across the repetitions is returned.</p></dd>
 
 
 <dt id="arg-standardize">standardize<a class="anchor" aria-label="anchor" href="#arg-standardize"></a></dt>
@@ -182,6 +185,12 @@ the same value in this vector cannot be assigned to the same anticluster.</p></d
 <dt id="arg-must-link">must_link<a class="anchor" aria-label="anchor" href="#arg-must-link"></a></dt>
 <dd><p>A numeric vector of length <code>nrow(x)</code>. Elements having
 the same value in this vector are assigned to the same anticluster.</p></dd>
+
+
+<dt id="arg-blocks">blocks<a class="anchor" aria-label="anchor" href="#arg-blocks"></a></dt>
+<dd><p>A vector, data.frame or matrix representing one
+or several categorical variables. Anticlustering is done sequentially
+within blocks. See details.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -229,10 +238,13 @@ distances of elements within the same groups (see
 <code><a href="diversity_objective.html">diversity_objective</a></code>). Hence, anticlustering using the diversity
 criterion maximizes between-group similarity
 by maximizing within-group heterogeneity (represented as the sum of all pairwise distances).
-If it is computed on the basis of the Euclidean distance (which is the default
+In the publication that introduced
+the <code>anticlust</code> package (Papenberg &amp; Klau, 2021), we used the term "anticluster
+editing" to refer to the maximization of the diversity, because the reversed
+procedure - minimizing the diversity - is also known as "cluster editing".
+If the diversity is computed on the basis of the Euclidean distance (which is the default
 behaviour if <code>x</code> is a feature matrix), the diversity is an all rounder objective that
-tends to equate all distribution
-characteristics between groups (such as means, variances, ...).
+tends to equate all distribution characteristics between groups (such as means, variances, ...).
 Note that the equivalence of within-group heterogeneity and between-group similarity only
 holds for equal-sized groups. For unequal-sized groups, it is recommended to
 use a different objective when striving for overall between-group similarity,
@@ -240,10 +252,7 @@ e.g., the k-plus objective or the <code>"average-diversity"</code>. The average 
 was introduced in version 0.8.6, and it is more useful if groups are not
 equal-sized. The average diversity normalizes the sum of intra-cluster distances
 by group size. If all groups are equal-sized, it is equivalent to the
-regular diversity. In the publication that introduces
-the <code>anticlust</code> package (Papenberg &amp; Klau, 2021), we used the term "anticluster
-editing" to refer to the maximization of the diversity, because the reversed
-procedure - minimizing the diversity - is also known as "cluster editing".</p>
+regular diversity.</p>
 <p>The "dispersion" is the minimum distance between any two elements
 that are part of the same cluster; maximization of this objective
 ensures that any two elements within the same group are as
@@ -253,18 +262,47 @@ dispersion. Oftentimes, it is useful to also consider the diversity
 and not only the dispersion; to optimize both objectives at the
 same time, see the function
 <code><a href="bicriterion_anticlustering.html">bicriterion_anticlustering</a></code>.</p>
-<p>If the data input <code>x</code> is a feature matrix (that is: each row
-is a "case" and each column is a "variable") and the option
-<code>objective = "diversity"</code> or <code>objective = "dispersion"</code> is used,
-the Euclidean distance is computed as the basic unit of the objectives. If
-a different measure of dissimilarity is preferred, you may pass a
-self-generated dissimilarity matrix via the argument <code>x</code>.</p>
 <p>In the standard case, groups of equal size are generated. Adjust
 the argument <code>K</code> to create groups of different size (see
 Examples).</p>
+
+<p><strong>Data input</strong></p>
+<p>The data input <code>x</code> is usually a feature matrix where each each row
+is a "case" and each column is a "variable". The default
+<code>objective = "diversity"</code> or the <code>objective = "dispersion"</code> are computed
+using a dissimilarity matrix as input, however. The default behaviour for
+feature matrices is to compute the Euclidean distance as the
+basic unit of these objectives, using a call to <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></code>.
+The combination <code>objective = "diversity"</code> +
+Euclidean distance was evaluated by us (e.g., Papenberg and Klau, 2021;
+Papenberg, 2024; Papenberg, Wang, et al., 2025) and is generally considered
+to be a good default for equal-sized groups. For unequal-sized groups, prefer
+<code>objective = "average-diversity"</code>.</p>
+<p>If a different type of dissimilarity measure is preferred (e.g., the Gower distance),
+you may pass a self-generated dissimilarity matrix via the argument <code>x</code>. This dissimilarity
+matrix can be an object of class <code>dist</code> (e.g., returned by <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></code>
+or <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">as.dist</a></code>) or a <code>matrix</code> where the entries of the upper
+and lower triangular matrix represent pairwise dissimilarities. If the input
+is a matrix rather than of class <code>dist</code>, the function internally tests if
+the input is a dissimilarity matrix (because a <code>matrix</code> could also be a
+feature matrix). It assumes the input is a dissimilarity matrix if the
+upper and lower triangular consists of the same values, and if the diagonal
+only consists of the same values. If the input is a <code>data.frame</code>,
+this function always assumes that it is a feature matrix. In a <code>data.frame</code>,
+each column must be either <code>numeric</code> or <code>factor</code> (the latter for
+categorical variables).</p>
 <p>As of version 0.8.12, this function supports handling of missing values (<code>NA</code>).
-In this case the function <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></code> handles the (<code>NA</code>) when converting
-features to pairwise distances.</p>
+In this case the function <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></code> handles the <code>NA</code>s when converting
+features to pairwise distances. Note that <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></code> always handles
+missing values even for objectives that are usually computed using a feature
+matrix as input (i.e., <code>objective = "variance"</code> and <code>objective = "kplus"</code>).
+In this case, we exploit an equivalence between the <code>objective = "variance"</code> and
+the <code>objective = "average-diversity"</code>: When the squared Euclidean distance
+<code>objective = "variance"</code> and the <code>objective = "average-diversity"</code>
+are actually equivalent, so we can optimize the <code>objective = "average-diversity"</code>
+in order to perform k-means (and thus, k-plus) anticlustering. See Papenberg,
+Breuer, et al. (2025) for details.</p>
+
 <p><strong>Algorithms for anticlustering</strong></p>
 <p>By default, a heuristic method is employed for anticlustering: the
 exchange method (<code>method = "exchange"</code>). First, elements are
@@ -307,7 +345,9 @@ changes of their default procedure, in particular they used a maximum "time"
 that the algorithm runs before terminating. For consistency with our other
 methods in anticlust, we are however using a maximum number of repetitions.
 Our default is 50 repetitions, which may be increased (but not decreased!)
-with the <code>repetitions</code> argument.</p>
+with the <code>repetitions</code> argument. Using the same adaptation for the repetitions
+argument, version 0.8.16 introduced for the Feasible and infeasible region
+search algorithm by Wu et al. (2025) via <code>method = "fifr"</code>.</p>
 <p><strong>Optimal anticlustering</strong></p>
 <p>Usually, heuristics are employed to tackle anticlustering problems,
 and their performance is generally very satisfying.  However,
@@ -338,7 +378,7 @@ for these objectives. The documentation of the function
 <code><a href="optimal_dispersion.html">optimal_dispersion</a></code> and <code><a href="optimal_anticlustering.html">optimal_anticlustering</a></code>
 contain more information on the optimal anticlustering algorithms.</p>
 <p><strong>Categorical variables</strong></p>
-<p>There are two ways to balance categorical variables among anticlusters (also
+<p>There are several ways to balance categorical variables among anticlusters (also
 see the package vignette "Using categorical variables with anticlustering").
 The first way is to treat them as "hard constraints" via the argument
 <code>categories</code> (see Papenberg &amp; Klau, 2021). If done so, balancing the
@@ -364,6 +404,14 @@ and numeric variables, and when using the k-plus objective). However note that t
 conversion always uses <code>use_combinations = FALSE</code>, which may not always
 what users need. In this case, I still recommend using <code><a href="categories_to_binary.html">categories_to_binary</a></code>
 manually.</p>
+<p>The argument <code>blocks</code> (available as of version 0.8.13) is similar
+to <code>categories</code>. Anticlustering is repeated within each stratum
+(i.e., each levels or combination of levels of <code>blocks</code> – as in <code>categories</code>
+mulitple variables are merged into a single variable to form strata). Anticlustering
+in later blocks "remembers" the assignment of previous blocks. This way,
+overall balance as well as balance within blocks is maximized. This is unlike
+when using <code>categories</code>, which only maximizes overall balance, but not
+specifically within strata.</p>
 <p><strong>Anticlustering with constraints</strong></p>
 <p>Versions 0.8.6 and 0.8.7 of anticlust introduced the possibility to induce
 cannot-link and must-link constraints with anticlustering with
@@ -437,25 +485,28 @@ as well.</p>
 diversity and dispersion criteria for anticlustering: A bicriterion
 approach. British Journal of Mathematical and Statistical
 Psychology, 73, 275-396. https://doi.org/10.1111/bmsp.12186</p>
-<p>Papenberg, M., Breuer, M., Diekhoff, M., Tran, N. K., &amp; Klau, G. W.
-(2025). Extending the Bicriterion Approach for Anticlustering:
-Exact and Hybrid Approaches. Advance online publication. Psychometrika.</p>
+<p>Papenberg, M., Breuer, M., Diekhoff, M., Tran, N. K., &amp; Klau, G. W. (2025).
+Extending the Bicriterion Approach for Anticlustering: Exact and Hybrid
+Approaches. Psychometrika, 90(5), 1789–1808. https://doi.org/10.1017/psy.2025.10052</p>
 <p>Papenberg, M., &amp; Klau, G. W. (2021). Using anticlustering to partition
 data sets into equivalent parts. Psychological Methods, 26(2),
 161–174. https://doi.org/10.1037/met0000301.</p>
 <p>Papenberg, M. (2024). K-plus Anticlustering: An Improved k-means Criterion for
 Maximizing Between-Group Similarity. British Journal of Mathematical and
 Statistical Psychology, 77(1), 80-102. https://doi.org/10.1111/bmsp.12315</p>
-<p>Papenberg, M., Wang, C., Diop, M., Bukhari, S. H., Oskotsky, B., Davidson,
-B. R., Vo, K. C., Liu, B., Irwin, J. C., Combes, A., Gaudilliere, B.,
-Li, J., Stevenson, D. K., Klau, G. W., Giudice, L. C., Sirota, M.,
-&amp; Oskotsky, T. T. (2025). Anticlustering for sample allocation to minimize
-batch effects. bioRxiv. https://doi.org/10.1101/2025.03.03.641320</p>
+<p>Papenberg, M., Wang, C., Diop, M., Bukhari, S. H., Oskotsky, B., Davidson, B. R.,
+Vo, K. C., Liu, B., Irwin, J. C., Combes, A., Gaudilliere, B., Li, J., Stevenson, D. K.,
+Klau, G. W., Giudice, L. C., Sirota, M., &amp; Oskotsky, T. T. (2025). Anticlustering
+for sample allocation to minimize batch effects. Cell Reports Methods, 5(8),
+101137. https://doi.org/10.1016/j.crmeth.2025.101137</p>
 <p>Späth, H. (1986). Anticlustering: Maximizing the variance criterion.
 Control and Cybernetics, 15, 213-218.</p>
 <p>Weitz, R. R., &amp; Lakshminarayanan, S. (1998). An empirical comparison of
 heuristic methods for creating maximally diverse groups. Journal of the
 Operational Research Society, 49(6), 635-646. https://doi.org/10.1057/palgrave.jors.2600510</p>
+<p>Wu, X., Feng, J., Yang, J., &amp; Zhang, Y. (2025). Feasible and infeasible region
+search for the maximally diverse grouping problem. Computers &amp; Operations Research, 179,
+107030. https://doi.org/10.1016/j.cor.2025.107030</p>
 <p>Yang, X., Cai, Z., Jin, T., Tang, Z., &amp; Gao, S. (2022). A three-phase search
 approach with dynamic population size for solving the maximally diverse grouping
 problem. European Journal of Operational Research, 302(3), 925-953.
@@ -584,7 +635,7 @@ https://doi.org/10.1016/j.ejor.2022.02.003</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">anticlust</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.16</span>
       </span>
     </div>
 
@@ -108,36 +108,41 @@ Papenberg</h4>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/m-Py/anticlust" class="external-link">anticlust</a></span><span class="op">)</span></span></code></pre></div>
 <p>In this vignette I explore some ways to incorporate categorical
-variables with anticlustering. The main function of
-<code>anticlust</code> is <code><a href="../reference/anticlustering.html">anticlustering()</a></code>, and it has an
-argument <code>categories</code>. It can be used easily enough: We just
-pass the numeric variables as first argument (<code>x</code>) and our
-categorical variable(s) to <code>categories</code>. I will use the
-penguin data set to illustrate the usage:</p>
+variables with anticlustering, focusing on the main function of
+<code>anticlust</code>: <code><a href="../reference/anticlustering.html">anticlustering()</a></code>. Historically, the
+first option we had to deal with categorical variables was the
+<code>categories</code> argument (Papenberg &amp; Klau, 2021). It can be
+used easily enough: We just pass the numeric variables as first argument
+(<code>x</code>) and our categorical variable(s) to
+<code>categories</code>. I will use the penguin data set to illustrate
+its usage:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span>
 <span><span class="co"># First exclude cases with missing values</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html" class="external-link">penguins</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   species    island bill_len bill_dep flipper_len body_mass    sex year</span></span>
-<span><span class="co">#&gt; 1  Adelie Torgersen     39.1     18.7         181      3750   male 2007</span></span>
-<span><span class="co">#&gt; 2  Adelie Torgersen     39.5     17.4         186      3800 female 2007</span></span>
-<span><span class="co">#&gt; 3  Adelie Torgersen     40.3     18.0         195      3250 female 2007</span></span>
-<span><span class="co">#&gt; 5  Adelie Torgersen     36.7     19.3         193      3450 female 2007</span></span>
-<span><span class="co">#&gt; 6  Adelie Torgersen     39.3     20.6         190      3650   male 2007</span></span>
-<span><span class="co">#&gt; 7  Adelie Torgersen     38.9     17.8         181      3625 female 2007</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 8</span></span></span>
+<span><span class="co">#&gt;   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Adelie  Torgersen           39.1          18.7               181        <span style="text-decoration: underline;">3</span>750</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Adelie  Torgersen           39.5          17.4               186        <span style="text-decoration: underline;">3</span>800</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Adelie  Torgersen           40.3          18                 195        <span style="text-decoration: underline;">3</span>250</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Adelie  Torgersen           36.7          19.3               193        <span style="text-decoration: underline;">3</span>450</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Adelie  Torgersen           39.3          20.6               190        <span style="text-decoration: underline;">3</span>650</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Adelie  Torgersen           38.9          17.8               181        <span style="text-decoration: underline;">3</span>625</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</span></span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 333</span></span></code></pre></div>
 <p>In the data set, each row represents a penguin, and the data set has
-four numeric variables (bill_len, bill_dep, flipper_len, body_mass) and
-several categorical variables (species, island, sex) as descriptions of
-the penguins.</p>
+four numeric variables (bill_length_mm, bill_depth_mm,
+flipper_length_mm, body_mass_g) and several categorical variables
+(species, island, sex) as descriptions of the penguins.</p>
 <p>Let’s call <code><a href="../reference/anticlustering.html">anticlustering()</a></code> to divide the 333 penguins
 into 3 groups. We use the four the numeric variables as first argument
 (i.e., the anticlustering objective is computed on the basis of the
 numeric variables), and the penguins’ sex as categorical variable:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">numeric_vars</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bill_len"</span>, <span class="st">"bill_dep"</span>, <span class="st">"flipper_len"</span>, <span class="st">"body_mass"</span><span class="op">)</span><span class="op">]</span></span>
+<code class="sourceCode R"><span><span class="va">numeric_vars</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span>, <span class="st">"flipper_length_mm"</span>, <span class="st">"body_mass_g"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span></span>
 <span>  <span class="va">numeric_vars</span>, </span>
 <span>  K <span class="op">=</span> <span class="fl">3</span>,</span>
@@ -333,12 +338,238 @@ for each of the three species, which is not accomplished when setting
 factors, which internally sets
 <code>use_combinations = FALSE</code>.</p>
 </div>
+<div class="section level2">
+<h2 id="blocking">Blocking<a class="anchor" aria-label="anchor" href="#blocking"></a>
+</h2>
+<p>As of version 0.8.13, we have another option of incorporating
+categorical variables with <code><a href="../reference/anticlustering.html">anticlustering()</a></code>: blocking. It
+is pretty similar to using the <code>categories</code> argument:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">groups1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span></span>
+<span>  <span class="va">numeric_vars</span>, </span>
+<span>  K <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  categories <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">sex</span>, </span>
+<span>  standardize <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  objective <span class="op">=</span> <span class="st">"kplus"</span>, </span>
+<span>  method <span class="op">=</span> <span class="st">"local-maximum"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">groups2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anticlustering.html">anticlustering</a></span><span class="op">(</span></span>
+<span>  <span class="va">numeric_vars</span>, </span>
+<span>  K <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  blocks <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">sex</span>, </span>
+<span>  standardize <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  objective <span class="op">=</span> <span class="st">"kplus"</span>, </span>
+<span>  method <span class="op">=</span> <span class="st">"local-maximum"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">sex</span>, <span class="va">groups1</span><span class="op">)</span></span>
+<span><span class="co">#&gt;         groups1</span></span>
+<span><span class="co">#&gt;           1  2  3</span></span>
+<span><span class="co">#&gt;   female 55 55 55</span></span>
+<span><span class="co">#&gt;   male   56 56 56</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">sex</span>, <span class="va">groups2</span><span class="op">)</span></span>
+<span><span class="co">#&gt;         groups2</span></span>
+<span><span class="co">#&gt;           1  2  3</span></span>
+<span><span class="co">#&gt;   female 55 55 55</span></span>
+<span><span class="co">#&gt;   male   56 56 56</span></span></code></pre></div>
+<p>There is one difference: With blocking, we also attempt to balance
+the numeric variables within each level of the blocking variable across
+groups; with the categories argument, we only attempt to achieve overall
+balance. As we can see:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">numeric_vars</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"female"</span>, <span class="op">]</span>, <span class="va">groups1</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"female"</span><span class="op">]</span><span class="op">)</span>, row.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># categories argument</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="4%">
+<col width="22%">
+<col width="20%">
+<col width="26%">
+<col width="25%">
+</colgroup>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="left">bill_length_mm</th>
+<th align="left">bill_depth_mm</th>
+<th align="left">flipper_length_mm</th>
+<th align="left">body_mass_g</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">42.29 (5.01)</td>
+<td align="left">16.32 (1.75)</td>
+<td align="left">197.82 (12.39)</td>
+<td align="left">3883.18 (685.95)</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">42.15 (5.07)</td>
+<td align="left">16.57 (1.94)</td>
+<td align="left">196.75 (12.39)</td>
+<td align="left">3853.18 (623.37)</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">41.85 (4.71)</td>
+<td align="left">16.39 (1.70)</td>
+<td align="left">197.53 (12.92)</td>
+<td align="left">3850.45 (698.57)</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">numeric_vars</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"female"</span>, <span class="op">]</span>, <span class="va">groups2</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"female"</span><span class="op">]</span><span class="op">)</span>, row.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># blocks argument</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="4%">
+<col width="22%">
+<col width="20%">
+<col width="26%">
+<col width="25%">
+</colgroup>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="left">bill_length_mm</th>
+<th align="left">bill_depth_mm</th>
+<th align="left">flipper_length_mm</th>
+<th align="left">body_mass_g</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">42.07 (4.91)</td>
+<td align="left">16.42 (1.81)</td>
+<td align="left">197.36 (12.58)</td>
+<td align="left">3865.91 (674.37)</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">42.11 (4.95)</td>
+<td align="left">16.44 (1.81)</td>
+<td align="left">197.44 (12.60)</td>
+<td align="left">3862.73 (671.23)</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">42.11 (4.94)</td>
+<td align="left">16.41 (1.80)</td>
+<td align="left">197.29 (12.55)</td>
+<td align="left">3858.18 (665.16)</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">numeric_vars</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"male"</span>, <span class="op">]</span>, <span class="va">groups1</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"male"</span><span class="op">]</span><span class="op">)</span>, row.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># categories argument</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="4%">
+<col width="22%">
+<col width="20%">
+<col width="26%">
+<col width="25%">
+</colgroup>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="left">bill_length_mm</th>
+<th align="left">bill_depth_mm</th>
+<th align="left">flipper_length_mm</th>
+<th align="left">body_mass_g</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">45.65 (5.45)</td>
+<td align="left">17.99 (1.84)</td>
+<td align="left">204.07 (14.99)</td>
+<td align="left">4523.66 (795.45)</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">45.80 (5.33)</td>
+<td align="left">17.76 (1.84)</td>
+<td align="left">205.09 (14.49)</td>
+<td align="left">4552.68 (822.19)</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">46.11 (5.41)</td>
+<td align="left">17.92 (1.94)</td>
+<td align="left">204.36 (14.41)</td>
+<td align="left">4560.71 (757.72)</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="../reference/mean_sd_tab.html">mean_sd_tab</a></span><span class="op">(</span><span class="va">numeric_vars</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"male"</span>, <span class="op">]</span>, <span class="va">groups2</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"male"</span><span class="op">]</span><span class="op">)</span>, row.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># blocks argument</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="4%">
+<col width="22%">
+<col width="20%">
+<col width="26%">
+<col width="25%">
+</colgroup>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="left">bill_length_mm</th>
+<th align="left">bill_depth_mm</th>
+<th align="left">flipper_length_mm</th>
+<th align="left">body_mass_g</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">45.87 (5.40)</td>
+<td align="left">17.89 (1.87)</td>
+<td align="left">204.50 (14.62)</td>
+<td align="left">4544.64 (791.10)</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">45.85 (5.40)</td>
+<td align="left">17.88 (1.88)</td>
+<td align="left">204.48 (14.66)</td>
+<td align="left">4545.54 (791.76)</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">45.84 (5.40)</td>
+<td align="left">17.90 (1.87)</td>
+<td align="left">204.54 (14.62)</td>
+<td align="left">4546.88 (794.30)</td>
+</tr>
+</tbody>
+</table>
+<p>Within each species, there is increased similarity between groups
+when using the blocks argument. Note that this is currently
+<em>only</em> achieved with the blocks argument; it is also not achieved
+when using the categorical variables as factors as described above.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+</div>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<p>Papenberg, M., &amp; Klau, G. W. (2021). Using anticlustering to
+partition data sets into equivalent parts. <em>Psychological Methods,
+26</em>(2), 161–174. <a href="https://doi.org/10.1037/met0000301" class="external-link uri">https://doi.org/10.1037/met0000301</a></p>
+</div>
 <div class="footnotes footnotes-end-of-document">
 <hr>
 <ol>
 <li id="fn1"><p>Internally, <code><a href="../reference/categories_to_binary.html">categories_to_binary()</a></code> is
 wrapper around the base <code>R</code> function
 <code><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix()</a></code>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>It should be possible to manually construct the input
+matrix <code>x</code> in such a way that it includes an interaction term
+for the blocking variable and the other variables of interest. In this
+case, we should also obtain balance within each level of the blocking
+variable. We are already doing the same thing in
+<code><a href="../reference/categories_to_binary.html">categories_to_binary()</a></code> – however, just with categorical
+variables – when using <code>use_combinations</code>. With
+<code><a href="https://rdrr.io/r/stats/model.matrix.html" class="external-link">model.matrix()</a></code>, advanced users may be able to construct
+interaction variables for categorical and numeric variables; future
+versions of <code>anticlust</code> may offer convenience support for
+this option.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>
@@ -358,7 +589,7 @@ wrapper around the base <code>R</code> function
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer>
