@@ -455,9 +455,9 @@ RANLIB=&quot;gcc-ranlib&quot;
 LTO=&quot;-flto=10&quot;
 LTO_OPT=&quot;-flto&quot;</code></pre>
 <p>Then call (for noLD):</p>
-<pre><code>CONFIG_SITE=&quot;$PWD/config.site&quot; ./configure --enable-lto=R</code></pre>
+<pre><code>CONFIG_SITE=&quot;$PWD/config.site&quot; ./configure --enable-lto=R --disable-long-double</code></pre>
 <p>Or, if Java makes problems:</p>
-<pre><code>CONFIG_SITE=&quot;$PWD/config.site&quot; ./configure --enable-lto=R --disable-java</code></pre>
+<pre><code>CONFIG_SITE=&quot;$PWD/config.site&quot; ./configure --enable-lto=R --disable-long-double --disable-java</code></pre>
 <ol start="6" style="list-style-type: decimal">
 <li></li>
 </ol>

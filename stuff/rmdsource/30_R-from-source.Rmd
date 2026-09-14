@@ -132,13 +132,13 @@ LTO_OPT="-flto"
 Then call (for noLD):
 
 ```
-CONFIG_SITE="$PWD/config.site" ./configure --enable-lto=R
+CONFIG_SITE="$PWD/config.site" ./configure --enable-lto=R --disable-long-double
 ```
 
 Or, if Java makes problems:
 
 ```
-CONFIG_SITE="$PWD/config.site" ./configure --enable-lto=R --disable-java
+CONFIG_SITE="$PWD/config.site" ./configure --enable-lto=R --disable-long-double --disable-java
 ```
 
 6.
