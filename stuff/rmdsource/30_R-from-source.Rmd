@@ -18,7 +18,6 @@ devtools::check(".", force_suggests=FALSE, cran = TRUE)
 
 This way I can conveniently set the force_suggests environment variable because `anticlust` suggests `gurobi`, which is not available on all of my machines.
 
-
 ---
 
 Before uploading a package to CRAN, it has to be tested using a recent
@@ -39,7 +38,7 @@ Administration" contains requisite packages for installation from source.
 Interestingly, Java is necessary to build R from source:
 
 ```
-sudo apt install openjdk-11-jdk
+sudo apt install openjdk-25-jdk
 ```
 
 Some dependencies are needed to build the documentation in pdf format using Latex. The following packages are for example needed:
@@ -115,7 +114,34 @@ Or:
 
 Note: As of 2023/2024 it was always sufficient for me to just use `./configure`.
 
-6. 
+If we wish to reproduce specific settings from a CRAN machine for reproducing errors, we can set compilation flags in the file config.site. For example for the CRAN machine noLD (no long doubles)
+
+```
+CFLAGS="-g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes"
+C17FLAGS="-g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration"
+FFLAGS="-g -O2 -mtune=native -Wall -pedantic"
+CXXFLAGS="-g -O2 -Wall -pedantic -mtune=native -Wno-ignored-attributes -Wno-parentheses -Werror=format-security -Wp,-D_FORTIFY_SOURCE=3 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection"
+
+JAVA_HOME="/usr/lib/jvm/java-25-openjdk-amd64"
+AR="gcc-ar"
+RANLIB="gcc-ranlib"
+LTO="-flto=10"
+LTO_OPT="-flto"
+```
+
+Then call (for noLD):
+
+```
+CONFIG_SITE="$PWD/config.site" ./configure --enable-lto=R
+```
+
+Or, if Java makes problems:
+
+```
+CONFIG_SITE="$PWD/config.site" ./configure --enable-lto=R --disable-java
+```
+
+6.
 
 ```
 make
