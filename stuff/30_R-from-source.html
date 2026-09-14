@@ -489,6 +489,11 @@ time.</a></p>
 the dependencies of your packages available to <code>R</code> devel.
 That is, install all of the packages in <code>Imports</code>,
 <code>Depends</code>, and <code>Suggests</code>.</p>
+<p>Can be done via:</p>
+<pre class="r"><code>dependencies &lt;- unlist(tools::package_dependencies(&quot;anticlust&quot;))
+dependencies &lt;- c(dependencies, unlist(tools::package_dependencies(&quot;anticlust&quot;,  which = &quot;Suggests&quot;)))
+dependencies &lt;- setdiff(dependencies, &quot;gurobi&quot;) # gurobi not on CRAN
+install.packages(dependencies)</code></pre>
 <p>Installing packages is actually accomplished by just using
 <code>install.packages()</code>. Packages will be installed into the
 directory in the <code>R</code> variable <code>.Library</code>, which
@@ -505,6 +510,8 @@ the package on your system.</p>
 <div id="checking-the-package" class="section level1">
 <h1>Checking the package</h1>
 <pre><code>./R CMD check --as-cran tar-ball.tar.gz</code></pre>
+<p>When a suggested package is not available, use:</p>
+<pre><code>_R_CHECK_FORCE_SUGGESTS_=false ./R CMD check --as-cran tar-ball.tar.gz</code></pre>
 <p>I usually ignore the warning “‘qpdf’ is needed for checks on size
 reduction of PDFs” and the note “Skipping checking HTML validation: no
 command ‘tidy’ found”, which are not relevant for CRAN.</p>

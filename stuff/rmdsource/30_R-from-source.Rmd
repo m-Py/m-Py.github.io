@@ -179,6 +179,15 @@ To test your package using `R CMD check`, you need to make the
 dependencies of your packages available to `R` devel. That is, install 
 all of the packages in `Imports`, `Depends`, and `Suggests`.
 
+Can be done via:
+
+```R
+dependencies <- unlist(tools::package_dependencies("anticlust"))
+dependencies <- c(dependencies, unlist(tools::package_dependencies("anticlust",  which = "Suggests")))
+dependencies <- setdiff(dependencies, "gurobi") # gurobi not on CRAN
+install.packages(dependencies)
+```
+
 Installing packages is actually accomplished by just using 
 `install.packages()`. Packages will be installed into the directory in 
 the `R` variable `.Library`, which was `R-devel/library` in my case.
@@ -200,7 +209,14 @@ on your system.
 ./R CMD check --as-cran tar-ball.tar.gz
 ```
 
+When a suggested package is not available, use:
+
+```
+_R_CHECK_FORCE_SUGGESTS_=false ./R CMD check --as-cran tar-ball.tar.gz
+```
+
 I usually ignore the warning "‘qpdf’ is needed for checks on size reduction of PDFs" and the note "Skipping checking HTML validation: no command 'tidy' found", which are not relevant for CRAN.
+
 
 # On Windows
 
